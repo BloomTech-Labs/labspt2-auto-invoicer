@@ -1,18 +1,26 @@
-.form {
+.payment_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px groove gray;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px gray;
   width: 300px;
 }
 
-.form fieldset {
-  border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: 3px 3px 3px gray;
-  display: flex;
-  flex-direction: column;
+.payment_info legend {
+  font-size: 2rem;
 }
 
-.form fieldset input {
-  border: 1px solid inherit;
-  border-radius: 5px;
+.payment_info input {
+  font-size: 2rem;
+  border: 1px solid lightgray;
+  border-radius: 4px;
   margin: 10px auto;
-  font-size: 1.2rem;
+  padding: 5px 0 5px 2px;
+}
+
+.payment_info input:hover {
+  border: 1px solid gray;
+  cursor: pointer;
 }

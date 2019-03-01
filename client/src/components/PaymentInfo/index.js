@@ -1,49 +1,47 @@
 import React from "react";
 
-// import styles here
+// import css here
 import "./PaymentInfo.css";
 
-class PaymentInfo extends React.Component {
-  constructor(props) {
-    super(props);
+const PaymentInfo = props => {
+  const { cc, exp, cvv, title } = props.paymentInfo;
+  const { changeHandler } = props;
 
-    this.state = {
-      cc: "",
-      exp: "",
-      cvv: "",
-      price: 0,
-      title: "Payment Info"
-    };
-  }
-
-  render() {
-    const { cc, exp, cvv, title } = this.state;
-    return (
-      <form className="form">
-        <fieldset>
-          <legend>{title}</legend>
-          <input
-            onChange={this.changeHandler}
-            name="cc"
-            value={cc}
-            placeholder="Credit Card #"
-          />
-          <input
-            onChange={this.changeHandler}
-            name="exp"
-            value={exp}
-            placeholder="Expiration Date"
-          />
-          <input
-            onChange={this.changeHandler}
-            name="cvv"
-            value={cvv}
-            placeholder="cvv"
-          />
-        </fieldset>
-      </form>
-    );
-  }
-}
+  return (
+    <fieldset className="payment_info">
+      <legend>{title}</legend>
+      <input
+        type="text"
+        onChange={changeHandler}
+        name="cc"
+        value={cc}
+        placeholder="Credit Card #"
+        maxLength={16}
+        pattern="[0-9]"
+        required
+      />
+      <input
+        type="text"
+        onChange={changeHandler}
+        name="exp"
+        value={exp}
+        placeholder="Expiration Date"
+        maxLength={4}
+        pattern="[0-9]"
+        required
+      />
+      <input
+        type="text"
+        onChange={changeHandler}
+        name="cvv"
+        value={cvv}
+        placeholder="Cvv"
+        pattern="[0-9]"
+        maxLength={3}
+        required
+      />
+    </fieldset>
+  );
+};
 
 export default PaymentInfo;
