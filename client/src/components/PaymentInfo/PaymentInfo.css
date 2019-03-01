@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .payment_info {
   display: flex;
   flex-direction: column;
@@ -23,4 +24,23 @@
 .payment_info input:hover {
   border: 1px solid gray;
   cursor: pointer;
+=======
+.form {
+  width: 300px;
+}
+
+.form fieldset {
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.form fieldset input {
+  border: 1px solid inherit;
+  border-radius: 5px;
+  margin: 10px auto;
+  font-size: 1.2rem;
+>>>>>>> 2c09fbc70e443d2259ff835ca0693563e481fb08
 }
