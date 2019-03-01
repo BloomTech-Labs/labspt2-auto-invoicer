@@ -1,0 +1,18 @@
+.form {
+  width: 300px;
+}
+
+.form fieldset {
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.form fieldset input {
+  border: 1px solid inherit;
+  border-radius: 5px;
+  margin: 10px auto;
+  font-size: 1.2rem;
+}
