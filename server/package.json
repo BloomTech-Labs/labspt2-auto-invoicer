@@ -1,0 +1,39 @@
+{
+  "name": "labspt2-auto-invoice-server",
+  "version": "1.0.0",
+  "description": "A server setup for auto-invoice app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch --verbose",
+    "starte": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "server",
+    "node",
+    "javascript",
+    "full-stack",
+    "express",
+    "postgresql",
+    "graphql"
+  ],
+  "author": "Abdiel Fernandez, Andres Rivera, Dewayne Lindsay, Jorge Osto, Joseph Thompson,  Paul Apivat Hanvongse",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "nodemon": "^1.18.10",
+    "supertest": "^3.4.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "graphql": "^14.1.1",
+    "helmet": "^3.15.1",
+    "jsonwebtoken": "^8.5.0",
+    "morgan": "^1.9.1",
+    "pg": "^7.8.1",
+    "sqlite3": "^4.0.6"
+  }
+}
