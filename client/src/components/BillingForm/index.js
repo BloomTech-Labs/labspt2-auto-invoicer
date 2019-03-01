@@ -15,7 +15,8 @@ class BillingForm extends React.Component {
       cc: "",
       exp: "",
       cvv: "",
-      title: "Payment Info"
+      title: "Payment Info",
+      payment: ""
     };
   }
   changeHandler = e => {
@@ -23,8 +24,11 @@ class BillingForm extends React.Component {
   };
   createPaymentObject = e => {
     e.preventDefault();
+    const { cc, exp, cvv, payment } = this.state;
+    const paymentObject = { cc, exp, cvv, payment };
 
-    console.log(this.state);
+    // change console log when we start adding redux and stripe payments
+    console.log(paymentObject);
   };
   render() {
     const paymentInfo = Object.create(this.state);
@@ -38,10 +42,10 @@ class BillingForm extends React.Component {
           <Button>Buy Now</Button>
         </div>
         <section>
-          <PaymentRadio label="9.99">
+          <PaymentRadio label="9.99" handler={this.changeHandler}>
             <p>1 Month Subscription - $9.99</p>
           </PaymentRadio>
-          <PaymentRadio label="0.99">
+          <PaymentRadio label="0.99" handler={this.changeHandler}>
             <p>1 Invoice - $0.99</p>
           </PaymentRadio>
         </section>
