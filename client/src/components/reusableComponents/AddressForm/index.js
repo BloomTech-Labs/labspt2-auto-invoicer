@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 
 export default class index extends Component {
   render() {
@@ -12,7 +10,9 @@ export default class index extends Component {
         <Typography variant="h6" gutterBottom>
           Shipping address
         </Typography>
-        <Grid container spacing={24}>
+        <Grid container spacing={14}>
+          {" "}
+          {/* Grad container spacing was 24 */}
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -88,14 +88,6 @@ export default class index extends Component {
               label="Country"
               fullWidth
               autoComplete="billing country"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
-              label="Use this address for payment details"
             />
           </Grid>
         </Grid>

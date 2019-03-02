@@ -50,3 +50,10 @@ export default class index extends Component {
     );
   }
 }
+
+// put AddressForm in it's own div
+// need to add sections for Add Your Logo
+// need to add section for Invoice Number, Date, Due Date, Balance Due
+// Change First + Last Name on AddressForm to:
+// Who is this invoice from?
+// who is this invoice to?
