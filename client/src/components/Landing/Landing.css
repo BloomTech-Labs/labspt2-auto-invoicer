@@ -19,7 +19,7 @@ button {
   background: lightgray;
   cursor: pointer;
 }
-@media (max-width:480px) {
+@media (max-width:500px) {
   .button {
     font-size:1rem;
     width: 60%;
