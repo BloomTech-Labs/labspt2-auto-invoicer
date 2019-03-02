@@ -39,7 +39,8 @@ export default class index extends Component {
             <div className="sidebar-nav-button">Settings</div>
           </div>
           <div className="invoice-list-container">
-            Placeholder for Create Invoice Input Fields
+            <div className="invoice-details">Invoice Details</div>
+            <div className="item-details">Item Details</div>
           </div>
         </div>
         <div className="footer">Footer</div>

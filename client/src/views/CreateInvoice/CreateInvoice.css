@@ -69,16 +69,25 @@
 
 .invoice-list-container {
   /* witdh ~ 960, height 720*/
-  border: 1px solid red;
-  background: lightsalmon;
+  border: 3px solid red;
   width: 80%;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  flex-wrap: wrap;
 }
 
 /* inside .invoice-list-container */
-.invoice-list-container .invoice-box {
+.invoice-list-container .invoice-details {
+  border: 1px solid brown;
+  height: 350px;
+}
+
+.invoice-list-container .item-details {
+  border: 1px solid black;
+  height: 350px;
+}
+
+/* .invoice-list-container .invoice-box {
   width: 30%;
   height: 330px;
   border: 1px solid brown;
@@ -100,7 +109,7 @@
   border: 1px solid blue;
   height: 60px;
   text-align: center;
-}
+} */
 
 .main-container .footer {
   width: 100%;
