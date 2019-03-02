@@ -33,7 +33,11 @@ export default class index extends Component {
             <div className="sidebar-nav-button">Settings</div>
           </div>
           <div className="invoice-list-container">
-            <div className="invoice-box">Sample Invoice 1</div>
+            <div className="invoice-box">
+              <div className="invoice-box-top">Invoice Number</div>
+              <div className="invoice-box-mid">Invoice Content</div>
+              <div className="invoice-box-bottom">Created: 3-2-2019</div>
+            </div>
             <div className="invoice-box">Sample Invoice 2</div>
             <div className="invoice-box">Sample Invoice 3</div>
             <div className="invoice-box">Sample Invoice 4</div>
