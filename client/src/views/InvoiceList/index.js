@@ -4,6 +4,9 @@ import React, { Component } from "react";
 //import styles
 import "./InvoiceList.css";
 
+//import components
+import CreateInvoiceButton from "../../components/reusableComponents/CreateInvoiceButton";
+
 export default class index extends Component {
   render() {
     return (
@@ -40,7 +43,9 @@ export default class index extends Component {
             </div>
             <div className="invoice-box">Sample Invoice 2</div>
             <div className="invoice-box">Sample Invoice 3</div>
-            <div className="invoice-box">Sample Invoice 4</div>
+            <div className="invoice-box">
+              <CreateInvoiceButton />
+            </div>
             <div className="invoice-box">Sample Invoice 5</div>
             <div className="invoice-box">Sample Invoice 6</div>
           </div>
