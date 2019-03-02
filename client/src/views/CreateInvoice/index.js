@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import "./CreateInvoice.css";
 
 //import components
-//import CreateInvoiceButton from "../../components/reusableComponents/CreateInvoiceButton";
+import AddressForm from "../../components/reusableComponents/AddressForm";
 
 export default class index extends Component {
   render() {
@@ -39,7 +39,9 @@ export default class index extends Component {
             <div className="sidebar-nav-button">Settings</div>
           </div>
           <div className="invoice-list-container">
-            <div className="invoice-details">Invoice Details</div>
+            <div className="invoice-details">
+              <AddressForm />
+            </div>
             <div className="item-details">Item Details</div>
           </div>
         </div>
