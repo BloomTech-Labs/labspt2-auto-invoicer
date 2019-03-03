@@ -74,6 +74,9 @@ class SideNavigation extends React.Component {
                   to={`${text.title}` === "Home" ? "/" : `/${text.title}`}
                   key={text.title}
                   className="icon-container"
+                  onClick={() => {
+                    this.setState({ open: !open });
+                  }}
                 >
                   <ListItem className="icon-item">
                     <ListItemIcon>{text.icon}</ListItemIcon>
@@ -94,6 +97,9 @@ class SideNavigation extends React.Component {
                   to={`/${text.title}`}
                   key={text.title}
                   className="icon-container"
+                  onClick={() => {
+                    this.setState({ open: !open });
+                  }}
                 >
                   <ListItem className="icon-item">
                     <ListItemIcon>{text.icon}</ListItemIcon>
