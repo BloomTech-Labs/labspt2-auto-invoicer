@@ -16,11 +16,18 @@
   text-decoration: none;
   color: black;
 }
+.icon-container .icon-item:hover {
+  background-color: lightgray;
+}
 .icon-title {
   font-size: 2.4rem;
 }
 
 .active .icon-item {
+  background-color: gray;
+  color: blue;
+}
+.active .icon-item:hover {
   background-color: gray;
   color: blue;
 }
