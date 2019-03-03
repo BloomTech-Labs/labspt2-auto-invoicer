@@ -12,7 +12,7 @@ import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter, Redirect, Link } from "react-router-dom";
 
 import "./SideNavigation.css";
 
@@ -23,7 +23,8 @@ class SideNavigation extends React.Component {
     this.state = {
       open: false,
       loggedIn: false,
-      credits: 3
+      credits: 3,
+      loggedOutClicked: false
     };
   }
 
@@ -31,10 +32,19 @@ class SideNavigation extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
+  signOut = () => {
+    this.setState({ loggedIn: false, loggedOutClicked: true });
+
+    return localStorage.getItem("jwt-auto-invoice")
+      ? localStorage.removeItem("jwt-auto-invoice")
+      : null;
+  };
+
   render() {
-    const { open } = this.state;
+    const { open, loggedIn, loggedOutClicked } = this.state;
     return (
       <div className="navigation">
+        {loggedOutClicked ? <Redirect to="/" /> : null}
         <header position="fixed" className="navbar">
           <IconButton
             color="inherit"
@@ -43,7 +53,7 @@ class SideNavigation extends React.Component {
           >
             <MenuIcon id="hamburger" />
           </IconButton>
-          {!this.state.loggedIn ? (
+          {!loggedIn ? (
             <ul className="auth-container">
               <button className="authentication-btns">Sign Up</button>
               <button className="authentication-btns">Sign In</button>
@@ -51,7 +61,9 @@ class SideNavigation extends React.Component {
           ) : (
             <ul className="auth-container">
               <p className="credits">Credits: {this.state.credits}</p>
-              <button className="authentication-btns">Sign Out</button>
+              <Link to="/" id="signOut" onClick={this.signOut}>
+                Sign Out
+              </Link>
             </ul>
           )}
         </header>
@@ -65,27 +77,30 @@ class SideNavigation extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          {!this.state.loggedIn ? (
+          {!loggedIn ? (
             <List className="all-icon-container">
               {[
                 { title: "Home", icon: <HomeIcon /> },
                 { title: "About", icon: <AboutIcon /> }
-              ].map((text, index) => (
-                <NavLink
-                  exact
-                  to={`${text.title}` === "Home" ? "/" : `/${text.title}`}
-                  key={text.title}
-                  className="icon-container"
-                  onClick={() => {
-                    this.setState({ open: !open });
-                  }}
-                >
-                  <ListItem className="icon-item">
-                    <ListItemIcon>{text.icon}</ListItemIcon>
-                    <p className="icon-title">{text.title}</p>
-                  </ListItem>
-                </NavLink>
-              ))}
+              ].map((text, index) => {
+                const { title, icon } = text;
+                return (
+                  <NavLink
+                    exact
+                    to={`${title}` === "Home" ? "/" : `/${title}`}
+                    key={title}
+                    className="icon-container"
+                    onClick={() => {
+                      this.setState({ open: !open });
+                    }}
+                  >
+                    <ListItem className="icon-item">
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <p className="icon-title">{title}</p>
+                    </ListItem>
+                  </NavLink>
+                );
+              })}
             </List>
           ) : (
             <List className="all-icon-container">
@@ -93,22 +108,25 @@ class SideNavigation extends React.Component {
                 { title: "Invoices", icon: <InvoicesIcon /> },
                 { title: "Billing", icon: <BillingIcon /> },
                 { title: "Settings", icon: <SettingsIcon /> }
-              ].map((text, index) => (
-                <NavLink
-                  exact
-                  to={`/${text.title}`}
-                  key={text.title}
-                  className="icon-container"
-                  onClick={() => {
-                    this.setState({ open: !open });
-                  }}
-                >
-                  <ListItem className="icon-item">
-                    <ListItemIcon>{text.icon}</ListItemIcon>
-                    <p className="icon-title">{text.title}</p>
-                  </ListItem>
-                </NavLink>
-              ))}
+              ].map((text, index) => {
+                const { title, icon } = text;
+                return (
+                  <NavLink
+                    exact
+                    to={`/${title}`}
+                    key={title}
+                    className="icon-container"
+                    onClick={() => {
+                      this.setState({ open: !open });
+                    }}
+                  >
+                    <ListItem className="icon-item">
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <p className="icon-title">{title}</p>
+                    </ListItem>
+                  </NavLink>
+                );
+              })}
             </List>
           )}
         </Drawer>
