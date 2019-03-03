@@ -1,0 +1,38 @@
+.navigation {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+/* Icon Cards in Side Nav */
+.icon-title {
+  font-size: 2.4rem;
+  min-width: 100px;
+}
+.auth-container {
+  display: flex;
+  width: 200px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.authentication-btns {
+  font-size: 1.6rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.authentication-btns:hover {
+  border: 1px solid darkgray;
+  background: gray;
+  color: white;
+  box-shadow: 3px 3px 3px lightgray;
+}
+
+.credits {
+  font-size: 1.6rem;
+}
