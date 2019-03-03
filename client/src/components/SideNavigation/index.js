@@ -3,7 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import MenuIcon from "@material-ui/icons/Dehaze";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -12,7 +12,7 @@ import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
 import "./SideNavigation.css";
 
@@ -33,7 +33,6 @@ class SideNavigation extends React.Component {
 
   render() {
     const { open } = this.state;
-
     return (
       <div className="navigation">
         <header position="fixed" className="navbar">
@@ -42,7 +41,7 @@ class SideNavigation extends React.Component {
             aria-label="Open drawer"
             onClick={this.handleDrawerOpen}
           >
-            <MenuIcon />
+            <MenuIcon id="hamburger" />
           </IconButton>
           {!this.state.loggedIn ? (
             <ul className="auth-container">
@@ -59,7 +58,7 @@ class SideNavigation extends React.Component {
         <Drawer variant="persistent" anchor="left" open={open}>
           <div id="drawer-container">
             <IconButton onClick={this.handleDrawerOpen}>
-              <ChevronLeftIcon />
+              <ChevronLeftIcon id="left-icon" />
             </IconButton>
           </div>
           <Divider />
@@ -115,4 +114,4 @@ class SideNavigation extends React.Component {
   }
 }
 
-export default SideNavigation;
+export default withRouter(SideNavigation);
