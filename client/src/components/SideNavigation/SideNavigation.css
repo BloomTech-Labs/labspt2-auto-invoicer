@@ -11,7 +11,7 @@
   justify-content: space-between;
 }
 #drawer-container {
-  min-width: 125px;
+  min-width: 180px;
   margin: 10px 0 5px 10px;
 }
 /* Icon Cards in Side Nav */
@@ -27,7 +27,7 @@
   font-size: 24px;
 }
 .all-icon-container {
-  max-width: 150px;
+  width: 100%;
 }
 
 .icon-container {

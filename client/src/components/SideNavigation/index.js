@@ -56,7 +56,6 @@ class SideNavigation extends React.Component {
           )}
         </header>
         <Drawer
-          variant="persistent"
           anchor={document.body.clientWidth < 520 ? "top" : "left"}
           open={open}
         >
