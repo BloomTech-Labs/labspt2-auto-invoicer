@@ -7,9 +7,9 @@ export default class index extends Component {
   render() {
     return (
       <React.Fragment>
-        <Typography variant="h6" gutterBottom>
-          Shipping address
-        </Typography>
+        {/* <Typography variant="h6" gutterBottom>
+          Shipping address 2
+        </Typography> */}
         <Grid container spacing={14}>
           {" "}
           {/* Grad container spacing was 24 */}
@@ -18,7 +18,7 @@ export default class index extends Component {
               required
               id="firstName"
               name="firstName"
-              label="First name"
+              label="Who is this invoice from?"
               fullWidth
               autoComplete="fname"
             />
@@ -28,7 +28,7 @@ export default class index extends Component {
               required
               id="lastName"
               name="lastName"
-              label="Last name"
+              label="Who is this invoice to?"
               fullWidth
               autoComplete="lname"
             />
@@ -41,15 +41,6 @@ export default class index extends Component {
               label="Address line 1"
               fullWidth
               autoComplete="billing address-line1"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="address2"
-              name="address2"
-              label="Address line 2"
-              fullWidth
-              autoComplete="billing address-line2"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
