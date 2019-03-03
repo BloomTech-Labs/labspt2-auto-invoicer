@@ -9,9 +9,12 @@
   justify-content: space-between;
 }
 #drawer-container {
-  min-width: 135px;
+  min-width: 125px;
 }
 /* Icon Cards in Side Nav */
+.all-icon-container {
+  width: 150px;
+}
 .icon-container {
   text-decoration: none;
   color: black;

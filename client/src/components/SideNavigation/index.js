@@ -22,7 +22,7 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      loggedIn: true,
+      loggedIn: false,
       credits: 3
     };
   }
@@ -64,7 +64,7 @@ class SideNavigation extends React.Component {
           </div>
           <Divider />
           {!this.state.loggedIn ? (
-            <List>
+            <List className="all-icon-container">
               {[
                 { title: "Home", icon: <HomeIcon /> },
                 { title: "About", icon: <AboutIcon /> }
@@ -83,7 +83,7 @@ class SideNavigation extends React.Component {
               ))}
             </List>
           ) : (
-            <List>
+            <List className="all-icon-container">
               {[
                 { title: "Invoices", icon: <InvoicesIcon /> },
                 { title: "Billing", icon: <BillingIcon /> },
