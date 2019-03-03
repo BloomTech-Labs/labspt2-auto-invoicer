@@ -55,7 +55,11 @@ class SideNavigation extends React.Component {
             </ul>
           )}
         </header>
-        <Drawer variant="persistent" anchor="left" open={open}>
+        <Drawer
+          variant="persistent"
+          anchor={document.body.clientWidth < 520 ? "top" : "left"}
+          open={open}
+        >
           <div id="drawer-container">
             <IconButton onClick={this.handleDrawerOpen}>
               <ChevronLeftIcon id="left-icon" />
