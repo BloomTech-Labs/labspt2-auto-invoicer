@@ -63,10 +63,8 @@ export default class index extends Component {
   }
 }
 
-// put AddressForm in it's own div
-// need to add sections for Add Your Logo
-// need to add section for Invoice Number, Date, Due Date, Balance Due
-// Change First + Last Name on AddressForm to:
-// Who is this invoice from?
-// who is this invoice to?
+// Add Your Logo Button as reusable component - Floating Action Button ?
+//// Floating Action Button in github https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/buttons/FloatingActionButtons.js
+// Add Spanning Table for Invoice Items
+//// Spanning Table in github https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/tables/SpanningTable.js
 // Question: why is font smaller than on invoice-list-page?
