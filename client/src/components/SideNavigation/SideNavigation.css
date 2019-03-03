@@ -13,7 +13,7 @@
 }
 /* Icon Cards in Side Nav */
 .all-icon-container {
-  width: 150px;
+  max-width: 150px;
 }
 .icon-container {
   text-decoration: none;
