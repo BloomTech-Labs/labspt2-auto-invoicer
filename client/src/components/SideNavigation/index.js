@@ -12,6 +12,7 @@ import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
+import { NavLink } from "react-router-dom";
 
 import "./SideNavigation.css";
 
@@ -43,20 +44,20 @@ class SideNavigation extends React.Component {
           >
             <MenuIcon />
           </IconButton>
-          {this.state.loggedIn ? (
+          {!this.state.loggedIn ? (
             <ul className="auth-container">
-              <button class="authentication-btns">Sign Up</button>
-              <button class="authentication-btns">Sign In</button>
+              <button className="authentication-btns">Sign Up</button>
+              <button className="authentication-btns">Sign In</button>
             </ul>
           ) : (
             <ul className="auth-container">
               <p className="credits">Credits: {this.state.credits}</p>
-              <button class="authentication-btns">Sign Out</button>
+              <button className="authentication-btns">Sign Out</button>
             </ul>
           )}
         </header>
         <Drawer variant="persistent" anchor="left" open={open}>
-          <div className="drawer-container">
+          <div id="drawer-container">
             <IconButton onClick={this.handleDrawerOpen}>
               <ChevronLeftIcon />
             </IconButton>
@@ -68,10 +69,17 @@ class SideNavigation extends React.Component {
                 { title: "Home", icon: <HomeIcon /> },
                 { title: "About", icon: <AboutIcon /> }
               ].map((text, index) => (
-                <ListItem button key={text.title}>
-                  <ListItemIcon>{text.icon}</ListItemIcon>
-                  <p className="icon-title">{text.title}</p>
-                </ListItem>
+                <NavLink
+                  exact
+                  to={`${text.title}` === "Home" ? "/" : `/${text.title}`}
+                  key={text.title}
+                  className="icon-container"
+                >
+                  <ListItem className="icon-item">
+                    <ListItemIcon>{text.icon}</ListItemIcon>
+                    <p className="icon-title">{text.title}</p>
+                  </ListItem>
+                </NavLink>
               ))}
             </List>
           ) : (
@@ -81,10 +89,17 @@ class SideNavigation extends React.Component {
                 { title: "Billing", icon: <BillingIcon /> },
                 { title: "Settings", icon: <SettingsIcon /> }
               ].map((text, index) => (
-                <ListItem button key={text.title}>
-                  <ListItemIcon>{text.icon}</ListItemIcon>
-                  <p className="icon-title">{text.title}</p>
-                </ListItem>
+                <NavLink
+                  exact
+                  to={`/${text.title}`}
+                  key={text.title}
+                  className="icon-container"
+                >
+                  <ListItem className="icon-item">
+                    <ListItemIcon>{text.icon}</ListItemIcon>
+                    <p className="icon-title">{text.title}</p>
+                  </ListItem>
+                </NavLink>
               ))}
             </List>
           )}

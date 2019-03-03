@@ -8,11 +8,23 @@
   display: flex;
   justify-content: space-between;
 }
+#drawer-container {
+  min-width: 135px;
+}
 /* Icon Cards in Side Nav */
+.icon-container {
+  text-decoration: none;
+  color: black;
+}
 .icon-title {
   font-size: 2.4rem;
-  min-width: 100px;
 }
+
+.active .icon-item {
+  background-color: gray;
+  color: blue;
+}
+
 .auth-container {
   display: flex;
   width: 200px;
