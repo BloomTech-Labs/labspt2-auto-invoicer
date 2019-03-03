@@ -78,38 +78,44 @@
 
 /* inside .invoice-list-container */
 .invoice-list-container .invoice-details {
+  border: 2px solid blue;
+  height: 170px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoice-list-container .invoice-details .invoice-logo {
+  border: 1px solid pink;
+  width: 30%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.invoice-list-container .invoice-details .invoice-number-container {
+  border: 1px solid greenyellow;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.invoice-list-container
+  .invoice-details
+  .invoice-number-container
+  .invoice-number-item {
+  border: 1px solid green;
+  height: 30px;
+}
+
+.invoice-list-container .invoice-address {
   border: 1px solid brown;
-  height: 350px;
+  height: 170px;
 }
 
 .invoice-list-container .item-details {
   border: 1px solid black;
   height: 350px;
 }
-
-/* .invoice-list-container .invoice-box {
-  width: 30%;
-  height: 330px;
-  border: 1px solid brown;
-}
-
-.invoice-list-container .invoice-box .invoice-box-top {
-  border: 1px solid green;
-  height: 50px;
-  text-align: center;
-}
-
-.invoice-list-container .invoice-box .invoice-box-mid {
-  border: 3px solid purple;
-  height: 200px;
-  margin: 0 30px 0 20px;
-}
-
-.invoice-list-container .invoice-box .invoice-box-bottom {
-  border: 1px solid blue;
-  height: 60px;
-  text-align: center;
-} */
 
 .main-container .footer {
   width: 100%;

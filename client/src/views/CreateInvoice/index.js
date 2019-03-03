@@ -40,8 +40,20 @@ export default class index extends Component {
           </div>
           <div className="invoice-list-container">
             <div className="invoice-details">
+              <div className="invoice-logo">
+                <h1>Add Your Logo +</h1>
+              </div>
+              <div className="invoice-number-container">
+                <div className="invoice-number-item">Invoice Number</div>
+                <div className="invoice-number-item">Date</div>
+                <div className="invoice-number-item">Due Date</div>
+                <div className="invoice-number-item">Balance Due: $0.00</div>
+              </div>
+            </div>
+            <div className="invoice-address">
               <AddressForm />
             </div>
+
             <div className="item-details">Item Details</div>
           </div>
         </div>
