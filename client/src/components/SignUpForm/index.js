@@ -58,9 +58,9 @@ class SignUpForm extends React.Component {
   };
   render() {
     return (
-      <form className="signin-form" onSubmit={this.createLoginObject}>
-        <label htmlFor="email" className="signin-form-group">
-          <EmailIcon />
+      <form className="signup-form" onSubmit={this.createLoginObject}>
+        <label htmlFor="email" className="signup-form-group">
+          <EmailIcon className="signup-icon" />
           <input
             className="signin-input"
             type="text"
@@ -71,8 +71,8 @@ class SignUpForm extends React.Component {
             value={this.state.email}
           />
         </label>
-        <label htmlFor="firstName" className="signin-form-group">
-          <PersonIcon />
+        <label htmlFor="firstName" className="signup-form-group">
+          <PersonIcon className="signup-icon" />
           <input
             className="signin-input"
             type="text"
@@ -83,8 +83,8 @@ class SignUpForm extends React.Component {
             value={this.state.firstName}
           />
         </label>
-        <label htmlFor="lastName" className="signin-form-group">
-          <Person2Icon />
+        <label htmlFor="lastName" className="signup-form-group">
+          <Person2Icon className="signup-icon" />
           <input
             className="signin-input"
             type="text"
@@ -95,8 +95,8 @@ class SignUpForm extends React.Component {
             value={this.state.lastName}
           />
         </label>
-        <label htmlFor="phone" className="signin-form-group">
-          <PhoneIcon />
+        <label htmlFor="phone" className="signup-form-group">
+          <PhoneIcon className="signup-icon" />
           <input
             className="signin-input"
             type="text"
@@ -107,8 +107,8 @@ class SignUpForm extends React.Component {
             value={this.state.phone}
           />
         </label>
-        <label htmlFor="password" className="signin-form-group">
-          <PasswordIcon />
+        <label htmlFor="password" className="signup-form-group">
+          <PasswordIcon className="signup-icon" />
           <input
             className="signin-input"
             type="password"
@@ -119,8 +119,8 @@ class SignUpForm extends React.Component {
             value={this.state.password}
           />
         </label>
-        <label htmlFor="password2" className="signin-form-group">
-          <Password2Icon />
+        <label htmlFor="password2" className="signup-form-group">
+          <Password2Icon className="signup-icon" />
           <input
             className="signin-input"
             type="password"
@@ -131,7 +131,7 @@ class SignUpForm extends React.Component {
             value={this.state.password2}
           />
         </label>
-        <button className="authentication-btns" type="submit">
+        <button className="authentication-btns register-btn" type="submit">
           Register
         </button>
       </form>
