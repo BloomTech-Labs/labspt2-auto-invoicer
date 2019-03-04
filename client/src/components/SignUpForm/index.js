@@ -31,10 +31,14 @@ class SignUpForm extends React.Component {
     return pass1 === pass2 ? true : false;
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
   createRegisterObject = e => {
 =======
   createLoginObject = e => {
 >>>>>>> added basics of signup form and icons to match
+=======
+  createRegisterObject = e => {
+>>>>>>> added prop types to reusable modal and SignUpModal
     e.preventDefault();
     const {
       email,
@@ -64,6 +68,7 @@ class SignUpForm extends React.Component {
     return (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <form className="signup-form" onSubmit={this.createRegisterObject}>
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
@@ -74,6 +79,9 @@ class SignUpForm extends React.Component {
 >>>>>>> added basics of signup form and icons to match
 =======
       <form className="signup-form" onSubmit={this.createLoginObject}>
+=======
+      <form className="signup-form" onSubmit={this.createRegisterObject}>
+>>>>>>> added prop types to reusable modal and SignUpModal
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
