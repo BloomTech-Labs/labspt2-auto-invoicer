@@ -9,6 +9,7 @@ import AddressForm from "../../components/reusableComponents/AddressForm";
 import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 //import AddIconButton from "../../components/reusableComponents/AddIconButton";
 //import AddIcon from "@material-ui/icons/Add";
+import AddCircle from "@material-ui/icons/AddCircle";
 
 export default class index extends Component {
   render() {
@@ -43,7 +44,9 @@ export default class index extends Component {
           </div>
           <div className="invoice-list-container">
             <div className="invoice-details">
-              <div className="invoice-logo">{/* Add Icon: <AddIcon /> */}</div>
+              <div className="invoice-logo">
+                Add Your Logo: <AddCircle />
+              </div>
               <div className="invoice-number-container">
                 <div className="invoice-number-item">Invoice Number</div>
                 <div className="invoice-number-item">Date</div>
