@@ -33,7 +33,8 @@ class App extends Component {
           ) : null}
         </header>
         <section className="routes-container">
-          {/* ROUTES GO HERE */}
+          {/* ROUTES GO HERE
+            check if logged in before routing below, and redirect to landing if not loggedIn */}
           <Route exact path={`/user/${id}/billing`} component={BillingPage} />
         </section>
       </div>
