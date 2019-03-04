@@ -1,0 +1,32 @@
+.backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1002;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evely;
+  min-width: 500px;
+  min-height: 300px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.close-icon {
+  text-align: right;
+}
+
+.close-icon:hover {
+  color: gray;
+}
