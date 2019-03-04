@@ -123,10 +123,11 @@ class SideNavigation extends React.Component {
                 { title: "Settings", icon: <SettingsIcon /> }
               ].map((text, index) => {
                 const { title, icon } = text;
+                const lowerTitle = title.toLowerCase();
                 return (
                   <NavLink
                     exact
-                    to={`/${title}`}
+                    to={`/user/1/${lowerTitle}`}
                     key={title}
                     className="icon-container"
                     onClick={() => {

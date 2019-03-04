@@ -1,0 +1,14 @@
+#root {
+  display: flex;
+  width: 100%;
+}
+.App {
+  width: 100%;
+  display: flex;
+}
+
+.routes-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 60px auto 20px;
+}

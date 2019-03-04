@@ -10,7 +10,7 @@ import { Route } from "react-router-dom";
 //imported components
 import SideNavigation from "../SideNavigation";
 import SignInModal from "../SignInModal";
-import BillingPage from "../../view/BillingPage";
+import BillingPage from "../../views/BillingPage";
 
 class App extends Component {
   state = {
@@ -25,14 +25,17 @@ class App extends Component {
     const { id } = this.state;
     return (
       <div className="App">
-        <SideNavigation signInModal={this.signInModal} />
-        {/* check if sigin clicked and open up signin modal or visa-versa */}
-        {this.state.toggleSignIn ? (
-          <SignInModal click={this.signInModal} />
-        ) : null}
-
-        {/* ROUTES GO HERE */}
-        <Route exact path={`/user/${id}/billing`} component={BillingPage} />
+        <header>
+          <SideNavigation signInModal={this.signInModal} />
+          {/* check if sigin clicked and open up signin modal or visa-versa */}
+          {this.state.toggleSignIn ? (
+            <SignInModal click={this.signInModal} />
+          ) : null}
+        </header>
+        <section className="routes-container">
+          {/* ROUTES GO HERE */}
+          <Route exact path={`/user/${id}/billing`} component={BillingPage} />
+        </section>
       </div>
     );
   }

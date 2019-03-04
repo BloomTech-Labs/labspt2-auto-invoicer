@@ -8,7 +8,7 @@ import "./BillingPage.css";
 
 const BillingPage = props => {
   return (
-    <section>
+    <section className="billing-container">
       <h1 className="main-title">Billing</h1>
       <BillingForm />
     </section>
