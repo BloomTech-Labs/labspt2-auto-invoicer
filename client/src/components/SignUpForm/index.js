@@ -63,6 +63,7 @@ class SignUpForm extends React.Component {
   render() {
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
       <form className="signup-form" onSubmit={this.createRegisterObject}>
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
@@ -71,6 +72,11 @@ class SignUpForm extends React.Component {
         <label htmlFor="email" className="signin-form-group">
           <EmailIcon />
 >>>>>>> added basics of signup form and icons to match
+=======
+      <form className="signup-form" onSubmit={this.createLoginObject}>
+        <label htmlFor="email" className="signup-form-group">
+          <EmailIcon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="text"
@@ -82,12 +88,17 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="firstName" className="signup-form-group">
           <PersonIcon className="signup-icon" />
 =======
         <label htmlFor="firstName" className="signin-form-group">
           <PersonIcon />
 >>>>>>> added basics of signup form and icons to match
+=======
+        <label htmlFor="firstName" className="signup-form-group">
+          <PersonIcon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="text"
@@ -99,12 +110,17 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="lastName" className="signup-form-group">
           <Person2Icon className="signup-icon" />
 =======
         <label htmlFor="lastName" className="signin-form-group">
           <Person2Icon />
 >>>>>>> added basics of signup form and icons to match
+=======
+        <label htmlFor="lastName" className="signup-form-group">
+          <Person2Icon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="text"
@@ -116,12 +132,17 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="phone" className="signup-form-group">
           <PhoneIcon className="signup-icon" />
 =======
         <label htmlFor="phone" className="signin-form-group">
           <PhoneIcon />
 >>>>>>> added basics of signup form and icons to match
+=======
+        <label htmlFor="phone" className="signup-form-group">
+          <PhoneIcon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="text"
@@ -133,12 +154,17 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="password" className="signup-form-group">
           <PasswordIcon className="signup-icon" />
 =======
         <label htmlFor="password" className="signin-form-group">
           <PasswordIcon />
 >>>>>>> added basics of signup form and icons to match
+=======
+        <label htmlFor="password" className="signup-form-group">
+          <PasswordIcon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="password"
@@ -150,12 +176,17 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="password2" className="signup-form-group">
           <Password2Icon className="signup-icon" />
 =======
         <label htmlFor="password2" className="signin-form-group">
           <Password2Icon />
 >>>>>>> added basics of signup form and icons to match
+=======
+        <label htmlFor="password2" className="signup-form-group">
+          <Password2Icon className="signup-icon" />
+>>>>>>> did css for signup form and fixed a bug in the close span
           <input
             className="signin-input"
             type="password"
@@ -167,10 +198,14 @@ class SignUpForm extends React.Component {
           />
         </label>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <button className="authentication-btns register-btn" type="submit">
 =======
         <button className="authentication-btns" type="submit">
 >>>>>>> added basics of signup form and icons to match
+=======
+        <button className="authentication-btns register-btn" type="submit">
+>>>>>>> did css for signup form and fixed a bug in the close span
           Register
         </button>
       </form>
