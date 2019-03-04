@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 //import css here
 import "./SignUpModal.css";
@@ -14,6 +15,10 @@ const SignInModal = props => {
       <SignUpForm />
     </Modal>
   );
+};
+
+SignInModal.propTypes = {
+  click: PropTypes.func
 };
 
 export default SignInModal;

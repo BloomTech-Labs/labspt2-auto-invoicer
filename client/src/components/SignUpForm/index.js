@@ -30,7 +30,7 @@ class SignUpForm extends React.Component {
   comparePasswords = (pass1, pass2) => {
     return pass1 === pass2 ? true : false;
   };
-  createLoginObject = e => {
+  createRegisterObject = e => {
     e.preventDefault();
     const {
       email,
@@ -58,7 +58,7 @@ class SignUpForm extends React.Component {
   };
   render() {
     return (
-      <form className="signup-form" onSubmit={this.createLoginObject}>
+      <form className="signup-form" onSubmit={this.createRegisterObject}>
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
           <input
