@@ -7,8 +7,6 @@ import "./CreateInvoice.css";
 //import components
 import AddressForm from "../../components/reusableComponents/AddressForm";
 import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
-//import AddIconButton from "../../components/reusableComponents/AddIconButton";
-//import AddIcon from "@material-ui/icons/Add";
 import AddCircle from "@material-ui/icons/AddCircle";
 
 export default class index extends Component {
@@ -69,11 +67,5 @@ export default class index extends Component {
   }
 }
 
-// Add Your Logo Button as reusable component - Floating Action Button ?
-//// Floating Action Button in github https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/buttons/FloatingActionButtons.js
-
 // Add functionality to form
 // submit handler, save responses to local state
-
-// Been reading documentation
-// may need to delete node_modules and re-install?
