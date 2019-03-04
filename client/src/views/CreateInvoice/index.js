@@ -56,7 +56,6 @@ export default class index extends Component {
             </div>
 
             <div className="item-details">
-              Item Details
               <InvoiceItemTable />
             </div>
           </div>

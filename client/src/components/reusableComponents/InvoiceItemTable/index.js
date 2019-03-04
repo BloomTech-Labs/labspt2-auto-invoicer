@@ -40,8 +40,8 @@ function subtotal(items) {
 
 const rows = [
   ["Paperclips (Box)", 100, 1.15],
-  ["Paper (Case)", 10, 45.99],
-  ["Waste Basket", 2, 17.99]
+  ["Paper (Case)", 10, 45.99]
+  //   ["Waste Basket", 2, 17.99]
 ].map((row, id) => createRow(id, ...row));
 
 const invoiceSubtotal = subtotal(rows);
@@ -55,12 +55,13 @@ function index(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Desc</TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">@</TableCell>
-            <TableCell align="right">Price</TableCell>
+            <TableCell>Item</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Rate</TableCell>
+            <TableCell align="right">Amount</TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           {rows.map(row => (
             <TableRow key={row.id}>
@@ -70,21 +71,39 @@ function index(props) {
               <TableCell align="right">{ccyFormat(row.price)}</TableCell>
             </TableRow>
           ))}
+
           <TableRow>
-            <TableCell rowSpan={3} />
+            <TableCell rowSpan={6} />
             <TableCell colSpan={2}>Subtotal</TableCell>
             <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
           </TableRow>
+
           <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+            <TableCell colSpan={2}>Discount</TableCell>
+            <TableCell align="right">0%</TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell colSpan={2}>Tax</TableCell>
+            {/* <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
               0
-            )} %`}</TableCell>
+            )} %`}</TableCell> */}
             <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
           </TableRow>
+
+          <TableRow>
+            <TableCell colSpan={2}>Shipping</TableCell>
+            <TableCell align="right">$0</TableCell>
+          </TableRow>
+
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
             <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell colSpan={2}>Amount Paid:</TableCell>
+            <TableCell align="right">$0</TableCell>
           </TableRow>
         </TableBody>
       </Table>
