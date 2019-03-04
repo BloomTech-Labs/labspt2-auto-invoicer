@@ -14,7 +14,10 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
 import { NavLink, withRouter, Redirect, Link } from "react-router-dom";
 
+// imported css here
 import "./SideNavigation.css";
+
+// imported components here
 
 class SideNavigation extends React.Component {
   constructor(props) {
@@ -40,6 +43,9 @@ class SideNavigation extends React.Component {
       : null;
   };
 
+  signInModal = () => {
+    return this.props.signInModal();
+  };
   render() {
     const { open, loggedIn, loggedOutClicked } = this.state;
     return (
@@ -56,7 +62,12 @@ class SideNavigation extends React.Component {
           {!loggedIn ? (
             <ul className="auth-container">
               <button className="authentication-btns">Sign Up</button>
-              <button className="authentication-btns">Sign In</button>
+              <button
+                className="authentication-btns"
+                onClick={this.signInModal}
+              >
+                Sign In
+              </button>
             </ul>
           ) : (
             <ul className="auth-container">
