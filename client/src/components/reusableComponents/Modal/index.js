@@ -1,6 +1,6 @@
 import React from "react";
 import Close from "@material-ui/icons/Close";
-
+import PropTypes from "prop-types";
 // import css here
 import "./Modal.css";
 
@@ -20,5 +20,9 @@ class Modal extends React.Component {
     );
   }
 }
+
+Modal.propTypes = {
+  close: PropTypes.func
+};
 
 export default Modal;
