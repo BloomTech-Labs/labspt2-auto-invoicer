@@ -71,3 +71,6 @@ export default class index extends Component {
 
 // Add functionality to form
 // submit handler, save responses to local state
+
+// Been reading documentation
+// may need to delete node_modules and re-install?
