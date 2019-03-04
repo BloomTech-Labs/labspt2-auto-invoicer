@@ -76,7 +76,11 @@ class SideNavigation extends React.Component {
           {!loggedIn ? (
             <AuthLanding signInModal={this.signInModal} />
           ) : (
-            <AuthSecured {...this.props} signOut={this.signOut} />
+            <AuthSecured
+              {...this.props}
+              signOut={this.signOut}
+              credits={this.state.credits}
+            />
           )}
         </header>
         <Drawer
