@@ -1,23 +1,30 @@
 import React from "react";
+// list of material ui components
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+
+// react router dom methods
+import { NavLink, withRouter, Redirect } from "react-router-dom";
+
+// list of icons used in the side navigation component
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Dehaze";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import HomeIcon from "@material-ui/icons/Home";
 import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
-import { NavLink, withRouter, Redirect, Link } from "react-router-dom";
 
 // imported css here
 import "./SideNavigation.css";
 
 // imported components here
+import AuthLanding from "../AuthLanding";
+import AuthSecured from "../AuthSecured";
 
 class SideNavigation extends React.Component {
   constructor(props) {
@@ -32,24 +39,30 @@ class SideNavigation extends React.Component {
   }
 
   handleDrawerOpen = () => {
+    // change open state to true || false to open or close navigation
     this.setState({ open: !this.state.open });
   };
 
   signOut = () => {
+    // change login state to update UI of navigation
     this.setState({ loggedIn: false, loggedOutClicked: true });
 
+    /* ternary operator checking if token is available in local storage and deletes if it is */
     return localStorage.getItem("jwt-auto-invoice")
       ? localStorage.removeItem("jwt-auto-invoice")
       : null;
   };
 
   signInModal = () => {
+    // signInModal from App Component
     return this.props.signInModal();
   };
   render() {
+    // deconstruct state to get a list of needed attributes
     const { open, loggedIn, loggedOutClicked } = this.state;
     return (
       <div className="navigation">
+        {/* if log out is clicked it will redirect to landing */}
         {loggedOutClicked ? <Redirect to="/" /> : null}
         <header position="fixed" className="navbar">
           <IconButton
@@ -59,23 +72,11 @@ class SideNavigation extends React.Component {
           >
             <MenuIcon id="hamburger" />
           </IconButton>
+          {/* if logged in show signup/signin else show */}
           {!loggedIn ? (
-            <ul className="auth-container">
-              <button className="authentication-btns">Sign Up</button>
-              <button
-                className="authentication-btns"
-                onClick={this.signInModal}
-              >
-                Sign In
-              </button>
-            </ul>
+            <AuthLanding signInModal={this.signInModal} />
           ) : (
-            <ul className="auth-container">
-              <p className="credits">Credits: {this.state.credits}</p>
-              <Link to="/" id="signOut" onClick={this.signOut}>
-                Sign Out
-              </Link>
-            </ul>
+            <AuthSecured {...this.props} />
           )}
         </header>
         <Drawer
@@ -88,6 +89,7 @@ class SideNavigation extends React.Component {
             </IconButton>
           </div>
           <Divider />
+          {/* if not logged in show public routes else show secured */}
           {!loggedIn ? (
             <List className="all-icon-container">
               {[
