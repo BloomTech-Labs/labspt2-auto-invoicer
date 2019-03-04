@@ -6,6 +6,7 @@ import "./CreateInvoice.css";
 
 //import components
 import AddressForm from "../../components/reusableComponents/AddressForm";
+import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 
 export default class index extends Component {
   render() {
@@ -54,7 +55,10 @@ export default class index extends Component {
               <AddressForm />
             </div>
 
-            <div className="item-details">Item Details</div>
+            <div className="item-details">
+              Item Details
+              <InvoiceItemTable />
+            </div>
           </div>
         </div>
         <div className="footer">Footer</div>
@@ -67,4 +71,5 @@ export default class index extends Component {
 //// Floating Action Button in github https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/buttons/FloatingActionButtons.js
 // Add Spanning Table for Invoice Items
 //// Spanning Table in github https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/tables/SpanningTable.js
-// Question: why is font smaller than on invoice-list-page?
+// Add functionality to form
+// submit handler, save responses to local state
