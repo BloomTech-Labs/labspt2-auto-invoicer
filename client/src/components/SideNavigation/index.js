@@ -57,6 +57,9 @@ class SideNavigation extends React.Component {
     // signInModal from App Component
     return this.props.signInModal();
   };
+  signUpModal = () => {
+    return this.props.signUpModal();
+  };
   render() {
     // deconstruct state to get a list of needed attributes
     const { open, loggedIn, loggedOutClicked } = this.state;
@@ -74,7 +77,10 @@ class SideNavigation extends React.Component {
           </IconButton>
           {/* if logged in show signup/signin else show */}
           {!loggedIn ? (
-            <AuthLanding signInModal={this.signInModal} />
+            <AuthLanding
+              signInModal={this.signInModal}
+              signUpModal={this.signUpModal}
+            />
           ) : (
             <AuthSecured {...this.props} signOut={this.signOut} />
           )}
