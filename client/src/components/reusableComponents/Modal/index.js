@@ -13,6 +13,7 @@ class Modal extends React.Component {
           <span className="close-icon" onClick={this.close}>
             <Close />
           </span>
+          {/* if you want to add your own tags inside modal this is where they will output in this.props.children */}
           {this.props.children}
         </div>
       </div>
