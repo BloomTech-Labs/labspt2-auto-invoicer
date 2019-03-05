@@ -1,0 +1,37 @@
+.invoice-card {
+  width: 250px;
+  height: 180px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.invoice-card h3 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.invoice-card p {
+  font-size: 1.4rem;
+  text-align: justify;
+}
+
+.late:hover {
+  border-color: rgb(224, 55, 55);
+  box-shadow: 0 0 5px red;
+}
+
+.paid:hover {
+  border-color: green;
+  box-shadow: 0 0 5px green;
+}
+
+.current:hover {
+  border-color: blue;
+  box-shadow: 0 0 5px blue;
+}

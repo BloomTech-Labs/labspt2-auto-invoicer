@@ -1,12 +1,7 @@
-.create-invoice-button {
-  text-align: center;
+.invoice-card .add-icon {
+  font-size: 60px;
 }
 
-.invoice-button-circle {
-  height: 50px;
-  width: 50px;
-  background-color: black;
-  border-radius: 50%;
-  margin-left: 100px;
-  display: inline-block;
+.add-invoice:hover {
+  border-color: darkgray;
 }
