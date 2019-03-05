@@ -31,3 +31,5 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
+module.exports = model('User', userSchema);
