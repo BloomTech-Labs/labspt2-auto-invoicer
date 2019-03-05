@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // import styles here
 import "./PaymentRadio.css";
@@ -17,6 +18,11 @@ const PaymentRadio = props => {
       {props.children}
     </label>
   );
+};
+
+PaymentRadio.propTypes = {
+  handler: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 export default PaymentRadio;
