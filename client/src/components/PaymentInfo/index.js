@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // import css here
 import "./PaymentInfo.css";
@@ -42,6 +43,16 @@ const PaymentInfo = props => {
       />
     </fieldset>
   );
+};
+
+PaymentInfo.propTypes = {
+  changeHandler: PropTypes.func.isRequired,
+  paymentInfo: PropTypes.shape({
+    cc: PropTypes.string.isRequired,
+    exp: PropTypes.string.isRequired,
+    cvv: PropTypes.string.isRequired,
+    title: PropTypes.string
+  })
 };
 
 export default PaymentInfo;
