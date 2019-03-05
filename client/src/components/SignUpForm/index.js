@@ -58,11 +58,7 @@ class SignUpForm extends React.Component {
   };
   render() {
     return (
-<<<<<<< HEAD
       <form className="signup-form" onSubmit={this.createRegisterObject}>
-=======
-      <form className="signup-form" onSubmit={this.createLoginObject}>
->>>>>>> did css for signup form and fixed a bug in the close span
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
           <input
