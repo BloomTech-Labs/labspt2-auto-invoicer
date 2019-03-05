@@ -4,6 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
 export default class index extends Component {
+  state = {
+    invoiceFrom: ""
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -16,8 +20,8 @@ export default class index extends Component {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="firstName"
-              name="firstName"
+              id="invoiceFrom"
+              name="invoiceFrom"
               label="Who is this invoice from?"
               fullWidth
               autoComplete="fname"

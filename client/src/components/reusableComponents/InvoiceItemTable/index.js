@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+import TextField from "@material-ui/core/TextField";
+
 const TAX_RATE = 0.07;
 
 const styles = theme => ({
@@ -40,7 +42,7 @@ function subtotal(items) {
 
 const rows = [
   ["Paperclips (Box)", 100, 1.15],
-  ["Paper (Case)", 10, 45.99]
+  ["Paper (Stack)", 10, 45.99]
   //   ["Waste Basket", 2, 17.99]
 ].map((row, id) => createRow(id, ...row));
 
@@ -93,7 +95,7 @@ function index(props) {
 
           <TableRow>
             <TableCell colSpan={2}>Shipping</TableCell>
-            <TableCell align="right">$0</TableCell>
+            <TableCell align="right">0</TableCell>
           </TableRow>
 
           <TableRow>
