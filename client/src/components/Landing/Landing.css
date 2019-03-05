@@ -22,7 +22,7 @@ button {
 @media (max-width:500px) {
   .button {
     font-size:1rem;
-    width: 60%;
+    width: 100%;
     padding:2px 0;
 
   }
