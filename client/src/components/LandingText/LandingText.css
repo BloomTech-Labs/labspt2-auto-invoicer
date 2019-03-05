@@ -1,0 +1,9 @@
+.landing_text{
+    font-size: 1.2 rem;
+}
+
+@media (max-width:500px) {
+  .landing_text {
+    font-size:0.8rem
+  }
+}
