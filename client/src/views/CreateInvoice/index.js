@@ -44,7 +44,7 @@ export default class index extends Component {
           <div className="invoice-list-container">
             <div className="invoice-details">
               <div className="invoice-logo">
-                Add Your Logo: <AddCircle />
+                Add Your Company Logo: <AddCircle />
               </div>
               <div className="invoice-number-container">
                 <div className="invoice-number-item">Invoice Number</div>
