@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express-graphql": "^0.7.1",
+    "mongoose": "^5.4.17"
+  }
+}
