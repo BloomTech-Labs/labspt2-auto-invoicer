@@ -41,7 +41,7 @@ const NewSettingsInfo = props => {
         placeholder="Confirm Password"
       />
       <Button>save</Button>
-      <p>password must contain at least 8 charachters</p>
+      <p>Password must contain at least 8 charachters</p>
     </fieldset>
   );
 };
