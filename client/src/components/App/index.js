@@ -14,11 +14,16 @@ import BillingPage from "../../views/BillingPage";
 import SignUpModal from "../SignUpModal";
 
 class App extends Component {
-  state = {
-    toggleSignIn: false,
-    id: 1,
-    toggleRegister: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      toggleSignIn: false,
+      id: 1,
+      toggleRegister: false
+    };
+  }
+
   signInModal = () => {
     // return the opposite of the current state of toggleSignIn
     return this.setState({ toggleSignIn: !this.state.toggleSignIn });
@@ -32,17 +37,16 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <SideNavigation signInModal={this.signInModal} />
-          {/* check if sigin clicked and open up signin modal or visa-versa */}
-          {this.state.toggleSignIn ? (
-            <SignInModal click={this.signInModal} />
-          ) : null}
+          <SideNavigation
+            signInModal={this.signInModal}
+            signUpModal={this.signUpModal}
+          />
         </header>
-
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
           <SignInModal click={this.signInModal} />
         ) : null}
+
         {/* check if sigup clicked and open up signup modal or visa-versa */}
         {this.state.toggleRegister ? (
           <SignUpModal click={this.signUpModal} />

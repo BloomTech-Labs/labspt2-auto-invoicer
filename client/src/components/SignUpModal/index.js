@@ -8,7 +8,7 @@ import "./SignUpModal.css";
 import SignUpForm from "../SignUpForm";
 import Modal from "../reusableComponents/Modal";
 
-const SignInModal = props => {
+const SignUpModal = props => {
   return (
     <Modal close={props.click}>
       <h1 className="modal-title">Auto-Invoicer Register Account</h1>
@@ -17,8 +17,8 @@ const SignInModal = props => {
   );
 };
 
-SignInModal.propTypes = {
+SignUpModal.propTypes = {
   click: PropTypes.func
 };
 
-export default SignInModal;
+export default SignUpModal;
