@@ -69,6 +69,7 @@ class SignUpForm extends React.Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <form className="signup-form" onSubmit={this.createRegisterObject}>
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
@@ -82,6 +83,12 @@ class SignUpForm extends React.Component {
 =======
       <form className="signup-form" onSubmit={this.createRegisterObject}>
 >>>>>>> added prop types to reusable modal and SignUpModal
+=======
+      <form className="signup-form" onSubmit={this.createRegisterObject}>
+=======
+      <form className="signup-form" onSubmit={this.createLoginObject}>
+>>>>>>> did css for signup form and fixed a bug in the close span
+>>>>>>> Merge branch 'create-signup-modal' of https://github.com/Lambda-School-Labs/labspt2-auto-invoicer into create-signup-modal
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span

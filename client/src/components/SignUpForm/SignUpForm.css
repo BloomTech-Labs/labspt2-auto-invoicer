@@ -10,12 +10,18 @@
   margin: 10px auto;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: ease-in-out color 0.2s;
 =======
 >>>>>>> did css for signup form and fixed a bug in the close span
 =======
   transition: ease-in-out color 0.2s;
 >>>>>>> added transitions for smoother effect when in focus
+=======
+  transition: ease-in-out color 0.2s;
+=======
+>>>>>>> did css for signup form and fixed a bug in the close span
+>>>>>>> Merge branch 'create-signup-modal' of https://github.com/Lambda-School-Labs/labspt2-auto-invoicer into create-signup-modal
 }
 .signup-form-group:hover {
   color: gray;
@@ -27,6 +33,7 @@
   cursor: pointer;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: ease-in-out border 0.3s;
   transition: ease-in-out box-shadow 0.2s;
 =======
@@ -35,6 +42,12 @@
   transition: ease-in-out border 0.3s;
   transition: ease-in-out box-shadow 0.2s;
 >>>>>>> added transitions for smoother effect when in focus
+=======
+  transition: ease-in-out border 0.3s;
+  transition: ease-in-out box-shadow 0.2s;
+=======
+>>>>>>> did css for signup form and fixed a bug in the close span
+>>>>>>> Merge branch 'create-signup-modal' of https://github.com/Lambda-School-Labs/labspt2-auto-invoicer into create-signup-modal
 }
 
 .signup-form-group input:hover {
