@@ -1,3 +1,12 @@
+.billing-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 450px;
+  justify-content: space-between;
+}
+
 .main-title {
-  font-size: 4rem;
+  font-size: 6rem;
 }
