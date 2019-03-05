@@ -8,7 +8,10 @@
 }
 .signup-form-group {
   margin: 10px auto;
+<<<<<<< HEAD
   transition: ease-in-out color 0.2s;
+=======
+>>>>>>> did css for signup form and fixed a bug in the close span
 }
 .signup-form-group:hover {
   color: gray;
@@ -18,8 +21,11 @@
 .signup-form-group input {
   border: 2px solid black;
   cursor: pointer;
+<<<<<<< HEAD
   transition: ease-in-out border 0.3s;
   transition: ease-in-out box-shadow 0.2s;
+=======
+>>>>>>> did css for signup form and fixed a bug in the close span
 }
 
 .signup-form-group input:hover {
