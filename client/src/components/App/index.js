@@ -5,16 +5,10 @@ import React, { Component } from "react";
 import "./App.css";
 
 //imported components
-import InvoiceList from "../../views/InvoiceList";
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        App Content
-        <InvoiceList />
-      </div>
-    );
+    return <div className="App">App Content</div>;
   }
 }
 
