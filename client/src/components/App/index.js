@@ -10,13 +10,19 @@ import { Route } from "react-router-dom";
 //imported components
 import SideNavigation from "../SideNavigation";
 import SignInModal from "../SignInModal";
+<<<<<<< HEAD
 import BillingPage from "../../views/BillingPage";
+=======
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
 import SignUpModal from "../SignUpModal";
 
 class App extends Component {
   state = {
     toggleSignIn: false,
+<<<<<<< HEAD
     id: 1,
+=======
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
     toggleRegister: false
   };
   signInModal = () => {
@@ -31,6 +37,7 @@ class App extends Component {
     const { id } = this.state;
     return (
       <div className="App">
+<<<<<<< HEAD
         <header>
           <SideNavigation signInModal={this.signInModal} />
           {/* check if sigin clicked and open up signin modal or visa-versa */}
@@ -38,6 +45,12 @@ class App extends Component {
             <SignInModal click={this.signInModal} />
           ) : null}
         </header>
+=======
+        <SideNavigation
+          signInModal={this.signInModal}
+          signUpModal={this.signUpModal}
+        />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
           <SignInModal click={this.signInModal} />
@@ -46,12 +59,15 @@ class App extends Component {
         {this.state.toggleRegister ? (
           <SignUpModal click={this.signUpModal} />
         ) : null}
+<<<<<<< HEAD
 
         <section className="routes-container">
           {/* ROUTES GO HERE
             check if logged in before routing below, and redirect to landing if not loggedIn */}
           <Route exact path={`/user/${id}/billing`} component={BillingPage} />
         </section>
+=======
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
       </div>
     );
   }

@@ -32,6 +32,7 @@ class SignUpForm extends React.Component {
   };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   createRegisterObject = e => {
 =======
   createLoginObject = e => {
@@ -39,6 +40,9 @@ class SignUpForm extends React.Component {
 =======
   createRegisterObject = e => {
 >>>>>>> added prop types to reusable modal and SignUpModal
+=======
+  createRegisterObject = e => {
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
     e.preventDefault();
     const {
       email,
@@ -70,6 +74,7 @@ class SignUpForm extends React.Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <form className="signup-form" onSubmit={this.createRegisterObject}>
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
@@ -92,6 +97,11 @@ class SignUpForm extends React.Component {
         <label htmlFor="email" className="signup-form-group">
           <EmailIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+      <form className="signup-form" onSubmit={this.createRegisterObject}>
+        <label htmlFor="email" className="signup-form-group">
+          <EmailIcon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="text"
@@ -104,6 +114,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="firstName" className="signup-form-group">
           <PersonIcon className="signup-icon" />
 =======
@@ -114,6 +125,10 @@ class SignUpForm extends React.Component {
         <label htmlFor="firstName" className="signup-form-group">
           <PersonIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <label htmlFor="firstName" className="signup-form-group">
+          <PersonIcon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="text"
@@ -126,6 +141,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="lastName" className="signup-form-group">
           <Person2Icon className="signup-icon" />
 =======
@@ -136,6 +152,10 @@ class SignUpForm extends React.Component {
         <label htmlFor="lastName" className="signup-form-group">
           <Person2Icon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <label htmlFor="lastName" className="signup-form-group">
+          <Person2Icon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="text"
@@ -148,6 +168,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="phone" className="signup-form-group">
           <PhoneIcon className="signup-icon" />
 =======
@@ -158,6 +179,10 @@ class SignUpForm extends React.Component {
         <label htmlFor="phone" className="signup-form-group">
           <PhoneIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <label htmlFor="phone" className="signup-form-group">
+          <PhoneIcon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="text"
@@ -170,6 +195,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="password" className="signup-form-group">
           <PasswordIcon className="signup-icon" />
 =======
@@ -180,6 +206,10 @@ class SignUpForm extends React.Component {
         <label htmlFor="password" className="signup-form-group">
           <PasswordIcon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <label htmlFor="password" className="signup-form-group">
+          <PasswordIcon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="password"
@@ -192,6 +222,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label htmlFor="password2" className="signup-form-group">
           <Password2Icon className="signup-icon" />
 =======
@@ -202,6 +233,10 @@ class SignUpForm extends React.Component {
         <label htmlFor="password2" className="signup-form-group">
           <Password2Icon className="signup-icon" />
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <label htmlFor="password2" className="signup-form-group">
+          <Password2Icon className="signup-icon" />
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           <input
             className="signin-input"
             type="password"
@@ -214,6 +249,7 @@ class SignUpForm extends React.Component {
         </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <button className="authentication-btns register-btn" type="submit">
 =======
         <button className="authentication-btns" type="submit">
@@ -221,6 +257,9 @@ class SignUpForm extends React.Component {
 =======
         <button className="authentication-btns register-btn" type="submit">
 >>>>>>> did css for signup form and fixed a bug in the close span
+=======
+        <button className="authentication-btns register-btn" type="submit">
+>>>>>>> bbe6f24c4c4b42f5e4d613877dcfcbabc04c2587
           Register
         </button>
       </form>
