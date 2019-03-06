@@ -38,7 +38,8 @@ class index extends Component {
             value={this.state.firstName}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="invoiceTo"
             name="invoiceTo"
@@ -46,7 +47,8 @@ class index extends Component {
             value={this.state.lastName}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12}>
           <TextField
             id="address1"
             name="address1"
@@ -55,7 +57,8 @@ class index extends Component {
             value={this.state.address1}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="city"
             name="city"
@@ -64,7 +67,8 @@ class index extends Component {
             value={this.state.city}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="state"
             name="state"
@@ -72,7 +76,8 @@ class index extends Component {
             value={this.state.state}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="zip"
             name="zip"
@@ -81,7 +86,8 @@ class index extends Component {
             value={this.state.zip}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="country"
             name="country"
@@ -90,9 +96,8 @@ class index extends Component {
             value={this.state.country}
             onChange={event => this.changeHandler(event)}
           />
-          <br />
-          <button onClick={event => this.onSubmit(event)}>Submit</button>
         </Grid>
+        <button onClick={event => this.onSubmit(event)}>Submit</button>
       </Grid>
     );
   }

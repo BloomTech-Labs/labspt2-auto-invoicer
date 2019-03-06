@@ -5,11 +5,11 @@ import React, { Component } from "react";
 import "./CreateInvoice.css";
 
 //import components
-//import AddressForm from "../../components/reusableComponents/AddressForm";
+import AddressForm from "../../components/reusableComponents/AddressForm";
 //import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
-import SampleForm from "../../components/reusableComponents/SampleForm";
+//import SampleForm from "../../components/reusableComponents/SampleForm";
 
 export default class index extends Component {
   constructor() {
@@ -67,8 +67,8 @@ export default class index extends Component {
               </div>
             </div>
             <div className="invoice-address">
-              {/* <AddressForm /> */}
-              <SampleForm onSubmit={fields => this.onSubmit(fields)} />
+              <AddressForm onSubmit={fields => this.onSubmit(fields)} />
+              {/* <SampleForm onSubmit={fields => this.onSubmit(fields)} /> */}
               <p>{JSON.stringify(this.state.fields)}</p>
             </div>
 
