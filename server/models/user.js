@@ -2,14 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true
-    },
-    phone_num: {
-      type: Number,
-      required: true
-    },
     email: {
       type: String,
       required: true
@@ -18,8 +10,12 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    active: {
-      type: Boolean,
+    name: {
+      type: String,
+      required: true
+    },
+    phone_num: {
+      type: String,
       required: true
     },
     companies: [
