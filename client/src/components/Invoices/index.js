@@ -13,7 +13,7 @@ class Invoices extends Component {
     super(props);
 
     this.state = {
-      empty: true,
+      empty: false,
       invoices: [
         {
           invoiceNumber: 1234567,
