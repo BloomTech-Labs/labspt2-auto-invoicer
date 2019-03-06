@@ -20,6 +20,7 @@ export default class index extends Component {
   }
 
   onSubmit = fields => {
+    this.setState({ fields });
     console.log("CreateInvoice Item Details: ", fields);
   };
 
@@ -72,6 +73,7 @@ export default class index extends Component {
             <div className="item-details">
               {/* <InvoiceItemTable /> */}
               <SampleTable onSubmit={fields => this.onSubmit(fields)} />
+              <p>{JSON.stringify(this.state.fields)}</p>
             </div>
           </div>
         </div>
