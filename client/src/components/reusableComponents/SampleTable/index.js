@@ -57,7 +57,13 @@ class index extends Component {
       itemDescription: "",
       itemQuantity: "",
       itemRate: "",
-      itemAmount: ""
+      itemAmount: "",
+      subtotal: "",
+      discount: "",
+      tax: "",
+      shipping: "",
+      total: "",
+      amountPaid: ""
     };
   }
   //const { classes } = props;
@@ -151,13 +157,28 @@ class index extends Component {
                 <TableCell rowSpan={6} />
                 <TableCell colSpan={2}>Subtotal</TableCell>
                 <TableCell align="right">
-                  {ccyFormat(invoiceSubtotal)}
+                  {/* ccyFormat(invoiceSubtotal) */}
+                  <TextField
+                    id="subtotal"
+                    name="subtotal"
+                    placeholder="Subtotal"
+                    value={this.state.subtotal}
+                    onChange={event => this.changeHandler(event)}
+                  />
                 </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell colSpan={2}>Discount</TableCell>
-                <TableCell align="right">0%</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="discount"
+                    name="discount"
+                    placeholder="Discount"
+                    value={this.state.discount}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
               </TableRow>
 
               <TableRow>
@@ -165,22 +186,56 @@ class index extends Component {
                 {/* <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
                   0
                 )} %`}</TableCell> */}
-                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+                <TableCell align="right">
+                  {/* ccyFormat(invoiceTaxes) */}
+                  <TextField
+                    id="tax"
+                    name="tax"
+                    placeholder="Tax"
+                    value={this.state.tax}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell colSpan={2}>Shipping</TableCell>
-                <TableCell align="right">0</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="shipping"
+                    name="shipping"
+                    placeholder="Shipping"
+                    value={this.state.shipping}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell colSpan={2}>Total</TableCell>
-                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                <TableCell align="right">
+                  {/* ccyFormat(invoiceTotal) */}
+                  <TextField
+                    id="total"
+                    name="total"
+                    placeholder="Total"
+                    value={this.state.total}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell colSpan={2}>Amount Paid:</TableCell>
-                <TableCell align="right">$0</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="amountPaid"
+                    name="amountPaid"
+                    placeholder="Amount Paid"
+                    value={this.state.amountPaid}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
