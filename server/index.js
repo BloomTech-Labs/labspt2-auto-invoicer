@@ -12,7 +12,8 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 const protected = require('./middleware/isAuth')
 
-app.use(express.json(), cors(), helmet(), protected);
+app.use(express.json(), cors(), helmet());
+// app.use(protected)
 
 app.use(
   '/graphql',
