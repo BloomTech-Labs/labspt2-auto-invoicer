@@ -1,0 +1,28 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  align-items: center;
+}
+.landing button {
+  border: 1px inset gray;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  padding: 10px 0;
+  width: 60%;
+  margin: 0px auto;
+  box-shadow: 3px 3px 3px lightgray;
+}
+
+.landing button:hover {
+  border: 1px outset gray;
+  background: lightgray;
+  cursor: pointer;
+}
+@media (max-width: 500px) {
+  .button {
+    font-size: 1rem;
+    width: 100%;
+    padding: 2px 0;
+  }
+}
