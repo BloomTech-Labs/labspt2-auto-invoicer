@@ -6,10 +6,9 @@ import "./CreateInvoice.css";
 
 //import components
 import AddressForm from "../../components/reusableComponents/AddressForm";
-//import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
+import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
-//import SampleForm from "../../components/reusableComponents/SampleForm";
 
 export default class index extends Component {
   constructor() {
@@ -68,11 +67,12 @@ export default class index extends Component {
             </div>
             <div className="invoice-address">
               <AddressForm onSubmit={fields => this.onSubmit(fields)} />
-              {/* <SampleForm onSubmit={fields => this.onSubmit(fields)} /> */}
               <p>{JSON.stringify(this.state.fields)}</p>
             </div>
 
-            <div className="item-details">{/* <InvoiceItemTable /> */}</div>
+            <div className="item-details">
+              <InvoiceItemTable />
+            </div>
           </div>
         </div>
         <div className="footer">Footer</div>

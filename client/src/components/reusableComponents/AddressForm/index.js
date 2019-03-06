@@ -29,76 +29,78 @@ class index extends Component {
 
   render() {
     return (
-      <Grid container spacing={16}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="invoiceFrom"
-            name="invoiceFrom"
-            label="Invoice FROM"
-            value={this.state.firstName}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="invoiceTo"
-            name="invoiceTo"
-            label="Invoice TO"
-            value={this.state.lastName}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            value={this.state.address1}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="city"
-            name="city"
-            label="City"
-            autoComplete="billing address-level2"
-            value={this.state.city}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            value={this.state.state}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            autoComplete="billing postal-code"
-            value={this.state.zip}
-            onChange={event => this.changeHandler(event)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="country"
-            name="country"
-            label="Country"
-            autoComplete="billing country"
-            value={this.state.country}
-            onChange={event => this.changeHandler(event)}
-          />
+      <div>
+        <Grid container spacing={16}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="invoiceFrom"
+              name="invoiceFrom"
+              label="Invoice FROM"
+              value={this.state.firstName}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="invoiceTo"
+              name="invoiceTo"
+              label="Invoice TO"
+              value={this.state.lastName}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="address1"
+              name="address1"
+              label="Address line 1"
+              fullWidth
+              value={this.state.address1}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="city"
+              name="city"
+              label="City"
+              autoComplete="billing address-level2"
+              value={this.state.city}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="state"
+              name="state"
+              label="State/Province/Region"
+              value={this.state.state}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="zip"
+              name="zip"
+              label="Zip / Postal code"
+              autoComplete="billing postal-code"
+              value={this.state.zip}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="country"
+              name="country"
+              label="Country"
+              autoComplete="billing country"
+              value={this.state.country}
+              onChange={event => this.changeHandler(event)}
+            />
+          </Grid>
         </Grid>
         <button onClick={event => this.onSubmit(event)}>Submit</button>
-      </Grid>
+      </div>
     );
   }
 }
