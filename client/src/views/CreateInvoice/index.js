@@ -5,12 +5,17 @@ import React, { Component } from "react";
 import "./CreateInvoice.css";
 
 //import components
-import AddressForm from "../../components/reusableComponents/AddressForm";
+//import AddressForm from "../../components/reusableComponents/AddressForm";
 import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
+import SampleForm from "../../components/reusableComponents/SampleForm";
 
 export default class index extends Component {
+  onSubmit = fields => {
+    console.log("CreateInvoice Page: ", fields);
+  };
+
   render() {
     return (
       <div className="main-container">
@@ -54,7 +59,8 @@ export default class index extends Component {
               </div>
             </div>
             <div className="invoice-address">
-              <AddressForm />
+              {/* <AddressForm /> */}
+              <SampleForm onSubmit={fields => this.onSubmit(fields)} />
             </div>
 
             <div className="item-details">
