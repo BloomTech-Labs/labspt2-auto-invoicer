@@ -6,9 +6,10 @@ import "./CreateInvoice.css";
 
 //import components
 import AddressForm from "../../components/reusableComponents/AddressForm";
-import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
+//import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
+import SampleTable from "../../components/reusableComponents/SampleTable";
 
 export default class index extends Component {
   render() {
@@ -58,7 +59,8 @@ export default class index extends Component {
             </div>
 
             <div className="item-details">
-              <InvoiceItemTable />
+              {/* <InvoiceItemTable /> */}
+              <SampleTable />
             </div>
           </div>
         </div>
