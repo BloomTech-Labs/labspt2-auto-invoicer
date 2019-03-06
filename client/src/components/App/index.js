@@ -16,6 +16,8 @@ import LandingPage from "../../views/LandingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import SettingsPage from "../../views/SettingsPage";
 
+import InvoiceList from "../../views/InvoiceList";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -66,6 +68,7 @@ class App extends Component {
           />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
           <Route exact path="/" component={LandingPage} />
+          <Route exact path={`/user/${id}/invoices`} component={InvoiceList} />
         </section>
       </div>
     );
