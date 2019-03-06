@@ -12,6 +12,9 @@ const SignInModal = props => {
     <Modal close={props.click}>
       <h1 className="modal-title">Auto-Invoicer Sign In</h1>
       <SignInForm />
+      <p className="forgot" onClick={props.forgot}>
+        Forgot Password?
+      </p>
     </Modal>
   );
 };
