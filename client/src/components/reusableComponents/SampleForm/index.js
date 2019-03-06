@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-// import Grid from "@material-ui/core/Grid";
-// import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 
 class index extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      lastName: ""
+      invoiceFrom: "",
+      invoiceTo: "",
+      address1: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: ""
     };
   }
 
@@ -24,27 +29,71 @@ class index extends Component {
 
   render() {
     return (
-      //   <Grid container spacing={14}>
-
-      <form>
-        <input
-          id="firstName"
-          name="firstName"
-          placeholder="First Name"
-          value={this.state.firstName}
-          onChange={event => this.changeHandler(event)}
-        />
-        <br />
-        <input
-          id="lastName"
-          name="lastName"
-          placeholder="Last Name"
-          value={this.state.lastName}
-          onChange={event => this.changeHandler(event)}
-        />
-        <button onClick={event => this.onSubmit(event)}>Submit</button>
-      </form>
-      //   </Grid>
+      <Grid container spacing={16}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="invoiceFrom"
+            name="invoiceFrom"
+            label="Invoice FROM"
+            value={this.state.firstName}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="invoiceTo"
+            name="invoiceTo"
+            label="Invoice TO"
+            value={this.state.lastName}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="address1"
+            name="address1"
+            label="Address line 1"
+            fullWidth
+            value={this.state.address1}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="city"
+            name="city"
+            label="City"
+            autoComplete="billing address-level2"
+            value={this.state.city}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="state"
+            name="state"
+            label="State/Province/Region"
+            value={this.state.state}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="zip"
+            name="zip"
+            label="Zip / Postal code"
+            autoComplete="billing postal-code"
+            value={this.state.zip}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <TextField
+            id="country"
+            name="country"
+            label="Country"
+            autoComplete="billing country"
+            value={this.state.country}
+            onChange={event => this.changeHandler(event)}
+          />
+          <br />
+          <button onClick={event => this.onSubmit(event)}>Submit</button>
+        </Grid>
+      </Grid>
     );
   }
 }
