@@ -2,24 +2,31 @@ const jwt = require('jsonwebtoken')
 
 const secret = process.env.SECRET || 'testingJWT';
 
+//for testing purposes, I will comment out
+//the thrown errors and 
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization')
   if (!authHeader) {
-    throw new Error('you are not logged in, please log in')
+    req.isAuth = false
+    return next()
   }
   const token = authHeader.split(' ')[1];
   if (!token || token === '') {
-    throw new Error('you are not logged in, please log in')
+    req.isAuth = false
+    return next()
   }
   try {
     decodedToken = jwt.verify(token, secret)
   } catch (error) {
-    throw new Error('unable to verify session at this moment, please try again later')
+    req.isAuth = false
+    return next()
   }
 
   if (!decodedToken) {
-    throw new Error('your session has expired, please log back in')
+    req.isAuth = false
+    return next()
   }
   req.isAuth = true;
   req.userId = decodedToken.userId
+  return next()
 }
