@@ -12,6 +12,9 @@ import SideNavigation from "../SideNavigation";
 import SignInModal from "../SignInModal";
 import BillingPage from "../../views/BillingPage";
 import SignUpModal from "../SignUpModal";
+import LandingPage from "../../views/LandingPage";
+import CreateInvoice from "../../views/CreateInvoice";
+import SettingsPage from "../../views/SettingsPage";
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +59,13 @@ class App extends Component {
           {/* ROUTES GO HERE
             check if logged in before routing below, and redirect to landing if not loggedIn */}
           <Route exact path={`/user/${id}/billing`} component={BillingPage} />
+          <Route
+            exact
+            path={`/user/${id}/invoice/create`}
+            component={CreateInvoice}
+          />
+          <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
+          <Route exact path="/" component={LandingPage} />
         </section>
       </div>
     );
