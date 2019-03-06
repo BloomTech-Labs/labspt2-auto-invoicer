@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken')
 
 const secret = process.env.SECRET || 'testingJWT';
 
-//for testing purposes, I will comment out
-//the thrown errors and 
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization')
   if (!authHeader) {
