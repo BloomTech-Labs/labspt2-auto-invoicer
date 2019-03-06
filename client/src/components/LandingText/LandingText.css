@@ -1,5 +1,6 @@
 .landing_text{
-    font-size: 1.2 rem;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
 }
 
 @media (max-width:500px) {

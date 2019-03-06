@@ -65,7 +65,14 @@ class App extends Component {
             component={CreateInvoice}
           />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
-          <Route exact path="/" component={LandingPage} />
+
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <LandingPage {...props} click={this.signUpModal} />
+            )}
+          />
         </section>
       </div>
     );

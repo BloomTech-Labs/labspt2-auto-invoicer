@@ -20,7 +20,7 @@ class Landing extends React.Component {
     return (
       <div className="landing">
         <LandingText />
-        <Button>Buy Now</Button>
+        <Button click={this.props.click}>Buy Now</Button>
       </div>
     );
   }
