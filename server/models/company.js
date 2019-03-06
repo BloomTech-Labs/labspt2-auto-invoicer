@@ -5,7 +5,7 @@ const companySchema = new Schema({
     type: String,
     required: true
   },
-  address: {
+  email: {
     type: String,
     required: true
   },
@@ -13,8 +13,23 @@ const companySchema = new Schema({
     type: String,
     required: true
   },
-  email: {
+  address_1: {
     type: String,
+    required: true
+  },
+  address_2: {
+    type: String
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  postal_code: {
+    type: Number,
     required: true
   },
   unlimited_tier: {
@@ -25,17 +40,7 @@ const companySchema = new Schema({
     type: Number,
     default: 3
   },
-  company_code: {
-    type: Number,
-    required: true
-  },
   users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
-  admins: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
