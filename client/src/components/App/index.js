@@ -15,6 +15,7 @@ import SignUpModal from "../SignUpModal";
 import LandingPage from "../../views/LandingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import SettingsPage from "../../views/SettingsPage";
+import ForgotPassModal from "../ForgotPassModal";
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class App extends Component {
     this.state = {
       toggleSignIn: false,
       id: 1,
-      toggleRegister: false
+      toggleRegister: false,
+      togglePassForgot: false
     };
   }
 
@@ -35,6 +37,16 @@ class App extends Component {
     // return the opposite of the current state of toggleRegister
     return this.setState({ toggleRegister: !this.state.toggleRegister });
   };
+  forgotPassModal = () => {
+    this.setState({
+      togglePassForgot: !this.state.togglePassForgot
+    });
+    // added a set timeout to be able to close both modals at once
+    setTimeout(() => {
+      return this.signInModal();
+    }, 0);
+  };
+
   render() {
     const { id } = this.state;
     return (
@@ -43,11 +55,12 @@ class App extends Component {
           <SideNavigation
             signInModal={this.signInModal}
             signUpModal={this.signUpModal}
+            forgotPassModal={this.forgotPassModal}
           />
         </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
-          <SignInModal click={this.signInModal} />
+          <SignInModal click={this.signInModal} forgot={this.forgotPassModal} />
         ) : null}
 
         {/* check if sigup clicked and open up signup modal or visa-versa */}
@@ -55,6 +68,15 @@ class App extends Component {
           <SignUpModal click={this.signUpModal} />
         ) : null}
 
+        {/* check if password forgot clicked and open up password modal or visa-versa */}
+        {this.state.togglePassForgot ? (
+          <ForgotPassModal
+            click={() => {
+              this.forgotPassModal();
+              this.signInModal();
+            }}
+          />
+        ) : null}
         <section className="routes-container">
           {/* ROUTES GO HERE
             check if logged in before routing below, and redirect to landing if not loggedIn */}
