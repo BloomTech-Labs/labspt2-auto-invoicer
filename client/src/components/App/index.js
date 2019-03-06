@@ -15,6 +15,7 @@ import SignUpModal from "../SignUpModal";
 import LandingPage from "../../views/LandingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import SettingsPage from "../../views/SettingsPage";
+import ForgotPassModal from "../ForgotPassModal";
 
 class App extends Component {
   constructor(props) {
@@ -30,9 +31,6 @@ class App extends Component {
 
   signInModal = () => {
     // return the opposite of the current state of toggleSignIn
-    if (this.state.toggleSignIn) {
-      this.handleSnackbarLoad("closed sign in");
-    }
     return this.setState({ toggleSignIn: !this.state.toggleSignIn });
   };
   signUpModal = () => {
@@ -40,10 +38,13 @@ class App extends Component {
     return this.setState({ toggleRegister: !this.state.toggleRegister });
   };
   forgotPassModal = () => {
-    return this.setState({
-      toggleSignIn: !this.state.toggleSignIn,
+    this.setState({
       togglePassForgot: !this.state.togglePassForgot
     });
+    // added a set timeout to be able to close both modals at once
+    setTimeout(() => {
+      return this.signInModal();
+    }, 0);
   };
 
   render() {
@@ -69,7 +70,12 @@ class App extends Component {
 
         {/* check if password forgot clicked and open up password modal or visa-versa */}
         {this.state.togglePassForgot ? (
-          <ForgotPassModal click={this.forgotPassModal} />
+          <ForgotPassModal
+            click={() => {
+              this.forgotPassModal();
+              this.signInModal();
+            }}
+          />
         ) : null}
         <section className="routes-container">
           {/* ROUTES GO HERE
