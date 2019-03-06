@@ -13,8 +13,6 @@ import SignInModal from "../SignInModal";
 import BillingPage from "../../views/BillingPage";
 import SignUpModal from "../SignUpModal";
 
-import CreateInvoicePage from "../../views/CreateInvoice";
-
 class App extends Component {
   state = {
     toggleSignIn: false,
@@ -54,7 +52,6 @@ class App extends Component {
           {/* ROUTES GO HERE
             check if logged in before routing below, and redirect to landing if not loggedIn */}
           <Route exact path={`/user/${id}/billing`} component={BillingPage} />
-          <CreateInvoicePage />
         </section>
       </div>
     );
