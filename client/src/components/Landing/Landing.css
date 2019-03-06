@@ -1,7 +1,7 @@
 .landing {
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 45%;
   align-items: center;
 }
 .landing button {
@@ -9,12 +9,12 @@
   border-radius: 3px;
   font-size: 1.6rem;
   padding: 10px 0;
-  width: 60%;
+  width: 80%;
   margin: 0px auto;
   box-shadow: 3px 3px 3px lightgray;
 }
 
-.landing button:hover {
+.landingbutton:hover {
   border: 1px outset gray;
   background: lightgray;
   cursor: pointer;
