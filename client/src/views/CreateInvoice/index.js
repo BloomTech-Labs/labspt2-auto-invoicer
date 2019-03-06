@@ -12,6 +12,17 @@ import AddCircle from "@material-ui/icons/AddCircle";
 import SampleTable from "../../components/reusableComponents/SampleTable";
 
 export default class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      fields: {}
+    };
+  }
+
+  onSubmit = fields => {
+    console.log("CreateInvoice Item Details: ", fields);
+  };
+
   render() {
     return (
       <div className="main-container">
@@ -60,7 +71,7 @@ export default class index extends Component {
 
             <div className="item-details">
               {/* <InvoiceItemTable /> */}
-              <SampleTable />
+              <SampleTable onSubmit={fields => this.onSubmit(fields)} />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -50,97 +50,144 @@ const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
-function index(props) {
+class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      itemDescription: "",
+      itemQuantity: "",
+      itemRate: "",
+      itemAmount: ""
+    };
+  }
   //const { classes } = props;
-  return (
-    <Paper>
-      {" "}
-      {/* className={classes.root} */}
-      <Table>
-        {" "}
-        {/* className={classes.table} */}
-        <TableHead>
-          <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Rate</TableCell>
-            <TableCell align="right">Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-            </TableRow>
-          ))} */}
 
-          <TableRow>
-            <TableCell>
-              <TextField
-                id="itemDescription"
-                name="itemDescription"
-                placeholder="Item Description"
-              />
-            </TableCell>
-            <TableCell align="right">
-              <TextField
-                id="itemQuantity"
-                name="itemQuantity"
-                placeholder="Item Quantity"
-              />
-            </TableCell>
-            <TableCell align="right">
-              <TextField id="itemRate" name="itemRate" placeholder="Rate" />
-            </TableCell>
-            <TableCell align="right">
-              <TextField
-                id="itemAmount"
-                name="itemAmount"
-                placeholder="Amount"
-              />
-            </TableCell>
-          </TableRow>
+  changeHandler = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
-          <TableRow>
-            <TableCell rowSpan={6} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.state);
+    //console.log(this.state);
+  };
 
-          <TableRow>
-            <TableCell colSpan={2}>Discount</TableCell>
-            <TableCell align="right">0%</TableCell>
-          </TableRow>
+  render() {
+    return (
+      <div>
+        <Paper>
+          {" "}
+          {/* className={classes.root} */}
+          <Table>
+            {" "}
+            {/* className={classes.table} */}
+            <TableHead>
+              <TableRow>
+                <TableCell>Item</TableCell>
+                <TableCell align="right">Quantity</TableCell>
+                <TableCell align="right">Rate</TableCell>
+                <TableCell align="right">Amount</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {/* {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.desc}</TableCell>
+                  <TableCell align="right">{row.qty}</TableCell>
+                  <TableCell align="right">{row.unit}</TableCell>
+                  <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+                </TableRow>
+              ))} */}
 
-          <TableRow>
-            <TableCell colSpan={2}>Tax</TableCell>
-            {/* <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
-              0
-            )} %`}</TableCell> */}
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
+              <TableRow>
+                <TableCell>
+                  <TextField
+                    id="itemDescription"
+                    name="itemDescription"
+                    placeholder="Item Description"
+                    value={this.state.itemDescription}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemQuantity"
+                    name="itemQuantity"
+                    placeholder="Item Quantity"
+                    value={this.state.itemQuantity}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemRate"
+                    name="itemRate"
+                    placeholder="Rate"
+                    value={this.state.itemRate}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemAmount"
+                    name="itemAmount"
+                    placeholder="Amount"
+                    value={this.state.itemAmount}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-          <TableRow>
-            <TableCell colSpan={2}>Shipping</TableCell>
-            <TableCell align="right">0</TableCell>
-          </TableRow>
+              <button onClick={event => this.onSubmit(event)}>Submit</button>
 
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow>
+              {console.log(this.state.itemDescription)}
+              {console.log(this.state.itemQuantity)}
+              {console.log(this.state.itemRate)}
+              {console.log(this.state.itemAmount)}
 
-          <TableRow>
-            <TableCell colSpan={2}>Amount Paid:</TableCell>
-            <TableCell align="right">$0</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+              <TableRow>
+                <TableCell rowSpan={6} />
+                <TableCell colSpan={2}>Subtotal</TableCell>
+                <TableCell align="right">
+                  {ccyFormat(invoiceSubtotal)}
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>Discount</TableCell>
+                <TableCell align="right">0%</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>Tax</TableCell>
+                {/* <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+                  0
+                )} %`}</TableCell> */}
+                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>Shipping</TableCell>
+                <TableCell align="right">0</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell colSpan={2}>Amount Paid:</TableCell>
+                <TableCell align="right">$0</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
+    );
+  }
 }
 
 index.propTypes = {
