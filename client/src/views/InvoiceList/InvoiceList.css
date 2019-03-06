@@ -1,0 +1,9 @@
+.invoice-list-container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.invoice-list-container h1 {
+  font-size: 4.8rem;
+}

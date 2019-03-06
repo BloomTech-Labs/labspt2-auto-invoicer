@@ -1,0 +1,7 @@
+.invoices-container {
+  background: lightgray;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  min-height: 400px;
+}
