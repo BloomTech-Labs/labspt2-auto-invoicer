@@ -66,6 +66,8 @@ class App extends Component {
           />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
 
+
+
           <Route
             exact
             path="/"
