@@ -11,6 +11,18 @@ import AddCircle from "@material-ui/icons/AddCircle";
 ////
 
 export default class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      fields: {}
+    };
+  }
+
+  onSubmit = fields => {
+    this.setState({ fields });
+    console.log("CreateInvoice Page: ", fields);
+  };
+
   render() {
     return (
       <div className="main-container">
@@ -54,7 +66,8 @@ export default class index extends Component {
               </div>
             </div>
             <div className="invoice-address">
-              <AddressForm />
+              <AddressForm onSubmit={fields => this.onSubmit(fields)} />
+              <p>{JSON.stringify(this.state.fields)}</p>
             </div>
 
             <div className="item-details">
