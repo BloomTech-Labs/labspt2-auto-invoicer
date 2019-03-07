@@ -32,7 +32,7 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      loggedIn: false,
+      loggedIn: true,
       credits: 3,
       loggedOutClicked: false
     };
