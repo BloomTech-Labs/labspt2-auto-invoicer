@@ -16,6 +16,21 @@ module.exports = {
     }
   },
 
+  customer: async (args, req) => {
+    // if (!req.isAuth) {
+    // throw new Error('not logged in')}
+
+    try {
+      const customer = await Customer.findOne({_id: args._id})
+      if (!customer) {
+        throw new Error('Customer does not exist')
+      }
+      return {...customer._doc}
+    } catch (error) {
+      throw error
+    }
+  },
+
   createCustomer: async (args, req) => {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
@@ -41,7 +56,7 @@ module.exports = {
   updateCustomer: async (args, req) => {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
-    
+
     const {name, address, email, phone_num} = args.customerUpdate
     const customer = await Customer.findOne({_id: args._id})
     if (!customer) {

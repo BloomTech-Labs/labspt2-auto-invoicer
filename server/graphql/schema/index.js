@@ -65,6 +65,7 @@ type RootQuery {
   users: [User!]!
   companies: [Company!]!
   customers: [Customer!]!
+  customer(_id:ID!): Customer!
   login(email: String!, password: String!): AuthData!
 }
 
