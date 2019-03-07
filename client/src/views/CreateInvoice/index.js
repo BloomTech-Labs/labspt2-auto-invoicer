@@ -6,10 +6,10 @@ import "./CreateInvoice.css";
 
 //import components
 import AddressForm from "../../components/reusableComponents/AddressForm";
-//import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
+import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
-import SampleTable from "../../components/reusableComponents/SampleTable";
+//import SampleTable from "../../components/reusableComponents/SampleTable";
 
 export default class index extends Component {
   constructor() {
@@ -19,7 +19,7 @@ export default class index extends Component {
     };
   }
 
-  onSubmit = fields => {
+  submitHandler = fields => {
     this.setState({ fields });
     console.log("CreateInvoice Item Details: ", fields);
   };
@@ -71,8 +71,10 @@ export default class index extends Component {
             </div>
 
             <div className="item-details">
-              {/* <InvoiceItemTable /> */}
-              <SampleTable onSubmit={fields => this.onSubmit(fields)} />
+              <InvoiceItemTable
+                onSubmit2={fields => this.submitHandler(fields)}
+              />
+              {/* <SampleTable onSubmit2={fields => this.submitHandler(fields)} /> */}
               <p>{JSON.stringify(this.state.fields)}</p>
             </div>
           </div>
