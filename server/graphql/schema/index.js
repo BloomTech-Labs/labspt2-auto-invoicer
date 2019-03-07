@@ -25,6 +25,17 @@ type Company {
   users: [User!]!
 }
 
+input CompanyInput {
+  name: String!
+  email: String!
+  phone_num: String!
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  postal_code: Int!
+}
+
 input UserInput {
   email: String!
   password: String!
