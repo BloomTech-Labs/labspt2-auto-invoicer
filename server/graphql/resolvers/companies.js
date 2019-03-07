@@ -1,4 +1,5 @@
 const Company = require('../../models/company');
+const { updateDocumentById } = require('../helpers');
 
 module.exports = {
   company: async ({ companyID }) => {
@@ -57,27 +58,7 @@ module.exports = {
       throw err;
     }
   },
-  editCompany: async ({ companyInput, id }) => {
-    try {
-      const companyExists = await Company.findById(id);
-      if (!companyExists) {
-        throw new Error('There is no company with the specified ID!');
-      }
-      Object.keys(companyInput).forEach(key => {
-        if (!companyInput[key]) {
-          delete companyInput[key];
-        }
-      });
-      const updatedCompany = await Company.findByIdAndUpdate(
-        id,
-        {
-          $set: { ...companyInput }
-        },
-        { new: true }
-      );
-      return { ...updatedCompany._doc };
-    } catch (err) {
-      throw err;
-    }
+  editCompany: ({ companyInput, id }) => {
+    return updateDocumentById(companyInput, id, Company);
   }
 };
