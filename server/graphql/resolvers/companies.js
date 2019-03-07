@@ -25,6 +25,37 @@ module.exports = {
       throw err;
     }
   },
-  createCompany: () => {},
+  createCompany: async ({ companyInput }) => {
+    try {
+      const {
+        name,
+        email,
+        phone_num,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code
+      } = companyInput;
+      const companyExists = await Company.findOne({ name });
+      if (companyExists) {
+        throw new Error('This company already exists!');
+      }
+      const company = new Company({
+        name,
+        email,
+        phone_num,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code
+      });
+      const newCompany = await company.save();
+      return { ...newCompany._doc };
+    } catch (err) {
+      throw err;
+    }
+  },
   editCompany: () => {}
 };
