@@ -57,6 +57,7 @@ type RootQuery {
 
 type RootMutation {
   createUser(userInput: UserInput): User
+  createCompany(companyInput: CompanyInput): Company
 }
 
 schema {
