@@ -39,6 +39,9 @@ module.exports = {
   },
 
   updateCustomer: async (args, req) => {
+    // if (!req.isAuth) {
+    // throw new Error('not logged in')}
+    
     const {name, address, email, phone_num} = args.customerUpdate
     const customer = await Customer.findOne({_id: args._id})
     if (!customer) {
@@ -61,7 +64,7 @@ module.exports = {
       customer.email = email
     }
     
-    if (typeof phone_num === 'number') {
+    if (typeof phone_num === 'string') {
       customer.phone_num = phone_num
     }
     

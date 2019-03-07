@@ -30,7 +30,7 @@ type Customer {
   name: String!
   address: String!
   email: String!
-  phone_num: Int!
+  phone_num: String!
   companies: [Company!]!
 }
 
@@ -51,14 +51,14 @@ input CustomerInput {
   name: String!
   address: String!
   email: String!
-  phone_num: Int!
+  phone_num: String!
 }
 
 input CustomerUpdate {
   name: String
   address: String
   email: String
-  phone_num: Int
+  phone_num: String
 }
 
 type RootQuery {
