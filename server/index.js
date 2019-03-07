@@ -6,12 +6,14 @@ const helmet = require('helmet');
 const graphqlHttp = require('express-graphql');
 const { connect } = require('mongoose');
 const app = express();
-const PORT = process.env.APP_PORT;
+const PORT = process.env.APP_PORT || 5000;
 
 const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
+const protected = require('./middleware/isAuth')
 
 app.use(express.json(), cors(), helmet());
+// app.use(protected)
 
 app.use(
   '/graphql',

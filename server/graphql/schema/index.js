@@ -32,9 +32,16 @@ input UserInput {
   phone_num: String!
 }
 
+type AuthData {
+  userId: ID!
+  token: String!
+  tokenExpiration: Int!
+}
+
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
+  login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {

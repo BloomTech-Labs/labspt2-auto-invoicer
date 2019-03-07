@@ -1,9 +1,14 @@
 const bcrypt = require('bcryptjs');
 
 const User = require('../../models/user');
+const isAuth = require('../../middleware/isAuth')
 
 module.exports = {
-  users: async () => {
+  users: async (args, req) => {
+    // if (!req.isAuth) {
+    //   throw new Error('not logged in')
+    // }
+    
     try {
       const users = await User.find();
       return users.map(user => {
