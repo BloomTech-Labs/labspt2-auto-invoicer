@@ -36,6 +36,17 @@ input CompanyInput {
   postal_code: Int!
 }
 
+input EditCompanyInput {
+  name: String
+  email: String
+  phone_num: String
+  address_1: String
+  address_2: String
+  city: String
+  state: String
+  postal_code: Int
+}
+
 input UserInput {
   email: String!
   password: String!
@@ -59,7 +70,7 @@ type RootQuery {
 type RootMutation {
   createUser(userInput: UserInput): User
   createCompany(companyInput: CompanyInput): Company
-  editCompany(companyInput: CompanyInput): Company
+  editCompany(companyInput: EditCompanyInput, id: ID!): Company
 }
 
 schema {

@@ -1,9 +1,11 @@
 const usersResolver = require('./users');
-const authResolver = require('./auth')
+const authResolver = require('./auth');
+const companiesResolver = require('./companies');
 
 const rootResolver = {
   ...usersResolver,
-  ...authResolver
+  ...authResolver,
+  ...companiesResolver
 };
 
 module.exports = rootResolver;
