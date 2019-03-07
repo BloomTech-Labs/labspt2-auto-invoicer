@@ -2,9 +2,3 @@
   font-size: 1.6rem;
   margin-bottom: 5px;
 }
-
-@media(max-width: 500px) {
-  .landing_text {
-    font-size: 0.8rem
-  }
-}
