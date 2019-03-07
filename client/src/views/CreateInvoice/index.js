@@ -18,6 +18,11 @@ export default class index extends Component {
     };
   }
 
+  onSubmit = fields => {
+    this.setState({ fields });
+    console.log("CreateInvoice Page: ", fields);
+  };
+
   submitHandler = fields => {
     this.setState({ fields });
     console.log("CreateInvoice Item Details: ", fields);
