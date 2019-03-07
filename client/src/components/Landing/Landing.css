@@ -14,7 +14,7 @@
   box-shadow: 3px 3px 3px lightgray;
 }
 
-.landingbutton:hover {
+.landing button:hover {
   border: 1px outset gray;
   background: lightgray;
   cursor: pointer;
