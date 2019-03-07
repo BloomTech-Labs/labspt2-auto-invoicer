@@ -9,7 +9,6 @@ import AddressForm from "../../components/reusableComponents/AddressForm";
 import InvoiceItemTable from "../../components/reusableComponents/InvoiceItemTable";
 import AddCircle from "@material-ui/icons/AddCircle";
 ////
-//import SampleTable from "../../components/reusableComponents/SampleTable";
 
 export default class index extends Component {
   constructor() {
@@ -32,13 +31,13 @@ export default class index extends Component {
           <div className="top-nav-left">
             <ul className="breadcrumb">
               <li>
-                <a href="#">Home</a>
+                <p>Home</p>
               </li>
               <li>
-                <a href="#">Invoices</a>
+                <p>Invoices</p>
               </li>
               <li>
-                <a href="#">New</a>
+                <p>New</p>
               </li>
             </ul>
           </div>
@@ -74,7 +73,6 @@ export default class index extends Component {
               <InvoiceItemTable
                 onSubmit2={fields => this.submitHandler(fields)}
               />
-              {/* <SampleTable onSubmit2={fields => this.submitHandler(fields)} /> */}
               <p>{JSON.stringify(this.state.fields)}</p>
             </div>
           </div>
@@ -84,6 +82,3 @@ export default class index extends Component {
     );
   }
 }
-
-// Add functionality to form
-// submit handler, save responses to local state
