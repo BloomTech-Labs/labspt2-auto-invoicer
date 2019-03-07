@@ -23,35 +23,11 @@ export default class index extends Component {
     console.log("CreateInvoice Page: ", fields);
   };
 
-  submitHandler = fields => {
-    this.setState({ fields });
-    console.log("CreateInvoice Item Details: ", fields);
-  };
-
   render() {
     return (
       <div className="main-container">
         {" "}
-        <div className="top-nav">
-          <div className="top-nav-left">
-            <ul className="breadcrumb">
-              <li>
-                <p>Home</p>
-              </li>
-              <li>
-                <p>Invoices</p>
-              </li>
-              <li>
-                <p>New</p>
-              </li>
-            </ul>
-          </div>
-
-          <div className="top-nav-right">
-            <div className="credits">Credits: 3</div>
-            <div className="signout-button">Sign Out</div>
-          </div>
-        </div>
+        <div className="top-nav" />
         <div className="mid-container">
           <div className="sidebar-nav">
             <div className="sidebar-nav-button">Invoice</div>
@@ -71,14 +47,12 @@ export default class index extends Component {
               </div>
             </div>
             <div className="invoice-address">
-              <AddressForm />
+              <AddressForm onSubmit={fields => this.onSubmit(fields)} />
+              <p>{JSON.stringify(this.state.fields)}</p>
             </div>
 
             <div className="item-details">
-              <InvoiceItemTable
-                onSubmit2={fields => this.submitHandler(fields)}
-              />
-              <p>{JSON.stringify(this.state.fields)}</p>
+              <InvoiceItemTable onSubmit={fields => this.onSubmit(fields)} />
             </div>
           </div>
         </div>
@@ -87,3 +61,6 @@ export default class index extends Component {
     );
   }
 }
+
+// Add functionality to form
+// submit handler, save responses to local state
