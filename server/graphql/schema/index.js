@@ -52,7 +52,7 @@ type AuthData {
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
-  company: Company!
+  company(companyID: ID!): Company
   login(email: String!, password: String!): AuthData!
 }
 
