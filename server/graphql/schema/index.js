@@ -25,11 +25,12 @@ type Company {
   users: [User!]!
 }
 
-input UserInput {
+type Customer {
+  _id: ID!
+  address: String!
   email: String!
-  password: String!
-  name: String!
-  phone_num: String!
+  phone_num: Int!
+  companies [Company!]!
 }
 
 type AuthData {
@@ -38,14 +39,30 @@ type AuthData {
   tokenExpiration: Int!
 }
 
+input UserInput {
+  email: String!
+  password: String!
+  name: String!
+  phone_num: String!
+}
+
+input CustomerInput {
+  name: String!
+  address: String!
+  email: String!
+  phone_num: Int!
+}
+
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
+  customers: [Customer!]!
   login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {
   createUser(userInput: UserInput): User
+  createCustomer(customerInput: CustomerInput): Customer
 }
 
 schema {
