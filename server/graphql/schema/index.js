@@ -52,12 +52,14 @@ type AuthData {
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
+  company: Company!
   login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {
   createUser(userInput: UserInput): User
   createCompany(companyInput: CompanyInput): Company
+  editCompany(companyInput: CompanyInput): Company
 }
 
 schema {
