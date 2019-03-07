@@ -9,7 +9,7 @@ import "./LandingPage.css";
 const LandingPage = props => {
   return (
     <section className="landing_page">
-      <Landing />
+      <Landing click={props.click} />
     </section>
   );
 };

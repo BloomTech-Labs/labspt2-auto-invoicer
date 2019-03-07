@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import TextField from "@material-ui/core/TextField";
-
-const TAX_RATE = 0.07;
 
 const styles = theme => ({
   root: {
@@ -23,94 +21,173 @@ const styles = theme => ({
   }
 });
 
-function ccyFormat(num) {
-  return `${num.toFixed(2)}`;
-}
+class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      itemDescription: "",
+      itemQuantity: "",
+      itemRate: "",
+      itemAmount: "",
+      subtotal: "",
+      discount: "",
+      tax: "",
+      shipping: "",
+      total: "",
+      amountPaid: ""
+    };
+  }
 
-function priceRow(qty, unit) {
-  return qty * unit;
-}
+  changeHandler = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
-function createRow(id, desc, qty, unit) {
-  const price = priceRow(qty, unit);
-  return { id, desc, qty, unit, price };
-}
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit2(this.state);
+  };
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
+  render() {
+    return (
+      <div>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Item</TableCell>
+                <TableCell align="right">Quantity</TableCell>
+                <TableCell align="right">Rate</TableCell>
+                <TableCell align="right">Amount</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <TextField
+                    id="itemDescription"
+                    name="itemDescription"
+                    placeholder="Item Description"
+                    value={this.state.itemDescription}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemQuantity"
+                    name="itemQuantity"
+                    placeholder="Item Quantity"
+                    value={this.state.itemQuantity}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemRate"
+                    name="itemRate"
+                    placeholder="Rate"
+                    value={this.state.itemRate}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="itemAmount"
+                    name="itemAmount"
+                    placeholder="Amount"
+                    value={this.state.itemAmount}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-const rows = [
-  ["Paperclips (Box)", 100, 1.15],
-  ["Paper (Stack)", 10, 45.99]
-  //   ["Waste Basket", 2, 17.99]
-].map((row, id) => createRow(id, ...row));
+              <TableRow>
+                <TableCell rowSpan={6} />
+                <TableCell colSpan={2}>Subtotal</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="subtotal"
+                    name="subtotal"
+                    placeholder="Subtotal"
+                    value={this.state.subtotal}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+              <TableRow>
+                <TableCell colSpan={2}>Discount</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="discount"
+                    name="discount"
+                    placeholder="Discount"
+                    value={this.state.discount}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-function index(props) {
-  const { classes } = props;
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Rate</TableCell>
-            <TableCell align="right">Amount</TableCell>
-          </TableRow>
-        </TableHead>
+              <TableRow>
+                <TableCell colSpan={2}>Tax</TableCell>
 
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-            </TableRow>
-          ))}
+                <TableCell align="right">
+                  <TextField
+                    id="tax"
+                    name="tax"
+                    placeholder="Tax"
+                    value={this.state.tax}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-          <TableRow>
-            <TableCell rowSpan={6} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>Shipping</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="shipping"
+                    name="shipping"
+                    placeholder="Shipping"
+                    value={this.state.shipping}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-          <TableRow>
-            <TableCell colSpan={2}>Discount</TableCell>
-            <TableCell align="right">0%</TableCell>
-          </TableRow>
+              <TableRow>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="total"
+                    name="total"
+                    placeholder="Total"
+                    value={this.state.total}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
 
-          <TableRow>
-            <TableCell colSpan={2}>Tax</TableCell>
-            {/* <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
-              0
-            )} %`}</TableCell> */}
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell colSpan={2}>Shipping</TableCell>
-            <TableCell align="right">0</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell colSpan={2}>Amount Paid:</TableCell>
-            <TableCell align="right">$0</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+              <TableRow>
+                <TableCell colSpan={2}>Amount Paid:</TableCell>
+                <TableCell align="right">
+                  <TextField
+                    id="amountPaid"
+                    name="amountPaid"
+                    placeholder="Amount Paid"
+                    value={this.state.amountPaid}
+                    onChange={event => this.changeHandler(event)}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <button onClick={event => this.onSubmit(event)}>Submit</button>
+        </Paper>
+      </div>
+    );
+  }
 }
 
 index.propTypes = {

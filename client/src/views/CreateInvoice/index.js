@@ -27,26 +27,7 @@ export default class index extends Component {
     return (
       <div className="main-container">
         {" "}
-        <div className="top-nav">
-          <div className="top-nav-left">
-            <ul className="breadcrumb">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Invoices</a>
-              </li>
-              <li>
-                <a href="#">New</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="top-nav-right">
-            <div className="credits">Credits: 3</div>
-            <div className="signout-button">Sign Out</div>
-          </div>
-        </div>
+        <div className="top-nav" />
         <div className="mid-container">
           <div className="sidebar-nav">
             <div className="sidebar-nav-button">Invoice</div>
@@ -71,7 +52,7 @@ export default class index extends Component {
             </div>
 
             <div className="item-details">
-              <InvoiceItemTable />
+              <InvoiceItemTable onSubmit={fields => this.onSubmit(fields)} />
             </div>
           </div>
         </div>
