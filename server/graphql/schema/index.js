@@ -27,10 +27,11 @@ type Company {
 
 type Customer {
   _id: ID!
+  name: String!
   address: String!
   email: String!
   phone_num: Int!
-  companies [Company!]!
+  companies: [Company!]!
 }
 
 type AuthData {
@@ -53,6 +54,13 @@ input CustomerInput {
   phone_num: Int!
 }
 
+input CustomerUpdate {
+  name: String
+  address: String
+  email: String
+  phone_num: Int
+}
+
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
@@ -63,6 +71,7 @@ type RootQuery {
 type RootMutation {
   createUser(userInput: UserInput): User
   createCustomer(customerInput: CustomerInput): Customer
+  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!) : Customer
 }
 
 schema {

@@ -8,8 +8,8 @@ module.exports = {
 
     try {
       const customers = await Customer.find();
-      customers.map( customer => {
-        return {...customer}
+      return customers.map( customer => {
+        return {...customer._doc}
       })
     } catch (error) {
       throw error
@@ -32,9 +32,40 @@ module.exports = {
         phone_num: args.customerInput.phone_num,
       })
       const newCustomer = await customer.save()
-      return {...newCustomer}
+      return {...newCustomer._doc}
     } catch (error) {
       throw error
     }
+  },
+
+  updateCustomer: async (args, req) => {
+    const {name, address, email, phone_num} = args.customerUpdate
+    const customer = await Customer.findOne({_id: args._id})
+    if (!customer) {
+      throw new Error('Customer does not exist')
+    }
+
+    if (typeof name === 'string') {
+      customer.name = name
+    }
+
+    if (typeof address === 'string') {
+      customer.address = address
+    }
+
+    if (typeof email === 'string') {
+      const emailExists = await Customer.findOne({email: email})
+      if (emailExists) {
+        throw new Error('unable to use this email, as is already in use')
+      }
+      customer.email = email
+    }
+    
+    if (typeof phone_num === 'number') {
+      customer.phone_num = phone_num
+    }
+    
+    const updatedUser = await customer.save()
+    return { ...updatedUser._doc}
   }
 }
