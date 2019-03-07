@@ -37,6 +37,7 @@ input CompanyInput {
 }
 
 input EditCompanyInput {
+  _id: ID
   name: String
   email: String
   phone_num: String
@@ -62,6 +63,7 @@ type AuthData {
 
 type RootQuery {
   users: [User!]!
+  companyByAnyField(companyInput: EditCompanyInput): [Company]
   companies: [Company!]!
   company(companyID: ID!): Company
   login(email: String!, password: String!): AuthData!
