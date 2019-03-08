@@ -5,8 +5,13 @@ const User = require('../../models/user')
 const secret = process.env.SECRET || 'testingJWT';
 
 module.exports = {
-  login: async ({email, password}) => {
-    const user = await User.findOne({email: email});
+  login: async ({
+    email,
+    password
+  }) => {
+    const user = await User.findOne({
+      email: email
+    });
     if (!user) {
       throw new Error('username or password is incorrect');
     }
@@ -15,10 +20,16 @@ module.exports = {
       throw new Error('username or password is incorrect');
     }
     const token = jwt.sign({
-      userId: user.id},
-      secret,
-      {expiresIn: '1h'}
+        userId: user.id
+      },
+      secret, {
+        expiresIn: '1h'
+      }
     )
-      return {userId: user.id, token: token, tokenExpiration: 1}
+    return {
+      userId: user.id,
+      token: token,
+      tokenExpiration: 1
+    }
   }
 };

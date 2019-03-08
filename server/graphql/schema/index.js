@@ -1,4 +1,6 @@
-const { buildSchema } = require('graphql');
+const {
+  buildSchema
+} = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -25,11 +27,13 @@ type Company {
   users: [User!]!
 }
 
-input UserInput {
-  email: String!
-  password: String!
+type Customer {
+  _id: ID!
   name: String!
+  address: String!
+  email: String!
   phone_num: String!
+  companies: [Company!]!
 }
 
 type AuthData {
@@ -38,14 +42,39 @@ type AuthData {
   tokenExpiration: Int!
 }
 
+input UserInput {
+  email: String!
+  password: String!
+  name: String!
+  phone_num: String!
+}
+
+input CustomerInput {
+  name: String!
+  address: String!
+  email: String!
+  phone_num: String!
+}
+
+input CustomerUpdate {
+  name: String
+  address: String
+  email: String
+  phone_num: String
+}
+
 type RootQuery {
   users: [User!]!
   companies: [Company!]!
+  customers: [Customer!]!
+  customer(_id:ID!): Customer!
   login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {
   createUser(userInput: UserInput): User
+  createCustomer(customerInput: CustomerInput): Customer
+  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!) : Customer
 }
 
 schema {
