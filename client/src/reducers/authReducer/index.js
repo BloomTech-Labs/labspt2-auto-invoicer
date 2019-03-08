@@ -3,7 +3,8 @@ import {
   SIGNING_IN,
   ERROR,
   FETCHED,
-  FORGOT_PASSWORD
+  FORGOT_PASSWORD,
+  WELCOME_EMAIL
 } from "../../actions/authActions";
 
 const initialState = {
@@ -72,6 +73,17 @@ export const authReducer = (state = initialState, action) => {
         fetched: true,
         message: action.payload.message,
         user: action.payload.user,
+        token: ""
+      });
+    case WELCOME_EMAIL:
+      return Object.assign({}, state, {
+        registering: false,
+        signing_in: false,
+        loggedIn: false,
+        forgot_password: false,
+        fetched: true,
+        message: action.payload,
+        user: "",
         token: ""
       });
     default:
