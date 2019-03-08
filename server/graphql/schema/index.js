@@ -63,7 +63,7 @@ type AuthData {
 
 type RootQuery {
   users: [User!]!
-  companyByAnyField(companyInput: EditCompanyInput): [Company]
+  companyByAnyField(companyInput: EditCompanyInput): [Company!]
   companies: [Company!]!
   company(companyID: ID!): Company
   login(email: String!, password: String!): AuthData!
