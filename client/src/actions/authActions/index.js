@@ -7,6 +7,7 @@ export const SIGNING_IN = "SIGNING_IN";
 export const FETCHED = "FETCHED";
 export const ERROR = "ERROR";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const WELCOME_EMAIL = "WELCOME_EMAIL";
 
 export const authUser = user => {
   return dispatch => {
@@ -33,7 +34,7 @@ export const registerUser = user => {
       after they submit register form
     */
     dispatch({ type: REGISTERING, payload: "Creating New User Account..." });
-
+    dispatch({ type: WELCOME_EMAIL, payload: user });
     /*
       axios statement to connect to server will go here
       - the success/error created here will be visible to client through snackbar popups
