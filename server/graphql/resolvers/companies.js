@@ -2,7 +2,8 @@ const Company = require('../../models/company');
 const {
   updateDocumentById,
   findDocumentsByAnyField,
-  findDocumentById
+  findDocumentById,
+  findAllDocuments
 } = require('../helpers');
 
 const companyFields = [
@@ -24,18 +25,8 @@ module.exports = {
   companyByAnyField: ({ companyInput }) => {
     return findDocumentsByAnyField(companyInput, companyFields, Company);
   },
-  companies: async () => {
-    try {
-      const companies = await Company.find();
-      if (!companies.length) {
-        throw new Error('There is no company yet, please try again later!');
-      }
-      return companies.map(company => {
-        return { ...company._doc };
-      });
-    } catch (err) {
-      throw err;
-    }
+  companies: () => {
+    return findAllDocuments(Company);
   },
   createCompany: async ({ companyInput }) => {
     try {

@@ -64,8 +64,25 @@ const findDocumentById = async (documentId, Model) => {
   }
 };
 
+const findAllDocuments = async Model => {
+  try {
+    const documents = await Model.find();
+    if (!documents.length) {
+      throw new Error(
+        'There is no document yet in this collection, please try again later'
+      );
+    }
+    return documents.map(document => {
+      return { ...document._doc };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   updateDocumentById,
   findDocumentsByAnyField,
-  findDocumentById
+  findDocumentById,
+  findAllDocuments
 };
