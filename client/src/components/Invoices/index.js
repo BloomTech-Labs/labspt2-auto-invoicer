@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import InvoiceCard from "../InvoiceCard";
 import CreateInvoiceButton from "../reusableComponents/CreateInvoiceButton";
 import EmptyInvoices from "../EmptyInvoices";
+import { Link } from "react-router-dom";
 
 // import css here
 import "./Invoices.css";
@@ -62,7 +63,10 @@ class Invoices extends Component {
                   return <InvoiceCard invoice={{ ...invoice }} />;
                 })
               : null}
-            : <CreateInvoiceButton />
+            :{" "}
+            <Link to="/user/1/invoice/create">
+              <CreateInvoiceButton />
+            </Link>
           </section>
         )}
       </section>
