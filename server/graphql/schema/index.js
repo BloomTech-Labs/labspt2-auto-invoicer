@@ -1,6 +1,4 @@
-const {
-  buildSchema
-} = require('graphql');
+const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -27,11 +25,34 @@ type Company {
   users: [User!]!
 }
 
-type Customer {
-  _id: ID!
+input CompanyInput {
+  name: String!
+  email: String!
+  phone_num: String!
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  postal_code: Int!
+}
+
+input EditCompanyInput {
+  _id: ID
+  name: String
+  email: String
+  phone_num: String
+  address_1: String
+  address_2: String
+  city: String
+  state: String
+  postal_code: Int
+}
+
+input UserInput {
+  email: String!
+  password: String!
   name: String!
   address: String!
-  email: String!
   phone_num: String!
   companies: [Company!]!
 }
@@ -40,13 +61,6 @@ type AuthData {
   userId: ID!
   token: String!
   tokenExpiration: Int!
-}
-
-input UserInput {
-  email: String!
-  password: String!
-  name: String!
-  phone_num: String!
 }
 
 input CustomerInput {
@@ -65,16 +79,16 @@ input CustomerUpdate {
 
 type RootQuery {
   users: [User!]!
+  companyByAnyField(companyInput: EditCompanyInput): [Company!]
   companies: [Company!]!
-  customers: [Customer!]!
-  customer(_id:ID!): Customer!
+  company(companyID: ID!): Company
   login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {
   createUser(userInput: UserInput): User
-  createCustomer(customerInput: CustomerInput): Customer
-  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!) : Customer
+  createCompany(companyInput: CompanyInput): Company
+  editCompany(companyInput: EditCompanyInput, id: ID!): Company
 }
 
 schema {
