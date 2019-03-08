@@ -1,5 +1,5 @@
-const Customer = require('../../models/customer')
-const isAuth = require('../../middleware/isAuth')
+const Customer = require('../../models/customer');
+const isAuth = require('../../middleware/isAuth');
 
 module.exports = {
   customers: async (args, req) => {
@@ -8,11 +8,13 @@ module.exports = {
 
     try {
       const customers = await Customer.find();
-      return customers.map( customer => {
-        return {...customer._doc}
-      })
+      return customers.map(customer => {
+        return {
+          ...customer._doc,
+        };
+      });
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
@@ -21,13 +23,17 @@ module.exports = {
     // throw new Error('not logged in')}
 
     try {
-      const customer = await Customer.findOne({_id: args._id})
+      const customer = await Customer.findOne({
+        _id: args._id,
+      });
       if (!customer) {
-        throw new Error('Customer does not exist')
+        throw new Error('Customer does not exist');
       }
-      return {...customer._doc}
+      return {
+        ...customer._doc,
+      };
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
@@ -36,20 +42,24 @@ module.exports = {
     // throw new Error('not logged in')}
 
     try {
-      const custExists = await Customer.findOne({email: args.customerInput.email})
-      if(custExists) {
-        throw new Error('Customer already exists')
+      const custExists = await Customer.findOne({
+        email: args.customerInput.email,
+      });
+      if (custExists) {
+        throw new Error('Customer already exists');
       }
       const customer = new Customer({
         name: args.customerInput.name,
         address: args.customerInput.address,
         email: args.customerInput.email,
         phone_num: args.customerInput.phone_num,
-      })
-      const newCustomer = await customer.save()
-      return {...newCustomer._doc}
+      });
+      const newCustomer = await customer.save();
+      return {
+        ...newCustomer._doc,
+      };
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
@@ -57,33 +67,44 @@ module.exports = {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
 
-    const {name, address, email, phone_num} = args.customerUpdate
-    const customer = await Customer.findOne({_id: args._id})
+    const {
+      name,
+      address,
+      email,
+      phone_num
+    } = args.customerUpdate;
+    const customer = await Customer.findOne({
+      _id: args._id,
+    });
     if (!customer) {
-      throw new Error('Customer does not exist')
+      throw new Error('Customer does not exist');
     }
 
     if (typeof name === 'string') {
-      customer.name = name
+      customer.name = name;
     }
 
     if (typeof address === 'string') {
-      customer.address = address
+      customer.address = address;
     }
 
     if (typeof email === 'string') {
-      const emailExists = await Customer.findOne({email: email})
+      const emailExists = await Customer.findOne({
+        email: email,
+      });
       if (emailExists) {
-        throw new Error('unable to use this email, as is already in use')
+        throw new Error('unable to use this email, as is already in use');
       }
-      customer.email = email
+      customer.email = email;
     }
-    
+
     if (typeof phone_num === 'string') {
-      customer.phone_num = phone_num
+      customer.phone_num = phone_num;
     }
-    
-    const updatedUser = await customer.save()
-    return { ...updatedUser._doc}
-  }
-}
+
+    const updatedUser = await customer.save();
+    return {
+      ...updatedUser._doc,
+    };
+  },
+};

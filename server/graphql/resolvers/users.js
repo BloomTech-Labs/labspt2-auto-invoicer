@@ -8,11 +8,14 @@ module.exports = {
     // if (!req.isAuth) {
     //   throw new Error('not logged in')
     // }
-    
+
     try {
       const users = await User.find();
       return users.map(user => {
-        return { ...user._doc, password: null }
+        return {
+          ...user._doc,
+          password: null
+        }
       });
     } catch (err) {
       throw err;
@@ -20,7 +23,9 @@ module.exports = {
   },
   createUser: async (args) => {
     try {
-      const userExists = await User.findOne({ email: args.userInput.email });
+      const userExists = await User.findOne({
+        email: args.userInput.email
+      });
       if (userExists) {
         throw new Error('Username already exists');
       }
@@ -32,7 +37,10 @@ module.exports = {
         phone_num: args.userInput.phone_num
       });
       const newUser = await user.save();
-      return { ...newUser._doc, password: null };
+      return {
+        ...newUser._doc,
+        password: null
+      };
     } catch (err) {
       throw err;
     }
