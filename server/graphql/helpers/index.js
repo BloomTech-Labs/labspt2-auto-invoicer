@@ -52,4 +52,20 @@ const findDocumentsByAnyField = async (documentInput, fields, Model) => {
   }
 };
 
-module.exports = { updateDocumentById, findDocumentsByAnyField };
+const findDocumentById = async (documentId, Model) => {
+  try {
+    const document = await Model.findById(documentId);
+    if (!document) {
+      throw new Error('There is no document with the specified ID!');
+    }
+    return { ...document._doc };
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = {
+  updateDocumentById,
+  findDocumentsByAnyField,
+  findDocumentById
+};
