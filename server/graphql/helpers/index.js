@@ -22,7 +22,7 @@ const updateDocumentById = async (documentInput, id, Model) => {
   }
 };
 
-const findDocumentsByAnyField = async (documentInput, fields, Model) => {
+const findDocumentsByAnyField = async (documentInput, Model) => {
   try {
     Object.keys(documentInput).forEach(key => {
       if (!documentInput[key]) {
@@ -30,9 +30,9 @@ const findDocumentsByAnyField = async (documentInput, fields, Model) => {
       }
     });
     const value = Object.values(documentInput)[0];
-    const arr = fields.map(field => {
-      if (field.type === typeof value) {
-        return { [field.name]: value };
+    const arr = Object.keys(Model.schema.paths).map(field => {
+      if (Model.schema.path(field).instance.toLowerCase() === typeof value) {
+        return { [field]: value };
       }
     });
     const newArr = [];

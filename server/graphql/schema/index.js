@@ -54,7 +54,6 @@ input UserInput {
   name: String!
   address: String!
   phone_num: String!
-  companies: [Company!]!
 }
 
 type AuthData {
