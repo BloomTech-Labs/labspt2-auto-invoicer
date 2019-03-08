@@ -53,7 +53,6 @@ input UserInput {
   password: String!
   name: String!
   address: String!
-  email: String!
   phone_num: String!
   companies: [Company!]!
 }
@@ -62,13 +61,6 @@ type AuthData {
   userId: ID!
   token: String!
   tokenExpiration: Int!
-}
-
-input UserInput {
-  email: String!
-  password: String!
-  name: String!
-  phone_num: String!
 }
 
 input CustomerInput {
