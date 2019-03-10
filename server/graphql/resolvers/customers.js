@@ -11,12 +11,6 @@ module.exports = {
     // throw new Error('not logged in')}
 
     try {
-      // const customers = await Customer.find();
-      // return customers.map(customer => {
-      //   return {
-      //     ...customer._doc,
-      //   };
-      // });
       return findAllDocuments(Customer)
     } catch (error) {
       throw error;
@@ -28,15 +22,6 @@ module.exports = {
     // throw new Error('not logged in')}
 
     try {
-      // const customer = await Customer.findOne({
-      //   _id: args._id,
-      // });
-      // if (!customer) {
-      //   throw new Error('Customer does not exist');
-      // }
-      // return {
-      //   ...customer._doc,
-      // };
       return findDocumentById(args._id, Customer)
     } catch (error) {
       throw error;
