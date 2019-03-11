@@ -30,19 +30,19 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
       }
     });
     const value = Object.values(documentInput)[0];
-    const arr = Object.keys(Model.schema.paths).map(field => {
+    const fields = Object.keys(Model.schema.paths).map(field => {
       if (Model.schema.path(field).instance.toLowerCase() === typeof value) {
         return { [field]: value };
       }
     });
-    const newArr = [];
-    arr.map(item => {
+    const validFields = [];
+    fields.map(item => {
       if (item) {
-        newArr.push(item);
+        validFields.push(item);
       }
     });
     const documents = await Model.find({
-      $or: newArr
+      $or: validFields
     });
     return documents.map(document => {
       return { ...document._doc };
