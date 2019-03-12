@@ -5,4 +5,7 @@ module.exports = {
   invoices: () => {
     return findAllDocuments(Invoice);
   },
+  invoice: async ({ invoiceID }) => {
+    return findDocumentById(invoiceID, Invoice);
+  },
 };
