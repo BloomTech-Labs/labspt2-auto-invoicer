@@ -27,16 +27,16 @@ type Company {
 
 type Invoice {
   _id: ID!
-  invoice_num: Number!
+  invoice_num: Int!
   company: [Company!]!
   customer: [Customer!]!
   items: [Item!]!
   due_date: String!
-  subtotal: Number!
-  discount: Number!
-  shipping: Number!
-  tax: Number!
-  total_cost: Number!
+  subtotal: Float!
+  discount: Float!
+  shipping: Float!
+  tax: Float!
+  total_cost: Float!
   paid: Boolean!
   archive: Boolean!
 }
@@ -44,9 +44,9 @@ type Invoice {
 type Item {
   _id: ID!
   description: String!
-  quantity: Number!
-  rate: Number!
-  amount: Number!
+  quantity: Int!
+  rate: Float!
+  amount: Int!
 }
 
 input CompanyInput {
