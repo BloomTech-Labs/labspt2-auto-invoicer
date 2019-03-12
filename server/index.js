@@ -23,6 +23,10 @@ const taxRateRouter = require("./routers/taxRateRouter");
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
 
+// for pdf creation
+const pdf = require("html-pdf");
+const pdfTemplate = require("./documents");
+
 app.use(
   session({
     name: "SID",
@@ -105,6 +109,21 @@ app.use(
     graphiql: true
   })
 );
+
+// add a route for pdf creation
+app.post("/create-pdf", (req, res) => {
+  const file = req.body;
+  pdf.create(pdfTemplate(file), {}).toFile("documents/result.pdf", err => {
+    if (err) {
+      res.send(Promise.reject());
+    } else res.send(Promise.resolve());
+  });
+});
+
+// add a route for generating pdf for client
+app.get("/fetch-pdf", (req, res) => {
+  res.sendFile(`${__dirname}/documents/result.pdf`);
+});
 
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
