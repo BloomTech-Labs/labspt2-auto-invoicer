@@ -216,6 +216,7 @@ export default class index extends Component {
     };
 
     console.log("Invoice Data Object:", formPayload);
+    this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
