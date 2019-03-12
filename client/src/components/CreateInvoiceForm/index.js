@@ -69,7 +69,15 @@ export default class index extends Component {
     this.handleShippingChange = this.handleShippingChange.bind(this);
     this.handleTotalChange = this.handleTotalChange.bind(this);
     this.handleAmountPaidChange = this.handleAmountPaidChange.bind(this);
+
+    this.invoiceObj = {
+      invoiceNumber: this.state.invoiceNumber,
+      addressFrom: this.state.addressFrom,
+      addressTo: this.state.addressTo
+    };
   }
+
+  //create invoiceObject to send back to server
 
   //individual invoice items
   handleInvoiceNumberChange(e) {
@@ -182,7 +190,6 @@ export default class index extends Component {
       total: "",
       amountPaid: ""
     });
-    console.log(this.state);
   }
 
   handleFormSubmit(e) {
@@ -208,7 +215,7 @@ export default class index extends Component {
       amountPaid: this.state.amountPaid
     };
 
-    console.log("Send this in a POST request:", formPayload);
+    console.log("Invoice Data Object:", formPayload);
     this.handleClearForm(e);
   }
 
@@ -471,7 +478,7 @@ export default class index extends Component {
           </section>
           <button
             className="btn btn-link float-left"
-            onClick={this.handleClearForm}
+            onClick={this.handleFormSubmit}
           >
             Generate
           </button>
