@@ -143,9 +143,7 @@ export default class index extends Component {
       invoiceItems[e.target.dataset.id][
         e.target.className
       ] = e.target.value.toUpperCase();
-      this.setState({ invoiceItems }, () =>
-        console.log(this.state.invoiceItems)
-      );
+      this.setState({ invoiceItems }, () => console.log("Invoice Items"));
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() });
     }
@@ -184,23 +182,7 @@ export default class index extends Component {
       total: "",
       amountPaid: ""
     });
-    console.log(this.state.invoiceNumber);
-    console.log(this.state.addressFrom);
-    console.log(this.state.addressTo);
-    console.log(this.state.invoiceDueSelection);
-    console.log(this.state.languageSelection);
-    console.log(this.state.currencySelection);
-    console.log(this.state.date);
-    console.log(this.state.balanceDue);
-    console.log(this.state.invoiceNotes);
-    console.log(this.state.invoiceTerms);
-    console.log(this.state.invoiceItems);
-    console.log(this.state.subtotal);
-    console.log(this.state.discount);
-    console.log(this.state.tax);
-    console.log(this.state.shipping);
-    console.log(this.state.total);
-    console.log(this.state.amountPaid);
+    console.log(this.state);
   }
 
   handleFormSubmit(e) {
