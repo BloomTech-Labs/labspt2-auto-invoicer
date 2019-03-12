@@ -184,11 +184,10 @@ export default class CreateInvoiceForm extends Component {
       amountPaid: this.state.amountPaid
     };
 
-    CreateInvoice(formPayload, "invoiceNumber total")
+    CreateInvoice(formPayload, "invoiceNumber total");
     this.props.click(formPayload);
     this.handleClearForm(e);
-  }
-
+  };
 
   render() {
     return (
@@ -368,8 +367,7 @@ export default class CreateInvoiceForm extends Component {
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
-                onChange={this.handleInvoiceItemsInputChange}
-              >
+                onChange={this.handleInvoiceItemsInputChange}>
                 <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
                 <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>

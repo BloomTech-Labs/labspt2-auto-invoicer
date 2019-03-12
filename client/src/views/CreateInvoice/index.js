@@ -15,7 +15,10 @@ export default class index extends Component {
       <div>
         Views Only.
         <CreateInvoiceForm click={this.props.click} />
+<<<<<<< HEAD
         <GoogleCalApi />
+=======
+>>>>>>> added a pdf creator for invoices
       </div>
     );
   }

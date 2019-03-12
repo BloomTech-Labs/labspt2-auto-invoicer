@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter } from "react-router-dom";
+import { saveAs } from "file-saver";
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { UserConsumer } from "../../contexts/UserContext";
@@ -35,12 +36,13 @@ class App extends Component {
   }
   componentDidMount() {
     axios
-      .get('https://api.myautoinvoicer.com/user', { withCredentials: true })
+      .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
       .then(res => {
         if (res.data.userId) {
-          this.setState({ loggedIn: true, id: res.data.userId })
+          this.setState({ loggedIn: true, id: res.data.userId });
         }
-      }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
@@ -84,11 +86,49 @@ class App extends Component {
   };
   signOut = () => {
     axios
-      .get('https://api.myautoinvoicer.com/logout', { withCredentials: true })
+      .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
       .then(res => {
         // TODO
-      }).catch(err => console.log(err));
-    this.setState({ loggedIn: false});
+      })
+      .catch(err => console.log(err));
+    this.setState({ loggedIn: false });
+  };
+  createPDF = () => {
+    const file = {
+      addressFrom: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
+      addressTo: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
+      amountPaid: "0.00",
+      balanceDue: "10.00",
+      currencySelection: "US Dollar (USD)",
+      date: "10-10-2019",
+      discount: "0",
+      invoiceDueSelection: "after 45 days",
+      invoiceItems: [
+        { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
+      ],
+      invoiceNotes:
+        "this is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\n",
+      invoiceNumber: "123456",
+      invoiceTerms: "this is just a test",
+      languageSelection: "English (US)",
+      shipping: "2.00",
+      subtotal: "10.00",
+      tax: "0.07",
+      total: "12.70"
+    };
+
+    axios
+      .post("http://localhost:5000/create-pdf", file)
+      .then(() =>
+        axios.get("http://localhost:5000/fetch-pdf", { responseType: "blob" })
+      )
+      .then(res => {
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
+      })
+      .catch(err => {
+        return "Error";
+      });
   };
   render() {
     const { id } = this.state;
