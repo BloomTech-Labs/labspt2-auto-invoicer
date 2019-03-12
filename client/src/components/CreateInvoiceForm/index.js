@@ -295,7 +295,7 @@ export default class CreateInvoiceForm extends Component {
       amountPaid: ""
     });
   };
-  
+
   handleFormSubmit = async e => {
     e.preventDefault();
 
@@ -330,7 +330,7 @@ export default class CreateInvoiceForm extends Component {
     };
 
     CreateInvoice(formPayload, "invoiceNumber total");
-    //this.props.click(formPayload);
+    this.props.click(formPayload);
     this.handleClearForm(e);
   };
 
@@ -533,8 +533,7 @@ export default class CreateInvoiceForm extends Component {
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
-                onChange={this.handleInvoiceItemsInputChange}
-              >
+                onChange={this.handleInvoiceItemsInputChange}>
                 <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
                 <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>
