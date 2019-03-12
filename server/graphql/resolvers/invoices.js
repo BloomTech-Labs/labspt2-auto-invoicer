@@ -1,14 +1,8 @@
 const Invoice = require('../../models/invoice');
+const { findDocumentById, findAllDocuments } = require('../helpers');
 
 module.exports = {
-  invoices: async () => {
-    try {
-      const invoices = await Invoice.find();
-      return invoices.map(invoice => {
-        return { ...invoice._doc };
-      });
-    } catch (err) {
-      throw err;
-    }
+  invoices: () => {
+    return findAllDocuments(Invoice);
   },
 };
