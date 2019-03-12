@@ -27,20 +27,26 @@ type Company {
 
 type Invoice {
   _id: ID!
+  invoice_num: Number!
+  company: [Company!]!
+  customer: [Customer!]!
+  items: [Item!]!
   due_date: String!
-  archive: Boolean!
-  total_cost: Number!
-  paid: Boolean!
-  item: String!
-  quantity: Number!
-  rate: Number!
   subtotal: Number!
-  amount: Number!
-  tax: Number!
   discount: Number!
   shipping: Number!
-  amount_paid: Number!
-  company_id: [Company!]!
+  tax: Number!
+  total_cost: Number!
+  paid: Boolean!
+  archive: Boolean!
+}
+
+type Item {
+  _id: ID!
+  description: String!
+  quantity: Number!
+  rate: Number!
+  amount: Number!
 }
 
 input CompanyInput {
