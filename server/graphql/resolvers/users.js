@@ -4,7 +4,28 @@ const User = require('../../models/user');
 const Company = require('../../models/company')
 const isAuth = require('../../middleware/isAuth')
 
+const {
+  findDocumentById
+} = require('../helpers/index')
+
 module.exports = {
+  user: async ({
+    userID
+  }, req) => {
+    try {
+      const user = await User.findById(userID);
+      if (!user) {
+        throw new Error('user does not exist')
+      };
+      return {
+        ...user._doc,
+        password: null
+      }
+    } catch (error) {
+      throw error
+    };
+  },
+
   users: async (args, req) => {
     // if (!req.isAuth) {
     //   throw new Error('not logged in')
@@ -52,10 +73,6 @@ module.exports = {
     companyID
   }) => {
     try {
-      // const user = await User.findOne({_id: userID})
-      // if (!user) {
-      //   throw new Error('user does not exist')
-      // }
       const company = await Company.findById(companyID)
       const user = await User.findById(userID)
       if (!company) {
