@@ -14,6 +14,7 @@ const passport = require("passport");
 const GraphQLSchema = require("./graphql/schema");
 const GraphQLResolvers = require("./graphql/resolvers");
 
+<<<<<<< HEAD
 const authRouter = require("./auth");
 const stripeRouter = require("./stripe");
 const welcomeRouter = require("./routers/welcomeRouter");
@@ -94,6 +95,10 @@ app.get("/logout", (req, res) => {
     });
   });
 });
+=======
+app.use(express.json(), cors(), helmet());
+// app.use(authorize)
+>>>>>>> fixed merge issues
 
 app.use("/stripe", stripeRouter);
 app.use("/auth", authRouter);
@@ -108,21 +113,6 @@ app.use(
     graphiql: true
   })
 );
-
-// add a route for pdf creation
-app.post("/create-pdf", (req, res) => {
-  const file = req.body;
-  pdf.create(pdfTemplate(file), {}).toFile("documents/result.pdf", err => {
-    if (err) {
-      res.send(Promise.reject());
-    } else res.send(Promise.resolve());
-  });
-});
-
-// add a route for generating pdf for client
-app.get("/fetch-pdf", (req, res) => {
-  res.sendFile(`${__dirname}/documents/result.pdf`);
-});
 
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
