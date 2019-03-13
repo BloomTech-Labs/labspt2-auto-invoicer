@@ -20,6 +20,10 @@ export default class index extends Component {
       invoiceNumber: "",
       addressFrom: "",
       addressTo: "",
+      cityTo: "",
+      stateRegionTo: "",
+      zipCodeTo: "",
+      clientEmailTo: "",
       invoiceDueOptions: ["after 30 days", "after 45 days"],
       invoiceDueSelection: "",
       languageOptions: ["English (US)", "Español"],
@@ -50,6 +54,10 @@ export default class index extends Component {
     this.handleInvoiceNumberChange = this.handleInvoiceNumberChange.bind(this);
     this.handleAddressFromChange = this.handleAddressFromChange.bind(this);
     this.handleAddressToChange = this.handleAddressToChange.bind(this);
+    this.handleCityToChange = this.handleCityToChange.bind(this);
+    this.handleStateRegionToChange = this.handleStateRegionToChange.bind(this);
+    this.handleZipCodeToChange = this.handleZipCodeToChange.bind(this);
+    this.handleClientEmailToChange = this.handleClientEmailToChange.bind(this);
     this.handleInvoiceDueSelectionChange = this.handleInvoiceDueSelectionChange.bind(
       this
     );
@@ -69,12 +77,6 @@ export default class index extends Component {
     this.handleShippingChange = this.handleShippingChange.bind(this);
     this.handleTotalChange = this.handleTotalChange.bind(this);
     this.handleAmountPaidChange = this.handleAmountPaidChange.bind(this);
-
-    this.invoiceObj = {
-      invoiceNumber: this.state.invoiceNumber,
-      addressFrom: this.state.addressFrom,
-      addressTo: this.state.addressTo
-    };
   }
 
   //create invoiceObject to send back to server
@@ -90,6 +92,22 @@ export default class index extends Component {
 
   handleAddressToChange(e) {
     this.setState({ addressTo: e.target.value });
+  }
+
+  handleCityToChange(e) {
+    this.setState({ cityTo: e.target.value });
+  }
+
+  handleStateRegionToChange(e) {
+    this.setState({ stateRegionTo: e.target.value });
+  }
+
+  handleZipCodeToChange(e) {
+    this.setState({ zipCodeTo: e.target.value });
+  }
+
+  handleClientEmailToChange(e) {
+    this.setState({ clientEmailTo: e.target.value });
   }
 
   handleInvoiceDueSelectionChange(e) {
@@ -175,6 +193,10 @@ export default class index extends Component {
       invoiceNumber: "",
       addressFrom: " ",
       addressTo: " ",
+      cityTo: "",
+      stateRegionTo: "",
+      zipCodeTo: "",
+      clientEmailTo: "",
       invoiceDueSelection: "",
       languageSelection: "",
       currencySelection: "",
@@ -199,6 +221,10 @@ export default class index extends Component {
       invoiceNumber: this.state.invoiceNumber,
       addressFrom: this.state.addressFrom,
       addressTo: this.state.addressTo,
+      cityTo: this.state.cityTo,
+      stateRegionTo: this.state.stateRegionTo,
+      zipCodeTo: this.state.zipCodeTo,
+      clientEmailTo: this.state.clientEmailTo,
       invoiceDueSelection: this.state.invoiceDueSelection,
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
@@ -274,9 +300,9 @@ export default class index extends Component {
           </section>
           <section className="mid-section">
             <div className="mid-section-left">
-              <div>
+              <div className="address-from">
                 <form onSubmit={this.handleFormSubmit}>
-                  <div>From</div>
+                  <div>FROM</div>
                   <TextArea
                     inputType={"text"}
                     //title={"Invoice From"}
@@ -292,18 +318,62 @@ export default class index extends Component {
               </div>
               <div>
                 <form onSubmit={this.handleFormSubmit}>
-                  <div>To</div>
-                  <TextArea
-                    inputType={"text"}
-                    //title={"Invoice To"}
-                    rows={5}
-                    resize={false}
-                    name={"name"}
-                    controlFunc={this.handleAddressToChange}
-                    placeholder={
-                      "Client Business, Inc. \nClient Address \nCity, State/Region, \nClient Country"
-                    }
-                  />
+                  <div>TO</div>
+                  <div>
+                    <div>Street Address</div>
+                    <SingleInput
+                      inputType={"text"}
+                      //title={"Invoice Number"}
+                      name={"name"}
+                      controlFunc={this.handleAddressToChange}
+                      content={this.state.addressTo}
+                      placeholder={"Client Street Address"}
+                    />
+                  </div>
+                  <div>
+                    <div>City</div>
+                    <SingleInput
+                      inputType={"text"}
+                      //title={"Invoice Number"}
+                      name={"name"}
+                      controlFunc={this.handleCityToChange}
+                      content={this.state.cityTo}
+                      placeholder={"Client City"}
+                    />
+                  </div>
+                  <div>
+                    <div>State / Region</div>
+                    <SingleInput
+                      inputType={"text"}
+                      //title={"Invoice Number"}
+                      name={"name"}
+                      controlFunc={this.handleStateRegionToChange}
+                      content={this.state.stateRegionTo}
+                      placeholder={"Client State / Region"}
+                    />
+                  </div>
+                  <div>
+                    <div>Zip Code</div>
+                    <SingleInput
+                      inputType={"text"}
+                      //title={"Invoice Number"}
+                      name={"name"}
+                      controlFunc={this.handleZipCodeToChange}
+                      content={this.state.zipCodeTo}
+                      placeholder={"Client Zip Codes"}
+                    />
+                  </div>
+                  <div>
+                    <div>Client Email</div>
+                    <SingleInput
+                      inputType={"text"}
+                      //title={"Invoice Number"}
+                      name={"name"}
+                      controlFunc={this.handleClientEmailToChange}
+                      content={this.state.clientEmailTo}
+                      placeholder={"Client Email"}
+                    />
+                  </div>
                 </form>
               </div>
             </div>
