@@ -74,9 +74,9 @@ class App extends Component {
     };
 
     axios
-      .post("http://localhost:5000/create-pdf", file)
+      .post("https://pdf-generator-server.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get("http://localhost:5000/fetch-pdf", { responseType: "blob" })
+        axios.get("https://pdf-generator-server.herokuapp.com/fetch-pdf", { responseType: "blob" })
       )
       .then(res => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
