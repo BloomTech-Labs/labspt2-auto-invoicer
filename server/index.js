@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-<<<<<<< HEAD
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -20,35 +19,10 @@ const stripeRouter = require("./stripe");
 const welcomeRouter = require("./routers/welcomeRouter");
 const passwordResetRouter = require("./routers/passwordResetRouter");
 const taxRateRouter = require("./routers/taxRateRouter");
-=======
-<<<<<<< HEAD
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const graphqlHttp = require('express-graphql');
-const { connect } = require('mongoose');
-const serverless = require('serverless-http');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-
-const authRouter = require('./auth');
-=======
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const graphqlHttp = require("express-graphql");
-const { connect } = require("mongoose");
-const serverless = require("serverless-http");
->>>>>>> added a pdf creator for invoices
->>>>>>> merging before pr
+const authRouter = require("./auth");
 
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
-
-<<<<<<< HEAD
-// for pdf creation
-const pdf = require("html-pdf");
-const pdfTemplate = require("./documents");
 
 app.use(
   session({
@@ -72,20 +46,6 @@ app.use(
       sameSite: "lax",
       secure: true
     }
-=======
-const GraphQLSchema = require("./graphql/schema");
-const GraphQLResolvers = require("./graphql/resolvers");
-const authorize = require("./middleware/isAuth");
-
-app.use(express.json(), cors(), helmet());
-// app.use(authorize)
-
-app.use(
-<<<<<<< HEAD
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: process.env.COOKIE_SESSION_KEY
->>>>>>> merging before pr
   })
 );
 
@@ -139,14 +99,7 @@ app.use("/welcome", welcomeRouter);
 app.use("/password-reset", passwordResetRouter);
 app.use("/taxes", taxRateRouter);
 app.use(
-<<<<<<< HEAD
   "/graphql",
-=======
-  '/graphql',
-=======
-  "/graphql",
->>>>>>> added a pdf creator for invoices
->>>>>>> merging before pr
   graphqlHttp({
     schema: GraphQLSchema,
     rootValue: GraphQLResolvers,
@@ -157,12 +110,8 @@ app.use(
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
     process.env.DB_PASSWORD
-<<<<<<< HEAD
   }@autoinvoice-evkdc.mongodb.net/${process.env.DB_NAME}?retryWrites=true`,
   { useNewUrlParser: true }
-=======
-  }@autoinvoice-evkdc.mongodb.net/${process.env.DB_NAME}?retryWrites=true`
->>>>>>> added a pdf creator for invoices
 )
   .then(app.listen(PORT, console.log(`App is up and running on port ${PORT}!`)))
   .catch(err => console.log(err));
