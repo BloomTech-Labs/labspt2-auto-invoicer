@@ -1,6 +1,6 @@
 // import packages
 import React, { Component } from "react";
-
+import * as jsPDF from "jspdf";
 //import styles
 import "./App.css";
 
@@ -48,7 +48,9 @@ class App extends Component {
       return this.signInModal();
     }, 0);
   };
-
+  createPDF = invoice => {
+    console.log(invoice, "app");
+  };
   render() {
     const { id } = this.state;
     return (
@@ -86,7 +88,7 @@ class App extends Component {
           <Route
             exact
             path={`/user/${id}/invoice/create`}
-            component={CreateInvoice}
+            render={props => <CreateInvoice click={this.createPDF} />}
           />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
           <Route
