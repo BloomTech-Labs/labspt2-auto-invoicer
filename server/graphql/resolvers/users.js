@@ -78,7 +78,7 @@ module.exports = {
       if (!company) {
         throw new Error('company does not exist')
       }
-      if (!company) {
+      if (!user) {
         throw new Error('user does not exist')
       }
       company.users.push(userID)
