@@ -22,14 +22,15 @@ app.use(
   graphqlHttp({
     schema: GraphQLSchema,
     rootValue: GraphQLResolvers,
-    graphiql: true,
+    graphiql: true
   })
 );
 
 connect(
-  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@autoinvoice-evkdc.mongodb.net/${
-    process.env.DB_NAME
-  }?retryWrites=true`
+  `mongodb+srv://${process.env.DB_USER}:${
+    process.env.DB_PASSWORD
+  }@autoinvoice-evkdc.mongodb.net/${process.env.DB_NAME}?retryWrites=true`,
+  { useNewUrlParser: true }
 )
   .then(app.listen(PORT, console.log(`App is up and running on port ${PORT}!`)))
   .catch(err => console.log(err));

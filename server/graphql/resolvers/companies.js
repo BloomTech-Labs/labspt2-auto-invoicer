@@ -6,24 +6,12 @@ const {
   findAllDocuments
 } = require('../helpers');
 
-const companyFields = [
-  { name: '_id', type: 'string' },
-  { name: 'name', type: 'string' },
-  { name: 'email', type: 'string' },
-  { name: 'phone_num', type: 'string' },
-  { name: 'address_1', type: 'string' },
-  { name: 'address_2', type: 'string' },
-  { name: 'city', type: 'string' },
-  { name: 'state', type: 'string' },
-  { name: 'postal_code', type: 'number' }
-];
-
 module.exports = {
   company: async ({ companyID }) => {
     return findDocumentById(companyID, Company);
   },
   companyByAnyField: ({ companyInput }) => {
-    return findDocumentsByAnyField(companyInput, companyFields, Company);
+    return findDocumentsByAnyField(companyInput, Company);
   },
   companies: () => {
     return findAllDocuments(Company);
