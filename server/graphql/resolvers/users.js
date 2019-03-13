@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const User = require('../../models/user');
+const Company = require('../../models/company')
 const isAuth = require('../../middleware/isAuth')
 
 module.exports = {
@@ -43,6 +44,31 @@ module.exports = {
       };
     } catch (err) {
       throw err;
+    }
+  },
+
+  addUserToCompany: async ({
+    userID,
+    companyID
+  }) => {
+    try {
+      // const user = await User.findOne({_id: userID})
+      // if (!user) {
+      //   throw new Error('user does not exist')
+      // }
+      const company = await Company.findOne({
+        _id: companyID
+      })
+      if (!company) {
+        throw new Error('company does not exist')
+      }
+      company.users.push(userID)
+      const companyDetails = await company.save()
+      return {
+        ...companyDetails._doc
+      }
+    } catch (error) {
+      throw error
     }
   }
 };
