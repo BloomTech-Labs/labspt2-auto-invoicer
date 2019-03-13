@@ -56,16 +56,21 @@ module.exports = {
       // if (!user) {
       //   throw new Error('user does not exist')
       // }
-      const company = await Company.findOne({
-        _id: companyID
-      })
+      const company = await Company.findById(companyID)
+      const user = await User.findById(userID)
       if (!company) {
         throw new Error('company does not exist')
       }
+      if (!company) {
+        throw new Error('user does not exist')
+      }
       company.users.push(userID)
+      user.companies.push(companyID)
       const companyDetails = await company.save()
+      const userDetails = await user.save()
       return {
-        ...companyDetails._doc
+        ...companyDetails._doc,
+        ...userDetails._doc
       }
     } catch (error) {
       throw error
