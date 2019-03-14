@@ -30,6 +30,14 @@ const companies = async companyId => {
   }
 };
 
+const formatPhoneNum = document => {
+  if (document.phone_num) {
+    const regx = /\D+/g;
+    let formatted = document.phone_num.replace(regx, '')
+    return document.phone_num = formatted.charAt(0) === '1' ? formatted.slice(1) : formatted
+  }
+}
+
 const updateDocumentById = async (documentInput, id, Model) => {
   try {
     const documentExists = await Model.findById(id);
@@ -40,7 +48,8 @@ const updateDocumentById = async (documentInput, id, Model) => {
       if (!documentInput[key]) {
         delete documentInput[key];
       }
-    });
+    }); 
+    formatPhoneNum(documentInput);
     const updatedDocument = await Model.findByIdAndUpdate(
       id,
       {
@@ -48,7 +57,9 @@ const updateDocumentById = async (documentInput, id, Model) => {
       },
       { new: true }
     );
-    return { ...updatedDocument._doc, users: users.bind(this, document.users) };
+    return { ...updatedDocument._doc, 
+      users: users.bind(this, updatedDocument._doc.users) 
+    };
   } catch (err) {
     throw err;
   }
@@ -117,4 +128,5 @@ module.exports = {
   findDocumentsByAnyField,
   findDocumentById,
   findAllDocuments,
+  formatPhoneNum
 };
