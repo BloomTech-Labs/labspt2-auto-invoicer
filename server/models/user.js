@@ -7,23 +7,27 @@ const userSchema = new Schema(
       required: true
     },
     password: {
-      type: String,
-      required: true
+      type: String
     },
     name: {
       type: String,
       required: true
     },
     phone_num: {
-      type: String,
-      required: true
+      type: String
     },
     companies: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Company'
       }
-    ]
+    ],
+    google: {
+      googleId: String,
+      picture: String,
+      gender: String,
+      locale: String
+    }
   },
   { timestamps: true }
 );

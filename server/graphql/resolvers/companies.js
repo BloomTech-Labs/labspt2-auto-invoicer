@@ -7,7 +7,7 @@ const {
 } = require('../helpers');
 
 module.exports = {
-  company: async ({ companyID }) => {
+  company: ({ companyID }) => {
     return findDocumentById(companyID, Company);
   },
   companyByAnyField: ({ companyInput }) => {

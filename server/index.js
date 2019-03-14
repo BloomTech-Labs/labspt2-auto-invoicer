@@ -6,6 +6,10 @@ const helmet = require('helmet');
 const graphqlHttp = require('express-graphql');
 const { connect } = require('mongoose');
 const serverless = require('serverless-http');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+
+const authRouter = require('./auth');
 
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
@@ -16,6 +20,18 @@ const authorize = require('./middleware/isAuth');
 
 app.use(express.json(), cors(), helmet());
 // app.use(authorize)
+
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: process.env.COOKIE_SESSION_KEY
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', authRouter);
 
 app.use(
   '/graphql',
