@@ -33,10 +33,10 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "helmet": "^3.15.1",
-    "html-pdf": "^2.2.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
+    "postmark": "^2.2.4",
     "serverless-http": "^1.9.1"
   }
 }

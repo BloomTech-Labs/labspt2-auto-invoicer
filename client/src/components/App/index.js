@@ -1,7 +1,6 @@
 // import packages
 import React, { Component } from "react";
-import axios from "axios";
-import { saveAs } from "file-saver";
+import axios from 'axios';
 //import styles
 import "./App.css";
 
@@ -49,44 +48,18 @@ class App extends Component {
       return this.signInModal();
     }, 0);
   };
-  createPDF = () => {
-    const file = {
-      addressFrom: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
-      addressTo: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
-      amountPaid: "0.00",
-      balanceDue: "10.00",
-      currencySelection: "US Dollar (USD)",
-      date: "10-10-2019",
-      discount: "0",
-      invoiceDueSelection: "after 45 days",
-      invoiceItems: [
-        { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
-      ],
-      invoiceNotes:
-        "this is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\n",
-      invoiceNumber: "123456",
-      invoiceTerms: "this is just a test",
-      languageSelection: "English (US)",
-      shipping: "2.00",
-      subtotal: "10.00",
-      tax: "0.07",
-      total: "12.70"
-    };
-
-    axios
-      .post("https://pdf-generator-server.herokuapp.com/create-pdf", file)
-      .then(() =>
-        axios.get("https://pdf-generator-server.herokuapp.com/fetch-pdf", { responseType: "blob" })
-      )
+  sendWelcomeEmail = user => {
+    // send an email object up with user email
+    //disable register button
+    axios.post('http://localhost:5000/welcome', {...user})
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-        saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
+        if(res.status === 201) {
+          return this.signUpModal();
+        } else {
+          // un-disable register button and let user try again.
+        }
       })
-      .catch(err => {
-        return "Error";
-      });
-  };
-
+  }
   render() {
     const { id } = this.state;
     return (
@@ -105,7 +78,8 @@ class App extends Component {
 
         {/* check if sigup clicked and open up signup modal or visa-versa */}
         {this.state.toggleRegister ? (
-          <SignUpModal click={this.signUpModal} />
+          <SignUpModal click={this.signUpModal}
+          welcome={this.sendWelcomeEmail} />
         ) : null}
 
         {/* check if password forgot clicked and open up password modal or visa-versa */}
@@ -124,7 +98,7 @@ class App extends Component {
           <Route
             exact
             path={`/user/${id}/invoice/create`}
-            render={props => <CreateInvoice click={this.createPDF} />}
+            component={CreateInvoice}
           />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
           <Route
