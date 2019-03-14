@@ -7,6 +7,7 @@ const graphqlHttp = require('express-graphql');
 const { connect } = require('mongoose');
 const serverless = require('serverless-http');
 const logger = require('morgan');
+
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
 
@@ -14,7 +15,8 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 const authorize = require('./middleware/isAuth');
 
-// add router for welcome email (no need to access our DB)
+
+// route for welcome email (No need to connect to DB)
 const WELCOME = require('./routers/welcomeRouter');
 
 app.use(express.json(), cors(), helmet(), logger('dev'));
@@ -28,8 +30,9 @@ app.use(
     graphiql: true
   })
 );
-// use welcome route for email
-app.use('/welcome', WELCOME);
+
+// use welcome email router
+app.use('/welcome', WELCOME)
 
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
