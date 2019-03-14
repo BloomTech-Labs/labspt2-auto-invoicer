@@ -31,6 +31,11 @@ const companies = async companyId => {
 };
 
 const formatPhoneNum = document => {
+  // Object.keys(document).forEach(key => {
+  //   if (typeof document[key] === "string") {
+  //     document[key].toLowerCase()
+  //   }
+  // }) 
   if (document.phone_num) {
     const regx = /\D+/g;
     let formatted = document.phone_num.replace(regx, '')
