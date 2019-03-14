@@ -7,24 +7,15 @@ const {
 } = require('../helpers');
 
 module.exports = {
-  customers: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  customers: async () => {
     return findAllDocuments(Customer)
   },
 
-  customer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  customer: async args => {
     return findDocumentById(args._id, Customer)
   },
 
-  createCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  createCustomer: async args => {
     try {
       const custExists = await Customer.findOne({
         email: args.customerInput.email,
@@ -47,10 +38,7 @@ module.exports = {
     }
   },
 
-  updateCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  updateCustomer: async args => {
     return updateDocumentById(args.customerUpdate, args._id, Customer)
   },
 };
