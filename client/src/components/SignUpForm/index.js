@@ -49,7 +49,8 @@ class SignUpForm extends React.Component {
         const user = { email, password, phone, name };
         /* console.log until we have backend hooked up */
         console.log(user);
-        return this.props.registerUser(user);
+        this.props.registerUser(user);
+        this.props.welcome(user);
       } else {
         return this.setState({ error: "Valid first/last name required" });
       }
