@@ -6,7 +6,10 @@ const helmet = require('helmet');
 const graphqlHttp = require('express-graphql');
 const { connect } = require('mongoose');
 const serverless = require('serverless-http');
-const logger = require('morgan');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+
+const authRouter = require('./auth');
 
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
@@ -15,13 +18,24 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 const authorize = require('./middleware/isAuth');
 
-
-// route for welcome email (No need to connect to DB)
+// welcome email router
 const WELCOME = require('./routers/welcomeRouter');
 
-app.use(express.json(), cors(), helmet(), logger('dev'));
+app.use(express.json(), cors(), helmet());
 // app.use(authorize)
 
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: process.env.COOKIE_SESSION_KEY
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', authRouter);
+app.use('/welcome', welcomeRouter);
 app.use(
   '/graphql',
   graphqlHttp({
@@ -30,9 +44,6 @@ app.use(
     graphiql: true
   })
 );
-
-// use welcome email router
-app.use('/welcome', WELCOME)
 
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
