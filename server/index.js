@@ -106,6 +106,21 @@ app.use(
   })
 );
 
+// add a route for pdf creation
+app.post("/create-pdf", (req, res) => {
+  const file = req.body;
+  pdf.create(pdfTemplate(file), {}).toFile("documents/result.pdf", err => {
+    if (err) {
+      res.send(Promise.reject());
+    } else res.send(Promise.resolve());
+  });
+});
+
+// add a route for generating pdf for client
+app.get("/fetch-pdf", (req, res) => {
+  res.sendFile(`${__dirname}/documents/result.pdf`);
+});
+
 connect(
   `mongodb+srv://${process.env.DB_USER}:${
     process.env.DB_PASSWORD
