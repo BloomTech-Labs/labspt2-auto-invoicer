@@ -13,7 +13,7 @@ export default class index extends Component {
     return (
       <div>
         Views Only.
-        <CreateInvoiceForm />
+        <CreateInvoiceForm click={this.props.click} />
       </div>
     );
   }
