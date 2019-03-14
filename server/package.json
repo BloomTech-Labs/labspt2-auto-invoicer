@@ -37,6 +37,8 @@
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0",
     "postmark": "^2.2.4",
     "serverless-http": "^1.9.1"
   }
