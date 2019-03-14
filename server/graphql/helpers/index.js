@@ -1,3 +1,35 @@
+const Company = require('../../models/company');
+const User = require('../../models/user');
+
+const users = async userId => {
+  try {
+    const fetchedUsers = await User.find({ _id: { $in: userId } });
+    return fetchedUsers.map(user => {
+      return {
+        ...user._doc,
+        password: null,
+        companies: companies.bind(this, user._doc.companies),
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+const companies = async companyId => {
+  try {
+    const fetchedCompanies = await Company.find({ _id: { $in: companyId } });
+    return fetchedCompanies.map(company => {
+      return {
+        ...company._doc,
+        users: users.bind(this, company.users),
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
 const updateDocumentById = async (documentInput, id, Model) => {
   try {
     const documentExists = await Model.findById(id);
@@ -12,11 +44,11 @@ const updateDocumentById = async (documentInput, id, Model) => {
     const updatedDocument = await Model.findByIdAndUpdate(
       id,
       {
-        $set: { ...documentInput }
+        $set: { ...documentInput },
       },
       { new: true }
     );
-    return { ...updatedDocument._doc };
+    return { ...updatedDocument._doc, users: users.bind(this, document.users) };
   } catch (err) {
     throw err;
   }
@@ -42,10 +74,10 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
       }
     });
     const documents = await Model.find({
-      $or: validFields
+      $or: validFields,
     });
     return documents.map(document => {
-      return { ...document._doc };
+      return { ...document._doc, users: users.bind(this, document.users) };
     });
   } catch (err) {
     throw err;
@@ -58,7 +90,7 @@ const findDocumentById = async (documentId, Model) => {
     if (!document) {
       throw new Error('There is no document with the specified ID!');
     }
-    return { ...document._doc };
+    return { ...document._doc, users: users.bind(this, document.users) };
   } catch (err) {
     throw err;
   }
@@ -73,7 +105,7 @@ const findAllDocuments = async Model => {
       );
     }
     return documents.map(document => {
-      return { ...document._doc };
+      return { ...document._doc, users: users.bind(this, document.users) };
     });
   } catch (err) {
     throw err;
@@ -84,5 +116,5 @@ module.exports = {
   updateDocumentById,
   findDocumentsByAnyField,
   findDocumentById,
-  findAllDocuments
+  findAllDocuments,
 };

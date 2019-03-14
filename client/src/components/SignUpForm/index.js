@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 
 // import icons
 import EmailIcon from "@material-ui/icons/Email";
@@ -44,9 +46,10 @@ class SignUpForm extends React.Component {
     if (this.comparePasswords(password, password2)) {
       if (firstName && lastName) {
         const name = `${firstName} ${lastName}`;
-        const userObject = { email, password, phone, name };
+        const user = { email, password, phone, name };
         /* console.log until we have backend hooked up */
-        console.log(userObject);
+        console.log(user);
+        return this.props.registerUser(user);
       } else {
         return this.setState({ error: "Valid first/last name required" });
       }
@@ -139,4 +142,11 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default SignUpForm;
+const mapStateToProps = state => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(SignUpForm);

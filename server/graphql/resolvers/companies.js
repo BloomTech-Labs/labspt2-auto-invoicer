@@ -1,9 +1,11 @@
 const Company = require('../../models/company');
+// const User = require('../../models/user');
+
 const {
   updateDocumentById,
   findDocumentsByAnyField,
   findDocumentById,
-  findAllDocuments
+  findAllDocuments,
 } = require('../helpers');
 
 module.exports = {
@@ -26,7 +28,7 @@ module.exports = {
         address_2,
         city,
         state,
-        postal_code
+        postal_code,
       } = companyInput;
       const companyExists = await Company.findOne({ name });
       if (companyExists) {
@@ -40,9 +42,16 @@ module.exports = {
         address_2,
         city,
         state,
-        postal_code
+        postal_code,
+        // users: '5c88bec6c5cf5c186025a084',
       });
       const newCompany = await company.save();
+      // const user = await User.findById('5c88bec6c5cf5c186025a084');
+      // if (!user) {
+      //   throw new Error('User not found.');
+      // }
+      // user.companies.push(company);
+      // await user.save();
       return { ...newCompany._doc };
     } catch (err) {
       throw err;
@@ -50,5 +59,5 @@ module.exports = {
   },
   editCompany: ({ companyInput, id }) => {
     return updateDocumentById(companyInput, id, Company);
-  }
+  },
 };
