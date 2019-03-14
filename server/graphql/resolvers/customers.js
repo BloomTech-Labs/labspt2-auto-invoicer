@@ -3,7 +3,8 @@ const isAuth = require('../../middleware/isAuth');
 const {
   findDocumentById,
   findAllDocuments,
-  updateDocumentById
+  updateDocumentById,
+  formatPhoneNum
 } = require('../helpers');
 
 module.exports = {
@@ -23,6 +24,7 @@ module.exports = {
       if (custExists) {
         throw new Error('Customer already exists');
       }
+      formatPhoneNum(args.customerInput)
       const customer = new Customer({
         name: args.customerInput.name,
         address: args.customerInput.address,
