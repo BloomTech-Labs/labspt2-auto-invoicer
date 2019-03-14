@@ -2,7 +2,8 @@ const Customer = require('../../models/customer');
 const isAuth = require('../../middleware/isAuth');
 const {
   findDocumentById,
-  findAllDocuments
+  findAllDocuments,
+  updateDocumentById
 } = require('../helpers');
 
 module.exports = {
@@ -10,22 +11,14 @@ module.exports = {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
 
-    try {
-      return findAllDocuments(Customer)
-    } catch (error) {
-      throw error;
-    }
+    return findAllDocuments(Customer)
   },
 
   customer: async (args, req) => {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
 
-    try {
-      return findDocumentById(args._id, Customer)
-    } catch (error) {
-      throw error;
-    }
+    return findDocumentById(args._id, Customer)
   },
 
   createCustomer: async (args, req) => {
@@ -58,44 +51,6 @@ module.exports = {
     // if (!req.isAuth) {
     // throw new Error('not logged in')}
 
-    const {
-      name,
-      address,
-      email,
-      phone_num
-    } = args.customerUpdate;
-    const customer = await Customer.findOne({
-      _id: args._id,
-    });
-    if (!customer) {
-      throw new Error('Customer does not exist');
-    }
-
-    if (typeof name === 'string') {
-      customer.name = name;
-    }
-
-    if (typeof address === 'string') {
-      customer.address = address;
-    }
-
-    if (typeof email === 'string') {
-      const emailExists = await Customer.findOne({
-        email: email,
-      });
-      if (emailExists) {
-        throw new Error('unable to use this email, as is already in use');
-      }
-      customer.email = email;
-    }
-
-    if (typeof phone_num === 'string') {
-      customer.phone_num = phone_num;
-    }
-
-    const updatedUser = await customer.save();
-    return {
-      ...updatedUser._doc,
-    };
+    return updateDocumentById(args.customerUpdate, args._id, Customer)
   },
 };
