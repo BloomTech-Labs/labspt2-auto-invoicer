@@ -5,7 +5,7 @@ const Company = require('../../models/company')
 const isAuth = require('../../middleware/isAuth')
 
 const {
-  findDocumentById
+  updateDocumentById
 } = require('../helpers/index')
 
 module.exports = {
@@ -65,6 +65,36 @@ module.exports = {
       };
     } catch (err) {
       throw err;
+    }
+  },
+
+  editUser: async ({
+    updateUser,
+    userID
+  }, req) => {
+    try {
+      const userExist = await User.findById(userID)
+      if (!userExist) {
+        throw new Error('user does not exist')
+      }
+      Object.keys(updateUser).forEach(key => {
+        if (!updateUser[key]) {
+          delete updateUser[key];
+        }
+      });
+      const updatedUser = await User.findByIdAndUpdate(userID, {
+        $set: {
+          ...updateUser
+        }
+      }, {
+        new: true
+      });
+      return {
+        ...updatedUser._doc,
+        password: null
+      }
+    } catch (error) {
+      throw error
     }
   },
 
