@@ -37,6 +37,7 @@
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
+    "postmark": "^2.2.4",
     "serverless-http": "^1.9.1"
   }
 }

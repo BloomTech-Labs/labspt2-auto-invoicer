@@ -1,6 +1,6 @@
 // import packages
 import React, { Component } from "react";
-
+import axios from 'axios';
 //import styles
 import "./App.css";
 
@@ -48,7 +48,18 @@ class App extends Component {
       return this.signInModal();
     }, 0);
   };
-
+  sendWelcomeEmail = user => {
+    // send an email object up with user email
+    //disable register button
+    axios.post('http://localhost:5000/welcome', {...user})
+      .then(res => {
+        if(res.status === 201) {
+          return this.signUpModal();
+        } else {
+          // un-disable register button and let user try again.
+        }
+      })
+  }
   render() {
     const { id } = this.state;
     return (
@@ -67,7 +78,8 @@ class App extends Component {
 
         {/* check if sigup clicked and open up signup modal or visa-versa */}
         {this.state.toggleRegister ? (
-          <SignUpModal click={this.signUpModal} />
+          <SignUpModal click={this.signUpModal}
+          welcome={this.sendWelcomeEmail} />
         ) : null}
 
         {/* check if password forgot clicked and open up password modal or visa-versa */}
