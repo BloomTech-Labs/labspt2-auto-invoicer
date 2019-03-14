@@ -14,7 +14,6 @@ export default class index extends Component {
   //No state held - views only render
   render() {
     return (
-<<<<<<< HEAD
       <UserConsumer>
         {({ userState }) => {
           return (
