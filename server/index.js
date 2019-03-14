@@ -14,7 +14,6 @@ const passport = require("passport");
 const GraphQLSchema = require("./graphql/schema");
 const GraphQLResolvers = require("./graphql/resolvers");
 
-<<<<<<< HEAD
 const authRouter = require("./auth");
 const stripeRouter = require("./stripe");
 const welcomeRouter = require("./routers/welcomeRouter");
@@ -23,9 +22,6 @@ const taxRateRouter = require("./routers/taxRateRouter");
 
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
-// for pdf creation
-const pdf = require("html-pdf");
-const pdfTemplate = require("./documents");
 
 app.use(
   session({
@@ -95,10 +91,6 @@ app.get("/logout", (req, res) => {
     });
   });
 });
-=======
-app.use(express.json(), cors(), helmet());
-// app.use(authorize)
->>>>>>> fixed merge issues
 
 app.use("/stripe", stripeRouter);
 app.use("/auth", authRouter);
