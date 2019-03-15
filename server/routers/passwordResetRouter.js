@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
       product_name: "Auto-Invoice",
       product_url: "https://auto-invoicer.netlify.com/",
       name: "Test",
-      action_url: "https://auto-invoicer.netlify.com/",
+      action_url: "https://auto-invoicer.netlify.com/password-reset",
       operating_system: `${browser_os}`,
       browser_name: `${browser_name}, ${browser_version}`,
       support_url: "https://auto-invoicer.netlify.com/",
