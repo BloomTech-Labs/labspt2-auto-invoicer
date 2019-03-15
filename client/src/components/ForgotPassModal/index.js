@@ -20,8 +20,9 @@ class ForgotPassModal extends React.Component {
   };
   createResetObject = e => {
     e.preventDefault();
-    const reset = { email: this.state.email };
-    console.log(reset);
+    alert("it works");
+    const reset = this.state.email;
+    return this.props.passwordReset({ email: reset });
   };
   render() {
     return (
@@ -37,7 +38,9 @@ class ForgotPassModal extends React.Component {
             onChange={this.changeHandler}
             value={this.state.email}
           />
-          <button className="password-btn">Reset password</button>
+          <button className="password-btn" type="submit">
+            Reset password
+          </button>
         </form>
       </Modal>
     );
