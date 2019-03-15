@@ -20,18 +20,19 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
-      const currentUser = await User.findOne({ email: profile._json.email });
+      const { email, picture, gender, locale } = profile._json;
+      const currentUser = await User.findOne({ email });
       if (currentUser) {
         done(null, currentUser);
       } else {
         const newUser = await new User({
-          email: profile._json.email,
+          email,
           name: profile.displayName,
           google: {
             googleId: profile.id,
-            picture: profile._json.picture,
-            gender: profile._json.gender,
-            locale: profile._json.locale
+            picture,
+            gender,
+            locale
           }
         }).save();
         done(null, newUser);
@@ -48,8 +49,21 @@ passport.use(
       clientSecret: process.env.FACEBOOK_APP_SECRET_KEY,
       profileFields: ['id', 'emails', 'name']
     },
-    (accessToken, refreshToken, profile, done) => {
-      console.log(accessToken, refreshToken, profile);
+    async (accessToken, refreshToken, profile, done) => {
+      const { first_name, last_name, email, id } = profile._json;
+      const currentUser = await User.findOne({ email });
+      if (currentUser) {
+        done(null, currentUser);
+      } else {
+        const newUser = await new User({
+          email: profile._json.email,
+          name: `${first_name} ${last_name}`,
+          facebook: {
+            facebookId: id
+          }
+        }).save();
+        done(null, newUser);
+      }
     }
   )
 );
