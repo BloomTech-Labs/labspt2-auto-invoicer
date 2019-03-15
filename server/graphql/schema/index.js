@@ -96,6 +96,14 @@ type AuthData {
   tokenExpiration: Int!
 }
 
+type Country {
+  name: String!
+  iso2: String!
+  dialCode: String!
+  priority: Int!
+  format: String!
+}
+
 input CustomerInput {
   name: String!
   address: String!
@@ -127,6 +135,8 @@ type RootQuery {
   company(companyID: ID!): Company
   customers: [Customer!]!
   customer(_id:ID!): Customer!
+  countries: [Country!]!
+  country(name: String, iso2: String): Country!
 }
 
 type RootMutation {
