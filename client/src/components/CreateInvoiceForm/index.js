@@ -12,6 +12,7 @@ import InvoiceItemInput from "../InvoiceItemsInput";
 
 //CSS
 import "./CreateInvoiceForm.css";
+import SampleCal from "../reusableComponents/SampleCal";
 
 export default class index extends Component {
   //State from sub-components held here
@@ -384,26 +385,29 @@ export default class index extends Component {
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
                   <CalendarDatePicker />
-                  <SingleInput
+
+                  {/* <SingleInput
                     inputType={"text"}
                     //title={"Date"}
                     name={"name"}
                     controlFunc={this.handleDateChange}
                     content={this.state.date}
                     placeholder={"Enter Date"}
-                  />
+                  /> */}
                 </form>
               </div>
               <div>
                 <form>
                   <div>Invoice Due</div>
-                  <Select
+                  <CalendarDatePicker />
+
+                  {/* <Select
                     name={"invoiceDueRange"}
                     placeholder={"Choose Invoice Due Date"}
                     controlFunc={this.handleInvoiceDueSelectionChange}
                     options={this.state.invoiceDueOptions}
                     selectedOption={this.state.invoiceDueSelection}
-                  />
+                  /> */}
                 </form>
               </div>
               <div>
