@@ -5,6 +5,7 @@ import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
+import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
 
 // InvoiceItemInput
 import InvoiceItemInput from "../InvoiceItemsInput";
@@ -24,8 +25,7 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-      invoiceDueOptions: ["after 30 days", "after 45 days"],
-      invoiceDueSelection: "",
+
       languageOptions: ["English (US)", "Español"],
       languageSelection: "",
       currencyOptions: [
@@ -58,9 +58,7 @@ export default class index extends Component {
     this.handleStateRegionToChange = this.handleStateRegionToChange.bind(this);
     this.handleZipCodeToChange = this.handleZipCodeToChange.bind(this);
     this.handleClientEmailToChange = this.handleClientEmailToChange.bind(this);
-    this.handleInvoiceDueSelectionChange = this.handleInvoiceDueSelectionChange.bind(
-      this
-    );
+
     this.handleLanguageSelectionChange = this.handleLanguageSelectionChange.bind(
       this
     );
@@ -140,10 +138,6 @@ export default class index extends Component {
 
   handleClientEmailToChange(e) {
     this.setState({ clientEmailTo: e.target.value });
-  }
-
-  handleInvoiceDueSelectionChange(e) {
-    this.setState({ invoiceDueSelection: e.target.value });
   }
 
   handleLanguageSelectionChange(e) {
@@ -229,7 +223,7 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-      invoiceDueSelection: "",
+
       languageSelection: "",
       currencySelection: "",
       date: "",
@@ -257,7 +251,7 @@ export default class index extends Component {
       stateRegionTo: this.state.stateRegionTo,
       zipCodeTo: this.state.zipCodeTo,
       clientEmailTo: this.state.clientEmailTo,
-      invoiceDueSelection: this.state.invoiceDueSelection,
+
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
       date: this.state.date,
@@ -274,7 +268,7 @@ export default class index extends Component {
     };
 
     console.log("Invoice Data Object:", formPayload);
-    this.props.click(formPayload);
+    //this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
@@ -415,26 +409,30 @@ export default class index extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
-                  <SingleInput
+                  <CalendarDatePicker />
+
+                  {/* <SingleInput
                     inputType={"text"}
                     //title={"Date"}
                     name={"name"}
                     controlFunc={this.handleDateChange}
                     content={this.state.date}
                     placeholder={"Enter Date"}
-                  />
+                  /> */}
                 </form>
               </div>
               <div>
                 <form>
                   <div>Invoice Due</div>
-                  <Select
+                  <CalendarDatePicker />
+
+                  {/* <Select
                     name={"invoiceDueRange"}
                     placeholder={"Choose Invoice Due Date"}
                     controlFunc={this.handleInvoiceDueSelectionChange}
                     options={this.state.invoiceDueOptions}
                     selectedOption={this.state.invoiceDueSelection}
-                  />
+                  /> */}
                 </form>
               </div>
               <div>
