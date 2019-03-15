@@ -1,6 +1,4 @@
-const {
-  buildSchema
-} = require('graphql');
+const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -25,6 +23,7 @@ type Company {
   unlimited_tier: Boolean!
   credits: Int!
   users: [User!]!
+  customers: [Customer!]
 }
 
 type Invoice {
