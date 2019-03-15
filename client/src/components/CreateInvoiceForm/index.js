@@ -26,8 +26,7 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-      invoiceDueOptions: ["after 30 days", "after 45 days"],
-      invoiceDueSelection: "",
+
       languageOptions: ["English (US)", "Español"],
       languageSelection: "",
       currencyOptions: [
@@ -60,9 +59,7 @@ export default class index extends Component {
     this.handleStateRegionToChange = this.handleStateRegionToChange.bind(this);
     this.handleZipCodeToChange = this.handleZipCodeToChange.bind(this);
     this.handleClientEmailToChange = this.handleClientEmailToChange.bind(this);
-    this.handleInvoiceDueSelectionChange = this.handleInvoiceDueSelectionChange.bind(
-      this
-    );
+
     this.handleLanguageSelectionChange = this.handleLanguageSelectionChange.bind(
       this
     );
@@ -110,10 +107,6 @@ export default class index extends Component {
 
   handleClientEmailToChange(e) {
     this.setState({ clientEmailTo: e.target.value });
-  }
-
-  handleInvoiceDueSelectionChange(e) {
-    this.setState({ invoiceDueSelection: e.target.value });
   }
 
   handleLanguageSelectionChange(e) {
@@ -199,7 +192,7 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-      invoiceDueSelection: "",
+
       languageSelection: "",
       currencySelection: "",
       date: "",
@@ -227,7 +220,7 @@ export default class index extends Component {
       stateRegionTo: this.state.stateRegionTo,
       zipCodeTo: this.state.zipCodeTo,
       clientEmailTo: this.state.clientEmailTo,
-      invoiceDueSelection: this.state.invoiceDueSelection,
+
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
       date: this.state.date,
