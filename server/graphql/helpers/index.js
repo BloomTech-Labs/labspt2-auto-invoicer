@@ -78,7 +78,7 @@ const updateDocumentById = async (documentInput, id, Model) => {
     }
     return {
       ...updatedDocument._doc
-    }
+    };
   } catch (err) {
     throw err;
   }
