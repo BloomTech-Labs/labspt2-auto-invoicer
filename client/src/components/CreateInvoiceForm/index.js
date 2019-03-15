@@ -12,7 +12,6 @@ import InvoiceItemInput from "../InvoiceItemsInput";
 
 //CSS
 import "./CreateInvoiceForm.css";
-import SampleCal from "../reusableComponents/SampleCal";
 
 export default class index extends Component {
   //State from sub-components held here
