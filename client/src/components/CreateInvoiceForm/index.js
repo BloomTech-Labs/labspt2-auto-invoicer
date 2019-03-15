@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 //import sub-components
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
@@ -77,10 +77,41 @@ export default class index extends Component {
     this.handleShippingChange = this.handleShippingChange.bind(this);
     this.handleTotalChange = this.handleTotalChange.bind(this);
     this.handleAmountPaidChange = this.handleAmountPaidChange.bind(this);
+    this.zipcodeApiAutofill = this.zipcodeApiAutofill.bind(this);
   }
 
   //create invoiceObject to send back to server
 
+  //ZipcodeApi Function
+
+  zipcodeApiAutofill() {
+    if (this.state.zipCodeTo.length > 4) {
+      //clientkey comes from zipcodeapi.com for client side key after registering for api key
+      const clientKey =
+        "js-kMEYzhr1QD1g3pfHW8oDHNZwbh9H0HlrQPFnSw4vIslCaICDQPTlmlodIzFax27L";
+      const zipcode = this.state.zipCodeTo;
+      const url =
+        "https://www.zipcodeapi.com/rest/" +
+        clientKey +
+        "/info.json/" +
+        zipcode +
+        "/radians";
+      axios
+        .get(url)
+        .then(res => {
+          this.setState({
+            cityTo: res.data.city,
+            stateRegionTo: res.data.state
+          });
+        })
+        .catch(error => {
+          console.log("Server Error", error);
+        });
+    } else {
+      this.setState({ cityTo: "" });
+      this.setState({ stateRegionTo: "" });
+    }
+  }
   //individual invoice items
   handleInvoiceNumberChange(e) {
     this.setState({ invoiceNumber: e.target.value });
@@ -102,8 +133,9 @@ export default class index extends Component {
     this.setState({ stateRegionTo: e.target.value });
   }
 
-  handleZipCodeToChange(e) {
-    this.setState({ zipCodeTo: e.target.value });
+  async handleZipCodeToChange(e) {
+    await this.setState({ zipCodeTo: e.target.value });
+    this.zipcodeApiAutofill();
   }
 
   handleClientEmailToChange(e) {
@@ -247,6 +279,7 @@ export default class index extends Component {
   }
 
   render() {
+    // console.log(zipCodeTo,"render")
     return (
       <div>
         Create Invoice Form.
