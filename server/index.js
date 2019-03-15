@@ -18,6 +18,9 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 const authorize = require('./middleware/isAuth');
 
+// welcome email router
+const welcomeRouter = require('./routers/welcomeRouter');
+
 app.use(express.json(), cors(), helmet());
 // app.use(authorize)
 
@@ -32,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRouter);
-
+app.use('/welcome', welcomeRouter);
 app.use(
   '/graphql',
   graphqlHttp({

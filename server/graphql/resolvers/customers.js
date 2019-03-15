@@ -2,36 +2,21 @@ const Customer = require('../../models/customer');
 const isAuth = require('../../middleware/isAuth');
 const {
   findDocumentById,
-  findAllDocuments
+  findAllDocuments,
+  updateDocumentById,
+  formatData,
 } = require('../helpers');
 
 module.exports = {
-  customers: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    try {
-      return findAllDocuments(Customer)
-    } catch (error) {
-      throw error;
-    }
+  customers: async () => {
+    return findAllDocuments(Customer)
   },
 
-  customer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    try {
-      return findDocumentById(args._id, Customer)
-    } catch (error) {
-      throw error;
-    }
+  customer: async args => {
+    return findDocumentById(args._id, Customer)
   },
 
-  createCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  createCustomer: async args => {
     try {
       const custExists = await Customer.findOne({
         email: args.customerInput.email,
@@ -39,6 +24,7 @@ module.exports = {
       if (custExists) {
         throw new Error('Customer already exists');
       }
+      formatData(args.customerInput);
       const customer = new Customer({
         name: args.customerInput.name,
         address: args.customerInput.address,
@@ -54,48 +40,7 @@ module.exports = {
     }
   },
 
-  updateCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    const {
-      name,
-      address,
-      email,
-      phone_num
-    } = args.customerUpdate;
-    const customer = await Customer.findOne({
-      _id: args._id,
-    });
-    if (!customer) {
-      throw new Error('Customer does not exist');
-    }
-
-    if (typeof name === 'string') {
-      customer.name = name;
-    }
-
-    if (typeof address === 'string') {
-      customer.address = address;
-    }
-
-    if (typeof email === 'string') {
-      const emailExists = await Customer.findOne({
-        email: email,
-      });
-      if (emailExists) {
-        throw new Error('unable to use this email, as is already in use');
-      }
-      customer.email = email;
-    }
-
-    if (typeof phone_num === 'string') {
-      customer.phone_num = phone_num;
-    }
-
-    const updatedUser = await customer.save();
-    return {
-      ...updatedUser._doc,
-    };
+  updateCustomer: async args => {
+    return updateDocumentById(args.customerUpdate, args._id, Customer)
   },
 };

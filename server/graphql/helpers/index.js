@@ -22,12 +22,26 @@ const companies = async companyId => {
     return fetchedCompanies.map(company => {
       return {
         ...company._doc,
-        users: users.bind(this, company.users),
+        users: users.bind(this, company._doc.users),
       };
     });
   } catch (err) {
     throw err;
   }
+};
+
+const formatData = document => {
+  Object.keys(document).forEach(key => {
+    if (typeof document[key] === 'string') {
+    document[key] = document[key].toLowerCase();
+    }
+  });
+  if (document.phone_num) {
+    const regx = /\D+/g;
+    let formatted = document.phone_num.replace(regx, '');
+    (document.phone_num = formatted.charAt(0) === '1' ? formatted.slice(1) : formatted);
+  };
+  return document;
 };
 
 const updateDocumentById = async (documentInput, id, Model) => {
@@ -41,14 +55,30 @@ const updateDocumentById = async (documentInput, id, Model) => {
         delete documentInput[key];
       }
     });
+    formatData(documentInput);
     const updatedDocument = await Model.findByIdAndUpdate(
       id,
       {
         $set: { ...documentInput },
       },
-      { new: true }
+      { new: true },
     );
-    return { ...updatedDocument._doc, users: users.bind(this, document.users) };
+    const documentType = Model.modelName;
+    if (documentType === 'User') {
+      return {
+        ...updatedDocument._doc,
+        companies: companies.bind(this, updatedDocument._doc.companies),
+      };
+    }
+    if (documentType === 'Company') {
+      return {
+        ...updatedDocument._doc,
+        users: users.bind(this, updatedDocument._doc.users),
+      };
+    }
+    return {
+      ...updatedDocument._doc
+    };
   } catch (err) {
     throw err;
   }
@@ -76,9 +106,23 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
     const documents = await Model.find({
       $or: validFields,
     });
-    return documents.map(document => {
-      return { ...document._doc, users: users.bind(this, document.users) };
-    });
+    const documentType = Model.modelName;
+    if (documentType === 'User') {
+      return documents.map(document => {
+        return {
+          ...document._doc,
+          companies: companies.bind(this, document._doc.companies),
+        };
+      });
+    }
+    if (documentType === 'Company') {
+      return documents.map(document => {
+        return {
+          ...document._doc,
+          users: users.bind(this, document._doc.users),
+        };
+      });
+    }
   } catch (err) {
     throw err;
   }
@@ -87,10 +131,19 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
 const findDocumentById = async (documentId, Model) => {
   try {
     const document = await Model.findById(documentId);
+    const documentType = Model.modelName;
     if (!document) {
-      throw new Error('There is no document with the specified ID!');
+      throw new Error(`${documentType} with the specified ID does not exist.`);
     }
-    return { ...document._doc, users: users.bind(this, document.users) };
+    if (documentType === 'User') {
+      return {
+        ...document._doc,
+        companies: companies.bind(this, document._doc.companies),
+      };
+    }
+    if (documentType === 'Company') {
+      return { ...document._doc, users: users.bind(this, document._doc.users) };
+    }
   } catch (err) {
     throw err;
   }
@@ -99,14 +152,26 @@ const findDocumentById = async (documentId, Model) => {
 const findAllDocuments = async Model => {
   try {
     const documents = await Model.find();
+    const documentType = Model.modelName;
     if (!documents.length) {
-      throw new Error(
-        'There is no document yet in this collection, please try again later'
-      );
+      throw new Error(`${documentType} does not exist.`);
     }
-    return documents.map(document => {
-      return { ...document._doc, users: users.bind(this, document.users) };
-    });
+    if (documentType === 'User') {
+      return documents.map(document => {
+        return {
+          ...document._doc,
+          companies: companies.bind(this, document._doc.companies),
+        };
+      });
+    }
+    if (documentType === 'Company') {
+      return documents.map(document => {
+        return {
+          ...document._doc,
+          users: users.bind(this, document._doc.users),
+        };
+      });
+    }
   } catch (err) {
     throw err;
   }
@@ -117,4 +182,5 @@ module.exports = {
   findDocumentsByAnyField,
   findDocumentById,
   findAllDocuments,
+  formatData,
 };

@@ -12,7 +12,7 @@ const SignUpModal = props => {
   return (
     <Modal close={props.click}>
       <h1 className="modal-title">Auto-Invoicer Register Account</h1>
-      <SignUpForm />
+      <SignUpForm welcome={props.welcome} />
     </Modal>
   );
 };

@@ -14,7 +14,7 @@ const customerSchema = new Schema({
     required: true
   },
   phone_num: {
-    type: Number,
+    type: String,
     required: true
   },
   companies: [
