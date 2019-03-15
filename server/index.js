@@ -19,7 +19,7 @@ const GraphQLResolvers = require('./graphql/resolvers');
 const authorize = require('./middleware/isAuth');
 
 // welcome email router
-const WELCOME = require('./routers/welcomeRouter');
+const welcomeRouter = require('./routers/welcomeRouter');
 
 app.use(express.json(), cors(), helmet());
 // app.use(authorize)
