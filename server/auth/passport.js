@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const User = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const StripeStrategy = require('passport-stripe').Strategy;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -64,6 +65,19 @@ passport.use(
         }).save();
         done(null, newUser);
       }
+    }
+  )
+);
+
+passport.use(
+  new StripeStrategy(
+    {
+      clientID: process.env.STRIPE_ID,
+      clientSecret: process.env.STRIPE_SECRET,
+      callbackURL: 'https://auto-invoicer.netlify.com'
+    },
+    async (accessToken, refreshToken, stripe_properties, done) => {
+      console.log(stripe_properties);
     }
   )
 );

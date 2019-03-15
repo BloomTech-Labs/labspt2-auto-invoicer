@@ -20,7 +20,7 @@ router.get('/google/home', passport.authenticate('google'), (req, res) => {
 
 router.get(
   '/facebook',
-  passport.authenticate('facebook', { scope: ['profile', 'email'] })
+  passport.authenticate('facebook', { scope: ['email'] })
 );
 router.get(
   '/facebook/home',
@@ -33,5 +33,15 @@ router.get(
 router.get('/facebook/home', passport.authenticate('facebook'), (req, res) => {
   res.send('<h1>Facebook Its working!</h1>');
 });
+
+router.get('/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
+
+router.get(
+  '/stripe/home',
+  passport.authenticate('stripe', { failureRedirect: '/auth' }),
+  (req, res) => {
+    res.send('<h1>Stripe Its working!</h1>');
+  }
+);
 
 module.exports = router;
