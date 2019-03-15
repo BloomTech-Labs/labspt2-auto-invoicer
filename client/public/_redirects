@@ -1,0 +1,6 @@
+/password-reset /password-reset
+/user/:id/billing /user/:id/billing
+/user/:id/invoice/create /user/:id/invoice/create
+/user/:id/settings /user/:id/settings
+/user/:id/invoices /user/:id/invoices
+/about /about
