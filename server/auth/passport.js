@@ -56,7 +56,7 @@ passport.use(
         done(null, currentUser);
       } else {
         const newUser = await new User({
-          email: profile._json.email,
+          email,
           name: `${first_name} ${last_name}`,
           facebook: {
             facebookId: id
