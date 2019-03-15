@@ -5,6 +5,7 @@ import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
+import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
 
 // InvoiceItemInput
 import InvoiceItemInput from "../InvoiceItemsInput";
@@ -242,7 +243,7 @@ export default class index extends Component {
     };
 
     console.log("Invoice Data Object:", formPayload);
-    this.props.click(formPayload);
+    //this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
@@ -382,6 +383,7 @@ export default class index extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
+                  <CalendarDatePicker />
                   <SingleInput
                     inputType={"text"}
                     //title={"Date"}
