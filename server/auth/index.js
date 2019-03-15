@@ -18,4 +18,16 @@ router.get('/google/home', passport.authenticate('google'), (req, res) => {
   res.send('<h1>Its working!</h1>');
 });
 
+router.get(
+  '/facebook',
+  passport.authenticate('facebook', { scope: ['profile', 'email'] })
+);
+router.get(
+  '/facebook/home',
+  passport.authenticate('facebook', {
+    successRedirect: '/auth/facebook/home',
+    failureRedirect: '/login'
+  })
+);
+
 module.exports = router;
