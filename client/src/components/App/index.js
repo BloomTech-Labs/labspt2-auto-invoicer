@@ -52,7 +52,7 @@ class App extends Component {
   sendWelcomeEmail = user => {
     // send an email object up with user email
     //disable register button
-    axios.post("http://localhost:6060/welcome", { ...user }).then(res => {
+    axios.post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome", { ...user }).then(res => {
       if (res.status === 201) {
         return this.signUpModal();
       } else {
@@ -62,7 +62,7 @@ class App extends Component {
   };
   sendPasswordReset = email => {
     axios
-      .post("http://localhost:6060/password-reset", { ...email })
+      .post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset", { ...email })
       .then(res => {
         console.log(res);
       });
