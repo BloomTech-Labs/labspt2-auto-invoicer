@@ -15,7 +15,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/google/home', passport.authenticate('google'), (req, res) => {
-  res.send('<h1>Its working!</h1>');
+  res.send('<h1>Google Its working!</h1>');
 });
 
 router.get(
@@ -29,5 +29,9 @@ router.get(
     failureRedirect: '/login'
   })
 );
+
+router.get('/facebook/home', passport.authenticate('facebook'), (req, res) => {
+  res.send('<h1>Facebook Its working!</h1>');
+});
 
 module.exports = router;
