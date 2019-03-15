@@ -1,6 +1,6 @@
 // import packages
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 //import styles
 import "./App.css";
 
@@ -18,6 +18,7 @@ import SettingsPage from "../../views/SettingsPage";
 import ForgotPassModal from "../ForgotPassModal";
 
 import InvoiceList from "../../views/InvoiceList";
+import PasswordResetView from "../../views/PasswordResetView";
 
 class App extends Component {
   constructor(props) {
@@ -51,15 +52,21 @@ class App extends Component {
   sendWelcomeEmail = user => {
     // send an email object up with user email
     //disable register button
-    axios.post('http://localhost:5000/welcome', {...user})
+    axios.post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome", { ...user }).then(res => {
+      if (res.status === 201) {
+        return this.signUpModal();
+      } else {
+        // un-disable register button and let user try again.
+      }
+    });
+  };
+  sendPasswordReset = email => {
+    axios
+      .post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset", { ...email })
       .then(res => {
-        if(res.status === 201) {
-          return this.signUpModal();
-        } else {
-          // un-disable register button and let user try again.
-        }
-      })
-  }
+        console.log(res);
+      });
+  };
   render() {
     const { id } = this.state;
     return (
@@ -78,17 +85,20 @@ class App extends Component {
 
         {/* check if sigup clicked and open up signup modal or visa-versa */}
         {this.state.toggleRegister ? (
-          <SignUpModal click={this.signUpModal}
-          welcome={this.sendWelcomeEmail} />
+          <SignUpModal
+            click={this.signUpModal}
+            welcome={this.sendWelcomeEmail}
+          />
         ) : null}
 
         {/* check if password forgot clicked and open up password modal or visa-versa */}
         {this.state.togglePassForgot ? (
           <ForgotPassModal
             click={() => {
-              this.forgotPassModal();
               this.signInModal();
+              this.forgotPassModal();
             }}
+            passwordReset={this.sendPasswordReset}
           />
         ) : null}
         <section className="routes-container">
@@ -109,6 +119,7 @@ class App extends Component {
             )}
           />
           <Route exact path={`/user/${id}/invoices`} component={InvoiceList} />
+          <Route exact path={"/password-reset"} component={PasswordResetView} />
         </section>
       </div>
     );
