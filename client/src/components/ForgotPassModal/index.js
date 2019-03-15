@@ -20,7 +20,6 @@ class ForgotPassModal extends React.Component {
   };
   createResetObject = e => {
     e.preventDefault();
-    alert("it works");
     const reset = this.state.email;
     return this.props.passwordReset({ email: reset });
   };
