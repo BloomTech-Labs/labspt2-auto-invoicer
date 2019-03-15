@@ -33,14 +33,13 @@ const companies = async companyId => {
 const formatData = document => {
   Object.keys(document).forEach(key => {
     if (typeof document[key] === 'string') {
-      document[key] = document[key].toLowerCase();
+    document[key] = document[key].toLowerCase();
     }
   });
   if (document.phone_num) {
     const regx = /\D+/g;
     let formatted = document.phone_num.replace(regx, '');
-    return (document.phone_num =
-      formatted.charAt(0) === '1' ? formatted.slice(1) : formatted);
+    (document.phone_num = formatted.charAt(0) === '1' ? formatted.slice(1) : formatted);
   };
   return document;
 };
@@ -76,6 +75,9 @@ const updateDocumentById = async (documentInput, id, Model) => {
         ...updatedDocument._doc,
         users: users.bind(this, updatedDocument._doc.users),
       };
+    }
+    return {
+      ...updatedDocument._doc
     }
   } catch (err) {
     throw err;
