@@ -16,6 +16,14 @@ functions:
           path: graphql
           method: get
           cors: true
+      - http:
+          path: welcome
+          method: post
+          cors: true
+      - http:
+          path: password-reset
+          method: post
+          cors: true
 
 plugins:
   - serverless-offline
