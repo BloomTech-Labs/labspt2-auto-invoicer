@@ -3,42 +3,50 @@ const { Schema, model } = require('mongoose');
 const companySchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   phone_num: {
     type: String,
-    required: true,
+    required: true
+  },
+  country_code: {
+    type: String,
+    required: true
   },
   address_1: {
     type: String,
-    required: true,
+    required: true
   },
   address_2: {
-    type: String,
+    type: String
   },
   city: {
     type: String,
-    required: true,
+    required: true
   },
   state: {
     type: String,
-    required: true,
+    required: true
   },
   postal_code: {
-    type: Number,
-    required: true,
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
   },
   unlimited_tier: {
     type: Boolean,
-    default: false,
+    default: false
   },
   credits: {
     type: Number,
-    default: 3,
+    default: 3
   },
   users: [
     {
