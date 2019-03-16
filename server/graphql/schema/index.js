@@ -100,7 +100,7 @@ type Country {
   iso2: String!
   dialCode: String!
   priority: Int!
-  format: String!
+  format: String
 }
 
 input CustomerInput {
