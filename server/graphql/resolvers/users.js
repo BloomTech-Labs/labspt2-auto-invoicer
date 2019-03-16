@@ -19,7 +19,7 @@ module.exports = {
   createUser: async args => {
     try {
       const userExists = await User.findOne({
-        email: args.userInput.email,
+        email: args.userInput.email
       });
       if (userExists) {
         throw new Error('Username already exists');
@@ -29,12 +29,12 @@ module.exports = {
         email: args.userInput.email,
         password: hashedPassword,
         name: args.userInput.name,
-        phone_num: args.userInput.phone_num,
+        phone_num: args.userInput.phone_num
       });
       const newUser = await user.save();
       return {
         ...newUser._doc,
-        password: null,
+        password: null
       };
     } catch (err) {
       throw err;
@@ -55,16 +55,16 @@ module.exports = {
         userID,
         {
           $set: {
-            ...updateUser,
-          },
+            ...updateUser
+          }
         },
         {
-          new: true,
+          new: true
         }
       );
       return {
         ...updatedUser._doc,
-        password: null,
+        password: null
       };
     } catch (error) {
       throw error;
@@ -86,10 +86,10 @@ module.exports = {
       const userDetails = await user.save();
       return {
         ...companyDetails._doc,
-        ...userDetails._doc,
+        ...userDetails._doc
       };
     } catch (error) {
       throw error;
     }
-  },
+  }
 };
