@@ -197,9 +197,14 @@ type RootMutation {
   editCompany(companyInput: EditCompanyInput!, id: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
   updateCustomer(_id: ID!, customerUpdate: EditCustomerInput!) : Customer
+<<<<<<< HEAD
 >>>>>>> corrected the data types in customer, user, company
   addUserToCompany(userID: ID!, companyID: ID!): Company
   createInvoice(invoiceInput: InvoiceInput!): Invoice
+=======
+  addUserToCompany(userID: ID!, companyID: ID!): User
+  addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
+>>>>>>> corrected addUserToCompany, so that it returns the user
 }
 
 schema {
