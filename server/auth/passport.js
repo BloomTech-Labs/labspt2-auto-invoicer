@@ -3,6 +3,8 @@ const GoogleStrategy = require('passport-google-oauth20');
 const User = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const StripeStrategy = require('passport-stripe').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -81,3 +83,25 @@ passport.use(
     }
   )
 );
+
+passport.use( 
+  new JwtStrategy(
+    {
+  jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey = process.env.JWT_SECRET_KEY
+}, async (jwt_payload, done) => {
+  const {id, name, password, email } = jwt_payload.user;
+  const currentUser = await User.findById(id);
+  if(currentUser){
+    done(null, currentUser);
+  } else {
+    const newUser = await new User({
+      email,
+      password,
+      name
+    }).save();
+    done(null, newUser);
+  }
+}
+)
+)
