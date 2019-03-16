@@ -90,9 +90,9 @@ passport.use(
   jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey = process.env.JWT_SECRET_KEY
 }, async (jwt_payload, done) => {
-  const {id, name, password, email } = jwt_payload.user;
-  const currentUser = await User.findById(id);
-  if(currentUser){
+  const {id, name, password, email } = jwt_payload.user;  
+  if(id){
+    const currentUser = await User.findById(id);
     done(null, currentUser);
   } else {
     const newUser = await new User({
