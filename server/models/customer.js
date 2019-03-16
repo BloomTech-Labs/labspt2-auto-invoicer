@@ -22,6 +22,12 @@ const customerSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Company'
     }
+  ],
+  invoices: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Invoice'
+    }
   ]
 });
 

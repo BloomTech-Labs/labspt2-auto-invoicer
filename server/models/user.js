@@ -22,6 +22,12 @@ const userSchema = new Schema(
         ref: 'Company'
       }
     ],
+    invoices: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Invoice'
+      }
+    ],
     google: {
       googleId: String,
       picture: String,
