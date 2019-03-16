@@ -77,7 +77,7 @@ passport.use(
       callbackURL: 'https://auto-invoicer.netlify.com'
     },
     async (accessToken, refreshToken, stripe_properties, done) => {
-      console.log(stripe_properties);
+      console.log(stripe_properties, accessToken);
     }
   )
 );
