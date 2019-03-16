@@ -163,6 +163,11 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
         };
       });
     }
+    return documents.map(document => {
+      return {
+        ...document._doc
+      };
+    });
   } catch (err) {
     throw err;
   }
@@ -190,6 +195,9 @@ const findDocumentById = async (documentId, Model) => {
         invoices: invoices.bind(this, document._doc.invoices)
       };
     }
+    return {
+      ...document.doc
+    };
   } catch (err) {
     throw err;
   }
@@ -221,6 +229,11 @@ const findAllDocuments = async Model => {
         };
       });
     }
+    return documents.map(document => {
+      return {
+        ...document._doc
+      };
+    });
   } catch (err) {
     throw err;
   }
