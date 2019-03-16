@@ -30,8 +30,10 @@ module.exports = {
       const newInvoice = await invoice.save();
       user.invoices.push(newInvoice._doc._id);
       company.invoices.push(newInvoice._doc._id);
+      customer.invoices.push(newInvoice._doc._id);
       await user.save();
       await company.save();
+      await customer.save();
       return {
         ...newInvoice._doc
       };
