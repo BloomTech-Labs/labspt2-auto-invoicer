@@ -27,6 +27,9 @@ const userSchema = new Schema(
       picture: String,
       gender: String,
       locale: String
+    },
+    facebook: {
+      facebookId: String
     }
   },
   { timestamps: true }
