@@ -85,7 +85,6 @@ module.exports = {
       const companyDetails = await company.save();
       const userDetails = await user.save();
       return {
-        ...companyDetails._doc,
         ...userDetails._doc,
       };
     } catch (error) {

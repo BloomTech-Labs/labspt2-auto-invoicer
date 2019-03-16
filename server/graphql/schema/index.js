@@ -189,7 +189,8 @@ type RootMutation {
   editCompany(companyInput: EditCompanyInput!, id: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
   updateCustomer(_id: ID!, customerUpdate: EditCustomerInput!) : Customer
-  addUserToCompany(userID: ID!, companyID: ID!): Company
+  addUserToCompany(userID: ID!, companyID: ID!): User
+  addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
 }
 
 schema {
