@@ -1,5 +1,6 @@
 const Company = require('../../models/company');
 const User = require('../../models/user');
+const Customer = require('../../models/customer');
 
 const users = async userId => {
   try {
@@ -23,6 +24,21 @@ const companies = async companyId => {
       return {
         ...company._doc,
         users: users.bind(this, company._doc.users),
+        customers: customers.bind(this, company._doc.customers),
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+const customers = async customerId => {
+  try {
+    const fetchedCustomers = await Customer.find({ _id: { $in: customerId } });
+    return fetchedCustomers.map(customer => {
+      return {
+        ...customer._doc,
+        companies: companies.bind(this, customer._doc.companies),
       };
     });
   } catch (err) {
@@ -33,14 +49,15 @@ const companies = async companyId => {
 const formatData = document => {
   Object.keys(document).forEach(key => {
     if (typeof document[key] === 'string') {
-    document[key] = document[key].toLowerCase();
+      document[key] = document[key].toLowerCase();
     }
   });
   if (document.phone_num) {
     const regx = /\D+/g;
-    let formatted = document.phone_num.replace(regx, '');
-    (document.phone_num = formatted.charAt(0) === '1' ? formatted.slice(1) : formatted);
-  };
+    const formatted = document.phone_num.replace(regx, '');
+    document.phone_num =
+      formatted.charAt(0) === '1' ? formatted.slice(1) : formatted;
+  }
   return document;
 };
 
@@ -61,10 +78,10 @@ const updateDocumentById = async (documentInput, id, Model) => {
       {
         $set: { ...documentInput },
       },
-      { new: true },
+      { new: true }
     );
     const documentType = Model.modelName;
-    if (documentType === 'User') {
+    if (documentType === 'User' || documentType === 'Customer') {
       return {
         ...updatedDocument._doc,
         companies: companies.bind(this, updatedDocument._doc.companies),
@@ -74,10 +91,11 @@ const updateDocumentById = async (documentInput, id, Model) => {
       return {
         ...updatedDocument._doc,
         users: users.bind(this, updatedDocument._doc.users),
+        customers: customers.bind(this, updatedDocument._doc.customers),
       };
     }
     return {
-      ...updatedDocument._doc
+      ...updatedDocument._doc,
     };
   } catch (err) {
     throw err;
@@ -107,7 +125,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
       $or: validFields,
     });
     const documentType = Model.modelName;
-    if (documentType === 'User') {
+    if (documentType === 'User' || documentType === 'Customer') {
       return documents.map(document => {
         return {
           ...document._doc,
@@ -120,6 +138,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
         return {
           ...document._doc,
           users: users.bind(this, document._doc.users),
+          customers: customers.bind(this, document._doc.customers),
         };
       });
     }
@@ -135,14 +154,18 @@ const findDocumentById = async (documentId, Model) => {
     if (!document) {
       throw new Error(`${documentType} with the specified ID does not exist.`);
     }
-    if (documentType === 'User') {
+    if (documentType === 'User' || documentType === 'Customer') {
       return {
         ...document._doc,
         companies: companies.bind(this, document._doc.companies),
       };
     }
     if (documentType === 'Company') {
-      return { ...document._doc, users: users.bind(this, document._doc.users) };
+      return {
+        ...document._doc,
+        users: users.bind(this, document._doc.users),
+        customers: customers.bind(this, document._doc.customers),
+      };
     }
   } catch (err) {
     throw err;
@@ -156,7 +179,7 @@ const findAllDocuments = async Model => {
     if (!documents.length) {
       throw new Error(`${documentType} does not exist.`);
     }
-    if (documentType === 'User') {
+    if (documentType === 'User' || documentType === 'Customer') {
       return documents.map(document => {
         return {
           ...document._doc,
@@ -169,6 +192,7 @@ const findAllDocuments = async Model => {
         return {
           ...document._doc,
           users: users.bind(this, document._doc.users),
+          customers: customers.bind(this, document._doc.customers),
         };
       });
     }

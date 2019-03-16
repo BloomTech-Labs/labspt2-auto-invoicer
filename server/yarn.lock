@@ -1062,6 +1062,11 @@ cors@^2.8.5:
     object-assign "^4"
     vary "^1"
 
+country-telephone-data@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/country-telephone-data/-/country-telephone-data-0.6.0.tgz#98711d3b2a692f7558f6ec74f88314c060daf39d"
+  integrity sha512-cscLBeYt+Xo3VNc2H22oJz1oAGMBGP7ymWRSRUzl2oDZSIhjuhSF59RcpWtsz1nCsocrHSpH9dRrf0UiQiISeg==
+
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
