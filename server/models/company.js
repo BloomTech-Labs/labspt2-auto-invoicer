@@ -12,6 +12,13 @@ const companySchema = new Schema({
   phone_num: {
     type: String,
     required: true
+<<<<<<< HEAD
+=======
+  },
+  country_code: {
+    type: String,
+    required: true
+>>>>>>> corrected the fields in the Company schema
   },
   address_1: {
     type: String,
@@ -29,7 +36,11 @@ const companySchema = new Schema({
     required: true
   },
   postal_code: {
-    type: Number,
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
     required: true
   },
   unlimited_tier: {
