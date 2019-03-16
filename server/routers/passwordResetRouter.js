@@ -7,7 +7,7 @@ require("dotenv").config();
 
 router.post("/", (req, res) => {
   // Send an email:
-  const client = new postmark.ServerClient(process.env.postmark_api);
+  const client = new postmark.ServerClient(process.env.POSTMARK_API);
   const { email } = req.body;
   let browser_name, browser_version, browser_os;
   // get browser info
