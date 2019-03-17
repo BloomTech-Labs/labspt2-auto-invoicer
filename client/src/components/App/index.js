@@ -52,20 +52,27 @@ class App extends Component {
   sendWelcomeEmail = user => {
     // send an email object up with user email
     //disable register button
-    axios.post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome", { ...user }).then(res => {
-      if (res.status === 201) {
-        return this.signUpModal();
-      } else {
-        // un-disable register button and let user try again.
-      }
-    });
+    /* =======================================================
+     ** commented to save api calls *========================================================== */
+    // axios.post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome", { ...user }).then(res => {
+    //   if (res.status === 201) {
+    //     return this.signUpModal();
+    //   } else {
+    //     // un-disable register button and let user try again.
+    //   }
+    // });
   };
   sendPasswordReset = email => {
-    axios
-      .post("https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset", { ...email })
-      .then(res => {
-        console.log(res);
-      });
+    /* =======================================================
+     ** commented to save api calls *========================================================== */
+    // axios
+    //   .post(
+    //     "https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset",
+    //     { ...email }
+    //   )
+    //   .then(res => {
+    //     console.log(res);
+    //   });
   };
   render() {
     const { id } = this.state;
