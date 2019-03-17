@@ -21,6 +21,7 @@ const authorize = require("./middleware/isAuth");
 // welcome email router
 const welcomeRouter = require("./routers/welcomeRouter");
 const passwordResetRouter = require("./routers/passwordResetRouter");
+const taxRateRouter = require("./routers/taxRateRouter");
 
 app.use(express.json(), cors(), helmet());
 // app.use(authorize)
@@ -38,6 +39,7 @@ app.use(passport.session());
 app.use("/auth", authRouter);
 app.use("/welcome", welcomeRouter);
 app.use("/password-reset", passwordResetRouter);
+app.use("/taxes", taxRateRouter);
 app.use(
   "/graphql",
   graphqlHttp({
