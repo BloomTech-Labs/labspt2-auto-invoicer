@@ -83,9 +83,13 @@ export default class index extends Component {
   // get tax rate object from api
   getTaxRateObject(zip) {
     if (zip) {
-      axios.get(`http://localhost:6060/taxes/${zip}`).then(res => {
-        this.setState({ tax: res.data.rate.combined_rate });
-      });
+      axios
+        .get(
+          `https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/taxes/${zip}`
+        )
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
     }
   }
   //ZipcodeApi Function
