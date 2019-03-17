@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const User = require('../models/user');
 require('./passport');
 
 router.get(
@@ -48,7 +49,7 @@ router.post(
   '/local',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    res.send(req.user.profile);
+    res.send(req.user);
   }
 );
 
