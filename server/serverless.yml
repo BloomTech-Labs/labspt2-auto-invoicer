@@ -24,6 +24,14 @@ functions:
           path: password-reset
           method: post
           cors: true
+      - http:
+          path: taxes/{zip}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                zip: true
 
 plugins:
   - serverless-offline
