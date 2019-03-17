@@ -6,10 +6,8 @@ import "./LandingText.css";
 const LandingText = props => {
   return (
     <p className="landing_text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae
-      vehicula arcu, vitae congue nulla. Mauris convallis luctus nunc sit amet
-      vulputate. Cras quis scelerisque dui. Nullam vitae dui nec mauris pulvinar
-      eleifend. 
+      Auto-Invoicer helps small buisnesses generate high quality PDF invoices and track them.
+      Click Buy Now to sign up for 3 free credits to create an invoice. Buisnesses can buy further credits or pay a subscription for unlimited credits. 
     </p>
   );
 };
