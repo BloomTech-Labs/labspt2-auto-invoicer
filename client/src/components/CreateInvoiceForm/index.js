@@ -5,13 +5,15 @@ import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
-import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
+//import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
+import DayPickerInput from "react-day-picker/DayPickerInput";
 
 // InvoiceItemInput
 import InvoiceItemInput from "../InvoiceItemsInput";
 
 //CSS
 import "./CreateInvoiceForm.css";
+import "react-day-picker/lib/style.css";
 
 export default class index extends Component {
   //State from sub-components held here
@@ -25,7 +27,6 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-
       languageOptions: ["English (US)", "Español"],
       languageSelection: "",
       currencyOptions: [
@@ -37,7 +38,7 @@ export default class index extends Component {
         "Thai Baht (THB)"
       ],
       currencySelection: "",
-      date: "",
+      selectedDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -65,7 +66,7 @@ export default class index extends Component {
     this.handleCurrencySelectionChange = this.handleCurrencySelectionChange.bind(
       this
     );
-    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleSelectedDateChange = this.handleSelectedDateChange.bind(this);
     this.handleBalanceDueChange = this.handleBalanceDueChange.bind(this);
     this.handleInvoiceNotesChange = this.handleInvoiceNotesChange.bind(this);
     this.handleInvoiceTermsChange = this.handleInvoiceTermsChange.bind(this);
@@ -148,8 +149,8 @@ export default class index extends Component {
     this.setState({ currencySelection: e.target.value });
   }
 
-  handleDateChange(e) {
-    this.setState({ date: e.target.value });
+  handleSelectedDateChange(day) {
+    this.setState({ selectedDate: day });
   }
 
   handleBalanceDueChange(e) {
@@ -223,10 +224,9 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-
       languageSelection: "",
       currencySelection: "",
-      date: "",
+      selectedDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -251,10 +251,9 @@ export default class index extends Component {
       stateRegionTo: this.state.stateRegionTo,
       zipCodeTo: this.state.zipCodeTo,
       clientEmailTo: this.state.clientEmailTo,
-
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
-      date: this.state.date,
+      selectedDate: this.state.selectedDate,
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
@@ -409,30 +408,24 @@ export default class index extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
-                  <CalendarDatePicker />
-
-                  {/* <SingleInput
-                    inputType={"text"}
-                    //title={"Date"}
-                    name={"name"}
-                    controlFunc={this.handleDateChange}
-                    content={this.state.date}
-                    placeholder={"Enter Date"}
-                  /> */}
+                  {/* <CalendarDatePicker /> */}
+                  <div>
+                    {this.state.selectedDate && (
+                      <p>
+                        Date: {this.state.selectedDate.toLocaleDateString()}
+                      </p>
+                    )}
+                    {!this.state.selectedDate && <p>Enter a Date</p>}
+                    <DayPickerInput
+                      onDayChange={this.handleSelectedDateChange}
+                    />
+                  </div>
                 </form>
               </div>
               <div>
                 <form>
                   <div>Invoice Due</div>
-                  <CalendarDatePicker />
-
-                  {/* <Select
-                    name={"invoiceDueRange"}
-                    placeholder={"Choose Invoice Due Date"}
-                    controlFunc={this.handleInvoiceDueSelectionChange}
-                    options={this.state.invoiceDueOptions}
-                    selectedOption={this.state.invoiceDueSelection}
-                  /> */}
+                  {/* <CalendarDatePicker /> */}
                 </form>
               </div>
               <div>
