@@ -1,4 +1,6 @@
-const { buildSchema } = require('graphql');
+const {
+  buildSchema
+} = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -177,7 +179,7 @@ type RootQuery {
   companies: [Company!]!
   company(companyID: ID!): Company!
   customers: [Customer!]!
-  customer(_id:ID!): Customer!
+  customer(customerID: ID!): Customer!
   countries: [Country!]!
   country(name: String, iso2: String): Country!
   invoices: [Invoice!]!
@@ -185,27 +187,14 @@ type RootQuery {
 
 type RootMutation {
   createUser(userInput: UserInput!): User
-<<<<<<< HEAD
-  editUser(userID: ID!, updateUser: UserUpdate!): User
+  editUser(userID: ID!, editUserInput: EditUserInput!) : User
   createCompany(companyInput: CompanyInput!): Company
-  editCompany(companyInput: EditCompanyInput!, id: ID!): Company
+  editCompany(editCompanyInput: EditCompanyInput!, companyID: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
-  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!): Customer
-=======
-  editUser(userID: ID!, updateUser: EditUserInput!) : User
-  createCompany(companyInput: CompanyInput!): Company
-  editCompany(companyInput: EditCompanyInput!, id: ID!): Company
-  createCustomer(customerInput: CustomerInput!): Customer
-  updateCustomer(_id: ID!, customerUpdate: EditCustomerInput!) : Customer
-<<<<<<< HEAD
->>>>>>> corrected the data types in customer, user, company
+  editCustomer(customerID: ID!, editCustomerInput: EditCustomerInput!) : Customer
   addUserToCompany(userID: ID!, companyID: ID!): Company
-  createInvoice(invoiceInput: InvoiceInput!): Invoice
-=======
-  addUserToCompany(userID: ID!, companyID: ID!): User
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
->>>>>>> corrected addUserToCompany, so that it returns the user
-}
+  createInvoice(invoiceInput: InvoiceInput!): Invoice
 
 schema {
   query: RootQuery
