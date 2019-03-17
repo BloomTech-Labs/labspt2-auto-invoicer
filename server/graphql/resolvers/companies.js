@@ -8,29 +8,42 @@ const {
   findAllDocuments,
 } = require('../helpers');
 
+const {
+  formatData
+} = require('../helpers/format')
+
 module.exports = {
-  company: ({ companyID }) => {
+  company: ({
+    companyID
+  }) => {
     return findDocumentById(companyID, Company);
   },
-  companyByAnyField: ({ companyInput }) => {
+  companyByAnyField: ({
+    companyInput
+  }) => {
     return findDocumentsByAnyField(companyInput, Company);
   },
   companies: () => {
     return findAllDocuments(Company);
   },
-  createCompany: async ({ companyInput }) => {
+  createCompany: async args => {
+    formatData(args.companyInput);
     try {
       const {
         name,
         email,
         phone_num,
+        country_code,
         address_1,
         address_2,
         city,
         state,
         postal_code,
-      } = companyInput;
-      const companyExists = await Company.findOne({ name });
+        country
+      } = args.companyInput;
+      const companyExists = await Company.findOne({
+        email
+      });
       if (companyExists) {
         throw new Error('This company already exists!');
       }
@@ -38,11 +51,13 @@ module.exports = {
         name,
         email,
         phone_num,
+        country_code,
         address_1,
         address_2,
         city,
         state,
         postal_code,
+        country
         // users: '5c88bec6c5cf5c186025a084',
       });
       const newCompany = await company.save();
@@ -52,12 +67,17 @@ module.exports = {
       // }
       // user.companies.push(company);
       // await user.save();
-      return { ...newCompany._doc };
+      return {
+        ...newCompany._doc
+      };
     } catch (err) {
       throw err;
     }
   },
-  editCompany: ({ companyInput, id }) => {
-    return updateDocumentById(companyInput, id, Company);
+  editCompany: ({
+    editCompanyInput,
+    companyID
+  }) => {
+    return updateDocumentById(editCompanyInput, companyID, Company);
   },
 };

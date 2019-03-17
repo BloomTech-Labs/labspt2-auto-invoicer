@@ -6,30 +6,53 @@ const {
   findDocumentById,
   findAllDocuments,
   updateDocumentById,
-  formatData
 } = require('../helpers');
+
+const {
+  formatData
+} = require('../helpers/format')
 
 module.exports = {
   customers: () => {
     return findAllDocuments(Customer);
   },
-  customer: ({ customerID }) => {
+  customer: ({
+    customerID
+  }) => {
     return findDocumentById(customerID, Customer);
   },
   createCustomer: async args => {
+    formatData(args.customerInput);
     try {
+      const {
+        name,
+        email,
+        phone_num,
+        country_code,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code,
+        country
+      } = args.customerInput
       const customerExists = await Customer.findOne({
-        email: args.customerInput.email
+        email
       });
       if (customerExists) {
         throw new Error('Customer already exists');
       }
-      formatData(args.customerInput);
       const customer = new Customer({
-        name: args.customerInput.name,
-        address: args.customerInput.address,
-        email: args.customerInput.email,
-        phone_num: args.customerInput.phone_num
+        name,
+        email,
+        phone_num,
+        country_code,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code,
+        country
       });
       const newCustomer = await customer.save();
       return {
@@ -39,10 +62,16 @@ module.exports = {
       throw error;
     }
   },
-  updateCustomer: async args => {
-    return updateDocumentById(args.customerUpdate, args._id, Customer);
+  editCustomer: async ({
+    editCustomerInput,
+    customerID
+  }) => {
+    return updateDocumentById(editCustomerInput, customerID, Customer);
   },
-  addCustomerToCompany: async ({ customerID, companyID }) => {
+  addCustomerToCompany: async ({
+    customerID,
+    companyID
+  }) => {
     try {
       const company = await Company.findById(companyID);
       const customer = await Customer.findById(customerID);
