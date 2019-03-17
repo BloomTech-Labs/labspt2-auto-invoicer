@@ -1,4 +1,6 @@
-const { buildSchema } = require('graphql');
+const {
+  buildSchema
+} = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -177,18 +179,18 @@ type RootQuery {
   companies: [Company!]!
   company(companyID: ID!): Company!
   customers: [Customer!]!
-  customer(_id:ID!): Customer!
+  customer(customerID: ID!): Customer!
   countries: [Country!]!
   country(name: String, iso2: String): Country!
 }
 
 type RootMutation {
   createUser(userInput: UserInput!): User
-  editUser(userID: ID!, updateUser: EditUserInput!) : User
+  editUser(userID: ID!, editUserInput: EditUserInput!) : User
   createCompany(companyInput: CompanyInput!): Company
-  editCompany(companyInput: EditCompanyInput!, id: ID!): Company
+  editCompany(editCompanyInput: EditCompanyInput!, companyID: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
-  updateCustomer(_id: ID!, customerUpdate: EditCustomerInput!) : Customer
+  editCustomer(customerID: ID!, editCustomerInput: EditCustomerInput!) : Customer
   addUserToCompany(userID: ID!, companyID: ID!): User
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
 }
