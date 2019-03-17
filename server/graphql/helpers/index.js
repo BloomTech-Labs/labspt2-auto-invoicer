@@ -2,9 +2,17 @@ const Company = require('../../models/company');
 const User = require('../../models/user');
 const Customer = require('../../models/customer');
 
+const {
+  formatData
+} = require('./format')
+
 const users = async userId => {
   try {
-    const fetchedUsers = await User.find({ _id: { $in: userId } });
+    const fetchedUsers = await User.find({
+      _id: {
+        $in: userId
+      }
+    });
     return fetchedUsers.map(user => {
       return {
         ...user._doc,
@@ -19,7 +27,11 @@ const users = async userId => {
 
 const companies = async companyId => {
   try {
-    const fetchedCompanies = await Company.find({ _id: { $in: companyId } });
+    const fetchedCompanies = await Company.find({
+      _id: {
+        $in: companyId
+      }
+    });
     return fetchedCompanies.map(company => {
       return {
         ...company._doc,
@@ -34,7 +46,11 @@ const companies = async companyId => {
 
 const customers = async customerId => {
   try {
-    const fetchedCustomers = await Customer.find({ _id: { $in: customerId } });
+    const fetchedCustomers = await Customer.find({
+      _id: {
+        $in: customerId
+      }
+    });
     return fetchedCustomers.map(customer => {
       return {
         ...customer._doc,
@@ -44,21 +60,6 @@ const customers = async customerId => {
   } catch (err) {
     throw err;
   }
-};
-
-const formatData = document => {
-  Object.keys(document).forEach(key => {
-    if (typeof document[key] === 'string') {
-      document[key] = document[key].toLowerCase();
-    }
-  });
-  if (document.phone_num) {
-    const regx = /\D+/g;
-    const formatted = document.phone_num.replace(regx, '');
-    document.phone_num =
-      formatted.charAt(0) === '1' ? formatted.slice(1) : formatted;
-  }
-  return document;
 };
 
 const updateDocumentById = async (documentInput, id, Model) => {
@@ -74,11 +75,13 @@ const updateDocumentById = async (documentInput, id, Model) => {
     });
     formatData(documentInput);
     const updatedDocument = await Model.findByIdAndUpdate(
-      id,
-      {
-        $set: { ...documentInput },
-      },
-      { new: true }
+      id, {
+        $set: {
+          ...documentInput
+        },
+      }, {
+        new: true
+      }
     );
     const documentType = Model.modelName;
     if (documentType === 'User' || documentType === 'Customer') {
@@ -112,7 +115,9 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
     const value = Object.values(documentInput)[0];
     const fields = Object.keys(Model.schema.paths).map(field => {
       if (Model.schema.path(field).instance.toLowerCase() === typeof value) {
-        return { [field]: value };
+        return {
+          [field]: value
+        };
       }
     });
     const validFields = [];
@@ -206,5 +211,4 @@ module.exports = {
   findDocumentsByAnyField,
   findDocumentById,
   findAllDocuments,
-  formatData,
 };
