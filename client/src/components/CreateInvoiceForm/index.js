@@ -5,7 +5,6 @@ import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
-//import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 
 // InvoiceItemInput
@@ -39,6 +38,7 @@ export default class index extends Component {
       ],
       currencySelection: "",
       selectedDate: undefined,
+      invoiceDueDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -67,6 +67,9 @@ export default class index extends Component {
       this
     );
     this.handleSelectedDateChange = this.handleSelectedDateChange.bind(this);
+    this.handleInvoiceDueDateChange = this.handleInvoiceDueDateChange.bind(
+      this
+    );
     this.handleBalanceDueChange = this.handleBalanceDueChange.bind(this);
     this.handleInvoiceNotesChange = this.handleInvoiceNotesChange.bind(this);
     this.handleInvoiceTermsChange = this.handleInvoiceTermsChange.bind(this);
@@ -153,6 +156,10 @@ export default class index extends Component {
     this.setState({ selectedDate: day });
   }
 
+  handleInvoiceDueDateChange(day) {
+    this.setState({ invoiceDueDate: day });
+  }
+
   handleBalanceDueChange(e) {
     this.setState({ balanceDue: e.target.value });
   }
@@ -210,7 +217,6 @@ export default class index extends Component {
         { item: "", quantity: "", rate: "", amount: "" }
       ]
     }));
-    console.log(this.state.invoiceItems);
   };
 
   //submission - Clear Form
@@ -227,6 +233,7 @@ export default class index extends Component {
       languageSelection: "",
       currencySelection: "",
       selectedDate: undefined,
+      invoiceDueDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -254,6 +261,7 @@ export default class index extends Component {
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
       selectedDate: this.state.selectedDate,
+      invoiceDueDate: this.state.invoiceDueDate,
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
@@ -272,7 +280,6 @@ export default class index extends Component {
   }
 
   render() {
-    // console.log(zipCodeTo,"render")
     return (
       <div>
         Create Invoice Form.
@@ -408,16 +415,11 @@ export default class index extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
-                  {/* <CalendarDatePicker /> */}
+
                   <div>
-                    {this.state.selectedDate && (
-                      <p>
-                        Date: {this.state.selectedDate.toLocaleDateString()}
-                      </p>
-                    )}
-                    {!this.state.selectedDate && <p>Enter a Date</p>}
                     <DayPickerInput
                       onDayChange={this.handleSelectedDateChange}
+                      placeholder="Today's Date"
                     />
                   </div>
                 </form>
@@ -425,7 +427,13 @@ export default class index extends Component {
               <div>
                 <form>
                   <div>Invoice Due</div>
-                  {/* <CalendarDatePicker /> */}
+
+                  <div>
+                    <DayPickerInput
+                      onDayChange={this.handleInvoiceDueDateChange}
+                      placeholder="Invoice Due Date"
+                    />
+                  </div>
                 </form>
               </div>
               <div>
