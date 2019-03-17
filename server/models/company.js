@@ -12,13 +12,10 @@ const companySchema = new Schema({
   phone_num: {
     type: String,
     required: true
-<<<<<<< HEAD
-=======
   },
   country_code: {
     type: String,
     required: true
->>>>>>> corrected the fields in the Company schema
   },
   address_1: {
     type: String,
