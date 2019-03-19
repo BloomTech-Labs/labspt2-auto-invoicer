@@ -80,6 +80,18 @@ export default class index extends Component {
 
   //create invoiceObject to send back to server
 
+  // get tax rate object from api
+  getTaxRateObject(zip) {
+    if (zip) {
+      axios
+        .get(
+          `https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/taxes/${zip}`
+        )
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
+    }
+  }
   //ZipcodeApi Function
 
   zipcodeApiAutofill() {
@@ -101,13 +113,14 @@ export default class index extends Component {
             cityTo: res.data.city,
             stateRegionTo: res.data.state
           });
+
+          return this.getTaxRateObject(zipcode);
         })
         .catch(error => {
           console.log("Server Error", error);
         });
     } else {
-      this.setState({ cityTo: "" });
-      this.setState({ stateRegionTo: "" });
+      this.setState({ cityTo: "", stateRegionTo: "", tax: "" });
     }
   }
   //individual invoice items
@@ -267,8 +280,7 @@ export default class index extends Component {
       amountPaid: this.state.amountPaid
     };
 
-    console.log("Invoice Data Object:", formPayload);
-    //this.props.click(formPayload);
+    this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
@@ -521,14 +533,9 @@ export default class index extends Component {
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
                     <div>Tax</div>
-                    <SingleInput
-                      inputType={"integer"}
-                      //title={"Tax"}
-                      name={"name"}
-                      controlFunc={this.handleTaxChange}
-                      content={this.state.tax}
-                      placeholder={"Tax"}
-                    />
+                    <div>
+                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
+                    </div>
                   </form>
                 </div>
                 <div>
