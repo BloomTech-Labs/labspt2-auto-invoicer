@@ -92,13 +92,6 @@ const updateDocumentById = async (documentInput, id, Model) => {
     });
     formatData(documentInput);
     const updatedDocument = await Model.findByIdAndUpdate(
-<<<<<<< HEAD
-      id,
-      {
-        $set: { ...documentInput }
-      },
-      { new: true }
-=======
       id, {
         $set: {
           ...documentInput
@@ -106,7 +99,6 @@ const updateDocumentById = async (documentInput, id, Model) => {
       }, {
         new: true
       }
->>>>>>> put the format function into its own file
     );
     const documentType = Model.modelName;
     if (documentType === 'User' || documentType === 'Customer') {
@@ -257,9 +249,5 @@ module.exports = {
   findDocumentsByAnyField,
   findDocumentById,
   findAllDocuments,
-<<<<<<< HEAD
   formatData
 };
-=======
-};
->>>>>>> put the format function into its own file
