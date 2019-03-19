@@ -1,13 +1,13 @@
 import React from "react";
 import { render } from "react-testing-library";
 import { BrowserRouter as Router } from "react-router-dom";
-import InvoiceList from "../InvoiceList";
+import AuthLanding from "../AuthLanding";
 
-describe("<InvoiceList />", () => {
-  it("renders Invoice List view", () => {
+describe("<AuthLanding />", () => {
+  it("renders Auth Landing components", () => {
     render(
       <Router>
-        <InvoiceList />
+        <AuthLanding />
       </Router>
     );
   });
