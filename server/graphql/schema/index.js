@@ -8,6 +8,7 @@ type User {
   name: String!
   phone_num: String!
   companies: [Company!]
+  invoices: [Invoice!]
 }
 
 type Company {
@@ -24,22 +25,19 @@ type Company {
   credits: Int!
   users: [User!]!
   customers: [Customer!]
+  invoices: [Invoice!]
 }
 
 type Invoice {
   _id: ID!
-  invoice_num: Int!
-  company: [Company!]!
-  customer: [Customer!]!
-  items: [Item!]!
-  due_date: String!
-  subtotal: Float!
-  discount: Float!
-  shipping: Float!
-  tax: Float!
-  total_cost: Float!
-  paid: Boolean!
-  archive: Boolean!
+  createdBy: ID!
+  invoice_num: String!
+  company_id: ID!
+  customer_id: ID!
+}
+
+input InvoiceInput {
+  invoice_num: String!
 }
 
 type Item {
@@ -88,6 +86,7 @@ type Customer {
   email: String!
   phone_num: String!
   companies: [Company!]!
+  invoices: [Invoice!]
 }
 
 type AuthData {
@@ -137,16 +136,18 @@ type RootQuery {
   customer(_id:ID!): Customer!
   countries: [Country!]!
   country(name: String, iso2: String): Country!
+  invoices: [Invoice!]!
 }
 
 type RootMutation {
   createUser(userInput: UserInput!): User
-  editUser(userID: ID!, updateUser: UserUpdate!) : User
+  editUser(userID: ID!, updateUser: UserUpdate!): User
   createCompany(companyInput: CompanyInput!): Company
   editCompany(companyInput: EditCompanyInput!, id: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
-  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!) : Customer
+  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!): Customer
   addUserToCompany(userID: ID!, companyID: ID!): Company
+  createInvoice(invoiceInput: InvoiceInput!): Invoice
 }
 
 schema {
