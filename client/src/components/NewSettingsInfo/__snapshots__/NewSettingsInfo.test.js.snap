@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewSettingsInfo /> renders New Settings Info 1`] = `
+<DocumentFragment>
+  <fieldset
+    class="settings_info"
+  >
+    <input
+      name="email"
+      placeholder="Email Address"
+      type="email"
+      value="testing@gmail.com"
+    />
+    <input
+      name="oldPassword"
+      placeholder="Old Password"
+      type="password"
+      value="testing1"
+    />
+    <input
+      name="newPassword"
+      placeholder="New Password"
+      type="password"
+      value="testing2"
+    />
+    <input
+      name="confirmPassword"
+      placeholder="Confirm Password"
+      type="password"
+      value="testing2"
+    />
+    <button
+      class="button"
+      type="submit"
+    >
+      save
+    </button>
+    <p>
+      Password must contain at least 8 charachters
+    </p>
+  </fieldset>
+</DocumentFragment>
+`;

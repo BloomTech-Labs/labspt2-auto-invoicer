@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthLanding /> renders Auth Landing components 1`] = `
+<DocumentFragment>
+  <ul
+    class="auth-container"
+  >
+    <button
+      class="authentication-btns"
+    >
+      Sign Up
+    </button>
+    <button
+      class="authentication-btns"
+    >
+      Sign In
+    </button>
+  </ul>
+</DocumentFragment>
+`;

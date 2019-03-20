@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InvoiceList /> renders Invoice List view 1`] = `
+<DocumentFragment>
+  <section
+    class="invoice-list-container"
+  >
+    <h1>
+      Invoices
+    </h1>
+    <section>
+      <section
+        class="invoices-container"
+      >
+        <article
+          class="invoice-card late"
+        >
+          <h3>
+            1234567
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </article>
+        <article
+          class="invoice-card paid"
+        >
+          <h3>
+            1234568383
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </article>
+        <article
+          class="invoice-card late"
+        >
+          <h3>
+            1234568383
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </article>
+        <article
+          class="invoice-card paid"
+        >
+          <h3>
+            1234568383
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </article>
+        <article
+          class="invoice-card current"
+        >
+          <h3>
+            1234568383
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </article>
+        : 
+        <a
+          href="/user/1/invoice/create"
+        >
+          <article
+            class="invoice-card add-invoice"
+          >
+            <h3>
+              New Invoice
+            </h3>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root-1 add-icon"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+              />
+            </svg>
+          </article>
+        </a>
+      </section>
+    </section>
+  </section>
+</DocumentFragment>
+`;

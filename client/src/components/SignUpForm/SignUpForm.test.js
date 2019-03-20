@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-testing-library";
+import "jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import SignUpForm from "../SignUpForm";
 import { createStore } from "redux";
@@ -8,10 +9,11 @@ const store = createStore(rootReducer);
 
 describe("<SignUpForm />", () => {
   it("renders Sign Up Form Component", () => {
-    render(
+    const { asFragment } = render(
       <Provider store={store}>
         <SignUpForm />
       </Provider>
     );
+    expect(asFragment()).toMatchSnapshot();
   });
 });
