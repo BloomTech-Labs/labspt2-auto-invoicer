@@ -1,7 +1,6 @@
 import React from "react";
-//import moment from "moment";
 import AnotherButton from "../reusableComponents/AnotherButton";
-//import AddToCalendar from "../AddToCalendar";
+import AddToCalendar from "../AddToCalendar";
 
 import {
   CLIENT_ID as clientId,
@@ -58,7 +57,7 @@ class index extends React.Component {
           label="Go back to Invoice Form"
           onClick={this.handleLogout}
         />
-        ADD TO CALENDAR HERE.
+        <AddToCalendar />
       </React.Fragment>
     ) : (
       <AnotherButton
