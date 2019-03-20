@@ -14,35 +14,28 @@ const userSchema = new Schema(
       required: true
     },
     phone_num: {
-      type: String,
-      required: true
+      type: String
     },
     country_code: {
-      type: String,
-      required: true
+      type: String
     },
     address_1: {
-      type: String,
-      required: true
+      type: String
     },
     address_2: {
       type: String
     },
     city: {
-      type: String,
-      required: true
+      type: String
     },
     state: {
-      type: String,
-      required: true
+      type: String
     },
     postal_code: {
-      type: String,
-      required: true
+      type: String
     },
     country: {
-      type: String,
-      required: true
+      type: String
     },
     companies: [
       {
@@ -56,14 +49,11 @@ const userSchema = new Schema(
         ref: 'Invoice'
       }
     ],
-    google: {
-      googleId: String,
-      picture: String,
-      gender: String,
-      locale: String
+    googleId: {
+      type: String
     },
-    facebook: {
-      facebookId: String
+    facebookId: {
+      type: String
     }
   },
   { timestamps: true }
