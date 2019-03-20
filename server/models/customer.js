@@ -36,7 +36,7 @@ const customerSchema = new Schema({
     type: String,
     required: true
   },
-  country:  {
+  country: {
     type: String,
     required: true
   },
