@@ -45,6 +45,7 @@
     "passport-jwt": "^4.0.0",
     "passport-stripe": "^0.2.3",
     "postmark": "^2.2.4",
-    "serverless-http": "^1.9.1"
+    "serverless-http": "^1.9.1",
+    "stripe": "^6.28.0"
   }
 }
