@@ -9,6 +9,22 @@ functions:
     handler: index.sls
     events:
       - http:
+          path: auth/google
+          method: get
+          cors: true
+      - http:
+          path: auth/google/home
+          method: get
+          cors: true
+      - http:
+          path: auth/facebook
+          method: get
+          cors: true
+      - http:
+          path: auth/facebook/home
+          method: post
+          cors: true
+      - http:
           path: graphql
           method: post
           cors: true
