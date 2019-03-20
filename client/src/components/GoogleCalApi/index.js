@@ -58,7 +58,7 @@ class index extends React.Component {
           label="Go back to Invoice Form"
           onClick={this.handleLogout}
         />
-        ADD TO CALENDAR HERE
+        ADD TO CALENDAR HERE.
       </React.Fragment>
     ) : (
       <AnotherButton
