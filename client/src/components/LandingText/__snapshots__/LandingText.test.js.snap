@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LandingText /> renders 1`] = `
+exports[`<LandingText /> renders Landing Text 1`] = `
 <DocumentFragment>
   <p
     class="landing_text"

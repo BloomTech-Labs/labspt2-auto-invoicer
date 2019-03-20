@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "react-testing-library";
-
+import "jest-dom/extend-expect";
 import NewSettingsInfo from "../NewSettingsInfo";
 
 describe("<NewSettingsInfo />", () => {
   it("renders New Settings Info", () => {
-    render(
+    const { asFragment } = render(
       <NewSettingsInfo
         settingsInfo={{
           email: "testing@gmail.com",
@@ -15,5 +15,6 @@ describe("<NewSettingsInfo />", () => {
         }}
       />
     );
+    expect(asFragment()).toMatchSnapshot();
   });
 });

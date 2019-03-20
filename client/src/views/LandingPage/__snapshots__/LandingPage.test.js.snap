@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LandingPage /> renders 1`] = `
+exports[`<LandingPage /> renders Landing Page view 1`] = `
 <DocumentFragment>
   <section
     class="landing_page"

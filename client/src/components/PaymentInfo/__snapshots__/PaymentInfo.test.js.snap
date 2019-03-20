@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PaymentInfo /> renders Payment Info component 1`] = `
+<DocumentFragment>
+  <fieldset
+    class="payment_info"
+  >
+    <legend />
+    <input
+      maxlength="16"
+      name="cc"
+      pattern="[0-9]{16}"
+      placeholder="Credit Card #"
+      required=""
+      type="text"
+      value=""
+    />
+    <input
+      maxlength="4"
+      name="exp"
+      pattern="[0-9]{4}"
+      placeholder="Expiration Date"
+      required=""
+      type="text"
+      value=""
+    />
+    <input
+      maxlength="3"
+      name="cvv"
+      pattern="[0-9]{3}"
+      placeholder="Cvv"
+      required=""
+      type="text"
+      value=""
+    />
+  </fieldset>
+</DocumentFragment>
+`;
