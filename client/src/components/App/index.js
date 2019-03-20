@@ -16,6 +16,7 @@ import LandingPage from "../../views/LandingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import SettingsPage from "../../views/SettingsPage";
 import ForgotPassModal from "../ForgotPassModal";
+import AuthModal from "../AuthModal";
 
 import InvoiceList from "../../views/InvoiceList";
 import PasswordResetView from "../../views/PasswordResetView";
@@ -28,10 +29,13 @@ class App extends Component {
       toggleSignIn: false,
       id: 1,
       toggleRegister: false,
-      togglePassForgot: false
+      togglePassForgot: false,
+      toggleAuth: false
     };
   }
-
+  toggleAuthModal = () => {
+    return this.setState({ toggleAuth: !this.state.toggleAuth });
+  };
   signInModal = () => {
     // return the opposite of the current state of toggleSignIn
     return this.setState({ toggleSignIn: !this.state.toggleSignIn });
@@ -87,7 +91,11 @@ class App extends Component {
         </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
-          <SignInModal click={this.signInModal} forgot={this.forgotPassModal} />
+          <SignInModal
+            click={this.signInModal}
+            auth={this.toggleAuthModal}
+            forgot={this.forgotPassModal}
+          />
         ) : null}
 
         {/* check if sigup clicked and open up signup modal or visa-versa */}
@@ -106,6 +114,14 @@ class App extends Component {
               this.forgotPassModal();
             }}
             passwordReset={this.sendPasswordReset}
+          />
+        ) : null}
+        {this.state.toggleAuth ? (
+          <AuthModal
+            click={() => {
+              this.signInModal();
+              this.toggleAuthModal();
+            }}
           />
         ) : null}
         <section className="routes-container">
