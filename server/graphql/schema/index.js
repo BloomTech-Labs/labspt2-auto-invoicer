@@ -52,6 +52,7 @@ type Customer {
   postal_code: String!
   country: String!
   companies: [Company!]!
+  invoices: [Invoice!]
 }
 
 type Invoice {
@@ -133,8 +134,6 @@ input CustomerInput {
   name: String!
   email: String!
   phone_num: String!
-  companies: [Company!]!
-  invoices: [Invoice!]
   country_code: String!
   address_1: String!
   address_2: String
@@ -195,6 +194,7 @@ type RootMutation {
   addUserToCompany(userID: ID!, companyID: ID!): Company
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
+}
 
 schema {
   query: RootQuery
