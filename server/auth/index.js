@@ -35,7 +35,7 @@ router.get(
   }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.redirect(`http://localhost:3000?token=${token}`);
+    res.redirect(`https://auto-invoicer.netlify.com/?token=${token}`);
   }
 );
 // Facebook
