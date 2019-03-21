@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const graphqlHttp = require('express-graphql');
@@ -20,6 +21,7 @@ const taxRateRouter = require('./routers/taxRateRouter');
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
 
+app.use(bodyParser.text());
 app.use(express.json(), cors(), helmet());
 
 app.use(passport.initialize());
