@@ -12,7 +12,7 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 
 const authRouter = require('./auth');
-
+const stripeRouter = require('./stripe');
 const welcomeRouter = require('./routers/welcomeRouter');
 const passwordResetRouter = require('./routers/passwordResetRouter');
 const taxRateRouter = require('./routers/taxRateRouter');
@@ -33,6 +33,7 @@ app.get(
   }
 );
 
+app.use('/stripe', stripeRouter);
 app.use('/auth', authRouter);
 app.use('/welcome', welcomeRouter);
 app.use('/password-reset', passwordResetRouter);

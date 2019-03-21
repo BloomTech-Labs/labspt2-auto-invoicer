@@ -70,4 +70,12 @@ router.get(
   }
 );
 
+router.post(
+  '/local',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
+
 module.exports = router;
