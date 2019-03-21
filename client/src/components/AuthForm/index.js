@@ -7,9 +7,17 @@ class AuthForm extends React.Component {
     return (
       <section className="auth-btn-container">
         <h1>Authentication Methods</h1>
-        <a href="http://localhost:6060/auth/facebook">Facebook</a>
-        <a href="http://localhost:6060/auth/google">Google</a>
-        <a href="http://localhost:6060/auth/stripe">Stripe</a>
+        <section className="auth-btns">
+          <a className="auth-btn" href="http://localhost:6060/auth/facebook">
+            Facebook
+          </a>
+          <a className="auth-btn" href="http://localhost:6060/auth/google">
+            Google
+          </a>
+          <a className="auth-btn" href="http://localhost:6060/auth/stripe">
+            Stripe
+          </a>
+        </section>
       </section>
     );
   }
