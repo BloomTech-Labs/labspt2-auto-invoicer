@@ -41,3 +41,18 @@ export const EditUser = async (userID, editedData, returnedData) => {
     const editedUser = await Post(EditUser)
     return editedUser.data.data
 }
+
+export const AddUserToCompany = async (userID, companyID, returnedData) => {
+  const AddUserToCompany = {
+    query:  `
+      mutation {
+        addUserToCompany(userID: "${userID}", companyID: "${companyID}") {
+          ${returnedData}
+        }
+      }
+    `
+  }
+  
+  const returnedCompany = await Post(AddUserToCompany);
+  return returnedCompany.data.data
+}
