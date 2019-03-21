@@ -7,7 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 // react router dom methods
-import { NavLink, withRouter, Redirect } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
 // list of icons used in the side navigation component
 import IconButton from "@material-ui/core/IconButton";
@@ -32,25 +32,12 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      loggedIn: true,
-      credits: 3,
-      loggedOutClicked: false
+      credits: 3
     };
   }
-
   handleDrawerOpen = () => {
     // change open state to true || false to open or close navigation
     this.setState({ open: !this.state.open });
-  };
-
-  signOut = () => {
-    // change login state to update UI of navigation
-    this.setState({ loggedIn: false, loggedOutClicked: true });
-
-    /* ternary operator checking if token is available in local storage and deletes if it is */
-    return localStorage.getItem("jwt-auto-invoice")
-      ? localStorage.removeItem("jwt-auto-invoice")
-      : null;
   };
 
   signInModal = () => {
@@ -62,11 +49,9 @@ class SideNavigation extends React.Component {
   };
   render() {
     // deconstruct state to get a list of needed attributes
-    const { open, loggedIn, loggedOutClicked } = this.state;
+    const { open } = this.state;
     return (
       <div className="navigation">
-        {/* if log out is clicked it will redirect to landing */}
-        {loggedOutClicked ? <Redirect to="/" /> : null}
         <header position="fixed" className="navbar">
           <IconButton
             color="inherit"
@@ -76,7 +61,7 @@ class SideNavigation extends React.Component {
             <MenuIcon id="hamburger" />
           </IconButton>
           {/* if logged in show signup/signin else show */}
-          {!loggedIn ? (
+          {!this.props.loggedIn ? (
             <AuthLanding
               signInModal={this.signInModal}
               signUpModal={this.signUpModal}
@@ -84,7 +69,7 @@ class SideNavigation extends React.Component {
           ) : (
             <AuthSecured
               {...this.props}
-              signOut={this.signOut}
+              signOut={this.props.signOut}
               credits={this.state.credits}
             />
           )}
@@ -100,7 +85,7 @@ class SideNavigation extends React.Component {
           </div>
           <Divider />
           {/* if not logged in show public routes else show secured */}
-          {!loggedIn ? (
+          {!this.props.loggedIn ? (
             <List className="all-icon-container">
               {[
                 { title: "Home", icon: <HomeIcon /> },
@@ -137,7 +122,7 @@ class SideNavigation extends React.Component {
                 return (
                   <NavLink
                     exact
-                    to={`/user/1/${lowerTitle}`}
+                    to={`/user/${this.props.id}/${lowerTitle}`}
                     key={title}
                     className="icon-container"
                     onClick={() => {
