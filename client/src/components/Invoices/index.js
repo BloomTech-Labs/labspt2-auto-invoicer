@@ -69,7 +69,7 @@ class Invoices extends Component {
                 })
               : null}
             :{" "}
-            <Link to="/user/1/invoice/create">
+            <Link to={`/user/${this.props.id}/invoice/create`}>
               <CreateInvoiceButton />
             </Link>
           </section>

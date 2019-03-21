@@ -12,7 +12,7 @@ export default class index extends Component {
     return (
       <section className="invoice-list-container">
         <h1>Invoices</h1>
-        <Invoices />
+        <Invoices id={this.props.id} />
       </section>
     );
   }

@@ -1,11 +1,13 @@
 // import packages
 import React, { Component } from "react";
 import axios from "axios";
+import queryString from "query-string";
+import jwt from "jsonwebtoken";
 //import styles
 import "./App.css";
 
 // react router methods
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 
 //imported components
 import SideNavigation from "../SideNavigation";
@@ -27,11 +29,27 @@ class App extends Component {
 
     this.state = {
       toggleSignIn: false,
-      id: 1,
+      loggedIn: false,
+      id: null,
       toggleRegister: false,
       togglePassForgot: false,
       toggleAuth: false
     };
+  }
+  componentWillMount() {
+    const query = queryString.parse(this.props.location.search);
+
+    if (query.token) {
+      window.localStorage.setItem("jwt-auto-invoice", query.token);
+    }
+
+    if (window.localStorage.getItem("jwt-auto-invoice")) {
+      const token = window.localStorage.getItem("jwt-auto-invoice");
+      const decoded = jwt.decode(token, { complete: true });
+      const userId = decoded.payload.userId;
+
+      this.setState({ loggedIn: true, id: userId });
+    }
   }
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
@@ -79,15 +97,27 @@ class App extends Component {
         console.log(res);
       });
   };
+  signOut = () => {
+    // change login state to update UI of navigation
+    this.setState({ loggedIn: false, loggedOutClicked: true });
+
+    /* ternary operator checking if token is available in local storage and deletes if it is */
+    return localStorage.getItem("jwt-auto-invoice")
+      ? localStorage.removeItem("jwt-auto-invoice")
+      : null;
+  };
   render() {
     const { id } = this.state;
     return (
       <div className="App">
         <header>
           <SideNavigation
+            loggedIn={this.state.loggedIn}
             signInModal={this.signInModal}
             signUpModal={this.signUpModal}
             forgotPassModal={this.forgotPassModal}
+            signOut={this.signOut}
+            id={id}
           />
         </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
@@ -142,7 +172,11 @@ class App extends Component {
               <LandingPage {...props} click={this.signUpModal} />
             )}
           />
-          <Route exact path={`/user/${id}/invoices`} component={InvoiceList} />
+          <Route
+            exact
+            path={`/user/${id}/invoices`}
+            render={props => <InvoiceList id={id} />}
+          />
           <Route exact path={"/password-reset"} component={PasswordResetView} />
         </section>
       </div>
@@ -150,4 +184,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
