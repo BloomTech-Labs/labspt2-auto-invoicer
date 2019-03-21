@@ -1,6 +1,6 @@
 import Post from '../index'
 
-export const Customers = async (returnedData) => {
+export const FetchCustomers = async (returnedData) => {
   const Customers = {
     query: `
       query {
@@ -14,7 +14,7 @@ export const Customers = async (returnedData) => {
   return listOfCustomers.data.data
 }
 
-export const Customer = async (customerID, returnedData) => {
+export const FetchCustomer = async (customerID, returnedData) => {
   const Customer = {
     query: `
       query {
