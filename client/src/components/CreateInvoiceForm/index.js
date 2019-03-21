@@ -286,7 +286,7 @@ export default class index extends Component {
       total: this.state.total,
       amountPaid: this.state.amountPaid
     };
-
+    
     this.props.click(formPayload);
     this.handleClearForm(e);
   }

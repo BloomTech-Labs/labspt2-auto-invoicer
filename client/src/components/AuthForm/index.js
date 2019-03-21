@@ -1,36 +1,35 @@
 import React from "react";
-import axios from "axios";
-import Button from "../reusableComponents/Button";
 import "./AuthForm.css";
+import { withRouter } from "react-router-dom";
 
 class AuthForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { tabIndex: 0 };
-  }
-  authenticateThirdParty = e => {
-    const authName = e.target.name;
-    axios.get(`http://localhost:6060/auth/${authName}`).then(res => {
-      console.log(res);
-    });
-  };
   render() {
     return (
       <section className="auth-btn-container">
         <h1>Authentication Methods</h1>
-        <Button click={this.authenticateThirdParty} name="facebook">
-          Facebook
-        </Button>
-        <Button click={this.authenticateThirdParty} name="google">
-          Google
-        </Button>
-        <Button click={this.authenticateThirdParty} name="stripe">
-          Stripe
-        </Button>
+        <section className="auth-btns">
+          <a
+            className="auth-btn"
+            href="https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/auth/facebook"
+          >
+            Facebook
+          </a>
+          <a
+            className="auth-btn"
+            href="https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/auth/google"
+          >
+            Google
+          </a>
+          <a
+            className="auth-btn"
+            href="https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/auth/stripe"
+          >
+            Stripe
+          </a>
+        </section>
       </section>
     );
   }
 }
 
-export default AuthForm;
+export default withRouter(AuthForm);
