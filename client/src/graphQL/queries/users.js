@@ -1,11 +1,11 @@
 import Post from "..";
 
-export const FetchUsers = async (returnData) => {
+export const FetchUsers = async (returnedData) => {
   const Users = {
       query: `
         query {
           users {
-            ${returnData}
+            ${returnedData}
           }
         }
       `
@@ -16,12 +16,12 @@ export const FetchUsers = async (returnData) => {
 };
 
 
-export const FetchUser = async (userID, returnData) => {
+export const FetchUser = async (userID, returnedData) => {
   const User = {
     query: `
       query {
         user(userID: "${userID}") {
-          ${returnData}
+          ${returnedData}
         }
       } 
       `
