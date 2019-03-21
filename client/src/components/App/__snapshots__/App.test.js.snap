@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component tests renders App 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <header>
+      <div
+        class="navigation"
+      >
+        <header
+          class="navbar"
+          position="fixed"
+        >
+          <button
+            aria-label="Open drawer"
+            class="MuiButtonBase-root-7 MuiIconButton-root-1 MuiIconButton-colorInherit-2"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label-6"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root-10"
+                focusable="false"
+                id="hamburger"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M2 15.5v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20v-2H2z"
+                />
+                <path
+                  d="M0 0h24v24H0z"
+                  fill="none"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root-33"
+            />
+          </button>
+          <ul
+            class="auth-container"
+          >
+            <p
+              class="credits"
+            >
+              Credits: 3
+            </p>
+            <a
+              href="/"
+              id="signOut"
+            >
+              Sign Out
+            </a>
+          </ul>
+        </header>
+      </div>
+    </header>
+    <section
+      class="routes-container"
+    >
+      <section
+        class="landing_page"
+      >
+        <div
+          class="landing"
+        >
+          <p
+            class="landing_text"
+          >
+            Auto-Invoicer helps small buisnesses generate high quality PDF invoices and track them. Click Buy Now to sign up for 3 free credits to create an invoice. Buisnesses can buy further credits or pay a subscription for unlimited credits.
+          </p>
+          <button
+            class="button"
+            type="submit"
+          >
+            Buy Now
+          </button>
+        </div>
+      </section>
+    </section>
+  </div>
+</DocumentFragment>
+`;

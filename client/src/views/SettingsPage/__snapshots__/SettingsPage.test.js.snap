@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsPage /> renders Settings Page view 1`] = `
+<DocumentFragment>
+  <section>
+    <form
+      class="settings_form"
+    >
+      <fieldset
+        class="settings_info"
+      >
+        <input
+          name="email"
+          placeholder="Email Address"
+          type="email"
+          value=""
+        />
+        <input
+          name="oldPassword"
+          placeholder="Old Password"
+          type="password"
+          value=""
+        />
+        <input
+          name="newPassword"
+          placeholder="New Password"
+          type="password"
+          value=""
+        />
+        <input
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          value=""
+        />
+        <button
+          class="button"
+          type="submit"
+        >
+          save
+        </button>
+        <p>
+          Password must contain at least 8 charachters
+        </p>
+      </fieldset>
+    </form>
+  </section>
+</DocumentFragment>
+`;

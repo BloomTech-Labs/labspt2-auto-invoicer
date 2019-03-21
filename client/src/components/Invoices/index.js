@@ -60,7 +60,12 @@ class Invoices extends Component {
           <section className="invoices-container">
             {invoices
               ? invoices.map(invoice => {
-                  return <InvoiceCard invoice={{ ...invoice }} />;
+                  return (
+                    <InvoiceCard
+                      key={invoice.invoiceNumber}
+                      invoice={{ ...invoice }}
+                    />
+                  );
                 })
               : null}
             :{" "}

@@ -6,8 +6,18 @@ type User {
   email: String!
   password: String
   name: String!
-  phone_num: String!
+  phone_num: String
+  country_code: String
+  address_1: String
+  address_2: String
+  city: String
+  state: String
+  postal_code: String
+  country: String
   companies: [Company!]
+  invoices: [Invoice!]
+  googleId: String
+  facebookId: String
 }
 
 type Company {
@@ -15,31 +25,45 @@ type Company {
   name: String!
   email: String!
   phone_num: String!
+  country_code: String!
   address_1: String!
   address_2: String
   city: String!
   state: String!
-  postal_code: Int!
+  postal_code: String!
+  country: String!
   unlimited_tier: Boolean!
   credits: Int!
   users: [User!]!
   customers: [Customer!]
+  invoices: [Invoice!]
+}
+
+type Customer {
+  _id: ID!
+  name: String!
+  email: String!
+  phone_num: String!
+  country_code: String!
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  postal_code: String!
+  country: String!
+  companies: [Company!]!
 }
 
 type Invoice {
   _id: ID!
-  invoice_num: Int!
-  company: [Company!]!
-  customer: [Customer!]!
-  items: [Item!]!
-  due_date: String!
-  subtotal: Float!
-  discount: Float!
-  shipping: Float!
-  tax: Float!
-  total_cost: Float!
-  paid: Boolean!
-  archive: Boolean!
+  createdBy: ID!
+  invoice_num: String!
+  company_id: ID!
+  customer_id: ID!
+}
+
+input InvoiceInput {
+  invoice_num: String!
 }
 
 type Item {
@@ -54,11 +78,13 @@ input CompanyInput {
   name: String!
   email: String!
   phone_num: String!
+  country_code: String!
   address_1: String!
   address_2: String
   city: String!
   state: String!
-  postal_code: Int!
+  postal_code: String!
+  country: String!
 }
 
 input EditCompanyInput {
@@ -66,28 +92,69 @@ input EditCompanyInput {
   name: String
   email: String
   phone_num: String
+  country_code: String
   address_1: String
   address_2: String
   city: String
   state: String
-  postal_code: Int
+  postal_code: String
+  country: String
 }
 
 input UserInput {
   email: String!
   password: String!
   name: String!
-  address: String!
   phone_num: String!
+  country_code: String!
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  postal_code: String!
+  country: String!
 }
 
-type Customer {
-  _id: ID!
+input EditUserInput {
+  email: String
+  password: String
+  name: String
+  phone_num: String
+  country_code: String
+  address_1: String
+  address_2: String
+  city: String
+  state: String
+  postal_code: String
+  country: String
+}
+
+input CustomerInput {
   name: String!
-  address: String!
   email: String!
   phone_num: String!
   companies: [Company!]!
+  invoices: [Invoice!]
+  country_code: String!
+  address_1: String!
+  address_2: String
+  city: String!
+  state: String!
+  postal_code: String!
+  country: String!
+}
+
+input EditCustomerInput {
+  name: String
+  email: String
+  phone_num: String
+  country_code: String
+  address_1: String
+  address_2: String
+  city: String
+  state: String
+  postal_code: String
+  country: String
 }
 
 type AuthData {
@@ -101,29 +168,7 @@ type Country {
   iso2: String!
   dialCode: String!
   priority: Int!
-  format: String!
-}
-
-input CustomerInput {
-  name: String!
-  address: String!
-  email: String!
-  phone_num: String!
-}
-
-input CustomerUpdate {
-  name: String
-  address: String
-  email: String
-  phone_num: String
-}
-
-input UserUpdate {
-  email: String
-  password: String
-  name: String
-  address: String
-  phone_num: String
+  format: String
 }
 
 type RootQuery {
@@ -132,21 +177,24 @@ type RootQuery {
   user(userID: ID!): User!
   companyByAnyField(companyInput: EditCompanyInput): [Company!]
   companies: [Company!]!
-  company(companyID: ID!): Company
+  company(companyID: ID!): Company!
   customers: [Customer!]!
-  customer(_id:ID!): Customer!
+  customer(customerID: ID!): Customer!
   countries: [Country!]!
   country(name: String, iso2: String): Country!
+  invoices: [Invoice!]!
 }
 
 type RootMutation {
   createUser(userInput: UserInput!): User
-  editUser(userID: ID!, updateUser: UserUpdate!) : User
+  editUser(userID: ID!, editUserInput: EditUserInput!): User
   createCompany(companyInput: CompanyInput!): Company
-  editCompany(companyInput: EditCompanyInput!, id: ID!): Company
+  editCompany(editCompanyInput: EditCompanyInput!, companyID: ID!): Company
   createCustomer(customerInput: CustomerInput!): Customer
-  updateCustomer(_id: ID!, customerUpdate: CustomerUpdate!) : Customer
+  editCustomer(customerID: ID!, editCustomerInput: EditCustomerInput!): Customer
   addUserToCompany(userID: ID!, companyID: ID!): Company
+  addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
+  createInvoice(invoiceInput: InvoiceInput!): Invoice
 }
 
 schema {

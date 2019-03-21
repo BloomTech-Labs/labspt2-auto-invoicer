@@ -9,6 +9,22 @@ functions:
     handler: index.sls
     events:
       - http:
+          path: auth/google
+          method: get
+          cors: true
+      - http:
+          path: auth/google/home
+          method: get
+          cors: true
+      - http:
+          path: auth/facebook
+          method: get
+          cors: true
+      - http:
+          path: auth/facebook/home
+          method: post
+          cors: true
+      - http:
           path: graphql
           method: post
           cors: true
@@ -16,6 +32,22 @@ functions:
           path: graphql
           method: get
           cors: true
+      - http:
+          path: welcome
+          method: post
+          cors: true
+      - http:
+          path: password-reset
+          method: post
+          cors: true
+      - http:
+          path: taxes/{zip}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                zip: true
 
 plugins:
   - serverless-offline

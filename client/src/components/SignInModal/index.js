@@ -15,6 +15,9 @@ const SignInModal = props => {
       <p className="forgot" onClick={props.forgot}>
         Forgot Password?
       </p>
+      <p className="auth-login" onClick={props.auth}>
+        Login Using Auth?
+      </p>
     </Modal>
   );
 };

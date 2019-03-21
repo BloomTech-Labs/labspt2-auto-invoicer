@@ -5,13 +5,14 @@ import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
-import CalendarDatePicker from "../reusableComponents/CalendarDatePicker";
+import DayPickerInput from "react-day-picker/DayPickerInput";
 
 // InvoiceItemInput
 import InvoiceItemInput from "../InvoiceItemsInput";
 
 //CSS
 import "./CreateInvoiceForm.css";
+import "react-day-picker/lib/style.css";
 
 export default class index extends Component {
   //State from sub-components held here
@@ -25,7 +26,6 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-
       languageOptions: ["English (US)", "Español"],
       languageSelection: "",
       currencyOptions: [
@@ -37,7 +37,8 @@ export default class index extends Component {
         "Thai Baht (THB)"
       ],
       currencySelection: "",
-      date: "",
+      selectedDate: undefined,
+      invoiceDueDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -65,7 +66,10 @@ export default class index extends Component {
     this.handleCurrencySelectionChange = this.handleCurrencySelectionChange.bind(
       this
     );
-    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleSelectedDateChange = this.handleSelectedDateChange.bind(this);
+    this.handleInvoiceDueDateChange = this.handleInvoiceDueDateChange.bind(
+      this
+    );
     this.handleBalanceDueChange = this.handleBalanceDueChange.bind(this);
     this.handleInvoiceNotesChange = this.handleInvoiceNotesChange.bind(this);
     this.handleInvoiceTermsChange = this.handleInvoiceTermsChange.bind(this);
@@ -80,6 +84,18 @@ export default class index extends Component {
 
   //create invoiceObject to send back to server
 
+  // get tax rate object from api
+  getTaxRateObject(zip) {
+    if (zip) {
+      axios
+        .get(
+          `https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/taxes/${zip}`
+        )
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
+    }
+  }
   //ZipcodeApi Function
 
   zipcodeApiAutofill() {
@@ -101,13 +117,14 @@ export default class index extends Component {
             cityTo: res.data.city,
             stateRegionTo: res.data.state
           });
+
+          return this.getTaxRateObject(zipcode);
         })
         .catch(error => {
           console.log("Server Error", error);
         });
     } else {
-      this.setState({ cityTo: "" });
-      this.setState({ stateRegionTo: "" });
+      this.setState({ cityTo: "", stateRegionTo: "", tax: "" });
     }
   }
   //individual invoice items
@@ -148,8 +165,12 @@ export default class index extends Component {
     this.setState({ currencySelection: e.target.value });
   }
 
-  handleDateChange(e) {
-    this.setState({ date: e.target.value });
+  handleSelectedDateChange(day) {
+    this.setState({ selectedDate: day });
+  }
+
+  handleInvoiceDueDateChange(day) {
+    this.setState({ invoiceDueDate: day });
   }
 
   handleBalanceDueChange(e) {
@@ -209,7 +230,6 @@ export default class index extends Component {
         { item: "", quantity: "", rate: "", amount: "" }
       ]
     }));
-    console.log(this.state.invoiceItems);
   };
 
   //submission - Clear Form
@@ -223,10 +243,10 @@ export default class index extends Component {
       stateRegionTo: "",
       zipCodeTo: "",
       clientEmailTo: "",
-
       languageSelection: "",
       currencySelection: "",
-      date: "",
+      selectedDate: undefined,
+      invoiceDueDate: undefined,
       balanceDue: "",
       invoiceNotes: "",
       invoiceTerms: "",
@@ -251,10 +271,10 @@ export default class index extends Component {
       stateRegionTo: this.state.stateRegionTo,
       zipCodeTo: this.state.zipCodeTo,
       clientEmailTo: this.state.clientEmailTo,
-
       languageSelection: this.state.languageSelection,
       currencySelection: this.state.currencySelection,
-      date: this.state.date,
+      selectedDate: this.state.selectedDate,
+      invoiceDueDate: this.state.invoiceDueDate,
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
@@ -267,13 +287,11 @@ export default class index extends Component {
       amountPaid: this.state.amountPaid
     };
 
-    console.log("Invoice Data Object:", formPayload);
-    //this.props.click(formPayload);
+    this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
   render() {
-    // console.log(zipCodeTo,"render")
     return (
       <div>
         Create Invoice Form.
@@ -409,30 +427,25 @@ export default class index extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
-                  <CalendarDatePicker />
 
-                  {/* <SingleInput
-                    inputType={"text"}
-                    //title={"Date"}
-                    name={"name"}
-                    controlFunc={this.handleDateChange}
-                    content={this.state.date}
-                    placeholder={"Enter Date"}
-                  /> */}
+                  <div>
+                    <DayPickerInput
+                      onDayChange={this.handleSelectedDateChange}
+                      placeholder="Today's Date"
+                    />
+                  </div>
                 </form>
               </div>
               <div>
                 <form>
                   <div>Invoice Due</div>
-                  <CalendarDatePicker />
 
-                  {/* <Select
-                    name={"invoiceDueRange"}
-                    placeholder={"Choose Invoice Due Date"}
-                    controlFunc={this.handleInvoiceDueSelectionChange}
-                    options={this.state.invoiceDueOptions}
-                    selectedOption={this.state.invoiceDueSelection}
-                  /> */}
+                  <div>
+                    <DayPickerInput
+                      onDayChange={this.handleInvoiceDueDateChange}
+                      placeholder="Invoice Due Date"
+                    />
+                  </div>
                 </form>
               </div>
               <div>
@@ -521,14 +534,9 @@ export default class index extends Component {
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
                     <div>Tax</div>
-                    <SingleInput
-                      inputType={"integer"}
-                      //title={"Tax"}
-                      name={"name"}
-                      controlFunc={this.handleTaxChange}
-                      content={this.state.tax}
-                      placeholder={"Tax"}
-                    />
+                    <div>
+                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
+                    </div>
                   </form>
                 </div>
                 <div>

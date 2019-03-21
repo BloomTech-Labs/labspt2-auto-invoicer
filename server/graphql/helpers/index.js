@@ -1,15 +1,25 @@
 const Company = require('../../models/company');
 const User = require('../../models/user');
 const Customer = require('../../models/customer');
+const Invoice = require('../../models/invoice');
+
+const {
+  formatData
+} = require('./format')
 
 const users = async userId => {
   try {
-    const fetchedUsers = await User.find({ _id: { $in: userId } });
+    const fetchedUsers = await User.find({
+      _id: {
+        $in: userId
+      }
+    });
     return fetchedUsers.map(user => {
       return {
         ...user._doc,
         password: null,
         companies: companies.bind(this, user._doc.companies),
+        invoices: invoices.bind(this, user._doc.invoices)
       };
     });
   } catch (err) {
@@ -19,12 +29,17 @@ const users = async userId => {
 
 const companies = async companyId => {
   try {
-    const fetchedCompanies = await Company.find({ _id: { $in: companyId } });
+    const fetchedCompanies = await Company.find({
+      _id: {
+        $in: companyId
+      }
+    });
     return fetchedCompanies.map(company => {
       return {
         ...company._doc,
         users: users.bind(this, company._doc.users),
         customers: customers.bind(this, company._doc.customers),
+        invoices: invoices.bind(this, company._doc.invoices)
       };
     });
   } catch (err) {
@@ -34,11 +49,16 @@ const companies = async companyId => {
 
 const customers = async customerId => {
   try {
-    const fetchedCustomers = await Customer.find({ _id: { $in: customerId } });
+    const fetchedCustomers = await Customer.find({
+      _id: {
+        $in: customerId
+      }
+    });
     return fetchedCustomers.map(customer => {
       return {
         ...customer._doc,
         companies: companies.bind(this, customer._doc.companies),
+        invoices: invoices.bind(this, customer._doc.invoices)
       };
     });
   } catch (err) {
@@ -46,19 +66,17 @@ const customers = async customerId => {
   }
 };
 
-const formatData = document => {
-  Object.keys(document).forEach(key => {
-    if (typeof document[key] === 'string') {
-      document[key] = document[key].toLowerCase();
-    }
-  });
-  if (document.phone_num) {
-    const regx = /\D+/g;
-    const formatted = document.phone_num.replace(regx, '');
-    document.phone_num =
-      formatted.charAt(0) === '1' ? formatted.slice(1) : formatted;
+const invoices = async invoiceId => {
+  try {
+    const fetchedInvoices = await Invoice.find({ _id: { $in: invoiceId } });
+    return fetchedInvoices.map(invoice => {
+      return {
+        ...invoice._doc
+      };
+    });
+  } catch (err) {
+    throw err;
   }
-  return document;
 };
 
 const updateDocumentById = async (documentInput, id, Model) => {
@@ -74,17 +92,20 @@ const updateDocumentById = async (documentInput, id, Model) => {
     });
     formatData(documentInput);
     const updatedDocument = await Model.findByIdAndUpdate(
-      id,
-      {
-        $set: { ...documentInput },
-      },
-      { new: true }
+      id, {
+        $set: {
+          ...documentInput
+        },
+      }, {
+        new: true
+      }
     );
     const documentType = Model.modelName;
     if (documentType === 'User' || documentType === 'Customer') {
       return {
         ...updatedDocument._doc,
         companies: companies.bind(this, updatedDocument._doc.companies),
+        invoices: invoices.bind(this, updatedDocument._doc.invoices)
       };
     }
     if (documentType === 'Company') {
@@ -92,10 +113,11 @@ const updateDocumentById = async (documentInput, id, Model) => {
         ...updatedDocument._doc,
         users: users.bind(this, updatedDocument._doc.users),
         customers: customers.bind(this, updatedDocument._doc.customers),
+        invoices: invoices.bind(this, updatedDocument._doc.invoices)
       };
     }
     return {
-      ...updatedDocument._doc,
+      ...updatedDocument._doc
     };
   } catch (err) {
     throw err;
@@ -112,7 +134,9 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
     const value = Object.values(documentInput)[0];
     const fields = Object.keys(Model.schema.paths).map(field => {
       if (Model.schema.path(field).instance.toLowerCase() === typeof value) {
-        return { [field]: value };
+        return {
+          [field]: value
+        };
       }
     });
     const validFields = [];
@@ -122,7 +146,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
       }
     });
     const documents = await Model.find({
-      $or: validFields,
+      $or: validFields
     });
     const documentType = Model.modelName;
     if (documentType === 'User' || documentType === 'Customer') {
@@ -130,6 +154,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
         return {
           ...document._doc,
           companies: companies.bind(this, document._doc.companies),
+          invoices: invoices.bind(this, document._doc.invoices)
         };
       });
     }
@@ -139,9 +164,15 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
           ...document._doc,
           users: users.bind(this, document._doc.users),
           customers: customers.bind(this, document._doc.customers),
+          invoices: invoices.bind(this, document._doc.invoices)
         };
       });
     }
+    return documents.map(document => {
+      return {
+        ...document._doc
+      };
+    });
   } catch (err) {
     throw err;
   }
@@ -158,6 +189,7 @@ const findDocumentById = async (documentId, Model) => {
       return {
         ...document._doc,
         companies: companies.bind(this, document._doc.companies),
+        invoices: invoices.bind(this, document._doc.invoices)
       };
     }
     if (documentType === 'Company') {
@@ -165,8 +197,12 @@ const findDocumentById = async (documentId, Model) => {
         ...document._doc,
         users: users.bind(this, document._doc.users),
         customers: customers.bind(this, document._doc.customers),
+        invoices: invoices.bind(this, document._doc.invoices)
       };
     }
+    return {
+      ...document.doc
+    };
   } catch (err) {
     throw err;
   }
@@ -184,6 +220,7 @@ const findAllDocuments = async Model => {
         return {
           ...document._doc,
           companies: companies.bind(this, document._doc.companies),
+          invoices: invoices.bind(this, document._doc.invoices)
         };
       });
     }
@@ -193,9 +230,15 @@ const findAllDocuments = async Model => {
           ...document._doc,
           users: users.bind(this, document._doc.users),
           customers: customers.bind(this, document._doc.customers),
+          invoices: invoices.bind(this, document._doc.invoices)
         };
       });
     }
+    return documents.map(document => {
+      return {
+        ...document._doc
+      };
+    });
   } catch (err) {
     throw err;
   }
@@ -206,5 +249,5 @@ module.exports = {
   findDocumentsByAnyField,
   findDocumentById,
   findAllDocuments,
-  formatData,
+  formatData
 };

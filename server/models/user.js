@@ -16,20 +16,44 @@ const userSchema = new Schema(
     phone_num: {
       type: String
     },
+    country_code: {
+      type: String
+    },
+    address_1: {
+      type: String
+    },
+    address_2: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    state: {
+      type: String
+    },
+    postal_code: {
+      type: String
+    },
+    country: {
+      type: String
+    },
     companies: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Company'
       }
     ],
-    google: {
-      googleId: String,
-      picture: String,
-      gender: String,
-      locale: String
+    invoices: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Invoice'
+      }
+    ],
+    googleId: {
+      type: String
     },
-    facebook: {
-      facebookId: String
+    facebookId: {
+      type: String
     }
   },
   { timestamps: true }

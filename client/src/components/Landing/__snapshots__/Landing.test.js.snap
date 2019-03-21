@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Landing /> renders Landing component 1`] = `
+<DocumentFragment>
+  <div
+    class="landing"
+  >
+    <p
+      class="landing_text"
+    >
+      Auto-Invoicer helps small buisnesses generate high quality PDF invoices and track them. Click Buy Now to sign up for 3 free credits to create an invoice. Buisnesses can buy further credits or pay a subscription for unlimited credits.
+    </p>
+    <button
+      class="button"
+      type="submit"
+    >
+      Buy Now
+    </button>
+  </div>
+</DocumentFragment>
+`;

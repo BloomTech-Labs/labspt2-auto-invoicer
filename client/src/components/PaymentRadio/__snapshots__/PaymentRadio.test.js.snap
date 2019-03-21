@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PaymentRadio /> renders PaymentRadio component 1`] = `
+<DocumentFragment>
+  <label
+    class="payment_checkboxes"
+  >
+    <input
+      name="payment"
+      type="radio"
+      value=""
+    />
+  </label>
+</DocumentFragment>
+`;
