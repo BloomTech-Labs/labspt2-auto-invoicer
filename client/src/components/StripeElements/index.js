@@ -5,7 +5,7 @@ import StripeCheckoutForm from '../StripeCheckoutForm';
 class StripeElements extends Component {
   render() {
     return (
-      <StripeProvider apiKey="null">
+      <StripeProvider apiKey={`${process.env.REACT_APP_STRIPE_CHECKOUT_PUBLISHABLE_KEY}`} >
         <div className="example">
           <h1>React Stripe Elements Example</h1>
           <Elements>

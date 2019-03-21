@@ -9,14 +9,12 @@ class StripeCheckoutForm extends Component {
   }
 
   async submit(ev) {
-    console.log(ev);
     let { token } = await this.props.stripe.createToken({ name: "Name" });
     let response = await fetch("http://localhost:6060/stripe/charge", {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
       body: token.id
     });
-    console.log(response);
   
     if (response.ok) console.log("Purchase Complete!")
   }
