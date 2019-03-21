@@ -8,14 +8,14 @@ type User {
   email: String!
   password: String
   name: String!
-  phone_num: String!
-  country_code: String!
-  address_1: String!
+  phone_num: String
+  country_code: String
+  address_1: String
   address_2: String
-  city: String!
-  state: String!
-  postal_code: String!
-  country: String!
+  city: String
+  state: String
+  postal_code: String
+  country: String
   companies: [Company!]
   invoices: [Invoice!]
 }
