@@ -20,17 +20,17 @@ export const CreateCustomer = async (customerInput, returnedData) => {
   return newCustomer.data.data
 }
 
-export const EditCustomer = async (customerID, customerInput, returnedData) => {
+export const EditCustomer = async (customerID, editedData, returnedData) => {
   const data = [];
-  for(let key in customerInput) {
-    data.push(`${key}: "${customerInput[key]}"`)
+  for(let key in editedData) {
+    data.push(`${key}: "${editedData[key]}"`)
   }
-  customerInput = data.join(", ");
+  editedData = data.join(", ");
 
   const EditCustomer = {
     query: `
       mutation {
-        editCustomer(customerID: "${customerID}", editCustomerInput: {${customerInput}}) {
+        editCustomer(customerID: "${customerID}", editCustomerInput: {${editedData}}) {
           ${returnedData}
         }
       }

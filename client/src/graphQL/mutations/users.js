@@ -17,8 +17,8 @@ export const CreateUser = async (userInput, returnedData) => {
     `
   };
 
-  const NewUser = await Post(CreateUser)
-  return NewUser.data.data
+  const newUser = await Post(CreateUser)
+  return newUser.data.data
 }
 
 export const EditUser = async (userID, editedData, returnedData) => {
