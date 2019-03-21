@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
     "cookie-session": "^1.3.3",
     "cors": "^2.8.5",
     "country-telephone-data": "^0.6.0",
