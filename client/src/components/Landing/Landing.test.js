@@ -5,9 +5,6 @@ import Landing from "../Landing";
 
 describe("<Landing />", () => {
   it("renders Landing component", () => {
-    render(<Landing />);
-  });
-  it("renders", () => {
     const { asFragment } = render(<Landing />);
     expect(asFragment()).toMatchSnapshot();
   });

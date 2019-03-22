@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const graphqlHttp = require('express-graphql');
@@ -12,7 +13,7 @@ const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 
 const authRouter = require('./auth');
-
+const stripeRouter = require('./stripe');
 const welcomeRouter = require('./routers/welcomeRouter');
 const passwordResetRouter = require('./routers/passwordResetRouter');
 const taxRateRouter = require('./routers/taxRateRouter');
@@ -20,6 +21,7 @@ const taxRateRouter = require('./routers/taxRateRouter');
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
 
+app.use(bodyParser.text());
 app.use(express.json(), cors(), helmet());
 
 app.use(passport.initialize());
@@ -33,6 +35,7 @@ app.get(
   }
 );
 
+app.use('/stripe', stripeRouter);
 app.use('/auth', authRouter);
 app.use('/welcome', welcomeRouter);
 app.use('/password-reset', passwordResetRouter);

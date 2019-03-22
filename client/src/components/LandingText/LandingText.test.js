@@ -5,10 +5,7 @@ import LandingText from "../LandingText";
 
 describe("<LandingText />", () => {
   it("renders Landing Text", () => {
-    render(<LandingText />);
-  })
-  it('renders', () => {
     const { asFragment } = render(<LandingText />);
     expect(asFragment()).toMatchSnapshot();
-  })
+  });
 });

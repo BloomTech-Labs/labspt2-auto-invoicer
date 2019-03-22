@@ -1,11 +1,11 @@
-const router = require('express').Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const router = require("express").Router();
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
-require('./jwt');
-require('./google');
-require('./facebook');
-require('./stripe');
+require("./jwt");
+require("./google");
+require("./facebook");
+require("./stripe");
 
 // Generate JWT
 const generateToken = user => {
@@ -20,39 +20,38 @@ const generateToken = user => {
 
 // Google
 router.get(
-  '/google',
-  passport.authenticate('google', {
+  "/google",
+  passport.authenticate("google", {
     session: false,
-    scope: ['profile', 'email']
+    scope: ["profile", "email"]
   })
 );
 
 router.get(
-  '/google/home',
-  passport.authenticate('google', {
+  "/google/home",
+  passport.authenticate("google", {
     session: false,
-    failureRedirect: '/login'
+    failureRedirect: "/login"
   }),
   (req, res) => {
     const token = generateToken(req.user);
-    res.json({ token });
+    res.redirect(`https://auto-invoicer.netlify.com/?token=${token}`);
   }
 );
-
 // Facebook
 router.get(
-  '/facebook',
-  passport.authenticate('facebook', {
+  "/facebook",
+  passport.authenticate("facebook", {
     session: false,
-    scope: ['email']
+    scope: ["email"]
   })
 );
 
 router.get(
-  '/facebook/home',
-  passport.authenticate('facebook', {
+  "/facebook/home",
+  passport.authenticate("facebook", {
     session: false,
-    failureRedirect: '/login'
+    failureRedirect: "/login"
   }),
   (req, res) => {
     const token = generateToken(req.user);
@@ -61,13 +60,21 @@ router.get(
 );
 
 // Stripe
-router.get('/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
+router.get("/stripe", passport.authenticate("stripe", { scope: "read_write" }));
 
 router.get(
-  '/stripe/home',
-  passport.authenticate('stripe', { failureRedirect: '/auth' }),
+  "/stripe/home",
+  passport.authenticate("stripe", { failureRedirect: "/auth" }),
   (req, res) => {
-    res.send('<h1>Stripe Its working!</h1>');
+    res.send("<h1>Stripe Its working!</h1>");
+  }
+);
+
+router.post(
+  '/local',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.send(req.user);
   }
 );
 

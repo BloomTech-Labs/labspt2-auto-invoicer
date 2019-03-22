@@ -3,3 +3,12 @@
   margin: 0 auto;
   text-align: center;
 }
+.secondary {
+  font-size: 14px;
+  color: gray;
+  margin: 5px;
+}
+.secondary:hover {
+  color: black;
+  cursor: pointer;
+}
