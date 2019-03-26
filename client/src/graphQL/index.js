@@ -1,7 +1,14 @@
 import axios from 'axios'
 
-const Post = query => {
+export const Post = query => {
   return axios.post('http://localhost:5000/graphql', query)
 }
 
-export default Post
+export const inputToString = input => {
+  const data = [];
+  for(let key in input) {
+    data.push(`${key}: "${input[key]}"`)
+  }
+  input = data.join(", ");
+  return input
+}

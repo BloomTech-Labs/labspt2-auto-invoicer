@@ -1,11 +1,7 @@
-import Post from '../index'
+import {Post, inputToString} from '../index'
 
 export const CreateCustomer = async (customerInput, returnedData) => {
-  const data = [];
-  for(let key in customerInput) {
-    data.push(`${key}: "${customerInput[key]}"`)
-  }
-  customerInput = data.join(", ");
+  inputToString(customerInput)
 
   const CreateCustomer = {
     query: `
@@ -21,11 +17,7 @@ export const CreateCustomer = async (customerInput, returnedData) => {
 }
 
 export const EditCustomer = async (customerID, editedData, returnedData) => {
-  const data = [];
-  for(let key in editedData) {
-    data.push(`${key}: "${editedData[key]}"`)
-  }
-  editedData = data.join(", ");
+  inputToString(editedData)
 
   const EditCustomer = {
     query: `
