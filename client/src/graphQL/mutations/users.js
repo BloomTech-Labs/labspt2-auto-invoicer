@@ -1,11 +1,7 @@
-import Post from '../index'
+import {Post, inputToString} from '../index'
 
 export const CreateUser = async (userInput, returnedData) => {
-  const data = [];
-  for(let key in userInput) {
-    data.push(`${key}: "${userInput[key]}"`)
-  }
-  userInput = data.join(", ");
+  inputToString(userInput)
   
   const CreateUser = {
     query: `
@@ -22,12 +18,8 @@ export const CreateUser = async (userInput, returnedData) => {
 }
 
 export const EditUser = async (userID, editedData, returnedData) => {
-  const data = [];
-  for(let key in editedData) {
-      data.push(`${key}: "${editedData[key]}"`)
-  }
-  editedData = data.join(", ")
-
+  inputToString(editedData)
+  
     const EditUser = {
       query: `
         mutation {
