@@ -1,6 +1,6 @@
-import React from "react";
-import "./AuthForm.css";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import './AuthForm.css';
+import { withRouter } from 'react-router-dom';
 
 class AuthForm extends React.Component {
   render() {
