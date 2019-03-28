@@ -13,7 +13,8 @@ class CompanyForm extends React.Component {
       companyAddress: "",
       companyZip: "",
       companyState: "",
-      companyCity: ""
+      companyCity: "",
+      selected: "create"
     };
   }
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -43,6 +44,18 @@ class CompanyForm extends React.Component {
       alert(JSON.stringify(companyObj));
     }
   };
+  static getDerivedStateFromProps(props, state) {
+    if (props.selected !== state.selected) {
+      return {
+        selected: props.selected,
+        companyName: props.company.companyName,
+        companyAddress: props.company.companyAddress,
+        companyZip: props.company.companyZip,
+        companyState: props.company.companyState,
+        companyCity: props.company.companyCity
+      };
+    }
+  }
   render() {
     return (
       <section>
