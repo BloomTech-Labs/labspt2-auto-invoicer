@@ -1,0 +1,118 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import "./CompanyForm.css";
+
+class CompanyForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.fileInput = React.createRef();
+    this.state = {
+      companyName: "",
+      companyAddress: "",
+      companyZip: "",
+      companyState: "",
+      companyCity: ""
+    };
+  }
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  createCompanyObject = e => {
+    e.preventDefault();
+    const {
+      companyName,
+      companyAddress,
+      companyCity,
+      companyState,
+      companyZip
+    } = this.state;
+
+    let companyObj = {
+      companyName,
+      companyAddress,
+      companyCity,
+      companyState,
+      companyZip
+    };
+    // check if logo is being uploaded prior to adding to companyObj
+    if (this.fileInput.current.files[0]) {
+      let logo = this.fileInput.current.files[0].name;
+      companyObj = Object.assign({}, { ...companyObj }, { logo: logo });
+      alert(JSON.stringify(companyObj));
+    } else {
+      alert(JSON.stringify(companyObj));
+    }
+  };
+  render() {
+    return (
+      <section>
+        <form onSubmit={this.createCompanyObject} className="form-column">
+          <label forhtml="companyName">
+            Company Name
+            <input
+              type="text"
+              name="companyName"
+              onChange={this.handleChange}
+              value={this.state.companyName}
+              placeholder="company name"
+            />
+          </label>
+          <label forhtml="companyAddress">
+            Address
+            <input
+              type="text"
+              name="companyAddress"
+              onChange={this.handleChange}
+              value={this.state.companyAddress}
+              placeholder="company address"
+            />
+          </label>
+          <label forhtml="companyCity">
+            City
+            <input
+              type="text"
+              name="companyCity"
+              onChange={this.handleChange}
+              value={this.state.companyCity}
+              placeholder="city"
+            />
+          </label>
+          <label forhtml="companyState">
+            State
+            <input
+              type="text"
+              name="companyState"
+              onChange={this.handleChange}
+              value={this.state.companyState}
+              placeholder="state"
+            />
+          </label>
+          <label forhtml="companyZip">
+            Zipcode
+            <input
+              type="text"
+              name="companyZip"
+              onChange={this.handleChange}
+              value={this.state.companyZip}
+              placeholder="zip"
+            />
+          </label>
+          <label forhtml="companyLogo">
+            Logo
+            <input
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              name="companyLogo"
+              ref={this.fileInput}
+              id="logo-input"
+            />
+          </label>
+          <p className="notes-caption">* Only accepts png/jpeg/jpg formats</p>
+          <button type="submit">Save Company</button>
+        </form>
+      </section>
+    );
+  }
+}
+
+export default CompanyForm;

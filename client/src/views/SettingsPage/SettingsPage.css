@@ -1,0 +1,51 @@
+.settings-view {
+  display: flex;
+  align-items: baseline;
+  margin-top: 30px;
+}
+.settings-view div > h3 {
+  font-size: 3.6rem;
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.form-column label {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  margin: 0 auto;
+}
+
+.form-column label input {
+  width: 200px;
+  margin: 5px;
+  font-size: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.form-column button {
+  width: 200px;
+  font-size: 20px;
+  padding: 3px 0;
+  margin: 10px auto;
+}
+.notes-caption {
+  width: 400px;
+  padding: 0 5px;
+  text-align: right;
+  margin: 0 auto;
+}
