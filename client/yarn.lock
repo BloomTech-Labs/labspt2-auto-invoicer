@@ -727,7 +727,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
   dependencies:
@@ -2985,15 +2985,6 @@ dom-serializer@0:
     entities "^1.1.1"
 
 dom-testing-library@^3.13.1:
-<<<<<<< HEAD
-  version "3.18.2"
-  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-3.18.2.tgz#07d65166743ad3299b7bee5b488e9622c31241bc"
-  integrity sha512-+nYUgGhHarrCY8kLVmyHlgM+IGwBXXrYsWIJB6vpAx2ne9WFgKfwMGcOkkTKQhuAro0sP6RIuRGfm5NF3+ccmQ==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    "@sheerun/mutationobserver-shim" "^0.3.2"
-    pretty-format "^24.5.0"
-=======
   version "3.17.1"
   resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-3.17.1.tgz#3291bc3cf68c555ba5e663697ee77d604aaa122b"
   integrity sha512-SbkaRfQvuLjnv+xFgSo/cmKoN9tjBL6Rh1f3nQH9jnjUe5q+keRwacYSi3uSpcB4D1K768iavCayKH3ZN9ea+g==
@@ -3001,7 +2992,6 @@ dom-testing-library@^3.13.1:
     "@babel/runtime" "^7.3.4"
     "@sheerun/mutationobserver-shim" "^0.3.2"
     pretty-format "^24.0.0"
->>>>>>> 79526c93a311afb6df57caa3f4f34c96c8811301
     wait-for-expect "^1.1.0"
 
 domain-browser@^1.1.1:
@@ -7231,11 +7221,7 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-<<<<<<< HEAD
 pretty-format@^24.0.0, pretty-format@^24.5.0:
-=======
-pretty-format@^24.0.0:
->>>>>>> 79526c93a311afb6df57caa3f4f34c96c8811301
   version "24.5.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.5.0.tgz#cc69a0281a62cd7242633fc135d6930cd889822d"
   integrity sha512-/3RuSghukCf8Riu5Ncve0iI+BzVkbRU5EeUoArKARZobREycuH5O4waxvaNIloEXdb0qwgmEAed5vTpX1HNROQ==
@@ -7669,7 +7655,6 @@ react-scripts@2.1.5:
   optionalDependencies:
     fsevents "1.2.4"
 
-<<<<<<< HEAD
 react-stripe-elements@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-2.0.3.tgz#cfd0f68d00ce52a07aab1cb2b59b29dc12309486"
@@ -7678,15 +7663,9 @@ react-stripe-elements@^2.0.3:
     prop-types "^15.5.10"
 
 react-testing-library@^6.0.0:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/react-testing-library/-/react-testing-library-6.0.2.tgz#afd7ddaa174e21cf672605e4e4f6f8156c4c9ef9"
-  integrity sha512-hWJIixR/jxJBnemcWI5O2JCMXlwoIpgF1IEUF8EYNEADORSZ9fs8rEJu4ygqyC53l3QOowkNb8D+eF5kGT3srg==
-=======
-react-testing-library@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-testing-library/-/react-testing-library-6.0.0.tgz#81edfcfae8a795525f48685be9bf561df45bb35d"
   integrity sha512-h0h+YLe4KWptK6HxOMnoNN4ngu3W8isrwDmHjPC5gxc+nOZOCurOvbKVYCvvuAw91jdO7VZSm/5KR7TxKnz0qA==
->>>>>>> 79526c93a311afb6df57caa3f4f34c96c8811301
   dependencies:
     "@babel/runtime" "^7.3.1"
     dom-testing-library "^3.13.1"
