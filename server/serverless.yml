@@ -22,6 +22,18 @@ functions:
           cors: true
       - http:
           path: auth/facebook/home
+          method: get
+          cors: true
+      - http:
+          path: auth/stripe
+          method: get
+          cors: true
+      - http:
+          path: auth/stripe/home
+          method: get
+          cors: true
+      - http:
+          path: stripe/charge
           method: post
           cors: true
       - http:
