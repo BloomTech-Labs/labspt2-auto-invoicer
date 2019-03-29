@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
 type User {
@@ -55,16 +55,54 @@ type Customer {
   invoices: [Invoice!]
 }
 
+
+
 type Invoice {
   _id: ID!
-  createdBy: ID!
-  invoice_num: String!
-  company_id: ID!
-  customer_id: ID!
+  invoiceNumber: Int!
+  languageSelection: String!
+  currencySelection: String!
+  addressFrom: String!
+  addressTo: String!
+  cityTo: String
+  stateRegionTo: String
+  zipCodeTo: Int!
+  clientEmailTo: String!
+  selectedDate: String!
+  invoiceDueDate: String!
+  balanceDue: Float!
+  subtotal: Int
+  discount: Int
+  tax: Float!
+  shipping: Int!
+  total: Int
+  amountPaid: Int
+  invoiceNotes: String
+  invoiceTerms: String
 }
 
+
 input InvoiceInput {
-  invoice_num: String!
+  invoiceNumber: Int!
+  languageSelection: String!
+  currencySelection: String!
+  addressFrom: String!
+  addressTo: String!
+  cityTo: String
+  stateRegionTo: String
+  zipCodeTo: Int!
+  clientEmailTo: String!
+  selectedDate: String!
+  invoiceDueDate: String!
+  balanceDue: Float!
+  subtotal: Int
+  discount: Int
+  tax: Float!
+  shipping: Int!
+  total: Int
+  amountPaid: Int
+  invoiceNotes: String
+  invoiceTerms: String
 }
 
 type Item {
@@ -182,6 +220,7 @@ type RootQuery {
   countries: [Country!]!
   country(name: String, iso2: String): Country!
   invoices: [Invoice!]!
+  invoice(invoiceID: ID!): Invoice!
 }
 
 type RootMutation {
@@ -194,6 +233,7 @@ type RootMutation {
   addUserToCompany(userID: ID!, companyID: ID!): Company
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
+  
 }
 
 schema {
