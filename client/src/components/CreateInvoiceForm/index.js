@@ -10,6 +10,9 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 // InvoiceItemInput
 import InvoiceItemInput from "../InvoiceItemsInput";
 
+// GraphQL mutation - CreateInvoice endpoint
+//import CreateInvoice from "../../graphQL/mutations/invoices";
+
 //CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
@@ -286,7 +289,7 @@ export default class index extends Component {
       total: this.state.total,
       amountPaid: this.state.amountPaid
     };
-    
+
     this.props.click(formPayload);
     this.handleClearForm(e);
   }
@@ -589,6 +592,7 @@ export default class index extends Component {
           <button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
+            //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
             Generate
           </button>
