@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 // import components here
 import SettingsForm from "../../components/SettingsForm";
@@ -37,18 +36,14 @@ class SettingsPage extends React.Component {
           companyAddress: "123 fake rd."
         }
       ],
-      currentCompany: {}
+      currentCompany: {companyName: "",
+      companyZip: "",
+      companyCity: "",
+      companyState: "",
+      companyAddress: ""}
     };
   }
   handleChange = e => {
-    this.state.companyList.map(company => {
-      if (company.companyName === e.target.value) {
-        return this.setState({
-          selected: e.target.value,
-          currentCompany: company
-        });
-      }
-    });
     if (e.target.value === "create") {
       return this.setState({
         currentCompany: {
@@ -58,6 +53,17 @@ class SettingsPage extends React.Component {
           companyState: "",
           companyAddress: ""
         }
+      });
+    }
+    else {
+      this.state.companyList.map(company => {
+        if (company.companyName === e.target.value) {
+          return this.setState({
+            selected: e.target.value,
+            currentCompany: company
+          });
+        }
+        return company;
       });
     }
   };
@@ -89,7 +95,7 @@ class SettingsPage extends React.Component {
               }}
             />
           ) : (
-            <CompanyForm company={this.state.currentCompany} />
+            <CompanyForm company={this.state.currentCompany} selected={this.state.selected} />
           )}
         </div>
       </section>

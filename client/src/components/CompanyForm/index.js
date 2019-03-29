@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import "./CompanyForm.css";
 
@@ -47,13 +46,22 @@ class CompanyForm extends React.Component {
   static getDerivedStateFromProps(props, state) {
     if (props.selected !== state.selected) {
       return {
-        selected: props.selected,
+        selected: props.company.selected,
         companyName: props.company.companyName,
         companyAddress: props.company.companyAddress,
         companyZip: props.company.companyZip,
         companyState: props.company.companyState,
         companyCity: props.company.companyCity
-      };
+      }
+    }else {
+      return {
+        selected: 'create',
+        companyName: '',
+        companyAddress: '',
+        companyZip: '',
+        companyState:'',
+        companyCity: ''
+      }
     }
   }
   render() {

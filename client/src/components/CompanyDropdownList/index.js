@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import "./CompanyDropdownList.css";
 
@@ -12,7 +11,7 @@ const CompanyDropdownList = props => {
         {props.companies ? (
           props.companies.map(company => {
             return (
-              <option value={company.companyName}>{company.companyName}</option>
+              <option value={company.companyName} key={`${company.companyName}+${company.companyZip}`}>{company.companyName}</option>
             );
           })
         ) : (

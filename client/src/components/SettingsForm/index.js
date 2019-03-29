@@ -60,7 +60,7 @@ class SettingsForm extends React.Component {
             value={phone}
             placeholder="phone"
             pattern="[0-9]{10}"
-            maxlength="10"
+            maxLength="10"
           />
         </label>
         <Button>Save</Button>
