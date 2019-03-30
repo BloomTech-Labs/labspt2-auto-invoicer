@@ -23,6 +23,9 @@ import AuthModal from "../AuthModal";
 import InvoiceList from "../../views/InvoiceList";
 import PasswordResetView from "../../views/PasswordResetView";
 
+import {CompanyConsumer} from '../../contexts/CompanyContext'
+import {UserConsumer} from '../../contexts/UserContext'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -155,30 +158,47 @@ class App extends Component {
             }}
           />
         ) : null}
-        <section className="routes-container">
-          {/* ROUTES GO HERE
-            check if logged in before routing below, and redirect to landing if not loggedIn */}
-          <Route exact path={`/user/${id}/billing`} component={BillingPage} />
-          <Route
-            exact
-            path={`/user/${id}/invoice/create`}
-            component={CreateInvoice}
-          />
-          <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <LandingPage {...props} click={this.signUpModal} />
-            )}
-          />
-          <Route
-            exact
-            path={`/user/${id}/invoices`}
-            render={props => <InvoiceList id={id} />}
-          />
-          <Route exact path={"/password-reset"} component={PasswordResetView} />
-        </section>
+        <UserConsumer>
+          {({fetchUser, userState}) => {
+            return (
+              <CompanyConsumer>
+                {({fetchCompany, companyState}) => {
+                  return (
+                    <section className="routes-container">
+                      {/* ROUTES GO HERE
+                        check if logged in before routing below, and redirect to landing if not loggedIn */}
+                      <Route exact path={`/user/${id}/billing`} component={BillingPage} />
+                      <Route
+                        exact
+                        path={`/user/${id}/invoice/create`}
+                        component={CreateInvoice}
+                      />
+                      <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
+                      <Route
+                        exact
+                        path="/"
+                        render={props => (
+                          <LandingPage {...props} click={this.signUpModal} />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path={`/user/${id}/invoices`}
+                        render={props => <InvoiceList 
+                          id={id} 
+                          fetchUser={fetchUser} 
+                          user={userState} 
+                          fetchCompany={fetchCompany}
+                          company={companyState}/>}
+                      />
+                      <Route exact path={"/password-reset"} component={PasswordResetView} />
+                    </section>
+                  )
+                }} 
+              </CompanyConsumer>
+            )
+          }}
+        </UserConsumer>
       </div>
     );
   }
