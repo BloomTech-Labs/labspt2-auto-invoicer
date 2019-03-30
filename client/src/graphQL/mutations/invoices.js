@@ -1,18 +1,20 @@
 import { Post, inputToString } from "../index";
 
 export const CreateInvoice = async (invoiceInput, returnedData) => {
-  inputToString(invoiceInput);
-
+  const result = inputToString(invoiceInput);
+  console.log("invoice input:", result);
   const CreateInvoice = {
     query: `
             mutation {
-                createInvoice(invoiceInput: {${invoiceInput}}) {
+                createInvoice(invoiceInput: {${result}}) {
                     ${returnedData}
                 }
             }
         `
   };
+  console.log("create invoice", CreateInvoice);
   const newInvoice = await Post(CreateInvoice);
+  console.log("new invoice", newInvoice);
   return newInvoice.data.data;
 };
 

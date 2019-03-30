@@ -29,7 +29,7 @@ class App extends Component {
 
     this.state = {
       toggleSignIn: false,
-      loggedIn: false,
+      loggedIn: false,   
       id: null,
       toggleRegister: false,
       togglePassForgot: false,

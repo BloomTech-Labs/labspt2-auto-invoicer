@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const invoiceSchema = new Schema({
   invoiceNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   languageSelection: {
@@ -30,7 +30,7 @@ const invoiceSchema = new Schema({
     required: false
   },
   zipCodeTo: {
-    type: Number,
+    type: String,
     required: true
   },
   clientEmailTo: {
@@ -46,31 +46,31 @@ const invoiceSchema = new Schema({
     required: true
   },
   balanceDue: {
-    type: Number,
+    type: String,
     required: true
   },
   subtotal: {
-    type: Number,
+    type: String,
     required: true
   },
   discount: {
-    type: Number,
+    type: String,
     required: true
   },
   tax: {
-    type: Number,
+    type: String,
     required: true
   },
   shipping: {
-    type: Number,
+    type: String,
     required: true
   },
   total: {
-    type: Number,
+    type: String,
     required: true
   },
   amountPaid: {
-    type: Number,
+    type: String,
     required: true
   },
   invoiceNotes: {

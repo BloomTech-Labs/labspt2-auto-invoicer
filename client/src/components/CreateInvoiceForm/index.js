@@ -11,7 +11,7 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import InvoiceItemInput from "../InvoiceItemsInput";
 
 // GraphQL mutation - CreateInvoice endpoint
-//import CreateInvoice from "../../graphQL/mutations/invoices";
+import { CreateInvoice } from "../../graphQL/mutations/invoices";
 
 //CSS
 import "./CreateInvoiceForm.css";
@@ -281,7 +281,7 @@ export default class index extends Component {
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
-      invoiceItems: this.state.invoiceItems,
+      //invoiceItems: this.state.invoiceItems,
       subtotal: this.state.subtotal,
       discount: this.state.discount,
       tax: this.state.tax,
@@ -290,6 +290,7 @@ export default class index extends Component {
       amountPaid: this.state.amountPaid
     };
 
+    CreateInvoice(formPayload, "invoiceNumber total")
     this.props.click(formPayload);
     this.handleClearForm(e);
   }
