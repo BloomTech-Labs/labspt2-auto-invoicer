@@ -1,4 +1,4 @@
-const { buildSchema } = require("graphql");
+const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
 type User {
@@ -55,54 +55,51 @@ type Customer {
   invoices: [Invoice!]
 }
 
-
-
 type Invoice {
   _id: ID!
   invoiceNumber: Int!
-  languageSelection: String!
-  currencySelection: String!
   addressFrom: String!
   addressTo: String!
-  cityTo: String
-  stateRegionTo: String
+  cityTo: String!
+  stateRegionTo: String!
   zipCodeTo: Int!
   clientEmailTo: String!
+  languageSelection: String!
+  currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
   balanceDue: Float!
-  subtotal: Int
-  discount: Int
+  subtotal: Float!
+  discount: Float!
   tax: Float!
-  shipping: Int!
-  total: Int
-  amountPaid: Int
+  shipping: Float!
+  total: Float!
   invoiceNotes: String
   invoiceTerms: String
+  amountPaid: Float
 }
-
 
 input InvoiceInput {
   invoiceNumber: Int!
-  languageSelection: String!
-  currencySelection: String!
   addressFrom: String!
   addressTo: String!
-  cityTo: String
-  stateRegionTo: String
+  cityTo: String!
+  stateRegionTo: String!
   zipCodeTo: Int!
   clientEmailTo: String!
+  languageSelection: String!
+  currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
   balanceDue: Float!
-  subtotal: Int
-  discount: Int
+  subtotal: Float!
+  discount: Float!
   tax: Float!
-  shipping: Int!
-  total: Int
-  amountPaid: Int
+  shipping: Float!
+  total: Float!
   invoiceNotes: String
   invoiceTerms: String
+  amountPaid: Float
 }
 
 type Item {
@@ -233,7 +230,6 @@ type RootMutation {
   addUserToCompany(userID: ID!, companyID: ID!): Company
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
-  
 }
 
 schema {

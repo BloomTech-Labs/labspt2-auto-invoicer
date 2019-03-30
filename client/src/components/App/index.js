@@ -77,7 +77,7 @@ class App extends Component {
     //disable register button
     axios
       .post(
-        'https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome',
+        "https://api.myautoinvoicer.com/welcome",
         { ...user }
       )
       .then(res => {
@@ -91,7 +91,7 @@ class App extends Component {
   sendPasswordReset = email => {
     axios
       .post(
-        'https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset',
+        "https://api.myautoinvoicer.com/password-reset",
         { ...email }
       )
       .then(res => {
