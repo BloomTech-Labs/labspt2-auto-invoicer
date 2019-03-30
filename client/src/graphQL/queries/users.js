@@ -1,4 +1,4 @@
-import Post from "..";
+import {Post} from "../index";
 
 export const FetchUsers = async (returnedData) => {
   const Users = {

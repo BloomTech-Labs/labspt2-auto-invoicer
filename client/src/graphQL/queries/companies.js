@@ -1,4 +1,4 @@
-import Post from "..";
+import {Post} from "..";
 
 export const FetchCompanies = async (returnedData) => {
   const Companies = {
