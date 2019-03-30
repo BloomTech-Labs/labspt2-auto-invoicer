@@ -78,7 +78,6 @@ class App extends Component {
     axios
       .post(
         "https://api.myautoinvoicer.com/welcome",
-
         { ...user }
       )
       .then(res => {
