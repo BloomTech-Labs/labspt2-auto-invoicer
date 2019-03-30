@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import StripeCheckoutForm from '../StripeCheckoutForm';
 
+import Typography from '@material-ui/core/Typography';
+
 class StripeElements extends Component {
   render() {
     return (
-      <StripeProvider apiKey={`${process.env.REACT_APP_STRIPE_CHECKOUT_PUBLISHABLE_KEY}`} >
+      <StripeProvider apiKey="pk_test_aQUyLjBzj0vLD5DfVQv55rFk">
         <div className="example">
-          <h1>React Stripe Elements Example</h1>
+          <Typography variant="h3" gutterBottom>
+            Purchase your plan
+          </Typography>
           <Elements>
             <StripeCheckoutForm />
           </Elements>
