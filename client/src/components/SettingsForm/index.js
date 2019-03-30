@@ -1,7 +1,7 @@
 import React from "react";
 
 // import components here
-import NewSettingsInfo from "../NewSettingsInfo";
+import Button from "../reusableComponents/Button";
 
 // import css here
 import "./SettingsForm.css";
@@ -11,10 +11,9 @@ class SettingsForm extends React.Component {
     super(props);
 
     this.state = {
-      email: "",
-      oldPassword: "",
-      newPassword: "",
-      confirmPassword: ""
+      email: "testing@gmail.com",
+      name: "john doe",
+      phone: "6789995566"
     };
   }
   changeHandler = e => {
@@ -27,16 +26,44 @@ class SettingsForm extends React.Component {
     newPassword === confirmPassword && newPassword.length > 7
       ? alert("Password Changed")
       : alert("Passwords do not match or invalid");
-    
   };
   render() {
-    const settingsInfo = Object.create(this.state);
+    const { name, email, phone } = this.state;
     return (
-      <form className="settings_form" onSubmit={this.newPasswordSubmit}>
-        <NewSettingsInfo
-          settingsInfo={settingsInfo}
-          changeHandler={this.changeHandler}
-        />
+      <form className="form-column" onSubmit={this.newPasswordSubmit}>
+        <label forhtml="name">
+          Name
+          <input
+            type="text"
+            name="name"
+            onChange={this.changeHandler}
+            value={name}
+            placeholder="name"
+          />
+        </label>
+        <label forhtml="email">
+          Email
+          <input
+            type="text"
+            name="email"
+            onChange={this.changeHandler}
+            value={email}
+            placeholder="email"
+          />
+        </label>
+        <label forhtml="companyCity">
+          Phone
+          <input
+            type="text"
+            name="phone"
+            onChange={this.changeHandler}
+            value={phone}
+            placeholder="phone"
+            pattern="[0-9]{10}"
+            maxLength="10"
+          />
+        </label>
+        <Button>Save</Button>
       </form>
     );
   }
