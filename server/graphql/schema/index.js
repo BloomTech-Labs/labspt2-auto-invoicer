@@ -4,16 +4,8 @@ module.exports = buildSchema(`
 type User {
   _id: ID!
   email: String!
-  password: String
   name: String!
   phone_num: String
-  country_code: String
-  address_1: String
-  address_2: String
-  city: String
-  state: String
-  postal_code: String
-  country: String
   companies: [Company!]
   invoices: [Invoice!]
   googleId: String
@@ -142,30 +134,15 @@ input EditCompanyInput {
 
 input UserInput {
   email: String!
-  password: String!
   name: String!
   phone_num: String!
-  country_code: String!
-  address_1: String!
-  address_2: String
-  city: String!
-  state: String!
-  postal_code: String!
-  country: String!
+
 }
 
 input EditUserInput {
   email: String
-  password: String
   name: String
   phone_num: String
-  country_code: String
-  address_1: String
-  address_2: String
-  city: String
-  state: String
-  postal_code: String
-  country: String
 }
 
 input CustomerInput {
