@@ -9,7 +9,7 @@ class StripeElements extends Component {
     return (
       <StripeProvider apiKey="pk_test_aQUyLjBzj0vLD5DfVQv55rFk">
         <div className="example">
-          <Typography variant="h3" gutterBottom>
+          <Typography style={{ fontSize: '4rem' }} variant="h3" gutterBottom>
             Purchase your plan
           </Typography>
           <Elements>

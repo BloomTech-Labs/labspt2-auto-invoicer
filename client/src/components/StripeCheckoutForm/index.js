@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
 
 const styles = theme => ({
   container: {
@@ -14,20 +16,39 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250
+    width: '90%',
+    fontSize: '1.5rem'
   },
   dense: {
     marginTop: 19
   },
   menu: {
-    width: 250
+    width: '90%',
+    fontSize: '1.5rem'
   },
   card: {
-    width: '25%'
+    width: '90%',
+    marginTop: 15
   },
   button: {
     margin: theme.spacing.unit,
-    width: '20%'
+    width: '90%',
+    alignSelf: 'center',
+    height: 40,
+    marginTop: 20,
+    fontSize: 18
+  },
+  label: {
+    fontSize: '1.5rem'
+  },
+  helperText: {
+    fontSize: '1.2rem'
+  },
+  paper: {
+    zIndex: 1,
+    position: 'relative',
+    margin: theme.spacing.unit,
+    padding: theme.spacing.unit
   }
 });
 
@@ -58,8 +79,13 @@ class StripeCheckoutForm extends Component {
       unlimited: false,
       currency: 'USD',
       name: '',
-      quantity: 0
+      quantity: 0,
+      checked: false
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ checked: true }), 700);
   }
 
   onChange = e => {
@@ -92,84 +118,122 @@ class StripeCheckoutForm extends Component {
 
   render() {
     const { classes } = this.props;
+    const { checked } = this.state;
     const price = this.state.unlimited ? 9.99 : this.state.quantity * 0.99;
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="standard-with-placeholder"
-          label="Card Holder's Name"
-          placeholder="Enter your name"
-          className={classes.textField}
-          margin="normal"
-          name="name"
-          value={this.state.name}
-          onChange={this.onChange}
-        />
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Select"
-          name="unlimited"
-          className={classes.textField}
-          value={this.state.unlimited}
-          onChange={this.onChange}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Please select your Plan"
-          margin="normal"
-        >
-          <MenuItem value={false}>Credits</MenuItem>
-          <MenuItem value={true}>1 Month Unlimited</MenuItem>
-        </TextField>
-        <TextField
-          id="standard-number"
-          label="Number"
-          name="quantity"
-          disabled={this.state.unlimited}
-          value={this.state.quantity}
-          onChange={this.onChange}
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true
-          }}
-          margin="normal"
-        />
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Select"
-          name="currency"
-          className={classes.textField}
-          value={this.state.currency}
-          onChange={this.onChange}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu
-            }
-          }}
-          helperText="Please select your currency"
-          margin="normal"
-        >
-          {currencies.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <CardElement className={classes.card} />
-        <Button
-          onClick={this.onSubmit}
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-        >
-          {`Pay ${price}`}
-        </Button>
-      </form>
+      <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+        <Paper elevation={4} className={classes.paper}>
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+              InputProps={{
+                inputProps: {
+                  className: classes.textField
+                }
+              }}
+              InputLabelProps={{
+                className: classes.label
+              }}
+              id="standard-with-placeholder"
+              style={{ fontSize: '2rem' }}
+              label="Card Holder's Name"
+              placeholder="Enter your name"
+              className={classes.textField}
+              margin="normal"
+              name="name"
+              value={this.state.name}
+              onChange={this.onChange}
+            />
+            <TextField
+              InputProps={{
+                inputProps: {
+                  className: classes.textField
+                }
+              }}
+              InputLabelProps={{
+                className: classes.label
+              }}
+              select
+              label="Choose a plan"
+              name="unlimited"
+              className={classes.textField}
+              value={this.state.unlimited}
+              onChange={this.onChange}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu
+                }
+              }}
+              FormHelperTextProps={{ className: classes.helperText }}
+              helperText="Please select your Plan"
+              margin="normal"
+            >
+              <MenuItem value={false}>Credits</MenuItem>
+              <MenuItem value={true}>1 Month Unlimited</MenuItem>
+            </TextField>
+            <TextField
+              InputProps={{
+                inputProps: {
+                  className: classes.textField
+                }
+              }}
+              InputLabelProps={{
+                className: classes.label
+              }}
+              id="standard-number"
+              label="How many credits do you want?"
+              name="quantity"
+              disabled={this.state.unlimited}
+              value={this.state.quantity}
+              onChange={this.onChange}
+              className={classes.textField}
+              InputLabelProps={{
+                className: classes.label
+              }}
+              margin="normal"
+            />
+            <TextField
+              InputProps={{
+                inputProps: {
+                  className: classes.textField
+                }
+              }}
+              InputLabelProps={{
+                className: classes.label
+              }}
+              id="standard-select-currency"
+              select
+              label="Currency"
+              name="currency"
+              className={classes.textField}
+              value={this.state.currency}
+              onChange={this.onChange}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu
+                }
+              }}
+              FormHelperTextProps={{ className: classes.helperText }}
+              helperText="Please select your currency"
+              margin="normal"
+            >
+              {currencies.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <CardElement className={classes.card} />
+            <Button
+              onClick={this.onSubmit}
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+            >
+              {`Pay ${price}`}
+            </Button>
+          </form>
+        </Paper>
+      </Slide>
     );
   }
 }

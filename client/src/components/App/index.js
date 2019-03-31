@@ -22,7 +22,6 @@ import AuthModal from '../AuthModal';
 
 import InvoiceList from '../../views/InvoiceList';
 import PasswordResetView from '../../views/PasswordResetView';
-import StripeElements from './../StripeElements/index';
 
 class App extends Component {
   constructor(props) {
@@ -76,10 +75,7 @@ class App extends Component {
     // send an email object up with user email
     //disable register button
     axios
-      .post(
-        "https://api.myautoinvoicer.com/welcome",
-        { ...user }
-      )
+      .post('https://api.myautoinvoicer.com/welcome', { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
@@ -90,10 +86,7 @@ class App extends Component {
   };
   sendPasswordReset = email => {
     axios
-      .post(
-        "https://api.myautoinvoicer.com/password-reset",
-        { ...email }
-      )
+      .post('https://api.myautoinvoicer.com/password-reset', { ...email })
       .then(res => {
         console.log(res);
       });
@@ -165,7 +158,6 @@ class App extends Component {
             path={`/user/${id}/invoice/create`}
             component={CreateInvoice}
           />
-          <Route exact path={`/users/purchase`} component={StripeElements} />
           <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
           <Route
             exact
