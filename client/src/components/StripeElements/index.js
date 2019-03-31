@@ -20,7 +20,11 @@ class StripeElements extends Component {
             mountOnEnter
             unmountOnExit
           >
-            <Typography style={{ fontSize: '4rem' }} variant="h3" gutterBottom>
+            <Typography
+              style={{ fontSize: '4rem', marginBottom: 40 }}
+              variant="h3"
+              gutterBottom
+            >
               Purchase your plan
             </Typography>
           </Slide>
