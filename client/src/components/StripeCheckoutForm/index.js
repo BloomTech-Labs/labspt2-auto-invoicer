@@ -121,7 +121,7 @@ class StripeCheckoutForm extends Component {
     const { checked } = this.state;
     const price = this.state.unlimited ? 9.99 : this.state.quantity * 0.99;
     return (
-      <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+      <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
         <Paper elevation={4} className={classes.paper}>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
