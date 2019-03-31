@@ -8,49 +8,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '90%',
-    fontSize: '1.5rem'
-  },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: '90%',
-    fontSize: '1.5rem'
-  },
-  card: {
-    width: '90%',
-    marginTop: 15
-  },
-  button: {
-    margin: theme.spacing.unit,
-    width: '90%',
-    alignSelf: 'center',
-    height: 40,
-    marginTop: 20,
-    fontSize: 18
-  },
-  label: {
-    fontSize: '1.5rem'
-  },
-  helperText: {
-    fontSize: '1.2rem'
-  },
-  paper: {
-    zIndex: 1,
-    position: 'relative',
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit
-  }
-});
+import styles from './styles';
+import CardHolderName from './CardHolderName';
 
 const currencies = [
   {
@@ -72,17 +31,14 @@ const currencies = [
 ];
 
 class StripeCheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      complete: false,
-      unlimited: false,
-      currency: 'USD',
-      name: '',
-      quantity: 0,
-      checked: false
-    };
-  }
+  state = {
+    complete: false,
+    unlimited: false,
+    currency: 'USD',
+    name: '',
+    quantity: 0,
+    checked: false
+  };
 
   componentDidMount() {
     setTimeout(() => this.setState({ checked: true }), 700);
@@ -124,24 +80,9 @@ class StripeCheckoutForm extends Component {
       <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
         <Paper elevation={4} className={classes.paper}>
           <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              InputProps={{
-                inputProps: {
-                  className: classes.textField
-                }
-              }}
-              InputLabelProps={{
-                className: classes.label
-              }}
-              id="standard-with-placeholder"
-              style={{ fontSize: '2rem' }}
-              label="Card Holder's Name"
-              placeholder="Enter your name"
-              className={classes.textField}
-              margin="normal"
-              name="name"
+            <CardHolderName
+              onChangeHandler={this.onChange}
               value={this.state.name}
-              onChange={this.onChange}
             />
             <TextField
               InputProps={{
