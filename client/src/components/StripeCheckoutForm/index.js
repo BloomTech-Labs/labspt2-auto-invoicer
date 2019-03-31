@@ -44,7 +44,6 @@ class StripeCheckoutForm extends Component {
       })
     });
     console.log(response);
-    if (response.ok) console.log('Purchase Complete!');
     this.setState({
       unlimited: false,
       currency: 'USD',
