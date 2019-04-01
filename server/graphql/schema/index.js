@@ -49,49 +49,54 @@ type Customer {
 
 type Invoice {
   _id: ID!
-  invoiceNumber: Int!
+  invoiceNumber: String!
+  languageSelection: String!
+  currencySelection: String!
   addressFrom: String!
   addressTo: String!
-  cityTo: String!
-  stateRegionTo: String!
-  zipCodeTo: Int!
+  cityTo: String
+  stateRegionTo: String
+  zipCodeTo: String!
   clientEmailTo: String!
   languageSelection: String!
   currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
-  balanceDue: Float!
-  subtotal: Float!
-  discount: Float!
-  tax: Float!
-  shipping: Float!
-  total: Float!
+  balanceDue: String!
+  subtotal: String
+  discount: String
+  tax: String!
+  shipping: String!
+  total: String
+  amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
   amountPaid: Float
 }
 
 input InvoiceInput {
-  invoiceNumber: Int!
+  invoiceNumber: String!
+  languageSelection: String!
+  currencySelection: String!
   addressFrom: String!
   addressTo: String!
-  cityTo: String!
-  stateRegionTo: String!
-  zipCodeTo: Int!
+  cityTo: String
+  stateRegionTo: String
+  zipCodeTo: String!
   clientEmailTo: String!
   languageSelection: String!
   currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
-  balanceDue: Float!
-  subtotal: Float!
-  discount: Float!
-  tax: Float!
-  shipping: Float!
-  total: Float!
+  balanceDue: String!
+  subtotal: String
+  discount: String
+  tax: String!
+  shipping: String!
+  total: String
+  amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
-  amountPaid: Float
 }
 
 type Item {

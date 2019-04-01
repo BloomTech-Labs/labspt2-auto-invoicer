@@ -8,6 +8,10 @@ import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
 import InvoiceItemInput from "../InvoiceItemsInput";
 
+// GraphQL mutation - CreateInvoice endpoint
+import { CreateInvoice } from "../../graphQL/mutations/invoices";
+
+//CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
 
@@ -156,43 +160,35 @@ export default class CreateInvoiceForm extends Component {
   handleFormSubmit = async e => {
     e.preventDefault();
 
-    const createInvoiceQuery = {
-      query: `
-        mutation {
-          createInvoice(invoiceInput: {
-            invoiceNumber: ${this.state.invoiceNumber},
-            addressFrom: "${this.state.addressFrom}",
-            addressTo: "${this.state.addressTo}",
-            cityTo: "${this.state.cityTo}",
-            stateRegionTo: "${this.state.stateRegionTo}",
-            zipCodeTo: ${this.state.zipCodeTo},
-            clientEmailTo: "${this.state.clientEmailTo}",
-            languageSelection: "${this.state.languageSelection}",
-            currencySelection: "${this.state.currencySelection}",
-            selectedDate: "${this.state.selectedDate}",
-            invoiceDueDate: "${this.state.invoiceDueDate}",
-            balanceDue: ${this.state.balanceDue},
-            subtotal: ${this.state.subtotal},
-            discount: ${this.state.discount},
-            tax: ${this.state.tax},
-            shipping: ${this.state.shipping},
-            total: ${this.state.total},
-            invoiceNotes: "${this.state.invoiceNotes}",
-            invoiceTerms: "${this.state.invoiceTerms}",
-            amountPaid: ${this.state.amountPaid}
-          }) {
-            _id
-          }
-        }
-      `
+    const formPayload = {
+      invoiceNumber: this.state.invoiceNumber,
+      addressFrom: this.state.addressFrom,
+      addressTo: this.state.addressTo,
+      cityTo: this.state.cityTo,
+      stateRegionTo: this.state.stateRegionTo,
+      zipCodeTo: this.state.zipCodeTo,
+      clientEmailTo: this.state.clientEmailTo,
+      languageSelection: this.state.languageSelection,
+      currencySelection: this.state.currencySelection,
+      selectedDate: this.state.selectedDate,
+      invoiceDueDate: this.state.invoiceDueDate,
+      balanceDue: this.state.balanceDue,
+      invoiceNotes: this.state.invoiceNotes,
+      invoiceTerms: this.state.invoiceTerms,
+      //invoiceItems: this.state.invoiceItems,
+      subtotal: this.state.subtotal,
+      discount: this.state.discount,
+      tax: this.state.tax,
+      shipping: this.state.shipping,
+      total: this.state.total,
+      amountPaid: this.state.amountPaid
     };
-    const newInvoice = await axios.post(
-      "https://api.myautoinvoicer.com/graphql",
-      createInvoiceQuery
-    );
 
-    return newInvoice.data.data;
-  };
+    CreateInvoice(formPayload, "invoiceNumber total")
+    this.props.click(formPayload);
+    this.handleClearForm(e);
+  }
+
 
   render() {
     return (
@@ -494,6 +490,7 @@ export default class CreateInvoiceForm extends Component {
           <button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
+            //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
             Generate
           </button>
