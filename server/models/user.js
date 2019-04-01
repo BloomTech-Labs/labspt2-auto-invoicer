@@ -1,13 +1,10 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
     email: {
       type: String,
       required: true
-    },
-    password: {
-      type: String
     },
     name: {
       type: String,
@@ -16,37 +13,16 @@ const userSchema = new Schema(
     phone_num: {
       type: String
     },
-    country_code: {
-      type: String
-    },
-    address_1: {
-      type: String
-    },
-    address_2: {
-      type: String
-    },
-    city: {
-      type: String
-    },
-    state: {
-      type: String
-    },
-    postal_code: {
-      type: String
-    },
-    country: {
-      type: String
-    },
     companies: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Company'
+        ref: "Company"
       }
     ],
     invoices: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Invoice'
+        ref: "Invoice"
       }
     ],
     googleId: {
@@ -59,4 +35,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model('User', userSchema);
+module.exports = model("User", userSchema);
