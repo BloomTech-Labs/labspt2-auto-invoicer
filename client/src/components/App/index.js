@@ -26,9 +26,6 @@ import PasswordResetView from '../../views/PasswordResetView';
 import {CompanyConsumer} from '../../contexts/CompanyContext'
 import {UserConsumer} from '../../contexts/UserContext'
 
-import {CompanyConsumer} from '../../contexts/CompanyContext'
-import {UserConsumer} from '../../contexts/UserContext'
-
 class App extends Component {
   constructor(props) {
     super(props);
