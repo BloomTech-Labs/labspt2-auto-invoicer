@@ -1,4 +1,4 @@
-import Post from '../index'
+import {Post} from '../index'
 
 export const FetchCustomers = async (returnedData) => {
   const Customers = {

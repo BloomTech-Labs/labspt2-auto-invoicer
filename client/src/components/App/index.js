@@ -1,27 +1,27 @@
 // import packages
-import React, { Component } from "react";
-import axios from "axios";
-import queryString from "query-string";
-import jwt from "jsonwebtoken";
+import React, { Component } from 'react';
+import axios from 'axios';
+import queryString from 'query-string';
+import jwt from 'jsonwebtoken';
 //import styles
-import "./App.css";
+import './App.css';
 
 // react router methods
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter } from 'react-router-dom';
 
 //imported components
-import SideNavigation from "../SideNavigation";
-import SignInModal from "../SignInModal";
-import BillingPage from "../../views/BillingPage";
-import SignUpModal from "../SignUpModal";
-import LandingPage from "../../views/LandingPage";
-import CreateInvoice from "../../views/CreateInvoice";
-import SettingsPage from "../../views/SettingsPage";
-import ForgotPassModal from "../ForgotPassModal";
-import AuthModal from "../AuthModal";
+import SideNavigation from '../SideNavigation';
+import SignInModal from '../SignInModal';
+import BillingPage from '../../views/BillingPage';
+import SignUpModal from '../SignUpModal';
+import LandingPage from '../../views/LandingPage';
+import CreateInvoice from '../../views/CreateInvoice';
+import SettingsPage from '../../views/SettingsPage';
+import ForgotPassModal from '../ForgotPassModal';
+import AuthModal from '../AuthModal';
 
-import InvoiceList from "../../views/InvoiceList";
-import PasswordResetView from "../../views/PasswordResetView";
+import InvoiceList from '../../views/InvoiceList';
+import PasswordResetView from '../../views/PasswordResetView';
 
 class App extends Component {
   constructor(props) {
@@ -40,11 +40,11 @@ class App extends Component {
     const query = queryString.parse(this.props.location.search);
 
     if (query.token) {
-      window.localStorage.setItem("jwt-auto-invoice", query.token);
+      window.localStorage.setItem('jwt-auto-invoice', query.token);
     }
 
-    if (window.localStorage.getItem("jwt-auto-invoice")) {
-      const token = window.localStorage.getItem("jwt-auto-invoice");
+    if (window.localStorage.getItem('jwt-auto-invoice')) {
+      const token = window.localStorage.getItem('jwt-auto-invoice');
       const decoded = jwt.decode(token, { complete: true });
       const userId = decoded.payload.userId;
 
@@ -75,10 +75,7 @@ class App extends Component {
     // send an email object up with user email
     //disable register button
     axios
-      .post(
-        "https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/welcome",
-        { ...user }
-      )
+      .post('https://api.myautoinvoicer.com/welcome', { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
@@ -89,10 +86,7 @@ class App extends Component {
   };
   sendPasswordReset = email => {
     axios
-      .post(
-        "https://2pkp3hqyc6.execute-api.us-east-1.amazonaws.com/dev/password-reset",
-        { ...email }
-      )
+      .post('https://api.myautoinvoicer.com/password-reset', { ...email })
       .then(res => {
         console.log(res);
       });
@@ -102,8 +96,8 @@ class App extends Component {
     this.setState({ loggedIn: false, loggedOutClicked: true });
 
     /* ternary operator checking if token is available in local storage and deletes if it is */
-    return localStorage.getItem("jwt-auto-invoice")
-      ? localStorage.removeItem("jwt-auto-invoice")
+    return localStorage.getItem('jwt-auto-invoice')
+      ? localStorage.removeItem('jwt-auto-invoice')
       : null;
   };
   render() {
@@ -177,7 +171,7 @@ class App extends Component {
             path={`/user/${id}/invoices`}
             render={props => <InvoiceList id={id} />}
           />
-          <Route exact path={"/password-reset"} component={PasswordResetView} />
+          <Route exact path={'/password-reset'} component={PasswordResetView} />
         </section>
       </div>
     );

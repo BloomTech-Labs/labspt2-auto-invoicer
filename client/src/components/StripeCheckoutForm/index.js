@@ -1,34 +1,100 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
+
+import styles from './styles';
+import CardHolderName from './CardHolderName';
+import SelectPurchasePlan from './SelectPurchasePlan';
+import AmountCredits from './AmountCredits';
+import SelectCurrency from './SelectCurrency';
 
 class StripeCheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { complete: false };
-    this.submit = this.submit.bind(this);
+  state = {
+    complete: false,
+    unlimited: false,
+    currency: 'USD',
+    name: '',
+    quantity: 0,
+    checked: false
+  };
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ checked: true }), 700);
   }
 
-  async submit(ev) {
-    let { token } = await this.props.stripe.createToken({ name: "Name" });
-    let response = await fetch("http://localhost:6060/stripe/charge", {
-      method: "POST",
-      headers: { "Content-Type": "text/plain" },
-      body: token.id
+  onChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  onSubmit = async e => {
+    e.preventDefault();
+    const { name, currency, quantity } = this.state;
+    const { token } = await this.props.stripe.createToken({ name });
+    const response = await fetch('http://localhost:6060/stripe/charge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({
+        stripeToken: token.id,
+        quantity,
+        currency
+      })
     });
-  
-    if (response.ok) console.log("Purchase Complete!")
-  }
+    console.log(response);
+    this.setState({
+      unlimited: false,
+      currency: 'USD',
+      name: '',
+      quantity: 0
+    });
+  };
 
   render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
+    const { classes } = this.props;
+    const price = this.state.unlimited ? 9.99 : this.state.quantity * 0.99;
     return (
-      <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement />
-        <button onClick={this.submit}>Send</button>
-      </div>
+      <Slide
+        direction="right"
+        in={this.state.checked}
+        mountOnEnter
+        unmountOnExit
+      >
+        <Paper elevation={4} className={classes.paper}>
+          <form className={classes.container} noValidate autoComplete="off">
+            <CardHolderName
+              onChangeHandler={this.onChange}
+              value={this.state.name}
+            />
+            <SelectPurchasePlan
+              onChangeHandler={this.onChange}
+              value={this.state.unlimited}
+            />
+            <AmountCredits
+              onChangeHandler={this.onChange}
+              value={this.state.quantity}
+              disabled={this.state.unlimited}
+            />
+            <SelectCurrency
+              onChangeHandler={this.onChange}
+              value={this.state.currency}
+            />
+            <CardElement className={classes.card} />
+            <Button
+              onClick={this.onSubmit}
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+            >
+              {`Pay ${price}`}
+            </Button>
+          </form>
+        </Paper>
+      </Slide>
     );
   }
 }
 
-export default injectStripe(StripeCheckoutForm);
+export default injectStripe(withStyles(styles)(StripeCheckoutForm));

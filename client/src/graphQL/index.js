@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const Post = query => {
-  return axios.post('http://localhost:5000/graphql', query)
+  return axios.post('https://api.myautoinvoicer.com/graphql', query)
 }
 
 export const inputToString = input => {

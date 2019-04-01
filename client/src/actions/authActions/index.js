@@ -1,5 +1,4 @@
 // imports go here
-import axios from "axios";
 
 // All variables go here
 export const REGISTERING = "REGISTERING";
