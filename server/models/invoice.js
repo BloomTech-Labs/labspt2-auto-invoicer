@@ -1,83 +1,93 @@
-const {
-  Schema,
-  model
-} = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const invoiceSchema = new Schema({
-  invoice_num: {
-    type: Number,
+  invoiceNumber: {
+    type: String,
     required: true
   },
-  due_date: {
-    type: Date,
+  languageSelection: {
+    type: String,
     required: true
   },
-  total_cost: {
-    type: Number,
+  currencySelection: {
+    type: String,
     required: true
   },
-  company_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Company'
+  addressFrom: {
+    type: String,
+    required: true
   },
-  archive: {
-    type: Boolean,
+  addressTo: {
+    type: String,
+    required: true
+  },
+  cityTo: {
+    type: String,
+    required: false
+  },
+  stateRegionTo: {
+    type: String,
+    required: false
+  },
+  zipCodeTo: {
+    type: String,
+    required: true
+  },
+  clientEmailTo: {
+    type: String,
+    required: true
+  },
+  selectedDate: {
+    type: String,
+    required: true
+  },
+  invoiceDueDate: {
+    type: String,
+    required: true
+  },
+  balanceDue: {
+    type: String,
+    required: true
+  },
+  subtotal: {
+    type: String,
+    required: true
+  },
+  discount: {
+    type: String,
+    required: true
+  },
+  tax: {
+    type: String,
+    required: true
+  },
+  shipping: {
+    type: String,
+    required: true
+  },
+  total: {
+    type: String,
+    required: true
+  },
+  amountPaid: {
+    type: String,
+    required: true
+  },
+  invoiceNotes: {
+    type: String,
+    required: true
+  },
+  invoiceTerms: {
+    type: String,
     required: true
   },
   paid: {
     type: Boolean,
-    required: true
-  },
-  services: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Service'
-  }],
-  service_done_by: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  customer: {
-    type: Schema.Types.ObjectId,
-    ref: 'Customer'
-  },
-  item: {
-    type: String,
-    required: true
-  },
-  quantity: {
-    type: Number,
-    required: true
-  },
-  rate: {
-    type: Number,
-    required: true
-  },
-  subtotal: {
-    type: Number,
-    required: true
-  },
-  amount: {
-    type: Number,
-    required: true
-  },
-  tax: {
-    type: Number,
-    required: true
-  },
-  discount: {
-    type: Number,
-    required: true
-  },
-  shipping: {
-    type: Number,
-    required: true
-  },
-  amount_paid: {
-    type: Number,
-    required: true
+    required: true,
+    default: false
   }
-}, {
-  timestamps: true
-});
 
-module.exports = model('Invoice', invoiceSchema);
+  // invoiceItems: [{...}]
+  // (not required) subtotal, tax, total, invoiceNotes, invoiceTerms
+});
+module.exports = model("Invoice", invoiceSchema);

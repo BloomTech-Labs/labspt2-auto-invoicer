@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import { render } from "react-testing-library";
+import "jest-dom/extend-expect";
+import App from "../App";
+import { BrowserRouter as Router } from "react-router-dom";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe("App Component tests", () => {
+  it("renders App", () => {
+    const { asFragment } = render(
+      <Router>
+        <App />
+      </Router>
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

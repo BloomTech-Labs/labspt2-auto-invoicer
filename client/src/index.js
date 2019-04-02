@@ -6,10 +6,19 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 
+//Context API import
+import { UserProvider } from "./contexts/UserContext";
+import { CompanyProvider } from "./contexts/CompanyContext";
+
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <UserProvider>
+    <CompanyProvider>
+    <Router>
+      <App />
+    </Router>
+    </CompanyProvider>
+  </UserProvider>,
   document.getElementById("root")
 );
 

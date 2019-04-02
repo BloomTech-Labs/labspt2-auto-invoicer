@@ -13,6 +13,10 @@ const companySchema = new Schema({
     type: String,
     required: true
   },
+  country_code: {
+    type: String,
+    required: true
+  },
   address_1: {
     type: String,
     required: true
@@ -29,7 +33,11 @@ const companySchema = new Schema({
     required: true
   },
   postal_code: {
-    type: Number,
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
     required: true
   },
   unlimited_tier: {
@@ -44,6 +52,18 @@ const companySchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    }
+  ],
+  customers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Customer'
+    }
+  ],
+  invoices: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Invoice'
     }
   ]
 });

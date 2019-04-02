@@ -1,48 +1,93 @@
-const bcrypt = require('bcryptjs');
+const User = require("../../models/user");
+const Company = require("../../models/company");
+// const isAuth = require('../../middleware/isAuth');
 
-const User = require('../../models/user');
-const isAuth = require('../../middleware/isAuth')
+const { findAllDocuments, findDocumentById } = require("../helpers/index");
+
+const { formatData } = require("../helpers/format");
 
 module.exports = {
-  users: async (args, req) => {
+  user: ({ userID }) => {
+    return findDocumentById(userID, User);
+  },
+  users: () => {
     // if (!req.isAuth) {
     //   throw new Error('not logged in')
     // }
-
+    return findAllDocuments(User);
+  },
+  createUser: async args => {
+    formatData(args.userInput);
     try {
-      const users = await User.find();
-      return users.map(user => {
-        return {
-          ...user._doc,
-          password: null
-        }
+      const { name, email, phone_num } = args.userInput;
+      const userExists = await User.findOne({
+        email
       });
+      if (userExists) {
+        throw new Error("Username already exists");
+      }
+      const user = new User({
+        name,
+        email,
+        phone_num
+      });
+      const newUser = await user.save();
+      return {
+        ...newUser._doc
+      };
     } catch (err) {
       throw err;
     }
   },
-  createUser: async (args) => {
+  editUser: async ({ editUserInput, userID }, req) => {
     try {
-      const userExists = await User.findOne({
-        email: args.userInput.email
-      });
-      if (userExists) {
-        throw new Error('Username already exists');
+      const userExist = await User.findById(userID);
+      if (!userExist) {
+        throw new Error("user does not exist");
       }
-      const hashedPassword = await bcrypt.hash(args.userInput.password, 12);
-      const user = new User({
-        email: args.userInput.email,
-        password: hashedPassword,
-        name: args.userInput.name,
-        phone_num: args.userInput.phone_num
+      Object.keys(editUserInput).forEach(key => {
+        if (!editUserInput[key]) {
+          delete editUserInput[key];
+        }
       });
-      const newUser = await user.save();
+      formatData(editUserInput);
+      const updatedUser = await User.findByIdAndUpdate(
+        userID,
+        {
+          $set: {
+            ...editUserInput
+          }
+        },
+        {
+          new: true
+        }
+      );
       return {
-        ...newUser._doc,
-        password: null
+        ...updatedUser._doc
       };
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      throw error;
+    }
+  },
+  addUserToCompany: async ({ userID, companyID }) => {
+    try {
+      const company = await Company.findById(companyID);
+      const user = await User.findById(userID);
+      if (!company) {
+        throw new Error("company does not exist");
+      }
+      if (!user) {
+        throw new Error("user does not exist");
+      }
+      company.users.push(userID);
+      user.companies.push(companyID);
+      const companyDetails = await company.save();
+      const userDetails = await user.save();
+      return {
+        ...userDetails._doc
+      };
+    } catch (error) {
+      throw error;
     }
   }
 };

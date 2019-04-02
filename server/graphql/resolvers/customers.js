@@ -1,110 +1,97 @@
 const Customer = require('../../models/customer');
-const isAuth = require('../../middleware/isAuth');
+const Company = require('../../models/company');
+// const isAuth = require('../../middleware/isAuth');
+
+const {
+  findDocumentById,
+  findAllDocuments,
+  updateDocumentById,
+} = require('../helpers');
+
+const {
+  formatData
+} = require('../helpers/format')
 
 module.exports = {
-  customers: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    try {
-      const customers = await Customer.find();
-      return customers.map(customer => {
-        return {
-          ...customer._doc,
-        };
-      });
-    } catch (error) {
-      throw error;
-    }
+  customers: () => {
+    return findAllDocuments(Customer);
   },
-
-  customer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    try {
-      const customer = await Customer.findOne({
-        _id: args._id,
-      });
-      if (!customer) {
-        throw new Error('Customer does not exist');
-      }
-      return {
-        ...customer._doc,
-      };
-    } catch (error) {
-      throw error;
-    }
+  customer: ({
+    customerID
+  }) => {
+    return findDocumentById(customerID, Customer);
   },
-
-  createCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
+  createCustomer: async args => {
+    formatData(args.customerInput);
     try {
-      const custExists = await Customer.findOne({
-        email: args.customerInput.email,
+      const {
+        name,
+        email,
+        phone_num,
+        country_code,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code,
+        country
+      } = args.customerInput
+      const customerExists = await Customer.findOne({
+        email
       });
-      if (custExists) {
+      if (customerExists) {
         throw new Error('Customer already exists');
       }
       const customer = new Customer({
-        name: args.customerInput.name,
-        address: args.customerInput.address,
-        email: args.customerInput.email,
-        phone_num: args.customerInput.phone_num,
+        name,
+        email,
+        phone_num,
+        country_code,
+        address_1,
+        address_2,
+        city,
+        state,
+        postal_code,
+        country
       });
       const newCustomer = await customer.save();
       return {
-        ...newCustomer._doc,
+        ...newCustomer._doc
       };
     } catch (error) {
       throw error;
     }
   },
-
-  updateCustomer: async (args, req) => {
-    // if (!req.isAuth) {
-    // throw new Error('not logged in')}
-
-    const {
-      name,
-      address,
-      email,
-      phone_num
-    } = args.customerUpdate;
-    const customer = await Customer.findOne({
-      _id: args._id,
-    });
-    if (!customer) {
-      throw new Error('Customer does not exist');
-    }
-
-    if (typeof name === 'string') {
-      customer.name = name;
-    }
-
-    if (typeof address === 'string') {
-      customer.address = address;
-    }
-
-    if (typeof email === 'string') {
-      const emailExists = await Customer.findOne({
-        email: email,
-      });
-      if (emailExists) {
-        throw new Error('unable to use this email, as is already in use');
-      }
-      customer.email = email;
-    }
-
-    if (typeof phone_num === 'string') {
-      customer.phone_num = phone_num;
-    }
-
-    const updatedUser = await customer.save();
-    return {
-      ...updatedUser._doc,
-    };
+  editCustomer: async ({
+    editCustomerInput,
+    customerID
+  }) => {
+    return updateDocumentById(editCustomerInput, customerID, Customer);
   },
+  addCustomerToCompany: async ({
+    customerID,
+    companyID
+  }) => {
+    try {
+      const company = await Company.findById(companyID);
+      const customer = await Customer.findById(customerID);
+      if (!company) {
+        throw new Error('Company does not exist.');
+      }
+      if (!customer) {
+        throw new Error('Customer does not exist.');
+      }
+      // TODO: checks
+      company.customers.push(customerID);
+      customer.companies.push(companyID);
+      const companyDetails = await company.save();
+      const customerDetails = await customer.save();
+      // TODO: allow nesting of companies on Customer
+      return {
+        ...customerDetails._doc
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 };

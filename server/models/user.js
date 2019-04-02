@@ -1,12 +1,8 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
     email: {
-      type: String,
-      required: true
-    },
-    password: {
       type: String,
       required: true
     },
@@ -15,17 +11,28 @@ const userSchema = new Schema(
       required: true
     },
     phone_num: {
-      type: String,
-      required: true
+      type: String
     },
     companies: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Company'
+        ref: "Company"
       }
-    ]
+    ],
+    invoices: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Invoice"
+      }
+    ],
+    googleId: {
+      type: String
+    },
+    facebookId: {
+      type: String
+    }
   },
   { timestamps: true }
 );
 
-module.exports = model('User', userSchema);
+module.exports = model("User", userSchema);

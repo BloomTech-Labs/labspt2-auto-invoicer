@@ -1,46 +1,49 @@
 const Company = require('../../models/company');
+// const User = require('../../models/user');
+
 const {
   updateDocumentById,
   findDocumentsByAnyField,
   findDocumentById,
-  findAllDocuments
+  findAllDocuments,
 } = require('../helpers');
 
-const companyFields = [
-  { name: '_id', type: 'string' },
-  { name: 'name', type: 'string' },
-  { name: 'email', type: 'string' },
-  { name: 'phone_num', type: 'string' },
-  { name: 'address_1', type: 'string' },
-  { name: 'address_2', type: 'string' },
-  { name: 'city', type: 'string' },
-  { name: 'state', type: 'string' },
-  { name: 'postal_code', type: 'number' }
-];
+const {
+  formatData
+} = require('../helpers/format')
 
 module.exports = {
-  company: async ({ companyID }) => {
+  company: ({
+    companyID
+  }) => {
     return findDocumentById(companyID, Company);
   },
-  companyByAnyField: ({ companyInput }) => {
-    return findDocumentsByAnyField(companyInput, companyFields, Company);
+  companyByAnyField: ({
+    companyInput
+  }) => {
+    return findDocumentsByAnyField(companyInput, Company);
   },
   companies: () => {
     return findAllDocuments(Company);
   },
-  createCompany: async ({ companyInput }) => {
+  createCompany: async args => {
+    formatData(args.companyInput);
     try {
       const {
         name,
         email,
         phone_num,
+        country_code,
         address_1,
         address_2,
         city,
         state,
-        postal_code
-      } = companyInput;
-      const companyExists = await Company.findOne({ name });
+        postal_code,
+        country
+      } = args.companyInput;
+      const companyExists = await Company.findOne({
+        email
+      });
       if (companyExists) {
         throw new Error('This company already exists!');
       }
@@ -48,19 +51,33 @@ module.exports = {
         name,
         email,
         phone_num,
+        country_code,
         address_1,
         address_2,
         city,
         state,
-        postal_code
+        postal_code,
+        country
+        // users: '5c88bec6c5cf5c186025a084',
       });
       const newCompany = await company.save();
-      return { ...newCompany._doc };
+      // const user = await User.findById('5c88bec6c5cf5c186025a084');
+      // if (!user) {
+      //   throw new Error('User not found.');
+      // }
+      // user.companies.push(company);
+      // await user.save();
+      return {
+        ...newCompany._doc
+      };
     } catch (err) {
       throw err;
     }
   },
-  editCompany: ({ companyInput, id }) => {
-    return updateDocumentById(companyInput, id, Company);
-  }
+  editCompany: ({
+    editCompanyInput,
+    companyID
+  }) => {
+    return updateDocumentById(editCompanyInput, companyID, Company);
+  },
 };

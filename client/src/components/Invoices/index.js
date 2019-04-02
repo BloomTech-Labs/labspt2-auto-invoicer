@@ -60,11 +60,16 @@ class Invoices extends Component {
           <section className="invoices-container">
             {invoices
               ? invoices.map(invoice => {
-                  return <InvoiceCard invoice={{ ...invoice }} />;
+                  return (
+                    <InvoiceCard
+                      key={invoice.invoiceNumber}
+                      invoice={{ ...invoice }}
+                    />
+                  );
                 })
               : null}
             :{" "}
-            <Link to="/user/1/invoice/create">
+            <Link to={`/user/${this.props.id}/invoice/create`}>
               <CreateInvoiceButton />
             </Link>
           </section>

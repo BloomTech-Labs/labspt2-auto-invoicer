@@ -1,16 +1,15 @@
-import React from "react";
+import React from 'react';
 
 // import components here
-import BillingForm from "../../components/BillingForm";
+import StripeElements from './../../components/StripeElements';
 
 // import styles here
-import "./BillingPage.css";
+import './BillingPage.css';
 
-const BillingPage = props => {
+const BillingPage = () => {
   return (
     <section className="billing-container">
-      <h1 className="main-title">Billing</h1>
-      <BillingForm />
+      <StripeElements />
     </section>
   );
 };
