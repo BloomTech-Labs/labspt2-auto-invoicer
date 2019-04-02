@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
 type User {
@@ -58,8 +58,6 @@ type Invoice {
   stateRegionTo: String
   zipCodeTo: String!
   clientEmailTo: String!
-  languageSelection: String!
-  currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
   balanceDue: String!
@@ -71,7 +69,6 @@ type Invoice {
   amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
-  amountPaid: Float
 }
 
 input InvoiceInput {
@@ -84,8 +81,6 @@ input InvoiceInput {
   stateRegionTo: String
   zipCodeTo: String!
   clientEmailTo: String!
-  languageSelection: String!
-  currencySelection: String!
   selectedDate: String!
   invoiceDueDate: String!
   balanceDue: String!
@@ -98,6 +93,11 @@ input InvoiceInput {
   invoiceNotes: String
   invoiceTerms: String
 }
+
+input EditInvoiceInput {
+  amountPaid: String!
+}
+ 
 
 type Item {
   _id: ID!
@@ -212,6 +212,7 @@ type RootMutation {
   addUserToCompany(userID: ID!, companyID: ID!): Company
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
+  editInvoice(editInvoiceInput: EditInvoiceInput!): Invoice
 }
 
 schema {
