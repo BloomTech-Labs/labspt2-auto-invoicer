@@ -212,7 +212,7 @@ type RootMutation {
   addUserToCompany(userID: ID!, companyID: ID!): Company
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
-  editInvoice(editInvoiceInput: EditInvoiceInput!): Invoice
+  editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceID: ID!): Invoice
 }
 
 schema {
