@@ -84,7 +84,7 @@ app.get('/logout', (req, res) => {
   req.logout();
   req.session.destroy(() => {
     res.clearCookie('SID');
-    res.redirect('https://www.myautoinvoicer.com');
+    // res.redirect('https://www.myautoinvoicer.com');
   });
 });
 
