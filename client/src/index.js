@@ -6,27 +6,19 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// redux imports
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./reducers/combineReducer";
+//Context API import
+import { UserProvider } from "./contexts/UserContext";
+import { CompanyProvider } from "./contexts/CompanyContext";
 
-// redux middleware imports
-import thunk from "redux-thunk";
-import logger from "redux-logger";
-
-// setup all middleware here
-const middleware = applyMiddleware(logger, thunk);
-
-// create the store here
-const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <UserProvider>
+    <CompanyProvider>
     <Router>
       <App />
     </Router>
-  </Provider>,
+    </CompanyProvider>
+  </UserProvider>,
   document.getElementById("root")
 );
 
