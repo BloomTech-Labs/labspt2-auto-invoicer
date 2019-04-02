@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import InvoiceCard from "../InvoiceCard";
 import CreateInvoiceButton from "../reusableComponents/CreateInvoiceButton";
 import EmptyInvoices from "../EmptyInvoices";
+import InvoiceViewForm from "../../components/InvoiceViewForm";
 import { Link } from "react-router-dom";
 
 // import css here
@@ -58,28 +59,40 @@ class Invoices extends Component {
     const { empty, invoices } = this.state;
 
     return (
-      <section>
-        {empty ? (
-          <EmptyInvoices />
-        ) : (
-          <section className="invoices-container">
-            {invoices
-              ? invoices.map(invoice => {
-                  return (
-                    <InvoiceCard
-                      key={invoice.invoiceNumber}
-                      invoice={{ ...invoice }}
-                    />
-                  );
-                })
-              : null}
-            :{" "}
-            <Link to={`/user/${this.props.id}/invoice/create`}>
-              <CreateInvoiceButton />
-            </Link>
-          </section>
-        )}
-      </section>
+      <>
+        <section>
+          {empty ? (
+            <EmptyInvoices />
+          ) : (
+            <section className="invoices-container">
+              {invoices
+                ? invoices.map(invoice => {
+                    return (
+                      <div>
+                        <Link to={`/user/${this.props.id}/invoice/view`}>
+                          <InvoiceCard
+                            key={invoice.invoiceNumber}
+                            invoice={{ ...invoice }}
+                            id={this.props.id}
+                          />
+                        </Link>
+                      </div>
+                    );
+                  })
+                : null}
+              :{" "}
+              <Link to={`/user/${this.props.id}/invoice/create`}>
+                <CreateInvoiceButton />
+              </Link>
+            </section>
+          )}
+        </section>
+        <div>
+          <Link to={`/user/${this.props.id}/invoice/view`}>
+            <div>Invoice View Form</div>
+          </Link>
+        </div>
+      </>
     );
   }
 }

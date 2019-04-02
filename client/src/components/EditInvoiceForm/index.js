@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default class InvoiceViewForm extends Component {
-  constructor(props) {
-    super(props);
+export default class EditInvoiceForm extends Component {
+  constructor() {
+    super();
     this.state = {
-      invoice: {},
-      isToggleOn: false
+      invoice: {}
     };
   }
 
@@ -28,24 +26,10 @@ export default class InvoiceViewForm extends Component {
   }
 
   render() {
-    console.log(this.state.invoice);
-    console.log(this.props.id);
     return (
       <div>
-        <div className="invoice-menu">
-          <div>
-            <Link to={`/user/${this.props.id}/invoice/edit`}>
-              Link to Edit Invoice
-            </Link>
-          </div>
-        </div>
-
-        <div className="invoice-container">
-          THIS IS INVOICE VIEW COMPONENT.
-          <p>ID Number {this.state.invoice._id} </p>
-          <p>Invoice Number: {this.state.invoice.invoiceNumber}</p>
-          <p>Amount Paid: {this.state.invoice.amountPaid}</p>
-        </div>
+        EDIT INVOICE FORM
+        <p>Amount Paid: {this.state.invoice.amountPaid}</p>
       </div>
     );
   }

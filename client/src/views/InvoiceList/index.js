@@ -1,6 +1,5 @@
 // import packages
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 //import styles
 import "./InvoiceList.css";
@@ -18,17 +17,10 @@ export default class index extends Component {
   render() {
     const { name } = this.props.user;
     return (
-      <>
-        <section className="invoice-list-container">
-          <h1>Hello {name} here are your Invoices</h1>
-          <Invoices id={this.props.id} />
-        </section>
-        <div>
-          <Link to={`/user/${this.props.id}/invoice/view`}>
-            Link to Indiviual InvoiceView.
-          </Link>
-        </div>
-      </>
+      <section className="invoice-list-container">
+        <h1>Hello {name} here are your Invoices</h1>
+        <Invoices id={this.props.id} />
+      </section>
     );
   }
 }
