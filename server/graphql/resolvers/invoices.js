@@ -3,7 +3,11 @@ const Company = require("../../models/company");
 const User = require("../../models/user");
 const Customer = require("../../models/customer");
 //may need to add Invoice2 to helpers
-const { findDocumentById, findAllDocuments } = require("../helpers");
+const {
+  findDocumentById,
+  findAllDocuments,
+  updateDocumentById
+} = require("../helpers");
 
 module.exports = {
   invoices: () => {
@@ -67,5 +71,8 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  editInvoice: ({ editInvoiceInput, invoiceID }) => {
+    return updateDocumentById(editInvoiceInput, invoiceID, Invoice);
   }
 };
