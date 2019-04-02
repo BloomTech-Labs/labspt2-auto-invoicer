@@ -21,6 +21,8 @@ import ForgotPassModal from "../ForgotPassModal";
 import AuthModal from "../AuthModal";
 
 import InvoiceList from "../../views/InvoiceList";
+// add InvoiceView
+import InvoiceView from "../../views/InvoiceView";
 import PasswordResetView from "../../views/PasswordResetView";
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
@@ -171,6 +173,7 @@ class App extends Component {
                         path={`/user/${id}/invoice/create`}
                         component={CreateInvoice}
                       />
+
                       <Route
                         exact
                         path={`/user/${id}/settings`}
@@ -195,6 +198,12 @@ class App extends Component {
                             company={companyState}
                           />
                         )}
+                      />
+                      {/* adding routes for InvoiceView and EditInvoice components*/}
+                      <Route
+                        exact
+                        path={`/user/${id}/invoice/view`}
+                        render={props => <InvoiceView />}
                       />
                       <Route
                         exact
