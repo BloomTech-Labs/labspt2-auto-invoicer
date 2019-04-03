@@ -13,6 +13,10 @@ functions:
           method: get
           cors: true
       - http:
+          path: logout
+          method: get
+          cors: true
+      - http:
           path: auth/google
           method: get
           cors: true

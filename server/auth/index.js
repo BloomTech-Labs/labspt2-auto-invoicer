@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const passport = require('passport');
-
 require('./google');
 require('./facebook');
 require('./stripe');
