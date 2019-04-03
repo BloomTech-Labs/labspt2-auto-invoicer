@@ -1,41 +1,27 @@
 const router = require('express').Router();
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-
-require('./jwt');
 require('./google');
 require('./facebook');
 require('./stripe');
-
-// Generate JWT
-const generateToken = user => {
-  const payload = {
-    userId: user._id
-  };
-  const options = {
-    expiresIn: 86400
-  };
-  return jwt.sign(payload, process.env.JWT_SECRET, options);
-};
 
 // Google
 router.get(
   '/google',
   passport.authenticate('google', {
-    session: false,
+    accessType: 'offline',
+    session: true,
     scope: ['profile', 'email']
   })
 );
 
 router.get(
-  '/google/home',
+  '/google/callback',
   passport.authenticate('google', {
-    session: false,
+    session: true,
     failureRedirect: '/login'
   }),
   (req, res) => {
-    const token = generateToken(req.user);
-    res.redirect(`https://auto-invoicer.netlify.com/?token=${token}`);
+    res.redirect('https://www.myautoinvoicer.com');
   }
 );
 
@@ -43,20 +29,19 @@ router.get(
 router.get(
   '/facebook',
   passport.authenticate('facebook', {
-    session: false,
+    session: true,
     scope: ['email']
   })
 );
 
 router.get(
-  '/facebook/home',
+  '/facebook/callback',
   passport.authenticate('facebook', {
-    session: false,
+    session: true,
     failureRedirect: '/login'
   }),
   (req, res) => {
-    const token = generateToken(req.user);
-    res.redirect(`https://auto-invoicer.netlify.com/?token=${token}`);
+    res.redirect('https://www.myautoinvoicer.com');
   }
 );
 
@@ -64,7 +49,7 @@ router.get(
 router.get(
   '/stripe',
   passport.authenticate('stripe', {
-    session: false,
+    session: true,
     scope: 'read_write'
   })
 );
@@ -76,16 +61,7 @@ router.get(
     failureRedirect: '/auth'
   }),
   (req, res) => {
-    const token = generateToken(req.user);
-    res.redirect(`https://auto-invoicer.netlify.com/?token=${token}`);
-  }
-);
-
-router.post(
-  '/local',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.send(req.user);
+    res.redirect('https://www.myautoinvoicer.com');
   }
 );
 
