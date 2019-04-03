@@ -6,7 +6,7 @@ passport.use(
     {
       clientID: process.env.STRIPE_ID,
       clientSecret: process.env.STRIPE_SECRET,
-      callbackURL: 'https://auto-invoicer.netlify.com'
+      callbackURL: 'https://www.myautoinvoicer.com'
     },
     async (accessToken, refreshToken, stripe_properties, done) => {
       console.log(stripe_properties, accessToken);
