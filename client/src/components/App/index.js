@@ -1,24 +1,37 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+// import packages
+import React, { Component } from "react";
+import axios from "axios";
+import queryString from "query-string";
+import jwt from "jsonwebtoken";
 import { Route, withRouter } from 'react-router-dom';
+//import styles
+import "./App.css";
 
-import {CompanyConsumer} from '../../contexts/CompanyContext'
-import {UserConsumer} from '../../contexts/UserContext'
+// react router methods
+import { Route, withRouter } from "react-router-dom";
 
-import SideNavigation from '../SideNavigation';
-import SignInModal from '../SignInModal';
-import BillingPage from '../../views/BillingPage';
-import SignUpModal from '../SignUpModal';
-import LandingPage from '../../views/LandingPage';
-import CreateInvoice from '../../views/CreateInvoice';
-import SettingsPage from '../../views/SettingsPage';
-import ForgotPassModal from '../ForgotPassModal';
-import AuthModal from '../AuthModal';
+//imported components
+import SideNavigation from "../SideNavigation";
+import SignInModal from "../SignInModal";
+import BillingPage from "../../views/BillingPage";
+import SignUpModal from "../SignUpModal";
+import LandingPage from "../../views/LandingPage";
+import CreateInvoice from "../../views/CreateInvoice";
+import SettingsPage from "../../views/SettingsPage";
+import ForgotPassModal from "../ForgotPassModal";
+import AuthModal from "../AuthModal";
 
-import InvoiceList from '../../views/InvoiceList';
-import PasswordResetView from '../../views/PasswordResetView';
 
-import './App.css';
+import InvoiceList from "../../views/InvoiceList";
+// add InvoiceView and EditInvoiceView
+import InvoiceView from "../../views/InvoiceView";
+import EditInvoiceView from "../../views/EditInvoiceView";
+import PasswordResetView from "../../views/PasswordResetView";
+
+
+import { CompanyConsumer } from "../../contexts/CompanyContext";
+import { UserConsumer } from "../../contexts/UserContext";
+
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +45,22 @@ class App extends Component {
       toggleAuth: false
     };
   }
+
+  componentWillMount() {
+    const query = queryString.parse(this.props.location.search);
+
+    if (query.token) {
+      window.localStorage.setItem("jwt-auto-invoice", query.token);
+    }
+
+    if (window.localStorage.getItem("jwt-auto-invoice")) {
+      const token = window.localStorage.getItem("jwt-auto-invoice");
+      const decoded = jwt.decode(token, { complete: true });
+      const userId = decoded.payload.userId;
+
+      this.setState({ loggedIn: true, id: userId });
+    }
+
   componentDidMount() {
     axios
       .get('https://api.myautoinvoicer.com/user', { withCredentials: true })
@@ -65,7 +94,7 @@ class App extends Component {
     // send an email object up with user email
     //disable register button
     axios
-      .post('https://api.myautoinvoicer.com/welcome', { ...user })
+      .post("https://api.myautoinvoicer.com/welcome", { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
@@ -76,13 +105,21 @@ class App extends Component {
   };
   sendPasswordReset = email => {
     axios
-      .post('https://api.myautoinvoicer.com/password-reset', { ...email })
+      .post("https://api.myautoinvoicer.com/password-reset", { ...email })
       .then(res => {
         console.log(res);
       });
   };
   signOut = () => {
     // change login state to update UI of navigation
+
+    this.setState({ loggedIn: false, loggedOutClicked: true });
+
+    /* ternary operator checking if token is available in local storage and deletes if it is */
+    return localStorage.getItem("jwt-auto-invoice")
+      ? localStorage.removeItem("jwt-auto-invoice")
+      : null;
+
     axios
       .get('https://api.myautoinvoicer.com/logout', { withCredentials: true })
       .then(res => {
@@ -140,21 +177,30 @@ class App extends Component {
           />
         ) : null}
         <UserConsumer>
-          {({fetchUser, userState}) => {
+          {({ fetchUser, userState }) => {
             return (
               <CompanyConsumer>
-                {({fetchCompany, companyState}) => {
+                {({ fetchCompany, companyState }) => {
                   return (
                     <section className="routes-container">
                       {/* ROUTES GO HERE
                         check if logged in before routing below, and redirect to landing if not loggedIn */}
-                      <Route exact path={`/user/${id}/billing`} component={BillingPage} />
+                      <Route
+                        exact
+                        path={`/user/${id}/billing`}
+                        component={BillingPage}
+                      />
                       <Route
                         exact
                         path={`/user/${id}/invoice/create`}
                         component={CreateInvoice}
                       />
-                      <Route exact path={`/user/${id}/settings`} component={SettingsPage} />
+
+                      <Route
+                        exact
+                        path={`/user/${id}/settings`}
+                        component={SettingsPage}
+                      />
                       <Route
                         exact
                         path="/"
@@ -165,19 +211,37 @@ class App extends Component {
                       <Route
                         exact
                         path={`/user/${id}/invoices`}
-                        render={props => <InvoiceList 
-                          id={id} 
-                          fetchUser={fetchUser} 
-                          user={userState} 
-                          fetchCompany={fetchCompany}
-                          company={companyState}/>}
+                        render={props => (
+                          <InvoiceList
+                            id={id}
+                            fetchUser={fetchUser}
+                            user={userState}
+                            fetchCompany={fetchCompany}
+                            company={companyState}
+                          />
+                        )}
                       />
-                      <Route exact path={"/password-reset"} component={PasswordResetView} />
+                      {/* adding routes for InvoiceView and EditInvoice components*/}
+                      <Route
+                        exact
+                        path={`/user/${id}/invoice/view`}
+                        component={InvoiceView}
+                      />
+                      <Route
+                        exact
+                        path={`/user/${id}/invoice/edit`}
+                        component={EditInvoiceView}
+                      />
+                      <Route
+                        exact
+                        path={"/password-reset"}
+                        component={PasswordResetView}
+                      />
                     </section>
-                  )
-                }} 
+                  );
+                }}
               </CompanyConsumer>
-            )
+            );
           }}
         </UserConsumer>
       </div>

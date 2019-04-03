@@ -53,28 +53,32 @@ class Invoices extends Component {
     const { empty, invoices } = this.state;
 
     return (
-      <section>
-        {empty ? (
-          <EmptyInvoices />
-        ) : (
-          <section className="invoices-container">
-            {invoices
-              ? invoices.map(invoice => {
-                  return (
-                    <InvoiceCard
-                      key={invoice.invoiceNumber}
-                      invoice={{ ...invoice }}
-                    />
-                  );
-                })
-              : null}
-            :{" "}
-            <Link to={`/user/${this.props.id}/invoice/create`}>
-              <CreateInvoiceButton />
-            </Link>
-          </section>
-        )}
-      </section>
+      <>
+        <section>
+          {empty ? (
+            <EmptyInvoices />
+          ) : (
+            <section className="invoices-container">
+              {invoices
+                ? invoices.map(invoice => {
+                    return (
+                      <div>
+                        <InvoiceCard
+                          key={invoice.invoiceNumber}
+                          invoice={{ ...invoice }}
+                        />
+                      </div>
+                    );
+                  })
+                : null}
+              :{" "}
+              <Link to={`/user/${this.props.id}/invoice/create`}>
+                <CreateInvoiceButton />
+              </Link>
+            </section>
+          )}
+        </section>
+      </>
     );
   }
 }
