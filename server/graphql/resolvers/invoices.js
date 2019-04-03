@@ -2,7 +2,7 @@ const Invoice = require("../../models/invoice");
 const Company = require("../../models/company");
 const User = require("../../models/user");
 const Customer = require("../../models/customer");
-//may need to add Invoice2 to helpers
+
 const {
   findDocumentById,
   findAllDocuments,
@@ -18,20 +18,12 @@ module.exports = {
   },
   createInvoice: async ({ invoiceInput }) => {
     try {
-      // ID from logged-in user creating the invoice
-      const user = await User.findById("5c8d88c17fef7140f485950f");
-      // find or create: if new company --> createCompany
-      const company = await Company.findById("5c8d925db548bf03b82a047b");
-      // find or create: if new customer --> createCustomer
-      const customer = await Customer.findById("5c8d97f7dc41c24070feba41");
-
       const invoice = new Invoice({
-        // similar to resolvers/invoices.js
-        // createdBy: user._id,
-        // invoice_num: invoiceInput.invoice_num,
-        // company_id: company._id,
-        // customer_id: customer._id,
-        // new features
+        companyID: invoiceInput.companyID,
+        userID: invoiceInput.userID,
+        customerID: invoiceInput.customerID,
+        companyName: invoiceInput.companyName,
+        userName: invoiceInput.userName,
         invoiceNumber: invoiceInput.invoiceNumber,
         languageSelection: invoiceInput.languageSelection,
         currencySelection: invoiceInput.currencySelection,
@@ -51,20 +43,19 @@ module.exports = {
         total: invoiceInput.total,
         amountPaid: invoiceInput.amountPaid,
         invoiceNotes: invoiceInput.invoiceNotes,
-        invoiceTerms: invoiceInput.invoiceTerms
+        invoiceTerms: invoiceInput.invoiceTerms,
       });
 
       const newInvoice = await invoice.save();
-      // user.invoices.push(newInvoice._doc._id);
-      // company.invoices.push(newInvoice._doc._id);
-      // customer.invoices.push(newInvoice._doc._id);
-      // new invoice features
-
-      // await user.save();
-      // await company.save();
-      // await customer.save();
-      // new invoice features
-
+      const user = await User.findById(newInvoice._doc.userID);
+      const company = await Company.findById(newInvoice._doc.companyID);
+      const customer = await Customer.findById(newInvoice._doc.customerID);
+      user.invoices.push(newInvoice._doc._id);
+      company.invoices.push(newInvoice._doc._id);
+      customer.invoices.push(newInvoice._doc._id);
+      await user.save();
+      await company.save();
+      await customer.save();
       return {
         ...newInvoice._doc
       };

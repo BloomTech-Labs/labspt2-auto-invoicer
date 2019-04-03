@@ -43,7 +43,7 @@ export class CompanyProvider extends React.Component {
         credits: company.credits,
         users: company.users,
         customers: company.customers,
-        // invoices: company.invoices,
+        invoices: company.invoices,
       })
     }
   }
