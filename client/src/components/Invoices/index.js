@@ -6,6 +6,10 @@ import CreateInvoiceButton from "../reusableComponents/CreateInvoiceButton";
 import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
 
+// temporary
+import EditInvoiceForm from "../EditInvoiceForm";
+import InvoiceViewForm from "../InvoiceViewForm";
+
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { UserConsumer } from "../../contexts/UserContext";
 // import css here
@@ -44,11 +48,20 @@ class Invoices extends Component {
                             })
                           : null}
                         :{" "}
-                        <Link to={`/user/${this.props.id}/invoice/create`}>
+                        {/* <Link to={`/user/${this.props.id}/invoice/create`}>
                           <CreateInvoiceButton />
-                        </Link>
+                        </Link> */}
                       </section>
                     )}
+                    <Link to={`/user/${this.props.id}/invoice/create`}>
+                      <CreateInvoiceButton />
+                    </Link>
+                    <Link to={`/user/${this.props.id}/invoice/view`}>
+                      <InvoiceViewForm />
+                    </Link>
+                    <Link to={`/user/${this.props.id}/invoice/edit`}>
+                      <EditInvoiceForm />
+                    </Link>
                   </section>
                 );
               }}
@@ -56,7 +69,6 @@ class Invoices extends Component {
           );
         }}
       </UserConsumer>
-
     );
   }
 }
