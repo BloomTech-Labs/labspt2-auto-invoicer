@@ -1,15 +1,10 @@
-// import packages
 import React, { Component } from 'react';
 import axios from 'axios';
-import queryString from 'query-string';
-import jwt from 'jsonwebtoken';
-//import styles
-import './App.css';
-
-// react router methods
 import { Route, withRouter } from 'react-router-dom';
 
-//imported components
+import {CompanyConsumer} from '../../contexts/CompanyContext'
+import {UserConsumer} from '../../contexts/UserContext'
+
 import SideNavigation from '../SideNavigation';
 import SignInModal from '../SignInModal';
 import BillingPage from '../../views/BillingPage';
@@ -23,36 +18,28 @@ import AuthModal from '../AuthModal';
 import InvoiceList from '../../views/InvoiceList';
 import PasswordResetView from '../../views/PasswordResetView';
 
-import {CompanyConsumer} from '../../contexts/CompanyContext'
-import {UserConsumer} from '../../contexts/UserContext'
+import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       toggleSignIn: false,
-      loggedIn: false,   
+      loggedIn: false,
       id: null,
       toggleRegister: false,
       togglePassForgot: false,
       toggleAuth: false
     };
   }
-  componentWillMount() {
-    const query = queryString.parse(this.props.location.search);
-
-    if (query.token) {
-      window.localStorage.setItem('jwt-auto-invoice', query.token);
-    }
-
-    if (window.localStorage.getItem('jwt-auto-invoice')) {
-      const token = window.localStorage.getItem('jwt-auto-invoice');
-      const decoded = jwt.decode(token, { complete: true });
-      const userId = decoded.payload.userId;
-
-      this.setState({ loggedIn: true, id: userId });
-    }
+  componentDidMount() {
+    axios
+      .get('https://api.myautoinvoicer.com/user', { withCredentials: true })
+      .then(res => {
+        if (res.data.userId) {
+          this.setState({ loggedIn: true, id: res.data.userId })
+        }
+      }).catch(err => console.log(err));
   }
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
@@ -96,12 +83,12 @@ class App extends Component {
   };
   signOut = () => {
     // change login state to update UI of navigation
-    this.setState({ loggedIn: false, loggedOutClicked: true });
-
-    /* ternary operator checking if token is available in local storage and deletes if it is */
-    return localStorage.getItem('jwt-auto-invoice')
-      ? localStorage.removeItem('jwt-auto-invoice')
-      : null;
+    axios
+      .get('https://api.myautoinvoicer.com/logout', { withCredentials: true })
+      .then(res => {
+        // TODO
+      }).catch(err => console.log(err));
+    this.setState({ loggedIn: false});
   };
   render() {
     const { id } = this.state;
