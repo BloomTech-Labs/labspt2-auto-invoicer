@@ -29,12 +29,12 @@ export default class InvoiceViewForm extends Component {
 
   render() {
     console.log(this.state.invoice);
-    console.log(this.props.id);
+
     return (
       <div>
         <div className="invoice-menu">
           <div>
-            <Link to={`/user/${this.props.id}/invoice/edit`}>
+            <Link to={`/user/${this.state.invoice._id}/invoice/edit`}>
               Link to Edit Invoice
             </Link>
           </div>

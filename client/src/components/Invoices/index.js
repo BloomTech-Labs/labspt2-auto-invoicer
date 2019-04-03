@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import InvoiceCard from "../InvoiceCard";
 import CreateInvoiceButton from "../reusableComponents/CreateInvoiceButton";
 import EmptyInvoices from "../EmptyInvoices";
-import InvoiceViewForm from "../../components/InvoiceViewForm";
 import { Link } from "react-router-dom";
 
 // import css here
@@ -46,11 +45,6 @@ class Invoices extends Component {
           text:
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
           paidStatus: "current"
-        },
-        {
-          invoiceNumber: 888,
-          text: "link to invoice view",
-          paidStatus: "current"
         }
       ]
     };
@@ -69,13 +63,10 @@ class Invoices extends Component {
                 ? invoices.map(invoice => {
                     return (
                       <div>
-                        <Link to={`/user/${this.props.id}/invoice/view`}>
-                          <InvoiceCard
-                            key={invoice.invoiceNumber}
-                            invoice={{ ...invoice }}
-                            id={this.props.id}
-                          />
-                        </Link>
+                        <InvoiceCard
+                          key={invoice.invoiceNumber}
+                          invoice={{ ...invoice }}
+                        />
                       </div>
                     );
                   })
@@ -87,11 +78,6 @@ class Invoices extends Component {
             </section>
           )}
         </section>
-        <div>
-          <Link to={`/user/${this.props.id}/invoice/view`}>
-            <div>Invoice View Form</div>
-          </Link>
-        </div>
       </>
     );
   }
