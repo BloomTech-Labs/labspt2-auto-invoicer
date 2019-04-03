@@ -17,6 +17,7 @@ export default class index extends Component {
 
   render() {
     const {name} = this.props.user;
+  
     return (
       <section className="invoice-list-container">
         <h1>Hello {name} here are your Invoices</h1>
