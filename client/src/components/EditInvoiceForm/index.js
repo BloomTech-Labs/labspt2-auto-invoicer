@@ -20,10 +20,11 @@ export default class EditInvoiceForm extends Component {
     };
   }
 
+  // for Incoming Invoice from InvoiceList
   componentDidMount() {
     axios
       .get(
-        `http://localhost:5000/graphql?query=query%20%7B%0A%20%20invoice(invoiceID%3A%20%225c9c3aa1242e1a4596fa996b%22)%7B%0A%20%20%20%20invoiceNumber%0A%20%20%20%20amountPaid%0A%20%20%20%20_id%0A%20%20%7D%0A%7D`
+        `http://localhost:5000/graphql?query=mutation%20%7B%0A%20%20editInvoice(editInvoiceInput%3A%20%7BamountPaid%3A%20%22${this.state.invoice.amountPaid}%22%7D%2CinvoiceID%3A%20%225ca432809ecfda497c0acc08%22)%7B%0A%20%20%20%20invoiceNumber%0A%20%20%20%20amountPaid%0A%20%20%20%20_id%0A%20%20%7D%0A%7D`
       )
       .then(response => {
         this.setState({ invoice: response.data.data.invoice });
@@ -35,6 +36,8 @@ export default class EditInvoiceForm extends Component {
         console.log("Failed to get Individual Invoice", err);
       });
   }
+
+  //handlesubmit - axios.get()
 
   render() {
     return (

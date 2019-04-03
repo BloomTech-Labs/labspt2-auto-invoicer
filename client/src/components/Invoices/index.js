@@ -60,7 +60,7 @@ class Invoices extends Component {
                       <InvoiceViewForm />
                     </Link>
                     <Link to={`/user/${this.props.id}/invoice/edit`}>
-                      <EditInvoiceForm />
+                      Edit Invoice Form
                     </Link>
                   </section>
                 );

@@ -184,11 +184,10 @@ export default class CreateInvoiceForm extends Component {
       amountPaid: this.state.amountPaid
     };
 
-    CreateInvoice(formPayload, "invoiceNumber total")
-    this.props.click(formPayload);
+    CreateInvoice(formPayload, "invoiceNumber total");
+    //this.props.click(formPayload);
     this.handleClearForm(e);
-  }
-
+  };
 
   render() {
     return (
