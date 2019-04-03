@@ -62,8 +62,8 @@ passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
-passport.deserializeUser((_id, done) => {
-  done(null, _id);
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 const isAuth = (req, res, next) => {
@@ -83,8 +83,12 @@ app.get('/user', isAuth, (req, res) => {
 app.get('/logout', (req, res) => {
   req.logout();
   req.session.destroy(() => {
-    res.clearCookie('SID');
-    // res.redirect('https://www.myautoinvoicer.com');
+    res.clearCookie('SID', {
+      domain: '.myautoinvoicer.com',
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: true
+    });
   });
 });
 
