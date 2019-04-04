@@ -33,3 +33,18 @@ const result = inputToString(editedData)
     const editedCompany = await Post(EditCompany)
     return editedCompany.data.data
 }
+
+export const BuyPlanOrCredits = async (companyID, quantity, returnedData) => {
+  const BuyPlanOrCredits = {
+    query: `
+      mutation {
+        buyPlanOrCredits(companyID: "${companyID}", quantity: ${quantity}) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+
+  const updatedCompany = await Post(BuyPlanOrCredits)
+  return updatedCompany.data.data
+}
