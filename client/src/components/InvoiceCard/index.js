@@ -5,14 +5,21 @@ import PropTypes from "prop-types";
 import "./InvoiceCard.css";
 
 const InvoiceCard = props => {
-  const { invoiceNumber, invoiceNotes, invoiceDueDate, amountPaid, total, paidStatus } = props.invoice;
+  const {
+    invoiceNumber,
+    invoiceNotes,
+    invoiceDueDate,
+    amountPaid,
+    total,
+    paid
+  } = props.invoice;
   return (
-    <article className={`invoice-card ${paidStatus}`}>
-      <h3>{invoiceNumber}</h3>
-      <p>{invoiceDueDate}</p>
-      <p>{total}</p>
-      <p>{amountPaid}</p>
-      <p>{invoiceNotes}</p>
+    <article className={"status-" + (paid ? "paid" : "unpaid")}>
+      <h3>Invoice Number:{invoiceNumber}</h3>
+      <p>Invoice Due Date:{invoiceDueDate}</p>
+      <p>Total:{total}</p>
+      <p>Amount Paid:{amountPaid}</p>
+      <p>Notes:{invoiceNotes}</p>
     </article>
   );
 };
