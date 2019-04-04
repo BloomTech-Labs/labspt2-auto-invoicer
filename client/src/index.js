@@ -7,15 +7,29 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 
 //Context API import
-import { UserProvider } from "./contexts/UserContext";
-import { CompanyProvider } from "./contexts/CompanyContext";
+import { UserProvider, UserConsumer } from "./contexts/UserContext";
+import { CompanyProvider, CompanyConsumer } from "./contexts/CompanyContext";
 
 
 ReactDOM.render(
   <UserProvider>
     <CompanyProvider>
     <Router>
-      <App />
+      <UserConsumer>
+        {({fetchUser}) => {
+          return (
+          <CompanyConsumer>
+            {({fetchCompany}) => {
+              return (
+                <App 
+                  fetchUser = {fetchUser}
+                  fetchCompany = {fetchCompany}
+                />
+              )
+            }}
+          </CompanyConsumer>
+        )}}
+      </UserConsumer>
     </Router>
     </CompanyProvider>
   </UserProvider>,
