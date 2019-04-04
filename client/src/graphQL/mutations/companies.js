@@ -1,12 +1,12 @@
 import {Post, inputToString} from '../index'
 
 export const CreateCompany = async (companyInput, returnedData) => {
-  inputToString(companyInput)
+  const result = inputToString(companyInput)
   
   const CreateCompany = {
     query: `
       mutation {
-        createCompany(companyInput: {${companyInput}} ) {
+        createCompany(companyInput: {${result}} ) {
           ${returnedData}
         }
       }
@@ -18,12 +18,12 @@ export const CreateCompany = async (companyInput, returnedData) => {
 }
 
 export const EditCompany = async (companyID, editedData, returnedData) => {
-inputToString(editedData)
+const result = inputToString(editedData)
 
     const EditCompany = {
       query: `
         mutation {
-          editCompany(companyID: "${companyID}", editCompanyInput: {${editedData}}) {
+          editCompany(companyID: "${companyID}", editCompanyInput: {${result}}) {
             ${returnedData}
           }
         }
