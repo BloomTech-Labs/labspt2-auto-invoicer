@@ -38,11 +38,18 @@ class App extends Component {
       .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
       .then(res => {
         if (res.data.userId) {
-          this.setState({ loggedIn: true, id: res.data.userId });
+          this.fetchData(res.data.userId)
+          this.setState({ loggedIn: true});
         }
-      })
+      }).then()
       .catch(err => console.log(err));
   }
+
+  fetchData = async (userId)  => {
+    const user = await this.props.fetchUser(userId)
+    await this.props.fetchCompany(user.companies[0]._id)
+  }
+
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
   };
@@ -142,10 +149,10 @@ class App extends Component {
           />
         ) : null}
         <UserConsumer>
-          {({ fetchUser, userState }) => {
+          {({ userState }) => {
             return (
               <CompanyConsumer>
-                {({ fetchCompany, companyState }) => {
+                {({ companyState }) => {
                   return (
                     <section className="routes-container">
                       {/* ROUTES GO HERE
@@ -179,9 +186,7 @@ class App extends Component {
                         render={props => (
                           <InvoiceList
                             id={id}
-                            fetchUser={fetchUser}
                             user={userState}
-                            fetchCompany={fetchCompany}
                             company={companyState}
                           />
                         )}
