@@ -26,7 +26,7 @@ class App extends Component {
     super(props);
     this.state = {
       toggleSignIn: false,
-      loggedIn: true,
+      loggedIn: false,
       id: null,
       toggleRegister: false,
       togglePassForgot: false,

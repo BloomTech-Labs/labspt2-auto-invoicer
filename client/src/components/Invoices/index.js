@@ -53,15 +53,6 @@ class Invoices extends Component {
                         </Link> */}
                       </section>
                     )}
-                    <Link to={`/user/${this.props.id}/invoice/create`}>
-                      <CreateInvoiceButton />
-                    </Link>
-                    <Link to={`/user/${this.props.id}/invoice/view`}>
-                      <InvoiceViewForm />
-                    </Link>
-                    <Link to={`/user/${this.props.id}/invoice/edit`}>
-                      Edit Invoice Form
-                    </Link>
                   </section>
                 );
               }}
