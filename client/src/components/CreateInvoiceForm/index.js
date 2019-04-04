@@ -32,12 +32,13 @@ const Button = styled.button`
 const StyledContainer = styled.div`
   max-width: 1000px;
   width: 100%;
-  height: 1000px;
+  height: 1500px;
   border: 1px solid blue;
   margin: 0 auto;
 
   @media (max-width: 500px) {
     background: palevioletred;
+    margin-top: 200px;
   }
 `;
 
@@ -62,6 +63,32 @@ const TopSectionBottom = styled.div`
     flex-direction: column;
     border: 2px solid yellow;
   }
+`;
+
+// section className="mid-section"
+const MidSection = styled.section`
+  border-bottom: 2px solid black;
+  margin-top: 50px;
+  height: 275px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    height: 675px;
+    flex-direction: column;
+    border: 2px solid yellow;
+  }
+`;
+
+// section className="mid-section-left"
+const MidSectionLeft = styled.div`
+  border: 1px solid green;
+`;
+
+// section className="mid-section-right"
+const MidSectionRight = styled.div`
+  border: 1px solid green;
 `;
 
 export default class CreateInvoiceForm extends Component {
@@ -311,8 +338,12 @@ export default class CreateInvoiceForm extends Component {
               </div>
             </TopSectionBottom>
           </TopSection>
-          <section className="mid-section">
-            <div className="mid-section-left">
+          <MidSection>
+            {" "}
+            {/* section className="mid-section"*/}
+            <MidSectionLeft>
+              {" "}
+              {/*div className="mid-section-left*/}
               <div className="address-from">
                 <form onSubmit={this.handleFormSubmit}>
                   <div>FROM</div>
@@ -389,8 +420,10 @@ export default class CreateInvoiceForm extends Component {
                   </div>
                 </form>
               </div>
-            </div>
-            <div className="mid-section-right">
+            </MidSectionLeft>
+            <MidSectionRight>
+              {" "}
+              {/* div className="mid-section-right"*/}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
@@ -430,8 +463,8 @@ export default class CreateInvoiceForm extends Component {
                   />
                 </form>
               </div>
-            </div>
-          </section>
+            </MidSectionRight>
+          </MidSection>
           <section className="bottom-section">
             <div className="bottom-section-top">
               <form
