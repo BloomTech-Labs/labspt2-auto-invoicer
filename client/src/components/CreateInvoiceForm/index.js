@@ -14,6 +14,7 @@ import { CreateInvoice } from "../../graphQL/mutations/invoices";
 //CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
+//import { TextField } from "@material-ui/core"; -- for material-ui
 
 export default class CreateInvoiceForm extends Component {
   state = {
@@ -88,6 +89,13 @@ export default class CreateInvoiceForm extends Component {
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  //material-ui
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value
+  //   });
+  // };
 
   handleZipCodeToChange = async e => {
     await this.setState({ zipCodeTo: e.target.value });
@@ -206,6 +214,13 @@ export default class CreateInvoiceForm extends Component {
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Invoice No.</div>
+                  {/* <TextField
+                    id="standard-name"
+                    label="Invoice Number"
+                    value={this.state.name}
+                    onChange={this.handleChange("invoiceNumber")}
+                    margin="normal"
+                  /> */}
                   <SingleInput
                     inputType="number"
                     // title={"Invoice Number"}
