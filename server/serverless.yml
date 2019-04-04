@@ -9,11 +9,19 @@ functions:
     handler: index.sls
     events:
       - http:
+          path: user
+          method: get
+          cors: true
+      - http:
+          path: logout
+          method: get
+          cors: true
+      - http:
           path: auth/google
           method: get
           cors: true
       - http:
-          path: auth/google/home
+          path: auth/google/callback
           method: get
           cors: true
       - http:
@@ -21,7 +29,7 @@ functions:
           method: get
           cors: true
       - http:
-          path: auth/facebook/home
+          path: auth/facebook/callback
           method: get
           cors: true
       - http:
@@ -29,7 +37,7 @@ functions:
           method: get
           cors: true
       - http:
-          path: auth/stripe/home
+          path: auth/stripe/callback
           method: get
           cors: true
       - http:

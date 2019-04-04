@@ -80,6 +80,11 @@ const invoiceSchema = new Schema({
   invoiceTerms: {
     type: String,
     required: true
+  },
+  paid: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 
   // invoiceItems: [{...}]
