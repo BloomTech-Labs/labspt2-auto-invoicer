@@ -50,8 +50,6 @@ type Customer {
 type Invoice {
   _id: ID!
   invoiceNumber: String!
-  languageSelection: String!
-  currencySelection: String!
   addressFrom: String!
   addressTo: String!
   cityTo: String
@@ -68,7 +66,6 @@ type Invoice {
   tax: String!
   shipping: String!
   total: String
-  amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
   amountPaid: Float
@@ -76,8 +73,6 @@ type Invoice {
 
 input InvoiceInput {
   invoiceNumber: String!
-  languageSelection: String!
-  currencySelection: String!
   addressFrom: String!
   addressTo: String!
   cityTo: String
