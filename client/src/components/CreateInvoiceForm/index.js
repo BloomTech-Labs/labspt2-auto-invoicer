@@ -22,7 +22,7 @@ import styled from "styled-components";
 const Button = styled.button`
   background: transparent;
   border-radius: 3px;
-  border: 2px solid palevioletred;
+  border: 2px solid black;
   color: palevioletred;
   margin: 0 1em;
   padding: 0.25em 1em;
@@ -32,13 +32,14 @@ const Button = styled.button`
 const StyledContainer = styled.div`
   max-width: 1000px;
   width: 100%;
-  height: 1500px;
-  border: 1px solid blue;
+  height: 1000px;
+
   margin: 0 auto;
 
   @media (max-width: 500px) {
-    background: palevioletred;
+    background: whitesmoke;
     margin-top: 200px;
+    height: 2300px;
   }
 `;
 
@@ -61,7 +62,6 @@ const TopSectionBottom = styled.div`
   @media (max-width: 500px) {
     height: 300px;
     flex-direction: column;
-    border: 2px solid yellow;
   }
 `;
 
@@ -77,18 +77,74 @@ const MidSection = styled.section`
   @media (max-width: 500px) {
     height: 675px;
     flex-direction: column;
-    border: 2px solid yellow;
   }
 `;
 
-// section className="mid-section-left"
+// div className="mid-section-left"
 const MidSectionLeft = styled.div`
-  border: 1px solid green;
+  height: 250px;
+  margin-top: 10px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 400px;
+  }
 `;
 
-// section className="mid-section-right"
+// div className="mid-section-right"
 const MidSectionRight = styled.div`
-  border: 1px solid green;
+  height: 250px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`;
+
+// section className="bottom-section"
+const BottomSection = styled.section`
+  border-bottom: 2px solid black;
+  height: 475px;
+
+  @media (max-width: 500px) {
+    height: 1000px;
+  }
+`;
+
+// div className="bottom-section-mid"
+const BottomSectionMid = styled.div`
+  border-bottom: 2px solid gray;
+  height: 225px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    border-bottom: 2px solid black;
+    height: 700px;
+    flex-direction: column;
+  }
+`;
+
+// div className="bottom-section-bottom-right"
+const BottomSectionBottomRight = styled.div`
+  height: 225px;
+  width: 40%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export default class CreateInvoiceForm extends Component {
@@ -465,7 +521,9 @@ export default class CreateInvoiceForm extends Component {
               </div>
             </MidSectionRight>
           </MidSection>
-          <section className="bottom-section">
+          <BottomSection>
+            {" "}
+            {/* section className="bottom-section"*/}
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
@@ -475,7 +533,9 @@ export default class CreateInvoiceForm extends Component {
                 <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>
             </div>
-            <div className="bottom-section-mid">
+            <BottomSectionMid>
+              {" "}
+              {/* div className="bottom-section-mid*/}
               <div className="bottom-section-bottom-left">
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -506,7 +566,9 @@ export default class CreateInvoiceForm extends Component {
                   </form>
                 </div>
               </div>
-              <div className="bottom-section-bottom-right">
+              <BottomSectionBottomRight>
+                {" "}
+                {/*div className="bottom-section-bottom-right"*/}
                 <div>
                   <div>Subtotal</div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -580,14 +642,14 @@ export default class CreateInvoiceForm extends Component {
                     />
                   </form>
                 </div>
-              </div>
-            </div>
+              </BottomSectionBottomRight>
+            </BottomSectionMid>
             <div className="bottom-section-bottom">
               <div>Email: example@company.com </div>
               <br />
               <div>Phone: +1-555-555-5555</div>
             </div>
-          </section>
+          </BottomSection>
           <Button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
