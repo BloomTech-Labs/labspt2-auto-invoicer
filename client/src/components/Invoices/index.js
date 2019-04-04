@@ -35,9 +35,15 @@ class Invoices extends Component {
                               return (
                                 <Link to={`/user/${invoice._id}/invoice/view`}>
                                   <InvoiceCard
+                                    className={
+                                      "status-" +
+                                      (invoice.paid ? "paid" : "unpaid")
+                                    }
                                     id={invoice._id}
                                     key={invoice.invoiceNumber}
-                                    invoice={{ ...invoice }}
+                                    invoice={{
+                                      ...invoice
+                                    }}
                                   />
                                 </Link>
                               );
@@ -56,7 +62,6 @@ class Invoices extends Component {
           );
         }}
       </UserConsumer>
-
     );
   }
 }
