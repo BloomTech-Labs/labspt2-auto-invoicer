@@ -58,15 +58,8 @@ module.exports = {
         state,
         postal_code,
         country
-        // users: '5c88bec6c5cf5c186025a084',
       });
       const newCompany = await company.save();
-      // const user = await User.findById('5c88bec6c5cf5c186025a084');
-      // if (!user) {
-      //   throw new Error('User not found.');
-      // }
-      // user.companies.push(company);
-      // await user.save();
       return {
         ...newCompany._doc
       };
@@ -80,4 +73,15 @@ module.exports = {
   }) => {
     return updateDocumentById(editCompanyInput, companyID, Company);
   },
+  buyPlanOrCredits: async ({companyID, quantity}) => {
+    const company = await Company.findById(companyID);
+    if (quantity) {
+      company.credits += quantity
+    } else {
+      company.unlimited_tier = true;
+    }
+    const newCompany = await company.save()
+    return newCompany._doc
+  }
+
 };

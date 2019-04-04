@@ -1,27 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 
-const StyledSingleInput = styled.input`
-  @media (max-width: 500px) {
-    height: 40px;
-    width: 90%;
-  }
-`;
-
-const SingleInput = props => {
+const DisabledSingleInput = props => {
   return (
     <div>
       <label className="form-label">{props.title}</label>
-      <StyledSingleInput
-        //className="form-input"
+      <input
+        className="form-input"
         name={props.name}
         type={props.inputType}
         value={props.content}
         onChange={props.controlFunc}
         placeholder={props.placeholder}
+        disabled
       />
     </div>
   );
 };
 
-export default SingleInput;
+export default DisabledSingleInput;
