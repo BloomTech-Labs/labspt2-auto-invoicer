@@ -197,7 +197,9 @@ class App extends Component {
                       <Route
                         exact
                         path={`/user/${id}/invoice/create`}
-                        component={CreateInvoice}
+                        render={props => (
+                          <CreateInvoice {...props} click={this.createPDF} />
+                        )}
                       />
 
                       <Route
