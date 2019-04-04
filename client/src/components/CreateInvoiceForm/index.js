@@ -14,6 +14,138 @@ import { CreateInvoice } from "../../graphQL/mutations/invoices";
 //CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
+//import { TextField } from "@material-ui/core"; -- for material-ui
+//import { styled } from "@material-ui/styles";
+//import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid black;
+  color: palevioletred;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`;
+
+// div className="main-container"
+const StyledContainer = styled.div`
+  max-width: 1000px;
+  width: 100%;
+  height: 1000px;
+
+  margin: 0 auto;
+
+  @media (max-width: 500px) {
+    background: whitesmoke;
+    margin-top: 200px;
+    height: 2300px;
+  }
+`;
+
+// section className="top-section"
+const TopSection = styled.section`
+  border-bottom: 2px solid black;
+  height: 200px;
+
+  @media (max-width: 500px) {
+    height: 400px;
+  }
+`;
+
+// section className="top-section-bottom"
+const TopSectionBottom = styled.div`
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    height: 300px;
+    flex-direction: column;
+  }
+`;
+
+// section className="mid-section"
+const MidSection = styled.section`
+  border-bottom: 2px solid black;
+  margin-top: 50px;
+  height: 275px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    height: 675px;
+    flex-direction: column;
+  }
+`;
+
+// div className="mid-section-left"
+const MidSectionLeft = styled.div`
+  height: 250px;
+  margin-top: 10px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 400px;
+  }
+`;
+
+// div className="mid-section-right"
+const MidSectionRight = styled.div`
+  height: 250px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`;
+
+// section className="bottom-section"
+const BottomSection = styled.section`
+  border-bottom: 2px solid black;
+  height: 475px;
+
+  @media (max-width: 500px) {
+    height: 1000px;
+  }
+`;
+
+// div className="bottom-section-mid"
+const BottomSectionMid = styled.div`
+  border-bottom: 2px solid gray;
+  height: 225px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    border-bottom: 2px solid black;
+    height: 700px;
+    flex-direction: column;
+  }
+`;
+
+// div className="bottom-section-bottom-right"
+const BottomSectionBottomRight = styled.div`
+  height: 225px;
+  width: 40%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`;
 
 export default class CreateInvoiceForm extends Component {
   state = {
@@ -88,6 +220,13 @@ export default class CreateInvoiceForm extends Component {
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  //material-ui
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value
+  //   });
+  // };
 
   handleZipCodeToChange = async e => {
     await this.setState({ zipCodeTo: e.target.value });
@@ -199,19 +338,32 @@ export default class CreateInvoiceForm extends Component {
     return (
       <div>
         Create Invoice Form.
-        <div className="main-container">
+        <StyledContainer>
+          {" "}
+          {/* div className="main-container"*/}
           Main Container
-          <section className="top-section">
+          <TopSection>
+            {" "}
+            {/* section className="top-section"*/}
             <div className="top-section-top">
               <div>*Thank you Message*</div>
               <div>
                 <AddLogo />
               </div>
             </div>
-            <div className="top-section-bottom">
+            <TopSectionBottom>
+              {" "}
+              {/* section className="top-section-bottom"*/}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Invoice No.</div>
+                  {/* <TextField
+                    id="standard-name"
+                    label="Invoice Number"
+                    value={this.state.name}
+                    onChange={this.handleChange("invoiceNumber")}
+                    margin="normal"
+                  /> */}
                   <SingleInput
                     inputType="number"
                     // title={"Invoice Number"}
@@ -246,10 +398,14 @@ export default class CreateInvoiceForm extends Component {
                   />
                 </form>
               </div>
-            </div>
-          </section>
-          <section className="mid-section">
-            <div className="mid-section-left">
+            </TopSectionBottom>
+          </TopSection>
+          <MidSection>
+            {" "}
+            {/* section className="mid-section"*/}
+            <MidSectionLeft>
+              {" "}
+              {/*div className="mid-section-left*/}
               <div className="address-from">
                 <form onSubmit={this.handleFormSubmit}>
                   <div>FROM</div>
@@ -326,8 +482,10 @@ export default class CreateInvoiceForm extends Component {
                   </div>
                 </form>
               </div>
-            </div>
-            <div className="mid-section-right">
+            </MidSectionLeft>
+            <MidSectionRight>
+              {" "}
+              {/* div className="mid-section-right"*/}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
@@ -367,9 +525,11 @@ export default class CreateInvoiceForm extends Component {
                   />
                 </form>
               </div>
-            </div>
-          </section>
-          <section className="bottom-section">
+            </MidSectionRight>
+          </MidSection>
+          <BottomSection>
+            {" "}
+            {/* section className="bottom-section"*/}
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
@@ -379,7 +539,9 @@ export default class CreateInvoiceForm extends Component {
                 <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>
             </div>
-            <div className="bottom-section-mid">
+            <BottomSectionMid>
+              {" "}
+              {/* div className="bottom-section-mid*/}
               <div className="bottom-section-bottom-left">
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -410,7 +572,9 @@ export default class CreateInvoiceForm extends Component {
                   </form>
                 </div>
               </div>
-              <div className="bottom-section-bottom-right">
+              <BottomSectionBottomRight>
+                {" "}
+                {/*div className="bottom-section-bottom-right"*/}
                 <div>
                   <div>Subtotal</div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -484,23 +648,23 @@ export default class CreateInvoiceForm extends Component {
                     />
                   </form>
                 </div>
-              </div>
-            </div>
+              </BottomSectionBottomRight>
+            </BottomSectionMid>
             <div className="bottom-section-bottom">
               <div>Email: example@company.com </div>
               <br />
               <div>Phone: +1-555-555-5555</div>
             </div>
-          </section>
-          <button
+          </BottomSection>
+          <Button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
             //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
             Generate
-          </button>
+          </Button>
           <footer className="footer">Footer</footer>
-        </div>
+        </StyledContainer>
       </div>
     );
   }
