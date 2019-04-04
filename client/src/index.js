@@ -16,7 +16,7 @@ ReactDOM.render(
     <CompanyProvider>
     <Router>
       <UserConsumer>
-        {({fetchUser}) => {
+        {({fetchUser, userState}) => {
           return (
           <CompanyConsumer>
             {({fetchCompany}) => {
@@ -24,6 +24,7 @@ ReactDOM.render(
                 <App 
                   fetchUser = {fetchUser}
                   fetchCompany = {fetchCompany}
+                  userId = {userState._id}
                 />
               )
             }}

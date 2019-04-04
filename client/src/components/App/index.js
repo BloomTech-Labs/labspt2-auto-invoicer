@@ -27,7 +27,6 @@ class App extends Component {
     this.state = {
       toggleSignIn: false,
       loggedIn: false,
-      id: null,
       toggleRegister: false,
       togglePassForgot: false,
       toggleAuth: false
@@ -100,7 +99,7 @@ class App extends Component {
     this.setState({ loggedIn: false });
   };
   render() {
-    const { id } = this.state;
+    const id = this.props.userId
     return (
       <div className="App">
         <header>
