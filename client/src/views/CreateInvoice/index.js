@@ -13,15 +13,8 @@ export default class index extends Component {
   render() {
     return (
       <div>
-        Views Only.
         <CreateInvoiceForm click={this.props.click} />
-<<<<<<< HEAD
-<<<<<<< HEAD
         <GoogleCalApi />
-=======
->>>>>>> added a pdf creator for invoices
-=======
->>>>>>> merging before pr
       </div>
     );
   }
