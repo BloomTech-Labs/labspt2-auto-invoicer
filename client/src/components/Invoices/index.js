@@ -27,7 +27,9 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <EmptyInvoices />
+                      <Link to={`/user/${this.props.id}/invoice/create`}>
+                        <EmptyInvoices />
+                      </Link>
                     ) : (
                       <section className="invoices-container">
                         {invoices
@@ -56,7 +58,6 @@ class Invoices extends Component {
           );
         }}
       </UserConsumer>
-
     );
   }
 }
