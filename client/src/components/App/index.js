@@ -120,7 +120,9 @@ class App extends Component {
     axios
       .post("https://pdf-generator-server.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get("https://pdf-generator-server.herokuapp.com/fetch-pdf", { responseType: "blob" })
+        axios.get("https://pdf-generator-server.herokuapp.com/fetch-pdf", {
+          responseType: "blob"
+        })
       )
       .then(res => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
@@ -196,7 +198,9 @@ class App extends Component {
                       <Route
                         exact
                         path={`/user/${id}/invoice/create`}
-                        component={CreateInvoice}
+                        render={props => (
+                          <CreateInvoice {...props} click={this.createPDF} />
+                        )}
                       />
 
                       <Route
