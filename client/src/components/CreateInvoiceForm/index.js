@@ -189,9 +189,8 @@ export default class CreateInvoiceForm extends Component {
       companyName: this.props.company.name,
       customerID: this.props.company.customers[0]._id
     };
-    // console.log(this.props.company.customers[0])
     CreateInvoice(formPayload, "invoiceNumber total")
-    // this.props.click(formPayload);
+    this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
