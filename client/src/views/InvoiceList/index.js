@@ -8,14 +8,14 @@ import "./InvoiceList.css";
 import Invoices from "../../components/Invoices";
 
 export default class index extends Component {
-  constructor(props) {
+constructor(props) {
     super(props)
     this.fetchData()
   }
 
   fetchData = async ()  => {
     await this.props.fetchUser("5c8d88c17fef7140f485950f")
-    this.props.fetchCompany(this.props.user.companies[0]._id)
+    await this.props.fetchCompany(this.props.user.companies[0]._id)
   }
 
   render() {

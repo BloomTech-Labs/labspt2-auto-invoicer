@@ -156,7 +156,7 @@ export default class CreateInvoiceForm extends Component {
       amountPaid: ""
     });
   };
-
+  
   handleFormSubmit = async e => {
     e.preventDefault();
 
@@ -181,11 +181,17 @@ export default class CreateInvoiceForm extends Component {
       tax: this.state.tax,
       shipping: this.state.shipping,
       total: this.state.total,
-      amountPaid: this.state.amountPaid
+      amountPaid: this.state.amountPaid,
+      //from props
+      userID: this.props.user.userID,
+      userName: this.props.user.name,
+      companyID: this.props.company.companyID,
+      companyName: this.props.company.name,
+      customerID: this.props.company.customers[0]._id
     };
-
+    // console.log(this.props.company.customers[0])
     CreateInvoice(formPayload, "invoiceNumber total")
-    this.props.click(formPayload);
+    // this.props.click(formPayload);
     this.handleClearForm(e);
   }
 
