@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter } from "react-router-dom";
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { UserConsumer } from "../../contexts/UserContext";
@@ -35,12 +35,13 @@ class App extends Component {
   }
   componentDidMount() {
     axios
-      .get('https://api.myautoinvoicer.com/user', { withCredentials: true })
+      .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
       .then(res => {
         if (res.data.userId) {
-          this.setState({ loggedIn: true, id: res.data.userId })
+          this.setState({ loggedIn: true, id: res.data.userId });
         }
-      }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
@@ -84,11 +85,12 @@ class App extends Component {
   };
   signOut = () => {
     axios
-      .get('https://api.myautoinvoicer.com/logout', { withCredentials: true })
+      .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
       .then(res => {
         // TODO
-      }).catch(err => console.log(err));
-    this.setState({ loggedIn: false});
+      })
+      .catch(err => console.log(err));
+    this.setState({ loggedIn: false });
   };
   render() {
     const { id } = this.state;
