@@ -17,6 +17,52 @@ import "react-day-picker/lib/style.css";
 //import { TextField } from "@material-ui/core"; -- for material-ui
 //import { styled } from "@material-ui/styles";
 //import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid palevioletred;
+  color: palevioletred;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+`;
+
+// div className="main-container"
+const StyledContainer = styled.div`
+  max-width: 1000px;
+  width: 100%;
+  height: 1000px;
+  border: 1px solid blue;
+  margin: 0 auto;
+
+  @media (max-width: 500px) {
+    background: palevioletred;
+  }
+`;
+
+// section className="top-section"
+const TopSection = styled.section`
+  border-bottom: 2px solid black;
+  height: 200px;
+
+  @media (max-width: 500px) {
+    height: 400px;
+  }
+`;
+
+// section className="top-section-bottom"
+const TopSectionBottom = styled.div`
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+
+  @media (max-width: 500px) {
+    height: 300px;
+    flex-direction: column;
+    border: 2px solid yellow;
+  }
+`;
 
 export default class CreateInvoiceForm extends Component {
   state = {
@@ -203,16 +249,22 @@ export default class CreateInvoiceForm extends Component {
     return (
       <div>
         Create Invoice Form.
-        <div className="main-container">
+        <StyledContainer>
+          {" "}
+          {/* div className="main-container"*/}
           Main Container
-          <section className="top-section">
+          <TopSection>
+            {" "}
+            {/* section className="top-section"*/}
             <div className="top-section-top">
               <div>*Thank you Message*</div>
               <div>
                 <AddLogo />
               </div>
             </div>
-            <div className="top-section-bottom">
+            <TopSectionBottom>
+              {" "}
+              {/* section className="top-section-bottom"*/}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Invoice No.</div>
@@ -257,8 +309,8 @@ export default class CreateInvoiceForm extends Component {
                   />
                 </form>
               </div>
-            </div>
-          </section>
+            </TopSectionBottom>
+          </TopSection>
           <section className="mid-section">
             <div className="mid-section-left">
               <div className="address-from">
@@ -503,15 +555,15 @@ export default class CreateInvoiceForm extends Component {
               <div>Phone: +1-555-555-5555</div>
             </div>
           </section>
-          <button
+          <Button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
             //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
             Generate
-          </button>
+          </Button>
           <footer className="footer">Footer</footer>
-        </div>
+        </StyledContainer>
       </div>
     );
   }
