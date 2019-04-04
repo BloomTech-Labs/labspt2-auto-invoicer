@@ -21,17 +21,12 @@
   text-align: justify;
 }
 
-.late:hover {
+.status-unpaid{
   border-color: rgb(224, 55, 55);
   box-shadow: 0 0 5px red;
 }
 
-.paid:hover {
+.status-paid {
   border-color: green;
   box-shadow: 0 0 5px green;
-}
-
-.current:hover {
-  border-color: blue;
-  box-shadow: 0 0 5px blue;
 }
