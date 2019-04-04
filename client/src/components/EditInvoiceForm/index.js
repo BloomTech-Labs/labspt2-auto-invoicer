@@ -8,6 +8,9 @@ import TextArea from "../reusableComponents/TextArea";
 //import Select from "../reusableComponents/Select";
 //import InvoiceItemInput from "../InvoiceItemsInput";
 
+// GraphQL mutation - EditInvoice endpoint
+import { EditInvoice } from "../../graphQL/mutations/invoices";
+
 //Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
@@ -24,7 +27,9 @@ export default class EditInvoiceForm extends Component {
   componentDidMount() {
     axios
       .get(
-        `http://localhost:5000/graphql?query=mutation%20%7B%0A%20%20editInvoice(editInvoiceInput%3A%20%7BamountPaid%3A%20%22${this.state.invoice.amountPaid}%22%7D%2CinvoiceID%3A%20%225ca432809ecfda497c0acc08%22)%7B%0A%20%20%20%20invoiceNumber%0A%20%20%20%20amountPaid%0A%20%20%20%20_id%0A%20%20%7D%0A%7D`
+        `http://localhost:5000/graphql?query=mutation%20%7B%0A%20%20editInvoice(editInvoiceInput%3A%20%7BamountPaid%3A%20%22${
+          this.state.invoice.amountPaid
+        }%22%7D%2CinvoiceID%3A%20%225ca432809ecfda497c0acc08%22)%7B%0A%20%20%20%20invoiceNumber%0A%20%20%20%20amountPaid%0A%20%20%20%20_id%0A%20%20%7D%0A%7D`
       )
       .then(response => {
         this.setState({ invoice: response.data.data.invoice });
@@ -38,6 +43,16 @@ export default class EditInvoiceForm extends Component {
   }
 
   //handlesubmit - axios.get()
+  handleFormSubmit = async e => {
+    e.preventDefault();
+
+    const formPayload = {
+      amountPaid: this.state.amountPaid
+    };
+
+    EditInvoice(formPayload, "amountPaid");
+    this.handleClearForm(e);
+  };
 
   render() {
     return (
