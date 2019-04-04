@@ -21,7 +21,7 @@ const AmountCredits = props => {
       label="How many credits do you want?"
       name="quantity"
       disabled={disabled}
-      value={value}
+      value={disabled ? 0 : value}
       onChange={onChangeHandler}
       className={classes.textField}
       InputLabelProps={{
