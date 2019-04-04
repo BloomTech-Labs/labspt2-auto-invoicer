@@ -25,7 +25,48 @@ export class CompanyProvider extends React.Component {
       invoices: [],
     }
     this.fetchCompany = async (companyID) => {
-      const returnedData = '_id name email phone_num address_1 address_2 city state postal_code country unlimited_tier credits users {_id name} customers {_id name}'
+      const companyData = `
+      _id 
+      name 
+      email 
+      phone_num 
+      address_1
+      address_2 
+      city 
+      state 
+      postal_code 
+      country 
+      unlimited_tier 
+      credits`
+      const usersData =  `users {_id name}`
+      const customersData = `customers {_id name}`
+      const invoicesData = `invoices {
+        _id
+        invoiceNumber 
+        companyName 
+        userName 
+        languageSelection 
+        currencySelection 
+        addressFrom 
+        addressTo 
+        cityTo 
+        stateRegionTo 
+        zipCodeTo 
+        clientEmailTo 
+        selectedDate 
+        invoiceDueDate 
+        balanceDue 
+        subtotal 
+        discount
+        tax 
+        shipping 
+        total 
+        amountPaid 
+        invoiceNotes 
+        invoiceTerms
+      }`
+
+      const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`
       const result = await FetchCompany(companyID, returnedData)
       const {company} = result
       this.setState({

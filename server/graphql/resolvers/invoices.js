@@ -17,6 +17,12 @@ module.exports = {
     return findDocumentById(invoiceID, Invoice);
   },
   createInvoice: async ({ invoiceInput }) => {
+    const company = await Company.findById(invoiceInput.companyID)
+    if (!company.unlimited_tier) {
+      if (!company.credits) {
+        throw new Error ('')
+      }
+    }
     try {
       const invoice = new Invoice({
         companyID: invoiceInput.companyID,
@@ -48,11 +54,13 @@ module.exports = {
 
       const newInvoice = await invoice.save();
       const user = await User.findById(newInvoice._doc.userID);
-      const company = await Company.findById(newInvoice._doc.companyID);
       const customer = await Customer.findById(newInvoice._doc.customerID);
       user.invoices.push(newInvoice._doc._id);
       company.invoices.push(newInvoice._doc._id);
       customer.invoices.push(newInvoice._doc._id);
+      if (!company.unlimited_tier) {
+        company.credits = company.credits - 1
+      }
       await user.save();
       await company.save();
       await customer.save();

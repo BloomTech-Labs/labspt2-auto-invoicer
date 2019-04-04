@@ -83,7 +83,6 @@ const invoiceSchema = new Schema({
   },
   paid: {
     type: Boolean,
-    required: true,
     default: false
   },
   companyID: {
