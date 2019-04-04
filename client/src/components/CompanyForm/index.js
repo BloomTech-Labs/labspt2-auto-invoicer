@@ -1,6 +1,7 @@
 import React from "react";
-
 import "./CompanyForm.css";
+
+import { CreateCompany } from "../../graphQL/mutations/companies";
 
 class CompanyForm extends React.Component {
   constructor(props) {
@@ -28,11 +29,11 @@ class CompanyForm extends React.Component {
     } = this.state;
 
     let companyObj = {
-      companyName,
-      companyAddress,
-      companyCity,
-      companyState,
-      companyZip
+      name: companyName,
+      address_1: companyAddress,
+      city: companyCity,
+      state: companyState,
+      postal_code: companyZip
     };
     // check if logo is being uploaded prior to adding to companyObj
     if (this.fileInput.current.files[0]) {
@@ -41,6 +42,10 @@ class CompanyForm extends React.Component {
       alert(JSON.stringify(companyObj));
     } else {
       alert(JSON.stringify(companyObj));
+    }
+    if (this.props.company.selected === "create") {
+      console.log(CreateCompany(companyObj));
+    } else {
     }
   };
   static getDerivedStateFromProps(props, state) {
@@ -52,16 +57,16 @@ class CompanyForm extends React.Component {
         companyZip: props.company.companyZip,
         companyState: props.company.companyState,
         companyCity: props.company.companyCity
-      }
-    }else {
+      };
+    } else {
       return {
-        selected: 'create',
-        companyName: '',
-        companyAddress: '',
-        companyZip: '',
-        companyState:'',
-        companyCity: ''
-      }
+        selected: "create",
+        companyName: "",
+        companyAddress: "",
+        companyZip: "",
+        companyState: "",
+        companyCity: ""
+      };
     }
   }
   render() {
