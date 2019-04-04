@@ -1,4 +1,6 @@
-const { buildSchema } = require("graphql");
+const {
+  buildSchema
+} = require("graphql");
 
 module.exports = buildSchema(`
 type User {
@@ -49,10 +51,15 @@ type Customer {
 
 type Invoice {
   _id: ID!
+  companyID: String!
+  companyName: String!
+  userID: String!
+  userName: String!
+  customerID: String! 
   invoiceNumber: String!
   languageSelection: String!
   currencySelection: String!
-  addressFrom: String!
+  addressFrom: String
   addressTo: String!
   cityTo: String
   stateRegionTo: String
@@ -72,22 +79,27 @@ type Invoice {
 }
 
 input InvoiceInput {
-  invoiceNumber: String!
-  languageSelection: String!
-  currencySelection: String!
-  addressFrom: String!
-  addressTo: String!
+  companyID: String!
+  companyName: String!
+  userID: String!
+  userName: String!
+  customerID: String!
+  invoiceNumber: String
+  languageSelection: String
+  currencySelection: String
+  addressFrom: String
+  addressTo: String
   cityTo: String
   stateRegionTo: String
-  zipCodeTo: String!
-  clientEmailTo: String!
-  selectedDate: String!
-  invoiceDueDate: String!
-  balanceDue: String!
+  zipCodeTo: String
+  clientEmailTo: String
+  selectedDate: String
+  invoiceDueDate: String
+  balanceDue: String
   subtotal: String
   discount: String
-  tax: String!
-  shipping: String!
+  tax: String
+  shipping: String
   total: String
   amountPaid: String
   invoiceNotes: String
@@ -97,7 +109,7 @@ input InvoiceInput {
 input EditInvoiceInput {
   amountPaid: String!
 }
- 
+
 
 type Item {
   _id: ID!
@@ -173,12 +185,6 @@ input EditCustomerInput {
   country: String
 }
 
-type AuthData {
-  userId: ID!
-  token: String!
-  tokenExpiration: Int!
-}
-
 type Country {
   name: String!
   iso2: String!
@@ -188,7 +194,6 @@ type Country {
 }
 
 type RootQuery {
-  login(email: String!, password: String!): AuthData!
   users: [User!]!
   user(userID: ID!): User!
   companyByAnyField(companyInput: EditCompanyInput): [Company!]
@@ -213,6 +218,7 @@ type RootMutation {
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
   editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceID: ID!): Invoice
+  buyPlanOrCredits(companyID: ID!, quantity: Int! ): Company
 }
 
 schema {

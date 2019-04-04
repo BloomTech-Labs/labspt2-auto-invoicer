@@ -83,8 +83,27 @@ const invoiceSchema = new Schema({
   },
   paid: {
     type: Boolean,
-    required: true,
     default: false
+  },
+  companyID: {
+    type: String,
+    required: true
+  },
+  companyName: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: String,
+    required: true
+  },
+  userName: {
+    type: String,
+    required: true
+  },
+  customerID: {
+    type: String,
+    required: true
   }
 
   // invoiceItems: [{...}]
