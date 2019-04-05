@@ -15,24 +15,24 @@ export default class index extends Component {
   render() {
     return (
       <UserConsumer>
-        {({userState})=> {
+        {({ userState }) => {
           return (
             <CompanyConsumer>
-              {({companyState}) =>{
+              {({ companyState }) => {
                 return (
                   <div>
                     Views Only.
-                    <CreateInvoiceForm 
-                    click={this.props.click}
-                    user = {userState} 
-                    company = {companyState}
+                    <CreateInvoiceForm
+                      click={this.props.click}
+                      user={userState}
+                      company={companyState}
                     />
                     <GoogleCalApi />
                   </div>
-                )
+                );
               }}
             </CompanyConsumer>
-          )
+          );
         }}
       </UserConsumer>
     );
