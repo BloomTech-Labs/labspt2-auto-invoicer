@@ -20,14 +20,14 @@ import EditInvoiceView from "../../views/EditInvoiceView";
 import PasswordResetView from "../../views/PasswordResetView";
 
 import "./App.css";
+import EditInvoiceForm from '../EditInvoiceForm/index'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       toggleSignIn: false,
-      loggedIn: true,
-      id: null,
+      loggedIn: false,
       toggleRegister: false,
       togglePassForgot: false,
       toggleAuth: false
@@ -139,7 +139,7 @@ class App extends Component {
       });
   };
   render() {
-    const { id } = this.state;
+    const id = this.props.userId
     return (
       <div className="App">
         <header>
@@ -240,8 +240,8 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/${id}/invoice/edit`}
-                        component={EditInvoiceView}
+                        path={`/user/:id/invoice/:invoiceID/edit`}
+                        render={ (props) => <EditInvoiceForm {...props} />}
                       />
                       <Route
                         exact
