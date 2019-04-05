@@ -20,6 +20,7 @@ import EditInvoiceView from "../../views/EditInvoiceView";
 import PasswordResetView from "../../views/PasswordResetView";
 
 import "./App.css";
+import EditInvoiceForm from '../EditInvoiceForm/index'
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends Component {
       .then(res => {
         if (res.data.userId) {
           this.fetchData(res.data.userId)
+          // this.fetchData("5c8d88c17fef7140f485950f")
           this.setState({ loggedIn: true});
         }
       }).then()
@@ -181,7 +183,7 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/${id}/invoices`}
+                        path={`/user/:id/invoices`}
                         render={props => (
                           <InvoiceList
                             id={id}
@@ -198,8 +200,8 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/${id}/invoice/edit`}
-                        component={EditInvoiceView}
+                        path={`/user/:id/invoice/:invoiceID/edit`}
+                        render={ (props) => <EditInvoiceForm {...props} />}
                       />
                       <Route
                         exact

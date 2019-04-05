@@ -39,7 +39,7 @@ class Invoices extends Component {
                         {invoices
                           ? invoices.map(invoice => {
                               return (
-                                <Link to={`/user/${invoice._id}/invoice/view`}>
+                                <Link to={ `/user/${userState.userID}/invoice/${invoice._id}/edit`}>
                                   <InvoiceCard
                                     id={invoice._id}
                                     key={invoice.invoiceNumber}

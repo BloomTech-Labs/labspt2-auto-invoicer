@@ -1,4 +1,4 @@
-import Post from "../index";
+import {Post} from "../index";
 
 // fetch all invoices
 export const FetchInvoices = async returnedData => {
