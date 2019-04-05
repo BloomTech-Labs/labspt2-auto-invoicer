@@ -71,6 +71,10 @@ module.exports = {
     editCompanyInput,
     companyID
   }) => {
+    Object.keys(editCompanyInput).forEach(key => {
+      if (key===unlimited_tier || key===credits ) {
+        delete editCompanyInput[key];
+      }
     return updateDocumentById(editCompanyInput, companyID, Company);
   },
   buyPlanOrCredits: async ({companyID, quantity}) => {
