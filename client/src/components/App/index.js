@@ -244,11 +244,11 @@ class App extends Component {
                         path={`/user/:id/invoice/:invoiceID/edit`}
                         render={ (props) => <EditInvoiceForm {...props} />}
                       />
-                      <Route
+                      {/* <Route
                         exact
                         path={"/password-reset"}
                         component={PasswordResetView}
-                      />
+                      /> */}
                     </section>
                   );
                 }}
