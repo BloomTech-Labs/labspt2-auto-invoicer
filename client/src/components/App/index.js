@@ -47,8 +47,8 @@ class App extends Component {
   }
 
   fetchData = async (userId)  => {
-    const user = await this.props.fetchUser(userId)
-    await this.props.fetchCompany(user.companies[0]._id)
+    await this.props.fetchUser(userId)
+    await this.props.fetchCompany(this.props.companies[0]._id)
   }
 
   toggleAuthModal = () => {
