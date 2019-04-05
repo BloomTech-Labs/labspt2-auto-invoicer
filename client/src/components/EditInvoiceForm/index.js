@@ -9,49 +9,69 @@ import TextArea from "../reusableComponents/TextArea";
 //import InvoiceItemInput from "../InvoiceItemsInput";
 
 // GraphQL mutation - EditInvoice endpoint
-import { EditInvoice } from "../../graphQL/mutations/invoices";
+import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
 
 //Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
+import {FetchInvoice} from '../../graphQL/queries/invoices'
 
 export default class EditInvoiceForm extends Component {
   constructor() {
     super();
     this.state = {
-      invoice: {}
+      invoice: {},
+      amountPaid: 1000
     };
   }
 
   // for Incoming Invoice from InvoiceList
-  componentDidMount() {
-    axios
-      .get(
-        `http://localhost:5000/graphql?query=mutation%20%7B%0A%20%20editInvoice(editInvoiceInput%3A%20%7BamountPaid%3A%20%22${
-          this.state.invoice.amountPaid
-        }%22%7D%2CinvoiceID%3A%20%225ca432809ecfda497c0acc08%22)%7B%0A%20%20%20%20invoiceNumber%0A%20%20%20%20amountPaid%0A%20%20%20%20_id%0A%20%20%7D%0A%7D`
-      )
-      .then(response => {
-        this.setState({ invoice: response.data.data.invoice });
-
-        console.log(response.data.data.invoice);
-        console.log(response.data.data.invoice.amountPaid);
-      })
-      .catch(err => {
-        console.log("Failed to get Individual Invoice", err);
-      });
+  async componentDidMount() {
+    try {
+      const returnedData = `
+      _id
+      invoiceNumber 
+      companyName 
+      userName 
+      languageSelection 
+      currencySelection 
+      addressFrom 
+      addressTo 
+      cityTo 
+      stateRegionTo 
+      zipCodeTo 
+      clientEmailTo 
+      selectedDate 
+      invoiceDueDate 
+      balanceDue 
+      subtotal 
+      discount
+      tax 
+      shipping 
+      total 
+      amountPaid 
+      invoiceNotes 
+      invoiceTerms
+      `
+      const {invoiceID} = this.props.match.params
+      const invoice = await FetchInvoice(invoiceID, returnedData)
+      this.setState({...invoice, amountPaid: invoice.amountPaid})
+    } catch (error) {
+      throw error
+    }
   }
 
   //handlesubmit - axios.get()
   handleFormSubmit = async e => {
     e.preventDefault();
 
-    const formPayload = {
-      amountPaid: this.state.amountPaid
-    };
+    EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
+    const {id} = this.props.match.params
+    this.props.history.push(`/user/${id}/invoices`)
+  };
 
-    EditInvoice(formPayload, "amountPaid");
-    this.handleClearForm(e);
+  handleAmountPaidChange = e => {
+    this.setState({ amountPaid: e.target.value });
   };
 
   render() {
@@ -76,7 +96,7 @@ export default class EditInvoiceForm extends Component {
                     // title={"Invoice Number"}
                     name="invoiceNumber"
                     controlFunc={this.handleInputChange}
-                    content={this.state.invoiceNumber}
+                    content={this.state.invoice.invoiceNumber}
                     placeholder="# Invoice Number"
                   />
                 </form>
@@ -135,7 +155,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Invoice Number"}
                       name="addressTo"
                       controlFunc={this.handleInputChange}
-                      content={this.state.addressTo}
+                      content={this.state.invoice.addressTo}
                       placeholder="Client Street Address"
                     />
                   </div>
@@ -146,7 +166,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Invoice Number"}
                       name="cityTo"
                       controlFunc={this.handleInputChange}
-                      content={this.state.cityTo}
+                      content={this.state.invoice.cityTo}
                       placeholder="Client City"
                     />
                   </div>
@@ -157,7 +177,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Invoice Number"}
                       name="stateRegionTo"
                       controlFunc={this.handleInputChange}
-                      content={this.state.stateRegionTo}
+                      content={this.state.invoice.stateRegionTo}
                       placeholder="Client State or Region"
                     />
                   </div>
@@ -168,7 +188,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Invoice Number"}
                       name="zipCodeTo"
                       controlFunc={this.handleZipCodeToChange}
-                      content={this.state.zipCodeTo}
+                      content={this.state.invoice.zipCodeTo}
                       placeholder="Client Zip Code"
                     />
                   </div>
@@ -179,7 +199,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Invoice Number"}
                       name="clientEmailTo"
                       controlFunc={this.handleInputChange}
-                      content={this.state.clientEmailTo}
+                      content={this.state.invoice.clientEmailTo}
                       placeholder="Client Email"
                     />
                   </div>
@@ -221,7 +241,7 @@ export default class EditInvoiceForm extends Component {
                     // title={"Balance Due"}
                     name="balanceDue"
                     controlFunc={this.handleInputChange}
-                    content={this.state.balanceDue}
+                    content={this.state.invoice.balanceDue}
                     placeholder="Balance Due"
                   />
                 </form>
@@ -250,6 +270,7 @@ export default class EditInvoiceForm extends Component {
                       resize={false}
                       name="invoiceNotes"
                       controlFunc={this.handleInputChange}
+                      content={this.state.invoice.invoiceNotes}
                       placeholder="Invoice Notes"
                     />
                   </form>
@@ -264,6 +285,7 @@ export default class EditInvoiceForm extends Component {
                       resize={false}
                       name="invoiceTerms"
                       controlFunc={this.handleInputChange}
+                      content={this.state.invoice.invoiceTerms}
                       placeholder="Invoice Terms"
                     />
                   </form>
@@ -278,7 +300,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Subtotal"}
                       name="subtotal"
                       controlFunc={this.handleInputChange}
-                      content={this.state.subtotal}
+                      content={this.state.invoice.subtotal}
                       placeholder="Subtotal"
                     />
                   </form>
@@ -291,7 +313,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Discount"}
                       name="discount"
                       controlFunc={this.handleInputChange}
-                      content={this.state.discount}
+                      content={this.state.invoice.discount}
                       placeholder="Discount"
                     />
                   </form>
@@ -312,7 +334,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Shipping"}
                       name="shipping"
                       controlFunc={this.handleInputChange}
-                      content={this.state.shipping}
+                      content={this.state.invoice.shipping}
                       placeholder="Shipping"
                     />
                   </form>
@@ -325,7 +347,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Total"}
                       name="total"
                       controlFunc={this.handleInputChange}
-                      content={this.state.total}
+                      content={this.state.invoice.total}
                       placeholder="Total"
                     />
                   </form>
@@ -337,7 +359,7 @@ export default class EditInvoiceForm extends Component {
                       inputType="number"
                       // title={"Amount Paid"}
                       name="amountPaid"
-                      controlFunc={this.handleInputChange}
+                      controlFunc={this.handleAmountPaidChange}
                       content={this.state.amountPaid}
                       placeholder="Amount Paid"
                     />
@@ -353,7 +375,7 @@ export default class EditInvoiceForm extends Component {
           </section>
           <button
             className="btn btn-link float-left"
-            //onClick={this.handleFormSubmit}
+            onClick={this.handleFormSubmit}
           >
             UPDATE INVOICE
           </button>
