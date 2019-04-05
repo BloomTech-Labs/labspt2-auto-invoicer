@@ -33,16 +33,22 @@ class StripeCheckoutForm extends Component {
   onSubmit = async e => {
     e.preventDefault();
     const { name, currency, quantity } = this.state;
+    if (this.state.unlimited) {
+      quantity = 0;
+    }
     const { token } = await this.props.stripe.createToken({ name });
-    const response = await fetch('https://api.myautoinvoicer.com/stripe/charge', {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        stripeToken: token.id,
-        quantity,
-        currency
-      })
-    });
+    const response = await fetch(
+      'https://api.myautoinvoicer.com/stripe/charge',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          stripeToken: token.id,
+          quantity,
+          currency
+        })
+      }
+    );
     console.log(response);
     this.setState({
       unlimited: false,
