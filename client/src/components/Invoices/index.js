@@ -31,7 +31,12 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <Link to={`/user/${this.props.id}/invoice/create`}>
+                      <Link
+                        className="card-links"
+                        to={`/user/${
+                          this.props.id
+                        }/invoice/create`}
+                      >
                         <EmptyInvoices />
                       </Link>
                     ) : (
@@ -39,20 +44,34 @@ class Invoices extends Component {
                         {invoices
                           ? invoices.map(invoice => {
                               return (
-                                <Link to={ `/user/${userState.userID}/invoice/${invoice._id}/edit`}>
+                                <Link
+                                  className="card-links"
+                                  to={`/user/${
+                                    userState.userID
+                                  }/invoice/${
+                                    invoice._id
+                                  }/edit`}
+                                >
                                   <InvoiceCard
                                     id={invoice._id}
                                     key={invoice.invoiceNumber}
-                                    invoice={{ ...invoice }}
+                                    invoice={{
+                                      ...invoice
+                                    }}
                                   />
                                 </Link>
                               );
                             })
                           : null}
                         :{" "}
-                        {/* <Link to={`/user/${this.props.id}/invoice/create`}>
+                        <Link
+                          className="card-links"
+                          to={`/user/${
+                            this.props.id
+                          }/invoice/create`}
+                        >
                           <CreateInvoiceButton />
-                        </Link> */}
+                        </Link>
                       </section>
                     )}
                   </section>

@@ -5,3 +5,8 @@
   margin: 20px auto;
   min-height: 400px;
 }
+
+.card-links{
+  text-decoration: none;
+  color:black;
+}
