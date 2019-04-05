@@ -19,7 +19,7 @@ export const CreateInvoice = async (invoiceInput, returnedData) => {
 };
 
 export const EditInvoice = async (invoiceID, editedData, returnedData) => {
-  inputToString(editedData);
+  editedData = inputToString(editedData);
 
   const EditInvoice = {
     query: `
@@ -33,6 +33,22 @@ export const EditInvoice = async (invoiceID, editedData, returnedData) => {
   const editedInvoice = await Post(EditInvoice);
   return editedInvoice.data.data;
 };
+
+export const EditAmountPaid = async (invoiceID, amountPaid, returnedData) => {
+  // const amount = amountPaid.toString();
+  const EditAmountPaid = {
+      query: `
+                mutation {
+                    editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {amountPaid: "${amountPaid}"}) {
+                        ${returnedData}
+                    }
+                }
+            `
+          }
+      const editedAmount = await Post(EditAmountPaid)
+      return editedAmount.data.data;
+  };
+
 
 // AddInvoiceToUser or AddInvoiceToCompany?
 export const AddInvoiceToCompany = async (
