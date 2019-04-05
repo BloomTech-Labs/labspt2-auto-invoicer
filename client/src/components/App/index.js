@@ -224,7 +224,7 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/:id/invoices`}
+                        path={`/user/${id}/invoices`}
                         render={props => (
                           <InvoiceList
                             id={id}
