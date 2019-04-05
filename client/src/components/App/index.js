@@ -47,8 +47,8 @@ class App extends Component {
   }
 
   fetchData = async (userId)  => {
-    const user = await this.props.fetchUser(userId)
-    await this.props.fetchCompany(user.companies[0]._id)
+    await this.props.fetchUser(userId)
+    await this.props.fetchCompany(this.props.companies[0]._id)
   }
 
   toggleAuthModal = () => {
@@ -224,7 +224,7 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/:id/invoices`}
+                        path={`/user/${id}/invoices`}
                         render={props => (
                           <InvoiceList
                             id={id}
@@ -244,11 +244,11 @@ class App extends Component {
                         path={`/user/:id/invoice/:invoiceID/edit`}
                         render={ (props) => <EditInvoiceForm {...props} />}
                       />
-                      <Route
+                      {/* <Route
                         exact
                         path={"/password-reset"}
                         component={PasswordResetView}
-                      />
+                      /> */}
                     </section>
                   );
                 }}
