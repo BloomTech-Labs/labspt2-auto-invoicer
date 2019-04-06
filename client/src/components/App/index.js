@@ -20,7 +20,7 @@ import EditInvoiceView from "../../views/EditInvoiceView";
 import PasswordResetView from "../../views/PasswordResetView";
 
 import "./App.css";
-import EditInvoiceForm from '../EditInvoiceForm/index'
+import EditInvoiceForm from "../EditInvoiceForm/index";
 
 class App extends Component {
   constructor(props) {
@@ -38,18 +38,19 @@ class App extends Component {
       .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
       .then(res => {
         if (res.data.userId) {
-          this.fetchData(res.data.userId)
+          this.fetchData(res.data.userId);
           // this.fetchData("5c8d88c17fef7140f485950f")
-          this.setState({ loggedIn: true});
+          this.setState({ loggedIn: true });
         }
-      }).then()
+      })
+      .then()
       .catch(err => console.log(err));
   }
 
-  fetchData = async (userId)  => {
-    await this.props.fetchUser(userId)
-    await this.props.fetchCompany(this.props.companies[0]._id)
-  }
+  fetchData = async userId => {
+    await this.props.fetchUser(userId);
+    await this.props.fetchCompany(this.props.companies[0]._id);
+  };
 
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
@@ -143,7 +144,7 @@ class App extends Component {
       });
   };
   render() {
-    const id = this.props.userId
+    const id = this.props.userId;
     return (
       <div className="App">
         <header>
@@ -245,7 +246,7 @@ class App extends Component {
                       <Route
                         exact
                         path={`/user/:id/invoice/:invoiceID/edit`}
-                        render={ (props) => <EditInvoiceForm {...props} />}
+                        render={props => <EditInvoiceForm {...props} />}
                       />
                       {/* <Route
                         exact

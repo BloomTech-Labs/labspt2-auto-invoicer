@@ -7,6 +7,7 @@ import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
 import InvoiceItemInput from "../InvoiceItemsInput";
+import { Link } from "react-router-dom";
 
 // GraphQL mutation - CreateInvoice endpoint
 import { CreateInvoice } from "../../graphQL/mutations/invoices";
@@ -533,7 +534,8 @@ export default class CreateInvoiceForm extends Component {
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
-                onChange={this.handleInvoiceItemsInputChange}>
+                onChange={this.handleInvoiceItemsInputChange}
+              >
                 <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
                 <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>
@@ -660,7 +662,7 @@ export default class CreateInvoiceForm extends Component {
             onClick={this.handleFormSubmit}
             //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
-            Generate
+            <Link to={`/user/${this.props.id}/invoices`}>Generate</Link>
           </Button>
           <footer className="footer">Footer</footer>
         </StyledContainer>
