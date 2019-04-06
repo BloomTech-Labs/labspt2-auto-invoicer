@@ -71,6 +71,7 @@ type Invoice {
   tax: String!
   shipping: String!
   total: String
+  amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
 }
