@@ -24,48 +24,47 @@ export class CompanyProvider extends React.Component {
       customers: [],
       invoices: [],
     }
+    const companyData = `
+    _id 
+    name 
+    email 
+    phone_num 
+    address_1
+    address_2 
+    city 
+    state 
+    postal_code 
+    country 
+    unlimited_tier 
+    credits`
+    const usersData =  `users {_id name}`
+    const customersData = `customers {_id name}`
+    const invoicesData = `invoices {
+      _id
+      invoiceNumber 
+      companyName 
+      userName 
+      languageSelection 
+      currencySelection 
+      addressFrom 
+      addressTo 
+      cityTo 
+      stateRegionTo 
+      zipCodeTo 
+      clientEmailTo 
+      selectedDate 
+      invoiceDueDate 
+      balanceDue 
+      subtotal 
+      discount
+      tax 
+      shipping 
+      total 
+      amountPaid 
+      invoiceNotes 
+      invoiceTerms
+    }`
     this.fetchCompany = async (companyID) => {
-      const companyData = `
-      _id 
-      name 
-      email 
-      phone_num 
-      address_1
-      address_2 
-      city 
-      state 
-      postal_code 
-      country 
-      unlimited_tier 
-      credits`
-      const usersData =  `users {_id name}`
-      const customersData = `customers {_id name}`
-      const invoicesData = `invoices {
-        _id
-        invoiceNumber 
-        companyName 
-        userName 
-        languageSelection 
-        currencySelection 
-        addressFrom 
-        addressTo 
-        cityTo 
-        stateRegionTo 
-        zipCodeTo 
-        clientEmailTo 
-        selectedDate 
-        invoiceDueDate 
-        balanceDue 
-        subtotal 
-        discount
-        tax 
-        shipping 
-        total 
-        amountPaid 
-        invoiceNotes 
-        invoiceTerms
-      }`
-
       const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`
       const result = await FetchCompany(companyID, returnedData)
       const {company} = result
@@ -87,14 +86,33 @@ export class CompanyProvider extends React.Component {
         invoices: company.invoices,
       })
     }
+
+    this.fetchInvoices = async () => {
+      const result = await FetchCompany(this.state.companyID, invoicesData)
+      const {company} = result
+      this.setState({invoices: company.invoices})
+    }
+
+    this.fetchUsers = async () => {
+      const result = await FetchCompany(this.state.companyID, usersData)
+      const {company} = result
+      this.setState({users: company.users})
+    }
+
+    this.fetchCustomers = async () => {
+      const result = await FetchCompany(this.state.companyID, customersData)
+      const {company} = result
+      this.setState({customers: company.customers})
+    }
   }
 
+
   render() {
-    const {fetchCompany} = this
+    const {fetchCompany, fetchCustomers, fetchInvoices, fetchUsers} = this
     const companyState = this.state
     return(
       <CompanyContext.Provider value={
-        {companyState, fetchCompany}
+        {companyState, fetchCompany, fetchCustomers, fetchInvoices, fetchUsers}
       }>
         {this.props.children}
       </CompanyContext.Provider>
