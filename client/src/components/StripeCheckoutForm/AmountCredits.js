@@ -24,9 +24,6 @@ const AmountCredits = props => {
       value={disabled ? 0 : value}
       onChange={onChangeHandler}
       className={classes.textField}
-      InputLabelProps={{
-        className: classes.label
-      }}
       margin="normal"
     />
   );
