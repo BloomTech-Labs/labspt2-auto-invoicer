@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Route, withRouter } from "react-router-dom";
-//import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { UserConsumer } from "../../contexts/UserContext";
 
@@ -134,7 +134,7 @@ class App extends Component {
       )
       .then(res => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-        //saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
+        saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         return "Error";
