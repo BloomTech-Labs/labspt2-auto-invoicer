@@ -7,6 +7,7 @@ import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 //import Select from "../reusableComponents/Select";
 //import InvoiceItemInput from "../InvoiceItemsInput";
+import { Link } from "react-router-dom";
 
 // GraphQL mutation - EditInvoice endpoint
 import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
@@ -14,7 +15,7 @@ import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
 //Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
-import {FetchInvoice} from '../../graphQL/queries/invoices'
+import { FetchInvoice } from "../../graphQL/queries/invoices";
 
 export default class EditInvoiceForm extends Component {
   constructor() {
@@ -52,12 +53,12 @@ export default class EditInvoiceForm extends Component {
       amountPaid 
       invoiceNotes 
       invoiceTerms
-      `
-      const {invoiceID} = this.props.match.params
-      const invoice = await FetchInvoice(invoiceID, returnedData)
-      this.setState({...invoice, amountPaid: invoice.amountPaid})
+      `;
+      const { invoiceID } = this.props.match.params;
+      const invoice = await FetchInvoice(invoiceID, returnedData);
+      this.setState({ ...invoice, amountPaid: invoice.amountPaid });
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
@@ -66,8 +67,8 @@ export default class EditInvoiceForm extends Component {
     e.preventDefault();
 
     EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
-    const {id} = this.props.match.params
-    this.props.history.push(`/user/${id}/invoices`)
+    const { id } = this.props.match.params;
+    this.props.history.push(`/user/${id}/invoices`);
   };
 
   handleAmountPaidChange = e => {
@@ -377,7 +378,7 @@ export default class EditInvoiceForm extends Component {
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
           >
-            UPDATE INVOICE
+            <Link to={`/user/${this.props.id}/invoices`}>UPDATE INVOICE</Link>
           </button>
           <footer className="footer">Footer</footer>
         </div>
