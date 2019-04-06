@@ -82,7 +82,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
-          this.companyHelper(companies);
+          // this.companyHelper(companies);
           return (
             <Slide
               direction="right"
