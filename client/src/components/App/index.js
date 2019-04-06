@@ -100,34 +100,36 @@ class App extends Component {
       .catch(err => console.log(err));
     this.setState({ loggedIn: false });
   };
-  createPDF = () => {
+  createPDF = formPayload => {
     const file = {
-      addressFrom: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
-      addressTo: "Happy Inc.\n123 Happy St.\nAtlanta, GA 30075",
-      amountPaid: "0.00",
-      balanceDue: "10.00",
-      currencySelection: "US Dollar (USD)",
-      date: "10-10-2019",
-      discount: "0",
-      invoiceDueSelection: "after 45 days",
-      invoiceItems: [
-        { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
-      ],
-      invoiceNotes:
-        "this is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\nthis is just a test\n",
-      invoiceNumber: "123456",
-      invoiceTerms: "this is just a test",
-      languageSelection: "English (US)",
-      shipping: "2.00",
-      subtotal: "10.00",
-      tax: "0.07",
-      total: "12.70"
+      addressFrom: formPayload.addressFrom,
+      addressTo: formPayload.addressTo,
+      amountPaid: formPayload.amountPaid,
+      balanceDue: formPayload.balanceDue,
+      stateRegionTo: formPayload.stateRegionTo,
+      zipCodeTo: formPayload.zipCodeTo,
+      cityTo: formPayload.cityTo,
+      clientEmailTo: formPayload.clientEmailTo,
+      currencySelection: formPayload.currencySelection,
+      date: formPayload.selectedDate,
+      discount: formPayload.discount,
+      invoiceDueSelection: formPayload.invoiceDueDate,
+      // invoiceItems: [
+      //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
+      // ],
+      invoiceNotes: formPayload.invoiceNotes,
+      invoiceNumber: formPayload.invoiceNumber,
+      invoiceTerms: formPayload.invoiceTerms,
+      languageSelection: formPayload.languageSelection,
+      shipping: formPayload.shipping,
+      subtotal: formPayload.subtotal,
+      tax: formPayload.tax,
+      total: formPayload.total
     };
-
     axios
-      .post("https://pdf-generator-server.herokuapp.com/create-pdf", file)
+      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get("https://pdf-generator-server.herokuapp.com/fetch-pdf", {
+        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
           responseType: "blob"
         })
       )
@@ -136,6 +138,7 @@ class App extends Component {
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
+        console.log(err);
         return "Error";
       });
   };
