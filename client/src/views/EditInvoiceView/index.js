@@ -4,16 +4,23 @@ import React, { Component } from "react";
 
 //import components
 import EditInvoiceForm from "../../components/EditInvoiceForm";
+import { CompanyConsumer } from "../../contexts/CompanyContext";
 
 export default class index extends Component {
   // No state held - views only render
 
   render() {
     return (
-      <div>
-        Edit Invoice Views Only.
-        <EditInvoiceForm />
-      </div>
+      <CompanyConsumer>
+        {({fetchInvoices}) => {
+          return (
+            <div>
+              Edit Invoice Views Only.
+            <EditInvoiceForm fetchInvoices={fetchInvoices} />
+          </div>
+          )
+        }}
+      </CompanyConsumer>
     );
   }
 }
