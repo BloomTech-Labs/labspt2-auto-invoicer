@@ -34,7 +34,9 @@ class StripeCheckoutForm extends Component {
     let company = companies.filter(
       company => company.name === this.state.company
     );
-    this.setState({ companyID: company._id });
+    if (company._id !== this.state.companyID) {
+      this.setState({ companyID: company._id });
+    }
   };
 
   onChange = e => {
@@ -82,7 +84,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
-          // this.companyHelper(companies);
+          this.companyHelper(companies);
           return (
             <Slide
               direction="right"
