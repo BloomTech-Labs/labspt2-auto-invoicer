@@ -333,6 +333,7 @@ export default class CreateInvoiceForm extends Component {
     CreateInvoice(formPayload, "invoiceNumber total");
     this.props.click(formPayload);
     this.handleClearForm(e);
+    this.props.fetchInvoices()
   };
 
   render() {
