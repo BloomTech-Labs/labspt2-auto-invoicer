@@ -5,22 +5,16 @@ const {
   updateDocumentById,
   findDocumentsByAnyField,
   findDocumentById,
-  findAllDocuments,
+  findAllDocuments
 } = require('../helpers');
 
-const {
-  formatData
-} = require('../helpers/format')
+const { formatData } = require('../helpers/format');
 
 module.exports = {
-  company: ({
-    companyID
-  }) => {
+  company: ({ companyID }) => {
     return findDocumentById(companyID, Company);
   },
-  companyByAnyField: ({
-    companyInput
-  }) => {
+  companyByAnyField: ({ companyInput }) => {
     return findDocumentsByAnyField(companyInput, Company);
   },
   companies: () => {
@@ -67,25 +61,22 @@ module.exports = {
       throw err;
     }
   },
-  editCompany: ({
-    editCompanyInput,
-    companyID
-  }) => {
+  editCompany: ({ editCompanyInput, companyID }) => {
     Object.keys(editCompanyInput).forEach(key => {
-      if (key===unlimited_tier || key===credits ) {
+      if (key === unlimited_tier || key === credits) {
         delete editCompanyInput[key];
       }
-    return updateDocumentById(editCompanyInput, companyID, Company);
+      return updateDocumentById(editCompanyInput, companyID, Company);
+    });
   },
-  buyPlanOrCredits: async ({companyID, quantity}) => {
+  buyPlanOrCredits: async ({ companyID, quantity }) => {
     const company = await Company.findById(companyID);
     if (quantity) {
-      company.credits += quantity
+      company.credits += quantity;
     } else {
       company.unlimited_tier = true;
     }
-    const newCompany = await company.save()
-    return newCompany._doc
+    const newCompany = await company.save();
+    return newCompany._doc;
   }
-
 };

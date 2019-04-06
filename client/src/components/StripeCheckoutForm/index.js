@@ -10,10 +10,15 @@ import CardHolderName from './CardHolderName';
 import SelectPurchasePlan from './SelectPurchasePlan';
 import AmountCredits from './AmountCredits';
 import SelectCurrency from './SelectCurrency';
+import SelectCompany from './SelectCompany';
+import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
+import { UserConsumer } from './../../contexts/UserContext';
 
 class StripeCheckoutForm extends Component {
   state = {
     complete: false,
+    company: '',
+    companyID: '',
     unlimited: false,
     currency: 'USD',
     name: '',
@@ -25,6 +30,15 @@ class StripeCheckoutForm extends Component {
     setTimeout(() => this.setState({ checked: true }), 700);
   }
 
+  companyHelper = companies => {
+    let company = companies.filter(
+      company => company.name === this.state.company
+    );
+    if (company._id !== this.state.companyID) {
+      this.setState({ companyID: company._id });
+    }
+  };
+
   onChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -32,7 +46,7 @@ class StripeCheckoutForm extends Component {
 
   onSubmit = async e => {
     e.preventDefault();
-    const { name, currency, quantity } = this.state;
+    let { name, currency, quantity } = this.state;
     if (this.state.unlimited) {
       quantity = 0;
     }
@@ -49,7 +63,13 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
-    console.log(response);
+    if (response.ok) {
+      const result = await BuyPlanOrCredits(
+        this.state.companyID,
+        quantity,
+        'name unlimited_tier credits'
+      );
+    }
     this.setState({
       unlimited: false,
       currency: 'USD',
@@ -62,43 +82,59 @@ class StripeCheckoutForm extends Component {
     const { classes } = this.props;
     const price = this.state.unlimited ? 9.99 : this.state.quantity * 0.99;
     return (
-      <Slide
-        direction="right"
-        in={this.state.checked}
-        mountOnEnter
-        unmountOnExit
-      >
-        <Paper elevation={4} className={classes.paper}>
-          <form className={classes.container} noValidate autoComplete="off">
-            <CardHolderName
-              onChangeHandler={this.onChange}
-              value={this.state.name}
-            />
-            <SelectPurchasePlan
-              onChangeHandler={this.onChange}
-              value={this.state.unlimited}
-            />
-            <AmountCredits
-              onChangeHandler={this.onChange}
-              value={this.state.quantity}
-              disabled={this.state.unlimited}
-            />
-            <SelectCurrency
-              onChangeHandler={this.onChange}
-              value={this.state.currency}
-            />
-            <CardElement className={classes.card} />
-            <Button
-              onClick={this.onSubmit}
-              variant="contained"
-              color="secondary"
-              className={classes.button}
+      <UserConsumer>
+        {({ userState: { companies } }) => {
+          this.companyHelper(companies);
+          return (
+            <Slide
+              direction="right"
+              in={this.state.checked}
+              mountOnEnter
+              unmountOnExit
             >
-              {`Pay ${price}`}
-            </Button>
-          </form>
-        </Paper>
-      </Slide>
+              <Paper elevation={4} className={classes.paper}>
+                <form
+                  className={classes.container}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <CardHolderName
+                    onChangeHandler={this.onChange}
+                    value={this.state.name}
+                  />
+                  <SelectCompany
+                    onChangeHandler={this.onChange}
+                    value={this.state.company}
+                    companies={companies}
+                  />
+                  <SelectPurchasePlan
+                    onChangeHandler={this.onChange}
+                    value={this.state.unlimited}
+                  />
+                  <AmountCredits
+                    onChangeHandler={this.onChange}
+                    value={this.state.quantity}
+                    disabled={this.state.unlimited}
+                  />
+                  <SelectCurrency
+                    onChangeHandler={this.onChange}
+                    value={this.state.currency}
+                  />
+                  <CardElement className={classes.card} />
+                  <Button
+                    onClick={this.onSubmit}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    {`Pay ${price}`}
+                  </Button>
+                </form>
+              </Paper>
+            </Slide>
+          );
+        }}
+      </UserConsumer>
     );
   }
 }
