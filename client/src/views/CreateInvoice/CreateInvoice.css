@@ -68,7 +68,7 @@
 
 .invoice-list-container {
   /* witdh ~ 960, height 720*/
-  border: 3px solid red;
+  /* border: 3px solid red; */
   width: 80%;
   display: flex;
   flex-direction: column;

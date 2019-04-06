@@ -25,6 +25,7 @@ ReactDOM.render(
                   fetchUser = {fetchUser}
                   fetchCompany = {fetchCompany}
                   userId = {userState._id}
+                  companies = {userState.companies}
                 />
               )
             }}

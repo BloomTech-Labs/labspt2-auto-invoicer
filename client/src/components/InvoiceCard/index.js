@@ -14,12 +14,29 @@ const InvoiceCard = props => {
     paid
   } = props.invoice;
   return (
-    <article className={"status-" + (paid ? "paid" : "unpaid")}>
-      <h3>Invoice Number:{invoiceNumber}</h3>
-      <p>Invoice Due Date:{invoiceDueDate}</p>
-      <p>Total:{total}</p>
-      <p>Amount Paid:{amountPaid}</p>
-      <p>Notes:{invoiceNotes}</p>
+    <article
+      className={
+        "status-" +
+        (amountPaid >= total ? "paid invoice-card" : "unpaid invoice-card")
+      }
+    >
+      <h3>Invoice Number: {invoiceNumber}</h3>
+      <p>
+        <u>Invoice Due Date:</u>
+        <br /> {invoiceDueDate}
+      </p>
+      <p>
+        <u>Total:</u>
+        <br /> ${total}
+      </p>
+      <p>
+        <u>Amount Paid:</u>
+        <br /> ${amountPaid}
+      </p>
+      <p>
+        <u>Notes:</u>
+        <br /> {invoiceNotes}
+      </p>
     </article>
   );
 };
