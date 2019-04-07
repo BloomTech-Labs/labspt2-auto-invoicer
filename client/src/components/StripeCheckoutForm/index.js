@@ -30,19 +30,14 @@ class StripeCheckoutForm extends Component {
     setTimeout(() => this.setState({ checked: true }), 700);
   }
 
-  companyHelper = companies => {
-    console.log('companies params: ', companies);
+  connectUserContextWithState = companies => {
     if (this.state.company) {
       let company = companies.filter(
         company => company.name === this.state.company
       );
-      console.log('helper company', company);
-      if (company && company[0]._id !== this.state.companyID) {
-        this.setState({ companyID: company[0]._id }, () =>
-          console.log('state in helper callback', this.state)
-        );
+      if (company[0]._id !== this.state.companyID) {
+        this.setState({ companyID: company[0]._id });
       }
-      console.log('state in helper', this.state);
     }
   };
 
@@ -70,7 +65,6 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
-    console.log('state', this.state);
     if (response.ok && this.state.companyID) {
       const result = await BuyPlanOrCredits(
         this.state.companyID,
@@ -82,7 +76,8 @@ class StripeCheckoutForm extends Component {
       unlimited: false,
       currency: 'USD',
       name: '',
-      quantity: 0
+      quantity: 0,
+      company: ''
     });
   };
 
@@ -92,8 +87,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
-          console.log('render companies', companies);
-          this.companyHelper(companies);
+          this.connectUserContextWithState(companies);
           return (
             <Slide
               direction="right"

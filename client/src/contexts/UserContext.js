@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { FetchUser } from "../graphQL/queries/users";
+import { FetchUser } from '../graphQL/queries/users';
 
 export const UserContext = React.createContext();
 
@@ -8,16 +8,17 @@ export class UserProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userID: "",
-      email: "",
-      name: "",
-      phone_num: "",
+      userID: '',
+      email: '',
+      name: '',
+      phone_num: '',
       companies: [],
-      defaultCompany: ""
+      defaultCompany: ''
     };
 
     this.fetchUser = async userID => {
-      const returnedData = "_id name email phone_num companies {_id name}";
+      const returnedData =
+        '_id name email phone_num companies {_id name credits unlimited_tier}';
       const result = await FetchUser(userID, returnedData);
       const { _id, email, name, phone_num, companies } = result.user;
       this.setState({
