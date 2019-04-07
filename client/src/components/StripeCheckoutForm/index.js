@@ -12,7 +12,7 @@ import AmountCredits from './AmountCredits';
 import SelectCurrency from './SelectCurrency';
 import SelectCompany from './SelectCompany';
 import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
-import { UserConsumer } from './../../contexts/UserContext';
+import { UserConsumer } from '../../contexts/UserContext';
 
 class StripeCheckoutForm extends Component {
   state = {
@@ -31,11 +31,18 @@ class StripeCheckoutForm extends Component {
   }
 
   companyHelper = companies => {
-    let company = companies.filter(
-      company => company.name === this.state.company
-    );
-    if (company._id !== this.state.companyID) {
-      this.setState({ companyID: company._id });
+    console.log('companies params: ', companies);
+    if (this.state.company) {
+      let company = companies.filter(
+        company => company.name === this.state.company
+      );
+      console.log('helper company', company);
+      if (company && company[0]._id !== this.state.companyID) {
+        this.setState({ companyID: company[0]._id }, () =>
+          console.log('state in helper callback', this.state)
+        );
+      }
+      console.log('state in helper', this.state);
     }
   };
 
@@ -63,7 +70,8 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
-    if (response.ok) {
+    console.log('state', this.state);
+    if (response.ok && this.state.companyID) {
       const result = await BuyPlanOrCredits(
         this.state.companyID,
         quantity,
@@ -84,6 +92,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
+          console.log('render companies', companies);
           this.companyHelper(companies);
           return (
             <Slide

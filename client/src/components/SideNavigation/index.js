@@ -18,6 +18,7 @@ import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
+import { UserConsumer } from "../../contexts/UserContext";
 
 // imported css here
 import "./SideNavigation.css";
@@ -35,6 +36,7 @@ class SideNavigation extends React.Component {
       credits: 3
     };
   }
+
   handleDrawerOpen = () => {
     // change open state to true || false to open or close navigation
     this.setState({ open: !this.state.open });
@@ -44,9 +46,11 @@ class SideNavigation extends React.Component {
     // signInModal from App Component
     return this.props.signInModal();
   };
+
   signUpModal = () => {
     return this.props.signUpModal();
   };
+
   render() {
     // deconstruct state to get a list of needed attributes
     const { open } = this.state;
@@ -74,71 +78,77 @@ class SideNavigation extends React.Component {
             />
           )}
         </header>
-        <Drawer
-          anchor={document.body.clientWidth < 520 ? "top" : "left"}
-          open={open}
-        >
-          <div id="drawer-container">
-            <IconButton onClick={this.handleDrawerOpen}>
-              <ChevronLeftIcon id="left-icon" />
-            </IconButton>
-          </div>
-          <Divider />
-          {/* if not logged in show public routes else show secured */}
-          {!this.props.loggedIn ? (
-            <List className="all-icon-container">
-              {[
-                { title: "Home", icon: <HomeIcon /> },
-                { title: "About", icon: <AboutIcon /> }
-              ].map((text, index) => {
-                const { title, icon } = text;
-                return (
-                  <NavLink
-                    exact
-                    to={`${title}` === "Home" ? "/" : `/${title}`}
-                    key={title}
-                    className="icon-container"
-                    onClick={() => {
-                      this.setState({ open: !open });
-                    }}
-                  >
-                    <ListItem className="icon-item">
-                      <ListItemIcon>{icon}</ListItemIcon>
-                      <p className="icon-title">{title}</p>
-                    </ListItem>
-                  </NavLink>
-                );
-              })}
-            </List>
-          ) : (
-            <List className="all-icon-container">
-              {[
-                { title: "Invoices", icon: <InvoicesIcon /> },
-                { title: "Billing", icon: <BillingIcon /> },
-                { title: "Settings", icon: <SettingsIcon /> }
-              ].map((text, index) => {
-                const { title, icon } = text;
-                const lowerTitle = title.toLowerCase();
-                return (
-                  <NavLink
-                    exact
-                    to={`/user/${this.props.id}/${lowerTitle}`}
-                    key={title}
-                    className="icon-container"
-                    onClick={() => {
-                      this.setState({ open: !open });
-                    }}
-                  >
-                    <ListItem className="icon-item">
-                      <ListItemIcon>{icon}</ListItemIcon>
-                      <p className="icon-title">{title}</p>
-                    </ListItem>
-                  </NavLink>
-                );
-              })}
-            </List>
-          )}
-        </Drawer>
+        <UserConsumer>
+          {({ userState }) => {
+            return (
+            <Drawer
+              anchor={document.body.clientWidth < 520 ? "top" : "left"}
+              open={open}
+            >
+              <div id="drawer-container">
+                <IconButton onClick={this.handleDrawerOpen}>
+                  <ChevronLeftIcon id="left-icon" />
+                </IconButton>
+              </div>
+              <Divider />
+              {/* if not logged in show public routes else show secured */}
+              {!this.props.loggedIn ? (
+                <List className="all-icon-container">
+                  {[
+                    { title: "Home", icon: <HomeIcon /> },
+                    { title: "About", icon: <AboutIcon /> }
+                  ].map((text, index) => {
+                    const { title, icon } = text;
+                    return (
+                      <NavLink
+                        exact
+                        to={`${title}` === "Home" ? "/" : `/${title}`}
+                        key={title}
+                        className="icon-container"
+                        onClick={() => {
+                          this.setState({ open: !open });
+                        }}
+                      >
+                        <ListItem className="icon-item">
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <p className="icon-title">{title}</p>
+                        </ListItem>
+                      </NavLink>
+                    );
+                  })}
+                </List>
+              ) : (
+                <List className="all-icon-container">
+                  {[
+                    { title: "Invoices", icon: <InvoicesIcon /> },
+                    { title: "Billing", icon: <BillingIcon /> },
+                    { title: "Settings", icon: <SettingsIcon /> }
+                  ].map((text, index) => {
+                    const { title, icon } = text;
+                    const lowerTitle = title.toLowerCase();
+                    return (
+                      <NavLink
+                        exact
+                        to={`/user/${userState.userID}/${lowerTitle}`}
+                        key={title}
+                        className="icon-container"
+                        onClick={() => {
+                          this.setState({ open: !open });
+                        }}
+                      >
+                        <ListItem className="icon-item">
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <p className="icon-title">{title}</p>
+                        </ListItem>
+                      </NavLink>
+                    );
+                  })}
+                </List>
+              )}
+            </Drawer>
+            );
+          }}
+        </UserConsumer>
       </div>
     );
   }

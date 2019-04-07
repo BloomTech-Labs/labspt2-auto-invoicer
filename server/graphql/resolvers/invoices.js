@@ -1,13 +1,13 @@
-const Invoice = require("../../models/invoice");
-const Company = require("../../models/company");
-const User = require("../../models/user");
-const Customer = require("../../models/customer");
+const Invoice = require('../../models/invoice');
+const Company = require('../../models/company');
+const User = require('../../models/user');
+const Customer = require('../../models/customer');
 
 const {
   findDocumentById,
   findAllDocuments,
   updateDocumentById
-} = require("../helpers");
+} = require('../helpers');
 
 module.exports = {
   invoices: () => {
@@ -17,10 +17,10 @@ module.exports = {
     return findDocumentById(invoiceID, Invoice);
   },
   createInvoice: async ({ invoiceInput }) => {
-    const company = await Company.findById(invoiceInput.companyID)
+    const company = await Company.findById(invoiceInput.companyID);
     if (!company.unlimited_tier) {
       if (!company.credits) {
-        throw new Error ('')
+        throw new Error('');
       }
     }
     try {
@@ -49,7 +49,7 @@ module.exports = {
         total: invoiceInput.total,
         amountPaid: invoiceInput.amountPaid,
         invoiceNotes: invoiceInput.invoiceNotes,
-        invoiceTerms: invoiceInput.invoiceTerms,
+        invoiceTerms: invoiceInput.invoiceTerms
       });
 
       const newInvoice = await invoice.save();
@@ -59,7 +59,7 @@ module.exports = {
       company.invoices.push(newInvoice._doc._id);
       customer.invoices.push(newInvoice._doc._id);
       if (!company.unlimited_tier) {
-        company.credits = company.credits - 1
+        company.credits -= 1;
       }
       await user.save();
       await company.save();

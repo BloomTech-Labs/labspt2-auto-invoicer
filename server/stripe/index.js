@@ -7,9 +7,9 @@ router.post('/charge', async (req, res) => {
     const status = await stripe.charges.create({
       amount: quantity ? quantity * 99 : 999,
       currency,
-      description: `Purchase of ${
-        quantity ? quantity + 'credits' : '1 Month Unlimited Plan!'
-      }`,
+      description: quantity
+        ? `Purchased ${quantity} credits`
+        : 'Purchased 1 Month Unlimited Plan!',
       source: stripeToken
     });
     res.json({ status });

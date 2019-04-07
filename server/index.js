@@ -1,28 +1,35 @@
 require('dotenv').config();
 
 const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+// const csrf = require('csurf');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const helmet = require('helmet');
-const graphqlHttp = require('express-graphql');
-const { connect } = require('mongoose');
-const serverless = require('serverless-http');
 const passport = require('passport');
+const { connect } = require('mongoose');
+const graphqlHttp = require('express-graphql');
+const serverless = require('serverless-http');
 
 const GraphQLSchema = require('./graphql/schema');
 const GraphQLResolvers = require('./graphql/resolvers');
 
+const authRouter = require('./auth');
 const stripeRouter = require('./stripe');
 const welcomeRouter = require('./routers/welcomeRouter');
-const passwordResetRouter = require('./routers/passwordResetRouter');
 const taxRateRouter = require('./routers/taxRateRouter');
-const authRouter = require('./auth');
 
 const app = express();
 const PORT = process.env.APP_PORT || 5000;
 
+app.use(helmet());
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(bodyParser.json());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+// TODO: implement CSRF
+// app.use(csrf({ cookie: true }));
 app.use(
   session({
     name: 'SID',
@@ -36,32 +43,25 @@ app.use(
       }?ssl=true&replicaSet=AutoInvoice-shard-0&authSource=admin&retryWrites=true`
     }),
     secret: process.env.SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {
-      domain: '.myautoinvoicer.com',
+      domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
+      path: '/',
       sameSite: 'lax',
-      secure: true
+      secure: true,
+      signed: true
     }
   })
 );
-
-app.use(bodyParser.text());
-app.use(
-  express.json(),
-  cors({ origin: 'https://www.myautoinvoicer.com', credentials: true }),
-  helmet()
-);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
-
 passport.deserializeUser((user, done) => {
   done(null, user);
 });
@@ -79,23 +79,23 @@ const isAuth = (req, res, next) => {
 app.get('/user', isAuth, (req, res) => {
   res.json({ userId: req.user });
 });
-
 app.get('/logout', (req, res) => {
-  req.logout();
   req.session.destroy(() => {
+    req.logout();
     res.clearCookie('SID', {
-      domain: '.myautoinvoicer.com',
+      domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
+      path: '/',
       sameSite: 'lax',
-      secure: true
+      secure: true,
+      signed: true
     });
+    res.send('Session destroyed');
   });
 });
-
-app.use('/stripe', stripeRouter);
+app.use('/stripe', bodyParser.text(), stripeRouter);
 app.use('/auth', authRouter);
 app.use('/welcome', welcomeRouter);
-app.use('/password-reset', passwordResetRouter);
 app.use('/taxes', taxRateRouter);
 app.use(
   '/graphql',
@@ -112,7 +112,7 @@ connect(
   }@autoinvoice-evkdc.mongodb.net/${process.env.DB_NAME}?retryWrites=true`,
   { useNewUrlParser: true }
 )
-  .then(app.listen(PORT, console.log(`App is up and running on port ${PORT}!`)))
+  .then(app.listen(PORT, console.log(`Server is running on port ${PORT}!`)))
   .catch(err => console.log(err));
 
 module.exports.sls = serverless(app);
