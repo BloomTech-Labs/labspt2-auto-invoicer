@@ -1,10 +1,10 @@
-const User = require("../../models/user");
-const Company = require("../../models/company");
+const User = require('../../models/user');
+const Company = require('../../models/company');
 // const isAuth = require('../../middleware/isAuth');
 
-const { findAllDocuments, findDocumentById } = require("../helpers/index");
+const { findAllDocuments, findDocumentById } = require('../helpers/index');
 
-const { formatData } = require("../helpers/format");
+const { formatData } = require('../helpers/format');
 
 module.exports = {
   user: ({ userID }) => {
@@ -24,7 +24,7 @@ module.exports = {
         email
       });
       if (userExists) {
-        throw new Error("Username already exists");
+        throw new Error('Username already exists');
       }
       const user = new User({
         name,
@@ -43,7 +43,7 @@ module.exports = {
     try {
       const userExist = await User.findById(userID);
       if (!userExist) {
-        throw new Error("user does not exist");
+        throw new Error('user does not exist');
       }
       Object.keys(editUserInput).forEach(key => {
         if (!editUserInput[key]) {
@@ -74,10 +74,10 @@ module.exports = {
       const company = await Company.findById(companyID);
       const user = await User.findById(userID);
       if (!company) {
-        throw new Error("company does not exist");
+        throw new Error('company does not exist');
       }
       if (!user) {
-        throw new Error("user does not exist");
+        throw new Error('user does not exist');
       }
       company.users.push(userID);
       user.companies.push(companyID);

@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const invoiceSchema = new Schema({
   invoiceNumber: {
@@ -109,4 +109,4 @@ const invoiceSchema = new Schema({
   // invoiceItems: [{...}]
   // (not required) subtotal, tax, total, invoiceNotes, invoiceTerms
 });
-module.exports = model("Invoice", invoiceSchema);
+module.exports = model('Invoice', invoiceSchema);

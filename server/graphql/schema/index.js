@@ -108,7 +108,6 @@ input EditInvoiceInput {
   amountPaid: String!
 }
 
-
 type Item {
   _id: ID!
   description: String!
@@ -216,7 +215,7 @@ type RootMutation {
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
   editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceID: ID!): Invoice
-  buyPlanOrCredits(companyID: ID!, quantity: Int! ): Company
+  buyPlanOrCredits(companyID: ID!, quantity: Int!): Company
 }
 
 schema {
