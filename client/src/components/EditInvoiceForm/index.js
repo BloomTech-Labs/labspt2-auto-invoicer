@@ -28,6 +28,7 @@ export default class EditInvoiceForm extends Component {
 
   // for Incoming Invoice from InvoiceList
   async componentDidMount() {
+    console.log(this.props)
     try {
       const returnedData = `
       _id
@@ -68,6 +69,7 @@ export default class EditInvoiceForm extends Component {
 
     EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
     const { id } = this.props.match.params;
+    console.log('second console:' , this.props)
     await this.props.fetchInvoices();
   };
 
