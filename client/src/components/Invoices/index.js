@@ -34,7 +34,7 @@ class Invoices extends Component {
                       <Link
                         className="card-links"
                         to={`/user/${
-                          this.props.id
+                          userState.userID
                         }/invoice/create`}
                       >
                         <EmptyInvoices />
@@ -67,7 +67,7 @@ class Invoices extends Component {
                         <Link
                           className="card-links"
                           to={`/user/${
-                            this.props.id
+                            userState.userID
                           }/invoice/create`}
                         >
                           <CreateInvoiceButton />
