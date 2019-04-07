@@ -33,7 +33,7 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      creditsOrPlan: ''
+      creditsOrPlan: null
     };
   }
 
@@ -52,12 +52,13 @@ class SideNavigation extends React.Component {
   };
 
   connectUserContextWithState = company => {
-    if (!this.state.creditsOrPlan) {
-      const { credits, unlimited_tier } = company;
-      this.setState({
-        creditsOrPlan: unlimited_tier ? '1 Month Unlimited' : credits
-      });
-    }
+    console.log('company in helper', company);
+    // if (!this.state.creditsOrPlan) {
+    //   const { credits, unlimited_tier } = company;
+    //   this.setState({
+    //     creditsOrPlan: unlimited_tier ? '1 Month Unlimited' : credits
+    //   });
+    // }
   };
 
   render() {
@@ -90,6 +91,7 @@ class SideNavigation extends React.Component {
         <UserConsumer>
           {({ userState }) => {
             const { companies } = userState;
+            console.log('companies in render', companies);
             this.connectUserContextWithState(companies[0]);
             return (
               <Drawer
