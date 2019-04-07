@@ -103,10 +103,9 @@ class App extends Component {
     axios
       .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
       .then(res => {
-        this.setState({ loggedIn: false });
+        window.location.assign("https://www.myautoinvoicer.com");
       })
       .catch(err => console.log(err));
-    window.location.reload(true);
   };
 
   createPDF = formPayload => {
