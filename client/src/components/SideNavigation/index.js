@@ -35,6 +35,8 @@ class SideNavigation extends React.Component {
       open: false,
       creditsOrPlan: ""
     };
+
+    this.connectUserContextWithState(this.props.userState.companies[0]);
   }
 
   handleDrawerOpen = () => {
