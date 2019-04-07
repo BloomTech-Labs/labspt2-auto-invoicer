@@ -35,7 +35,7 @@ class StripeCheckoutForm extends Component {
       company => company.name === this.state.company
     );
     console.log('helper company', company);
-    if (!this.state.companyID) {
+    if (company._id !== this.state.companyID) {
       this.setState({ companyID: company._id });
     }
     console.log('state in helper', this.state);
