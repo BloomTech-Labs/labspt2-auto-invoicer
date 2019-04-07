@@ -17,7 +17,8 @@ export default class index extends Component {
           return (
             <div>
               Edit Invoice Views Only.
-            <EditInvoiceForm fetchInvoices={fetchInvoices} />
+            <EditInvoiceForm fetchInvoices={fetchInvoices} 
+            test={'test'}/>
           </div>
           )
         }}
