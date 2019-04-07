@@ -33,6 +33,7 @@ class App extends Component {
       toggleAuth: false
     };
   }
+
   componentDidMount() {
     axios
       .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
@@ -49,20 +50,24 @@ class App extends Component {
 
   fetchData = async userId => {
     await this.props.fetchUser(userId);
-    await this.props.fetchCompany(this.props.companies[0]._id);
+    if (this.props.companies.length)
+      await this.props.fetchCompany(this.props.companies[0]._id);
   };
 
   toggleAuthModal = () => {
     return this.setState({ toggleAuth: !this.state.toggleAuth });
   };
+
   signInModal = () => {
     // return the opposite of the current state of toggleSignIn
     return this.setState({ toggleSignIn: !this.state.toggleSignIn });
   };
+
   signUpModal = () => {
     // return the opposite of the current state of toggleRegister
     return this.setState({ toggleRegister: !this.state.toggleRegister });
   };
+
   forgotPassModal = () => {
     this.setState({
       togglePassForgot: !this.state.togglePassForgot
@@ -72,19 +77,20 @@ class App extends Component {
       return this.signInModal();
     }, 0);
   };
+
   sendWelcomeEmail = user => {
     // send an email object up with user email
-    //disable register button
+    // disable register button
     axios
       .post("https://api.myautoinvoicer.com/welcome", { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
-        } else {
-          // un-disable register button and let user try again.
         }
+        // un-disable register button and let user try again.
       });
   };
+
   sendPasswordReset = email => {
     axios
       .post("https://api.myautoinvoicer.com/password-reset", { ...email })
@@ -92,6 +98,7 @@ class App extends Component {
         console.log(res);
       });
   };
+
   signOut = () => {
     axios
       .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
@@ -101,6 +108,7 @@ class App extends Component {
       .catch(err => console.log(err));
     this.setState({ loggedIn: false });
   };
+
   createPDF = formPayload => {
     const file = {
       addressFrom: formPayload.addressFrom,
@@ -143,19 +151,25 @@ class App extends Component {
         return "Error";
       });
   };
+
   render() {
-    const id = this.props.userId;
     return (
       <div className="App">
         <header>
-          <SideNavigation
-            loggedIn={this.state.loggedIn}
-            signInModal={this.signInModal}
-            signUpModal={this.signUpModal}
-            forgotPassModal={this.forgotPassModal}
-            signOut={this.signOut}
-            id={id}
-          />
+          <UserConsumer>
+            {({ userState: { userID } }) => {
+              return (
+                <SideNavigation
+                  loggedIn={this.state.loggedIn}
+                  signInModal={this.signInModal}
+                  signUpModal={this.signUpModal}
+                  forgotPassModal={this.forgotPassModal}
+                  signOut={this.signOut}
+                  id={userID}
+                />
+              );
+            }}
+          </UserConsumer>
         </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
@@ -203,12 +217,12 @@ class App extends Component {
                         check if logged in before routing below, and redirect to landing if not loggedIn */}
                       <Route
                         exact
-                        path={`/user/${id}/billing`}
+                        path={`/user/${userState.userID}/billing`}
                         component={BillingPage}
                       />
                       <Route
                         exact
-                        path={`/user/${id}/invoice/create`}
+                        path={`/user/${userState.userID}/invoice/create`}
                         render={props => (
                           <CreateInvoice {...props} click={this.createPDF} />
                         )}
@@ -216,7 +230,7 @@ class App extends Component {
 
                       <Route
                         exact
-                        path={`/user/${id}/settings`}
+                        path={`/user/${userState.userID}/settings`}
                         component={SettingsPage}
                       />
                       <Route
@@ -228,24 +242,25 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/${id}/invoices`}
+                        path={`/user/${userState.userID}/invoices`}
                         render={props => (
                           <InvoiceList
-                            id={id}
+                            {...props}
+                            id={userState.userID}
                             user={userState}
                             company={companyState}
                           />
                         )}
                       />
-                      {/* adding routes for InvoiceView and EditInvoice components*/}
+                      {/* adding routes for InvoiceView and EditInvoice components */}
                       <Route
                         exact
-                        path={`/user/${id}/invoice/view`}
+                        path={`/user/${userState.userID}/invoice/view`}
                         component={InvoiceView}
                       />
                       <Route
                         exact
-                        path={`/user/:id/invoice/:invoiceID/edit`}
+                        path="/user/:id/invoice/:invoiceID/edit"
                         render={props => <EditInvoiceForm {...props} />}
                       />
                       {/* <Route

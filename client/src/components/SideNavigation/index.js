@@ -35,6 +35,7 @@ class SideNavigation extends React.Component {
       credits: 3
     };
   }
+
   handleDrawerOpen = () => {
     // change open state to true || false to open or close navigation
     this.setState({ open: !this.state.open });
@@ -44,9 +45,11 @@ class SideNavigation extends React.Component {
     // signInModal from App Component
     return this.props.signInModal();
   };
+
   signUpModal = () => {
     return this.props.signUpModal();
   };
+
   render() {
     // deconstruct state to get a list of needed attributes
     const { open } = this.state;
@@ -122,7 +125,7 @@ class SideNavigation extends React.Component {
                 return (
                   <NavLink
                     exact
-                    to={`/user/${this.props.id}/${lowerTitle}`}
+                    to={`/user/${this.props.userID}/${lowerTitle}`}
                     key={title}
                     className="icon-container"
                     onClick={() => {
