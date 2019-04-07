@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Slide from "@material-ui/core/Slide";
+import React, { Component } from 'react';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
 
-import styles from "./styles";
-import CardHolderName from "./CardHolderName";
-import SelectPurchasePlan from "./SelectPurchasePlan";
-import AmountCredits from "./AmountCredits";
-import SelectCurrency from "./SelectCurrency";
-import SelectCompany from "./SelectCompany";
-import { BuyPlanOrCredits } from "../../graphQL/mutations/companies";
-import { UserConsumer } from "../../contexts/UserContext";
+import styles from './styles';
+import CardHolderName from './CardHolderName';
+import SelectPurchasePlan from './SelectPurchasePlan';
+import AmountCredits from './AmountCredits';
+import SelectCurrency from './SelectCurrency';
+import SelectCompany from './SelectCompany';
+import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
+import { UserConsumer } from '../../contexts/UserContext';
 
 class StripeCheckoutForm extends Component {
   state = {
     complete: false,
-    company: "",
-    companyID: "",
+    company: '',
+    companyID: '',
     unlimited: false,
-    currency: "USD",
-    name: "",
+    currency: 'USD',
+    name: '',
     quantity: 0,
     checked: false
   };
@@ -31,17 +31,19 @@ class StripeCheckoutForm extends Component {
   }
 
   companyHelper = companies => {
-    console.log("companies params: ", companies);
-    let company = companies.filter(
-      company => company.name === this.state.company
-    );
-    console.log('helper company', company);
-    if (company && company[0]._id !== this.state.companyID) {
-      this.setState({ companyID: company[0]._id }, () =>
-        console.log('state in helper callback', this.state)
+    console.log('companies params: ', companies);
+    if (this.state.company) {
+      let company = companies.filter(
+        company => company.name === this.state.company
       );
+      console.log('helper company', company);
+      if (company && company[0]._id !== this.state.companyID) {
+        this.setState({ companyID: company[0]._id }, () =>
+          console.log('state in helper callback', this.state)
+        );
+      }
+      console.log('state in helper', this.state);
     }
-    console.log("state in helper", this.state);
   };
 
   onChange = e => {
@@ -57,10 +59,10 @@ class StripeCheckoutForm extends Component {
     }
     const { token } = await this.props.stripe.createToken({ name });
     const response = await fetch(
-      "https://api.myautoinvoicer.com/stripe/charge",
+      'https://api.myautoinvoicer.com/stripe/charge',
       {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
           stripeToken: token.id,
           quantity,
@@ -68,18 +70,18 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
-    console.log("state", this.state);
+    console.log('state', this.state);
     if (response.ok && this.state.companyID) {
       const result = await BuyPlanOrCredits(
         this.state.companyID,
         quantity,
-        "name unlimited_tier credits"
+        'name unlimited_tier credits'
       );
     }
     this.setState({
       unlimited: false,
-      currency: "USD",
-      name: "",
+      currency: 'USD',
+      name: '',
       quantity: 0
     });
   };
@@ -90,7 +92,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
-          console.log("render companies", companies);
+          console.log('render companies', companies);
           this.companyHelper(companies);
           return (
             <Slide
