@@ -26,7 +26,7 @@ export default class index extends Component {
                       click={this.props.click}
                       user={userState}
                       company={companyState}
-                      fetchInvoices = {fetchInvoices}
+                      fetchInvoices={fetchInvoices}
                     />
                     <GoogleCalApi />
                   </div>

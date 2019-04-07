@@ -2,24 +2,24 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import { Link } from "react-router-dom";
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
-//import Select from "../reusableComponents/Select";
-//import InvoiceItemInput from "../InvoiceItemsInput";
-import { Link } from "react-router-dom";
+// import Select from "../reusableComponents/Select";
+// import InvoiceItemInput from "../InvoiceItemsInput";
 
 // GraphQL mutation - EditInvoice endpoint
 import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
 
-//Syling - CSS
+// Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
 import { FetchInvoice } from "../../graphQL/queries/invoices";
 
 export default class EditInvoiceForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       invoice: {},
       amountPaid: 1000
@@ -31,27 +31,27 @@ export default class EditInvoiceForm extends Component {
     try {
       const returnedData = `
       _id
-      invoiceNumber 
-      companyName 
-      userName 
-      languageSelection 
-      currencySelection 
-      addressFrom 
-      addressTo 
-      cityTo 
-      stateRegionTo 
-      zipCodeTo 
-      clientEmailTo 
-      selectedDate 
-      invoiceDueDate 
-      balanceDue 
-      subtotal 
+      invoiceNumber
+      companyName
+      userName
+      languageSelection
+      currencySelection
+      addressFrom
+      addressTo
+      cityTo
+      stateRegionTo
+      zipCodeTo
+      clientEmailTo
+      selectedDate
+      invoiceDueDate
+      balanceDue
+      subtotal
       discount
-      tax 
-      shipping 
-      total 
-      amountPaid 
-      invoiceNotes 
+      tax
+      shipping
+      total
+      amountPaid
+      invoiceNotes
       invoiceTerms
       `;
       const { invoiceID } = this.props.match.params;
@@ -62,13 +62,13 @@ export default class EditInvoiceForm extends Component {
     }
   }
 
-  //handlesubmit - axios.get()
+  // handlesubmit - axios.get()
   handleFormSubmit = async e => {
     e.preventDefault();
 
     EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
     const { id } = this.props.match.params;
-    this.props.fetchInvoices()
+    this.props.fetchInvoices();
   };
 
   handleAmountPaidChange = e => {
