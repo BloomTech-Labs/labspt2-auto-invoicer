@@ -68,7 +68,7 @@ export default class EditInvoiceForm extends Component {
 
     EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
     const { id } = this.props.match.params;
-    this.props.fetchInvoices();
+    await this.props.fetchInvoices();
   };
 
   handleAmountPaidChange = e => {
