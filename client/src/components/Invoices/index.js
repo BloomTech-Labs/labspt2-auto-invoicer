@@ -44,7 +44,9 @@ class Invoices extends Component {
                     {invoices.length < 1 ? (
                       <Link
                         className="card-links"
-                        to={`/user/${this.props.id}/invoice/create`}
+                        to={`/user/${
+                          userState.userID
+                        }/invoice/create`}
                       >
                         <EmptyInvoices />
                       </Link>
@@ -73,7 +75,9 @@ class Invoices extends Component {
                         :{" "}
                         <Link
                           className="card-links"
-                          to={`/user/${this.props.id}/invoice/create`}
+                          to={`/user/${
+                            userState.userID
+                          }/invoice/create`}
                         >
                           <CreateInvoiceButton />
                         </Link>
