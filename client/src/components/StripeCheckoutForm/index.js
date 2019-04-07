@@ -34,6 +34,7 @@ class StripeCheckoutForm extends Component {
     let company = companies.filter(
       company => company.name === this.state.company
     );
+    console.log('helper company', company);
     if (company._id !== this.state.companyID) {
       this.setState({ companyID: company._id });
     }
@@ -63,6 +64,7 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
+    console.log('state', this.state);
     if (response.ok) {
       const result = await BuyPlanOrCredits(
         this.state.companyID,
@@ -84,6 +86,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
+          console.log('render companies', companies);
           this.companyHelper(companies);
           return (
             <Slide
