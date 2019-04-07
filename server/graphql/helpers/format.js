@@ -13,4 +13,4 @@ const formatData = document => {
 
 module.exports = {
   formatData
-}
+};

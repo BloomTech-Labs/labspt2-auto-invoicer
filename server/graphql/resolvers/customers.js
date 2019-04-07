@@ -5,20 +5,16 @@ const Company = require('../../models/company');
 const {
   findDocumentById,
   findAllDocuments,
-  updateDocumentById,
+  updateDocumentById
 } = require('../helpers');
 
-const {
-  formatData
-} = require('../helpers/format')
+const { formatData } = require('../helpers/format');
 
 module.exports = {
   customers: () => {
     return findAllDocuments(Customer);
   },
-  customer: ({
-    customerID
-  }) => {
+  customer: ({ customerID }) => {
     return findDocumentById(customerID, Customer);
   },
   createCustomer: async args => {
@@ -35,7 +31,7 @@ module.exports = {
         state,
         postal_code,
         country
-      } = args.customerInput
+      } = args.customerInput;
       const customerExists = await Customer.findOne({
         email
       });
@@ -62,16 +58,10 @@ module.exports = {
       throw error;
     }
   },
-  editCustomer: async ({
-    editCustomerInput,
-    customerID
-  }) => {
+  editCustomer: async ({ editCustomerInput, customerID }) => {
     return updateDocumentById(editCustomerInput, customerID, Customer);
   },
-  addCustomerToCompany: async ({
-    customerID,
-    companyID
-  }) => {
+  addCustomerToCompany: async ({ customerID, companyID }) => {
     try {
       const company = await Company.findById(companyID);
       const customer = await Customer.findById(customerID);
