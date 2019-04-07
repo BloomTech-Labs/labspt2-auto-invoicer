@@ -102,8 +102,9 @@ class App extends Component {
   signOut = () => {
     axios
       .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
-      .then(res => {
-        window.location.assign("https://www.myautoinvoicer.com");
+      .then(() => {
+        this.setState({ loggedIn: false });
+        window.location.replace("/");
       })
       .catch(err => console.log(err));
   };
