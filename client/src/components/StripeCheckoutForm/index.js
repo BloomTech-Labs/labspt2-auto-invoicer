@@ -32,13 +32,13 @@ class StripeCheckoutForm extends Component {
 
   companyHelper = companies => {
     console.log("companies params: ", companies);
-    const company = companies.find(
+    let company = companies.filter(
       company => company.name === this.state.company
     );
-    console.log("helper company", company);
-    if (company._id !== this.state.companyID) {
-      this.setState({ companyID: company._id }, () =>
-        console.log("state in helper callback", this.state)
+    console.log('helper company', company);
+    if (company[0]._id !== this.state.companyID) {
+      this.setState({ companyID: company[0]._id }, () =>
+        console.log('state in helper callback', this.state)
       );
     }
     console.log("state in helper", this.state);
