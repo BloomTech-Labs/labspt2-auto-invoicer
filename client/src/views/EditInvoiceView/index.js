@@ -13,6 +13,7 @@ export default class index extends Component {
     return (
       <CompanyConsumer>
         {({fetchInvoices}) => {
+          console.log(fetchInvoices)
           return (
             <div>
               Edit Invoice Views Only.
