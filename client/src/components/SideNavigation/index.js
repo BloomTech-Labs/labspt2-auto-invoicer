@@ -129,7 +129,7 @@ class SideNavigation extends React.Component {
                       return (
                         <NavLink
                           exact
-                          to={`/user/${this.props.id}/${lowerTitle}`}
+                          to={`/user/${userState.userID}/${lowerTitle}`}
                           key={title}
                           className="icon-container"
                           onClick={() => {
