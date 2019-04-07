@@ -103,10 +103,9 @@ class App extends Component {
     axios
       .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
       .then(res => {
-        // TODO
+        window.location.assign("https://www.myautoinvoicer.com");
       })
       .catch(err => console.log(err));
-    this.setState({ loggedIn: false });
   };
 
   createPDF = formPayload => {
@@ -210,12 +209,12 @@ class App extends Component {
                         check if logged in before routing below, and redirect to landing if not loggedIn */}
                       <Route
                         exact
-                        path={`/user/${userState.userID}/billing`}
+                        path="/user/:id/billing"
                         component={BillingPage}
                       />
                       <Route
                         exact
-                        path={`/user/${userState.userID}/invoice/create`}
+                        path="/user/:id/invoice/create"
                         render={props => (
                           <CreateInvoice {...props} click={this.createPDF} />
                         )}
@@ -223,7 +222,7 @@ class App extends Component {
 
                       <Route
                         exact
-                        path={`/user/${userState.userID}/settings`}
+                        path="/user/:id/settings"
                         component={SettingsPage}
                       />
                       <Route
@@ -235,7 +234,7 @@ class App extends Component {
                       />
                       <Route
                         exact
-                        path={`/user/${userState.userID}/invoices`}
+                        path="/user/:id/invoices"
                         render={props => (
                           <InvoiceList
                             {...props}
@@ -247,7 +246,7 @@ class App extends Component {
                       {/* adding routes for InvoiceView and EditInvoice components */}
                       <Route
                         exact
-                        path={`/user/${userState.userID}/invoice/view`}
+                        path="/user/:id/invoice/view"
                         component={InvoiceView}
                       />
                       <Route
