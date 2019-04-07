@@ -158,7 +158,7 @@ class App extends Component {
       {({ userState }) => {
         return (
           <CompanyConsumer>
-            {({ companyState }) => {
+            {({ companyState, fetchInvoices }) => {
               return (
                 <div className="App">
                   {/* check if sigin clicked and open up signin modal or visa-versa */}
@@ -230,7 +230,8 @@ class App extends Component {
                     <Route
                       exact
                       path="/user/:id/invoice/:invoiceID/edit"
-                      render={props => <EditInvoiceForm {...props} />}
+                      render={props => <EditInvoiceForm {...props}
+                      fetchInvoices={fetchInvoices} />}
                     />
                   </section>
 
