@@ -118,30 +118,32 @@ class SideNavigation extends React.Component {
             <List className="all-icon-container">
               <UserConsumer>
                 {({ userState }) => {
-                  [
-                    { title: "Invoices", icon: <InvoicesIcon /> },
-                    { title: "Billing", icon: <BillingIcon /> },
-                    { title: "Settings", icon: <SettingsIcon /> }
-                  ].map((text, index) => {
-                    const { title, icon } = text;
-                    const lowerTitle = title.toLowerCase();
-                    return (
-                      <NavLink
-                        exact
-                        to={`/user/${userState.userID}/${lowerTitle}`}
-                        key={title}
-                        className="icon-container"
-                        onClick={() => {
-                          this.setState({ open: !open });
-                        }}
-                      >
-                        <ListItem className="icon-item">
-                          <ListItemIcon>{icon}</ListItemIcon>
-                          <p className="icon-title">{title}</p>
-                        </ListItem>
-                      </NavLink>
-                    );
-                  });
+                  {
+                    [
+                      { title: "Invoices", icon: <InvoicesIcon /> },
+                      { title: "Billing", icon: <BillingIcon /> },
+                      { title: "Settings", icon: <SettingsIcon /> }
+                    ].map((text, index) => {
+                      const { title, icon } = text;
+                      const lowerTitle = title.toLowerCase();
+                      return (
+                        <NavLink
+                          exact
+                          to={`/user/${this.props.id}/${lowerTitle}`}
+                          key={title}
+                          className="icon-container"
+                          onClick={() => {
+                            this.setState({ open: !open });
+                          }}
+                        >
+                          <ListItem className="icon-item">
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <p className="icon-title">{title}</p>
+                          </ListItem>
+                        </NavLink>
+                      );
+                    });
+                  }
                 }}
               </UserConsumer>
             </List>
