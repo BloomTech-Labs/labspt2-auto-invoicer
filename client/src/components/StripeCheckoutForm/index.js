@@ -31,7 +31,7 @@ class StripeCheckoutForm extends Component {
   }
 
   companyHelper = companies => {
-    let company = companies.filter(
+    let company = companies.find(
       company => company.name === this.state.company
     );
     console.log('helper company', company);
