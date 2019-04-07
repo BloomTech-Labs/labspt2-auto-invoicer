@@ -78,77 +78,77 @@ class SideNavigation extends React.Component {
             />
           )}
         </header>
-        <Drawer
-          anchor={document.body.clientWidth < 520 ? "top" : "left"}
-          open={open}
-        >
-          <div id="drawer-container">
-            <IconButton onClick={this.handleDrawerOpen}>
-              <ChevronLeftIcon id="left-icon" />
-            </IconButton>
-          </div>
-          <Divider />
-          {/* if not logged in show public routes else show secured */}
-          {!this.props.loggedIn ? (
-            <List className="all-icon-container">
-              {[
-                { title: "Home", icon: <HomeIcon /> },
-                { title: "About", icon: <AboutIcon /> }
-              ].map((text, index) => {
-                const { title, icon } = text;
-                return (
-                  <NavLink
-                    exact
-                    to={`${title}` === "Home" ? "/" : `/${title}`}
-                    key={title}
-                    className="icon-container"
-                    onClick={() => {
-                      this.setState({ open: !open });
-                    }}
-                  >
-                    <ListItem className="icon-item">
-                      <ListItemIcon>{icon}</ListItemIcon>
-                      <p className="icon-title">{title}</p>
-                    </ListItem>
-                  </NavLink>
-                );
-              })}
-            </List>
-          ) : (
-            <List className="all-icon-container">
-              <UserConsumer>
-                {({ userState }) => {
-                  {
-                    [
-                      { title: "Invoices", icon: <InvoicesIcon /> },
-                      { title: "Billing", icon: <BillingIcon /> },
-                      { title: "Settings", icon: <SettingsIcon /> }
-                    ].map((text, index) => {
-                      const { title, icon } = text;
-                      const lowerTitle = title.toLowerCase();
-                      return (
-                        <NavLink
-                          exact
-                          to={`/user/${userState.userID}/${lowerTitle}`}
-                          key={title}
-                          className="icon-container"
-                          onClick={() => {
-                            this.setState({ open: !open });
-                          }}
-                        >
-                          <ListItem className="icon-item">
-                            <ListItemIcon>{icon}</ListItemIcon>
-                            <p className="icon-title">{title}</p>
-                          </ListItem>
-                        </NavLink>
-                      );
-                    });
-                  }
-                }}
-              </UserConsumer>
-            </List>
-          )}
-        </Drawer>
+        <UserConsumer>
+          {({ userState }) => {
+            return (
+            <Drawer
+              anchor={document.body.clientWidth < 520 ? "top" : "left"}
+              open={open}
+            >
+              <div id="drawer-container">
+                <IconButton onClick={this.handleDrawerOpen}>
+                  <ChevronLeftIcon id="left-icon" />
+                </IconButton>
+              </div>
+              <Divider />
+              {/* if not logged in show public routes else show secured */}
+              {!this.props.loggedIn ? (
+                <List className="all-icon-container">
+                  {[
+                    { title: "Home", icon: <HomeIcon /> },
+                    { title: "About", icon: <AboutIcon /> }
+                  ].map((text, index) => {
+                    const { title, icon } = text;
+                    return (
+                      <NavLink
+                        exact
+                        to={`${title}` === "Home" ? "/" : `/${title}`}
+                        key={title}
+                        className="icon-container"
+                        onClick={() => {
+                          this.setState({ open: !open });
+                        }}
+                      >
+                        <ListItem className="icon-item">
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <p className="icon-title">{title}</p>
+                        </ListItem>
+                      </NavLink>
+                    );
+                  })}
+                </List>
+              ) : (
+                <List className="all-icon-container">
+                  {[
+                    { title: "Invoices", icon: <InvoicesIcon /> },
+                    { title: "Billing", icon: <BillingIcon /> },
+                    { title: "Settings", icon: <SettingsIcon /> }
+                  ].map((text, index) => {
+                    const { title, icon } = text;
+                    const lowerTitle = title.toLowerCase();
+                    return (
+                      <NavLink
+                        exact
+                        to={`/user/${userState.userID}/${lowerTitle}`}
+                        key={title}
+                        className="icon-container"
+                        onClick={() => {
+                          this.setState({ open: !open });
+                        }}
+                      >
+                        <ListItem className="icon-item">
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <p className="icon-title">{title}</p>
+                        </ListItem>
+                      </NavLink>
+                    );
+                  })}
+                </List>
+              )}
+            </Drawer>
+            );
+          }}
+        </UserConsumer>
       </div>
     );
   }
