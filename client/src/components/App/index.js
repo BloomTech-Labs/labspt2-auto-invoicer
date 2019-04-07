@@ -155,15 +155,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <SideNavigation
-            loggedIn={this.state.loggedIn}
-            signInModal={this.signInModal}
-            signUpModal={this.signUpModal}
-            forgotPassModal={this.forgotPassModal}
-            signOut={this.signOut}
-          />
-        </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
           <SignInModal
@@ -205,63 +196,50 @@ class App extends Component {
               <CompanyConsumer>
                 {({ companyState }) => {
                   return (
-                    <section className="routes-container">
-                      {/* ROUTES GO HERE
-                        check if logged in before routing below, and redirect to landing if not loggedIn */}
-                      <Route
-                        exact
-                        path="/user/:id/billing"
-                        component={BillingPage}
-                      />
-                      <Route
-                        exact
-                        path="/user/:id/invoice/create"
-                        render={props => (
-                          <CreateInvoice {...props} click={this.createPDF} />
-                        )}
-                      />
-
-                      <Route
-                        exact
-                        path="/user/:id/settings"
-                        component={SettingsPage}
-                      />
-                      <Route
-                        exact
-                        path="/"
-                        render={props => (
-                          <LandingPage {...props} click={this.signUpModal} />
-                        )}
-                      />
-                      <Route
-                        exact
-                        path="/user/:id/invoices"
-                        render={props => (
-                          <InvoiceList
-                            {...props}
-                            user={userState}
-                            company={companyState}
-                          />
-                        )}
-                      />
-                      {/* adding routes for InvoiceView and EditInvoice components */}
-                      <Route
-                        exact
-                        path="/user/:id/invoice/view"
-                        component={InvoiceView}
-                      />
-                      <Route
-                        exact
-                        path="/user/:id/invoice/:invoiceID/edit"
-                        render={props => <EditInvoiceForm {...props} />}
-                      />
-                    </section>
+                    <SideNavigation
+                      loggedIn={this.state.loggedIn}
+                      signInModal={this.signInModal}
+                      signUpModal={this.signUpModal}
+                      forgotPassModal={this.forgotPassModal}
+                      signOut={this.signOut}
+                      userState={userState}
+                    />
                   );
                 }}
               </CompanyConsumer>
             );
           }}
         </UserConsumer>
+        <section className="routes-container">
+          <Route exact path="/user/:id/billing" component={BillingPage} />
+          <Route
+            exact
+            path="/user/:id/invoice/create"
+            render={props => (
+              <CreateInvoice {...props} click={this.createPDF} />
+            )}
+          />
+          <Route exact path="/user/:id/settings" component={SettingsPage} />
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <LandingPage {...props} click={this.signUpModal} />
+            )}
+          />
+          <Route
+            exact
+            path="/user/:id/invoices"
+            render={props => <InvoiceList {...props} />}
+          />
+          {/* adding routes for InvoiceView and EditInvoice components */}
+          <Route exact path="/user/:id/invoice/view" component={InvoiceView} />
+          <Route
+            exact
+            path="/user/:id/invoice/:invoiceID/edit"
+            render={props => <EditInvoiceForm {...props} />}
+          />
+        </section>
       </div>
     );
   }
