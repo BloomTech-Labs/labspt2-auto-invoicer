@@ -24,11 +24,15 @@
 }
 
 .status-unpaid{
-  border-color: rgb(224, 55, 55);
-  box-shadow: 0 0 5px red;
+  border-color: yellow;
+  box-shadow: 0 0 5px yellow;
 }
 
 .status-paid {
   border-color: green;
   box-shadow: 0 0 5px green;
+}
+.status-late{
+  border-color: red;
+  box-shadow: 0 0 5px red;
 }
