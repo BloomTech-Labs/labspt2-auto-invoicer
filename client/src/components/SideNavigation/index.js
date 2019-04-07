@@ -35,8 +35,6 @@ class SideNavigation extends React.Component {
       open: false,
       creditsOrPlan: ""
     };
-
-    this.connectUserContextWithState(this.props.userState.companies[0]);
   }
 
   handleDrawerOpen = () => {
@@ -62,6 +60,13 @@ class SideNavigation extends React.Component {
       });
     }
   };
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps);
+    if (this.props.userState !== prevProps.userState) {
+      this.connectUserContextWithState(this.props.userState.companies[0]);
+    }
+  }
 
   componentDidMount() {
     console.log(this.props.userState);
