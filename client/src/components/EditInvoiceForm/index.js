@@ -68,10 +68,10 @@ export default class EditInvoiceForm extends Component {
     e.preventDefault();
 
     EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
+    await this.props.fetchInvoices();
     const { id } = this.props.match.params;
     console.log('second console:' , this.props.fetchInvoices)
     console.log('test console:' , this.props)
-    await this.props.fetchInvoices();
   };
 
   handleAmountPaidChange = e => {
