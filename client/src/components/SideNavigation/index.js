@@ -54,7 +54,9 @@ class SideNavigation extends React.Component {
   connectUserContextWithState = company => {
     if (!this.state.creditsOrPlan) {
       const { credits, unlimited_tier } = company;
-      this.setState({ creditsOrPlan: unlimited_tier || credits });
+      this.setState({
+        creditsOrPlan: unlimited_tier ? unlimited_tier : credits
+      });
     }
   };
 
