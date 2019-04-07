@@ -61,6 +61,7 @@ class SideNavigation extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props.userState);
     if (this.props.loggedIn && this.props.userState.companies.length)
       this.connectUserContextWithState(this.props.userState.companies[0]);
   }
