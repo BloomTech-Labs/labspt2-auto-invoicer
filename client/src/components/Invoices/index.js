@@ -30,6 +30,17 @@ class Invoices extends Component {
                 const { invoices } = companyState;
                 return (
                   <section>
+                    <ul class="legend">
+                      <li>
+                        <span class="paid" /> Paid
+                      </li>
+                      <li>
+                        <span class="late" /> Late
+                      </li>
+                      <li>
+                        <span class="unpaid" /> Unpaid
+                      </li>
+                    </ul>
                     {invoices.length < 1 ? (
                       <Link
                         className="card-links"
@@ -46,9 +57,7 @@ class Invoices extends Component {
                               return (
                                 <Link
                                   className="card-links"
-                                  to={`/user/${
-                                    userState.userID
-                                  }/invoice/${
+                                  to={`/user/${userState.userID}/invoice/${
                                     invoice._id
                                   }/edit`}
                                 >
