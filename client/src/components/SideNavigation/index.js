@@ -55,7 +55,7 @@ class SideNavigation extends React.Component {
     if (!this.state.creditsOrPlan) {
       const { credits, unlimited_tier } = company;
       this.setState({
-        creditsOrPlan: unlimited_tier ? unlimited_tier : credits
+        creditsOrPlan: unlimited_tier ? '1 Month Unlimited' : credits
       });
     }
   };
