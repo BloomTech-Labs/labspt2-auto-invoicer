@@ -156,20 +156,13 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <UserConsumer>
-            {({ userState: { userID } }) => {
-              return (
-                <SideNavigation
-                  loggedIn={this.state.loggedIn}
-                  signInModal={this.signInModal}
-                  signUpModal={this.signUpModal}
-                  forgotPassModal={this.forgotPassModal}
-                  signOut={this.signOut}
-                  id={userID}
-                />
-              );
-            }}
-          </UserConsumer>
+          <SideNavigation
+            loggedIn={this.state.loggedIn}
+            signInModal={this.signInModal}
+            signUpModal={this.signUpModal}
+            forgotPassModal={this.forgotPassModal}
+            signOut={this.signOut}
+          />
         </header>
         {/* check if sigin clicked and open up signin modal or visa-versa */}
         {this.state.toggleSignIn ? (
@@ -246,7 +239,6 @@ class App extends Component {
                         render={props => (
                           <InvoiceList
                             {...props}
-                            id={userState.userID}
                             user={userState}
                             company={companyState}
                           />
@@ -263,11 +255,6 @@ class App extends Component {
                         path="/user/:id/invoice/:invoiceID/edit"
                         render={props => <EditInvoiceForm {...props} />}
                       />
-                      {/* <Route
-                        exact
-                        path={"/password-reset"}
-                        component={PasswordResetView}
-                      /> */}
                     </section>
                   );
                 }}
