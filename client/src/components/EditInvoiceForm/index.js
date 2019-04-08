@@ -319,7 +319,9 @@ export default class EditInvoiceForm extends Component {
                   <form onSubmit={this.handleFormSubmit}>
                     <div>Tax</div>
                     <div>
-                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
+                      {Math.round(this.state.invoice.tax * 100).toFixed(2) ||
+                        "0.00"}{" "}
+                      %
                     </div>
                   </form>
                 </div>
