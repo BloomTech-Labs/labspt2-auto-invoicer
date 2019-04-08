@@ -30,15 +30,15 @@ class Invoices extends Component {
                 const { invoices } = companyState;
                 return (
                   <section>
-                    <ul class="legend">
+                    <ul className="legend">
                       <li>
-                        <span class="paid" /> Paid
+                        <span className="paid" /> Paid
                       </li>
                       <li>
-                        <span class="late" /> Late
+                        <span className="late" /> Late
                       </li>
                       <li>
-                        <span class="unpaid" /> Unpaid
+                        <span className="unpaid" /> Unpaid
                       </li>
                     </ul>
                     {invoices.length < 1 ? (

@@ -102,7 +102,7 @@ class InvoiceCard extends React.Component {
         </p>
         <p>
           <u>Notes:</u>
-          <br /> {invoiceNotes}
+          <br /> {this.ellipsis(invoiceNotes)}
         </p>
       </article>
     );
