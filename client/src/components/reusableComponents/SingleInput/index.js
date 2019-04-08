@@ -17,6 +17,7 @@ const SingleInput = props => {
         name={props.name}
         type={props.inputType}
         value={props.content}
+        onKeyUp={props.onKeyUp}
         onChange={props.controlFunc}
         placeholder={props.placeholder}
       />
