@@ -143,6 +143,7 @@ export default class EditInvoiceForm extends Component {
                     resize={false}
                     name="addressFrom"
                     controlFunc={this.handleInputChange}
+                    content={this.state.invoice.addressFrom}
                     placeholder={
                       "Your Business, Inc. \nYour Address \nCity, State/Region, \nYour Country"
                     }
@@ -364,7 +365,7 @@ export default class EditInvoiceForm extends Component {
                       // title={"Amount Paid"}
                       name="amountPaid"
                       controlFunc={this.handleAmountPaidChange}
-                      content={this.state.invoice.amountPaid}
+                      content={this.state.amountPaid}
                       placeholder="Amount Paid"
                     />
                   </form>
