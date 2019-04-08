@@ -606,7 +606,7 @@ class CreateInvoiceForm extends Component {
                   <form onSubmit={this.handleFormSubmit}>
                     <div>Tax</div>
                     <div>
-                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
+                      {this.state.tax * 100} %
                     </div>
                   </form>
                 </div>
