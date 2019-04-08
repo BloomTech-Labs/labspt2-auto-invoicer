@@ -7,7 +7,7 @@ import { CompanyConsumer } from "../../contexts/CompanyContext";
 const AuthSecured = props => {
   return (
     <CompanyConsumer>
-      {({userState: {credits, unlimited_tier}}) => {
+      {({companyState: {credits, unlimited_tier}}) => {
         const plan = unlimited_tier ? "1 Month Unlimited" : credits
         return (
           <ul className="auth-container">
