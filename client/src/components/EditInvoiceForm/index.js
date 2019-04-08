@@ -21,14 +21,12 @@ export default class EditInvoiceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      invoice: {},
-      amountPaid: 1000
+      invoice: {}
     };
   }
 
   // for Incoming Invoice from InvoiceList
   async componentDidMount() {
-    console.log(this.props)
     try {
       const returnedData = `
       _id
@@ -57,7 +55,7 @@ export default class EditInvoiceForm extends Component {
       `;
       const { invoiceID } = this.props.match.params;
       const invoice = await FetchInvoice(invoiceID, returnedData);
-      this.setState({ ...invoice, amountPaid: invoice.amountPaid });
+      this.setState({ ...invoice });
     } catch (error) {
       throw error;
     }
@@ -67,15 +65,16 @@ export default class EditInvoiceForm extends Component {
   handleFormSubmit = async e => {
     e.preventDefault();
 
-    await EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
+    await EditAmountPaid(
+      this.state.invoice._id,
+      this.state.invoice.amountPaid,
+      "amountPaid"
+    );
     await this.props.fetchInvoices();
-    const { id } = this.props.match.params;
-    console.log('second console:' , this.props.fetchInvoices)
-    console.log('test console:' , this.props)
   };
 
   handleAmountPaidChange = e => {
-    this.setState({ amountPaid: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
@@ -362,9 +361,9 @@ export default class EditInvoiceForm extends Component {
                     <SingleInput
                       inputType="number"
                       // title={"Amount Paid"}
-                      name="amountPaid"
+                      name="invoice.amountPaid"
                       controlFunc={this.handleAmountPaidChange}
-                      content={this.state.amountPaid}
+                      content={this.state.invoice.amountPaid}
                       placeholder="Amount Paid"
                     />
                   </form>
@@ -378,10 +377,13 @@ export default class EditInvoiceForm extends Component {
             </div>
           </section>
           <button
+            type="button"
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
           >
-            <Link to={`/user/${this.props.id}/invoices`}>UPDATE INVOICE</Link>
+            <Link to={`/user/${this.props.userID}/invoices`}>
+              UPDATE INVOICE
+            </Link>
           </button>
           <footer className="footer">Footer</footer>
         </div>
