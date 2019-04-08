@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
+import React, { Component } from "react";
+import { CardElement, injectStripe } from "react-stripe-elements";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Slide from "@material-ui/core/Slide";
 
-import styles from './styles';
-import CardHolderName from './CardHolderName';
-import SelectPurchasePlan from './SelectPurchasePlan';
-import AmountCredits from './AmountCredits';
-import SelectCurrency from './SelectCurrency';
-import SelectCompany from './SelectCompany';
-import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
-import { UserConsumer } from '../../contexts/UserContext';
+import styles from "./styles";
+import CardHolderName from "./CardHolderName";
+import SelectPurchasePlan from "./SelectPurchasePlan";
+import AmountCredits from "./AmountCredits";
+import SelectCurrency from "./SelectCurrency";
+import SelectCompany from "./SelectCompany";
+import { BuyPlanOrCredits } from "../../graphQL/mutations/companies";
+import { UserConsumer } from "../../contexts/UserContext";
 
 class StripeCheckoutForm extends Component {
   state = {
     complete: false,
-    company: '',
-    companyID: '',
+    company: "",
+    companyID: "",
     unlimited: false,
-    currency: 'USD',
-    name: '',
+    currency: "USD",
+    name: "",
     quantity: 0,
     checked: false
   };
@@ -32,7 +32,7 @@ class StripeCheckoutForm extends Component {
 
   connectUserContextWithState = companies => {
     if (this.state.company) {
-      let company = companies.filter(
+      const company = companies.filter(
         company => company.name === this.state.company
       );
       if (company[0]._id !== this.state.companyID) {
@@ -54,10 +54,10 @@ class StripeCheckoutForm extends Component {
     }
     const { token } = await this.props.stripe.createToken({ name });
     const response = await fetch(
-      'https://api.myautoinvoicer.com/stripe/charge',
+      `${process.env.REACT_APP_BACKEND_URL}/stripe/charge`,
       {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({
           stripeToken: token.id,
           quantity,
@@ -69,16 +69,16 @@ class StripeCheckoutForm extends Component {
       const result = await BuyPlanOrCredits(
         this.state.companyID,
         quantity,
-        'name unlimited_tier credits'
+        "name unlimited_tier credits"
       );
-      await this.props.fetchPlanOrCredits(this.state.companyID)
+      await this.props.fetchPlanOrCredits(this.state.companyID);
     }
     this.setState({
       unlimited: false,
-      currency: 'USD',
-      name: '',
+      currency: "USD",
+      name: "",
       quantity: 0,
-      company: ''
+      company: ""
     });
   };
 
