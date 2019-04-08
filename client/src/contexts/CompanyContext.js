@@ -88,10 +88,10 @@ export class CompanyProvider extends React.Component {
     };
 
     this.fetchInvoices = async () => {
-      const result = await FetchCompany(this.state.companyID, invoicesData);
+      const returnedData = `credits ${invoicesData}`
+      const result = await FetchCompany(this.state.companyID, returnedData);
       const { company } = result;
-      console.log('company from await', company)
-      this.setState({ invoices: company.invoices });
+      this.setState({ invoices: company.invoices, credits: company.credits });
     };
 
     this.fetchUsers = async () => {
@@ -105,11 +105,18 @@ export class CompanyProvider extends React.Component {
       const { company } = result;
       this.setState({ customers: company.customers });
     };
+
+    this.fetchPlanOrCredits = async (companyID) => {
+      const plan = `unlimited_tier credits`
+      const result = await FetchCompany(companyID, plan )
+      const { company } = result;
+      this.setState({credits: company.credits, unlimited_tier: company.unlimited_tier})
+    }
   }
 
 
   render() {
-    const { fetchCompany, fetchCustomers, fetchInvoices, fetchUsers } = this;
+    const { fetchCompany, fetchCustomers, fetchInvoices, fetchUsers, fetchPlanOrCredits } = this;
     const companyState = this.state;
     return (
       <CompanyContext.Provider
@@ -118,7 +125,8 @@ export class CompanyProvider extends React.Component {
           fetchCompany,
           fetchCustomers,
           fetchInvoices,
-          fetchUsers
+          fetchUsers,
+          fetchPlanOrCredits
         }}
       >
         {this.props.children}

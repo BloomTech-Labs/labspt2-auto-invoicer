@@ -71,6 +71,7 @@ class StripeCheckoutForm extends Component {
         quantity,
         'name unlimited_tier credits'
       );
+      await this.props.fetchPlanOrCredits(this.state.companyID)
     }
     this.setState({
       unlimited: false,
