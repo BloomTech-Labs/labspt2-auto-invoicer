@@ -56,6 +56,7 @@ export default class EditInvoiceForm extends Component {
       `;
       const { invoiceID } = this.props.match.params;
       const invoice = await FetchInvoice(invoiceID, returnedData);
+      console.log(invoice);
       this.setState({ ...invoice, amountPaid: invoice.amountPaid });
     } catch (error) {
       throw error;
