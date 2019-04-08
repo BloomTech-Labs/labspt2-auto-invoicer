@@ -22,13 +22,12 @@ export default class EditInvoiceForm extends Component {
     super(props);
     this.state = {
       invoice: {},
-      amountPaid: 1000
+      amountPaid: ""
     };
   }
 
   // for Incoming Invoice from InvoiceList
   async componentDidMount() {
-    console.log(this.props)
     try {
       const returnedData = `
       _id
@@ -67,11 +66,12 @@ export default class EditInvoiceForm extends Component {
   handleFormSubmit = async e => {
     e.preventDefault();
 
-    await EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
+    await EditAmountPaid(
+      this.state.invoice._id,
+      this.state.amountPaid,
+      "amountPaid"
+    );
     await this.props.fetchInvoices();
-    const { id } = this.props.match.params;
-    console.log('second console:' , this.props.fetchInvoices)
-    console.log('test console:' , this.props)
   };
 
   handleAmountPaidChange = e => {
@@ -143,6 +143,7 @@ export default class EditInvoiceForm extends Component {
                     resize={false}
                     name="addressFrom"
                     controlFunc={this.handleInputChange}
+                    content={this.state.invoice.addressFrom}
                     placeholder={
                       "Your Business, Inc. \nYour Address \nCity, State/Region, \nYour Country"
                     }
@@ -378,10 +379,13 @@ export default class EditInvoiceForm extends Component {
             </div>
           </section>
           <button
+            type="button"
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
           >
-            <Link to={`/user/${this.props.id}/invoices`}>UPDATE INVOICE</Link>
+            <Link to={`/user/${this.props.userID}/invoices`}>
+              UPDATE INVOICE
+            </Link>
           </button>
           <footer className="footer">Footer</footer>
         </div>

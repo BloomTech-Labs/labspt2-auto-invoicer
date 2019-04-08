@@ -155,92 +155,108 @@ class App extends Component {
   render() {
     return (
       <UserConsumer>
-      {({ userState }) => {
-        return (
-          <CompanyConsumer>
-            {({ companyState, fetchInvoices }) => {
-              return (
-                <div className="App">
-                  {/* check if sigin clicked and open up signin modal or visa-versa */}
-                  {this.state.toggleSignIn ? (
-                    <SignInModal
-                      click={this.signInModal}
-                      auth={this.toggleAuthModal}
-                      forgot={this.forgotPassModal}
-                    />
-                  ) : null}
+        {({ userState }) => {
+          return (
+            <CompanyConsumer>
+              {({ companyState, fetchInvoices }) => {
+                return (
+                  <div className="App">
+                    {/* check if sigin clicked and open up signin modal or visa-versa */}
+                    {this.state.toggleSignIn ? (
+                      <SignInModal
+                        click={this.signInModal}
+                        auth={this.toggleAuthModal}
+                        forgot={this.forgotPassModal}
+                      />
+                    ) : null}
 
-                  {/* check if sigup clicked and open up signup modal or visa-versa */}
-                  {this.state.toggleRegister ? (
-                    <SignUpModal
-                      click={this.signUpModal}
-                      welcome={this.sendWelcomeEmail}
+                    {/* check if sigup clicked and open up signup modal or visa-versa */}
+                    {this.state.toggleRegister ? (
+                      <SignUpModal
+                        click={this.signUpModal}
+                        welcome={this.sendWelcomeEmail}
+                      />
+                    ) : null}
+                    {/* check if password forgot clicked and open up password modal or visa-versa */}
+                    {this.state.togglePassForgot ? (
+                      <ForgotPassModal
+                        click={() => {
+                          this.signInModal();
+                          this.forgotPassModal();
+                        }}
+                        passwordReset={this.sendPasswordReset}
+                      />
+                    ) : null}
+                    {this.state.toggleAuth ? (
+                      <AuthModal
+                        click={() => {
+                          this.signInModal();
+                          this.toggleAuthModal();
+                        }}
+                      />
+                    ) : null}
+                    <SideNavigation
+                      loggedIn={this.state.loggedIn}
+                      signInModal={this.signInModal}
+                      signUpModal={this.signUpModal}
+                      forgotPassModal={this.forgotPassModal}
+                      signOut={this.signOut}
+                      userState={userState}
                     />
-                  ) : null}
-                  {/* check if password forgot clicked and open up password modal or visa-versa */}
-                  {this.state.togglePassForgot ? (
-                    <ForgotPassModal
-                      click={() => {
-                        this.signInModal();
-                        this.forgotPassModal();
-                      }}
-                      passwordReset={this.sendPasswordReset}
-                    />
-                  ) : null}
-                  {this.state.toggleAuth ? (
-                    <AuthModal
-                      click={() => {
-                        this.signInModal();
-                        this.toggleAuthModal();
-                      }}
-                    />
-                  ) : null}
-                  <SideNavigation
-                    loggedIn={this.state.loggedIn}
-                    signInModal={this.signInModal}
-                    signUpModal={this.signUpModal}
-                    forgotPassModal={this.forgotPassModal}
-                    signOut={this.signOut}
-                    userState={userState}
-                  />
-                  <section className="routes-container">
-                    <Route exact path="/user/:id/billing" component={BillingPage} />
-                    <Route
-                      exact
-                      path="/user/:id/invoice/create"
-                      render={props => (
-                        <CreateInvoice {...props} click={this.createPDF} />
-                      )}
-                    />
-                    <Route exact path="/user/:id/settings" component={SettingsPage} />
-                    <Route
-                      exact
-                      path="/"
-                      render={props => (
-                        <LandingPage {...props} click={this.signUpModal} />
-                      )}
-                    />
-                    <Route
-                      exact
-                      path="/user/:id/invoices"
-                      render={props => <InvoiceList {...props} />}
-                    />
-                    {/* adding routes for InvoiceView and EditInvoice components */}
-                    <Route exact path="/user/:id/invoice/view" component={InvoiceView} />
-                    <Route
-                      exact
-                      path="/user/:id/invoice/:invoiceID/edit"
-                      render={props => <EditInvoiceForm {...props}
-                      fetchInvoices={fetchInvoices} />}
-                    />
-                  </section>
-
-                </div>
-              );
-            }}
-          </CompanyConsumer>
-        );
-      }}
+                    <section className="routes-container">
+                      <Route
+                        exact
+                        path="/user/:id/billing"
+                        component={BillingPage}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoice/create"
+                        render={props => (
+                          <CreateInvoice {...props} click={this.createPDF} />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/settings"
+                        component={SettingsPage}
+                      />
+                      <Route
+                        exact
+                        path="/"
+                        render={props => (
+                          <LandingPage {...props} click={this.signUpModal} />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoices"
+                        render={props => <InvoiceList {...props} />}
+                      />
+                      {/* adding routes for InvoiceView and EditInvoice components */}
+                      <Route
+                        exact
+                        path="/user/:id/invoice/view"
+                        component={InvoiceView}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoice/:invoiceID/edit"
+                        render={props => (
+                          <EditInvoiceForm
+                            {...props}
+                            fetchInvoices={fetchInvoices}
+                            userID={userState.userID}
+                          />
+                        )}
+                      />
+                    </section>
+                  </div>
+                );
+              }}
+            </CompanyConsumer>
+          );
+        }}
       </UserConsumer>
     );
   }
