@@ -537,7 +537,9 @@ class CreateInvoiceForm extends Component {
                 onChange={this.handleInvoiceItemsInputChange}
               >
                 <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
-                <button onClick={this.addInvoiceItem}>Add Line Item +</button>
+                <button onClick={this.addInvoiceItem}>
+                  Add Line Item +
+                </button>
               </form>
             </div>
             <BottomSectionMid>
@@ -604,8 +606,8 @@ class CreateInvoiceForm extends Component {
                 </div>
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
-                    <div>Tax</div>
-                    <div>
+                    <div className="tax">Tax</div>
+                    <div className="taxNum">
                       {this.state.tax * 100} %
                     </div>
                   </form>
