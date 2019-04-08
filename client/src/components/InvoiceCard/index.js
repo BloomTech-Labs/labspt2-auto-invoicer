@@ -8,13 +8,13 @@ class InvoiceCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        invoiceDueDate: this.props.invoice.invoiceDueDate,
-        amountPaid: this.props.invoice.amountPaid,
-        total: this.props.invoice.total,
-        paid: this.props.invoice.paid,
-      }
+      invoiceDueDate: this.props.invoice.invoiceDueDate,
+      amountPaid: this.props.invoice.amountPaid,
+      total: this.props.invoice.total,
+      paid: this.props.invoice.paid
     };
-    
+  }
+
   lateChecker = date => {
     let year = date.slice(11, 15);
     let month = date.slice(4, 7);
@@ -68,6 +68,14 @@ class InvoiceCard extends React.Component {
       return "status-unpaid invoice-card";
     }
   };
+  headerEllipsis = str => {
+    let shortened = str.length > 25 ? str.slice(0, 25) + "..." : str;
+    return shortened;
+  };
+  ellipsis = str => {
+    let shortened = str.length > 35 ? str.slice(0, 35) + "..." : str;
+    return shortened;
+  };
   render() {
     const {
       invoiceNumber,
@@ -79,18 +87,18 @@ class InvoiceCard extends React.Component {
     } = this.props.invoice;
     return (
       <article className={this.visualClass()}>
-        <h3>Invoice Number: {invoiceNumber}</h3>
+        <h3>Invoice Number: {this.headerEllipsis(invoiceNumber)}</h3>
         <p>
           <u>Invoice Due Date:</u>
           <br /> {invoiceDueDate}
         </p>
         <p>
           <u>Total:</u>
-          <br /> ${total}
+          <br /> ${this.ellipsis(total)}
         </p>
         <p>
           <u>Amount Paid:</u>
-          <br /> ${amountPaid}
+          <br /> ${this.ellipsis(amountPaid)}
         </p>
         <p>
           <u>Notes:</u>
