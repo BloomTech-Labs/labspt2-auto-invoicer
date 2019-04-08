@@ -1,24 +1,22 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
-
 import DayPickerInput from "react-day-picker/DayPickerInput";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
 import InvoiceItemInput from "../InvoiceItemsInput";
 
-// GraphQL mutation - CreateInvoice endpoint
 import { CreateInvoice } from "../../graphQL/mutations/invoices";
 
-// CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
 // import { TextField } from "@material-ui/core"; -- for material-ui
 // import { styled } from "@material-ui/styles";
 // import Button from "@material-ui/core/Button";
-import styled from "styled-components";
 
 const Button = styled.button`
   background: transparent;
@@ -148,7 +146,7 @@ const BottomSectionBottomRight = styled.div`
   }
 `;
 
-export default class CreateInvoiceForm extends Component {
+class CreateInvoiceForm extends Component {
   state = {
     languageOptions: ["English (US)", "Español"],
     currencyOptions: [
@@ -301,7 +299,6 @@ export default class CreateInvoiceForm extends Component {
 
   handleFormSubmit = async e => {
     e.preventDefault();
-
     const formPayload = {
       invoiceNumber: this.state.invoiceNumber,
       addressFrom: this.state.addressFrom,
@@ -331,11 +328,11 @@ export default class CreateInvoiceForm extends Component {
       companyName: this.props.company.name,
       customerID: this.props.company.customers[0]._id
     };
-
     await CreateInvoice(formPayload, "invoiceNumber total");
     this.props.click(formPayload);
     this.handleClearForm(e);
     await this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.user.userID}/invoices`);
   };
 
   render() {
@@ -665,7 +662,7 @@ export default class CreateInvoiceForm extends Component {
             onClick={this.handleFormSubmit}
             // onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
-            <Link to={`/user/${this.props.id}/invoices`}>Generate</Link>
+            Generate
           </Button>
           <footer className="footer">Footer</footer>
         </StyledContainer>
@@ -673,3 +670,5 @@ export default class CreateInvoiceForm extends Component {
     );
   }
 }
+
+export default withRouter(CreateInvoiceForm);

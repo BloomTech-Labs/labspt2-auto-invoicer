@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import axios from "axios";
-
 import DayPickerInput from "react-day-picker/DayPickerInput";
-import { Link } from "react-router-dom";
+
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
-// import Select from "../reusableComponents/Select";
-// import InvoiceItemInput from "../InvoiceItemsInput";
 
-// GraphQL mutation - EditInvoice endpoint
-import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
+import { FetchInvoice } from "../../graphQL/queries/invoices";
+import { EditAmountPaid } from "../../graphQL/mutations/invoices";
 
-// Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
-import { FetchInvoice } from "../../graphQL/queries/invoices";
 
 export default class EditInvoiceForm extends Component {
   constructor(props) {
@@ -26,7 +20,6 @@ export default class EditInvoiceForm extends Component {
     };
   }
 
-  // for Incoming Invoice from InvoiceList
   async componentDidMount() {
     try {
       const returnedData = `
@@ -56,23 +49,21 @@ export default class EditInvoiceForm extends Component {
       `;
       const { invoiceID } = this.props.match.params;
       const invoice = await FetchInvoice(invoiceID, returnedData);
-      console.log(invoice);
       this.setState({ ...invoice, amountPaid: invoice.amountPaid });
     } catch (error) {
       throw error;
     }
   }
 
-  // handlesubmit - axios.get()
   handleFormSubmit = async e => {
     e.preventDefault();
-
     await EditAmountPaid(
       this.state.invoice._id,
       this.state.amountPaid,
       "amountPaid"
     );
     await this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.userID}/invoices`);
   };
 
   handleAmountPaidChange = e => {
@@ -384,9 +375,7 @@ export default class EditInvoiceForm extends Component {
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
           >
-            <Link to={`/user/${this.props.userID}/invoices`}>
-              UPDATE INVOICE
-            </Link>
+            UPDATE INVOICE
           </button>
           <footer className="footer">Footer</footer>
         </div>
