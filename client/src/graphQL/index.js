@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // //production
-export const Post = async query => {
+export const Post = query => {
   return axios.post('https://api.myautoinvoicer.com/graphql', query)
 }
 
