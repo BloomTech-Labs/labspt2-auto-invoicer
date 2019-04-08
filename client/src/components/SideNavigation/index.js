@@ -33,7 +33,7 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      // creditsOrPlan: ""
+      creditsOrPlan: ""
     };
   }
 
@@ -51,15 +51,15 @@ class SideNavigation extends React.Component {
     return this.props.signUpModal();
   };
 
-  // connectUserContextWithState = company => {
-  //   console.log(company);
-  //   if (!this.state.creditsOrPlan) {
-  //     const { credits, unlimited_tier } = company;
-  //     this.setState({
-  //       creditsOrPlan: unlimited_tier ? "1 Month Unlimited" : credits
-  //     });
-  //   }
-  // };
+  connectUserContextWithState = company => {
+    console.log(company);
+    if (!this.state.creditsOrPlan) {
+      const { credits, unlimited_tier } = company;
+      this.setState({
+        creditsOrPlan: unlimited_tier ? "1 Month Unlimited" : credits
+      });
+    }
+  };
 
   componentDidUpdate(prevProps) {
     if (this.props.userState !== prevProps.userState) {
