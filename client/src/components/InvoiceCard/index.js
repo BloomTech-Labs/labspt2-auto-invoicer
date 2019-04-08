@@ -15,10 +15,6 @@ class InvoiceCard extends React.Component {
       }
     };
     
-    componentDidUpdate() {
-      this.visualClass()
-    }
-    
   lateChecker = date => {
     let year = date.slice(11, 15);
     let month = date.slice(4, 7);
