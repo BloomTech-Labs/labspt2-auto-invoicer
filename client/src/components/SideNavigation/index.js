@@ -52,7 +52,6 @@ class SideNavigation extends React.Component {
   };
 
   connectUserContextWithState = company => {
-    console.log(company);
     if (!this.state.creditsOrPlan) {
       const { credits, unlimited_tier } = company;
       this.setState({
@@ -62,16 +61,9 @@ class SideNavigation extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
     if (this.props.userState !== prevProps.userState) {
       this.connectUserContextWithState(this.props.userState.companies[0]);
     }
-  }
-
-  componentDidMount() {
-    console.log(this.props.userState);
-    if (this.props.loggedIn && this.props.userState.companies.length)
-      this.connectUserContextWithState(this.props.userState.companies[0]);
   }
 
   render() {
