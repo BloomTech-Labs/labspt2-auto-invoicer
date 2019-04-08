@@ -90,8 +90,7 @@ export class CompanyProvider extends React.Component {
     this.fetchInvoices = async () => {
       const result = await FetchCompany(this.state.companyID, invoicesData);
       const { company } = result;
-      console.log('result from await',result)
-      console.log('company from await',company)
+      console.log('company from await', company)
       this.setState({ invoices: company.invoices });
     };
 

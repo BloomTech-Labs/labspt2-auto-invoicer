@@ -67,7 +67,7 @@ export default class EditInvoiceForm extends Component {
   handleFormSubmit = async e => {
     e.preventDefault();
 
-    EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
+    await EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
     await this.props.fetchInvoices();
     const { id } = this.props.match.params;
     console.log('second console:' , this.props.fetchInvoices)
