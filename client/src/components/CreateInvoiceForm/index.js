@@ -2,22 +2,22 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import { Link } from "react-router-dom";
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
 import InvoiceItemInput from "../InvoiceItemsInput";
-import { Link } from "react-router-dom";
 
 // GraphQL mutation - CreateInvoice endpoint
 import { CreateInvoice } from "../../graphQL/mutations/invoices";
 
-//CSS
+// CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
-//import { TextField } from "@material-ui/core"; -- for material-ui
-//import { styled } from "@material-ui/styles";
-//import Button from "@material-ui/core/Button";
+// import { TextField } from "@material-ui/core"; -- for material-ui
+// import { styled } from "@material-ui/styles";
+// import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -185,9 +185,11 @@ export default class CreateInvoiceForm extends Component {
   // get tax rate object from api
   getTaxRateObject = zip => {
     if (zip) {
-      axios.get(`https://api.myautoinvoicer.com/taxes/${zip}`).then(res => {
-        this.setState({ tax: res.data.rate.combined_rate });
-      });
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/taxes/${zip}`)
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
     }
   };
 
@@ -222,7 +224,7 @@ export default class CreateInvoiceForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  //material-ui
+  // material-ui
   // handleChange = name => event => {
   //   this.setState({
   //     [name]: event.target.value
@@ -315,14 +317,14 @@ export default class CreateInvoiceForm extends Component {
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
-      //invoiceItems: this.state.invoiceItems,
+      // invoiceItems: this.state.invoiceItems,
       subtotal: this.state.subtotal,
       discount: this.state.discount,
       tax: this.state.tax,
       shipping: this.state.shipping,
       total: this.state.total,
       amountPaid: this.state.amountPaid,
-      //from props
+      // from props
       userID: this.props.user.userID,
       userName: this.props.user.name,
       companyID: this.props.company.companyID,
@@ -333,7 +335,7 @@ export default class CreateInvoiceForm extends Component {
     await CreateInvoice(formPayload, "invoiceNumber total");
     this.props.click(formPayload);
     this.handleClearForm(e);
-    await this.props.fetchInvoices()
+    await this.props.fetchInvoices();
   };
 
   render() {
@@ -342,11 +344,11 @@ export default class CreateInvoiceForm extends Component {
         Create Invoice Form.
         <StyledContainer>
           {" "}
-          {/* div className="main-container"*/}
+          {/* div className="main-container" */}
           Main Container
           <TopSection>
             {" "}
-            {/* section className="top-section"*/}
+            {/* section className="top-section" */}
             <div className="top-section-top">
               <div>*Thank you Message*</div>
               <div>
@@ -355,7 +357,7 @@ export default class CreateInvoiceForm extends Component {
             </div>
             <TopSectionBottom>
               {" "}
-              {/* section className="top-section-bottom"*/}
+              {/* section className="top-section-bottom" */}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Invoice No.</div>
@@ -404,10 +406,10 @@ export default class CreateInvoiceForm extends Component {
           </TopSection>
           <MidSection>
             {" "}
-            {/* section className="mid-section"*/}
+            {/* section className="mid-section" */}
             <MidSectionLeft>
               {" "}
-              {/*div className="mid-section-left*/}
+              {/* div className="mid-section-left */}
               <div className="address-from">
                 <form onSubmit={this.handleFormSubmit}>
                   <div>FROM</div>
@@ -487,7 +489,7 @@ export default class CreateInvoiceForm extends Component {
             </MidSectionLeft>
             <MidSectionRight>
               {" "}
-              {/* div className="mid-section-right"*/}
+              {/* div className="mid-section-right" */}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
@@ -531,7 +533,7 @@ export default class CreateInvoiceForm extends Component {
           </MidSection>
           <BottomSection>
             {" "}
-            {/* section className="bottom-section"*/}
+            {/* section className="bottom-section" */}
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
@@ -543,7 +545,7 @@ export default class CreateInvoiceForm extends Component {
             </div>
             <BottomSectionMid>
               {" "}
-              {/* div className="bottom-section-mid*/}
+              {/* div className="bottom-section-mid */}
               <div className="bottom-section-bottom-left">
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -576,7 +578,7 @@ export default class CreateInvoiceForm extends Component {
               </div>
               <BottomSectionBottomRight>
                 {" "}
-                {/*div className="bottom-section-bottom-right"*/}
+                {/* div className="bottom-section-bottom-right" */}
                 <div>
                   <div>Subtotal</div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -661,7 +663,7 @@ export default class CreateInvoiceForm extends Component {
           <Button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
-            //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
+            // onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
             <Link to={`/user/${this.props.id}/invoices`}>Generate</Link>
           </Button>

@@ -36,11 +36,12 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
+        withCredentials: true
+      })
       .then(res => {
         if (res.data.userId) {
           this.fetchData(res.data.userId);
-          // this.fetchData("5c8d88c17fef7140f485950f")
           this.setState({ loggedIn: true });
         }
       })
@@ -82,7 +83,7 @@ class App extends Component {
     // send an email object up with user email
     // disable register button
     axios
-      .post("https://api.myautoinvoicer.com/welcome", { ...user })
+      .post(`${process.env.REACT_APP_BACKEND_URL}/welcome`, { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
@@ -93,7 +94,7 @@ class App extends Component {
 
   sendPasswordReset = email => {
     axios
-      .post("https://api.myautoinvoicer.com/password-reset", { ...email })
+      .post(`${process.env.REACT_APP_BACKEND_URL}/password-reset`, { ...email })
       .then(res => {
         console.log(res);
       });
@@ -101,7 +102,9 @@ class App extends Component {
 
   signOut = () => {
     axios
-      .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+        withCredentials: true
+      })
       .then(() => {
         this.setState({ loggedIn: false });
         window.location.replace("/");
