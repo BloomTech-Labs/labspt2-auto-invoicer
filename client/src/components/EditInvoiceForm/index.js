@@ -21,7 +21,8 @@ export default class EditInvoiceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      invoice: {}
+      invoice: {},
+      amountPaid: ""
     };
   }
 
@@ -67,14 +68,14 @@ export default class EditInvoiceForm extends Component {
 
     await EditAmountPaid(
       this.state.invoice._id,
-      this.state.invoice.amountPaid,
+      this.state.amountPaid,
       "amountPaid"
     );
     await this.props.fetchInvoices();
   };
 
   handleAmountPaidChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ amountPaid: e.target.value });
   };
 
   render() {
@@ -361,7 +362,7 @@ export default class EditInvoiceForm extends Component {
                     <SingleInput
                       inputType="number"
                       // title={"Amount Paid"}
-                      name="invoice.amountPaid"
+                      name="amountPaid"
                       controlFunc={this.handleAmountPaidChange}
                       content={this.state.invoice.amountPaid}
                       placeholder="Amount Paid"
