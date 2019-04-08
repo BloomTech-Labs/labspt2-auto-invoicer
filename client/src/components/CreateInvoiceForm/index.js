@@ -179,7 +179,15 @@ class CreateInvoiceForm extends Component {
     invoiceTerms: "",
     amountPaid: ""
   };
-
+  total = () => {
+    let tax = Number(this.state.tax);
+    let subtotal = Number(this.state.subtotal);
+    let subtotalTax = tax * subtotal;
+    let discount = Number(this.state.discount);
+    let shipping = Number(this.state.shipping);
+    let newTotal = subtotalTax + subtotal + shipping - discount;
+    this.setState({ total: newTotal });
+  };
   // get tax rate object from api
   getTaxRateObject = zip => {
     if (zip) {
@@ -537,9 +545,7 @@ class CreateInvoiceForm extends Component {
                 onChange={this.handleInvoiceItemsInputChange}
               >
                 <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
-                <button onClick={this.addInvoiceItem}>
-                  Add Line Item +
-                </button>
+                <button onClick={this.addInvoiceItem}>Add Line Item +</button>
               </form>
             </div>
             <BottomSectionMid>
@@ -584,6 +590,7 @@ class CreateInvoiceForm extends Component {
                     <SingleInput
                       inputType="number"
                       // title={"Subtotal"}
+                      onKeyUp={this.total}
                       name="subtotal"
                       controlFunc={this.handleInputChange}
                       content={this.state.subtotal}
@@ -598,6 +605,7 @@ class CreateInvoiceForm extends Component {
                       inputType="number"
                       // title={"Discount"}
                       name="discount"
+                      onKeyUp={this.total}
                       controlFunc={this.handleInputChange}
                       content={this.state.discount}
                       placeholder="Discount"
@@ -607,9 +615,7 @@ class CreateInvoiceForm extends Component {
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
                     <div className="tax">Tax</div>
-                    <div className="taxNum">
-                      {this.state.tax * 100} %
-                    </div>
+                    <div className="taxNum">{this.state.tax * 100} %</div>
                   </form>
                 </div>
                 <div>
@@ -619,6 +625,7 @@ class CreateInvoiceForm extends Component {
                       inputType="number"
                       // title={"Shipping"}
                       name="shipping"
+                      onKeyUp={this.total}
                       controlFunc={this.handleInputChange}
                       content={this.state.shipping}
                       placeholder="Shipping"
