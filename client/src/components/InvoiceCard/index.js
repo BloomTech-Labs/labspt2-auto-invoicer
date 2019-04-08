@@ -11,7 +11,7 @@ class InvoiceCard extends React.Component {
         invoiceDueDate: this.props.invoice.invoiceDueDate,
         amountPaid: this.props.invoice.amountPaid,
         total: this.props.invoice.total,
-        paid: this.props.invoice.paid
+        paid: this.props.invoice.paid,
       }
     };
     
@@ -57,7 +57,7 @@ class InvoiceCard extends React.Component {
     return dateInNumberForm;
   };
   visualClass = () => {
-    if (this.state.amountPaid >= this.state.total) {
+    if (Number(this.state.amountPaid) >= Number(this.state.total)) {
       return "status-paid invoice-card";
     } else if (
       this.lateChecker(Date()) >
