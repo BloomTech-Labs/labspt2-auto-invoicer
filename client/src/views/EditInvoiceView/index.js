@@ -13,10 +13,12 @@ export default class index extends Component {
     return (
       <CompanyConsumer>
         {({fetchInvoices}) => {
+          console.log(fetchInvoices)
           return (
             <div>
               Edit Invoice Views Only.
-            <EditInvoiceForm fetchInvoices={fetchInvoices} />
+            <EditInvoiceForm fetchInvoices={fetchInvoices} 
+            test={'test'}/>
           </div>
           )
         }}

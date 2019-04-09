@@ -1,32 +1,25 @@
 import React, { Component } from "react";
-import axios from "axios";
-
 import DayPickerInput from "react-day-picker/DayPickerInput";
-import { Link } from "react-router-dom";
+
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
-// import Select from "../reusableComponents/Select";
-// import InvoiceItemInput from "../InvoiceItemsInput";
 
-// GraphQL mutation - EditInvoice endpoint
-import { EditInvoice, EditAmountPaid } from "../../graphQL/mutations/invoices";
+import { FetchInvoice } from "../../graphQL/queries/invoices";
+import { EditAmountPaid } from "../../graphQL/mutations/invoices";
 
-// Syling - CSS
 import "./EditInvoiceForm.css";
 import "react-day-picker/lib/style.css";
-import { FetchInvoice } from "../../graphQL/queries/invoices";
 
 export default class EditInvoiceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       invoice: {},
-      amountPaid: 1000
+      amountPaid: ""
     };
   }
 
-  // for Incoming Invoice from InvoiceList
   async componentDidMount() {
     try {
       const returnedData = `
@@ -62,13 +55,15 @@ export default class EditInvoiceForm extends Component {
     }
   }
 
-  // handlesubmit - axios.get()
   handleFormSubmit = async e => {
     e.preventDefault();
-
-    EditAmountPaid(this.state.invoice._id, this.state.amountPaid, "amountPaid");
-    const { id } = this.props.match.params;
+    await EditAmountPaid(
+      this.state.invoice._id,
+      this.state.amountPaid,
+      "amountPaid"
+    );
     await this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.userID}/invoices`);
   };
 
   handleAmountPaidChange = e => {
@@ -140,6 +135,7 @@ export default class EditInvoiceForm extends Component {
                     resize={false}
                     name="addressFrom"
                     controlFunc={this.handleInputChange}
+                    content={this.state.invoice.addressFrom}
                     placeholder={
                       "Your Business, Inc. \nYour Address \nCity, State/Region, \nYour Country"
                     }
@@ -323,7 +319,9 @@ export default class EditInvoiceForm extends Component {
                   <form onSubmit={this.handleFormSubmit}>
                     <div>Tax</div>
                     <div>
-                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
+                      {Math.round(this.state.invoice.tax * 100).toFixed(2) ||
+                        "0.00"}{" "}
+                      %
                     </div>
                   </form>
                 </div>
@@ -375,10 +373,11 @@ export default class EditInvoiceForm extends Component {
             </div>
           </section>
           <button
+            type="button"
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
           >
-            <Link to={`/user/${this.props.id}/invoices`}>UPDATE INVOICE</Link>
+            UPDATE INVOICE
           </button>
           <footer className="footer">Footer</footer>
         </div>

@@ -1,24 +1,22 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
-
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import styled from "styled-components";
+
 import AddLogo from "../reusableComponents/AddLogo";
 import SingleInput from "../reusableComponents/SingleInput";
 import TextArea from "../reusableComponents/TextArea";
 import Select from "../reusableComponents/Select";
 import InvoiceItemInput from "../InvoiceItemsInput";
-import { Link } from "react-router-dom";
 
-// GraphQL mutation - CreateInvoice endpoint
 import { CreateInvoice } from "../../graphQL/mutations/invoices";
 
-//CSS
 import "./CreateInvoiceForm.css";
 import "react-day-picker/lib/style.css";
-//import { TextField } from "@material-ui/core"; -- for material-ui
-//import { styled } from "@material-ui/styles";
-//import Button from "@material-ui/core/Button";
-import styled from "styled-components";
+// import { TextField } from "@material-ui/core"; -- for material-ui
+// import { styled } from "@material-ui/styles";
+// import Button from "@material-ui/core/Button";
 
 const Button = styled.button`
   background: transparent;
@@ -148,7 +146,7 @@ const BottomSectionBottomRight = styled.div`
   }
 `;
 
-export default class CreateInvoiceForm extends Component {
+class CreateInvoiceForm extends Component {
   state = {
     languageOptions: ["English (US)", "Español"],
     currencyOptions: [
@@ -181,13 +179,23 @@ export default class CreateInvoiceForm extends Component {
     invoiceTerms: "",
     amountPaid: ""
   };
-
+  total = () => {
+    let tax = Number(this.state.tax);
+    let subtotal = Number(this.state.subtotal);
+    let subtotalTax = tax * subtotal;
+    let discount = Number(this.state.discount);
+    let shipping = Number(this.state.shipping);
+    let newTotal = subtotalTax + subtotal + shipping - discount;
+    this.setState({ total: newTotal });
+  };
   // get tax rate object from api
   getTaxRateObject = zip => {
     if (zip) {
-      axios.get(`https://api.myautoinvoicer.com/taxes/${zip}`).then(res => {
-        this.setState({ tax: res.data.rate.combined_rate });
-      });
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/taxes/${zip}`)
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
     }
   };
 
@@ -222,7 +230,7 @@ export default class CreateInvoiceForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  //material-ui
+  // material-ui
   // handleChange = name => event => {
   //   this.setState({
   //     [name]: event.target.value
@@ -299,7 +307,6 @@ export default class CreateInvoiceForm extends Component {
 
   handleFormSubmit = async e => {
     e.preventDefault();
-
     const formPayload = {
       invoiceNumber: this.state.invoiceNumber,
       addressFrom: this.state.addressFrom,
@@ -315,25 +322,25 @@ export default class CreateInvoiceForm extends Component {
       balanceDue: this.state.balanceDue,
       invoiceNotes: this.state.invoiceNotes,
       invoiceTerms: this.state.invoiceTerms,
-      //invoiceItems: this.state.invoiceItems,
+      // invoiceItems: this.state.invoiceItems,
       subtotal: this.state.subtotal,
       discount: this.state.discount,
       tax: this.state.tax,
       shipping: this.state.shipping,
       total: this.state.total,
       amountPaid: this.state.amountPaid,
-      //from props
+      // from props
       userID: this.props.user.userID,
       userName: this.props.user.name,
       companyID: this.props.company.companyID,
       companyName: this.props.company.name,
       customerID: this.props.company.customers[0]._id
     };
-
-    CreateInvoice(formPayload, "invoiceNumber total");
+    await CreateInvoice(formPayload, "invoiceNumber total");
     this.props.click(formPayload);
     this.handleClearForm(e);
-    await this.props.fetchInvoices()
+    await this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.user.userID}/invoices`);
   };
 
   render() {
@@ -342,11 +349,11 @@ export default class CreateInvoiceForm extends Component {
         Create Invoice Form.
         <StyledContainer>
           {" "}
-          {/* div className="main-container"*/}
+          {/* div className="main-container" */}
           Main Container
           <TopSection>
             {" "}
-            {/* section className="top-section"*/}
+            {/* section className="top-section" */}
             <div className="top-section-top">
               <div>*Thank you Message*</div>
               <div>
@@ -355,7 +362,7 @@ export default class CreateInvoiceForm extends Component {
             </div>
             <TopSectionBottom>
               {" "}
-              {/* section className="top-section-bottom"*/}
+              {/* section className="top-section-bottom" */}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Invoice No.</div>
@@ -404,10 +411,10 @@ export default class CreateInvoiceForm extends Component {
           </TopSection>
           <MidSection>
             {" "}
-            {/* section className="mid-section"*/}
+            {/* section className="mid-section" */}
             <MidSectionLeft>
               {" "}
-              {/*div className="mid-section-left*/}
+              {/* div className="mid-section-left */}
               <div className="address-from">
                 <form onSubmit={this.handleFormSubmit}>
                   <div>FROM</div>
@@ -487,7 +494,7 @@ export default class CreateInvoiceForm extends Component {
             </MidSectionLeft>
             <MidSectionRight>
               {" "}
-              {/* div className="mid-section-right"*/}
+              {/* div className="mid-section-right" */}
               <div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div>Date</div>
@@ -531,7 +538,7 @@ export default class CreateInvoiceForm extends Component {
           </MidSection>
           <BottomSection>
             {" "}
-            {/* section className="bottom-section"*/}
+            {/* section className="bottom-section" */}
             <div className="bottom-section-top">
               <form
                 onSubmit={this.handleFormSubmit}
@@ -543,7 +550,7 @@ export default class CreateInvoiceForm extends Component {
             </div>
             <BottomSectionMid>
               {" "}
-              {/* div className="bottom-section-mid*/}
+              {/* div className="bottom-section-mid */}
               <div className="bottom-section-bottom-left">
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
@@ -576,13 +583,14 @@ export default class CreateInvoiceForm extends Component {
               </div>
               <BottomSectionBottomRight>
                 {" "}
-                {/*div className="bottom-section-bottom-right"*/}
+                {/* div className="bottom-section-bottom-right" */}
                 <div>
                   <div>Subtotal</div>
                   <form onSubmit={this.handleFormSubmit}>
                     <SingleInput
                       inputType="number"
                       // title={"Subtotal"}
+                      onKeyUp={this.total}
                       name="subtotal"
                       controlFunc={this.handleInputChange}
                       content={this.state.subtotal}
@@ -597,6 +605,7 @@ export default class CreateInvoiceForm extends Component {
                       inputType="number"
                       // title={"Discount"}
                       name="discount"
+                      onKeyUp={this.total}
                       controlFunc={this.handleInputChange}
                       content={this.state.discount}
                       placeholder="Discount"
@@ -605,10 +614,8 @@ export default class CreateInvoiceForm extends Component {
                 </div>
                 <div>
                   <form onSubmit={this.handleFormSubmit}>
-                    <div>Tax</div>
-                    <div>
-                      {Math.round(this.state.tax * 100).toFixed(2) || "0.00"} %
-                    </div>
+                    <div className="tax">Tax</div>
+                    <div className="taxNum">{this.state.tax * 100} %</div>
                   </form>
                 </div>
                 <div>
@@ -618,6 +625,7 @@ export default class CreateInvoiceForm extends Component {
                       inputType="number"
                       // title={"Shipping"}
                       name="shipping"
+                      onKeyUp={this.total}
                       controlFunc={this.handleInputChange}
                       content={this.state.shipping}
                       placeholder="Shipping"
@@ -661,9 +669,9 @@ export default class CreateInvoiceForm extends Component {
           <Button
             className="btn btn-link float-left"
             onClick={this.handleFormSubmit}
-            //onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
+            // onClick={this.CreateInvoice(this.state, 'invoiceNumber')}
           >
-            <Link to={`/user/${this.props.id}/invoices`}>Generate</Link>
+            Generate
           </Button>
           <footer className="footer">Footer</footer>
         </StyledContainer>
@@ -671,3 +679,5 @@ export default class CreateInvoiceForm extends Component {
     );
   }
 }
+
+export default withRouter(CreateInvoiceForm);

@@ -51,7 +51,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24,
       path: '/',
       sameSite: 'lax',
-      secure: true,
+      // secure: true, // uncomment in development
       signed: true
     }
   })

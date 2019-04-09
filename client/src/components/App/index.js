@@ -36,11 +36,12 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("https://api.myautoinvoicer.com/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
+        withCredentials: true
+      })
       .then(res => {
         if (res.data.userId) {
           this.fetchData(res.data.userId);
-          // this.fetchData("5c8d88c17fef7140f485950f")
           this.setState({ loggedIn: true });
         }
       })
@@ -82,7 +83,7 @@ class App extends Component {
     // send an email object up with user email
     // disable register button
     axios
-      .post("https://api.myautoinvoicer.com/welcome", { ...user })
+      .post(`${process.env.REACT_APP_BACKEND_URL}/welcome`, { ...user })
       .then(res => {
         if (res.status === 201) {
           return this.signUpModal();
@@ -93,7 +94,7 @@ class App extends Component {
 
   sendPasswordReset = email => {
     axios
-      .post("https://api.myautoinvoicer.com/password-reset", { ...email })
+      .post(`${process.env.REACT_APP_BACKEND_URL}/password-reset`, { ...email })
       .then(res => {
         console.log(res);
       });
@@ -101,7 +102,9 @@ class App extends Component {
 
   signOut = () => {
     axios
-      .get("https://api.myautoinvoicer.com/logout", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+        withCredentials: true
+      })
       .then(() => {
         this.setState({ loggedIn: false });
         window.location.replace("/");
@@ -154,48 +157,47 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {/* check if sigin clicked and open up signin modal or visa-versa */}
-        {this.state.toggleSignIn ? (
-          <SignInModal
-            click={this.signInModal}
-            auth={this.toggleAuthModal}
-            forgot={this.forgotPassModal}
-          />
-        ) : null}
+      <UserConsumer>
+        {({ userState }) => {
+          return (
+            <CompanyConsumer>
+              {({ companyState, fetchInvoices }) => {
+                return (
+                  <div className="App">
+                    {/* check if sigin clicked and open up signin modal or visa-versa */}
+                    {this.state.toggleSignIn ? (
+                      <SignInModal
+                        click={this.signInModal}
+                        auth={this.toggleAuthModal}
+                        forgot={this.forgotPassModal}
+                      />
+                    ) : null}
 
-        {/* check if sigup clicked and open up signup modal or visa-versa */}
-        {this.state.toggleRegister ? (
-          <SignUpModal
-            click={this.signUpModal}
-            welcome={this.sendWelcomeEmail}
-          />
-        ) : null}
-
-        {/* check if password forgot clicked and open up password modal or visa-versa */}
-        {this.state.togglePassForgot ? (
-          <ForgotPassModal
-            click={() => {
-              this.signInModal();
-              this.forgotPassModal();
-            }}
-            passwordReset={this.sendPasswordReset}
-          />
-        ) : null}
-        {this.state.toggleAuth ? (
-          <AuthModal
-            click={() => {
-              this.signInModal();
-              this.toggleAuthModal();
-            }}
-          />
-        ) : null}
-        <UserConsumer>
-          {({ userState }) => {
-            return (
-              <CompanyConsumer>
-                {({ companyState }) => {
-                  return (
+                    {/* check if sigup clicked and open up signup modal or visa-versa */}
+                    {this.state.toggleRegister ? (
+                      <SignUpModal
+                        click={this.signUpModal}
+                        welcome={this.sendWelcomeEmail}
+                      />
+                    ) : null}
+                    {/* check if password forgot clicked and open up password modal or visa-versa */}
+                    {this.state.togglePassForgot ? (
+                      <ForgotPassModal
+                        click={() => {
+                          this.signInModal();
+                          this.forgotPassModal();
+                        }}
+                        passwordReset={this.sendPasswordReset}
+                      />
+                    ) : null}
+                    {this.state.toggleAuth ? (
+                      <AuthModal
+                        click={() => {
+                          this.signInModal();
+                          this.toggleAuthModal();
+                        }}
+                      />
+                    ) : null}
                     <SideNavigation
                       loggedIn={this.state.loggedIn}
                       signInModal={this.signInModal}
@@ -204,43 +206,61 @@ class App extends Component {
                       signOut={this.signOut}
                       userState={userState}
                     />
-                  );
-                }}
-              </CompanyConsumer>
-            );
-          }}
-        </UserConsumer>
-        <section className="routes-container">
-          <Route exact path="/user/:id/billing" component={BillingPage} />
-          <Route
-            exact
-            path="/user/:id/invoice/create"
-            render={props => (
-              <CreateInvoice {...props} click={this.createPDF} />
-            )}
-          />
-          <Route exact path="/user/:id/settings" component={SettingsPage} />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <LandingPage {...props} click={this.signUpModal} />
-            )}
-          />
-          <Route
-            exact
-            path="/user/:id/invoices"
-            render={props => <InvoiceList {...props} />}
-          />
-          {/* adding routes for InvoiceView and EditInvoice components */}
-          <Route exact path="/user/:id/invoice/view" component={InvoiceView} />
-          <Route
-            exact
-            path="/user/:id/invoice/:invoiceID/edit"
-            render={props => <EditInvoiceForm {...props} />}
-          />
-        </section>
-      </div>
+                    <section className="routes-container">
+                      <Route
+                        exact
+                        path="/user/:id/billing"
+                        component={BillingPage}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoice/create"
+                        render={props => (
+                          <CreateInvoice {...props} click={this.createPDF} />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/settings"
+                        component={SettingsPage}
+                      />
+                      <Route
+                        exact
+                        path="/"
+                        render={props => (
+                          <LandingPage {...props} click={this.signUpModal} />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoices"
+                        render={props => <InvoiceList {...props} />}
+                      />
+                      {/* adding routes for InvoiceView and EditInvoice components */}
+                      <Route
+                        exact
+                        path="/user/:id/invoice/view"
+                        component={InvoiceView}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/invoice/:invoiceID/edit"
+                        render={props => (
+                          <EditInvoiceForm
+                            {...props}
+                            fetchInvoices={fetchInvoices}
+                            userID={userState.userID}
+                          />
+                        )}
+                      />
+                    </section>
+                  </div>
+                );
+              }}
+            </CompanyConsumer>
+          );
+        }}
+      </UserConsumer>
     );
   }
 }
