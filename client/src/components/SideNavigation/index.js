@@ -1,31 +1,31 @@
-import React from 'react';
+import React from "react";
 // list of material ui components
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 // react router dom methods
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from "react-router-dom";
 
 // list of icons used in the side navigation component
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Dehaze';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import HomeIcon from '@material-ui/icons/Home';
-import AboutIcon from '@material-ui/icons/Code';
-import BillingIcon from '@material-ui/icons/Payment';
-import SettingsIcon from '@material-ui/icons/Settings';
-import InvoicesIcon from '@material-ui/icons/Receipt';
-import { UserConsumer } from '../../contexts/UserContext';
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Dehaze";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import HomeIcon from "@material-ui/icons/Home";
+import AboutIcon from "@material-ui/icons/Code";
+import BillingIcon from "@material-ui/icons/Payment";
+import SettingsIcon from "@material-ui/icons/Settings";
+import InvoicesIcon from "@material-ui/icons/Receipt";
+import { UserConsumer } from "../../contexts/UserContext";
 
 // imported css here
-import './SideNavigation.css';
+import "./SideNavigation.css";
 
 // imported components here
-import AuthLanding from '../AuthLanding';
-import AuthSecured from '../AuthSecured';
+import AuthLanding from "../AuthLanding";
+import AuthSecured from "../AuthSecured";
 
 class SideNavigation extends React.Component {
   constructor(props) {
@@ -33,7 +33,11 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
+<<<<<<< HEAD
       creditsOrPlan: null
+=======
+      creditsOrPlan: ""
+>>>>>>> 12a0eee1017549b01eb0f11d72a88ba2a37f46a9
     };
   }
 
@@ -52,6 +56,7 @@ class SideNavigation extends React.Component {
   };
 
   connectUserContextWithState = company => {
+<<<<<<< HEAD
     console.log('company in helper', company);
     // if (!this.state.creditsOrPlan) {
     //   const { credits, unlimited_tier } = company;
@@ -59,7 +64,20 @@ class SideNavigation extends React.Component {
     //     creditsOrPlan: unlimited_tier ? '1 Month Unlimited' : credits
     //   });
     // }
+=======
+    if (!this.state.creditsOrPlan) {
+      const { credits, unlimited_tier } = company;
+      this.setState({
+        creditsOrPlan: unlimited_tier ? "1 Month Unlimited" : credits
+      });
+    }
+>>>>>>> 12a0eee1017549b01eb0f11d72a88ba2a37f46a9
   };
+
+  componentDidMount() {
+    if (this.props.loggedIn && this.props.userState.companies.length)
+      this.connectUserContextWithState(this.props.userState.companies[0]);
+  }
 
   render() {
     // deconstruct state to get a list of needed attributes
@@ -88,6 +106,7 @@ class SideNavigation extends React.Component {
             />
           )}
         </header>
+<<<<<<< HEAD
         <UserConsumer>
           {({ userState }) => {
             const { companies } = userState;
@@ -162,6 +181,73 @@ class SideNavigation extends React.Component {
             );
           }}
         </UserConsumer>
+=======
+        <Drawer
+          anchor={document.body.clientWidth < 520 ? "top" : "left"}
+          open={open}
+        >
+          <div id="drawer-container">
+            <IconButton onClick={this.handleDrawerOpen}>
+              <ChevronLeftIcon id="left-icon" />
+            </IconButton>
+          </div>
+          <Divider />
+          {/* if not logged in show public routes else show secured */}
+          {!this.props.loggedIn ? (
+            <List className="all-icon-container">
+              {[
+                { title: "Home", icon: <HomeIcon /> },
+                { title: "About", icon: <AboutIcon /> }
+              ].map((text, index) => {
+                const { title, icon } = text;
+                return (
+                  <NavLink
+                    exact
+                    to={`${title}` === "Home" ? "/" : `/${title}`}
+                    key={title}
+                    className="icon-container"
+                    onClick={() => {
+                      this.setState({ open: !open });
+                    }}
+                  >
+                    <ListItem className="icon-item">
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <p className="icon-title">{title}</p>
+                    </ListItem>
+                  </NavLink>
+                );
+              })}
+            </List>
+          ) : (
+            <List className="all-icon-container">
+              {[
+                { title: "Invoices", icon: <InvoicesIcon /> },
+                { title: "Billing", icon: <BillingIcon /> },
+                { title: "Settings", icon: <SettingsIcon /> }
+              ].map((text, index) => {
+                const { title, icon } = text;
+                const lowerTitle = title.toLowerCase();
+                return (
+                  <NavLink
+                    exact
+                    to={`/user/${this.props.userState.userID}/${lowerTitle}`}
+                    key={title}
+                    className="icon-container"
+                    onClick={() => {
+                      this.setState({ open: !open });
+                    }}
+                  >
+                    <ListItem className="icon-item">
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <p className="icon-title">{title}</p>
+                    </ListItem>
+                  </NavLink>
+                );
+              })}
+            </List>
+          )}
+        </Drawer>
+>>>>>>> 12a0eee1017549b01eb0f11d72a88ba2a37f46a9
       </div>
     );
   }

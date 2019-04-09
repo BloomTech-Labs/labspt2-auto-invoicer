@@ -106,6 +106,7 @@ export class CompanyProvider extends React.Component {
     };
   }
 
+
   render() {
     const { fetchCompany, fetchCustomers, fetchInvoices, fetchUsers } = this;
     const companyState = this.state;
