@@ -1,41 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./components/App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './components/App';
 
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router } from "react-router-dom";
+import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 //Context API import
-import { UserProvider, UserConsumer } from "./contexts/UserContext";
-import { CompanyProvider, CompanyConsumer } from "./contexts/CompanyContext";
-
+import { UserProvider, UserConsumer } from './contexts/UserContext';
+import { CompanyProvider, CompanyConsumer } from './contexts/CompanyContext';
 
 ReactDOM.render(
   <UserProvider>
     <CompanyProvider>
-    <Router>
-      <UserConsumer>
-        {({fetchUser, userState}) => {
-          return (
-          <CompanyConsumer>
-            {({fetchCompany}) => {
-              return (
-                <App 
-                  fetchUser = {fetchUser}
-                  fetchCompany = {fetchCompany}
-                  userId = {userState._id}
-                  companies = {userState.companies}
-                />
-              )
-            }}
-          </CompanyConsumer>
-        )}}
-      </UserConsumer>
-    </Router>
+      <Router>
+        <UserConsumer>
+          {({ fetchUser, userState }) => {
+            return (
+              <CompanyConsumer>
+                {({ fetchCompany }) => {
+                  return (
+                    <App
+                      fetchUser={fetchUser}
+                      fetchCompany={fetchCompany}
+                      userId={userState._id}
+                      companies={userState.companies}
+                    />
+                  );
+                }}
+              </CompanyConsumer>
+            );
+          }}
+        </UserConsumer>
+      </Router>
     </CompanyProvider>
   </UserProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

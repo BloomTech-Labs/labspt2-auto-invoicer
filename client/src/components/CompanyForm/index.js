@@ -1,7 +1,13 @@
-import React from "react";
-import "./CompanyForm.css";
+import React from 'react';
+// import './CompanyForm.css';
 
-import { CreateCompany } from "../../graphQL/mutations/companies";
+import { CreateCompany } from '../../graphQL/mutations/companies';
+
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import styles from './styles';
 
 class CompanyForm extends React.Component {
   constructor(props) {
@@ -9,12 +15,12 @@ class CompanyForm extends React.Component {
 
     this.fileInput = React.createRef();
     this.state = {
-      companyName: "",
-      companyAddress: "",
-      companyZip: "",
-      companyState: "",
-      companyCity: "",
-      selected: "create"
+      companyName: '',
+      companyAddress: '',
+      companyZip: '',
+      companyState: '',
+      companyCity: '',
+      selected: 'create'
     };
   }
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -43,7 +49,7 @@ class CompanyForm extends React.Component {
     } else {
       alert(JSON.stringify(companyObj));
     }
-    if (this.props.company.selected === "create") {
+    if (this.props.company.selected === 'create') {
       console.log(CreateCompany(companyObj));
     } else {
     }
@@ -60,85 +66,136 @@ class CompanyForm extends React.Component {
       };
     } else {
       return {
-        selected: "create",
-        companyName: "",
-        companyAddress: "",
-        companyZip: "",
-        companyState: "",
-        companyCity: ""
+        selected: 'create',
+        companyName: '',
+        companyAddress: '',
+        companyZip: '',
+        companyState: '',
+        companyCity: ''
       };
     }
   }
   render() {
+    const { classes } = this.props;
     return (
       <section>
-        <form onSubmit={this.createCompanyObject} className="form-column">
-          <label forhtml="companyName">
-            Company Name
-            <input
-              type="text"
-              name="companyName"
-              onChange={this.handleChange}
-              value={this.state.companyName}
-              placeholder="company name"
-            />
-          </label>
-          <label forhtml="companyAddress">
-            Address
-            <input
-              type="text"
-              name="companyAddress"
-              onChange={this.handleChange}
-              value={this.state.companyAddress}
-              placeholder="company address"
-            />
-          </label>
-          <label forhtml="companyCity">
-            City
-            <input
-              type="text"
-              name="companyCity"
-              onChange={this.handleChange}
-              value={this.state.companyCity}
-              placeholder="city"
-            />
-          </label>
-          <label forhtml="companyState">
-            State
-            <input
-              type="text"
-              name="companyState"
-              onChange={this.handleChange}
-              value={this.state.companyState}
-              placeholder="state"
-            />
-          </label>
-          <label forhtml="companyZip">
-            Zipcode
-            <input
-              type="text"
-              name="companyZip"
-              onChange={this.handleChange}
-              value={this.state.companyZip}
-              placeholder="zip"
-            />
-          </label>
-          <label forhtml="companyLogo">
-            Logo
-            <input
-              type="file"
-              accept="image/png, image/jpeg, image/jpg"
-              name="companyLogo"
-              ref={this.fileInput}
-              id="logo-input"
-            />
-          </label>
+        <form onSubmit={this.createCompanyObject}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="Company Name"
+            id="standard-with-placeholder"
+            name="companyName"
+            onChange={this.handleChange}
+            value={this.state.companyName}
+            placeholder="Company Name"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="Address"
+            id="standard-with-placeholder"
+            name="companyAddress"
+            onChange={this.handleChange}
+            value={this.state.companyAddress}
+            placeholder="company address"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="City"
+            id="standard-with-placeholder"
+            name="companyCity"
+            onChange={this.handleChange}
+            value={this.state.companyCity}
+            placeholder="city"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="State"
+            id="standard-with-placeholder"
+            name="companyState"
+            onChange={this.handleChange}
+            value={this.state.companyState}
+            placeholder="state"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="Zip Code"
+            id="standard-with-placeholder"
+            name="companyZip"
+            onChange={this.handleChange}
+            value={this.state.companyZip}
+            placeholder="zip"
+            margin="normal"
+          />
+          <TextField
+            InputProps={{
+              inputProps: {
+                className: classes.textField
+              }
+            }}
+            InputLabelProps={{
+              className: classes.label
+            }}
+            style={{ fontSize: '2rem' }}
+            label="Logo"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            name="companyLogo"
+            ref={this.fileInput}
+            id="logo-input"
+            margin="normal"
+          />
           <p className="notes-caption">* Only accepts png/jpeg/jpg formats</p>
-          <button type="submit">Save Company</button>
+          <Button type="submit" variant="contained" color="secondary">
+            Save Company
+          </Button>
         </form>
       </section>
     );
   }
 }
 
-export default CompanyForm;
+export default withStyles(styles)(CompanyForm);
