@@ -66,7 +66,7 @@ class StripeCheckoutForm extends Component {
       }
     );
     if (response.ok && this.state.companyID) {
-      const result = await BuyPlanOrCredits(
+      BuyPlanOrCredits(
         this.state.companyID,
         quantity,
         'name unlimited_tier credits'

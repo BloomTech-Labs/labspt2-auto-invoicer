@@ -1,25 +1,56 @@
-import React from "react";
+import React from 'react';
 
-import "./CompanyDropdownList.css";
+import './CompanyDropdownList.css';
+
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import styles from './styles';
 
 const CompanyDropdownList = props => {
+  const { classes, handleChange } = props;
   return (
     <section className="companies-list">
-      <h3>Current Company</h3>
-      <select onChange={props.handleChange}>
-        <option value="create">create</option>
+      <TextField
+        InputProps={{
+          inputProps: {
+            className: classes.textField
+          }
+        }}
+        SelectProps={{
+          MenuProps: {
+            className: classes.menu
+          }
+        }}
+        FormHelperTextProps={{ className: classes.helperText }}
+        helperText="Please select your company"
+        margin="normal"
+        InputLabelProps={{
+          className: classes.label
+        }}
+        select
+        label="Current Company"
+        onChange={handleChange}
+      >
+        <MenuItem value="create">create</MenuItem>
         {props.companies ? (
           props.companies.map(company => {
             return (
-              <option value={company.companyName} key={`${company.companyName}+${company.companyZip}`}>{company.companyName}</option>
+              <MenuItem
+                value={company.companyName}
+                key={`${company.companyName}+${company.companyZip}`}
+              >
+                {company.companyName}
+              </MenuItem>
             );
           })
         ) : (
-          <option value="create">create</option>
+          <MenuItem value="create">create</MenuItem>
         )}
-      </select>
+      </TextField>
     </section>
   );
 };
 
-export default CompanyDropdownList;
+export default withStyles(styles)(CompanyDropdownList);
