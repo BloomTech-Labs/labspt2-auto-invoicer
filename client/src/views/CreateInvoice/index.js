@@ -10,6 +10,8 @@ import GoogleCalApi from "../../components/GoogleCalApi";
 import { UserConsumer } from "../../contexts/UserContext";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 
+import CreateInvoiceForm2 from "../../components/CreateInvoiceForm2";
+
 export default class index extends Component {
   //No state held - views only render
   render() {
@@ -22,13 +24,14 @@ export default class index extends Component {
                 return (
                   <div>
                     Views Only.
-                    <CreateInvoiceForm
+                    {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}
                       company={companyState}
                       fetchInvoices={fetchInvoices}
                     />
-                    <GoogleCalApi />
+                    <GoogleCalApi /> */}
+                    <CreateInvoiceForm2 />
                   </div>
                 );
               }}
