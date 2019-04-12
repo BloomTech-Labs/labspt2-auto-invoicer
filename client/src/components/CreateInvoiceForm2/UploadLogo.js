@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-const UploadLogo2 = props => {
+const UploadLogo = props => {
   const { classes } = props;
   return (
     <div>
@@ -45,4 +45,4 @@ const UploadLogo2 = props => {
   );
 };
 
-export default withStyles(styles)(UploadLogo2);
+export default withStyles(styles)(UploadLogo);
