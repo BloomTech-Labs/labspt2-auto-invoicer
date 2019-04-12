@@ -1,9 +1,20 @@
 import React from "react";
 //import styles from "./styles";
-
+import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
-const UploadLogo = props => {
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+
+  rightIcon: {
+    marginLeft: theme.spacing.unit
+  }
+});
+
+const UploadLogo2 = props => {
   const { classes } = props;
   return (
     <div>
@@ -17,12 +28,18 @@ const UploadLogo = props => {
       />
       <label htmlFor="raised-button-file">
         {/* <Button variant="raised" component="span" className={classes.button}> */}
-        <Button variant="raised" component="span">
-          Upload
+        <Button
+          variant="contained"
+          component="span"
+          color="default"
+          className={classes.button}
+        >
+          Upload Logo
+          <CloudUploadIcon className={classes.rightIcon} />
         </Button>
       </label>
     </div>
   );
 };
 
-export default UploadLogo;
+export default withStyles(styles)(UploadLogo2);
