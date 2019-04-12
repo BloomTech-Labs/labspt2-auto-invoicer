@@ -23,19 +23,19 @@ const InvoiceItemTableHead = props => {
   const { classes } = props;
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
+      <Table className={classes.table} style={{ backgroundColor: "#3F51B5" }}>
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontSize: 14 }} align="left">
+            <TableCell style={{ fontSize: 14, color: "white" }} align="left">
               Item
             </TableCell>
-            <TableCell style={{ fontSize: 14 }} align="left">
+            <TableCell style={{ fontSize: 14, color: "white" }} align="left">
               Quantity
             </TableCell>
-            <TableCell style={{ fontSize: 14 }} align="left">
+            <TableCell style={{ fontSize: 14, color: "white" }} align="left">
               Rate
             </TableCell>
-            <TableCell style={{ fontSize: 14 }} align="left">
+            <TableCell style={{ fontSize: 14, color: "white" }} align="left">
               Amount
             </TableCell>
           </TableRow>
