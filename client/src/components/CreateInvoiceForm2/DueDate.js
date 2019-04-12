@@ -9,7 +9,7 @@ import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
 const styles = theme => ({
   line: {
-    width: 220
+    width: 200
   }
 });
 
