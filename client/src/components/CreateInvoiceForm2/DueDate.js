@@ -5,34 +5,31 @@ import { withStyles } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
-import styles from "./styles";
+//import styles from "./styles";
 
-class DueDate extends React.Component {
-  state = {
-    // The first commit of Material-UI
-    selectedDate: new Date("2019-04-18T21:11:54")
-  };
-
-  handleDateChange = date => {
-    this.setState({ selectedDate: date });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { selectedDate } = this.state;
-    return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container className={classes.grid} justify="space-around">
-          <DatePicker
-            margin="normal"
-            label="Invoice Due Date"
-            value={selectedDate}
-            onChange={this.handleDateChange}
-          />
-        </Grid>
-      </MuiPickersUtilsProvider>
-    );
+const styles = theme => ({
+  line: {
+    width: 200
   }
-}
+});
+
+const DueDate = props => {
+  const { classes, onChangeHandler, value } = props;
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container className={classes.grid} justify="space-around">
+        <DatePicker
+          margin="normal"
+          label="Due Date"
+          InputLabelProps={{ style: { fontSize: 15 } }}
+          InputProps={{ style: { fontSize: 20 } }}
+          value={value}
+          onChange={onChangeHandler}
+          className={classes.line}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
+  );
+};
 
 export default withStyles(styles)(DueDate);

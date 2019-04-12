@@ -17,8 +17,17 @@ const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
+  height: 125px;
+`;
+
+const StyledAddress = styled.section`
+  padding-top: 10px;
+  padding-left: 10px;
+  height: 475px;
 `;
 
 class CreateInvoiceForm2 extends Component {
@@ -45,18 +54,18 @@ class CreateInvoiceForm2 extends Component {
               </Grid>
             </StyledSection>
             <StyledSection>
-              <Grid item xs={6}>
+              <Grid item xs={9}>
                 <InvoiceDescription />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <UploadLogo />
               </Grid>
             </StyledSection>
-            <StyledSection>
-              <Grid item xs={6}>
+            <StyledAddress>
+              <Grid item xs={4}>
                 <BillTo />
               </Grid>
-            </StyledSection>
+            </StyledAddress>
             <StyledSection>
               <Grid item xs={12}>
                 <InvoiceItemTable />
