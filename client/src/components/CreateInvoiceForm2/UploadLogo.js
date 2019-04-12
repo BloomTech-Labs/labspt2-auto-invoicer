@@ -10,7 +10,10 @@ const styles = theme => ({
   },
 
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
+    marginTop: 10,
+    height: 50,
+    width: 75
   }
 });
 
