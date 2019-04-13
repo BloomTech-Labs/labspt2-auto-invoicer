@@ -5,6 +5,7 @@
 .App {
   width: 100%;
   display: flex;
+  background: #e2e1e0;
 }
 
 .routes-container {
