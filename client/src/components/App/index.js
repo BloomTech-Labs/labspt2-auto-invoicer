@@ -1,26 +1,27 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Route, withRouter } from "react-router-dom";
-import { saveAs } from "file-saver";
-import { CompanyConsumer } from "../../contexts/CompanyContext";
-import { UserConsumer } from "../../contexts/UserContext";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Route, withRouter } from 'react-router-dom';
+import { saveAs } from 'file-saver';
+import { CompanyConsumer } from '../../contexts/CompanyContext';
+import { UserConsumer } from '../../contexts/UserContext';
 
-import SideNavigation from "../SideNavigation";
-import SignInModal from "../SignInModal";
-import BillingPage from "../../views/BillingPage";
-import SignUpModal from "../SignUpModal";
-import LandingPage from "../../views/LandingPage";
-import CreateInvoice from "../../views/CreateInvoice";
-import SettingsPage from "../../views/SettingsPage";
-import ForgotPassModal from "../ForgotPassModal";
-import AuthModal from "../AuthModal";
-import InvoiceList from "../../views/InvoiceList";
-import InvoiceView from "../../views/InvoiceView";
-import EditInvoiceView from "../../views/EditInvoiceView";
-import PasswordResetView from "../../views/PasswordResetView";
+import SideNavigation from '../SideNavigation';
+import SignInModal from '../SignInModal';
+import BillingPage from '../../views/BillingPage';
+import SignUpModal from '../SignUpModal';
+import LandingPage from '../../views/LandingPage';
+import CreateInvoice from '../../views/CreateInvoice';
+import SettingsPage from '../../views/SettingsPage';
+import ForgotPassModal from '../ForgotPassModal';
+import AuthModal from '../AuthModal';
+import InvoiceList from '../../views/InvoiceList';
+import InvoiceView from '../../views/InvoiceView';
+import EditInvoiceView from '../../views/EditInvoiceView';
+import PasswordResetView from '../../views/PasswordResetView';
 
-import "./App.css";
-import EditInvoiceForm from "../EditInvoiceForm/index";
+import './App.css';
+import EditInvoiceForm from '../EditInvoiceForm/index';
+import Dashboard from '../Dashboard';
 
 class App extends Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class App extends Component {
       })
       .then(() => {
         this.setState({ loggedIn: false });
-        window.location.replace("/");
+        window.location.replace('/');
       })
       .catch(err => console.log(err));
   };
@@ -139,19 +140,19 @@ class App extends Component {
       total: formPayload.total
     };
     axios
-      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
+      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
       .then(() =>
-        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
-          responseType: "blob"
+        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
+          responseType: 'blob'
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return "Error";
+        return 'Error';
       });
   };
 
@@ -211,6 +212,11 @@ class App extends Component {
                         exact
                         path="/user/:id/billing"
                         component={BillingPage}
+                      />
+                      <Route
+                        exact
+                        path="/user/:id/dashboard"
+                        component={Dashboard}
                       />
                       <Route
                         exact
