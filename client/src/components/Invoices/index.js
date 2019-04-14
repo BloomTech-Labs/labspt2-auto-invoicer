@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import {
   withStyles,
   createMuiTheme,
@@ -15,110 +14,21 @@ import Paper from "@material-ui/core/Paper";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Edit from "@material-ui/icons/EditOutlined";
 import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
 import Money from "@material-ui/icons/AttachMoney";
 import Tooltip from "@material-ui/core/Tooltip";
 // import components here
-import Typography from "@material-ui/core/Typography";
 
-import CreateInvoiceButton from "../reusableComponents/CreateInvoiceButton";
 import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
 
-// temporary
-import EditInvoiceForm from "../EditInvoiceForm";
-import InvoiceViewForm from "../InvoiceViewForm";
+// Import Data Here
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { UserConsumer } from "../../contexts/UserContext";
+
 // import css here
+
 import "./Invoices.css";
-
-const actionsStyles = theme => ({
-  root: {
-    flexShrink: 0,
-    color: theme.palette.text.secondary,
-    marginLeft: theme.spacing.unit * 2.5
-  }
-});
-
-class TablePaginationActions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  handleFirstPageButtonClick = event => {
-    this.props.onChangePage(event, 0);
-  };
-
-  handleBackButtonClick = event => {
-    this.props.onChangePage(event, this.props.page - 1);
-  };
-
-  handleNextButtonClick = event => {
-    this.props.onChangePage(event, this.props.page + 1);
-  };
-
-  handleLastPageButtonClick = event => {
-    this.props.onChangePage(
-      event,
-      Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1)
-    );
-  };
-
-  render() {
-    const { classes, count, page, rowsPerPage, theme } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <IconButton
-          onClick={this.handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label="First Page"
-        >
-          {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-
-        <IconButton
-          onClick={this.handleBackButtonClick}
-          disabled={page === 0}
-          aria-label="Previous Page"
-        >
-          {theme.direction === "rtl" ? (
-            <KeyboardArrowRight />
-          ) : (
-            <KeyboardArrowLeft />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={this.handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="Next Page"
-        >
-          {theme.direction === "rtl" ? (
-            <KeyboardArrowLeft />
-          ) : (
-            <KeyboardArrowRight />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={this.handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="Last Page"
-        >
-          {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
-      </div>
-    );
-  }
-}
-
-const TablePaginationActionsWrapped = withStyles(actionsStyles, {
-  withTheme: true
-})(TablePaginationActions);
 
 const styles = theme => ({
   root: {
@@ -126,7 +36,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 500
+    minWidth: 1000,
   },
   tableWrapper: {
     overflowX: "auto"
@@ -145,14 +55,14 @@ class Invoices extends Component {
     this.setState({ page });
   };
   dueDate = str => {
-    return str.length > 10 ? str.slice(0, 10) : str;
+    return str.slice(4, 16);
   };
   ellipsis = str => {
-    let shortened = str.length > 7 ? str.slice(0, 7) + "..." : str;
+    let shortened = str.length >= 5 ? str.slice(0, 5) + "..." : str;
     return shortened;
   };
   handleChangeRowsPerPage = event => {
-    this.setState({ page: 0, rowsPerPage: event.target.value });
+    this.setState({ rowsPerPage: event.target.value });
   };
 
   lateChecker = date => {
@@ -196,27 +106,35 @@ class Invoices extends Component {
     let dateInNumberForm = parseInt(year + monthConvertedToNumber + day, 10);
     return dateInNumberForm;
   };
-
+  toolTipSize = (component, placement, str) => {
+    const theme = createMuiTheme({
+      typography: {
+        fontSize: 25,
+        useNextVariants: true
+      }
+    });
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Tooltip placement={placement} title={str}>
+          {component}
+        </Tooltip>
+      </MuiThemeProvider>
+    );
+  };
   status = invoice => {
     const theme = createMuiTheme({
-      overrides: {
-        MuiTooltip: {
-          tooltip: {
-            fontSize: "1.5em"
-          }
-        }
+      typography: {
+        fontSize: 25,
+        useNextVariants: true
       }
     });
     if (Number(invoice.amountPaid) >= Number(invoice.total)) {
       return (
-        console.log(this.props),
-        (
-          <MuiThemeProvider theme={theme}>
-            <Tooltip placement="left" title="Paid">
-              <Money style={{ color: "green" }} />
-            </Tooltip>
-          </MuiThemeProvider>
-        )
+        <MuiThemeProvider theme={theme}>
+          <Tooltip placement="left" title="Paid">
+            <Money style={{ color: "green" }} />
+          </Tooltip>
+        </MuiThemeProvider>
       );
     } else if (
       this.lateChecker(Date()) >
@@ -243,11 +161,11 @@ class Invoices extends Component {
     const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
     const themes = createMuiTheme({
-          typography: {
-          fontSize: 30
-        }
+      typography: {
+        fontSize: 30,
+        useNextVariants: true
       }
-    );
+    });
     return (
       <UserConsumer>
         {({ userState }) => {
@@ -273,41 +191,37 @@ class Invoices extends Component {
                           <Table className={classes.table}>
                             <TableBody>
                               <TableRow>
-                                <TableCell style={{ fontSize: 25 }}>
+                                <TableCell style={{ fontSize: 20 }}>
                                   #
                                 </TableCell>
-                                <TableCell style={{ fontSize: 25 }}>
+                                <TableCell style={{ fontSize: 20 }}>
                                   Status
                                 </TableCell>
                                 <TableCell
-                                  style={{ fontSize: 25 }}
+                                  style={{ fontSize: 20 }}
                                   align="right"
                                 >
                                   Name
                                 </TableCell>
                                 <TableCell
-                                  style={{ fontSize: 25 }}
-                                  align="center"
+                                  style={{ fontSize: 20 }}
+                                  align="right"
+                                  colSpan={3}
                                 >
                                   Due Date
                                 </TableCell>
                                 <TableCell
-                                  style={{ fontSize: 25 }}
-                                  align="right"
+                                  style={{ fontSize: 20 }}
+                                  align="center"
+                                  colSpan={3}
                                 >
                                   Total
                                 </TableCell>
                                 <TableCell
-                                  style={{ fontSize: 25 }}
+                                  style={{ fontSize: 20 }}
                                   align="center"
                                 >
-                                  Edit
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 25 }}
-                                  align="center"
-                                >
-                                  Pdf
+                                  Actions
                                 </TableCell>
                               </TableRow>
 
@@ -321,58 +235,69 @@ class Invoices extends Component {
                                     <TableCell
                                       component="th"
                                       scope="row"
-                                      style={{ fontSize: 20 }}
+                                      style={{ fontSize: 18.5 }}
                                     >
                                       {this.ellipsis(invoice.invoiceNumber)}
                                     </TableCell>
                                     <TableCell
                                       component="th"
                                       scope="row"
-                                      style={{ fontSize: 20 }}
+                                      style={{ fontSize: 18 }}
                                     >
                                       {this.status(invoice)}
                                     </TableCell>
 
                                     <TableCell
-                                      style={{ fontSize: 20 }}
+                                      style={{ fontSize: 18 }}
                                       align="right"
                                     >
                                       {invoice.companyName}
                                     </TableCell>
 
                                     <TableCell
-                                      style={{ fontSize: 20 }}
+                                      style={{ fontSize: 18 }}
                                       align="right"
+                                      colSpan={3}
                                     >
                                       {this.dueDate(invoice.invoiceDueDate)}
                                     </TableCell>
 
                                     <TableCell
-                                      style={{ fontSize: 20 }}
-                                      align="right"
+                                      style={{ fontSize: 18 }}
+                                      align="center"
+                                      colSpan={3}
                                     >
                                       ${this.ellipsis(invoice.total)}
                                     </TableCell>
 
                                     <TableCell
-                                      style={{ fontSize: 20 }}
-                                      align="right"
+                                      style={{ fontSize: 18 }}
+                                      align="center"
                                     >
-                                      <IconButton
-                                        onClick={() => {
-                                          console.log("ok");
-                                        }}
-                                      >
-                                        <Edit />
+                                      <IconButton>
+                                        <Link
+                                          className="card-links"
+                                          to={`/user/${
+                                            userState.userID
+                                          }/invoice/${invoice._id}/edit`}
+                                        >
+                                          {this.toolTipSize(
+                                            <Edit />,
+                                            "left",
+                                            "Edit"
+                                          )}
+                                        </Link>
                                       </IconButton>
-                                    </TableCell>
-                                    <TableCell align="right">
                                       <IconButton
                                         onClick={() => {
-                                          console.log("works");
+                                          this.props.createPDF(invoice);
                                         }}
                                       >
-                                        <SaveAlt />
+                                        {this.toolTipSize(
+                                          <SaveAlt />,
+                                          "right",
+                                          "Download"
+                                        )}
                                       </IconButton>
                                     </TableCell>
                                   </TableRow>
@@ -390,25 +315,24 @@ class Invoices extends Component {
 
                             <TableFooter style={{ fontSize: 15 }}>
                               <TableRow style={{ fontSize: 15 }}>
-        <MuiThemeProvider theme={themes}>
-                                <TablePagination
-                                  style={{ fontSize: 15 }}
-                                  rowsPerPageOptions={[5, 10, 25]}
-                                  colSpan={3}
-                                  count={invoices.length}
-                                  rowsPerPage={rowsPerPage}
-                                  page={page}
-                                  SelectProps={{
-                                    native: true
-                                  }}
-                                  onChangePage={this.handleChangePage}
-                                  onChangeRowsPerPage={
-                                    this.handleChangeRowsPerPage
-                                  }
-                                  ActionsComponent={
-                                    TablePaginationActionsWrapped
-                                  }
-                                />
+                                <MuiThemeProvider theme={themes}>
+                                  <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    backIconButtonProps={{
+                                      "aria-label": "Previous Page"
+                                    }}
+                                    nextIconButtonProps={{
+                                      "aria-label": "Next Page"
+                                    }}
+                                    colSpan={3}
+                                    count={invoices.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onChangePage={this.handleChangePage}
+                                    onChangeRowsPerPage={
+                                      this.handleChangeRowsPerPage
+                                    }
+                                  />
                                 </MuiThemeProvider>
                               </TableRow>
                             </TableFooter>
