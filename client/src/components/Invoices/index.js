@@ -36,7 +36,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 1000,
+    minWidth: 1000
   },
   tableWrapper: {
     overflowX: "auto"
@@ -224,7 +224,6 @@ class Invoices extends Component {
                                   Actions
                                 </TableCell>
                               </TableRow>
-
                               {invoices
                                 .slice(
                                   page * rowsPerPage,
@@ -246,14 +245,12 @@ class Invoices extends Component {
                                     >
                                       {this.status(invoice)}
                                     </TableCell>
-
                                     <TableCell
                                       style={{ fontSize: 18 }}
                                       align="right"
                                     >
                                       {invoice.companyName}
                                     </TableCell>
-
                                     <TableCell
                                       style={{ fontSize: 18 }}
                                       align="right"
@@ -261,7 +258,6 @@ class Invoices extends Component {
                                     >
                                       {this.dueDate(invoice.invoiceDueDate)}
                                     </TableCell>
-
                                     <TableCell
                                       style={{ fontSize: 18 }}
                                       align="center"
@@ -269,7 +265,6 @@ class Invoices extends Component {
                                     >
                                       ${this.ellipsis(invoice.total)}
                                     </TableCell>
-
                                     <TableCell
                                       style={{ fontSize: 18 }}
                                       align="center"
@@ -312,7 +307,6 @@ class Invoices extends Component {
                                 </TableRow>
                               )}
                             </TableBody>
-
                             <TableFooter style={{ fontSize: 15 }}>
                               <TableRow style={{ fontSize: 15 }}>
                                 <MuiThemeProvider theme={themes}>
