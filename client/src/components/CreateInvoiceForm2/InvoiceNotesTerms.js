@@ -19,36 +19,41 @@ const StyledSection = styled.section`
 `;
 
 const InvoiceNotesTerms = props => {
-  const { classes, onChangeHandler, value } = props;
-  return (
-    <React.Fragment>
-      <StyledSection>
-        <TextField
-          id="standard-multiline-flexible"
-          label="Notes"
-          multiline
-          rowsMax="5"
-          value={value}
-          onChange={onChangeHandler}
-          className={classes.textField}
-          InputProps={{ style: { fontSize: 14 } }}
-          margin="normal"
-        />
+  return props.invoiceNotesTermsItems.map((val, idx) => {
+    let notesId = `notes-${idx}`,
+      termsId = `terms-${idx}`;
 
-        <TextField
-          id="standard-multiline-flexible"
-          label="Terms"
-          multiline
-          rowsMax="5"
-          value={value}
-          onChange={onChangeHandler}
-          className={classes.textField}
-          InputProps={{ style: { fontSize: 14 } }}
-          margin="normal"
-        />
-      </StyledSection>
-    </React.Fragment>
-  );
+    //const { classes, onChangeHandler, value } = props;
+    return (
+      <React.Fragment key={idx}>
+        <StyledSection>
+          <TextField
+            label="Notes"
+            multiline
+            rowsMax="5"
+            name={notesId}
+            data-id={idx}
+            value={props.invoiceNotesTermsItems[idx].name}
+            className="notes"
+            InputProps={{ style: { fontSize: 14 } }}
+            margin="normal"
+          />
+
+          <TextField
+            label="Terms"
+            multiline
+            rowsMax="5"
+            name={termsId}
+            data-id={idx}
+            value={props.invoiceNotesTermsItems[idx].name}
+            className="terms"
+            InputProps={{ style: { fontSize: 14 } }}
+            margin="normal"
+          />
+        </StyledSection>
+      </React.Fragment>
+    );
+  });
 };
 
 export default withStyles(styles)(InvoiceNotesTerms);
