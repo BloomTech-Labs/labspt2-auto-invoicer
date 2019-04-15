@@ -28,6 +28,9 @@ const Navigation = props => {
             <Link to={`/user/${props.user.userID}/invoices`}>
               <span className="link">Invoices</span>
             </Link>
+            <Link to={`/user/${props.user.userID}/billing`}>
+              <span className="link">Settings</span>
+            </Link>
             <Link to={`/user/${props.user.userID}/settings`}>
               <span className="link">Settings</span>
             </Link>
