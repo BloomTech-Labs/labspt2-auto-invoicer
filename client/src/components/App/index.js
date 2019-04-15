@@ -222,7 +222,10 @@ class App extends Component {
                         exact
                         path="/user/:id/invoice/create"
                         render={props => (
-                          <CreateInvoice {...props} click={this.createPDF} />
+                          <CreateInvoice
+                            {...props}
+                            click={this.createPDF}
+                          />
                         )}
                       />
                       <Route
@@ -234,13 +237,21 @@ class App extends Component {
                         exact
                         path="/"
                         render={props => (
-                          <LandingPage {...props} click={this.signUpModal} />
+                          <LandingPage
+                            {...props}
+                            click={this.signUpModal}
+                          />
                         )}
                       />
                       <Route
                         exact
                         path="/user/:id/invoices"
-                        render={props => <InvoiceList {...props} />}
+                        render={props => (
+                          <InvoiceList
+                            {...props}
+                            click={this.createPDF}
+                          />
+                        )}
                       />
                       {/* adding routes for InvoiceView and EditInvoice components */}
                       <Route
