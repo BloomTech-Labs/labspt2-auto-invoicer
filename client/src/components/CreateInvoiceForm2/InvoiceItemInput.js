@@ -1,5 +1,5 @@
 import React from "react";
-
+//import "./InvoiceItemsInput.css";
 import { TextField } from "@material-ui/core";
 
 import {
@@ -32,7 +32,7 @@ const InvoiceItemsInput = props => {
     const { classes } = props;
 
     return (
-      <Paper className={classes.root}>
+      <Paper className={classes.root} key={idx}>
         <Table className={classes.table}>
           <TableBody>
             <TableRow>
