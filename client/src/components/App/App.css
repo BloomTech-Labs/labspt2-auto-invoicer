@@ -2,14 +2,16 @@
   display: flex;
   width: 100%;
 }
+
 .App {
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   display: flex;
-  background: #e2e1e0;
 }
 
 .routes-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
   width: 100%;
-  max-width: 1000px;
-  margin: 60px auto 20px;
 }
