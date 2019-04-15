@@ -1,14 +1,20 @@
-import React from "react";
+import React from 'react';
 
-// import styles here
-import "./LandingText.css";
+import { ReactComponent as InvoicesSVG } from '../../assets/undraw_printing_invoices_5r4r.svg';
+
+import './LandingText.css';
 
 const LandingText = props => {
   return (
-    <p className="landing_text">
-      Auto-Invoicer helps small buisnesses generate high quality PDF invoices and track them.
-      Click Buy Now to sign up for 3 free credits to create an invoice. Buisnesses can buy further credits or pay a subscription for unlimited credits. 
-    </p>
+    <div className="landing-text-container">
+      <div className="landing-text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Pellentesque dignissim enim sit amet venenatis urna cursus eget nunc.
+        </p>
+      </div>
+    </div>
   );
 };
 

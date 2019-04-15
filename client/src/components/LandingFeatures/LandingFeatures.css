@@ -1,0 +1,48 @@
+.landing-features-container {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+  width: 100%;
+}
+
+.landing-features {
+  display: flex;
+  flex-wrap: wrap;
+  color: #000000;
+  font-size: 1.6rem;
+  max-width: 940px;
+  width: 100%;
+}
+
+.top-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.top-row-text {
+  margin-left: 20px;
+  max-width: 460px;
+  width: 100%;
+}
+
+.bot-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.bot-row-text {
+  margin-right: 20px;
+  max-width: 460px;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

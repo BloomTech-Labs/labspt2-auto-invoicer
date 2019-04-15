@@ -2,26 +2,22 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
-import { CompanyConsumer } from '../../contexts/CompanyContext';
-import { UserConsumer } from '../../contexts/UserContext';
 
-import SideNavigation from '../SideNavigation';
-import SignInModal from '../SignInModal';
-import BillingPage from '../../views/BillingPage';
-import SignUpModal from '../SignUpModal';
+import { UserConsumer } from '../../contexts/UserContext';
+import { CompanyConsumer } from '../../contexts/CompanyContext';
+
 import LandingPage from '../../views/LandingPage';
+import BillingPage from '../../views/BillingPage';
 import CreateInvoice from '../../views/CreateInvoice';
 import SettingsPage from '../../views/SettingsPage';
-import ForgotPassModal from '../ForgotPassModal';
-import AuthModal from '../AuthModal';
 import InvoiceList from '../../views/InvoiceList';
 import InvoiceView from '../../views/InvoiceView';
-import EditInvoiceView from '../../views/EditInvoiceView';
-import PasswordResetView from '../../views/PasswordResetView';
+import SignInModal from '../SignInModal';
+import EditInvoiceForm from '../EditInvoiceForm';
+import Dashboard from '../Dashboard';
+import Navigation from '../Navigation/Navigation';
 
 import './App.css';
-import EditInvoiceForm from '../EditInvoiceForm/index';
-import Dashboard from '../Dashboard';
 
 class App extends Component {
   constructor(props) {
@@ -29,8 +25,6 @@ class App extends Component {
     this.state = {
       toggleSignIn: false,
       loggedIn: false,
-      toggleRegister: false,
-      togglePassForgot: false,
       toggleAuth: false
     };
   }
@@ -44,9 +38,9 @@ class App extends Component {
         if (res.data.userId) {
           this.fetchData(res.data.userId);
           this.setState({ loggedIn: true });
+          this.props.history.push(`/user/${res.data.userId}/dashboard`);
         }
       })
-      .then()
       .catch(err => console.log(err));
   }
 
@@ -61,44 +55,7 @@ class App extends Component {
   };
 
   signInModal = () => {
-    // return the opposite of the current state of toggleSignIn
     return this.setState({ toggleSignIn: !this.state.toggleSignIn });
-  };
-
-  signUpModal = () => {
-    // return the opposite of the current state of toggleRegister
-    return this.setState({ toggleRegister: !this.state.toggleRegister });
-  };
-
-  forgotPassModal = () => {
-    this.setState({
-      togglePassForgot: !this.state.togglePassForgot
-    });
-    // added a set timeout to be able to close both modals at once
-    setTimeout(() => {
-      return this.signInModal();
-    }, 0);
-  };
-
-  sendWelcomeEmail = user => {
-    // send an email object up with user email
-    // disable register button
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/welcome`, { ...user })
-      .then(res => {
-        if (res.status === 201) {
-          return this.signUpModal();
-        }
-        // un-disable register button and let user try again.
-      });
-  };
-
-  sendPasswordReset = email => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/password-reset`, { ...email })
-      .then(res => {
-        console.log(res);
-      });
   };
 
   signOut = () => {
@@ -165,7 +122,12 @@ class App extends Component {
               {({ companyState, fetchInvoices }) => {
                 return (
                   <div className="App">
-                    {/* check if sigin clicked and open up signin modal or visa-versa */}
+                    <Navigation
+                      user={userState}
+                      handleSignIn={this.signInModal}
+                      handleSignOut={this.signOut}
+                      loggedIn={this.state.loggedIn}
+                    />
                     {this.state.toggleSignIn ? (
                       <SignInModal
                         click={this.signInModal}
@@ -173,40 +135,6 @@ class App extends Component {
                         forgot={this.forgotPassModal}
                       />
                     ) : null}
-
-                    {/* check if sigup clicked and open up signup modal or visa-versa */}
-                    {this.state.toggleRegister ? (
-                      <SignUpModal
-                        click={this.signUpModal}
-                        welcome={this.sendWelcomeEmail}
-                      />
-                    ) : null}
-                    {/* check if password forgot clicked and open up password modal or visa-versa */}
-                    {this.state.togglePassForgot ? (
-                      <ForgotPassModal
-                        click={() => {
-                          this.signInModal();
-                          this.forgotPassModal();
-                        }}
-                        passwordReset={this.sendPasswordReset}
-                      />
-                    ) : null}
-                    {this.state.toggleAuth ? (
-                      <AuthModal
-                        click={() => {
-                          this.signInModal();
-                          this.toggleAuthModal();
-                        }}
-                      />
-                    ) : null}
-                    <SideNavigation
-                      loggedIn={this.state.loggedIn}
-                      signInModal={this.signInModal}
-                      signUpModal={this.signUpModal}
-                      forgotPassModal={this.forgotPassModal}
-                      signOut={this.signOut}
-                      userState={userState}
-                    />
                     <section className="routes-container">
                       <Route
                         exact
@@ -233,16 +161,13 @@ class App extends Component {
                       <Route
                         exact
                         path="/"
-                        render={props => (
-                          <LandingPage {...props} click={this.signUpModal} />
-                        )}
+                        render={props => <LandingPage {...props} />}
                       />
                       <Route
                         exact
                         path="/user/:id/invoices"
                         render={props => <InvoiceList {...props} />}
                       />
-                      {/* adding routes for InvoiceView and EditInvoice components */}
                       <Route
                         exact
                         path="/user/:id/invoice/view"
