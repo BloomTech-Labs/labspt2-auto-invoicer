@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Paper, Grid, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 import styles from "./styles";
 import styled from "styled-components";
@@ -15,6 +16,10 @@ import InvoiceItemInput from "./InvoiceItemInput";
 import InvoiceItemTableHead from "./InvoiceItemTableHead";
 import InvoiceBalance from "./InvoiceBalance";
 import InvoiceNotesTerms from "./InvoiceNotesTerms";
+import CityTo from "./CityTo";
+import StateTo from "./StateTo";
+import ZipTo from "./ZipTo";
+import Tax from "./Tax";
 
 const StyledSection = styled.section`
   display: flex;
@@ -31,6 +36,8 @@ const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
+  border: 1px solid red;
+  display: flex;
 `;
 
 const StyledInvoiceItem = styled.section`
@@ -67,7 +74,11 @@ class CreateInvoiceForm2 extends Component {
         amountPaid: ""
       }
     ],
-    invoiceNotesTermsItems: [{ notes: "", terms: "" }]
+    invoiceNotesTermsItems: [{ notes: "", terms: "" }],
+    cityTo: "",
+    stateTo: "",
+    zipCodeTo: "",
+    tax: ""
   };
 
   handleInputChange = name => event => {
@@ -157,6 +168,50 @@ class CreateInvoiceForm2 extends Component {
     }
   };
 
+  // ZipCode & Tax API
+
+  // Tax Rate from API
+  getTaxRateObject = zip => {
+    if (zip) {
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/taxes/${zip}`)
+        .then(res => {
+          this.setState({ tax: res.data.rate.combined_rate });
+        });
+    }
+  };
+
+  // ZipcodeApi Function
+  zipcodeApiAutofill = () => {
+    if (this.state.zipCodeTo.length > 4) {
+      // clientkey comes from zipcodeapi.com for client side key after registering for api key
+      const clientKey =
+        "js-2zEUwuIKNMSQvyjRbj8Ko7OQy0PdrquR9s6rvdbZTjcFvP9HYEQVp0dqAXVc27jZ";
+      const zipcode = this.state.zipCodeTo;
+      const url = `https://www.zipcodeapi.com/rest/${clientKey}/info.json/${zipcode}/radians`;
+      axios
+        .get(url)
+        .then(res => {
+          this.setState({
+            cityTo: res.data.city,
+            stateTo: res.data.state
+          });
+
+          return this.getTaxRateObject(zipcode);
+        })
+        .catch(error => {
+          console.log("Server Error", error);
+        });
+    } else {
+      this.setState({ cityTo: "", stateTo: "", tax: "" });
+    }
+  };
+
+  handleZipCodeToChange = async e => {
+    await this.setState({ zipCodeTo: e.target.value });
+    this.zipcodeApiAutofill();
+  };
+
   // handleClearForm = e => {
   //   e.preventDefault();
   //   this.setState({
@@ -218,6 +273,25 @@ class CreateInvoiceForm2 extends Component {
                   onChange={this.handleBillToItemsChange}
                 >
                   <BillTo billToItems={this.state.billToItems} />
+                </form>
+              </Grid>
+              <Grid item xs={4}>
+                <CityTo
+                  onChangeHandler={this.handleInputChange("cityTo")}
+                  value={this.state.cityTo}
+                />
+                <StateTo
+                  onChangeHandler={this.handleInputChange("stateTo")}
+                  value={this.state.stateTo}
+                />
+                <ZipTo
+                  onChangeHandler={this.handleZipCodeToChange}
+                  value={this.state.zipCodeTo}
+                />
+                {/* <Tax value={this.state.tax} /> */}
+                <form onSubmit={this.handleFormSubmit}>
+                  <div className="tax">Tax</div>
+                  <div className="taxNum">{this.state.tax * 100} %</div>
                 </form>
               </Grid>
             </StyledAddress>
