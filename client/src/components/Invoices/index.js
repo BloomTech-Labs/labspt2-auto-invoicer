@@ -191,21 +191,27 @@ class Invoices extends Component {
                           <Table className={classes.table}>
                             <TableBody>
                               <TableRow>
-                                <TableCell style={{ fontSize: 20 }}>
-                                  #
+                                <TableCell
+                                  style={{ fontSize: 20 }}
+                                  align="center"
+                                >
+                                  Number
                                 </TableCell>
-                                <TableCell style={{ fontSize: 20 }}>
+                                <TableCell
+                                  style={{ fontSize: 20 }}
+                                  align="center"
+                                >
                                   Status
                                 </TableCell>
                                 <TableCell
                                   style={{ fontSize: 20 }}
-                                  align="right"
+                                  align="center"
                                 >
                                   Name
                                 </TableCell>
                                 <TableCell
                                   style={{ fontSize: 20 }}
-                                  align="right"
+                                  align="center"
                                   colSpan={3}
                                 >
                                   Due Date
@@ -234,6 +240,7 @@ class Invoices extends Component {
                                     <TableCell
                                       component="th"
                                       scope="row"
+                                      align="center"
                                       style={{ fontSize: 18.5 }}
                                     >
                                       {this.ellipsis(invoice.invoiceNumber)}
@@ -241,19 +248,20 @@ class Invoices extends Component {
                                     <TableCell
                                       component="th"
                                       scope="row"
+                                      align="center"
                                       style={{ fontSize: 18 }}
                                     >
                                       {this.status(invoice)}
                                     </TableCell>
                                     <TableCell
                                       style={{ fontSize: 18 }}
-                                      align="right"
+                                      align="center"
                                     >
                                       {invoice.companyName}
                                     </TableCell>
                                     <TableCell
                                       style={{ fontSize: 18 }}
-                                      align="right"
+                                      align="center"
                                       colSpan={3}
                                     >
                                       {this.dueDate(invoice.invoiceDueDate)}
