@@ -150,7 +150,10 @@ class App extends Component {
                         exact
                         path="/user/:id/invoice/create"
                         render={props => (
-                          <CreateInvoice {...props} click={this.createPDF} />
+                          <CreateInvoice
+                            {...props}
+                            click={this.createPDF}
+                          />
                         )}
                       />
                       <Route
@@ -166,7 +169,12 @@ class App extends Component {
                       <Route
                         exact
                         path="/user/:id/invoices"
-                        render={props => <InvoiceList {...props} />}
+                        render={props => (
+                          <InvoiceList
+                            {...props}
+                            click={this.createPDF}
+                          />
+                        )}
                       />
                       <Route
                         exact
