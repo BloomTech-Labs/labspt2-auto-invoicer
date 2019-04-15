@@ -1,4 +1,16 @@
-.landing_text{
-  font-size: 1.69rem;
-  margin-bottom: 15px;
+.landing-text-container {
+  background: #50c878;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10px 0 100px 0; */
+  padding: 100px 0 20px 0;
+  width: 100%;
+}
+
+.landing-text {
+  color: #ffffff;
+  font-size: 1.6rem;
+  max-width: 940px;
+  width: 100%;
 }
