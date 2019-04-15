@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import MyAutoInvoicerIcon from '../../assets/myai.png';
+
 import './Navigation.css';
 
 const Navigation = props => {
@@ -10,12 +12,12 @@ const Navigation = props => {
         <div className="nav-left">
           {props.loggedIn ? (
             <Link to={`/user/${props.user.userID}/dashboard`}>
-              <img alt="" src="/assets/myai.png" width="32" height="32" />
+              <img alt="" src={MyAutoInvoicerIcon} width="32" height="32" />
               <span className="company-name">myAutoInvoicer</span>
             </Link>
           ) : (
             <Link to="/">
-              <img alt="" src="/assets/myai.png" width="32" height="32" />
+              <img alt="" src={MyAutoInvoicerIcon} width="32" height="32" />
               <span className="company-name">myAutoInvoicer</span>
             </Link>
           )}
@@ -29,7 +31,7 @@ const Navigation = props => {
               <span className="link">Invoices</span>
             </Link>
             <Link to={`/user/${props.user.userID}/billing`}>
-              <span className="link">Settings</span>
+              <span className="link">Billing</span>
             </Link>
             <Link to={`/user/${props.user.userID}/settings`}>
               <span className="link">Settings</span>
