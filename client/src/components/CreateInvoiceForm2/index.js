@@ -72,21 +72,12 @@ class CreateInvoiceForm2 extends Component {
     invoiceDueDate: new Date(),
 
     invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
-    invoiceBalanceItems: [
-      {
-        subtotal: "",
-        discount: "",
-        tax: "",
-        shipping: "",
-        total: "",
-        amountPaid: ""
-      }
-    ],
+
     invoiceNotesTermsItems: [{ notes: "", terms: "" }],
     cityTo: "",
     stateTo: "",
     zipCodeTo: "",
-    tax: "",
+
     addressTo: "",
     emailTo: "",
     subtotal: "",
@@ -303,11 +294,6 @@ class CreateInvoiceForm2 extends Component {
                   onChangeHandler={this.handleInputChange("emailTo")}
                   value={this.state.emailTo}
                 />
-
-                {/* <form onSubmit={this.handleFormSubmit}>
-                  <div className="tax">Tax</div>
-                  <div className="taxNum">{this.state.tax * 100} %</div>
-                </form> */}
               </Grid>
             </StyledAddress>
             <StyledInvoiceItem>
