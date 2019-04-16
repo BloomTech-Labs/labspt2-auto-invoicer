@@ -6,12 +6,12 @@ import styles from "./styles";
 //import { TextField } from "../../../node_modules/@material-ui/core";
 import { TextField } from "@material-ui/core";
 
-const AddressTo = props => {
+const Subtotal = props => {
   const { classes, onChangeHandler, value } = props;
   return (
     <TextField
       id="filled-name"
-      label="Address"
+      label="Subtotal"
       className={classes.textField}
       value={value}
       onChange={onChangeHandler}
@@ -19,9 +19,8 @@ const AddressTo = props => {
       InputLabelProps={{ style: { fontSize: 12 } }}
       InputProps={{ style: { fontSize: 12 } }}
       margin="normal"
-      variant="filled"
     />
   );
 };
 
-export default withStyles(styles)(AddressTo);
+export default withStyles(styles)(Subtotal);

@@ -11,10 +11,10 @@ import DateIssue from "./DateIssue";
 import DueDate from "./DueDate";
 import InvoiceDescription from "./InvoiceDescription";
 import UploadLogo from "./UploadLogo";
-import BillTo from "./BillTo";
+//import BillTo from "./BillTo";
 import InvoiceItemInput from "./InvoiceItemInput";
 import InvoiceItemTableHead from "./InvoiceItemTableHead";
-import InvoiceBalance from "./InvoiceBalance";
+//import InvoiceBalance from "./InvoiceBalance";
 import InvoiceNotesTerms from "./InvoiceNotesTerms";
 import CityTo from "./CityTo";
 import StateTo from "./StateTo";
@@ -22,6 +22,8 @@ import ZipTo from "./ZipTo";
 import Tax from "./Tax";
 import AddressTo from "./AddressTo";
 import EmailTo from "./EmailTo";
+import Subtotal from "./Subtotal";
+import Discount from "./Discount";
 
 const StyledSection = styled.section`
   display: flex;
@@ -38,7 +40,7 @@ const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
-  border: 1px solid red;
+
   display: flex;
 `;
 
@@ -51,7 +53,7 @@ const StyledInvoiceItem = styled.section`
 
 const StyledInvoiceBalance = styled.section`
   padding-top: 25px;
-
+  border: 1px solid red;
   display: flex;
   justify-content: space-around;
 `;
@@ -62,9 +64,7 @@ class CreateInvoiceForm2 extends Component {
     invoiceDescription: "",
     selectedDate: new Date(),
     invoiceDueDate: new Date(),
-    billToItems: [
-      { address1: "", address2: "", city: "", state: "", zip: "", email: "" }
-    ],
+
     invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
     invoiceBalanceItems: [
       {
@@ -272,14 +272,6 @@ class CreateInvoiceForm2 extends Component {
             </StyledSection>
             <StyledAddress>
               <Grid item xs={4}>
-                <form
-                  onSubmit={this.handleFormSubmit}
-                  onChange={this.handleBillToItemsChange}
-                >
-                  <BillTo billToItems={this.state.billToItems} />
-                </form>
-              </Grid>
-              <Grid item xs={4}>
                 <ZipTo
                   onChangeHandler={this.handleZipCodeToChange}
                   value={this.state.zipCodeTo}
@@ -337,14 +329,16 @@ class CreateInvoiceForm2 extends Component {
                 </form>
               </Grid>
               <Grid item xs={4}>
-                <form
+                <Subtotal />
+                <Discount />
+                {/* <form
                   onSubmit={this.handleFormSubmit}
                   onChange={this.handleInvoiceBalanceItemsChange}
                 >
                   <InvoiceBalance
                     invoiceBalanceItems={this.state.invoiceBalanceItems}
                   />
-                </form>
+                </form> */}
               </Grid>
             </StyledInvoiceBalance>
             <Button

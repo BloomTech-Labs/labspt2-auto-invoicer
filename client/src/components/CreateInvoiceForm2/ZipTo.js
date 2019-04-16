@@ -12,7 +12,7 @@ const ZipTo = props => {
   return (
     <React.Fragment>
       <Typography variant="h4" gutterBottom>
-        APIs
+        Bill To
       </Typography>
       <TextField
         id="filled-name"
@@ -21,8 +21,8 @@ const ZipTo = props => {
         value={value}
         onChange={onChangeHandler}
         style={{ width: 300 }}
-        InputLabelProps={{ style: { fontSize: 10 } }}
-        InputProps={{ style: { fontSize: 10 } }}
+        InputLabelProps={{ style: { fontSize: 12 } }}
+        InputProps={{ style: { fontSize: 12 } }}
         margin="normal"
         variant="filled"
       />

@@ -16,8 +16,8 @@ const EmailTo = props => {
       value={value}
       onChange={onChangeHandler}
       style={{ width: 300 }}
-      InputLabelProps={{ style: { fontSize: 10 } }}
-      InputProps={{ style: { fontSize: 10 } }}
+      InputLabelProps={{ style: { fontSize: 12 } }}
+      InputProps={{ style: { fontSize: 12 } }}
       margin="normal"
       variant="filled"
     />
