@@ -28,9 +28,9 @@ class Dashboard extends React.Component {
           console.log(companyState);
           return (
             <div className={classes.root}>
-              <Typography className={classes.title} variant="h2">
+              {/* <Typography className={classes.title} variant="h2">
                 Dashboard
-              </Typography>
+              </Typography> */}
               <Grid container spacing={16}>
                 <Grid container item>
                   <Grid item xs>
@@ -40,6 +40,9 @@ class Dashboard extends React.Component {
                       {...(checked ? { timeout: 1000 } : {})}
                     >
                       <Paper elevation={3} className={classes.image}>
+                        <Typography className={classes.title} variant="h1">
+                          Dashboard
+                        </Typography>
                         <DashIMG />
                       </Paper>
                     </Grow>
