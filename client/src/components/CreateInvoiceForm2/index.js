@@ -27,6 +27,7 @@ import Discount from "./Discount";
 import Tax from "./Tax";
 import Shipping from "./Shipping";
 import Total from "./Total";
+import AmountPaid from "./AmountPaid";
 
 const StyledSection = styled.section`
   display: flex;
@@ -85,7 +86,12 @@ class CreateInvoiceForm2 extends Component {
     zipCodeTo: "",
     tax: "",
     addressTo: "",
-    emailTo: ""
+    emailTo: "",
+    subtotal: "",
+    discount: "",
+    tax: "",
+    shipping: "",
+    amountPaid: ""
   };
 
   handleInputChange = name => event => {
@@ -296,10 +302,10 @@ class CreateInvoiceForm2 extends Component {
                   value={this.state.emailTo}
                 />
 
-                <form onSubmit={this.handleFormSubmit}>
+                {/* <form onSubmit={this.handleFormSubmit}>
                   <div className="tax">Tax</div>
                   <div className="taxNum">{this.state.tax * 100} %</div>
-                </form>
+                </form> */}
               </Grid>
             </StyledAddress>
             <StyledInvoiceItem>
@@ -332,19 +338,30 @@ class CreateInvoiceForm2 extends Component {
                 </form>
               </Grid>
               <Grid item xs={4}>
-                <Subtotal />
-                <Discount />
-                <Tax />
-                <Shipping />
-                <Total />
-                {/* <form
-                  onSubmit={this.handleFormSubmit}
-                  onChange={this.handleInvoiceBalanceItemsChange}
-                >
-                  <InvoiceBalance
-                    invoiceBalanceItems={this.state.invoiceBalanceItems}
-                  />
-                </form> */}
+                <Subtotal
+                  onChangeHandler={this.handleInputChange("subtotal")}
+                  value={this.state.subtotal}
+                />
+                <Discount
+                  onChangeHandler={this.handleInputChange("discount")}
+                  value={this.state.discount}
+                />
+                <Tax
+                  onChangeHandler={this.handleInputChange("tax")}
+                  value={this.state.tax}
+                />
+                <Shipping
+                  onChangeHandler={this.handleInputChange("shipping")}
+                  value={this.state.shipping}
+                />
+                <Total
+                  onChangeHandler={this.handleInputChange("total")}
+                  value={this.state.total}
+                />
+                <AmountPaid
+                  onChangeHandler={this.handleInputChange("amountPaid")}
+                  value={this.state.amountPaid}
+                />
               </Grid>
             </StyledInvoiceBalance>
             <Button
