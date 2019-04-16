@@ -20,6 +20,8 @@ import CityTo from "./CityTo";
 import StateTo from "./StateTo";
 import ZipTo from "./ZipTo";
 import Tax from "./Tax";
+import AddressTo from "./AddressTo";
+import EmailTo from "./EmailTo";
 
 const StyledSection = styled.section`
   display: flex;
@@ -78,7 +80,9 @@ class CreateInvoiceForm2 extends Component {
     cityTo: "",
     stateTo: "",
     zipCodeTo: "",
-    tax: ""
+    tax: "",
+    addressTo: "",
+    emailTo: ""
   };
 
   handleInputChange = name => event => {
@@ -276,6 +280,14 @@ class CreateInvoiceForm2 extends Component {
                 </form>
               </Grid>
               <Grid item xs={4}>
+                <ZipTo
+                  onChangeHandler={this.handleZipCodeToChange}
+                  value={this.state.zipCodeTo}
+                />
+                <AddressTo
+                  onChangeHandler={this.handleInputChange("addressTo")}
+                  value={this.state.addressTo}
+                />
                 <CityTo
                   onChangeHandler={this.handleInputChange("cityTo")}
                   value={this.state.cityTo}
@@ -284,11 +296,11 @@ class CreateInvoiceForm2 extends Component {
                   onChangeHandler={this.handleInputChange("stateTo")}
                   value={this.state.stateTo}
                 />
-                <ZipTo
-                  onChangeHandler={this.handleZipCodeToChange}
-                  value={this.state.zipCodeTo}
+                <EmailTo
+                  onChangeHandler={this.handleInputChange("emailTo")}
+                  value={this.state.emailTo}
                 />
-                {/* <Tax value={this.state.tax} /> */}
+
                 <form onSubmit={this.handleFormSubmit}>
                   <div className="tax">Tax</div>
                   <div className="taxNum">{this.state.tax * 100} %</div>

@@ -6,12 +6,12 @@ import styles from "./styles";
 //import { TextField } from "../../../node_modules/@material-ui/core";
 import { TextField } from "@material-ui/core";
 
-const CityTo = props => {
+const AddressTo = props => {
   const { classes, onChangeHandler, value } = props;
   return (
     <TextField
       id="filled-name"
-      label="Client City"
+      label="Address"
       className={classes.textField}
       value={value}
       onChange={onChangeHandler}
@@ -24,4 +24,4 @@ const CityTo = props => {
   );
 };
 
-export default withStyles(styles)(CityTo);
+export default withStyles(styles)(AddressTo);
