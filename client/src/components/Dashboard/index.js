@@ -24,8 +24,8 @@ class Dashboard extends React.Component {
 
     return (
       <CompanyConsumer>
-        {({ comppanyState }) => {
-          console.log(comppanyState);
+        {({ companyState }) => {
+          console.log(companyState);
           return (
             <div className={classes.root}>
               <Typography className={classes.title} variant="h2">
