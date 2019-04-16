@@ -19,11 +19,14 @@ import InvoiceNotesTerms from "./InvoiceNotesTerms";
 import CityTo from "./CityTo";
 import StateTo from "./StateTo";
 import ZipTo from "./ZipTo";
-import Tax from "./Tax";
+
 import AddressTo from "./AddressTo";
 import EmailTo from "./EmailTo";
 import Subtotal from "./Subtotal";
 import Discount from "./Discount";
+import Tax from "./Tax";
+import Shipping from "./Shipping";
+import Total from "./Total";
 
 const StyledSection = styled.section`
   display: flex;
@@ -331,6 +334,9 @@ class CreateInvoiceForm2 extends Component {
               <Grid item xs={4}>
                 <Subtotal />
                 <Discount />
+                <Tax />
+                <Shipping />
+                <Total />
                 {/* <form
                   onSubmit={this.handleFormSubmit}
                   onChange={this.handleInvoiceBalanceItemsChange}

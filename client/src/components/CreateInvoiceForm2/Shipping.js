@@ -6,12 +6,12 @@ import styles from "./styles";
 //import { TextField } from "../../../node_modules/@material-ui/core";
 import { TextField } from "@material-ui/core";
 
-const Tax = props => {
+const Shipping = props => {
   const { classes, onChangeHandler, value } = props;
   return (
     <TextField
       id="filled-name"
-      label="Tax"
+      label="Shipping"
       className={classes.textField}
       value={value}
       onChange={onChangeHandler}
@@ -23,4 +23,4 @@ const Tax = props => {
   );
 };
 
-export default withStyles(styles)(Tax);
+export default withStyles(styles)(Shipping);
