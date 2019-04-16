@@ -31,12 +31,13 @@ import AmountPaid from "./AmountPaid";
 
 const StyledSection = styled.section`
   display: flex;
-  buttonjustify-content: space-between;
+  justify-content: space-between;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
+  border: 1px solid blue;
   height: 125px;
 `;
 
@@ -44,7 +45,7 @@ const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
-
+  border: 1px solid green;
   display: flex;
 `;
 
@@ -53,6 +54,7 @@ const StyledInvoiceItem = styled.section`
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
   height: auto;
+  border: 1px solid purple;
 `;
 
 const StyledInvoiceBalance = styled.section`
@@ -249,19 +251,19 @@ class CreateInvoiceForm2 extends Component {
         <Paper className={classes.paper}>
           <div className={classes.container}>
             <StyledSection>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <InvoiceNumberInput
                   onChangeHandler={this.handleInputChange("invoiceNumber")}
                   value={this.state.invoiceNumber}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={3}>
                 <DateIssue
                   onChangeHandler={this.handleDateChange}
                   value={this.state.selectedDate}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} sm={3}>
                 <DueDate
                   onChangeHandler={this.handleInvoiceDueDateChange}
                   value={this.state.invoiceDueDate}
