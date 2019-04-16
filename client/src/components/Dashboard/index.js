@@ -9,79 +9,87 @@ import Grow from '@material-ui/core/Grow';
 import styles from './styles';
 
 import InvoicedChart from './InvoicedChart';
-// import CollectedChart from './CollectedChart';
-// import OutstandingChart from './OutstandingChart';
-// import PastDueChart from './PastDueChart';
 import StatisticsChart from './StatisticsChart';
+import { DashIMG } from './DashIMG';
+import { CompanyConsumer } from '../../contexts/CompanyContext';
 
 class Dashboard extends React.Component {
   state = { checked: false };
   componentDidMount() {
-    setTimeout(() => this.setState({ checked: true }), 1500);
+    setTimeout(() => this.setState({ checked: true }), 800);
   }
   render() {
     const { classes } = this.props;
     const { checked } = this.state;
 
     return (
-      <div className={classes.root}>
-        <Grid container spacing={16}>
-          <Grid item xs>
-            <Grow in={checked}>
-              <Paper elevation={5} className={classes.paper}>
-                <Typography variant="h3" gutterBottom>
-                  Statistics
-                </Typography>
-                <StatisticsChart />
-              </Paper>
-            </Grow>
-          </Grid>
-          <Grid item xs>
-            <Grow
-              in={checked}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(checked ? { timeout: 1500 } : {})}
-            >
-              <Paper elevation={5} className={classes.paper}>
-                <Typography variant="h3" gutterBottom>
-                  Invoiced
-                </Typography>
-                <InvoicedChart />
-              </Paper>
-            </Grow>
-          </Grid>
-        </Grid>
-        <Grid container spacing={16}>
-          <Grid item xs>
-            <Grow
-              in={checked}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(checked ? { timeout: 1500 } : {})}
-            >
-              <Paper elevation={5} className={classes.paper}>
-                <Typography variant="h3" gutterBottom>
-                  Outstanding
-                </Typography>
-                {/* <OutstandingChart /> */}
-              </Paper>
-            </Grow>
-          </Grid>
-          <Grid item xs>
-            <Grow
-              in={checked}
-              style={{ transformOrigin: '0 0 0' }}
-              {...(checked ? { timeout: 1500 } : {})}
-            >
-              <Paper elevation={5} className={classes.paper}>
-                <Typography variant="h3" gutterBottom>
-                  Past Due
-                </Typography>
-                {/* <PastDueChart /> */}
-              </Paper>
-            </Grow>
-          </Grid>
-        </Grid>
-      </div>
+      <CompanyConsumer>
+        {({ comppanyState }) => {
+          console.log(comppanyState);
+          return (
+            <div className={classes.root}>
+              <Typography className={classes.title} variant="h2">
+                Dashboard
+              </Typography>
+              <Grid container spacing={16}>
+                <Grid container item>
+                  <Grid item xs>
+                    <Grow
+                      in={checked}
+                      style={{ transformOrigin: '0 0 0' }}
+                      {...(checked ? { timeout: 1000 } : {})}
+                    >
+                      <Paper elevation={3} className={classes.image}>
+                        <DashIMG />
+                      </Paper>
+                    </Grow>
+                  </Grid>
+                  <Grid container item>
+                    <Grid md={8} item xs>
+                      <Grow in={checked}>
+                        <Paper elevation={3} className={classes.chart}>
+                          <Typography variant="h3" gutterBottom>
+                            Invoiced
+                          </Typography>
+                          <InvoicedChart />
+                        </Paper>
+                      </Grow>
+                    </Grid>
+                    <Grid md={4} item xs>
+                      <Grow
+                        in={checked}
+                        style={{ transformOrigin: '0 0 0' }}
+                        {...(checked ? { timeout: 1200 } : {})}
+                      >
+                        <Paper elevation={3} className={classes.paper}>
+                          <Typography variant="h3" gutterBottom>
+                            Statistics
+                          </Typography>
+                          <StatisticsChart />
+                        </Paper>
+                      </Grow>
+                    </Grid>
+                  </Grid>
+                  {/* <Grid item xs>
+              <Grow
+                in={checked}
+                style={{ transformOrigin: '0 0 0' }}
+                {...(checked ? { timeout: 1500 } : {})}
+              >
+                <Paper elevation={5} className={classes.paper}>
+                  <Typography variant="h3" gutterBottom>
+                    Past Due
+                  </Typography>
+                </Paper>
+              </Grow>
+            </Grid> */}
+                </Grid>
+                <Grid md={4} sm={12} container item spacing={16} />
+              </Grid>
+            </div>
+          );
+        }}
+      </CompanyConsumer>
     );
   }
 }
