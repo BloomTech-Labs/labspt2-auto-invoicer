@@ -1,7 +1,7 @@
 .navigation {
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
   margin: 5px 0 5px 10px;
 }
 
@@ -57,6 +57,7 @@
   align-items: center;
 }
 .authentication-btns {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
   border: 1px solid gray;
   border-radius: 5px;
