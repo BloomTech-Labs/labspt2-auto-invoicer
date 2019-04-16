@@ -27,9 +27,6 @@ export default theme => ({
     borderRadius: 0
     // boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
   },
-  title: {
-    marginBottom: 40
-  },
   image: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',

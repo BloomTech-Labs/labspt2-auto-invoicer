@@ -40,9 +40,7 @@ class Dashboard extends React.Component {
                       {...(checked ? { timeout: 1000 } : {})}
                     >
                       <Paper elevation={3} className={classes.image}>
-                        <Typography className={classes.title} variant="h1">
-                          Dashboard
-                        </Typography>
+                        <Typography variant="h1">Dashboard</Typography>
                         <DashIMG />
                       </Paper>
                     </Grow>
