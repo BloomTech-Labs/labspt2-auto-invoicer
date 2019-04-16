@@ -8,6 +8,7 @@ import CompanyDropdownList from '../../components/CompanyDropdownList';
 // import "./SettingsPage.css";
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import UserDetails from '../../components/Settings/UserDetails';
 
 class SettingsPage extends React.Component {
   constructor(props) {
@@ -72,7 +73,25 @@ class SettingsPage extends React.Component {
   };
   render() {
     return (
-      <Grid container spacing={24}>
+      <Grid
+      container
+      direction="column"
+      alignContent='space-around'
+      spacing= {8}
+      justify='space-between'>
+        <UserDetails />
+        <UserDetails />
+        <UserDetails />
+      </Grid>
+    );
+  }
+}
+
+export default SettingsPage;
+
+
+
+{/* <Grid container spacing={24}>
         <section className="settings-view">
           <div>
             <Typography
@@ -93,34 +112,29 @@ class SettingsPage extends React.Component {
               Company Info
             </Typography>
             {/* add a drop down for current companies and auto fill company form when clicked. Change state of form button from save to edit */}
-            <CompanyDropdownList
-              companies={this.state.companyList}
-              handleChange={this.handleChange}
-            />
+      //       <CompanyDropdownList
+      //         companies={this.state.companyList}
+      //         handleChange={this.handleChange}
+      //       />
 
-            {this.state.selected === 'create' ? (
-              <CompanyForm
-                company={{
-                  currentCompany: {
-                    companyName: '',
-                    companyZip: '',
-                    companyCity: '',
-                    companyState: '',
-                    companyAddress: ''
-                  }
-                }}
-              />
-            ) : (
-              <CompanyForm
-                company={this.state.currentCompany}
-                selected={this.state.selected}
-              />
-            )}
-          </div>
-        </section>
-      </Grid>
-    );
-  }
-}
-
-export default SettingsPage;
+      //       {this.state.selected === 'create' ? (
+      //         <CompanyForm
+      //           company={{
+      //             currentCompany: {
+      //               companyName: '',
+      //               companyZip: '',
+      //               companyCity: '',
+      //               companyState: '',
+      //               companyAddress: ''
+      //             }
+      //           }}
+      //         />
+      //       ) : (
+      //         <CompanyForm
+      //           company={this.state.currentCompany}
+      //           selected={this.state.selected}
+      //         />
+      //       )}
+      //     </div>
+      //   </section>
+      // </Grid> */}
