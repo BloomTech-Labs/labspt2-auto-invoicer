@@ -350,8 +350,9 @@ class CreateInvoiceForm2 extends Component {
                 />
                 <Tax
                   onChangeHandler={this.handleInputChange("tax")}
-                  value={this.state.tax}
+                  value={this.state.tax * 100 + `%`}
                 />
+
                 <Shipping
                   onChangeHandler={this.handleInputChange("shipping")}
                   value={this.state.shipping}
