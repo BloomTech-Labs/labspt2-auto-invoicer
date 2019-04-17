@@ -40,14 +40,14 @@ const StyledSection = styled.section`
   padding-right: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
-  border: 1px solid blue;
+
   height: 125px;
   width: 100%;
 
   @media (max-width: 600px) {
     height: 300px;
     width: 400px;
-    background: dodgerblue;
+
     flex-direction: column;
   }
 `;
@@ -56,12 +56,11 @@ const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
-  border: 1px solid green;
+
   display: flex;
 
   @media (max-width: 600px) {
     width: 410px;
-    background: dodgerblue;
   }
 `;
 
@@ -70,11 +69,9 @@ const StyledInvoiceItem = styled.section`
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
   height: auto;
-  border: 1px solid purple;
 
   @media (max-width: 600px) {
     width: 420px;
-    background: dodgerblue;
   }
 `;
 
@@ -90,7 +87,7 @@ const StyledButton = styled(Button)`
 
 const StyledInvoiceBalance = styled.section`
   padding-top: 25px;
-  border: 1px solid red;
+
   display: flex;
   justify-content: space-around;
 
@@ -98,7 +95,6 @@ const StyledInvoiceBalance = styled.section`
     padding-left: 20px;
     flex-direction: column-reverse;
     width: 400px;
-    background: dodgerblue;
   }
 `;
 

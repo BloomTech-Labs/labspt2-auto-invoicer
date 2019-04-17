@@ -7,10 +7,9 @@ import { TextField } from "@material-ui/core";
 const styles = theme => ({
   textField: {
     width: 200,
-    backgroundColor: "red",
+
     [`@media (max-width: 600px)`]: {
-      width: 400,
-      backgroundColor: "green"
+      width: 400
     }
   }
 });
