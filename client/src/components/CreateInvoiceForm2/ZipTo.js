@@ -20,7 +20,7 @@ const ZipTo = props => {
         className={classes.textField}
         value={value}
         onChange={onChangeHandler}
-        style={{ width: 300 }}
+        style={{ width: 400 }}
         InputLabelProps={{ style: { fontSize: 12 } }}
         InputProps={{ style: { fontSize: 12 } }}
         margin="normal"

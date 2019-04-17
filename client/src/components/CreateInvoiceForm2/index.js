@@ -52,30 +52,17 @@ const StyledSection = styled.section`
   }
 `;
 
-// const StyledSection = styled.section`
-//   /* height: 250px;
-//   background: dodgerblue;
-//   flex-direction: column; */
-
-//   @media (min-width: 600px) {
-//     display: flex;
-//     justify-content: space-between;
-//     padding-top: 10px;
-//     padding-left: 10px;
-//     padding-right: 10px;
-//     padding-bottom: 20px;
-//     border-bottom: 1px solid lightgray;
-//     border: 1px solid blue;
-//     height: 125px;
-//   }
-// `;
-
 const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
   border: 1px solid green;
   display: flex;
+
+  @media (max-width: 600px) {
+    width: 400px;
+    background: dodgerblue;
+  }
 `;
 
 const StyledInvoiceItem = styled.section`
