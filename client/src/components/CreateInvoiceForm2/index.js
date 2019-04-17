@@ -60,7 +60,7 @@ const StyledAddress = styled.section`
   display: flex;
 
   @media (max-width: 600px) {
-    width: 400px;
+    width: 410px;
     background: dodgerblue;
   }
 `;
@@ -71,6 +71,11 @@ const StyledInvoiceItem = styled.section`
   border-bottom: 1px solid lightgray;
   height: auto;
   border: 1px solid purple;
+
+  @media (max-width: 600px) {
+    width: 420px;
+    background: dodgerblue;
+  }
 `;
 
 const StyledInvoiceBalance = styled.section`
@@ -317,7 +322,7 @@ class CreateInvoiceForm2 extends Component {
               </Grid>
             </StyledAddress>
             <StyledInvoiceItem>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={12}>
                 <form
                   onSubmit={this.handleFormSubmit}
                   onChange={this.handleInvoiceItemsInputChange}
