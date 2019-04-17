@@ -9,7 +9,7 @@ const styles = theme => ({
     width: 200,
     backgroundColor: "red",
     [`@media (max-width: 600px)`]: {
-      width: 600,
+      width: 400,
       backgroundColor: "green"
     }
   }

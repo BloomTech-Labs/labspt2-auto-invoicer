@@ -42,9 +42,11 @@ const StyledSection = styled.section`
   border-bottom: 1px solid lightgray;
   border: 1px solid blue;
   height: 125px;
+  width: 100%;
 
   @media (max-width: 600px) {
     height: 300px;
+    width: 400px;
     background: dodgerblue;
     flex-direction: column;
   }
