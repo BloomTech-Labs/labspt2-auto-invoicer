@@ -78,11 +78,28 @@ const StyledInvoiceItem = styled.section`
   }
 `;
 
+const StyledButton = styled(Button)`
+  width: 100px;
+
+  @media (max-width: 600px) {
+    width: 400px;
+    height: 50px;
+    font-size: 2em;
+  }
+`;
+
 const StyledInvoiceBalance = styled.section`
   padding-top: 25px;
   border: 1px solid red;
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 600px) {
+    padding-left: 20px;
+    flex-direction: column-reverse;
+    width: 400px;
+    background: dodgerblue;
+  }
 `;
 
 class CreateInvoiceForm2 extends Component {
@@ -329,13 +346,13 @@ class CreateInvoiceForm2 extends Component {
                 >
                   <InvoiceItemTableHead />
                   <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
-                  <Button
+                  <StyledButton
                     variant="contained"
                     color="secondary"
                     onClick={this.addInvoiceItem}
                   >
                     Add Line Item +
-                  </Button>
+                  </StyledButton>
                 </form>
               </Grid>
             </StyledInvoiceItem>
@@ -382,13 +399,13 @@ class CreateInvoiceForm2 extends Component {
                 />
               </Grid>
             </StyledInvoiceBalance>
-            <Button
+            <StyledButton
               onClick={this.handleFormSubmit}
               variant="contained"
               color="primary"
             >
               Generate
-            </Button>
+            </StyledButton>
           </div>
         </Paper>
       </Grid>
