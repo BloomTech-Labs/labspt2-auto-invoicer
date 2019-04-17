@@ -10,7 +10,8 @@ import InvoiceNumberInput from "./InvoiceNumberInput";
 import DateIssue from "./DateIssue";
 import DueDate from "./DueDate";
 import InvoiceDescription from "./InvoiceDescription";
-import UploadLogo from "./UploadLogo";
+//import UploadLogo from "./UploadLogo";
+import CompanyDropDown from "./CompanyDropDown";
 //import BillTo from "./BillTo";
 import InvoiceItemInput from "./InvoiceItemInput";
 import InvoiceItemTableHead from "./InvoiceItemTableHead";
@@ -29,6 +30,7 @@ import Shipping from "./Shipping";
 import Total from "./Total";
 import AmountPaid from "./AmountPaid";
 
+//@media (max-width: 500px)
 const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
@@ -39,7 +41,31 @@ const StyledSection = styled.section`
   border-bottom: 1px solid lightgray;
   border: 1px solid blue;
   height: 125px;
+
+  @media (max-width: 600px) {
+    height: 300px;
+    background: dodgerblue;
+    flex-direction: column;
+  }
 `;
+
+// const StyledSection = styled.section`
+//   /* height: 250px;
+//   background: dodgerblue;
+//   flex-direction: column; */
+
+//   @media (min-width: 600px) {
+//     display: flex;
+//     justify-content: space-between;
+//     padding-top: 10px;
+//     padding-left: 10px;
+//     padding-right: 10px;
+//     padding-bottom: 20px;
+//     border-bottom: 1px solid lightgray;
+//     border: 1px solid blue;
+//     height: 125px;
+//   }
+// `;
 
 const StyledAddress = styled.section`
   padding-top: 10px;
@@ -269,7 +295,8 @@ class CreateInvoiceForm2 extends Component {
                 />
               </Grid>
               <Grid item xs={3}>
-                <UploadLogo />
+                {/* <UploadLogo /> */}
+                <CompanyDropDown />
               </Grid>
             </StyledSection>
             <StyledAddress>
