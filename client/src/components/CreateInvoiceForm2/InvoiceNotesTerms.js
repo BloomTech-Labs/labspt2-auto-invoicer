@@ -7,7 +7,10 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
+    [`@media (max-width: 600px)`]: {
+      width: 380
+    }
   }
 });
 
@@ -23,7 +26,7 @@ const InvoiceNotesTerms = props => {
     let notesId = `notes-${idx}`,
       termsId = `terms-${idx}`;
 
-    //const { classes, onChangeHandler, value } = props;
+    const { classes } = props;
     return (
       <React.Fragment key={idx}>
         <StyledSection>
@@ -34,7 +37,7 @@ const InvoiceNotesTerms = props => {
             name={notesId}
             data-id={idx}
             value={props.invoiceNotesTermsItems[idx].name}
-            className="notes"
+            className={classes.textField}
             InputProps={{ style: { fontSize: 14 } }}
             margin="normal"
           />
@@ -46,7 +49,7 @@ const InvoiceNotesTerms = props => {
             name={termsId}
             data-id={idx}
             value={props.invoiceNotesTermsItems[idx].name}
-            className="terms"
+            className={classes.textField}
             InputProps={{ style: { fontSize: 14 } }}
             margin="normal"
           />

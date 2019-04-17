@@ -96,3 +96,14 @@ const InvoiceBalance = props => {
 };
 
 export default InvoiceBalance;
+
+{
+  /* <form
+                  onSubmit={this.handleFormSubmit}
+                  onChange={this.handleInvoiceBalanceItemsChange}
+                >
+                  <InvoiceBalance
+                    invoiceBalanceItems={this.state.invoiceBalanceItems}
+                  />
+                </form> */
+}
