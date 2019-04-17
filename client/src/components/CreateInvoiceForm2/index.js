@@ -10,7 +10,7 @@ import InvoiceNumberInput from "./InvoiceNumberInput";
 import DateIssue from "./DateIssue";
 import DueDate from "./DueDate";
 import InvoiceDescription from "./InvoiceDescription";
-//import UploadLogo from "./UploadLogo";
+
 import CompanyDropDown from "./CompanyDropDown";
 //import BillTo from "./BillTo";
 import InvoiceItemInput from "./InvoiceItemInput";
@@ -29,6 +29,7 @@ import Tax from "./Tax";
 import Shipping from "./Shipping";
 import Total from "./Total";
 import AmountPaid from "./AmountPaid";
+import BalanceDue from "./BalanceDue";
 
 //@media (max-width: 500px)
 const StyledSection = styled.section`
@@ -96,7 +97,7 @@ class CreateInvoiceForm2 extends Component {
     invoiceDescription: "",
     selectedDate: new Date(),
     invoiceDueDate: new Date(),
-
+    company: "",
     invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
 
     invoiceNotesTermsItems: [{ notes: "", terms: "" }],
@@ -110,7 +111,8 @@ class CreateInvoiceForm2 extends Component {
     discount: "",
     tax: "",
     shipping: "",
-    amountPaid: ""
+    amountPaid: "",
+    balanceDue: ""
   };
 
   handleInputChange = name => event => {
@@ -295,8 +297,10 @@ class CreateInvoiceForm2 extends Component {
                 />
               </Grid>
               <Grid item xs={3}>
-                {/* <UploadLogo /> */}
-                <CompanyDropDown />
+                <CompanyDropDown
+                  onChangeHandler={this.handleInputChange("company")}
+                  value={this.state.company}
+                />
               </Grid>
             </StyledSection>
             <StyledAddress>
@@ -377,6 +381,10 @@ class CreateInvoiceForm2 extends Component {
                 <AmountPaid
                   onChangeHandler={this.handleInputChange("amountPaid")}
                   value={this.state.amountPaid}
+                />
+                <BalanceDue
+                  onChangeHandler={this.handleInputChange("balanceDue")}
+                  value={this.state.balanceDue}
                 />
               </Grid>
             </StyledInvoiceBalance>

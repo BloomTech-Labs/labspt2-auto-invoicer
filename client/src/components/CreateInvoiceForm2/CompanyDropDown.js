@@ -6,8 +6,23 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "./styles";
 
+const companies = [
+  {
+    name: "Google"
+  },
+  {
+    name: "Facebook"
+  },
+  {
+    name: "Apple"
+  },
+  {
+    name: "Netflix"
+  }
+];
+
 const CompanyDropDown = props => {
-  const { classes, onChangeHandler, value, companies } = props;
+  const { classes, onChangeHandler, value } = props;
   return (
     <TextField
       InputProps={{
@@ -37,12 +52,11 @@ const CompanyDropDown = props => {
       helperText="Please select your company"
       margin="normal"
     >
-      {/* {companies.map(company => (
+      {companies.map(company => (
         <MenuItem key={company._id} value={company.name}>
           {company.name}
         </MenuItem>
-      ))} */}
-      Companies
+      ))}
     </TextField>
   );
 };
