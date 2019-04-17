@@ -4,7 +4,16 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import styles from "./styles";
+//import styles from "./styles";
+
+const styles = theme => ({
+  textField: {
+    width: 200,
+    [`@media (max-width: 600px)`]: {
+      width: 400
+    }
+  }
+});
 
 const companies = [
   {
