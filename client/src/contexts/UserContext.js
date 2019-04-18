@@ -29,13 +29,24 @@ export class UserProvider extends React.Component {
         companies
       });
     };
+
+    this.fetchUserData = async () => {
+      const returnedData = 'name email phone_num'
+      const result = await FetchUser(this.state.userID, returnedData);
+      const {name, email, phone_num} = result.user
+      this.setState({
+        name,
+        email,
+        phone_num,
+      })
+    }
   }
 
   render() {
-    const { fetchUser } = this;
+    const { fetchUser, fetchUserData } = this;
     const userState = this.state;
     return (
-      <UserContext.Provider value={{ userState, fetchUser }}>
+      <UserContext.Provider value={{ userState, fetchUser, fetchUserData }}>
         {this.props.children}
       </UserContext.Provider>
     );
