@@ -5,16 +5,14 @@ import { LandingCTA } from '../LandingCTA';
 import { LandingFeatures } from '../LandingFeatures';
 import { LandingGetStarted } from '../LandingGetStarted';
 
-import './Landing.css';
-
 const Landing = props => {
   return (
-    <div className="landing">
+    <React.Fragment>
       <LandingText />
       <LandingCTA />
       <LandingFeatures />
       <LandingGetStarted />
-    </div>
+    </React.Fragment>
   );
 };
 

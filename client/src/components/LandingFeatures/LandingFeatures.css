@@ -2,47 +2,49 @@
   background: #ffffff;
   display: flex;
   justify-content: center;
-  margin: 100px 0;
   width: 100%;
 }
 
 .landing-features {
+  color: #000000;
   display: flex;
   flex-wrap: wrap;
-  color: #000000;
   font-size: 1.6rem;
-  max-width: 940px;
+  max-width: 960px;
+  padding: 100px 0;
   width: 100%;
 }
 
 .top-row {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
 }
 
 .top-row-text {
-  margin-left: 20px;
   max-width: 460px;
+  padding: 8px;
   width: 100%;
 }
 
 .bot-row {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 40px;
   width: 100%;
 }
 
 .bot-row-text {
-  margin-right: 20px;
   max-width: 460px;
+  padding: 8px;
   width: 100%;
 }
 
 img {
-  max-width: 100%;
   height: auto;
+  max-width: 100%;
 }
