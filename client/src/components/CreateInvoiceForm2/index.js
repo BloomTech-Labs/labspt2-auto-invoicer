@@ -120,6 +120,7 @@ class CreateInvoiceForm2 extends Component {
     discount: "",
     tax: "",
     shipping: "",
+    total: "",
     amountPaid: "",
     balanceDue: ""
   };
@@ -284,6 +285,7 @@ class CreateInvoiceForm2 extends Component {
       discount: this.state.discount,
       tax: this.state.tax,
       shipping: this.state.shipping,
+      total: this.state.total,
       amountPaid: this.state.amountPaid,
       balanceDue: this.state.balanceDue
       // from props
