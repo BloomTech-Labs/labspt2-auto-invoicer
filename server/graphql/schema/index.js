@@ -74,6 +74,7 @@ type Invoice {
   amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
+  invoiceItems: [Item!]
 }
 
 input InvoiceInput {
@@ -102,6 +103,7 @@ input InvoiceInput {
   amountPaid: String
   invoiceNotes: String
   invoiceTerms: String
+  invoiceItems: [ItemInput!]
 }
 
 input EditInvoiceInput {
@@ -111,9 +113,17 @@ input EditInvoiceInput {
 type Item {
   _id: ID!
   description: String!
-  quantity: Int!
-  rate: Float!
-  amount: Int!
+  quantity: String!
+  rate: String!
+  amount: String!
+}
+
+input ItemInput {
+  _id: ID!
+  description: String!
+  quantity: String!
+  rate: String!
+  amount: String!
 }
 
 input CompanyInput {
