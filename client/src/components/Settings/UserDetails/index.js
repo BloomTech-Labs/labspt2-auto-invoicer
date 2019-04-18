@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import ViewUserDetails from './ViewUserDetails';
 import EditUserDetails from './EditUserDetails';
 import {UserConsumer} from '../../../contexts/UserContext'
+import styles from '../styles'
 
 export class UserDetails extends Component {
   state = {
@@ -24,11 +26,12 @@ export class UserDetails extends Component {
 
   }
   render() {
+    const { classes } = this.props;
     return (
       <UserConsumer>
         {({userState, fetchUserData}) => {
           return (
-            <Paper className='user-card'>
+            <Paper elevation={5} className={classes.paper}>
               {!this.state.edit ? 
               <ViewUserDetails 
                 toggleView={this.toggleView}
@@ -45,4 +48,4 @@ export class UserDetails extends Component {
   }
 }
 
-export default UserDetails
+export default withStyles(styles)(UserDetails); 
