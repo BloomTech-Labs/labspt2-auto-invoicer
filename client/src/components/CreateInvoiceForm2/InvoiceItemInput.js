@@ -18,7 +18,7 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    minWidth: 700
+    //maxWidth: 600
   }
 });
 
@@ -46,7 +46,7 @@ const InvoiceItemsInput = props => {
                   className="item"
                   placeholder={`Item #${idx + 1}`}
                   InputProps={{
-                    style: { fontSize: 14 },
+                    //style: { fontSize: 14 },
                     disableUnderline: true
                   }}
                   //variant="filled"
@@ -62,7 +62,7 @@ const InvoiceItemsInput = props => {
                   className="quantity"
                   placeholder={`Quantity #${idx + 1}`}
                   InputProps={{
-                    style: { fontSize: 14 },
+                    //style: { fontSize: 14 },
                     disableUnderline: true
                   }}
                   //variant="outlined"
@@ -78,7 +78,7 @@ const InvoiceItemsInput = props => {
                   className="rate"
                   placeholder={`Rate #${idx + 1}`}
                   InputProps={{
-                    style: { fontSize: 14 },
+                    //style: { fontSize: 14 },
                     disableUnderline: true
                   }}
                   //variant="outlined"
@@ -94,7 +94,7 @@ const InvoiceItemsInput = props => {
                   className="amount"
                   placeholder={`Amount #${idx + 1}`}
                   InputProps={{
-                    style: { fontSize: 14 },
+                    //style: { fontSize: 14 },
                     disableUnderline: true
                   }}
                   //variant="outlined"
