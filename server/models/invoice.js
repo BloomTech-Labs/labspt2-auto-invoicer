@@ -104,9 +104,10 @@ const invoiceSchema = new Schema({
   customerID: {
     type: String,
     required: true
+  },
+  invoiceItems: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Item'
   }
-
-  // invoiceItems: [{...}]
-  // (not required) subtotal, tax, total, invoiceNotes, invoiceTerms
 });
 module.exports = model('Invoice', invoiceSchema);
