@@ -1,41 +1,40 @@
 export default theme => ({
   root: {
-    alignSelf: 'center',
-    marginTop: 20,
     flexGrow: 1,
-    widht: '80%'
-    // padding: 50
+    backgroundColor: theme.palette.grey['100'],
+    overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundPosition: '0 400px',
+    paddingBottom: 200
+  },
+  grid: {
+    width: 1200,
+    margin: `0 ${theme.spacing.unit * 2}px`,
+    [theme.breakpoints.down('sm')]: {
+      width: 'calc(100% - 20px)'
+    }
   },
   paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
+    padding: theme.spacing.unit * 3,
+    textAlign: 'left',
     color: theme.palette.text.secondary,
-    width: 280,
-    height: 280,
-    margin: 0,
-    marginBottom: 50,
-    borderRadius: 0
-    // boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+    '&:hover': {
+      boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+    }
   },
-  chart: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    width: '90%',
-    height: 280,
-    marginBottom: 50,
-    borderRadius: 0
-    // boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+  statistics: {
+    height: 280
   },
-  title: {
-    marginBottom: 40,
-    textAlign: 'start'
+  topBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  image: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    width: '90%',
-    marginBottom: 40,
-    borderRadius: 0
+  outlinedButtom: {
+    textTransform: 'uppercase',
+    margin: theme.spacing.unit
+  },
+  block: {
+    padding: theme.spacing.unit * 2
   }
 });

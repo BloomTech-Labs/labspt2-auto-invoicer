@@ -7,7 +7,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from 'recharts';
 
 const data = [
@@ -62,7 +63,7 @@ class CustomizedLabel extends PureComponent {
 
 class CustomizedAxisTick extends PureComponent {
   render() {
-    const { x, y, stroke, payload } = this.props;
+    const { x, y, payload } = this.props;
 
     return (
       <g transform={`translate(${x},${y})`}>
@@ -86,29 +87,33 @@ export default class InvoicedChart extends PureComponent {
 
   render() {
     return (
-      <LineChart
-        width={700}
-        height={240}
-        data={data}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 10
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" height={60} tick={<CustomizedAxisTick />} />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="uv"
-          stroke="#8884d8"
-          label={<CustomizedLabel />}
-        />
-      </LineChart>
+      <div style={{ width: '100%', height: 270 }}>
+        <ResponsiveContainer>
+          <LineChart
+            width={700}
+            height={240}
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 10
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" height={60} tick={<CustomizedAxisTick />} />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="uv"
+              stroke="#8884d8"
+              label={<CustomizedLabel />}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }
