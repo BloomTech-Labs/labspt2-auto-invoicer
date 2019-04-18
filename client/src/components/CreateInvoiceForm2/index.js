@@ -10,34 +10,58 @@ import InvoiceNumberInput from "./InvoiceNumberInput";
 import DateIssue from "./DateIssue";
 import DueDate from "./DueDate";
 import InvoiceDescription from "./InvoiceDescription";
-import UploadLogo from "./UploadLogo";
-import BillTo from "./BillTo";
+
+import CompanyDropDown from "./CompanyDropDown";
+//import BillTo from "./BillTo";
 import InvoiceItemInput from "./InvoiceItemInput";
 import InvoiceItemTableHead from "./InvoiceItemTableHead";
-import InvoiceBalance from "./InvoiceBalance";
+//import InvoiceBalance from "./InvoiceBalance";
 import InvoiceNotesTerms from "./InvoiceNotesTerms";
 import CityTo from "./CityTo";
 import StateTo from "./StateTo";
 import ZipTo from "./ZipTo";
-import Tax from "./Tax";
 
+import AddressTo from "./AddressTo";
+import EmailTo from "./EmailTo";
+import Subtotal from "./Subtotal";
+import Discount from "./Discount";
+import Tax from "./Tax";
+import Shipping from "./Shipping";
+import Total from "./Total";
+import AmountPaid from "./AmountPaid";
+import BalanceDue from "./BalanceDue";
+
+//@media (max-width: 500px)
 const StyledSection = styled.section`
   display: flex;
-  buttonjustify-content: space-between;
+  justify-content: space-between;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
+
   height: 125px;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    height: 300px;
+    width: 400px;
+
+    flex-direction: column;
+  }
 `;
 
 const StyledAddress = styled.section`
   padding-top: 10px;
   padding-left: 10px;
   height: 475px;
-  border: 1px solid red;
+
   display: flex;
+
+  @media (max-width: 600px) {
+    width: 410px;
+  }
 `;
 
 const StyledInvoiceItem = styled.section`
@@ -45,6 +69,20 @@ const StyledInvoiceItem = styled.section`
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
   height: auto;
+
+  @media (max-width: 600px) {
+    width: 420px;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  width: 100px;
+
+  @media (max-width: 600px) {
+    width: 400px;
+    height: 50px;
+    font-size: 2em;
+  }
 `;
 
 const StyledInvoiceBalance = styled.section`
@@ -52,6 +90,12 @@ const StyledInvoiceBalance = styled.section`
 
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 600px) {
+    padding-left: 20px;
+    flex-direction: column-reverse;
+    width: 400px;
+  }
 `;
 
 class CreateInvoiceForm2 extends Component {
@@ -60,25 +104,22 @@ class CreateInvoiceForm2 extends Component {
     invoiceDescription: "",
     selectedDate: new Date(),
     invoiceDueDate: new Date(),
-    billToItems: [
-      { address1: "", address2: "", city: "", state: "", zip: "", email: "" }
-    ],
+    company: "",
     invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
-    invoiceBalanceItems: [
-      {
-        subtotal: "",
-        discount: "",
-        tax: "",
-        shipping: "",
-        total: "",
-        amountPaid: ""
-      }
-    ],
+
     invoiceNotesTermsItems: [{ notes: "", terms: "" }],
     cityTo: "",
     stateTo: "",
     zipCodeTo: "",
-    tax: ""
+
+    addressTo: "",
+    emailTo: "",
+    subtotal: "",
+    discount: "",
+    tax: "",
+    shipping: "",
+    amountPaid: "",
+    balanceDue: ""
   };
 
   handleInputChange = name => event => {
@@ -236,19 +277,19 @@ class CreateInvoiceForm2 extends Component {
         <Paper className={classes.paper}>
           <div className={classes.container}>
             <StyledSection>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <InvoiceNumberInput
                   onChangeHandler={this.handleInputChange("invoiceNumber")}
                   value={this.state.invoiceNumber}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={3}>
                 <DateIssue
                   onChangeHandler={this.handleDateChange}
                   value={this.state.selectedDate}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} sm={3}>
                 <DueDate
                   onChangeHandler={this.handleInvoiceDueDateChange}
                   value={this.state.invoiceDueDate}
@@ -263,19 +304,22 @@ class CreateInvoiceForm2 extends Component {
                 />
               </Grid>
               <Grid item xs={3}>
-                <UploadLogo />
+                <CompanyDropDown
+                  onChangeHandler={this.handleInputChange("company")}
+                  value={this.state.company}
+                />
               </Grid>
             </StyledSection>
             <StyledAddress>
               <Grid item xs={4}>
-                <form
-                  onSubmit={this.handleFormSubmit}
-                  onChange={this.handleBillToItemsChange}
-                >
-                  <BillTo billToItems={this.state.billToItems} />
-                </form>
-              </Grid>
-              <Grid item xs={4}>
+                <ZipTo
+                  onChangeHandler={this.handleZipCodeToChange}
+                  value={this.state.zipCodeTo}
+                />
+                <AddressTo
+                  onChangeHandler={this.handleInputChange("addressTo")}
+                  value={this.state.addressTo}
+                />
                 <CityTo
                   onChangeHandler={this.handleInputChange("cityTo")}
                   value={this.state.cityTo}
@@ -284,32 +328,27 @@ class CreateInvoiceForm2 extends Component {
                   onChangeHandler={this.handleInputChange("stateTo")}
                   value={this.state.stateTo}
                 />
-                <ZipTo
-                  onChangeHandler={this.handleZipCodeToChange}
-                  value={this.state.zipCodeTo}
+                <EmailTo
+                  onChangeHandler={this.handleInputChange("emailTo")}
+                  value={this.state.emailTo}
                 />
-                {/* <Tax value={this.state.tax} /> */}
-                <form onSubmit={this.handleFormSubmit}>
-                  <div className="tax">Tax</div>
-                  <div className="taxNum">{this.state.tax * 100} %</div>
-                </form>
               </Grid>
             </StyledAddress>
             <StyledInvoiceItem>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={12}>
                 <form
                   onSubmit={this.handleFormSubmit}
                   onChange={this.handleInvoiceItemsInputChange}
                 >
                   <InvoiceItemTableHead />
                   <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
-                  <Button
+                  <StyledButton
                     variant="contained"
                     color="secondary"
                     onClick={this.addInvoiceItem}
                   >
                     Add Line Item +
-                  </Button>
+                  </StyledButton>
                 </form>
               </Grid>
             </StyledInvoiceItem>
@@ -325,23 +364,44 @@ class CreateInvoiceForm2 extends Component {
                 </form>
               </Grid>
               <Grid item xs={4}>
-                <form
-                  onSubmit={this.handleFormSubmit}
-                  onChange={this.handleInvoiceBalanceItemsChange}
-                >
-                  <InvoiceBalance
-                    invoiceBalanceItems={this.state.invoiceBalanceItems}
-                  />
-                </form>
+                <Subtotal
+                  onChangeHandler={this.handleInputChange("subtotal")}
+                  value={this.state.subtotal}
+                />
+                <Discount
+                  onChangeHandler={this.handleInputChange("discount")}
+                  value={this.state.discount}
+                />
+                <Tax
+                  onChangeHandler={this.handleInputChange("tax")}
+                  value={this.state.tax * 100 + `%`}
+                />
+
+                <Shipping
+                  onChangeHandler={this.handleInputChange("shipping")}
+                  value={this.state.shipping}
+                />
+                <Total
+                  onChangeHandler={this.handleInputChange("total")}
+                  value={this.state.total}
+                />
+                <AmountPaid
+                  onChangeHandler={this.handleInputChange("amountPaid")}
+                  value={this.state.amountPaid}
+                />
+                <BalanceDue
+                  onChangeHandler={this.handleInputChange("balanceDue")}
+                  value={this.state.balanceDue}
+                />
               </Grid>
             </StyledInvoiceBalance>
-            <Button
+            <StyledButton
               onClick={this.handleFormSubmit}
               variant="contained"
               color="primary"
             >
               Generate
-            </Button>
+            </StyledButton>
           </div>
         </Paper>
       </Grid>

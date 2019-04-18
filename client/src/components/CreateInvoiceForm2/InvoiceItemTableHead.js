@@ -15,7 +15,10 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    minWidth: 700
+    //minWidth: 700
+    [`@media (max-width: 600px)`]: {
+      display: "none"
+    }
   }
 });
 

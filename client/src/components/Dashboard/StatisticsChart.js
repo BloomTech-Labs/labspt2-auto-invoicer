@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
 const data = [
-  { name: 'Invoices', shit: 400 },
-  { name: 'Unpaid', shit: 1300 },
-  { name: 'Collected', shit: 300 },
-  { name: 'Andres', shit: 200 }
+  { name: 'Invoices', money: 400 },
+  { name: 'Unpaid', money: 250 },
+  { name: 'Collected', money: 300 }
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
@@ -103,12 +102,12 @@ export default class StatisticsChart extends PureComponent {
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={data}
-          cx={230}
+          cx={160}
           cy={100}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={40}
+          outerRadius={70}
           fill="#8884d8"
-          dataKey="shit"
+          dataKey="money"
           onMouseEnter={this.onPieEnter}
         >
           {data.map((entry, index) => (

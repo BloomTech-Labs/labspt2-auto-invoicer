@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { ReactComponent as InvoicesSVG } from '../../assets/undraw_printing_invoices_5r4r.svg';
-
 import './LandingText.css';
 
 const LandingText = props => {

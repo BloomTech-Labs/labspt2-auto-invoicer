@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -9,6 +10,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 //Context API import
 import { UserProvider, UserConsumer } from './contexts/UserContext';
 import { CompanyProvider, CompanyConsumer } from './contexts/CompanyContext';
+
+import theme from './theme';
 
 ReactDOM.render(
   <UserProvider>
@@ -20,12 +23,14 @@ ReactDOM.render(
               <CompanyConsumer>
                 {({ fetchCompany }) => {
                   return (
-                    <App
-                      fetchUser={fetchUser}
-                      fetchCompany={fetchCompany}
-                      userId={userState._id}
-                      companies={userState.companies}
-                    />
+                    <MuiThemeProvider theme={theme}>
+                      <App
+                        fetchUser={fetchUser}
+                        fetchCompany={fetchCompany}
+                        userId={userState._id}
+                        companies={userState.companies}
+                      />
+                    </MuiThemeProvider>
                   );
                 }}
               </CompanyConsumer>
