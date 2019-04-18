@@ -35,6 +35,7 @@ module.exports = {
         selectedDate: invoiceInput.selectedDate,
         invoiceDueDate: invoiceInput.invoiceDueDate,
         company: invoiceInput.company,
+        addressFrom: invoiceInput.addressFrom,
         cityTo: invoiceInput.cityTo,
         stateTo: invoiceInput.stateTo,
         zipCodeTo: invoiceInput.zipCodeTo,

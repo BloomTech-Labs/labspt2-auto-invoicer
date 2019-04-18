@@ -21,7 +21,10 @@ const invoiceSchema = new Schema({
     type: String,
     required: true
   },
-
+  addressFrom: {
+    type: String,
+    required: true
+  },
   cityTo: {
     type: String,
     required: false

@@ -60,6 +60,7 @@ type Invoice {
   selectedDate: String!
   invoiceDueDate: String!
   company: String!
+  addressFrom: String!
   cityTo: String
   stateTo: String
   zipCodeTo: String!
@@ -87,6 +88,7 @@ input InvoiceInput {
   selectedDate: String!
   invoiceDueDate: String!
   company: String!
+  addressFrom: String!
   cityTo: String
   stateTo: String
   zipCodeTo: String!
