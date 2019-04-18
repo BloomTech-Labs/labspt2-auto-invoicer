@@ -31,7 +31,12 @@ export default class index extends Component {
                       fetchInvoices={fetchInvoices}
                     />
                     <GoogleCalApi /> */}
-                    <CreateInvoiceForm2 />
+                    <CreateInvoiceForm2
+                      click={this.props.click}
+                      user={userState}
+                      company={companyState}
+                      fetchInvoices={fetchInvoices}
+                    />
                   </div>
                 );
               }}

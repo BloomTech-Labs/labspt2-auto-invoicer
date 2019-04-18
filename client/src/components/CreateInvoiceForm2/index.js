@@ -287,18 +287,18 @@ class CreateInvoiceForm2 extends Component {
       shipping: this.state.shipping,
       total: this.state.total,
       amountPaid: this.state.amountPaid,
-      balanceDue: this.state.balanceDue
+      balanceDue: this.state.balanceDue,
       // from props
-      // userID: this.props.user.userID,
-      // userName: this.props.user.name,
-      // companyID: this.props.company.companyID,
-      // companyName: this.props.company.name,
-      // customerID: this.props.company.customers[0]._id
+      userID: this.props.user.userID,
+      userName: this.props.user.name,
+      companyID: this.props.company.companyID,
+      companyName: this.props.company.name
+      //customerID: this.props.company.customers[0]._id
     };
     CreateInvoice(formPayload, "invoiceNumber total");
-    //this.props.click(formPayload);
-    //this.props.fetchInvoices();
-    //this.props.history.push(`/user/${this.props.user.userID}/invoices`);
+    // this.props.click(formPayload);
+    // this.props.fetchInvoices();
+    // this.props.history.push(`/user/${this.props.user.userID}/invoices`);
     console.log(this.state);
     console.log(formPayload);
   };
