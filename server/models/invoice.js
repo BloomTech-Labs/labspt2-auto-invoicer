@@ -107,6 +107,7 @@ const invoiceSchema = new Schema({
   }
 });
 
+// Original Version
 // const invoiceSchema = new Schema({
 //   invoiceNumber: {
 //     type: String,
