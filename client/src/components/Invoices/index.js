@@ -4,6 +4,9 @@ import {
   createMuiTheme,
   MuiThemeProvider
 } from "@material-ui/core/styles";
+import Grow from "@material-ui/core/Grow";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,6 +14,9 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Edit from "@material-ui/icons/EditOutlined";
 import IconButton from "@material-ui/core/IconButton";
@@ -20,6 +26,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
+import styles from "./style";
+
 
 // Import Data Here
 
@@ -30,27 +38,18 @@ import { UserConsumer } from "../../contexts/UserContext";
 
 import "./Invoices.css";
 
-const styles = theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3
-  },
-  table: {
-    minWidth: 1000
-  },
-  tableWrapper: {
-    overflowX: "auto"
-  }
-});
-
 class Invoices extends Component {
   constructor(props) {
     super(props);
     this.state = {
       page: 0,
-      rowsPerPage: 5
+      rowsPerPage: 5,
+      search:""
     };
   }
+   handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
@@ -121,6 +120,14 @@ class Invoices extends Component {
       </MuiThemeProvider>
     );
   };
+  invoiceSearch = invoices => {
+   let invoicesToShow = this.state.search === "" ? invoices : invoices.filter(invoice => {
+      return invoice.invoiceNumber.includes(this.state.search);
+    })
+    return invoicesToShow
+  }
+
+
   status = invoice => {
     const theme = createMuiTheme({
       typography: {
@@ -159,7 +166,8 @@ class Invoices extends Component {
   };
   render() {
     const { classes } = this.props;
-    const { rowsPerPage, page } = this.state;
+    console.log(this.state.search)
+    const { rowsPerPage, page} = this.state;
     const themes = createMuiTheme({
       typography: {
         fontSize: 30,
@@ -181,16 +189,66 @@ class Invoices extends Component {
                     {invoices.length < 1 ? (
                       <Link
                         className="card-links"
-                        to={`/user/${userState.userID}/invoice/create`}
+                        to={`/user/${
+                          userState.userID
+                        }/invoice/create`}
                       >
                         <EmptyInvoices />
                       </Link>
                     ) : (
-                      <Paper className={classes.root}>
+                                <Grow
+            in={true}
+            {...{timeout: 1300} }
+          >
+                      <Paper
+                        style={{ border: "2px solid #50c878" }}
+                        className={classes.root}
+                      >
+                        <AppBar
+                          style={{ backgroundColor: "#50c878" }}
+                          position="static"
+                        >
+                          <Toolbar>
+                            <Typography
+                              variant="h2"
+                              color="inherit"
+                              noWrap
+                            >
+                              Invoices
+                            </Typography>
+                            <div className={classes.grow} />
+                            <div className={classes.search}>
+                              <div
+                                className={classes.searchIcon}
+                              >
+                                <SearchIcon />
+                              </div>
+                              <InputBase
+                                placeholder="Search…"
+                                style={{
+                                  fontSize: 20
+                                }}
+                                name="search"
+                                onChange={
+                                  this.handleInputChange
+                                }
+                                classes={{
+                                  root: classes.inputRoot,
+                                  input: classes.inputInput
+                                }}
+                              />
+                            </div>
+                          </Toolbar>
+                        </AppBar>
                         <div className={classes.tableWrapper}>
                           <Table className={classes.table}>
                             <TableBody>
-                              <TableRow>
+                              <TableRow
+                                style={{
+                                  borderBottom:
+                                    "2px solid #50c878"
+                                }}
+                              >
                                 <TableCell
                                   style={{ fontSize: 20 }}
                                   align="center"
@@ -230,20 +288,29 @@ class Invoices extends Component {
                                   Actions
                                 </TableCell>
                               </TableRow>
-                              {invoices
+                              {this.invoiceSearch(invoices)
                                 .slice(
                                   page * rowsPerPage,
-                                  page * rowsPerPage + rowsPerPage
+                                  page * rowsPerPage +
+                                    rowsPerPage
                                 )
                                 .map(invoice => (
-                                  <TableRow key={invoice._id}>
+                                  <TableRow
+                                    style={{
+                                      borderBottom:
+                                        "2px solid #50c878"
+                                    }}
+                                    key={invoice._id}
+                                  >
                                     <TableCell
                                       component="th"
                                       scope="row"
                                       align="center"
                                       style={{ fontSize: 18.5 }}
                                     >
-                                      {this.ellipsis(invoice.invoiceNumber)}
+                                      {this.ellipsis(
+                                        invoice.invoiceNumber
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       component="th"
@@ -264,14 +331,19 @@ class Invoices extends Component {
                                       align="center"
                                       colSpan={3}
                                     >
-                                      {this.dueDate(invoice.invoiceDueDate)}
+                                      {this.dueDate(
+                                        invoice.invoiceDueDate
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{ fontSize: 18 }}
                                       align="center"
                                       colSpan={3}
                                     >
-                                      ${this.ellipsis(invoice.total)}
+                                      $
+                                      {this.ellipsis(
+                                        invoice.total
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{ fontSize: 18 }}
@@ -282,7 +354,9 @@ class Invoices extends Component {
                                           className="card-links"
                                           to={`/user/${
                                             userState.userID
-                                          }/invoice/${invoice._id}/edit`}
+                                          }/invoice/${
+                                            invoice._id
+                                          }/edit`}
                                         >
                                           {this.toolTipSize(
                                             <Edit />,
@@ -293,7 +367,9 @@ class Invoices extends Component {
                                       </IconButton>
                                       <IconButton
                                         onClick={() => {
-                                          this.props.createPDF(invoice);
+                                          this.props.createPDF(
+                                            invoice
+                                          );
                                         }}
                                       >
                                         {this.toolTipSize(
@@ -315,24 +391,38 @@ class Invoices extends Component {
                                 </TableRow>
                               )}
                             </TableBody>
-                            <TableFooter style={{ fontSize: 15 }}>
-                              <TableRow style={{ fontSize: 15 }}>
-                                <MuiThemeProvider theme={themes}>
+                            <TableFooter
+                              style={{ fontSize: 15 }}
+                            >
+                              <TableRow
+                                style={{ fontSize: 15 }}
+                              >
+                                <MuiThemeProvider
+                                  theme={themes}
+                                >
                                   <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
+                                    rowsPerPageOptions={[
+                                      5,
+                                      10,
+                                      25
+                                    ]}
                                     backIconButtonProps={{
-                                      "aria-label": "Previous Page"
+                                      "aria-label":
+                                        "Previous Page"
                                     }}
                                     nextIconButtonProps={{
                                       "aria-label": "Next Page"
                                     }}
                                     colSpan={3}
-                                    count={invoices.length}
+                                    count={this.invoiceSearch(invoices).length}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
-                                    onChangePage={this.handleChangePage}
+                                    onChangePage={
+                                      this.handleChangePage
+                                    }
                                     onChangeRowsPerPage={
-                                      this.handleChangeRowsPerPage
+                                      this
+                                        .handleChangeRowsPerPage
                                     }
                                   />
                                 </MuiThemeProvider>
@@ -341,6 +431,7 @@ class Invoices extends Component {
                           </Table>
                         </div>
                       </Paper>
+                      </Grow>
                     )}
                   </section>
                 );
