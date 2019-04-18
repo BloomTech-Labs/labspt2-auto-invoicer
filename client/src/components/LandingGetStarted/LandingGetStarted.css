@@ -1,16 +1,30 @@
 .landing-get-started-container {
-  position: absolute;
-  bottom: 0;
   background: #2b2c2e;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  padding: 20px 0;
   width: 100%;
-  padding: 50px 0;
 }
 
 .landing-get-started {
   color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 1.6rem;
-  max-width: 940px;
+  justify-content: center;
+  max-width: 960px;
   width: 100%;
+}
+
+.get-started-text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  margin: 8px;
+  min-width: 280px;
 }
