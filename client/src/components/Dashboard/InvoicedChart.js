@@ -87,8 +87,8 @@ export default class InvoicedChart extends PureComponent {
   render() {
     return (
       <LineChart
-        width={450}
-        height={230}
+        width={700}
+        height={240}
         data={data}
         margin={{
           top: 20,
