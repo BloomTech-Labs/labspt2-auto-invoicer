@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import {EditUser} from '../../../graphQL/mutations/users'
 
 export default class EditUserDetails extends Component {
   constructor(props) {
@@ -12,6 +14,17 @@ export default class EditUserDetails extends Component {
     }
   }
 
+  editUser = async (editedData, returnedData) => {
+    const {userID} = this.props.userState
+    await EditUser(userID, editedData, returnedData)
+    await this.props.fetchUserData()
+    this.props.toggleView()
+  }
+
+  handleChange = e => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
   render() {
     return (
       <div>
@@ -21,25 +34,34 @@ export default class EditUserDetails extends Component {
             label={'Name'}
             fullWidth={true}
             placeholder={'Name'}
-            // onChange={}
+            name={'name'}
+            onChange={this.handleChange}
             value={this.state.name} />
             <TextField
               id={'email'}
               label={'Email'}
               fullWidth={true}
               placeholder={'Email'}
-              // onChange={}
+              name={'email'}
+              onChange={this.handleChange}
               value={this.state.email} />
             <TextField
               id={'phone_num'}
               label={'Phone Number'}
               fullWidth={true}
               placeholder={'Phone Number'}
-              // onChange={}
+              name={'phone_num'}
+              onChange={this.handleChange}
               value={this.state.phone_num} />
         </form>
-        <button
-          onClick={this.props.toggleView}>cancel</button>
+        <Button
+          onClick={this.props.toggleView}>
+          cancel
+        </Button>
+        <Button
+          onClick={() => this.editUser(this.state, '_id')}>
+          save
+        </Button>
       </div>
     )
   }
