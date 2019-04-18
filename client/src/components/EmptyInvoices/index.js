@@ -1,20 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import Grow from "@material-ui/core/Grow";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { ReactComponent as Investing } from "../../assets/undraw_investing_7u74.svg";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import styles from "./style";
 
-//import components here
-import AddIcon from "@material-ui/icons/AddCircle";
-
-// import styles here
+// import css here
 import "./EmptyInvoices.css";
 
-const EmptyInvoices = props => {
-  return (
-    <section className="invoices-container empty-invoices">
-      <article className="invoice-card add-invoice">
-        <h3>Add a New Invoice</h3>
-        <AddIcon />
-      </article>
-    </section>
-  );
-};
+class EmptyInvoices extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-export default EmptyInvoices;
+  render() {
+    const { classes, userID } = this.props;
+    return (
+      <Grow in={true} {...{ timeout: 1300 }}>
+        <Paper
+          style={{ border: "2px solid #8bc34a", height: "490px",marginBottom:"20px" }}
+          className={classes.root}
+        >
+          <AppBar style={{ backgroundColor: "#8bc34a" }} position="static">
+            <Toolbar>
+              <Typography variant="h2" color="inherit" noWrap>
+                Invoices
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Link to={`/user/${userID}/invoice/create`}>
+            <p className="topText">
+              Your Path To Financial Success Starts Here.
+            </p>
+            <Investing className="emptyInvoices" />
+            <p className="btmText">Click Now To Create Your First Invoice.</p>
+          </Link>
+        </Paper>
+      </Grow>
+    );
+  }
+}
+
+export default withStyles(styles)(EmptyInvoices);

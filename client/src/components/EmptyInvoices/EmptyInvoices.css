@@ -1,4 +1,25 @@
-.empty-invoices {
+/* .empty-invoices {
   justify-content: center;
   align-items: center;
+} */
+
+.emptyInvoices{
+  width:420px;
+  height: 400px;
+  margin-top:-20px;
+
+}
+.topText {
+  margin-top:15px;
+  font-size: 1.8rem;
+}
+.btmText {
+  font-size: 1.8rem;
+  margin-top:-20px;
+
+}
+@media (max-width: 500px) {
+    .emptyInvoices{
+    width:95%;
+	}
 }

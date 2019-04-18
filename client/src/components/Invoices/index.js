@@ -28,7 +28,6 @@ import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
 import styles from "./style";
 
-
 // Import Data Here
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
@@ -43,11 +42,11 @@ class Invoices extends Component {
     super(props);
     this.state = {
       page: 0,
-      rowsPerPage: 5,
-      search:""
+      rowsPerPage: 10,
+      search: ""
     };
   }
-   handleInputChange = e => {
+  handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleChangePage = (event, page) => {
@@ -121,12 +120,14 @@ class Invoices extends Component {
     );
   };
   invoiceSearch = invoices => {
-   let invoicesToShow = this.state.search === "" ? invoices : invoices.filter(invoice => {
-      return invoice.invoiceNumber.includes(this.state.search);
-    })
-    return invoicesToShow
-  }
-
+    let invoicesToShow =
+      this.state.search === ""
+        ? invoices
+        : invoices.filter(invoice => {
+            return invoice.invoiceNumber.includes(this.state.search);
+          });
+    return invoicesToShow;
+  };
 
   status = invoice => {
     const theme = createMuiTheme({
@@ -166,8 +167,8 @@ class Invoices extends Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.state.search)
-    const { rowsPerPage, page} = this.state;
+    console.log(this.state.search);
+    const { rowsPerPage, page } = this.state;
     const themes = createMuiTheme({
       typography: {
         fontSize: 30,
@@ -187,250 +188,206 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <Link
-                        className="card-links"
-                        to={`/user/${
-                          userState.userID
-                        }/invoice/create`}
-                      >
-                        <EmptyInvoices />
-                      </Link>
+                      <EmptyInvoices userID={userState.userID} />
                     ) : (
-                                <Grow
-            in={true}
-            {...{timeout: 1300} }
-          >
-                      <Paper
-                        style={{ border: "2px solid #50c878" }}
-                        className={classes.root}
-                      >
-                        <AppBar
-                          style={{ backgroundColor: "#50c878" }}
-                          position="static"
+                      <Grow in={true} {...{ timeout: 1300 }}>
+                        <Paper
+                          style={{ border: "2px solid #8bc34a",marginBottom:"20px" }}
+                          className={classes.root}
                         >
-                          <Toolbar>
-                            <Typography
-                              variant="h2"
-                              color="inherit"
-                              noWrap
-                            >
-                              Invoices
-                            </Typography>
-                            <div className={classes.grow} />
-                            <div className={classes.search}>
-                              <div
-                                className={classes.searchIcon}
-                              >
-                                <SearchIcon />
+                          <AppBar
+                            style={{ backgroundColor: "#8bc34a" }}
+                            position="static"
+                          >
+                            <Toolbar>
+                              <Typography variant="h2" color="inherit" noWrap>
+                                Invoices
+                              </Typography>
+                              <div className={classes.grow} />
+                              <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                  <SearchIcon />
+                                </div>
+                                <InputBase
+                                  placeholder="Search…"
+                                  style={{
+                                    fontSize: 20
+                                  }}
+                                  name="search"
+                                  onChange={this.handleInputChange}
+                                  classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput
+                                  }}
+                                />
                               </div>
-                              <InputBase
-                                placeholder="Search…"
-                                style={{
-                                  fontSize: 20
-                                }}
-                                name="search"
-                                onChange={
-                                  this.handleInputChange
-                                }
-                                classes={{
-                                  root: classes.inputRoot,
-                                  input: classes.inputInput
-                                }}
-                              />
-                            </div>
-                          </Toolbar>
-                        </AppBar>
-                        <div className={classes.tableWrapper}>
-                          <Table className={classes.table}>
-                            <TableBody>
-                              <TableRow
-                                style={{
-                                  borderBottom:
-                                    "2px solid #50c878"
-                                }}
-                              >
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                >
-                                  Number
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                >
-                                  Status
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                >
-                                  Name
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                  colSpan={3}
-                                >
-                                  Due Date
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                  colSpan={3}
-                                >
-                                  Total
-                                </TableCell>
-                                <TableCell
-                                  style={{ fontSize: 20 }}
-                                  align="center"
-                                >
-                                  Actions
-                                </TableCell>
-                              </TableRow>
-                              {this.invoiceSearch(invoices)
-                                .slice(
-                                  page * rowsPerPage,
-                                  page * rowsPerPage +
-                                    rowsPerPage
-                                )
-                                .map(invoice => (
-                                  <TableRow
-                                    style={{
-                                      borderBottom:
-                                        "2px solid #50c878"
-                                    }}
-                                    key={invoice._id}
-                                  >
-                                    <TableCell
-                                      component="th"
-                                      scope="row"
-                                      align="center"
-                                      style={{ fontSize: 18.5 }}
-                                    >
-                                      {this.ellipsis(
-                                        invoice.invoiceNumber
-                                      )}
-                                    </TableCell>
-                                    <TableCell
-                                      component="th"
-                                      scope="row"
-                                      align="center"
-                                      style={{ fontSize: 18 }}
-                                    >
-                                      {this.status(invoice)}
-                                    </TableCell>
-                                    <TableCell
-                                      style={{ fontSize: 18 }}
-                                      align="center"
-                                    >
-                                      {invoice.companyName}
-                                    </TableCell>
-                                    <TableCell
-                                      style={{ fontSize: 18 }}
-                                      align="center"
-                                      colSpan={3}
-                                    >
-                                      {this.dueDate(
-                                        invoice.invoiceDueDate
-                                      )}
-                                    </TableCell>
-                                    <TableCell
-                                      style={{ fontSize: 18 }}
-                                      align="center"
-                                      colSpan={3}
-                                    >
-                                      $
-                                      {this.ellipsis(
-                                        invoice.total
-                                      )}
-                                    </TableCell>
-                                    <TableCell
-                                      style={{ fontSize: 18 }}
-                                      align="center"
-                                    >
-                                      <IconButton>
-                                        <Link
-                                          className="card-links"
-                                          to={`/user/${
-                                            userState.userID
-                                          }/invoice/${
-                                            invoice._id
-                                          }/edit`}
-                                        >
-                                          {this.toolTipSize(
-                                            <Edit />,
-                                            "left",
-                                            "Edit"
-                                          )}
-                                        </Link>
-                                      </IconButton>
-                                      <IconButton
-                                        onClick={() => {
-                                          this.props.createPDF(
-                                            invoice
-                                          );
-                                        }}
-                                      >
-                                        {this.toolTipSize(
-                                          <SaveAlt />,
-                                          "right",
-                                          "Download"
-                                        )}
-                                      </IconButton>
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
-                              {emptyRows > 0 && (
+                            </Toolbar>
+                          </AppBar>
+                          <div className={classes.tableWrapper}>
+                            <Table className={classes.table}>
+                              <TableBody>
                                 <TableRow
                                   style={{
-                                    height: 48 * emptyRows
+                                    borderBottom: "2px solid #8bc34a"
                                   }}
                                 >
-                                  <TableCell colSpan={6} />
-                                </TableRow>
-                              )}
-                            </TableBody>
-                            <TableFooter
-                              style={{ fontSize: 15 }}
-                            >
-                              <TableRow
-                                style={{ fontSize: 15 }}
-                              >
-                                <MuiThemeProvider
-                                  theme={themes}
-                                >
-                                  <TablePagination
-                                    rowsPerPageOptions={[
-                                      5,
-                                      10,
-                                      25
-                                    ]}
-                                    backIconButtonProps={{
-                                      "aria-label":
-                                        "Previous Page"
-                                    }}
-                                    nextIconButtonProps={{
-                                      "aria-label": "Next Page"
-                                    }}
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
+                                  >
+                                    Number
+                                  </TableCell>
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
+                                  >
+                                    Status
+                                  </TableCell>
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
+                                  >
+                                    Name
+                                  </TableCell>
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
                                     colSpan={3}
-                                    count={this.invoiceSearch(invoices).length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onChangePage={
-                                      this.handleChangePage
-                                    }
-                                    onChangeRowsPerPage={
-                                      this
-                                        .handleChangeRowsPerPage
-                                    }
-                                  />
-                                </MuiThemeProvider>
-                              </TableRow>
-                            </TableFooter>
-                          </Table>
-                        </div>
-                      </Paper>
+                                  >
+                                    Due Date
+                                  </TableCell>
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
+                                    colSpan={3}
+                                  >
+                                    Total
+                                  </TableCell>
+                                  <TableCell
+                                    style={{ fontSize: 20 }}
+                                    align="center"
+                                  >
+                                    Actions
+                                  </TableCell>
+                                </TableRow>
+                                {this.invoiceSearch(invoices)
+                                  .slice(
+                                    page * rowsPerPage,
+                                    page * rowsPerPage + rowsPerPage
+                                  )
+                                  .map(invoice => (
+                                    <TableRow
+                                      style={{
+                                        borderBottom: "2px solid #8bc34a"
+                                      }}
+                                      key={invoice._id}
+                                    >
+                                      <TableCell
+                                        component="th"
+                                        scope="row"
+                                        align="center"
+                                        style={{ fontSize: 18.5 }}
+                                      >
+                                        {this.ellipsis(invoice.invoiceNumber)}
+                                      </TableCell>
+                                      <TableCell
+                                        component="th"
+                                        scope="row"
+                                        align="center"
+                                        style={{ fontSize: 18 }}
+                                      >
+                                        {this.status(invoice)}
+                                      </TableCell>
+                                      <TableCell
+                                        style={{ fontSize: 18 }}
+                                        align="center"
+                                      >
+                                        {invoice.companyName}
+                                      </TableCell>
+                                      <TableCell
+                                        style={{ fontSize: 18 }}
+                                        align="center"
+                                        colSpan={3}
+                                      >
+                                        {this.dueDate(invoice.invoiceDueDate)}
+                                      </TableCell>
+                                      <TableCell
+                                        style={{ fontSize: 18 }}
+                                        align="center"
+                                        colSpan={3}
+                                      >
+                                        ${this.ellipsis(invoice.total)}
+                                      </TableCell>
+                                      <TableCell
+                                        style={{ fontSize: 18 }}
+                                        align="center"
+                                      >
+                                        <IconButton>
+                                          <Link
+                                            className="card-links"
+                                            to={`/user/${
+                                              userState.userID
+                                            }/invoice/${invoice._id}/edit`}
+                                          >
+                                            {this.toolTipSize(
+                                              <Edit />,
+                                              "left",
+                                              "Edit"
+                                            )}
+                                          </Link>
+                                        </IconButton>
+                                        <IconButton
+                                          onClick={() => {
+                                            this.props.createPDF(invoice);
+                                          }}
+                                        >
+                                          {this.toolTipSize(
+                                            <SaveAlt />,
+                                            "right",
+                                            "Download"
+                                          )}
+                                        </IconButton>
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                {emptyRows > 0 && (
+                                  <TableRow
+                                    style={{
+                                      height: 48 * emptyRows
+                                    }}
+                                  >
+                                    <TableCell colSpan={6} />
+                                  </TableRow>
+                                )}
+                              </TableBody>
+                              <TableFooter style={{ fontSize: 15 }}>
+                                <TableRow style={{ fontSize: 15 }}>
+                                  <MuiThemeProvider theme={themes}>
+                                    <TablePagination
+                                      rowsPerPageOptions={[5, 10, 25]}
+                                      backIconButtonProps={{
+                                        "aria-label": "Previous Page"
+                                      }}
+                                      nextIconButtonProps={{
+                                        "aria-label": "Next Page"
+                                      }}
+                                      colSpan={3}
+                                      count={
+                                        this.invoiceSearch(invoices).length
+                                      }
+                                      rowsPerPage={rowsPerPage}
+                                      page={page}
+                                      onChangePage={this.handleChangePage}
+                                      onChangeRowsPerPage={
+                                        this.handleChangeRowsPerPage
+                                      }
+                                    />
+                                  </MuiThemeProvider>
+                                </TableRow>
+                              </TableFooter>
+                            </Table>
+                          </div>
+                        </Paper>
                       </Grow>
                     )}
                   </section>

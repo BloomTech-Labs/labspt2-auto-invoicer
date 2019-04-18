@@ -1,54 +1,30 @@
-.settings-view {
+.container {
+  width: 90%;
+  padding-top: 30px;
+}
+
+.card-header {
+  margin-bottom: 10px;
+  border-bottom: 1px solid gray;
   display: flex;
-  align-items: baseline;
-  margin-top: 30px;
-}
-.settings-view div > h3 {
-  font-size: 3.6rem;
-  margin: 20px auto;
-  width: 100%;
-  text-align: center;
-}
-.settings-view div:nth-child(2) {
-  border-left: 1px solid black;
+  justify-content: space-around
 }
 
-.form-column {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: baseline;
+.edit {
+  cursor: pointer;
 }
 
-.form-column label {
-  display: flex;
-  width: 400px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 20px;
-  margin: 10px auto;
+h1 {
+  font-size: 2.5rem;
+  color: black
 }
 
-.form-column label input {
-  width: 200px;
-  margin: 5px;
-  font-size: 20px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 3px;
+h2 {
+  font-size: 2rem;
+  color: black
 }
 
-.form-column button {
-  width: 200px;
-  font-size: 20px;
-  padding: 3px 0;
-  margin: 10px auto;
-}
-.notes-caption {
-  width: 400px;
-  padding: 0 5px;
-  text-align: right;
-  margin: 0 auto;
+p {
+  font-size: 1.6rem;
+  font-style: italic
 }
