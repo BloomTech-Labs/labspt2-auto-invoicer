@@ -107,6 +107,10 @@ const invoiceSchema = new Schema({
   customerID: {
     type: String,
     required: true
+  },
+  invoiceItems: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Item'
   }
 });
 

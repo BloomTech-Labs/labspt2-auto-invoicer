@@ -2,6 +2,7 @@ const Company = require('../../models/company');
 const User = require('../../models/user');
 const Customer = require('../../models/customer');
 const Invoice = require('../../models/invoice');
+const Item = require('../../models/item');
 
 const { formatData } = require('./format');
 
@@ -69,7 +70,21 @@ const invoices = async invoiceId => {
     const fetchedInvoices = await Invoice.find({ _id: { $in: invoiceId } });
     return fetchedInvoices.map(invoice => {
       return {
-        ...invoice._doc
+        ...invoice._doc,
+        invoiceItems: items.bind(this, invoice._doc.items)
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+const items = async itemId => {
+  try {
+    const fetchedItems = await Item.find({ _id: { $in: itemId } });
+    return fetchedItems.map(item => {
+      return {
+        ...item._doc
       };
     });
   } catch (err) {

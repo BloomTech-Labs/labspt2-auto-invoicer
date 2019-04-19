@@ -1,18 +1,13 @@
-#root {
-  display: flex;
-  width: 100%;
-}
-
 .App {
-  font-family: 'Roboto', sans-serif;
-  width: 90%;
-  margin: 0 auto;
-  text-align: center;
   display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
 }
 
 .routes-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 50px;
   width: 100%;

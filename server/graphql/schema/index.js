@@ -114,9 +114,17 @@ input EditInvoiceInput {
 type Item {
   _id: ID!
   description: String!
-  quantity: Int!
-  rate: Float!
-  amount: Int!
+  quantity: String!
+  rate: String!
+  amount: String!
+}
+
+input ItemInput {
+  _id: ID!
+  description: String!
+  quantity: String!
+  rate: String!
+  amount: String!
 }
 
 input CompanyInput {
