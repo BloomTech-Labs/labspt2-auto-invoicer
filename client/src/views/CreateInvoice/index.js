@@ -5,8 +5,8 @@ import React, { Component } from "react";
 import "./CreateInvoice.css";
 
 //import components
-import CreateInvoiceForm from "../../components/CreateInvoiceForm";
-import GoogleCalApi from "../../components/GoogleCalApi";
+//import CreateInvoiceForm from "../../components/CreateInvoiceForm";
+//import GoogleCalApi from "../../components/GoogleCalApi";
 import { UserConsumer } from "../../contexts/UserContext";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 
@@ -22,8 +22,8 @@ export default class index extends Component {
             <CompanyConsumer>
               {({ companyState, fetchInvoices }) => {
                 return (
-                  <div>
-                    Views Only.
+                  <div className="main-container">
+                    Views.
                     {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}
@@ -31,7 +31,12 @@ export default class index extends Component {
                       fetchInvoices={fetchInvoices}
                     />
                     <GoogleCalApi /> */}
-                    <CreateInvoiceForm2 />
+                    <CreateInvoiceForm2
+                      click={this.props.click}
+                      user={userState}
+                      company={companyState}
+                      fetchInvoices={fetchInvoices}
+                    />
                   </div>
                 );
               }}

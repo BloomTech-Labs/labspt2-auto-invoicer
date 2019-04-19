@@ -5,7 +5,16 @@ import { withStyles } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
-import styles from "./styles";
+//import styles from "./styles";
+
+const styles = theme => ({
+  line: {
+    width: 200,
+    [`@media (max-width: 600px)`]: {
+      width: 400
+    }
+  }
+});
 
 const DateIssue = props => {
   const { classes, onChangeHandler, value } = props;
@@ -20,6 +29,7 @@ const DateIssue = props => {
           InputProps={{ style: { fontSize: 20 } }}
           value={value}
           onChange={onChangeHandler}
+          className={classes.line}
         />
       </Grid>
     </MuiPickersUtilsProvider>

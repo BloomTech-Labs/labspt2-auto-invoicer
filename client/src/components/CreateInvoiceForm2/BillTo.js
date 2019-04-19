@@ -106,3 +106,18 @@ const BillTo = props => {
 };
 
 export default BillTo;
+
+{
+  /* <Grid item xs={4}>
+                <form
+                  onSubmit={this.handleFormSubmit}
+                  onChange={this.handleBillToItemsChange}
+                >
+                  <BillTo billToItems={this.state.billToItems} />
+                </form>
+              </Grid> */
+}
+
+// billToItems: [
+//   { address1: "", address2: "", city: "", state: "", zip: "", email: "" }
+// ],
