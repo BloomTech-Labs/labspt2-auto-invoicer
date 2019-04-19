@@ -292,8 +292,8 @@ class CreateInvoiceForm2 extends Component {
       userID: this.props.user.userID,
       userName: this.props.user.name,
       companyID: this.props.company.companyID,
-      companyName: this.props.company.name
-      //customerID: this.props.company.customers[0]._id
+      companyName: this.props.company.name,
+      customerID: this.props.company.customers[0]._id
     };
     CreateInvoice(formPayload, "invoiceNumber total");
     // this.props.click(formPayload);
