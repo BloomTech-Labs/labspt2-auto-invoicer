@@ -16,7 +16,6 @@
 
 # labspt2-auto-invoicer
 
-
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![Python](https://img.shields.io/badge/python-3.7-blue.svg)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
@@ -111,20 +110,19 @@
 ### Frontend built using:
 
 - React.js
-- Material Design
-- GraphQL & Apollo
-- Netlify
+- Material UI
+- GraphQL
 
-Deployed [here](https://bestpos.netlify.com/)
+Deployed [here](https://www.myautoinvoicer.com)
 
 ### Backend built using:
 
-- PostgresQL
-- GraphQL & Graphene
+- GraphQL
 - bcrypt
-- Heroku
+- MongoDB
+- Node & Express
 
-Deployed [here](https://dashboard.heroku.com/apps/labs7-posserver)
+Deployed [here](https://www.myautoinvoicer.com)
 
 ### Reasoning:
 
@@ -132,7 +130,7 @@ Deployed [here](https://dashboard.heroku.com/apps/labs7-posserver)
 
   - We selected React as our frontend framework because we knew with the application we were planning on building, there were going to be a lot of reusable components all interacting with each other.
 
-- Material Design
+- Material UI
 
   - The styling of Material UI components has always appealed to our team, so we jump at any opportunity to integrate it into our varied projects. Our goal for this application was to be utilitarian without seeming as though we were making no effort on improving user experience, so Material UI just seemed like the good fit.
 
@@ -148,11 +146,9 @@ Deployed [here](https://dashboard.heroku.com/apps/labs7-posserver)
 
   - We chose a SQL database database because we felt that the necessary components of our application related to each other and would be best implemented in a relational database. We chose PostgresQL specifically because it was the backend support most recommended by Django, which we had already decided would be our backend framework, for its support of schemas.
 
-
-- GraphQL
+* GraphQL
 
   - We knew that the models we were dealing with were very closely related to each other and that the way in which we wanted to display that data to users called for a lot of connected queries to the database. Using GraphQL in lieu of REST (while having an initial setup cost of having to make sense of the various documentation) has made a lot of the communication between client and server more efficient.
-
 
 - Bcrypt
 
@@ -390,7 +386,6 @@ NOT CURRENTLY IMPLEMENTED
 - user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 - job = models.ForeignKey("Job", on_delete=models.CASCADE, blank=True, null=True)
 - note = models.ForeignKey("Note", on_delete=models.CASCADE, blank=True, null=True)
-
 
 ## GraphQL
 
@@ -816,7 +811,7 @@ We are using Stripe in order to accept payments from users of the application. W
 
 Free users of the application are allowed to create eight items of a given type at any one time.
 
-Premium plans cost .99c for monthly and $9.99 for an entire year. The perks of such a membership include unlimited creation privileges and the ability to change the themes on the application. We are constantly adding new themes for users to choose from and are excited to offer this as a perk!
+Premium plans cost .99c for monthly and \$9.99 for an entire year. The perks of such a membership include unlimited creation privileges and the ability to change the themes on the application. We are constantly adding new themes for users to choose from and are excited to offer this as a perk!
 
 ## Design:
 
