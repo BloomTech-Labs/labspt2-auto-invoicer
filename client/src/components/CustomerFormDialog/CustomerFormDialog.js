@@ -192,4 +192,4 @@ class CustomerFormDialog extends Component {
   }
 }
 
-export default CustomerFormDialog;
+export { CustomerFormDialog };

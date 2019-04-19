@@ -130,4 +130,4 @@ class ItemFormDialog extends Component {
   }
 }
 
-export default ItemFormDialog;
+export { ItemFormDialog };
