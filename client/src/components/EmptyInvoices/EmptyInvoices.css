@@ -1,25 +1,31 @@
-/* .empty-invoices {
-  justify-content: center;
-  align-items: center;
-} */
-
-.emptyInvoices{
-  width:420px;
+.emptyInvoices {
+  width: 420px;
   height: 400px;
-  margin-top:-20px;
-
+  margin-top: -20px;
 }
 .topText {
-  margin-top:15px;
+  margin-top: 15px;
   font-size: 1.8rem;
+margin-left:20px;
+
 }
 .btmText {
   font-size: 1.8rem;
-  margin-top:-20px;
-
+  margin-top: -20px;
+  margin-left:40px;
+}
+.align {
+  display: flex;
+  justify-content: center;
 }
 @media (max-width: 500px) {
-    .emptyInvoices{
-    width:95%;
-	}
+  .emptyInvoices {
+    width: 95%;
+  }
+  .topText {
+    margin-left: 20px;
+  }
+  .btmText {
+    margin-left: 40px;
+  }
 }
