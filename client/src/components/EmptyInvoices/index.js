@@ -23,7 +23,11 @@ class EmptyInvoices extends Component {
     return (
       <Grow in={true} {...{ timeout: 1300 }}>
         <Paper
-          style={{ border: "2px solid #8bc34a", height: "490px",marginBottom:"20px" }}
+          style={{
+            border: "2px solid #8bc34a",
+            height: "490px",
+            marginBottom: "20px"
+          }}
           className={classes.root}
         >
           <AppBar style={{ backgroundColor: "#8bc34a" }} position="static">
@@ -33,13 +37,15 @@ class EmptyInvoices extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <Link to={`/user/${userID}/invoice/create`}>
-            <p className="topText">
-              Your Path To Financial Success Starts Here.
-            </p>
-            <Investing className="emptyInvoices" />
-            <p className="btmText">Click Now To Create Your First Invoice.</p>
-          </Link>
+          <div className="align">
+            <Link to={`/user/${userID}/invoice/create`}>
+              <p className="topText">
+                Your Path To Financial Success Starts Here.
+              </p>
+              <Investing className="emptyInvoices" />
+              <p className="btmText">Click Now To Create Your First Invoice.</p>
+            </Link>
+          </div>
         </Paper>
       </Grow>
     );

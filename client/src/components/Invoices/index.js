@@ -10,6 +10,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import Button from "@material-ui/core/Button";
+import MoreIcon from "@material-ui/icons/MoreVert";
+
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
@@ -19,7 +25,6 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Edit from "@material-ui/icons/EditOutlined";
-import IconButton from "@material-ui/core/IconButton";
 import Money from "@material-ui/icons/AttachMoney";
 import Tooltip from "@material-ui/core/Tooltip";
 // import components here
@@ -43,9 +48,13 @@ class Invoices extends Component {
     this.state = {
       page: 0,
       rowsPerPage: 10,
-      search: ""
+      search: "",
+      mobileMenuOpen: true
     };
   }
+  clickCloseOpen = () => {
+    this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen });
+  };
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -167,8 +176,41 @@ class Invoices extends Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.state.search);
-    const { rowsPerPage, page } = this.state;
+    const { rowsPerPage, page, mobileMenuOpen } = this.state;
+    const ismobileMenuOpen = !mobileMenuOpen;
+    const renderMobileMenu = (
+      <UserConsumer>
+        {({ userState }) => {
+          return (
+      <Menu
+        anchorOrigin={{ horizontal: "right",}}
+        transformOrigin={{ horizontal: "right", }}
+        open={ismobileMenuOpen}
+        style={{ marginTop: -350,marginLeft:-3 }}
+        onClose={this.clickCloseOpen}
+      >
+        <MenuItem
+          onClick={this.clickCloseOpen}
+          style={{ backgroundColor: "#8bc34a",}}
+        >
+          <Link to={`/user/${userState.userID}/invoice/create`}>
+                  <Button
+            variant="contained"
+            size="medium"
+            style={{
+              backgroundColor: "#689f38",
+              color: "white"
+            }}
+            className={classes.margin}
+          >
+            Create
+          </Button>
+          </Link>
+        </MenuItem>
+      </Menu>
+              )}}
+      </UserConsumer>
+    );
     const themes = createMuiTheme({
       typography: {
         fontSize: 30,
@@ -192,37 +234,65 @@ class Invoices extends Component {
                     ) : (
                       <Grow in={true} {...{ timeout: 1300 }}>
                         <Paper
-                          style={{ border: "2px solid #8bc34a",marginBottom:"20px" }}
+                          style={{
+                            border: "2px solid #8bc34a",
+                            marginBottom: "20px"
+                          }}
                           className={classes.root}
                         >
-                          <AppBar
-                            style={{ backgroundColor: "#8bc34a" }}
-                            position="static"
-                          >
-                            <Toolbar>
-                              <Typography variant="h2" color="inherit" noWrap>
-                                Invoices
-                              </Typography>
-                              <div className={classes.grow} />
-                              <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                  <SearchIcon />
+                          <div className={classes.rootbar}>
+                            <AppBar
+                              position="static"
+                              style={{ backgroundColor: "#8bc34a" }}
+                            >
+                              <Toolbar>
+                                <Typography
+                                  className={classes.title}
+                                  color="inherit"
+                                  noWrap
+                                >
+                                  Invoices
+                                </Typography>
+                                <div className={classes.search}>
+                                  <div className={classes.searchIcon}>
+                                    <SearchIcon />
+                                  </div>
+                                  <InputBase
+                                    placeholder="Search…"
+                                    name="search"
+                                    onChange={this.handleInputChange}
+                                    classes={{
+                                      root: classes.inputRoot,
+                                      input: classes.inputInput
+                                    }}
+                                  />
                                 </div>
-                                <InputBase
-                                  placeholder="Search…"
-                                  style={{
-                                    fontSize: 20
-                                  }}
-                                  name="search"
-                                  onChange={this.handleInputChange}
-                                  classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput
-                                  }}
-                                />
-                              </div>
-                            </Toolbar>
-                          </AppBar>
+                                <div className={classes.grow} />
+                                <div className={classes.sectionDesktop}>
+                                    <Link to={`/user/${userState.userID}/invoice/create`}>
+                                  <Button
+                                    variant="contained"
+                                    style={{ backgroundColor: "#689f38",color:"white" }}
+                                    size="large"
+                                    color="primary"
+                                  >
+                                    Create
+                                  </Button>
+                                  </Link>
+                                </div>
+                                <div className={classes.sectionMobile}>
+                                  <IconButton
+                                    aria-haspopup="true"
+                                    onClick={this.clickCloseOpen}
+                                    color="inherit"
+                                  >
+                                    <MoreIcon />
+                                  </IconButton>
+                                </div>
+                              </Toolbar>
+                            </AppBar>
+                            {renderMobileMenu}
+                          </div>
                           <div className={classes.tableWrapper}>
                             <Table className={classes.table}>
                               <TableBody>
