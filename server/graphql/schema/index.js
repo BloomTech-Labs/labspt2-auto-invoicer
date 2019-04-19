@@ -65,7 +65,7 @@ type Invoice {
   stateTo: String
   zipCodeTo: String
   addressTo: String
-  emailTo: String!
+  emailTo: String
   subtotal: String
   discount: String
   tax: String

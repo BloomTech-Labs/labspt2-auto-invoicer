@@ -33,6 +33,8 @@ import AmountPaid from "./AmountPaid";
 import BalanceDue from "./BalanceDue";
 import { CreateInvoice } from "../../graphQL/mutations/invoices";
 
+// import history from '../reusableComponents/history/history'
+
 //@media (max-width: 500px)
 const StyledSection = styled.section`
   display: flex;
@@ -291,15 +293,16 @@ class CreateInvoiceForm2 extends Component {
       // from props
       userID: this.props.user.userID,
       userName: this.props.user.name,
+      addressFrom: this.props.company.address_1,
       companyID: this.props.company.companyID,
       companyName: this.props.company.name,
       customerID: this.props.company.customers[0]._id
     };
     CreateInvoice(formPayload, "invoiceNumber total");
     // this.props.click(formPayload);
-    // this.props.fetchInvoices();
-    // this.props.history.push(`/user/${this.props.user.userID}/invoices`);
-    console.log(this.state);
+    this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.user.userID}/invoices`);
+    console.log(this.props);
     console.log(formPayload);
   };
 
