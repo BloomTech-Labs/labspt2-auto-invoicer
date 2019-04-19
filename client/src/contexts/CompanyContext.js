@@ -44,14 +44,13 @@ export class CompanyProvider extends React.Component {
       invoiceNumber 
       companyName 
       userName 
-      languageSelection 
-      currencySelection 
+      invoiceDescription 
       addressFrom 
       addressTo 
       cityTo 
-      stateRegionTo 
+      stateTo 
       zipCodeTo 
-      clientEmailTo 
+      emailTo 
       selectedDate 
       invoiceDueDate 
       balanceDue 
@@ -61,8 +60,8 @@ export class CompanyProvider extends React.Component {
       shipping 
       total 
       amountPaid 
-      invoiceNotes 
-      invoiceTerms
+      notes 
+      terms
     }`;
     this.fetchCompany = async companyID => {
       const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`;
@@ -88,7 +87,7 @@ export class CompanyProvider extends React.Component {
     };
 
     this.fetchInvoices = async () => {
-      const returnedData = `credits ${invoicesData}`
+      const returnedData = `credits ${invoicesData}`;
       const result = await FetchCompany(this.state.companyID, returnedData);
       const { company } = result;
       this.setState({ invoices: company.invoices, credits: company.credits });
@@ -106,17 +105,44 @@ export class CompanyProvider extends React.Component {
       this.setState({ customers: company.customers });
     };
 
+    this.fetchCompanyData = async (companyID) => {
+      const result = await FetchCompany(companyID, companyData);
+      const { company } = result
+      this.setState({
+        companyID: company._id,
+        name: company.name,
+        email: company.email,
+        phone_num: company.phone_num,
+        address_1: company.address_1,
+        address_2: company.address_2,
+        city: company.city,
+        state: company.state,
+        postal_code: company.postal_code,
+        country: company.country,
+        unlimited_tier: company.unlimited_tier,
+        credits: company.credits,
+      })
+    }
+
     this.fetchPlanOrCredits = async (companyID) => {
       const plan = `unlimited_tier credits`
       const result = await FetchCompany(companyID, plan )
       const { company } = result;
-      this.setState({credits: company.credits, unlimited_tier: company.unlimited_tier})
-    }
+      this.setState({
+        credits: company.credits,
+        unlimited_tier: company.unlimited_tier
+      });
+    };
   }
 
-
   render() {
-    const { fetchCompany, fetchCustomers, fetchInvoices, fetchUsers, fetchPlanOrCredits } = this;
+    const {
+      fetchCompany,
+      fetchCustomers,
+      fetchInvoices,
+      fetchUsers,
+      fetchPlanOrCredits
+    } = this;
     const companyState = this.state;
     return (
       <CompanyContext.Provider

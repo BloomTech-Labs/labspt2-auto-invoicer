@@ -23,7 +23,7 @@ export default class index extends Component {
               {({ companyState, fetchInvoices }) => {
                 return (
                   <div className="main-container">
-                    Views Only.
+                    Views.
                     {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}
@@ -31,7 +31,12 @@ export default class index extends Component {
                       fetchInvoices={fetchInvoices}
                     />
                     <GoogleCalApi /> */}
-                    <CreateInvoiceForm2 />
+                    <CreateInvoiceForm2
+                      history={this.props.history}
+                      user={userState}
+                      company={companyState}
+                      fetchInvoices={fetchInvoices}
+                    />
                   </div>
                 );
               }}

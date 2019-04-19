@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Route, withRouter } from 'react-router-dom';
-import { saveAs } from 'file-saver';
+import React, { Component } from "react";
+import axios from "axios";
+import { Route, withRouter } from "react-router-dom";
+import { saveAs } from "file-saver";
 
-import { UserConsumer } from '../../contexts/UserContext';
-import { CompanyConsumer } from '../../contexts/CompanyContext';
+import { UserConsumer } from "../../contexts/UserContext";
+import { CompanyConsumer } from "../../contexts/CompanyContext";
 
-import LandingPage from '../../views/LandingPage';
-import BillingPage from '../../views/BillingPage';
-import CreateInvoice from '../../views/CreateInvoice';
-import SettingsPage from '../../views/SettingsPage';
-import InvoiceList from '../../views/InvoiceList';
-import InvoiceView from '../../views/InvoiceView';
-import SignInModal from '../SignInModal';
-import EditInvoiceForm from '../EditInvoiceForm';
-import Dashboard from '../Dashboard';
-import Navigation from '../Navigation/Navigation';
+import LandingPage from "../../views/LandingPage";
+import BillingPage from "../../views/BillingPage";
+import CreateInvoice from "../../views/CreateInvoice";
+import SettingsPage from "../../views/SettingsPage";
+import InvoiceList from "../../views/InvoiceList";
+import InvoiceView from "../../views/InvoiceView";
+import SignInModal from "../SignInModal";
+import EditInvoiceForm from "../EditInvoiceForm";
+import Dashboard from "../Dashboard";
+import Navigation from "../Navigation/Navigation";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -46,8 +46,10 @@ class App extends Component {
 
   fetchData = async userId => {
     await this.props.fetchUser(userId);
-    if (this.props.companies.length)
-      await this.props.fetchCompany(this.props.companies[0]._id);
+
+    if (this.props.companies.length) console.log("Testing Run");
+    await this.props.fetchCompany(this.props.companies[0]._id);
+    console.log("Testing Again");
   };
 
   toggleAuthModal = () => {
@@ -65,7 +67,7 @@ class App extends Component {
       })
       .then(() => {
         this.setState({ loggedIn: false });
-        window.location.replace('/');
+        window.location.replace("/");
       })
       .catch(err => console.log(err));
   };
@@ -97,19 +99,19 @@ class App extends Component {
       total: formPayload.total
     };
     axios
-      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
+      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
-          responseType: 'blob'
+        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
+          responseType: "blob"
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return 'Error';
+        return "Error";
       });
   };
 
