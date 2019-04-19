@@ -59,7 +59,7 @@ type Invoice {
   invoiceDescription: String
   selectedDate: String
   invoiceDueDate: String
-  company: String!
+  company: String
   addressFrom: String
   cityTo: String
   stateTo: String
