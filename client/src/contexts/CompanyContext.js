@@ -105,9 +105,28 @@ export class CompanyProvider extends React.Component {
       this.setState({ customers: company.customers });
     };
 
-    this.fetchPlanOrCredits = async companyID => {
-      const plan = `unlimited_tier credits`;
-      const result = await FetchCompany(companyID, plan);
+    this.fetchCompanyData = async (companyID) => {
+      const result = await FetchCompany(companyID, companyData);
+      const { company } = result
+      this.setState({
+        companyID: company._id,
+        name: company.name,
+        email: company.email,
+        phone_num: company.phone_num,
+        address_1: company.address_1,
+        address_2: company.address_2,
+        city: company.city,
+        state: company.state,
+        postal_code: company.postal_code,
+        country: company.country,
+        unlimited_tier: company.unlimited_tier,
+        credits: company.credits,
+      })
+    }
+
+    this.fetchPlanOrCredits = async (companyID) => {
+      const plan = `unlimited_tier credits`
+      const result = await FetchCompany(companyID, plan )
       const { company } = result;
       this.setState({
         credits: company.credits,

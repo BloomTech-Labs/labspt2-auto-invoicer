@@ -49,30 +49,30 @@ type Customer {
 
 
 type Invoice {
-  _id: ID!
-  companyID: String!
-  companyName: String!
-  userID: String!
-  userName: String!
-  customerID: String! 
-  invoiceNumber: String!
-  invoiceDescription: String!
-  selectedDate: String!
-  invoiceDueDate: String!
-  company: String!
-  addressFrom: String!
+  _id: ID
+  companyID: String
+  companyName: String
+  userID: String
+  userName: String
+  customerID: String
+  invoiceNumber: String
+  invoiceDescription: String
+  selectedDate: String
+  invoiceDueDate: String
+  company: String
+  addressFrom: String
   cityTo: String
   stateTo: String
-  zipCodeTo: String!
+  zipCodeTo: String
   addressTo: String
-  emailTo: String!
+  emailTo: String
   subtotal: String
   discount: String
-  tax: String!
-  shipping: String!
+  tax: String
+  shipping: String
   total: String
   amountPaid: String
-  balanceDue: String!
+  balanceDue: String
   notes: String
   terms: String
 }

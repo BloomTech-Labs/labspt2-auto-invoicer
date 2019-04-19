@@ -32,7 +32,7 @@ export default class index extends Component {
                     />
                     <GoogleCalApi /> */}
                     <CreateInvoiceForm2
-                      click={this.props.click}
+                      history={this.props.history}
                       user={userState}
                       company={companyState}
                       fetchInvoices={fetchInvoices}
