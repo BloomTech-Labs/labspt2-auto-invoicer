@@ -12,8 +12,8 @@ const InvoicedCard = props => {
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
       <Paper className={classes.paper} style={{ position: 'relative' }}>
-        <Typography variant="h3" gutterBottom>
-          Total $ Invoiced
+        <Typography variant="h4" gutterBottom>
+          Total Invoiced
         </Typography>
         <InvoicedChart />
       </Paper>
