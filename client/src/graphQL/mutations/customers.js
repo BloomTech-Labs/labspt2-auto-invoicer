@@ -1,23 +1,23 @@
-import {Post, inputToString} from '../index'
+import { Post, inputToString } from '../index';
 
 export const CreateCustomer = async (customerInput, returnedData) => {
-  inputToString(customerInput)
+  const result = inputToString(customerInput);
 
   const CreateCustomer = {
     query: `
       mutation {
-        createCustomer(customerInput: {${customerInput}}) {
+        createCustomer(customerInput: {${result}}) {
           ${returnedData}
         }
       }
     `
-  }
-  const newCustomer = await Post(CreateCustomer)
-  return newCustomer.data.data
-}
+  };
+  const newCustomer = await Post(CreateCustomer);
+  return newCustomer.data.data;
+};
 
 export const EditCustomer = async (customerID, editedData, returnedData) => {
-  inputToString(editedData)
+  inputToString(editedData);
 
   const EditCustomer = {
     query: `
@@ -27,12 +27,16 @@ export const EditCustomer = async (customerID, editedData, returnedData) => {
         }
       }
     `
-  }
-  const editedCustomer = await Post(EditCustomer)
-  return editedCustomer.data.data
-}
+  };
+  const editedCustomer = await Post(EditCustomer);
+  return editedCustomer.data.data;
+};
 
-export const AddCustomerToCompany = async (customerID, companyID, returnedData) => {
+export const AddCustomerToCompany = async (
+  customerID,
+  companyID,
+  returnedData
+) => {
   const AddCustomerToCompany = {
     query: `
       mutation {
@@ -41,7 +45,7 @@ export const AddCustomerToCompany = async (customerID, companyID, returnedData) 
         }
       }
     `
-  }
-  const returnedCustomer = await Post(AddCustomerToCompany)
-  return returnedCustomer.data.data
-}
+  };
+  const returnedCustomer = await Post(AddCustomerToCompany);
+  return returnedCustomer.data.data;
+};
