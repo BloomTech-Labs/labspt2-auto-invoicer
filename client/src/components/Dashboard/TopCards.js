@@ -15,9 +15,7 @@ const TopCards = props => {
       {...(checked ? { timeout } : {})}
     >
       <Paper className={classes.paper}>
-        <Typography variant="h4" gutterBottom>
-          {children}
-        </Typography>
+        <div className={classes.topcards}>{children}</div>
       </Paper>
     </Grow>
   );

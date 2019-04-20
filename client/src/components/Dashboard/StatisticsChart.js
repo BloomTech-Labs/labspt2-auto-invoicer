@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
 const data = [
-  { name: 'Invoices', money: 400 },
-  { name: 'Unpaid', money: 250 },
-  { name: 'Collected', money: 300 }
+  { name: 'Late', money: 400 },
+  { name: 'Collected', money: 250 },
+  { name: 'Unpaid', money: 300 }
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+const COLORS = ['#ff3d00', '#00e676', '#40c4ff'];
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
@@ -36,7 +36,7 @@ const renderActiveShape = props => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} fontSize={16} textAnchor="middle" fill={fill}>
         {payload.name}
       </text>
       <Sector

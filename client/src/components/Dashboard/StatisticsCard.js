@@ -18,7 +18,7 @@ const StatisticsCard = props => {
     >
       <Paper className={classes.paper} style={{ position: 'relative' }}>
         <div className={classes.statistics}>
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Statistics
           </Typography>
           <StatisticsChart />
