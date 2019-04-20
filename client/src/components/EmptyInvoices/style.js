@@ -1,7 +1,7 @@
 import { fade } from "@material-ui/core/styles/colorManipulator";
 export default theme => ({
     root: {
-        width: "100%",
+        width: "99%",
         height:"1500",
         marginTop: theme.spacing.unit * 3
     },

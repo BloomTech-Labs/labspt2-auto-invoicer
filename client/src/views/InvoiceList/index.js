@@ -10,7 +10,6 @@ import Invoices from "../../components/Invoices";
 export default class index extends Component {
 
   render() {
-    console.log(this.props,"ii")
     return (
       <section className="invoice-list-container">
         <Invoices createPDF={this.props.click} />

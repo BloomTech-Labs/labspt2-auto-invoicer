@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { Paper, Grid, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
@@ -30,6 +31,9 @@ import Shipping from "./Shipping";
 import Total from "./Total";
 import AmountPaid from "./AmountPaid";
 import BalanceDue from "./BalanceDue";
+import { CreateInvoice } from "../../graphQL/mutations/invoices";
+
+// import history from '../reusableComponents/history/history'
 
 //@media (max-width: 500px)
 const StyledSection = styled.section`
@@ -118,6 +122,7 @@ class CreateInvoiceForm2 extends Component {
     discount: "",
     tax: "",
     shipping: "",
+    total: "",
     amountPaid: "",
     balanceDue: ""
   };
@@ -263,11 +268,42 @@ class CreateInvoiceForm2 extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.setState({
-      // invoiceNumber: "",
-      // invoiceDescription: ""
-    });
-    console.log(this.state);
+    const formPayload = {
+      invoiceNumber: this.state.invoiceNumber,
+      invoiceDescription: this.state.invoiceDescription,
+      selectedDate: this.state.selectedDate,
+      invoiceDueDate: this.state.invoiceDueDate,
+      company: this.state.company,
+      //invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
+      //invoiceNotesTermsItems: [{ notes: "", terms: "" }],
+      notes: this.state.invoiceNotesTermsItems.notes - 0,
+      terms: this.state.invoiceNotesTermsItems.terms - 0,
+      cityTo: this.state.cityTo,
+      stateTo: this.state.stateTo,
+      zipCodeTo: this.state.zipCodeTo,
+      addressTo: this.state.addressTo,
+      emailTo: this.state.emailTo,
+      subtotal: this.state.subtotal,
+      discount: this.state.discount,
+      tax: this.state.tax,
+      shipping: this.state.shipping,
+      total: this.state.total,
+      amountPaid: this.state.amountPaid,
+      balanceDue: this.state.balanceDue,
+      // from props
+      userID: this.props.user.userID,
+      userName: this.props.user.name,
+      addressFrom: this.props.company.address_1,
+      companyID: this.props.company.companyID,
+      companyName: this.props.company.name,
+      customerID: this.props.company.customers[0]._id
+    };
+    CreateInvoice(formPayload, "invoiceNumber total");
+    // this.props.click(formPayload);
+    this.props.fetchInvoices();
+    this.props.history.push(`/user/${this.props.user.userID}/invoices`);
+    console.log(this.props);
+    console.log(formPayload);
   };
 
   render() {

@@ -12,17 +12,18 @@ import './LandingGetStarted.css';
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    maxWidth: 280,
     backgroundColor: theme.palette.background.paper,
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.15)',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    maxWidth: 280,
+    width: '100%'
   },
   greenButton: {
-    fontSize: 14,
     backgroundColor: '#689f38',
+    color: '#fff',
+    fontSize: 14,
     '&:hover': {
       backgroundColor: '#212121'
     }
@@ -38,19 +39,19 @@ const styles = theme => ({
       .spacing.unit * 2}px`
   },
   icon: {
-    margin: theme.spacing.unit,
-    fontSize: 18
+    fontSize: 18,
+    margin: theme.spacing.unit
   },
   features: {
-    display: 'flex',
     alignItems: 'center',
     color: '#689f38',
+    display: 'flex',
     fontSize: 14
   },
   lockedFeatures: {
-    display: 'flex',
     alignItems: 'center',
     color: 'rgba(0, 0, 0, 0.54)',
+    display: 'flex',
     fontSize: 14
   },
   description: {
