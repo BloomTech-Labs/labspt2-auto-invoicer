@@ -37,22 +37,22 @@ export default class EditUserDetails extends Component {
             name={'name'}
             onChange={this.handleChange}
             value={this.state.name} />
-            <TextField
-              id={'email'}
-              label={'Email'}
-              fullWidth={true}
-              placeholder={'Email'}
-              name={'email'}
-              onChange={this.handleChange}
-              value={this.state.email} />
-            <TextField
-              id={'phone_num'}
-              label={'Phone Number'}
-              fullWidth={true}
-              placeholder={'Phone Number'}
-              name={'phone_num'}
-              onChange={this.handleChange}
-              value={this.state.phone_num} />
+          <TextField
+            id={'email'}
+            label={'Email'}
+            fullWidth={true}
+            placeholder={'Email'}
+            name={'email'}
+            onChange={this.handleChange}
+            value={this.state.email} />
+          <TextField
+            id={'phone_num'}
+            label={'Phone Number'}
+            fullWidth={true}
+            placeholder={'Phone Number'}
+            name={'phone_num'}
+            onChange={this.handleChange}
+            value={this.state.phone_num} />
         </form>
         <Button
           onClick={this.props.toggleView}>
