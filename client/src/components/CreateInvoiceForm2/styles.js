@@ -15,9 +15,13 @@ export default theme => ({
     padding: theme.spacing.unit
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: "20%",
-    fontSize: "1.5rem"
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit
+    //width: "20%",
+    //fontSize: "1.5rem"
+    // [theme.breakpoints.down("xs")]: {
+    //   //equivalent to max-width: 600px
+    //   backgroundColor: theme.palette.primary.main
+    // }
   }
 });

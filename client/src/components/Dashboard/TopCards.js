@@ -1,0 +1,26 @@
+import React from 'react';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grow from '@material-ui/core/Grow';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+import styles from './styles';
+
+const TopCards = props => {
+  const { checked, children, classes, timeout } = props;
+  return (
+    <Grow
+      in={checked}
+      style={{ transformOrigin: '0 0 0' }}
+      {...(checked ? { timeout } : {})}
+    >
+      <Paper className={classes.paper}>
+        <Typography variant="h4" gutterBottom>
+          {children}
+        </Typography>
+      </Paper>
+    </Grow>
+  );
+};
+
+export default withStyles(styles)(TopCards);
