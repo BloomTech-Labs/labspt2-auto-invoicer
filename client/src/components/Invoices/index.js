@@ -11,11 +11,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
-import MoreIcon from "@material-ui/icons/MoreVert";
-
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
@@ -49,11 +45,22 @@ class Invoices extends Component {
       page: 0,
       rowsPerPage: 10,
       search: "",
-      mobileMenuOpen: true
+      buttonSize: "large"
     };
   }
-  clickCloseOpen = () => {
-    this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen });
+  componentDidMount() {
+    this.rowsPerPage();
+    this.buttonSize();
+  }
+  rowsPerPage = () => {
+    window.innerWidth > 500
+      ? this.setState({ rowsPerPage: 10 })
+      : this.setState({ rowsPerPage: 5 });
+  };
+  buttonSize = () => {
+    window.innerWidth > 500
+      ? this.setState({ buttonSize: "large" })
+      : this.setState({ buttonSize: "medium" });
   };
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -176,40 +183,7 @@ class Invoices extends Component {
   };
   render() {
     const { classes } = this.props;
-    const { rowsPerPage, page, mobileMenuOpen } = this.state;
-    const ismobileMenuOpen = !mobileMenuOpen;
-    const renderMobileMenu = (
-      <UserConsumer>
-        {({ userState }) => {
-          return (
-            <Menu
-              open={ismobileMenuOpen}
-              style={{ marginTop: -345, marginLeft: 220 }}
-              onClose={this.clickCloseOpen}
-            >
-              <MenuItem
-                onClick={this.clickCloseOpen}
-                style={{ backgroundColor: "#8bc34a" }}
-              >
-                <Link to={`/user/${userState.userID}/invoice/create`}>
-                  <Button
-                    variant="contained"
-                    size="medium"
-                    style={{
-                      backgroundColor: "#689f38",
-                      color: "white"
-                    }}
-                    className={classes.margin}
-                  >
-                    Create
-                  </Button>
-                </Link>
-              </MenuItem>
-            </Menu>
-          );
-        }}
-      </UserConsumer>
-    );
+    const { rowsPerPage, page, buttonSize } = this.state;
     const themes = createMuiTheme({
       typography: {
         fontSize: 30,
@@ -267,7 +241,7 @@ class Invoices extends Component {
                                   />
                                 </div>
                                 <div className={classes.grow} />
-                                <div className={classes.sectionDesktop}>
+                                <div>
                                   <Link
                                     to={`/user/${
                                       userState.userID
@@ -279,25 +253,14 @@ class Invoices extends Component {
                                         backgroundColor: "#689f38",
                                         color: "white"
                                       }}
-                                      size="large"
-                                      color="primary"
+                                      size={buttonSize}
                                     >
                                       Create
                                     </Button>
                                   </Link>
                                 </div>
-                                <div className={classes.sectionMobile}>
-                                  <IconButton
-                                    aria-haspopup="true"
-                                    onClick={this.clickCloseOpen}
-                                    color="inherit"
-                                  >
-                                      <MoreIcon  />
-                                  </IconButton>
-                                </div>
                               </Toolbar>
                             </AppBar>
-                            {renderMobileMenu}
                           </div>
                           <div className={classes.tableWrapper}>
                             <Table className={classes.table}>
@@ -381,14 +344,14 @@ class Invoices extends Component {
                                         {invoice.companyName}
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 18 }}
+                                        style={{ fontSize: 17 }}
                                         align="center"
                                         colSpan={3}
                                       >
                                         {this.dueDate(invoice.invoiceDueDate)}
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 18 }}
+                                        style={{ fontSize: 17 }}
                                         align="center"
                                         colSpan={3}
                                       >

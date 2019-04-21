@@ -16,11 +16,19 @@ import "./EmptyInvoices.css";
 class EmptyInvoices extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { buttonSize: "large" };
   }
-
+  componentDidMount() {
+    this.buttonSize();
+  }
+  buttonSize = () => {
+    window.innerWidth > 500
+      ? this.setState({ buttonSize: "large" })
+      : this.setState({ buttonSize: "medium" });
+  };
   render() {
     const { classes, userID } = this.props;
+    const { buttonSize } = this.state;
     return (
       <Grow in={true} {...{ timeout: 1300 }}>
         <Paper
@@ -40,7 +48,7 @@ class EmptyInvoices extends Component {
                 <Button
                   variant="contained"
                   style={{ backgroundColor: "#689f38", color: "white" }}
-                  size="large"
+                  size={buttonSize}
                   color="primary"
                 >
                   Create
