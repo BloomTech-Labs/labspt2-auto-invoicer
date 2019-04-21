@@ -2,7 +2,7 @@ import React from "react";
 
 //import LandingText from "../LandingText";
 import LandingCTA from "../LandingText/LandingCTA.js";
-import { LandingFeatures } from "../LandingFeatures";
+import LandingFeaturesText from "../LandingText/LandingFeaturesText";
 import { LandingGetStarted } from "../LandingGetStarted";
 
 import HeadlineText from "../LandingText/HeadlineText";
@@ -12,7 +12,8 @@ const Landing = props => {
     <React.Fragment>
       <HeadlineText />
       <LandingCTA />
-      <LandingFeatures />
+      <LandingFeaturesText />
+      {/* <LandingFeatures /> */}
       <LandingGetStarted />
     </React.Fragment>
   );

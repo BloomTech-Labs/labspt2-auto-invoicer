@@ -13,20 +13,20 @@ const LandingFeatures = props => {
           <InvoicesSVG />
           {/* <img src="/assets/placeholder-460x300.png" /> */}
           <div className="top-row-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Non
-            curabitur gravida arcu ac. Vitae turpis massa sed elementum tempus.
-            Lacus laoreet non curabitur gravida arcu ac tortor dignissim.
-            Sagittis vitae et leo duis ut diam quam nulla.
+            Features: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Non curabitur gravida arcu ac. Vitae turpis massa sed elementum
+            tempus. Lacus laoreet non curabitur gravida arcu ac tortor
+            dignissim. Sagittis vitae et leo duis ut diam quam nulla.
           </div>
         </div>
         <div className="bot-row">
           <div className="bot-row-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Non
-            curabitur gravida arcu ac. Vitae turpis massa sed elementum tempus.
-            Lacus laoreet non curabitur gravida arcu ac tortor dignissim.
-            Sagittis vitae et leo duis ut diam quam nulla.
+            Next Features: Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Non curabitur gravida arcu ac. Vitae turpis massa sed
+            elementum tempus. Lacus laoreet non curabitur gravida arcu ac tortor
+            dignissim. Sagittis vitae et leo duis ut diam quam nulla.
           </div>
           <ChartsSVG />
           {/* <img src="/assets/placeholder-460x250.png" /> */}
