@@ -8,17 +8,17 @@ export default theme => ({
     width: "100%"
   },
   table: {
-    minWidth: 1000
+    minWidth: 1000,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      minWidth:0,
+    }
   },
   tableWrapper: {
     overflowX: "auto"
   },
   grow: {
     flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   title: {
     fontSize: 28,
@@ -43,7 +43,7 @@ export default theme => ({
     }
   },
   searchIcon: {
-    width: theme.spacing.unit * 11,
+    paddingLeft: 5,
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -56,29 +56,21 @@ export default theme => ({
     width: "100%"
   },
   inputInput: {
+    paddingTop: 5,
+    paddingRight: 10,
+    paddingBottom: 5,
+    paddingLeft: 30,
+    transition: theme.transitions.create("width"),
+    width: 60,
+    "&:focus": {
+      width: 165
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 300,
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create("width"),
-      width: 48,
-      "&:focus": {
-          width: 170
-      },
-    [theme.breakpoints.up("md")]: {
-      width: 300
     }
   },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
-  }
 });
