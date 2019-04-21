@@ -1,16 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import LandingText from '../LandingText';
-import { LandingCTA } from '../LandingCTA';
-import { LandingFeatures } from '../LandingFeatures';
-import { LandingGetStarted } from '../LandingGetStarted';
+//import LandingText from "../LandingText";
+import LandingCTA from "../LandingText/LandingCTA.js";
+import LandingFeaturesText from "../LandingText/LandingFeaturesText";
+import { LandingGetStarted } from "../LandingGetStarted";
+
+import HeadlineText from "../LandingText/HeadlineText";
 
 const Landing = props => {
   return (
     <React.Fragment>
-      <LandingText />
+      <HeadlineText />
       <LandingCTA />
-      <LandingFeatures />
+      <LandingFeaturesText />
+
       <LandingGetStarted />
     </React.Fragment>
   );
