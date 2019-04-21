@@ -13,7 +13,7 @@ const Landing = props => {
       <HeadlineText />
       <LandingCTA />
       <LandingFeaturesText />
-      {/* <LandingFeatures /> */}
+
       <LandingGetStarted />
     </React.Fragment>
   );
