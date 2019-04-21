@@ -21,11 +21,7 @@ export default class EditCompanyDetails extends Component {
 
   editCompany = async (editedData, returnedData) => {
     const {_id} = this.props.company
-    console.log('id', _id)
-    console.log('edited', editedData)
-    console.log('returnedData', returnedData)
-    const returned = await EditCompany(_id, editedData, returnedData)
-    console.log(returned)
+    await EditCompany(_id, editedData, returnedData)
     await this.props.fetchUserCompanies()
     this.props.toggleView()
   }
