@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { ReactComponent as InvoicesSVG } from '../../assets/undraw_printing_invoices_5r4r.svg';
-import { ReactComponent as ChartsSVG } from '../../assets/undraw_finance_0bdk.svg';
+import { ReactComponent as InvoicesSVG } from "../../assets/undraw_printing_invoices_5r4r.svg";
+import { ReactComponent as ChartsSVG } from "../../assets/undraw_finance_0bdk.svg";
 
-import './LandingFeatures.css';
+import "./LandingFeatures.css";
 
 const LandingFeatures = props => {
   return (
