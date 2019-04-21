@@ -182,33 +182,32 @@ class Invoices extends Component {
       <UserConsumer>
         {({ userState }) => {
           return (
-      <Menu
-        anchorOrigin={{ horizontal: "right",}}
-        transformOrigin={{ horizontal: "right", }}
-        open={ismobileMenuOpen}
-        style={{ marginTop: -350,marginLeft:-3 }}
-        onClose={this.clickCloseOpen}
-      >
-        <MenuItem
-          onClick={this.clickCloseOpen}
-          style={{ backgroundColor: "#8bc34a",}}
-        >
-          <Link to={`/user/${userState.userID}/invoice/create`}>
+            <Menu
+              open={ismobileMenuOpen}
+              style={{ marginTop: -345, marginLeft: 220 }}
+              onClose={this.clickCloseOpen}
+            >
+              <MenuItem
+                onClick={this.clickCloseOpen}
+                style={{ backgroundColor: "#8bc34a" }}
+              >
+                <Link to={`/user/${userState.userID}/invoice/create`}>
                   <Button
-            variant="contained"
-            size="medium"
-            style={{
-              backgroundColor: "#689f38",
-              color: "white"
-            }}
-            className={classes.margin}
-          >
-            Create
-          </Button>
-          </Link>
-        </MenuItem>
-      </Menu>
-              )}}
+                    variant="contained"
+                    size="medium"
+                    style={{
+                      backgroundColor: "#689f38",
+                      color: "white"
+                    }}
+                    className={classes.margin}
+                  >
+                    Create
+                  </Button>
+                </Link>
+              </MenuItem>
+            </Menu>
+          );
+        }}
       </UserConsumer>
     );
     const themes = createMuiTheme({
@@ -269,15 +268,22 @@ class Invoices extends Component {
                                 </div>
                                 <div className={classes.grow} />
                                 <div className={classes.sectionDesktop}>
-                                    <Link to={`/user/${userState.userID}/invoice/create`}>
-                                  <Button
-                                    variant="contained"
-                                    style={{ backgroundColor: "#689f38",color:"white" }}
-                                    size="large"
-                                    color="primary"
+                                  <Link
+                                    to={`/user/${
+                                      userState.userID
+                                    }/invoice/create`}
                                   >
-                                    Create
-                                  </Button>
+                                    <Button
+                                      variant="contained"
+                                      style={{
+                                        backgroundColor: "#689f38",
+                                        color: "white"
+                                      }}
+                                      size="large"
+                                      color="primary"
+                                    >
+                                      Create
+                                    </Button>
                                   </Link>
                                 </div>
                                 <div className={classes.sectionMobile}>
@@ -286,7 +292,7 @@ class Invoices extends Component {
                                     onClick={this.clickCloseOpen}
                                     color="inherit"
                                   >
-                                    <MoreIcon />
+                                      <MoreIcon  />
                                   </IconButton>
                                 </div>
                               </Toolbar>

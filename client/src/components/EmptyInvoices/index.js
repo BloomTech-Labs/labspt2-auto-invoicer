@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grow from "@material-ui/core/Grow";
 import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
 import { ReactComponent as Investing } from "../../assets/undraw_investing_7u74.svg";
 import Paper from "@material-ui/core/Paper";
@@ -31,10 +32,20 @@ class EmptyInvoices extends Component {
           className={classes.root}
         >
           <AppBar style={{ backgroundColor: "#8bc34a" }} position="static">
-            <Toolbar>
-              <Typography variant="h2" color="inherit" noWrap>
+            <Toolbar className={classes.toolbar}>
+              <Typography className={classes.title} color="inherit" noWrap>
                 Invoices
               </Typography>
+              <Link to={`/user/${userID}/invoice/create`}>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#689f38", color: "white" }}
+                  size="large"
+                  color="primary"
+                >
+                  Create
+                </Button>
+              </Link>
             </Toolbar>
           </AppBar>
           <div className="align">
