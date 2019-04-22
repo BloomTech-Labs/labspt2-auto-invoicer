@@ -1,6 +1,6 @@
-import {Post} from '../index'
+import { Post } from '../index';
 
-export const FetchCustomers = async (returnedData) => {
+export const FetchCustomers = async returnedData => {
   const Customers = {
     query: `
       query {
@@ -9,21 +9,21 @@ export const FetchCustomers = async (returnedData) => {
         }
       }
     `
-  }
-  const listOfCustomers = await Post(Customers)
-  return listOfCustomers.data.data
-}
+  };
+  const listOfCustomers = await Post(Customers);
+  return listOfCustomers.data.data;
+};
 
-export const FetchCustomer = async (customerID, returnedData) => {
+export const FetchCustomer = async (customerId, returnedData) => {
   const Customer = {
     query: `
       query {
-        customer(customerID: "${customerID}") {
+        customer(customerId: "${customerId}") {
           ${returnedData}
         }
       }
     `
-  }
+  };
   const returnedCustomer = await Post(Customer);
-  return returnedCustomer.data.data
-}
+  return returnedCustomer.data.data;
+};

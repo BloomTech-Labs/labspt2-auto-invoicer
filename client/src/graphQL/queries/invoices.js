@@ -1,6 +1,5 @@
-import {Post} from "../index";
+import { Post } from '../index';
 
-// fetch all invoices
 export const FetchInvoices = async returnedData => {
   const Invoices = {
     query: `
@@ -15,12 +14,11 @@ export const FetchInvoices = async returnedData => {
   return listOfInvoices.data.data;
 };
 
-// fetch single invoice
-export const FetchInvoice = async (invoiceID, returnedData) => {
+export const FetchInvoice = async (invoiceId, returnedData) => {
   const Invoice = {
     query: `
             query {
-                invoice(invoiceID: "${invoiceID}") {
+                invoice(invoiceId: "${invoiceId}") {
                     ${returnedData}
                 }
             }

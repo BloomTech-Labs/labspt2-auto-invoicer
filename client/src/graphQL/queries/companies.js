@@ -1,32 +1,31 @@
-import {Post} from "..";
+import { Post } from '..';
 
-export const FetchCompanies = async (returnedData) => {
+export const FetchCompanies = async returnedData => {
   const Companies = {
-      query: `
+    query: `
         query {
           companies {
             ${returnedData}
           }
         }
       `
-    }
+  };
 
-    const listOfCompanies = await Post(Companies)
-    return listOfCompanies.data.data
+  const listOfCompanies = await Post(Companies);
+  return listOfCompanies.data.data;
 };
 
-
-export const FetchCompany = async (companyID, returnedData) => {
+export const FetchCompany = async (companyId, returnedData) => {
   const Company = {
     query: `
       query {
-        company(companyID: "${companyID}") {
+        company(companyId: "${companyId}") {
           ${returnedData}
         }
       } 
       `
-    }
+  };
 
-  const returnedCompany = await Post(Company)
-  return returnedCompany.data.data
+  const returnedCompany = await Post(Company);
+  return returnedCompany.data.data;
 };

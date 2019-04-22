@@ -1,32 +1,31 @@
-import {Post} from "../index";
+import { Post } from '../index';
 
-export const FetchUsers = async (returnedData) => {
+export const FetchUsers = async returnedData => {
   const Users = {
-      query: `
+    query: `
         query {
           users {
             ${returnedData}
           }
         }
       `
-    }
+  };
 
-    const listOfUsers = await Post(Users)
-    return listOfUsers.data.data
+  const listOfUsers = await Post(Users);
+  return listOfUsers.data.data;
 };
 
-
-export const FetchUser = async (userID, returnedData) => {
+export const FetchUser = async (userId, returnedData) => {
   const User = {
     query: `
       query {
-        user(userID: "${userID}") {
+        user(userId: "${userId}") {
           ${returnedData}
         }
       } 
       `
-    }
+  };
 
-  const returnedUser = await Post(User)
-  return returnedUser.data.data
+  const returnedUser = await Post(User);
+  return returnedUser.data.data;
 };
