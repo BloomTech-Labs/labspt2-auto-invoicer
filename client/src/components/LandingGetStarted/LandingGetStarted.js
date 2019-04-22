@@ -91,7 +91,8 @@ const LandingGetStarted = props => {
             <Divider variant="middle" />
             <div className={classes.section2}>
               <Typography gutterBottom className={classes.description}>
-                Insert description for free here
+                Simply create a free account and get started with your free
+                invoice on the go!
               </Typography>
             </div>
             <div className={classes.section3}>
@@ -137,7 +138,9 @@ const LandingGetStarted = props => {
             <Divider variant="middle" />
             <div className={classes.section2}>
               <Typography gutterBottom className={classes.description}>
-                Insert description for premium here
+                Unlimited invoices for unlimited customers. Create an account to
+                save your invoices, customers and company settings for
+                convenient access.
               </Typography>
             </div>
             <div className={classes.section3}>
