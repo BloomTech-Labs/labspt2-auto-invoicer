@@ -16,13 +16,13 @@ export const CreateCustomer = async (customerInput, returnedData) => {
   return newCustomer.data.data;
 };
 
-export const EditCustomer = async (customerID, editedData, returnedData) => {
+export const EditCustomer = async (customerId, editedData, returnedData) => {
   inputToString(editedData);
 
   const EditCustomer = {
     query: `
       mutation {
-        editCustomer(customerID: "${customerID}", editCustomerInput: {${editedData}}) {
+        editCustomer(customerId: "${customerId}", editCustomerInput: {${editedData}}) {
           ${returnedData}
         }
       }
@@ -33,14 +33,14 @@ export const EditCustomer = async (customerID, editedData, returnedData) => {
 };
 
 export const AddCustomerToCompany = async (
-  customerID,
-  companyID,
+  customerId,
+  companyId,
   returnedData
 ) => {
   const AddCustomerToCompany = {
     query: `
       mutation {
-        addCustomerToCompany(customerID: "${customerID}", companyID: "${companyID}") {
+        addCustomerToCompany(customerId: "${customerId}", companyId: "${companyId}") {
           ${returnedData}
         }
       }

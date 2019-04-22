@@ -1,8 +1,8 @@
-import {Post, inputToString} from '../index'
+import { Post, inputToString } from '../index';
 
 export const CreateUser = async (userInput, returnedData) => {
-  inputToString(userInput)
-  
+  inputToString(userInput);
+
   const CreateUser = {
     query: `
       mutation {
@@ -13,38 +13,38 @@ export const CreateUser = async (userInput, returnedData) => {
     `
   };
 
-  const newUser = await Post(CreateUser)
-  return newUser.data.data
-}
+  const newUser = await Post(CreateUser);
+  return newUser.data.data;
+};
 
-export const EditUser = async (userID, editedData, returnedData) => {
-  editedData = inputToString(editedData)
-  
-    const EditUser = {
-      query: `
+export const EditUser = async (userId, editedData, returnedData) => {
+  editedData = inputToString(editedData);
+
+  const EditUser = {
+    query: `
         mutation {
-          editUser(userID: "${userID}", editUserInput: {${editedData}}) {
+          editUser(userId: "${userId}", editUserInput: {${editedData}}) {
             ${returnedData}
           }
         }
       `
-    };
+  };
 
-    const editedUser = await Post(EditUser)
-    return editedUser.data.data
-}
+  const editedUser = await Post(EditUser);
+  return editedUser.data.data;
+};
 
-export const AddUserToCompany = async (userID, companyID, returnedData) => {
+export const AddUserToCompany = async (userId, companyId, returnedData) => {
   const AddUserToCompany = {
-    query:  `
+    query: `
       mutation {
-        addUserToCompany(userID: "${userID}", companyID: "${companyID}") {
+        addUserToCompany(userId: "${userId}", companyId: "${companyId}") {
           ${returnedData}
         }
       }
     `
-  }
-  
+  };
+
   const returnedCompany = await Post(AddUserToCompany);
-  return returnedCompany.data.data
-}
+  return returnedCompany.data.data;
+};
