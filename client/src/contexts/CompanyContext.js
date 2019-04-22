@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { FetchCompany } from "../graphQL/queries/companies";
+import { FetchCompany } from '../graphQL/queries/companies';
 
 export const CompanyContext = React.createContext();
 
@@ -8,78 +8,111 @@ export class CompanyProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyID: "",
-      name: "",
-      email: "",
-      phone_num: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      state: "",
-      postal_code: "",
-      country: "",
-      unlimited_tier: false,
-      credits: 0,
+      _id: '',
+      name: '',
+      email: '',
+      phoneNumber: '',
+      address1: '',
+      address2: '',
+      zipCode: '',
+      city: '',
+      state: '',
+      premium: false,
+      premiumExpiresOn: '',
       users: [],
       customers: [],
       invoices: []
     };
     const companyData = `
-    _id 
-    name 
-    email 
-    phone_num 
-    address_1
-    address_2 
-    city 
-    state 
-    postal_code 
-    country 
-    unlimited_tier 
-    credits`;
-    const usersData = `users {_id name}`;
-    const customersData = `customers {_id name}`;
-    const invoicesData = `invoices {
       _id
-      invoiceNumber 
-      companyName 
-      userName 
-      invoiceDescription 
-      addressFrom 
-      addressTo 
-      cityTo 
-      stateTo 
-      zipCodeTo 
-      emailTo 
-      selectedDate 
-      invoiceDueDate 
-      balanceDue 
-      subtotal 
-      discount
-      tax 
-      shipping 
-      total 
-      amountPaid 
-      notes 
-      terms
-    }`;
-    this.fetchCompany = async companyID => {
+      name
+      email
+      phoneNumber
+      address1
+      address2
+      zipCode
+      city
+      state
+      premium
+      premiumExpiresOn
+    `;
+    const usersData = `
+      users {
+        _id
+        name
+      }
+    `;
+    const customersData = `
+      customers {
+        _id
+        name
+        email
+        phoneNumber
+        address1
+        address2
+        zipCode
+        city
+        state
+      }
+    `;
+    const invoicesData = `
+      invoices {
+        _id
+        createdBy
+        number
+        description
+        terms
+        date
+        dueDate
+        company {
+          _id
+          name
+          email
+          phoneNumber
+          address1
+          address2
+          zipCode
+          city
+          state
+        }
+        customer {
+          _id
+          name
+          email
+          phoneNumber
+          address1
+          address2
+          zipCode
+          city
+          state
+        }
+        subtotal
+        discount
+        tax
+        shipping
+        total
+        balance
+        notes
+        paid
+      }
+    `;
+    this.fetchCompany = async companyId => {
       const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`;
-      const result = await FetchCompany(companyID, returnedData);
+      console.log(returnedData);
+      const result = await FetchCompany(companyId, returnedData);
       const { company } = result;
       this.setState({
-        companyID: company._id,
+        _id: company._id,
         name: company.name,
         email: company.email,
-        phone_num: company.phone_num,
-        address_1: company.address_1,
-        address_2: company.address_2,
+        phoneNumber: company.phoneNumber,
+        address1: company.address1,
+        address2: company.address2,
+        zipCode: company.zipCode,
         city: company.city,
         state: company.state,
-        postal_code: company.postal_code,
-        country: company.country,
-        unlimited_tier: company.unlimited_tier,
-        credits: company.credits,
+        premium: company.premium,
+        premiumExpiresOn: company.premiumExpiresOn,
         users: company.users,
         customers: company.customers,
         invoices: company.invoices
@@ -87,50 +120,51 @@ export class CompanyProvider extends React.Component {
     };
 
     this.fetchInvoices = async () => {
-      const returnedData = `credits ${invoicesData}`;
-      const result = await FetchCompany(this.state.companyID, returnedData);
+      const returnedData = `${invoicesData}`;
+      const result = await FetchCompany(this.state._id, returnedData);
       const { company } = result;
-      this.setState({ invoices: company.invoices, credits: company.credits });
+      this.setState({ invoices: company.invoices });
     };
 
     this.fetchUsers = async () => {
-      const result = await FetchCompany(this.state.companyID, usersData);
+      const result = await FetchCompany(this.state._id, usersData);
       const { company } = result;
       this.setState({ users: company.users });
     };
 
     this.fetchCustomers = async () => {
-      const result = await FetchCompany(this.state.companyID, customersData);
+      const result = await FetchCompany(this.state._id, customersData);
       const { company } = result;
       this.setState({ customers: company.customers });
     };
 
-    this.fetchCompanyData = async (companyID) => {
-      const result = await FetchCompany(companyID, companyData);
-      const { company } = result
-      this.setState({
-        companyID: company._id,
-        name: company.name,
-        email: company.email,
-        phone_num: company.phone_num,
-        address_1: company.address_1,
-        address_2: company.address_2,
-        city: company.city,
-        state: company.state,
-        postal_code: company.postal_code,
-        country: company.country,
-        unlimited_tier: company.unlimited_tier,
-        credits: company.credits,
-      })
-    }
-
-    this.fetchPlanOrCredits = async (companyID) => {
-      const plan = `unlimited_tier credits`
-      const result = await FetchCompany(companyID, plan )
+    this.fetchCompanyData = async companyId => {
+      const result = await FetchCompany(companyId, companyData);
       const { company } = result;
       this.setState({
-        credits: company.credits,
-        unlimited_tier: company.unlimited_tier
+        _id: company._id,
+        name: company.name,
+        email: company.email,
+        phoneNumber: company.phoneNumber,
+        address1: company.address1,
+        address2: company.address2,
+        zipCode: company.zipCode,
+        city: company.city,
+        state: company.state,
+        premium: company.premium,
+        premiumExpiresOn: company.premiumExpiresOn,
+        users: company.users,
+        customers: company.customers,
+        invoices: company.invoices
+      });
+    };
+
+    this.fetchPlanOrCredits = async companyId => {
+      const plan = `premium`;
+      const result = await FetchCompany(companyId, plan);
+      const { company } = result;
+      this.setState({
+        premium: company.premium
       });
     };
   }
