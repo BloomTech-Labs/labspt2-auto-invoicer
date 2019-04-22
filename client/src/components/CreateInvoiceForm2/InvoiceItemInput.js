@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 //import "./InvoiceItemsInput.css";
-import { TextField } from "@material-ui/core";
+import { TextField } from '@material-ui/core';
 
 import {
   withStyles,
@@ -9,13 +9,13 @@ import {
   TableRow,
   TableCell,
   TableBody
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: 'auto'
   },
   table: {
     //maxWidth: 600
@@ -23,10 +23,11 @@ const styles = theme => ({
 });
 
 const InvoiceItemsInput = props => {
-  return props.invoiceItems.map((val, idx) => {
+  return props.items.map((val, idx) => {
     let itemId = `item-${idx}`,
+      descriptionId = `description-${idx}`,
       quantityId = `quantity-${idx}`,
-      rateId = `rate-${idx}`,
+      costId = `cost-${idx}`,
       amountId = `amount-${idx}`;
 
     const { classes } = props;
@@ -42,9 +43,9 @@ const InvoiceItemsInput = props => {
                   name={itemId}
                   data-id={idx}
                   id={itemId}
-                  value={props.invoiceItems[idx].name}
-                  className="item"
-                  placeholder={`Item #${idx + 1}`}
+                  value={props.items[idx].name}
+                  className="name"
+                  placeholder={`Name #${idx + 1}`}
                   InputProps={{
                     //style: { fontSize: 14 },
                     disableUnderline: true
@@ -55,10 +56,26 @@ const InvoiceItemsInput = props => {
               <TableCell align="center">
                 <TextField
                   type="text"
+                  name={descriptionId}
+                  data-id={idx}
+                  id={descriptionId}
+                  value={props.items[idx].description}
+                  className="description"
+                  placeholder={`Description #${idx + 1}`}
+                  InputProps={{
+                    //style: { fontSize: 14 },
+                    disableUnderline: true
+                  }}
+                  //variant="outlined"
+                />
+              </TableCell>
+              <TableCell align="center">
+                <TextField
+                  type="text"
                   name={quantityId}
                   data-id={idx}
-                  id={itemId}
-                  value={props.invoiceItems[idx].name}
+                  id={quantityId}
+                  value={props.items[idx].quantity}
                   className="quantity"
                   placeholder={`Quantity #${idx + 1}`}
                   InputProps={{
@@ -71,12 +88,12 @@ const InvoiceItemsInput = props => {
               <TableCell align="center">
                 <TextField
                   type="text"
-                  name={rateId}
+                  name={costId}
                   data-id={idx}
-                  id={rateId}
-                  value={props.invoiceItems[idx].name}
-                  className="rate"
-                  placeholder={`Rate #${idx + 1}`}
+                  id={costId}
+                  value={props.items[idx].cost}
+                  className="cost"
+                  placeholder={`Cost #${idx + 1}`}
                   InputProps={{
                     //style: { fontSize: 14 },
                     disableUnderline: true
@@ -90,7 +107,7 @@ const InvoiceItemsInput = props => {
                   name={amountId}
                   data-id={idx}
                   id={amountId}
-                  value={props.invoiceItems[idx].name}
+                  value={props.items[idx].amount}
                   className="amount"
                   placeholder={`Amount #${idx + 1}`}
                   InputProps={{

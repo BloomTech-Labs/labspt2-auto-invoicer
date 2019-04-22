@@ -10,49 +10,38 @@ import { CreateCustomer } from '../../graphQL/mutations/customers';
 
 class CustomerFormDialog extends Component {
   state = {
-    isOpened: false,
+    isOpened: true,
     name: '',
     email: '',
-    phone_num: '',
-    address_1: '',
-    address_2: '',
-    postal_code: '',
+    phoneNumber: '',
+    address1: '',
+    address2: '',
+    zipCode: '',
     city: '',
-    state: '',
-    country: ''
-  };
-
-  handleClickOpen = () => {
-    this.setState({ isOpened: true });
-  };
-
-  handleClose = () => {
-    this.setState({ isOpened: false });
+    state: ''
   };
 
   handleSave = async () => {
     const {
       name,
       email,
-      phone_num,
-      address_1,
-      address_2,
-      postal_code,
+      phoneNumber,
+      address1,
+      address2,
+      zipCode,
       city,
-      state,
-      country
+      state
     } = this.state;
-    await CreateCustomer(
+    const result = await CreateCustomer(
       {
         name,
         email,
-        phone_num,
-        address_1,
-        address_2,
-        postal_code,
+        phoneNumber,
+        address1,
+        address2,
+        zipCode,
         city,
-        state,
-        country
+        state
       },
       '_id'
     );
@@ -60,13 +49,12 @@ class CustomerFormDialog extends Component {
       isOpened: false,
       name: '',
       email: '',
-      phone_num: '',
-      address_1: '',
-      address_2: '',
-      postal_code: '',
+      phoneNumber: '',
+      address1: '',
+      address2: '',
+      zipCode: '',
       city: '',
-      state: '',
-      country: ''
+      state: ''
     });
   };
 
@@ -75,22 +63,32 @@ class CustomerFormDialog extends Component {
   };
 
   render() {
+    const {
+      name,
+      email,
+      phoneNumber,
+      address1,
+      address2,
+      zipCode,
+      city,
+      state
+    } = this.state;
     return (
       <div>
         <Dialog
           maxWidth="xs"
           open={this.state.isOpened}
-          onClose={this.handleClose}
+          onClose={this.props.onClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create Customer</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
               margin="dense"
               id="name"
               name="name"
-              value={this.state.name}
+              value={name}
               label="Name"
               type="text"
               fullWidth
@@ -101,37 +99,40 @@ class CustomerFormDialog extends Component {
               margin="dense"
               id="email"
               name="email"
-              value={this.state.email}
+              value={email}
               label="Email"
               type="email"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
               id="phone"
-              name="phone_num"
-              value={this.state.phone_num}
+              name="phoneNumber"
+              value={phoneNumber}
               label="Phone Number"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
-              id="address"
-              name="address_1"
-              value={this.state.address_1}
+              id="address1"
+              name="address1"
+              value={address1}
               label="Address 1"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
-              id="address 2"
-              name="address_2"
-              value={this.state.address_2}
+              id="address2"
+              name="address2"
+              value={address2}
               label="Address 2"
               type="text"
               fullWidth
@@ -140,46 +141,39 @@ class CustomerFormDialog extends Component {
             <TextField
               margin="dense"
               id="zipcode"
-              name="postal_code"
-              value={this.state.postal_code}
+              name="zipCode"
+              value={zipCode}
               label="Zip Code"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
               id="city"
               name="city"
-              value={this.state.city}
+              value={city}
               label="City"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
               id="state"
               name="state"
-              value={this.state.state}
+              value={state}
               label="State"
               type="text"
               fullWidth
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
-              id="country"
-              name="country"
-              value={this.state.country}
-              label="Country"
-              type="text"
-              fullWidth
+              required
               onChange={this.handleChange}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.props.onClose} color="primary">
               Cancel
             </Button>
             <Button onClick={this.handleSave} color="primary">

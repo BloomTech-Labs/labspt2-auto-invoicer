@@ -10,30 +10,22 @@ import { CreateItem } from '../../graphQL/mutations/items';
 
 class ItemFormDialog extends Component {
   state = {
-    isOpened: false,
+    isOpened: true,
     name: '',
     description: '',
     quantity: '',
-    rate: '',
+    cost: '',
     amount: ''
   };
 
-  handleClickOpen = () => {
-    this.setState({ isOpened: true });
-  };
-
-  handleClose = () => {
-    this.setState({ isOpened: false });
-  };
-
   handleSave = async () => {
-    const { name, description, quantity, rate, amount } = this.state;
+    const { name, description, quantity, cost, amount } = this.state;
     await CreateItem(
       {
         name,
         description,
         quantity,
-        rate,
+        cost,
         amount
       },
       '_id'
@@ -43,7 +35,7 @@ class ItemFormDialog extends Component {
       name: '',
       description: '',
       quantity: '',
-      rate: '',
+      cost: '',
       amount: ''
     });
   };
@@ -61,7 +53,7 @@ class ItemFormDialog extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create Item</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Item</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -72,10 +64,10 @@ class ItemFormDialog extends Component {
               label="Item"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="description"
               name="description"
@@ -93,16 +85,18 @@ class ItemFormDialog extends Component {
               label="Quantity"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
               margin="dense"
-              id="rate"
-              name="rate"
-              value={this.state.rate}
-              label="Rate"
+              id="cost"
+              name="cost"
+              value={this.state.cost}
+              label="Cost"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
             <TextField
@@ -113,6 +107,7 @@ class ItemFormDialog extends Component {
               label="Amount"
               type="text"
               fullWidth
+              required
               onChange={this.handleChange}
             />
           </DialogContent>

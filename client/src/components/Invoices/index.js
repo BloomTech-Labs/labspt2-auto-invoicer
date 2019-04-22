@@ -1,42 +1,42 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   withStyles,
   createMuiTheme,
   MuiThemeProvider
-} from "@material-ui/core/styles";
-import Grow from "@material-ui/core/Grow";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
-import SaveAlt from "@material-ui/icons/SaveAlt";
-import Edit from "@material-ui/icons/EditOutlined";
-import Money from "@material-ui/icons/AttachMoney";
-import Tooltip from "@material-ui/core/Tooltip";
+} from '@material-ui/core/styles';
+import Grow from '@material-ui/core/Grow';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Edit from '@material-ui/icons/EditOutlined';
+import Money from '@material-ui/icons/AttachMoney';
+import Tooltip from '@material-ui/core/Tooltip';
 // import components here
 
-import EmptyInvoices from "../EmptyInvoices";
-import { Link } from "react-router-dom";
-import styles from "./style";
+import EmptyInvoices from '../EmptyInvoices';
+import { Link } from 'react-router-dom';
+import styles from './style';
 
 // Import Data Here
 
-import { CompanyConsumer } from "../../contexts/CompanyContext";
-import { UserConsumer } from "../../contexts/UserContext";
+import { CompanyConsumer } from '../../contexts/CompanyContext';
+import { UserConsumer } from '../../contexts/UserContext';
 
 // import css here
 
-import "./Invoices.css";
+import './Invoices.css';
 
 class Invoices extends Component {
   constructor(props) {
@@ -44,8 +44,8 @@ class Invoices extends Component {
     this.state = {
       page: 0,
       rowsPerPage: 10,
-      search: "",
-      buttonSize: "large"
+      search: '',
+      buttonSize: 'large'
     };
   }
   componentDidMount() {
@@ -59,8 +59,8 @@ class Invoices extends Component {
   };
   buttonSize = () => {
     window.innerWidth > 500
-      ? this.setState({ buttonSize: "large" })
-      : this.setState({ buttonSize: "medium" });
+      ? this.setState({ buttonSize: 'large' })
+      : this.setState({ buttonSize: 'medium' });
   };
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -72,7 +72,7 @@ class Invoices extends Component {
     return str.slice(4, 16);
   };
   ellipsis = str => {
-    let shortened = str.length >= 5 ? str.slice(0, 5) + "..." : str;
+    let shortened = str.length >= 5 ? str.slice(0, 5) + '...' : str;
     return shortened;
   };
   handleChangeRowsPerPage = event => {
@@ -85,32 +85,32 @@ class Invoices extends Component {
     let day = date.slice(8, 10);
     let monthConvertedToNumber = 0;
     let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
     ];
     let monthInNumberForm = [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-      "12"
+      '01',
+      '02',
+      '03',
+      '04',
+      '05',
+      '06',
+      '07',
+      '08',
+      '09',
+      '10',
+      '11',
+      '12'
     ];
     for (let i = 0; i < months.length; i++) {
       if (months[i] === month) {
@@ -137,10 +137,10 @@ class Invoices extends Component {
   };
   invoiceSearch = invoices => {
     let invoicesToShow =
-      this.state.search === ""
+      this.state.search === ''
         ? invoices
         : invoices.filter(invoice => {
-            return invoice.invoiceNumber.includes(this.state.search);
+            return invoice.number.includes(this.state.search);
           });
     return invoicesToShow;
   };
@@ -152,17 +152,16 @@ class Invoices extends Component {
         useNextVariants: true
       }
     });
-    if (Number(invoice.amountPaid) >= Number(invoice.total)) {
+    if (Number(invoice.balance) >= Number(invoice.total)) {
       return (
         <MuiThemeProvider theme={theme}>
           <Tooltip placement="left" title="Paid">
-            <Money style={{ color: "green" }} />
+            <Money style={{ color: 'green' }} />
           </Tooltip>
         </MuiThemeProvider>
       );
     } else if (
-      this.lateChecker(Date()) >
-      this.lateChecker(String(invoice.invoiceDueDate))
+      this.lateChecker(Date()) > this.lateChecker(String(invoice.dueDate))
     ) {
       return (
         <MuiThemeProvider theme={theme}>
@@ -175,7 +174,7 @@ class Invoices extends Component {
       return (
         <MuiThemeProvider theme={theme}>
           <Tooltip placement="left" title="Outstanding">
-            <Money style={{ color: "yellow" }} />
+            <Money style={{ color: 'yellow' }} />
           </Tooltip>
         </MuiThemeProvider>
       );
@@ -203,20 +202,20 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <EmptyInvoices userID={userState.userID} />
+                      <EmptyInvoices userId={userState._id} />
                     ) : (
                       <Grow in={true} {...{ timeout: 1300 }}>
                         <Paper
                           style={{
-                            border: "2px solid #8bc34a",
-                            marginBottom: "20px"
+                            border: '2px solid #8bc34a',
+                            marginBottom: '20px'
                           }}
                           className={classes.root}
                         >
                           <div className={classes.rootbar}>
                             <AppBar
                               position="static"
-                              style={{ backgroundColor: "#8bc34a" }}
+                              style={{ backgroundColor: '#8bc34a' }}
                             >
                               <Toolbar>
                                 <Typography
@@ -243,15 +242,13 @@ class Invoices extends Component {
                                 <div className={classes.grow} />
                                 <div>
                                   <Link
-                                    to={`/user/${
-                                      userState.userID
-                                    }/invoice/create`}
+                                    to={`/user/${userState._id}/invoice/create`}
                                   >
                                     <Button
                                       variant="contained"
                                       style={{
-                                        backgroundColor: "#689f38",
-                                        color: "white"
+                                        backgroundColor: '#689f38',
+                                        color: 'white'
                                       }}
                                       size={buttonSize}
                                     >
@@ -267,7 +264,7 @@ class Invoices extends Component {
                               <TableBody>
                                 <TableRow
                                   style={{
-                                    borderBottom: "2px solid #8bc34a"
+                                    borderBottom: '2px solid #8bc34a'
                                   }}
                                 >
                                   <TableCell
@@ -317,7 +314,7 @@ class Invoices extends Component {
                                   .map(invoice => (
                                     <TableRow
                                       style={{
-                                        borderBottom: "2px solid #8bc34a"
+                                        borderBottom: '2px solid #8bc34a'
                                       }}
                                       key={invoice._id}
                                     >
@@ -327,7 +324,7 @@ class Invoices extends Component {
                                         align="center"
                                         style={{ fontSize: 18.5 }}
                                       >
-                                        {this.ellipsis(invoice.invoiceNumber)}
+                                        {this.ellipsis(invoice.number)}
                                       </TableCell>
                                       <TableCell
                                         component="th"
@@ -341,14 +338,14 @@ class Invoices extends Component {
                                         style={{ fontSize: 18 }}
                                         align="center"
                                       >
-                                        {invoice.companyName}
+                                        {invoice.company.name}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 17 }}
                                         align="center"
                                         colSpan={3}
                                       >
-                                        {this.dueDate(invoice.invoiceDueDate)}
+                                        {this.dueDate(invoice.dueDate)}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 17 }}
@@ -365,13 +362,13 @@ class Invoices extends Component {
                                           <Link
                                             className="card-links"
                                             to={`/user/${
-                                              userState.userID
+                                              userState._id
                                             }/invoice/${invoice._id}/edit`}
                                           >
                                             {this.toolTipSize(
                                               <Edit />,
-                                              "left",
-                                              "Edit"
+                                              'left',
+                                              'Edit'
                                             )}
                                           </Link>
                                         </IconButton>
@@ -382,8 +379,8 @@ class Invoices extends Component {
                                         >
                                           {this.toolTipSize(
                                             <SaveAlt />,
-                                            "right",
-                                            "Download"
+                                            'right',
+                                            'Download'
                                           )}
                                         </IconButton>
                                       </TableCell>
@@ -405,10 +402,10 @@ class Invoices extends Component {
                                     <TablePagination
                                       rowsPerPageOptions={[5, 10, 25]}
                                       backIconButtonProps={{
-                                        "aria-label": "Previous Page"
+                                        'aria-label': 'Previous Page'
                                       }}
                                       nextIconButtonProps={{
-                                        "aria-label": "Next Page"
+                                        'aria-label': 'Next Page'
                                       }}
                                       colSpan={3}
                                       count={
