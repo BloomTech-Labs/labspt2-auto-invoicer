@@ -26,7 +26,7 @@ const InvoiceItemTableHead = props => {
   const { classes } = props;
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table} style={{ backgroundColor: "#3F51B5" }}>
+      <Table className={classes.table} style={{ backgroundColor: "#4fc878" }}>
         <TableHead>
           <TableRow>
             <TableCell style={{ fontSize: 14, color: "white" }} align="left">
