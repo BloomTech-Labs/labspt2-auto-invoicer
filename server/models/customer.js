@@ -9,20 +9,20 @@ const customerSchema = new Schema({
     type: String,
     required: true
   },
-  phone_num: {
+  phoneNumber: {
     type: String,
     required: true
   },
-  country_code: {
+  address1: {
     type: String,
     required: true
   },
-  address_1: {
-    type: String,
-    required: true
-  },
-  address_2: {
+  address2: {
     type: String
+  },
+  zipCode: {
+    type: String,
+    required: true
   },
   city: {
     type: String,
@@ -32,26 +32,14 @@ const customerSchema = new Schema({
     type: String,
     required: true
   },
-  postal_code: {
-    type: String,
-    required: true
+  companies: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Company'
   },
-  country: {
-    type: String,
-    required: true
-  },
-  companies: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Company'
-    }
-  ],
-  invoices: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Invoice'
-    }
-  ]
+  invoices: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Invoice'
+  }
 });
 
 module.exports = model('Customer', customerSchema);

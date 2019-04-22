@@ -9,20 +9,20 @@ const companySchema = new Schema({
     type: String,
     required: true
   },
-  phone_num: {
+  phoneNumber: {
     type: String,
     required: true
   },
-  country_code: {
+  address1: {
     type: String,
     required: true
   },
-  address_1: {
-    type: String,
-    required: true
-  },
-  address_2: {
+  address2: {
     type: String
+  },
+  zipCode: {
+    type: String,
+    required: true
   },
   city: {
     type: String,
@@ -32,40 +32,30 @@ const companySchema = new Schema({
     type: String,
     required: true
   },
-  postal_code: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  unlimited_tier: {
+  premium: {
     type: Boolean,
+    required: true,
     default: false
   },
-  credits: {
-    type: Number,
-    default: 3
+  premiumExpiresOn: {
+    type: String
   },
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
-  customers: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Customer'
-    }
-  ],
-  invoices: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Invoice'
-    }
-  ]
+  users: {
+    type: [Schema.Types.ObjectId],
+    ref: 'User'
+  },
+  customers: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Customer'
+  },
+  invoices: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Invoice'
+  },
+  items: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Item'
+  }
 });
 
 module.exports = model('Company', companySchema);

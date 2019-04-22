@@ -1,20 +1,23 @@
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
-  description: {
+  name: {
     type: String,
     required: true
   },
+  description: {
+    type: String
+  },
   quantity: {
-    type: Number,
+    type: String,
     required: true
   },
-  rate: {
-    type: Number,
+  cost: {
+    type: String,
     required: true
   },
   amount: {
-    type: Number,
+    type: String,
     required: true
   }
 });
