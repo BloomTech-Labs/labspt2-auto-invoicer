@@ -1,6 +1,5 @@
 const Customer = require('../../models/customer');
 const Company = require('../../models/company');
-// const isAuth = require('../../middleware/isAuth');
 
 const {
   findDocumentById,
@@ -14,8 +13,8 @@ module.exports = {
   customers: () => {
     return findAllDocuments(Customer);
   },
-  customer: ({ customerID }) => {
-    return findDocumentById(customerID, Customer);
+  customer: ({ customerId }) => {
+    return findDocumentById(customerId, Customer);
   },
   createCustomer: async args => {
     formatData(args.customerInput);
@@ -23,15 +22,14 @@ module.exports = {
       const {
         name,
         email,
-        phone_num,
-        country_code,
-        address_1,
-        address_2,
+        phoneNumber,
+        address1,
+        address2,
+        zipCode,
         city,
-        state,
-        postal_code,
-        country
+        state
       } = args.customerInput;
+      // only check if customer exists for company
       const customerExists = await Customer.findOne({
         email
       });
@@ -41,14 +39,12 @@ module.exports = {
       const customer = new Customer({
         name,
         email,
-        phone_num,
-        country_code,
-        address_1,
-        address_2,
+        phoneNumber,
+        address1,
+        address2,
+        zipCode,
         city,
-        state,
-        postal_code,
-        country
+        state
       });
       const newCustomer = await customer.save();
       return {
@@ -58,13 +54,13 @@ module.exports = {
       throw error;
     }
   },
-  editCustomer: async ({ editCustomerInput, customerID }) => {
-    return updateDocumentById(editCustomerInput, customerID, Customer);
+  editCustomer: async ({ editCustomerInput, customerId }) => {
+    return updateDocumentById(editCustomerInput, customerId, Customer);
   },
-  addCustomerToCompany: async ({ customerID, companyID }) => {
+  addCustomerToCompany: async ({ customerId, companyId }) => {
     try {
-      const company = await Company.findById(companyID);
-      const customer = await Customer.findById(customerID);
+      const company = await Company.findById(companyId);
+      const customer = await Customer.findById(customerId);
       if (!company) {
         throw new Error('Company does not exist.');
       }
@@ -72,8 +68,8 @@ module.exports = {
         throw new Error('Customer does not exist.');
       }
       // TODO: checks
-      company.customers.push(customerID);
-      customer.companies.push(companyID);
+      company.customers.push(customerId);
+      customer.companies.push(companyId);
       const companyDetails = await company.save();
       const customerDetails = await customer.save();
       // TODO: allow nesting of companies on Customer

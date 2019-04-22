@@ -1,5 +1,4 @@
 const Company = require('../../models/company');
-// const User = require('../../models/user');
 
 const {
   updateDocumentById,
@@ -11,8 +10,8 @@ const {
 const { formatData } = require('../helpers/format');
 
 module.exports = {
-  company: ({ companyID }) => {
-    return findDocumentById(companyID, Company);
+  company: ({ companyId }) => {
+    return findDocumentById(companyId, Company);
   },
   companyByAnyField: ({ companyInput }) => {
     return findDocumentsByAnyField(companyInput, Company);
@@ -26,14 +25,12 @@ module.exports = {
       const {
         name,
         email,
-        phone_num,
-        country_code,
-        address_1,
-        address_2,
+        phoneNumber,
+        address1,
+        address2,
+        zipCode,
         city,
-        state,
-        postal_code,
-        country
+        state
       } = args.companyInput;
       const companyExists = await Company.findOne({
         email
@@ -44,14 +41,12 @@ module.exports = {
       const company = new Company({
         name,
         email,
-        phone_num,
-        country_code,
-        address_1,
-        address_2,
+        phoneNumber,
+        address1,
+        address2,
+        zipCode,
         city,
-        state,
-        postal_code,
-        country
+        state
       });
       const newCompany = await company.save();
       return {
@@ -61,20 +56,15 @@ module.exports = {
       throw err;
     }
   },
-  editCompany: ({ editCompanyInput, companyID }) => {
-    Object.keys(editCompanyInput).forEach(key => {
-      if (key === unlimited_tier || key === credits) {
-        delete editCompanyInput[key];
-      }
-      return updateDocumentById(editCompanyInput, companyID, Company);
-    });
+  editCompany: ({ editCompanyInput, companyId }) => {
+    return updateDocumentById(editCompanyInput, companyId, Company);
   },
-  buyPlanOrCredits: async ({ companyID, quantity }) => {
-    const company = await Company.findById(companyID);
+  buyPlanOrCredits: async ({ companyId, quantity }) => {
+    const company = await Company.findById(companyId);
     if (quantity) {
       company.credits += quantity;
     } else {
-      company.unlimited_tier = true;
+      company.premium = true;
     }
     const newCompany = await company.save();
     return newCompany._doc;
