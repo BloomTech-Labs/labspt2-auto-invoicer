@@ -23,7 +23,7 @@ export default class index extends Component {
               {({ companyState, fetchInvoices }) => {
                 return (
                   <div className="main-container">
-                    Views.
+                    Views 2.
                     {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}

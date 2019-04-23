@@ -7,7 +7,7 @@ import styles from "./styles";
 import { TextField } from "@material-ui/core";
 
 const InvoiceDescription = props => {
-  const { classes, onChangeHandler, value } = props;
+  const { classes, onChangeHandler, value, error, helperText } = props;
   return (
     <TextField
       id="filled-name"
@@ -20,6 +20,8 @@ const InvoiceDescription = props => {
       InputProps={{ style: { fontSize: 20 } }}
       margin="normal"
       variant="filled"
+      error={error}
+      helperText={helperText}
     />
   );
 };

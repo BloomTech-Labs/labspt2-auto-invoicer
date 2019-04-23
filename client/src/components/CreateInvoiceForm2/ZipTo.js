@@ -8,7 +8,7 @@ import styles from "./styles";
 import { TextField } from "@material-ui/core";
 
 const ZipTo = props => {
-  const { classes, onChangeHandler, value } = props;
+  const { classes, onChangeHandler, value, error, helperText } = props;
   return (
     <React.Fragment>
       <Typography variant="h4" gutterBottom>
@@ -25,6 +25,8 @@ const ZipTo = props => {
         InputProps={{ style: { fontSize: 12 } }}
         margin="normal"
         variant="filled"
+        error={error}
+        helperText={helperText}
       />
     </React.Fragment>
   );

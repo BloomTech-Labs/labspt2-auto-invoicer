@@ -31,7 +31,8 @@ const companies = [
 ];
 
 const CompanyDropDown = props => {
-  const { classes, onChangeHandler, value } = props;
+  const { classes, onChangeHandler, value, error, helperText } = props;
+
   return (
     <TextField
       InputProps={{
@@ -58,7 +59,8 @@ const CompanyDropDown = props => {
         className: classes.helperText,
         style: { fontSize: 14 }
       }}
-      helperText="Please select your company"
+      error={error}
+      helperText={helperText}
       margin="normal"
     >
       {companies.map(company => (

@@ -124,7 +124,8 @@ class CreateInvoiceForm2 extends Component {
     shipping: "",
     total: "",
     amountPaid: "",
-    balanceDue: ""
+    balanceDue: "",
+    errorText: ""
   };
 
   handleInputChange = name => event => {
@@ -268,46 +269,65 @@ class CreateInvoiceForm2 extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const formPayload = {
-      invoiceNumber: this.state.invoiceNumber,
-      invoiceDescription: this.state.invoiceDescription,
-      selectedDate: this.state.selectedDate,
-      invoiceDueDate: this.state.invoiceDueDate,
-      company: this.state.company,
-      //invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
-      //invoiceNotesTermsItems: [{ notes: "", terms: "" }],
-      notes: this.state.invoiceNotesTermsItems.notes - 0,
-      terms: this.state.invoiceNotesTermsItems.terms - 0,
-      cityTo: this.state.cityTo,
-      stateTo: this.state.stateTo,
-      zipCodeTo: this.state.zipCodeTo,
-      addressTo: this.state.addressTo,
-      emailTo: this.state.emailTo,
-      subtotal: this.state.subtotal,
-      discount: this.state.discount,
-      tax: this.state.tax,
-      shipping: this.state.shipping,
-      total: this.state.total,
-      amountPaid: this.state.amountPaid,
-      balanceDue: this.state.balanceDue,
-      // from props
-      userID: this.props.user.userID,
-      userName: this.props.user.name,
-      addressFrom: this.props.company.address_1,
-      companyID: this.props.company.companyID,
-      companyName: this.props.company.name,
-      customerID: this.props.company.customers[0]._id
-    };
-    CreateInvoice(formPayload, "invoiceNumber total");
-    // this.props.click(formPayload);
-    this.props.fetchInvoices();
-    this.props.history.push(`/user/${this.props.user.userID}/invoices`);
-    console.log(this.props);
-    console.log(formPayload);
+
+    if (
+      this.state.invoiceNumber.length === 0 ||
+      this.state.invoiceDescription.length === 0 ||
+      this.state.company.length === 0 ||
+      this.state.zipCodeTo.length === 0 ||
+      this.state.addressTo.length === 0 ||
+      this.state.emailTo.length === 0 ||
+      this.state.subtotal.length === 0 ||
+      this.state.discount.length === 0 ||
+      this.state.shipping.length === 0 ||
+      this.state.total.length === 0 ||
+      this.state.amountPaid.length === 0 ||
+      this.state.balanceDue.length === 0
+    ) {
+      this.setState({ errorText: "please enter your info" });
+    } else {
+      const formPayload = {
+        invoiceNumber: this.state.invoiceNumber,
+        invoiceDescription: this.state.invoiceDescription,
+        selectedDate: this.state.selectedDate,
+        invoiceDueDate: this.state.invoiceDueDate,
+        company: this.state.company,
+        //invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
+        //invoiceNotesTermsItems: [{ notes: "", terms: "" }],
+        notes: this.state.invoiceNotesTermsItems.notes - 0,
+        terms: this.state.invoiceNotesTermsItems.terms - 0,
+        cityTo: this.state.cityTo,
+        stateTo: this.state.stateTo,
+        zipCodeTo: this.state.zipCodeTo,
+        addressTo: this.state.addressTo,
+        emailTo: this.state.emailTo,
+        subtotal: this.state.subtotal,
+        discount: this.state.discount,
+        tax: this.state.tax,
+        shipping: this.state.shipping,
+        total: this.state.total,
+        amountPaid: this.state.amountPaid,
+        balanceDue: this.state.balanceDue,
+        // from props
+        userID: this.props.user.userID,
+        userName: this.props.user.name,
+        addressFrom: this.props.company.address_1,
+        companyID: this.props.company.companyID,
+        companyName: this.props.company.name,
+        customerID: this.props.company.customers[0]._id
+      };
+      CreateInvoice(formPayload, "invoiceNumber total");
+      // this.props.click(formPayload);
+      this.props.fetchInvoices();
+      this.props.history.push(`/user/${this.props.user.userID}/invoices`);
+      console.log(this.props);
+      console.log(formPayload);
+    }
   };
 
   render() {
     const { classes } = this.props;
+
     return (
       <Grid container spacing={16}>
         <Paper className={classes.paper}>
@@ -317,6 +337,16 @@ class CreateInvoiceForm2 extends Component {
                 <InvoiceNumberInput
                   onChangeHandler={this.handleInputChange("invoiceNumber")}
                   value={this.state.invoiceNumber}
+                  error={
+                    this.state.invoiceNumber.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.invoiceNumber
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={3}>
@@ -337,12 +367,32 @@ class CreateInvoiceForm2 extends Component {
                 <InvoiceDescription
                   onChangeHandler={this.handleInputChange("invoiceDescription")}
                   value={this.state.invoiceDescription}
+                  error={
+                    this.state.invoiceDescription.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.invoiceDescription
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
               <Grid item xs={3}>
                 <CompanyDropDown
                   onChangeHandler={this.handleInputChange("company")}
                   value={this.state.company}
+                  error={
+                    this.state.company.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.company
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledSection>
@@ -351,10 +401,30 @@ class CreateInvoiceForm2 extends Component {
                 <ZipTo
                   onChangeHandler={this.handleZipCodeToChange}
                   value={this.state.zipCodeTo}
+                  error={
+                    this.state.zipCodeTo.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.zipCodeTo
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <AddressTo
                   onChangeHandler={this.handleInputChange("addressTo")}
                   value={this.state.addressTo}
+                  error={
+                    this.state.addressTo.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.addressTo
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <CityTo
                   onChangeHandler={this.handleInputChange("cityTo")}
@@ -367,6 +437,16 @@ class CreateInvoiceForm2 extends Component {
                 <EmailTo
                   onChangeHandler={this.handleInputChange("emailTo")}
                   value={this.state.emailTo}
+                  error={
+                    this.state.emailTo.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.emailTo
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledAddress>
@@ -404,10 +484,30 @@ class CreateInvoiceForm2 extends Component {
                 <Subtotal
                   onChangeHandler={this.handleInputChange("subtotal")}
                   value={this.state.subtotal}
+                  error={
+                    this.state.subtotal.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.subtotal
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <Discount
                   onChangeHandler={this.handleInputChange("discount")}
                   value={this.state.discount}
+                  error={
+                    this.state.subtotal.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.discount
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <Tax
                   onChangeHandler={this.handleInputChange("tax")}
@@ -417,18 +517,58 @@ class CreateInvoiceForm2 extends Component {
                 <Shipping
                   onChangeHandler={this.handleInputChange("shipping")}
                   value={this.state.shipping}
+                  error={
+                    this.state.shipping.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.shipping
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <Total
                   onChangeHandler={this.handleInputChange("total")}
                   value={this.state.total}
+                  error={
+                    this.state.total.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.total
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <AmountPaid
                   onChangeHandler={this.handleInputChange("amountPaid")}
                   value={this.state.amountPaid}
+                  error={
+                    this.state.amountPaid.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.amountPaid
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <BalanceDue
                   onChangeHandler={this.handleInputChange("balanceDue")}
                   value={this.state.balanceDue}
+                  error={
+                    this.state.balanceDue.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.balanceDue
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledInvoiceBalance>
