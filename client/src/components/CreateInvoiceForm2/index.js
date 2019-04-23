@@ -273,6 +273,7 @@ class CreateInvoiceForm2 extends Component {
     if (
       this.state.invoiceNumber.length === 0 ||
       this.state.invoiceDescription.length === 0 ||
+      this.state.company.length === 0 ||
       this.state.zipCodeTo.length === 0 ||
       this.state.addressTo.length === 0 ||
       this.state.emailTo.length === 0 ||
@@ -419,6 +420,16 @@ class CreateInvoiceForm2 extends Component {
                 <CompanyDropDown
                   onChangeHandler={this.handleInputChange("company")}
                   value={this.state.company}
+                  error={
+                    this.state.company.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.company
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledSection>
