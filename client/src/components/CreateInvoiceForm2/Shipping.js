@@ -16,7 +16,7 @@ const styles = theme => ({
 });
 
 const Shipping = props => {
-  const { classes, onChangeHandler, value } = props;
+  const { classes, onChangeHandler, value, error, helperText } = props;
   return (
     <TextField
       id="filled-name"
@@ -28,6 +28,8 @@ const Shipping = props => {
       InputLabelProps={{ style: { fontSize: 12 } }}
       InputProps={{ style: { fontSize: 12 } }}
       margin="normal"
+      error={error}
+      helperText={helperText}
     />
   );
 };
