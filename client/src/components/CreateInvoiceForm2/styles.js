@@ -3,6 +3,12 @@ export default theme => ({
     //main container
     // dislay: "flex",
     // flexDirection: "column"
+    flexGrow: 1,
+    backgroundColor: "#eff7f2",
+    overflow: "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "0 400px",
+    paddingBottom: 200
   },
   grid: {
     //date picker grid
@@ -11,8 +17,8 @@ export default theme => ({
   paper: {
     zIndex: 1,
     position: "relative",
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit
+    margin: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 3
   },
   textField: {
     // marginLeft: theme.spacing.unit,
