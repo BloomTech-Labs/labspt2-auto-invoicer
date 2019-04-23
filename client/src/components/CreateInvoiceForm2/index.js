@@ -278,7 +278,8 @@ class CreateInvoiceForm2 extends Component {
       this.state.emailTo.length === 0 ||
       this.state.subtotal.length === 0 ||
       this.state.discount.length === 0 ||
-      this.state.shipping.length === 0
+      this.state.shipping.length === 0 ||
+      this.state.total.length === 0
     ) {
       this.setState({ errorText: "please enter your info" });
     } else {
@@ -554,6 +555,16 @@ class CreateInvoiceForm2 extends Component {
                 <Total
                   onChangeHandler={this.handleInputChange("total")}
                   value={this.state.total}
+                  error={
+                    this.state.total.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.total
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
                 <AmountPaid
                   onChangeHandler={this.handleInputChange("amountPaid")}
