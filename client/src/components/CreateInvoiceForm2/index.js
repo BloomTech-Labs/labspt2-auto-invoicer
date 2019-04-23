@@ -270,7 +270,10 @@ class CreateInvoiceForm2 extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
 
-    if (this.state.invoiceNumber.length === 0) {
+    if (
+      this.state.invoiceNumber.length === 0 ||
+      this.state.invoiceDescription.length === 0
+    ) {
       this.setState({ errorText: "please enter your info" });
     } else {
       const formPayload = {
@@ -366,8 +369,11 @@ class CreateInvoiceForm2 extends Component {
                       ? !!this.state.errorText
                       : false
                   }
-                  //error={this.state.errorText.length === 0 ? false : true}
-                  helperText={this.state.errorText}
+                  helperText={
+                    this.state.invoiceNumber
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={3}>
@@ -388,6 +394,16 @@ class CreateInvoiceForm2 extends Component {
                 <InvoiceDescription
                   onChangeHandler={this.handleInputChange("invoiceDescription")}
                   value={this.state.invoiceDescription}
+                  error={
+                    this.state.invoiceDescription.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.invoiceDescription
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
               <Grid item xs={3}>
