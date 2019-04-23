@@ -280,7 +280,8 @@ class CreateInvoiceForm2 extends Component {
       this.state.discount.length === 0 ||
       this.state.shipping.length === 0 ||
       this.state.total.length === 0 ||
-      this.state.amountPaid.length === 0
+      this.state.amountPaid.length === 0 ||
+      this.state.balanceDue.length === 0
     ) {
       this.setState({ errorText: "please enter your info" });
     } else {
@@ -584,6 +585,16 @@ class CreateInvoiceForm2 extends Component {
                 <BalanceDue
                   onChangeHandler={this.handleInputChange("balanceDue")}
                   value={this.state.balanceDue}
+                  error={
+                    this.state.balanceDue.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.balanceDue
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledInvoiceBalance>
