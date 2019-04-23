@@ -380,7 +380,8 @@ class CreateInvoiceForm2 extends Component {
                   <InvoiceItemInput invoiceItems={this.state.invoiceItems} />
                   <StyledButton
                     variant="contained"
-                    color="secondary"
+                    style={{ background: "#a8e4bc" }}
+                    //color="secondary"
                     onClick={this.addInvoiceItem}
                   >
                     Add Line Item +
@@ -434,7 +435,8 @@ class CreateInvoiceForm2 extends Component {
             <StyledButton
               onClick={this.handleFormSubmit}
               variant="contained"
-              color="primary"
+              style={{ background: "#4fc878" }}
+              //color="primary"
             >
               Generate
             </StyledButton>
