@@ -32,6 +32,7 @@ const companies = [
 
 const CompanyDropDown = props => {
   const { classes, onChangeHandler, value } = props;
+
   return (
     <TextField
       InputProps={{
