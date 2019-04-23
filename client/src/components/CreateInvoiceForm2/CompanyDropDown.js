@@ -59,7 +59,7 @@ const CompanyDropDown = props => {
         className: classes.helperText,
         style: { fontSize: 14 }
       }}
-      helperText="Please select your company"
+      helperText="Please pick a company"
       margin="normal"
     >
       {companies.map(company => (
