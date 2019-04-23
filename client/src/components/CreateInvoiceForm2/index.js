@@ -274,7 +274,8 @@ class CreateInvoiceForm2 extends Component {
       this.state.invoiceNumber.length === 0 ||
       this.state.invoiceDescription.length === 0 ||
       this.state.zipCodeTo.length === 0 ||
-      this.state.addressTo.length === 0
+      this.state.addressTo.length === 0 ||
+      this.state.emailTo.length === 0
     ) {
       this.setState({ errorText: "please enter your info" });
     } else {
@@ -456,6 +457,16 @@ class CreateInvoiceForm2 extends Component {
                 <EmailTo
                   onChangeHandler={this.handleInputChange("emailTo")}
                   value={this.state.emailTo}
+                  error={
+                    this.state.emailTo.length === 0
+                      ? !!this.state.errorText
+                      : false
+                  }
+                  helperText={
+                    this.state.emailTo
+                      ? !!this.state.errorText
+                      : this.state.errorText
+                  }
                 />
               </Grid>
             </StyledAddress>
