@@ -392,7 +392,7 @@ class Invoices extends Component {
                                         <IconButton>
                                           {this.toolTipSize(
                                             <EditDialog />,
-                                            "left",
+                                            "right",
                                             "Edit"
                                           )}
                                         </IconButton>

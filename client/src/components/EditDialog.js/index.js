@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from "react";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import {
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  Tooltip
 } from "@material-ui/core";
 import Edit from "@material-ui/icons/EditOutlined";
-//import Form from "./Form";
+import Form from "./Form";
 
 //import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -32,6 +34,22 @@ export default class extends Component {
     this.props.onCreate(exercise);
   };
 
+  toolTipSize = (component, placement, str) => {
+    const theme = createMuiTheme({
+      typography: {
+        fontSize: 25,
+        useNextVariants: true
+      }
+    });
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Tooltip placement={placement} title={str}>
+          {component}
+        </Tooltip>
+      </MuiThemeProvider>
+    );
+  };
+
   render() {
     const { open } = this.state,
       { muscles } = this.props;
@@ -39,14 +57,13 @@ export default class extends Component {
     return (
       <Fragment>
         <Button variant="fab" onClick={this.handleToggle} mini>
-          <Edit />
+          {this.toolTipSize(<Edit />, "right", "New Edit")}
         </Button>
         <Dialog open={open} onClose={this.handleToggle}>
-          <DialogTitle>Create a New Exercise</DialogTitle>
+          <DialogTitle>Edit Invoice Form</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Please fill out the form below.
-            </DialogContentText>
+            <DialogContentText>Please make your edits below.</DialogContentText>
+            <Form />
             {/* <Form muscles={muscles} onSubmit={this.handleFormSubmit} /> */}
           </DialogContent>
         </Dialog>
