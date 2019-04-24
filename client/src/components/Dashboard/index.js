@@ -28,9 +28,11 @@ class Dashboard extends Component {
       <CompanyConsumer>
         {({ companyState: { invoices } }) => {
           console.log(invoices);
-          const collected = invoices.reduce((invoice, acc) => {
-            return acc + invoice.amountPaid;
-          }, 0);
+          const collected = invoices.map(invoice => {
+            let total = 0;
+            total += invoice.amountPaid;
+            return total;
+          });
           return (
             <>
               <CssBaseline />
