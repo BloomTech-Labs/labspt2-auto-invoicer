@@ -29,7 +29,7 @@ class Dashboard extends Component {
         {({ companyState: { invoices } }) => {
           console.log(invoices);
           const collected = invoices.reduce((invoice, acc) => {
-            return invoice.amountPaid + acc;
+            return acc + invoice.amountPaid;
           }, 0);
           return (
             <>
