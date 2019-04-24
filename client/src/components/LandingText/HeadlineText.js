@@ -24,7 +24,17 @@ const HeadlineText = props => {
   return (
     <div className={classes.container}>
       <div className={classes.root}>
-        <Typography variant="h1">Invoicing Solved</Typography>
+        <Typography
+          variant="h1"
+          style={{
+            fontFamily: "roboto",
+            fontSize: 95,
+            fontWeight: 500,
+            color: "white"
+          }}
+        >
+          Invoicing Solved
+        </Typography>
         <br />
         <Typography variant="h4">Turn sales into cashflow.</Typography>
       </div>
