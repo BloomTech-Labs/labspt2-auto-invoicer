@@ -78,15 +78,17 @@ const renderActiveShape = props => {
 
 export default class StatisticsChart extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
-
-  state = {
-    activeIndex: 0,
-    data: [
-      { name: 'Late', money: 400 },
-      { name: 'Collected', money: this.props.collected },
-      { name: 'Unpaid', money: 300 }
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: 0,
+      data: [
+        { name: 'Late', money: 400 },
+        { name: 'Collected', money: this.props.collected },
+        { name: 'Unpaid', money: 300 }
+      ]
+    };
+  }
 
   onPieEnter = (data, index) => {
     this.setState({

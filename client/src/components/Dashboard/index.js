@@ -33,6 +33,7 @@ class Dashboard extends Component {
             total += invoice.amountPaid;
             return total;
           });
+          console.log('dashboard', collected);
           return (
             <>
               <CssBaseline />
