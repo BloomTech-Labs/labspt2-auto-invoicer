@@ -28,10 +28,9 @@ class Dashboard extends Component {
       <CompanyConsumer>
         {({ companyState: { invoices } }) => {
           console.log(invoices);
-          const collected = invoices.map(invoice => {
-            let total = 0;
-            total += Number(invoice.amountPaid);
-            return total;
+          const collected = 0;
+          invoices.map(invoice => {
+            return (collected += Number(invoice.amountPaid));
           });
           console.log('dashboard', collected);
           return (
