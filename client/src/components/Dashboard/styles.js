@@ -113,7 +113,8 @@ export default theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    cursor: 'pointer'
   },
   tooltip: {
     backgroundColor: theme.palette.common.white,
