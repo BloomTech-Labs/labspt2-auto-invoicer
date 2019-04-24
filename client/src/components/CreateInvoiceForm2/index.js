@@ -225,7 +225,7 @@ class CreateInvoiceForm2 extends Component {
           `https://cors-anywhere.herokuapp.com/https://api.zip-tax.com/request/v40?key=jXN4sqZiwuMr8HCA&postalcode=${zip}`
         )
         .then(res => {
-          this.setState({ tax: res.data.results[0].taxSales});
+          this.setState({ tax: res.data.results[0].taxSales });
         });
     }
   };
@@ -245,13 +245,10 @@ class CreateInvoiceForm2 extends Component {
             cityTo: res.data.city,
             stateTo: res.data.state
           });
-
           return this.getTaxRateObject(zipcode);
         })
         .catch(error => {
           console.log("Server Error", error);
-          
-
         });
     } else {
       this.setState({ cityTo: "", stateTo: "", tax: "" });
