@@ -386,6 +386,23 @@ class Invoices extends Component {
                                             "Download"
                                           )}
                                         </IconButton>
+                                        {/* Experimental */}
+                                        <IconButton>
+                                          <Link
+                                            style={{ color: "red" }}
+                                            className="card-links"
+                                            to={`/user/${
+                                              userState.userID
+                                            }/invoice/${invoice._id}/edit`}
+                                          >
+                                            {this.toolTipSize(
+                                              <Edit />,
+                                              "left",
+                                              "Edit"
+                                            )}
+                                          </Link>
+                                        </IconButton>
+                                        {/* Experimental */}
                                       </TableCell>
                                     </TableRow>
                                   ))}
