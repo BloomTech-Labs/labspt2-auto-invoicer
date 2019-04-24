@@ -29,6 +29,8 @@ import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
 import styles from "./style";
 
+import EditDialog from "../EditDialog.js";
+
 // Import Data Here
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
@@ -386,6 +388,15 @@ class Invoices extends Component {
                                             "Download"
                                           )}
                                         </IconButton>
+                                        {/* Experimental */}
+                                        <IconButton>
+                                          {this.toolTipSize(
+                                            <EditDialog />,
+                                            "right",
+                                            "Edit"
+                                          )}
+                                        </IconButton>
+                                        {/* Experimental */}
                                       </TableCell>
                                     </TableRow>
                                   ))}
