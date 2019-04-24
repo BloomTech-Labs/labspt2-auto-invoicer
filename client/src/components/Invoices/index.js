@@ -29,6 +29,8 @@ import EmptyInvoices from "../EmptyInvoices";
 import { Link } from "react-router-dom";
 import styles from "./style";
 
+import EditDialog from "../EditDialog.js";
+
 // Import Data Here
 
 import { CompanyConsumer } from "../../contexts/CompanyContext";
@@ -388,19 +390,11 @@ class Invoices extends Component {
                                         </IconButton>
                                         {/* Experimental */}
                                         <IconButton>
-                                          <Link
-                                            style={{ color: "red" }}
-                                            className="card-links"
-                                            to={`/user/${
-                                              userState.userID
-                                            }/invoice/${invoice._id}/edit`}
-                                          >
-                                            {this.toolTipSize(
-                                              <Edit />,
-                                              "left",
-                                              "Edit"
-                                            )}
-                                          </Link>
+                                          {this.toolTipSize(
+                                            <EditDialog />,
+                                            "left",
+                                            "Edit"
+                                          )}
                                         </IconButton>
                                         {/* Experimental */}
                                       </TableCell>
