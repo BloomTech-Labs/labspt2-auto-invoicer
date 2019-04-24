@@ -28,8 +28,8 @@ const HeadlineText = props => {
           variant="h1"
           style={{
             fontFamily: "roboto",
-
-            fontWeight: "600",
+            fontSize: 95,
+            fontWeight: 500,
             color: "white"
           }}
         >
