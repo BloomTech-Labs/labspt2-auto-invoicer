@@ -26,8 +26,11 @@ class Dashboard extends Component {
     const { checked } = this.state;
     return (
       <CompanyConsumer>
-        {({ companyState }) => {
-          console.log(companyState);
+        {({ companyState: { invoices } }) => {
+          console.log(invoices);
+          const collected = invoices.reduce((invoice, acc) => {
+            return invoice.amountPaid + acc;
+          }, 0);
           return (
             <>
               <CssBaseline />
@@ -51,12 +54,12 @@ class Dashboard extends Component {
                                 classes={{ tooltip: classes.tooltip }}
                               >
                                 <div className={classes.invoicesCircle}>
-                                  <icon
+                                  <i
                                     className="material-icons"
                                     style={{ color: '#0d47a1' }}
                                   >
                                     file_copy
-                                  </icon>
+                                  </i>
                                 </div>
                               </Tooltip>
                             </div>
@@ -71,12 +74,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.percentageComparison}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#00897b', marginRight: 12 }}
                                 >
                                   arrow_upward
-                                </icon>
+                                </i>
                                 <span className={classes.percentagePos}>
                                   12.05%
                                 </span>
@@ -94,12 +97,12 @@ class Dashboard extends Component {
                                 classes={{ tooltip: classes.tooltip }}
                               >
                                 <div className={classes.usersCircle}>
-                                  <icon
+                                  <i
                                     className="material-icons"
                                     style={{ color: '#e65100' }}
                                   >
                                     supervisor_account
-                                  </icon>
+                                  </i>
                                 </div>
                               </Tooltip>
                             </div>
@@ -114,12 +117,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.percentageComparison}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#ff5722', marginRight: 12 }}
                                 >
                                   arrow_downward
-                                </icon>
+                                </i>
                                 <span className={classes.percentageNeg}>
                                   3.89%
                                 </span>
@@ -136,12 +139,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.shortcutsCircle}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#e65100', fontSize: 36 }}
                                 >
                                   note_add
-                                </icon>
+                                </i>
                               </div>
                             </Tooltip>
                             <Tooltip
@@ -149,12 +152,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.shortcutsCircle}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#e65100', fontSize: 36 }}
                                 >
                                   attach_money
-                                </icon>
+                                </i>
                               </div>
                             </Tooltip>
                             <Tooltip
@@ -162,12 +165,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.shortcutsCircle}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#e65100', fontSize: 36 }}
                                 >
                                   person_add
-                                </icon>
+                                </i>
                               </div>
                             </Tooltip>
                             <Tooltip
@@ -175,12 +178,12 @@ class Dashboard extends Component {
                               classes={{ tooltip: classes.tooltip }}
                             >
                               <div className={classes.shortcutsCircle}>
-                                <icon
+                                <i
                                   className="material-icons"
                                   style={{ color: '#e65100', fontSize: 36 }}
                                 >
                                   add_to_queue
-                                </icon>
+                                </i>
                               </div>
                             </Tooltip>
                           </div>
@@ -192,7 +195,10 @@ class Dashboard extends Component {
                         <InvoicedCard checked={checked} />
                       </Grid>
                       <Grid item xs={12} md={4}>
-                        <StatisticsCard checked={checked} />
+                        <StatisticsCard
+                          collected={collected}
+                          checked={checked}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>

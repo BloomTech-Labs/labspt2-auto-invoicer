@@ -3,7 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
-import Button from '@material-ui/core/Button';
 
 import styles from './styles';
 
