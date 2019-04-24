@@ -30,7 +30,7 @@ class Dashboard extends Component {
           console.log(invoices);
           let collected = 0;
           invoices.map(invoice => {
-            return (collected += Number(invoice.amountPaid));
+            return (collected = collected + Number(invoice.amountPaid));
           });
           console.log('dashboard', collected);
           return (
