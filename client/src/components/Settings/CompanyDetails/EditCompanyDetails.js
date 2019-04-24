@@ -23,6 +23,7 @@ export default class EditCompanyDetails extends Component {
     const {_id} = this.props.company
     await EditCompany(_id, editedData, returnedData)
     await this.props.fetchUserCompanies()
+    await this.props.fetchCurrentCompany(this.props.company)
     this.props.toggleView()
   }
 
@@ -32,7 +33,7 @@ export default class EditCompanyDetails extends Component {
 
   render() {
     return (
-      <div>
+      <form>
         <TextField
           id={'name'}
           label={'Name'}
@@ -99,7 +100,7 @@ export default class EditCompanyDetails extends Component {
           value={this.state.postal_code}/>
         <Button onClick={this.props.toggleView}>Cancel</Button>
         <Button onClick={() => this.editCompany(this.state, '_id')} >Save</Button>
-      </div>
+      </form>
     )
   }
 }

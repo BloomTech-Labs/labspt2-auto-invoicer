@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
+
 import { UserConsumer } from '../../../contexts/UserContext';
+
 import ViewCompanyDetails from './ViewCompanyDetails'
 import EditCompanyDetails from './EditCompanyDetails'
 import SelectCompany from './SelectCompany'
 
 import { Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../styles'
+
 import {FetchCompany} from '../../../graphQL/queries/companies'
 
-export default class index extends Component {
+class CompanyDetails extends Component {
   state = {
     edit: false,
     selectedCompany: '',
@@ -29,6 +34,11 @@ export default class index extends Component {
     this.setState({selectedCompany: e.target.value, companyData})
   }
 
+  handleUpdatedCompany = async companyID => {
+    const companyData = await this.fetchCompany(companyID);
+    this.setState({companyData})
+  }
+
   setDefaultCompany = async company => {
     if (!this.state.selectedCompany && company) {
       const companyData = await this.fetchCompany(company)
@@ -43,13 +53,14 @@ export default class index extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <UserConsumer>
         {({userState: {companies, defaultCompany}, fetchUserCompanies}) => {
             this.setDefaultCompany(defaultCompany)
           return (
-            <Paper>
-              <SelectCompany 
+            <Paper className={classes.cards}>
+              <SelectCompany
                 companies={companies} 
                 handleSelect={this.handleSelect}
                 selectedCompany={this.state.selectedCompany} />
@@ -60,6 +71,7 @@ export default class index extends Component {
               <EditCompanyDetails 
               company={this.state.companyData}
               fetchUserCompanies={fetchUserCompanies}
+              fetchCurrentCompany={this.handleUpdatedCompany}
               toggleView={this.toggleView} />}
             </Paper>
           )
@@ -68,3 +80,5 @@ export default class index extends Component {
     )
   }
 }
+
+export default withStyles(styles)(CompanyDetails); 
