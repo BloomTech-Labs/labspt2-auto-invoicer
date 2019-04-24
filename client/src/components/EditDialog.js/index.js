@@ -51,8 +51,8 @@ export default class extends Component {
   };
 
   render() {
-    const { open } = this.state,
-      { muscles } = this.props;
+    const { open } = this.state;
+    // { muscles } = this.props;
 
     return (
       <Fragment>
@@ -64,7 +64,6 @@ export default class extends Component {
           <DialogContent>
             <DialogContentText>Please make your edits below.</DialogContentText>
             <Form />
-            {/* <Form muscles={muscles} onSubmit={this.handleFormSubmit} /> */}
           </DialogContent>
         </Dialog>
       </Fragment>
