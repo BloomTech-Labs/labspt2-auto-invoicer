@@ -18,7 +18,7 @@ export class UserProvider extends React.Component {
 
     this.fetchUser = async userID => {
       const returnedData =
-        '_id name email phone_num companies {_id name credits unlimited_tier}';
+        '_id name email phone_num companies {_id name}';
       const result = await FetchUser(userID, returnedData);
       const { _id, email, name, phone_num, companies } = result.user;
       this.setState({
@@ -26,9 +26,17 @@ export class UserProvider extends React.Component {
         email,
         name,
         phone_num,
-        companies
+        companies,
+        defaultCompany: companies[0],
       });
     };
+
+    this.fetchUserCompanies = async () => {
+      const returnedData = 'companies {_id name}'
+      const result = await FetchUser(this.state.userID, returnedData)
+      const {companies} = result.user
+      this.setState({companies})
+    }
 
     this.fetchUserData = async () => {
       const returnedData = 'name email phone_num'
@@ -43,10 +51,10 @@ export class UserProvider extends React.Component {
   }
 
   render() {
-    const { fetchUser, fetchUserData } = this;
+    const { fetchUser, fetchUserData, fetchUserCompanies } = this;
     const userState = this.state;
     return (
-      <UserContext.Provider value={{ userState, fetchUser, fetchUserData }}>
+      <UserContext.Provider value={{ userState, fetchUser, fetchUserData, fetchUserCompanies }}>
         {this.props.children}
       </UserContext.Provider>
     );
