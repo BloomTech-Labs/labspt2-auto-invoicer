@@ -95,6 +95,7 @@ export default class StatisticsChart extends PureComponent {
   };
 
   render() {
+    console.log(this.props.collected, this.state.collected);
     return (
       <PieChart width={400} height={400}>
         <Pie
