@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Grow from '@material-ui/core/Grow';
 import withStyles from '@material-ui/core/styles/withStyles';
 

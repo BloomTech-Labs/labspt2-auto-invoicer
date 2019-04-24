@@ -1,12 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
-const data = [
-  { name: 'Late', money: 400 },
-  { name: 'Collected', money: 250 },
-  { name: 'Unpaid', money: 300 }
-];
-
 const COLORS = ['#ff3d00', '#00e676', '#40c4ff'];
 
 const renderActiveShape = props => {
@@ -86,7 +80,12 @@ export default class StatisticsChart extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
 
   state = {
-    activeIndex: 0
+    activeIndex: 0,
+    data: [
+      { name: 'Late', money: 400 },
+      { name: 'Collected', money: this.props.collected },
+      { name: 'Unpaid', money: 300 }
+    ]
   };
 
   onPieEnter = (data, index) => {
@@ -101,7 +100,7 @@ export default class StatisticsChart extends PureComponent {
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={this.state.data}
           cx={160}
           cy={100}
           innerRadius={40}
@@ -110,7 +109,7 @@ export default class StatisticsChart extends PureComponent {
           dataKey="money"
           onMouseEnter={this.onPieEnter}
         >
-          {data.map((entry, index) => (
+          {this.state.data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>

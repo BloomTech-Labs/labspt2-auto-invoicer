@@ -1,7 +1,6 @@
 export default theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
     backgroundSize: 'cover',
     backgroundPosition: '0 400px',
