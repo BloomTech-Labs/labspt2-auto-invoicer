@@ -52,7 +52,7 @@ export const EditAmountPaid = async (invoiceID, amountPaid, returnedData) => {
 // EditTotal & EditBalanceDue
 export const EditTotal = async (invoiceID, total, returnedData) => {
   // const amount = amountPaid.toString();
-  const EditAmountPaid = {
+  const EditTotal = {
     query: `
                   mutation {
                       editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {total: "${total}"}) {

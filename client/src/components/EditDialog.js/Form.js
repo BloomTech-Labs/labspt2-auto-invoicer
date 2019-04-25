@@ -7,7 +7,12 @@ import Total from "../CreateInvoiceForm2/Total";
 import AmountPaid from "../CreateInvoiceForm2/AmountPaid";
 import BalanceDue from "../CreateInvoiceForm2/BalanceDue";
 import { FetchInvoice } from "../../graphQL/queries/invoices";
-import { EditAmountPaid } from "../../graphQL/mutations/invoices";
+import {
+  EditAmountPaid,
+  EditTotal,
+  EditBalanceDue,
+  EditInvoice
+} from "../../graphQL/mutations/invoices";
 
 export default withStyles(styles)(
   class extends Component {
@@ -66,8 +71,20 @@ export default withStyles(styles)(
       e.preventDefault();
       await EditAmountPaid(
         this.state.invoice._id,
-        this.state.total,
+
         this.state.amountPaid,
+
+        "amountPaid"
+      );
+      await EditTotal(
+        this.state.invoice._id,
+        this.state.total,
+
+        "total"
+      );
+      await EditBalanceDue(
+        this.state.invoice._id,
+
         this.state.balanceDue,
         "balanceDue"
       );
