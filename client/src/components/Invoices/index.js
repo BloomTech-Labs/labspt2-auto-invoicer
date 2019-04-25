@@ -391,7 +391,7 @@ class Invoices extends Component {
                                         {/* Experimental */}
                                         <IconButton>
                                           {this.toolTipSize(
-                                            <EditDialog />,
+                                            <EditDialog id={invoice._id} />,
                                             "right",
                                             "Edit"
                                           )}

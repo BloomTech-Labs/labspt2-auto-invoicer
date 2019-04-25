@@ -63,7 +63,7 @@ export default class extends Component {
           <DialogTitle>Edit Invoice Form</DialogTitle>
           <DialogContent>
             <DialogContentText>Please make your edits below.</DialogContentText>
-            <Form />
+            <Form id={this.props.id} />
           </DialogContent>
         </Dialog>
       </Fragment>

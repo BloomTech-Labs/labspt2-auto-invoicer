@@ -54,7 +54,7 @@ export default withStyles(styles)(
         rate
         amount
         `;
-        const { invoiceID } = this.props.match.params;
+        const { invoiceID } = this.props.id;
         const invoice = await FetchInvoice(invoiceID, returnedData);
         this.setState({
           ...invoice,
@@ -71,24 +71,16 @@ export default withStyles(styles)(
       e.preventDefault();
       await EditAmountPaid(
         this.state.invoice._id,
-
         this.state.amountPaid,
-
         "amountPaid"
       );
-      await EditTotal(
-        this.state.invoice._id,
-        this.state.total,
-
-        "total"
-      );
+      await EditTotal(this.state.invoice._id, this.state.total, "total");
       await EditBalanceDue(
         this.state.invoice._id,
-
         this.state.balanceDue,
         "balanceDue"
       );
-      await this.props.fethcInvoices();
+      await this.props.fetchInvoices();
     };
 
     handleTotalChange = e => {
