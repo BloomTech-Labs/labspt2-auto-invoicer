@@ -7,12 +7,12 @@ import Total from "../CreateInvoiceForm2/Total";
 import AmountPaid from "../CreateInvoiceForm2/AmountPaid";
 import BalanceDue from "../CreateInvoiceForm2/BalanceDue";
 
-// import {
-//   EditAmountPaid,
-//   EditTotal,
-//   EditBalanceDue,
-//   EditInvoice
-// } from "../../graphQL/mutations/invoices";
+import {
+  EditAmountPaid,
+  EditTotal,
+  EditBalanceDue,
+  EditInvoice
+} from "../../graphQL/mutations/invoices";
 
 export default withStyles(styles)(
   class extends Component {
@@ -67,40 +67,40 @@ export default withStyles(styles)(
     //   }
     // }
 
-    // handleFormSubmit = async e => {
-    //   e.preventDefault();
-    //   await EditAmountPaid(
-    //     this.state.invoice._id,
-    //     this.state.amountPaid,
-    //     "amountPaid"
-    //   );
-    //   await EditTotal(this.state.invoice._id, this.state.total, "total");
-    //   await EditBalanceDue(
-    //     this.state.invoice._id,
-    //     this.state.balanceDue,
-    //     "balanceDue"
-    //   );
-    //   await this.props.fetchInvoices();
-    // };
+    handleFormSubmit = async e => {
+      e.preventDefault();
+      await EditAmountPaid(
+        this.state.invoice._id,
+        this.state.amountPaid,
+        "amountPaid"
+      );
+      await EditTotal(this.state.invoice._id, this.state.total, "total");
+      await EditBalanceDue(
+        this.state.invoice._id,
+        this.state.balanceDue,
+        "balanceDue"
+      );
+      await this.props.fetchInvoices();
+    };
 
-    // handleTotalChange = e => {
-    //   this.setState({ total: e.target.value });
-    // };
+    handleTotalChange = e => {
+      this.setState({ total: e.target.value });
+    };
 
-    // handleAmountPaidChange = e => {
-    //   this.setState({ amountPaid: e.target.value });
-    // };
+    handleAmountPaidChange = e => {
+      this.setState({ amountPaid: e.target.value });
+    };
 
-    // handleBalanceDueChange = e => {
-    //   this.setState({ balanceDue: e.target.value });
-    // };
+    handleBalanceDueChange = e => {
+      this.setState({ balanceDue: e.target.value });
+    };
 
     render() {
       return (
         <Fragment>
           <form>
             <Total
-              //onChangeHandler={this.handleTotalChange}
+              onChangeHandler={this.handleTotalChange}
               value={this.state.total}
               // error={
               //   this.state.total.length === 0 ? !!this.state.errorText : false
@@ -110,7 +110,7 @@ export default withStyles(styles)(
               // }
             />
             <AmountPaid
-              //onChangeHandler={this.handleAmountPaidChange}
+              onChangeHandler={this.handleAmountPaidChange}
               value={this.state.amountPaid}
               // error={
               //   this.state.amountPaid.length === 0
@@ -124,7 +124,7 @@ export default withStyles(styles)(
               // }
             />
             <BalanceDue
-              //onChangeHandler={this.handleBalanceDueChange}
+              onChangeHandler={this.handleBalanceDueChange}
               value={this.state.balanceDue}
               // error={
               //   this.state.balanceDue.length === 0
@@ -139,7 +139,7 @@ export default withStyles(styles)(
             />
           </form>
           <Button
-            //onClick={this.handleFormSubmit}
+            onClick={this.handleFormSubmit}
             variant="contained"
             style={{ background: "#4fc878" }}
             //color="primary"
