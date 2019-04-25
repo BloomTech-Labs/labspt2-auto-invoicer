@@ -28,7 +28,7 @@ export class UserDetails extends Component {
       <UserConsumer>
         {({userState, fetchUserData}) => {
           return (
-            <Paper elevation={5} className={classes.paper}>
+            <Paper elevation={5} className={classes.cards}>
               {!this.state.edit ? 
               <ViewUserDetails 
                 toggleView={this.toggleView}
