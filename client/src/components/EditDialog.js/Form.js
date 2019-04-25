@@ -62,6 +62,14 @@ export default withStyles(styles)(
           >
             Edit
           </Button>
+          <Button
+            //onClick={this.handleFormSubmit}
+            variant="contained"
+            style={{ background: "#ff8080" }}
+            //color="primary"
+          >
+            Cancel
+          </Button>
         </Fragment>
       );
     }
