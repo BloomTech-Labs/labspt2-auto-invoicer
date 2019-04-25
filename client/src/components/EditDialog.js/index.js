@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import {
-  Button,
+  Fab,
   Dialog,
   DialogContent,
   DialogContentText,
@@ -56,9 +56,9 @@ export default class extends Component {
 
     return (
       <Fragment>
-        <Button variant="fab" onClick={this.handleToggle} mini>
+        <Fab onClick={this.handleToggle} mini="true">
           {this.toolTipSize(<Edit />, "right", "New Edit")}
-        </Button>
+        </Fab>
         <Dialog open={open} onClose={this.handleToggle}>
           <DialogTitle>Edit Invoice Form</DialogTitle>
           <DialogContent>
