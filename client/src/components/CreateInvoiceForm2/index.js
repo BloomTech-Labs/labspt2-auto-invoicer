@@ -221,9 +221,11 @@ class CreateInvoiceForm2 extends Component {
   getTaxRateObject = zip => {
     if (zip) {
       axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/taxes/${zip}`)
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://api.zip-tax.com/request/v40?key=jXN4sqZiwuMr8HCA&postalcode=${zip}`
+        )
         .then(res => {
-          this.setState({ tax: res.data.rate.combined_rate });
+          this.setState({ tax: res.data.results[0].taxSales });
         });
     }
   };
@@ -243,7 +245,6 @@ class CreateInvoiceForm2 extends Component {
             cityTo: res.data.city,
             stateTo: res.data.state
           });
-
           return this.getTaxRateObject(zipcode);
         })
         .catch(error => {
