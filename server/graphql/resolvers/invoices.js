@@ -66,14 +66,7 @@ module.exports = {
           city: customer.city,
           state: customer.state
         },
-        items: {
-          _id: items._id,
-          name: items.name,
-          description: items.description,
-          quantity: items.quantity,
-          cost: items.cost,
-          amount: items.amount
-        },
+        items,
         subtotal,
         discount,
         tax,

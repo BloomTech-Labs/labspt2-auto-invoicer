@@ -1,4 +1,5 @@
 const Company = require('../../models/company');
+const User = require('../../models/user');
 
 const {
   updateDocumentById,
@@ -19,9 +20,10 @@ module.exports = {
   companies: () => {
     return findAllDocuments(Company);
   },
-  createCompany: async args => {
-    formatData(args.companyInput);
+  createCompany: async ({ companyInput, userId }) => {
     try {
+      formatData(companyInput);
+      const user = await User.findById(userId);
       const {
         name,
         email,
@@ -31,13 +33,14 @@ module.exports = {
         zipCode,
         city,
         state
-      } = args.companyInput;
-      const companyExists = await Company.findOne({
-        email
-      });
-      if (companyExists) {
-        throw new Error('This company already exists!');
-      }
+      } = companyInput;
+      // check if company exists for user
+      // const companyExists = await Company.findOne({
+      //   email
+      // });
+      // if (companyExists) {
+      //   throw new Error('This company already exists!');
+      // }
       const company = new Company({
         name,
         email,
@@ -48,7 +51,10 @@ module.exports = {
         city,
         state
       });
+      company.users.push(userId);
       const newCompany = await company.save();
+      user.companies.push(newCompany._doc._id);
+      await user.save();
       return {
         ...newCompany._doc
       };

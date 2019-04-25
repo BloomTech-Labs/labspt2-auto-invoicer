@@ -16,9 +16,10 @@ module.exports = {
   customer: ({ customerId }) => {
     return findDocumentById(customerId, Customer);
   },
-  createCustomer: async args => {
-    formatData(args.customerInput);
+  createCustomer: async ({ customerInput, companyId }) => {
     try {
+      formatData(customerInput);
+      const company = await Company.findById(companyId);
       const {
         name,
         email,
@@ -28,14 +29,14 @@ module.exports = {
         zipCode,
         city,
         state
-      } = args.customerInput;
-      // only check if customer exists for company
-      const customerExists = await Customer.findOne({
-        email
-      });
-      if (customerExists) {
-        throw new Error('Customer already exists');
-      }
+      } = customerInput;
+      // only check if customer exists for company - not db-wide
+      // const customerExists = await Customer.findOne({
+      //   email
+      // });
+      // if (customerExists) {
+      //   throw new Error('Customer already exists');
+      // }
       const customer = new Customer({
         name,
         email,
@@ -47,6 +48,9 @@ module.exports = {
         state
       });
       const newCustomer = await customer.save();
+      company.customers.push(newCustomer._doc._id);
+      await company.save();
+
       return {
         ...newCustomer._doc
       };

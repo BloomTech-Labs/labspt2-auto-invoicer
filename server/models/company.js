@@ -48,13 +48,13 @@ const companySchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: 'Customer'
   },
-  invoices: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Invoice'
-  },
   items: {
     type: [Schema.Types.ObjectId],
     ref: 'Item'
+  },
+  invoices: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Invoice'
   }
 });
 

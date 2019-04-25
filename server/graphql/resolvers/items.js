@@ -1,4 +1,5 @@
 const Item = require('../../models/item');
+const Company = require('../../models/company');
 
 const { findAllDocuments, findDocumentById } = require('../helpers/index');
 
@@ -11,11 +12,11 @@ module.exports = {
   items: () => {
     return findAllDocuments(Item);
   },
-  createItem: async args => {
-    formatData(args.itemInput);
+  createItem: async ({ itemInput, companyId }) => {
     try {
-      const { name, description, quantity, cost, amount } = args.itemInput;
-
+      formatData(itemInput);
+      const company = await Company.findById(companyId);
+      const { name, description, quantity, cost, amount } = itemInput;
       const item = new Item({
         name,
         description,
@@ -24,6 +25,8 @@ module.exports = {
         amount
       });
       const newItem = await item.save();
+      company.items.push(newItem._doc._id);
+      await company.save();
       return {
         ...newItem._doc
       };

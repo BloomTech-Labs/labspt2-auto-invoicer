@@ -193,17 +193,17 @@ module.exports = buildSchema(`
 
   type RootMutation {
     createUser(userInput: UserInput!): User
-    editUser(userId: ID!, editUserInput: EditUserInput!): User
-    createCompany(companyInput: CompanyInput!): Company
-    editCompany(editCompanyInput: EditCompanyInput!, companyId: ID!): Company
-    createCustomer(customerInput: CustomerInput!): Customer
-    editCustomer(customerId: ID!, editCustomerInput: EditCustomerInput!): Customer
-    addUserToCompany(userId: ID!, companyId: ID!): Company
-    addCustomerToCompany(customerId: ID!, companyId: ID!): Customer
+    createCompany(companyInput: CompanyInput!, userId: ID!): Company
+    createCustomer(customerInput: CustomerInput!, companyId: ID!): Customer
+    createItem(itemInput: ItemInput!, companyId: ID!): Item
     createInvoice(invoiceInput: InvoiceInput!): Invoice
+    editUser(userId: ID!, editUserInput: EditUserInput!): User
+    editCompany(editCompanyInput: EditCompanyInput!, companyId: ID!): Company
+    editCustomer(customerId: ID!, editCustomerInput: EditCustomerInput!): Customer
     editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceId: ID!): Invoice
+    addCustomerToCompany(customerId: ID!, companyId: ID!): Customer
+    addUserToCompany(userId: ID!, companyId: ID!): Company
     buyPlanOrCredits(companyId: ID!, quantity: Int!): Company
-    createItem(itemInput: ItemInput!): Item
   }
 
   schema {
