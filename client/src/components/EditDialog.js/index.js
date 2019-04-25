@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { CompanyConsumer } from "../../contexts/CompanyContext";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import {
   Fab,
@@ -55,18 +56,30 @@ export default class extends Component {
     // { muscles } = this.props;
 
     return (
-      <Fragment>
-        <Fab onClick={this.handleToggle} mini="true">
-          {this.toolTipSize(<Edit />, "right", "New Edit")}
-        </Fab>
-        <Dialog open={open} onClose={this.handleToggle}>
-          <DialogTitle>Edit Invoice Form</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Please make your edits below.</DialogContentText>
-            <Form id={this.props.id} />
-          </DialogContent>
-        </Dialog>
-      </Fragment>
+      <CompanyConsumer>
+        {({ companyState }) => {
+          const { id } = this.props;
+          const invoice = companyState.invoices.find(
+            invoice => invoice._id === id
+          );
+          return (
+            <Fragment>
+              <Fab onClick={this.handleToggle} mini="true">
+                {this.toolTipSize(<Edit />, "right", "New Edit")}
+              </Fab>
+              <Dialog open={open} onClose={this.handleToggle}>
+                <DialogTitle>Edit Invoice Form</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Please make your edits below.
+                  </DialogContentText>
+                  <Form invoice={invoice} />
+                </DialogContent>
+              </Dialog>
+            </Fragment>
+          );
+        }}
+      </CompanyConsumer>
     );
   }
 }
