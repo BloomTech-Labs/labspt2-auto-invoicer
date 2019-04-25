@@ -245,7 +245,7 @@ class CreateInvoiceForm2 extends Component {
             cityTo: res.data.city,
             stateTo: res.data.state
           });
-          return this.getTaxRateObject(zipcode);
+          // return this.getTaxRateObject(zipcode);
         })
         .catch(error => {
           console.log("Server Error", error);
