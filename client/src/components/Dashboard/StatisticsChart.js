@@ -30,7 +30,7 @@ const renderActiveShape = props => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} fontSize={16} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} fontSize={20} textAnchor="middle" fill={fill}>
         {payload.name}
       </text>
       <Sector
@@ -77,17 +77,25 @@ const renderActiveShape = props => {
 };
 
 export default class StatisticsChart extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
   constructor(props) {
     super(props);
     this.state = {
       activeIndex: 0,
-      data: [
-        { name: 'Late', money: 400 },
-        { name: 'Collected', money: this.props.collected },
-        { name: 'Unpaid', money: 300 }
-      ]
+      data: []
     };
+  }
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.collected !== this.props.collected) {
+      this.setState({
+        data: [
+          { name: 'Late', money: this.props.late },
+          { name: 'Collected', money: this.props.collected },
+          { name: 'Unpaid', money: this.props.unpaid }
+        ]
+      });
+    }
   }
 
   onPieEnter = (data, index) => {
@@ -97,21 +105,16 @@ export default class StatisticsChart extends PureComponent {
   };
 
   render() {
-    console.log(
-      'on statistics chart render',
-      this.props.collected,
-      this.state.collected
-    );
     return (
       <PieChart width={400} height={400}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.state.data}
-          cx={160}
+          cx={210}
           cy={100}
-          innerRadius={40}
-          outerRadius={70}
+          innerRadius={45}
+          outerRadius={95}
           fill="#8884d8"
           dataKey="money"
           onMouseEnter={this.onPieEnter}

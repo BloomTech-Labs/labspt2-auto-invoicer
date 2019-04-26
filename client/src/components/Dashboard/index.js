@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -29,24 +30,33 @@ class Dashboard extends Component {
         {({ companyState: { invoices } }) => {
           console.log(invoices);
           let collected = 0;
+          let late = 0;
+          let unpaid = 0;
           invoices.map(invoice => {
-            return (collected = collected + parseFloat(invoice.amountPaid));
+            collected += parseFloat(invoice.amountPaid);
+            if (moment(invoice.invoiceDueDate).isBefore(new Date())) {
+              late +=
+                parseFloat(invoice.total) - parseFloat(invoice.amountPaid);
+            } else {
+              unpaid +=
+                parseFloat(invoice.total) - parseFloat(invoice.amountPaid);
+            }
           });
-          console.log('dashboard', collected);
+
           return (
             <>
               <CssBaseline />
               <div className={classes.root}>
                 <Grid container justify="center">
                   <Grid
-                    spacing={24}
+                    spacing={40}
                     alignItems="center"
                     justify="center"
                     container
                     className={classes.grid}
                   >
                     <TopBar checked={checked} />
-                    <Grid container spacing={24} style={{ marginBottom: 20 }}>
+                    <Grid container spacing={40} style={{ marginBottom: 20 }}>
                       <Grid item xs={12} md={4}>
                         <TopCards checked={checked} timeout={1000}>
                           <div style={{ display: 'flex' }}>
@@ -198,6 +208,8 @@ class Dashboard extends Component {
                       </Grid>
                       <Grid item xs={12} md={4}>
                         <StatisticsCard
+                          unpaid={unpaid}
+                          late={late}
                           collected={collected}
                           checked={checked}
                         />
