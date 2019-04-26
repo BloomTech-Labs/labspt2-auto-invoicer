@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
-const COLORS = ['#ff3d00', '#339933', '#40c4ff'];
+const COLORS = ['#ff3d00', '#00e676', '#40c4ff'];
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
