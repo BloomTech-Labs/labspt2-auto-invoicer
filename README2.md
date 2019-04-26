@@ -126,9 +126,15 @@ Deployed [here](https://www.myautoinvoicer.com)
 
 ### Authentication:
 
+Our application has users authenticate with Google and Facebook Login. These are secure authentication systems that enabled our users, small business owners to sign in with their Google or Facebook account. As an added bonus, premium users will also to send information from the application to their Google accounts.
+
 ### Authorization:
 
+Authorization is handled on the model level, with each model query checking to see if the requesting party is a free or premium user, restricting access certain privileges, and filtering responses to limit access to only those items the particular requesting party has created.
+
 ### Form Validation
+
+Form validation is handled at the component level with Material-UI.
 
 ## Testing
 
