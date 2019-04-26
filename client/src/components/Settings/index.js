@@ -1,6 +1,8 @@
 import React from 'react'
-import UserDetails from './UserDetails';
 import { Grid } from '@material-ui/core';
+
+import UserDetails from './UserDetails';
+import CompanyDetails from './CompanyDetails'
 
 export default function index() {
   return (
@@ -10,7 +12,7 @@ export default function index() {
             <UserDetails />
           </Grid>
           <Grid item xs>
-          Company Details
+            <CompanyDetails />
           </Grid>
           <Grid item xs>
           Add User to Company
