@@ -53,7 +53,7 @@ export default class extends Component {
 
   render() {
     const { open } = this.state;
-    // { muscles } = this.props;
+    //{ invoice } = this.props;
 
     return (
       <CompanyConsumer>
@@ -71,9 +71,9 @@ export default class extends Component {
                 <DialogTitle>Update Payment</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    Please make your edits below.
+                    Please make updates to your invoice here
                   </DialogContentText>
-                  <Form invoice={invoice} />
+                  <Form invoice={this.props.invoice} />
                 </DialogContent>
               </Dialog>
             </Fragment>

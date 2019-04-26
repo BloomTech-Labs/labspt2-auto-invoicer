@@ -184,7 +184,7 @@ class Invoices extends Component {
     }
   };
   render() {
-    const { classes } = this.props;
+    const { classes, invoice } = this.props;
     const { rowsPerPage, page, buttonSize } = this.state;
     const themes = createMuiTheme({
       typography: {
@@ -391,7 +391,7 @@ class Invoices extends Component {
                                         {/* Experimental */}
                                         <IconButton>
                                           {this.toolTipSize(
-                                            <EditDialog id={invoice._id} />,
+                                            <EditDialog invoice={invoice} />,
                                             "right",
                                             "Edit"
                                           )}
