@@ -32,7 +32,7 @@
   - [Authentication](#authentication)
   - [Authorization](#authorization)
   - [Form Validation](#form-validation)
-  - [OWASP Top 10 Application Security Risks 2017](#owasp-top-10-application-security-risks-2017)
+  - [OWASP Top 10 Application Security Risks 2017](#owasp-top-10-application-security-risks-2017) {consider this section}
     - [Injection](#injection)
     - [Broken Authentication](#broken-authentication)
     - [Sensitive Data Exposure](#sensitive-data-exposure)
@@ -43,7 +43,7 @@
     - [Insecure Deserialization](#insecure-deserialization)
     - [Using Components with Known Vulnerabilities](#using-components-with-known-vulnerabilities)
     - [Insufficient Logging and Monitoring](#insufficient-logging-and-monitoring)
-  - [Additional Security Threats](#additional-security-threats)
+  - [Additional Security Threats](#additional-security-threats) {consider this section}
     - [CSRF](#csrf)
     - [Clickjacking](#clickjacking)
 - [Testing](#testing)
