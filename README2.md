@@ -85,44 +85,40 @@ Deployed [here](https://www.myautoinvoicer.com)
 ### Backend built using:
 
 - GraphQL
-- bcrypt
-- MongoDB
+- MongoDB/Mongoose
 - Node & Express
 
 Deployed [here](https://www.myautoinvoicer.com)
 
 ### Reasoning:
 
-- React.js
+- React.js / Context
 
-  - We selected React as our frontend framework because we knew with the application we were planning on building, there were going to be a lot of reusable components all interacting with each other.
+  - We selected React as our frontend framework because we wanted a fast and efficient framework to help us manage many reusable components interacting with each other. We are using Context to allow us to manage state, without the setup required in Redux.
 
-- Material UI
+* Material UI
 
-  - The styling of Material UI components has always appealed to our team, so we jump at any opportunity to integrate it into our varied projects. Our goal for this application was to be utilitarian without seeming as though we were making no effort on improving user experience, so Material UI just seemed like the good fit.
-
-- GraphQL/Apollo Client
-
-  - We made the decision early on to attempt to make this application with GraphQL instead of REST as none of the team had worked on a GraphQL project of this scale and we were all keen to learn what we could learn from being in the thick of it, as it were. We also realized that a lot of the data we would need from our server would be subject to change over time and that editing queries and mutations in GraphQL is a lot simpler than rewriting REST endpoints.
-
-- Netlify
-
-  - In a bid to reduce the number of independent variables at play in the application (as a lot of the decisions we made early on about tech stack choice were with the intent of learning a lot of new technology), we opted to deploy using a platform we had all independently been successful at deploying from at some point or another.
-
-- PostgresQL
-
-  - We chose a SQL database database because we felt that the necessary components of our application related to each other and would be best implemented in a relational database. We chose PostgresQL specifically because it was the backend support most recommended by Django, which we had already decided would be our backend framework, for its support of schemas.
+  - Our application targets small businesses so we wanted a styling framework that would be straight-forward, clean and minimal. Material UI allows us to style our application to give our users a professional experience.
 
 - GraphQL
 
-  - We knew that the models we were dealing with were very closely related to each other and that the way in which we wanted to display that data to users called for a lot of connected queries to the database. Using GraphQL in lieu of REST (while having an initial setup cost of having to make sense of the various documentation) has made a lot of the communication between client and server more efficient.
+  - Our team has been excited to make this application with GraphQL from the start. We wanted to provide our users with a wealth of information regarding their invoices so we knew they would need to make multiple requests to the server. GraphQL allows us to query the data more efficiently. Moreover, data would change over time and editing queries and mutations in GraphQL is much simpler than rewriting REST endpoints.
 
-- Bcrypt
+* Netlify
 
-  - Django's default hashing algorithm is PBKDF2 but we were more familiar with bcrypt password hashing, having implemented it in every security-based project, so felt safer using it as our password hashing algorithm.
+  - Given that we were already experimenting with newer technologies on the backend (GraphQL, Mongoose), we wanted to deploy using a platform we were familiar with.
 
-- Heroku
-  - We chose Heroku for roughly the same reason we chose Netlify, with the addendum that we also wanted a deployment site that would interact well with a Postgres database.
+- GraphQL
+
+  - We knew we wanted to provider users, busy business owners, with a seamless experience by making it easy for them to save and query customer and company data. Using GraphQL in lieu of REST has made the communication between client and server more efficient.
+
+* MongoDB/Mongoose
+
+  - We wanted a database that would allow us to store information as JSON objects for efficient querying. MongoDB allow our application to scale, if that is necessary in the future.
+
+* Node & Express
+
+  - We are with Node and Express and it works well with GraphQL.
 
 ---
 
