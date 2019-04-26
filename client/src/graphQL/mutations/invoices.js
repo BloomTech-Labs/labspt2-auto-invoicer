@@ -37,18 +37,48 @@ export const EditInvoice = async (invoiceID, editedData, returnedData) => {
 export const EditAmountPaid = async (invoiceID, amountPaid, returnedData) => {
   // const amount = amountPaid.toString();
   const EditAmountPaid = {
-      query: `
+    query: `
                 mutation {
                     editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {amountPaid: "${amountPaid}"}) {
                         ${returnedData}
                     }
                 }
             `
-          }
-      const editedAmount = await Post(EditAmountPaid)
-      return editedAmount.data.data;
   };
+  const editedAmount = await Post(EditAmountPaid);
+  return editedAmount.data.data;
+};
 
+// EditTotal & EditBalanceDue
+export const EditTotal = async (invoiceID, total, returnedData) => {
+  // const amount = amountPaid.toString();
+  const EditTotal = {
+    query: `
+                  mutation {
+                      editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {total: "${total}"}) {
+                          ${returnedData}
+                      }
+                  }
+              `
+  };
+  const editedTotal = await Post(EditTotal);
+  return editedTotal.data.data;
+};
+
+export const EditBalanceDue = async (invoiceID, balanceDue, returnedData) => {
+  // const amount = amountPaid.toString();
+  const EditBalanceDue = {
+    query: `
+                      mutation {
+                          editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {balanceDue: "${balanceDue}"}) {
+                              ${returnedData}
+                          }
+                      }
+                  `
+  };
+  const editedBalanceDue = await Post(EditBalanceDue);
+  return editedBalanceDue.data.data;
+};
 
 // AddInvoiceToUser or AddInvoiceToCompany?
 export const AddInvoiceToCompany = async (
