@@ -103,7 +103,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#00897b',
+                                          color: '#4fc878',
                                           marginRight: 12
                                         }}
                                       >
@@ -176,7 +176,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#e65100',
+                                          color: '#339933',
                                           fontSize: 36
                                         }}
                                       >
@@ -192,7 +192,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#e65100',
+                                          color: '#339933',
                                           fontSize: 36
                                         }}
                                       >
@@ -208,7 +208,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#e65100',
+                                          color: '#339933',
                                           fontSize: 36
                                         }}
                                       >
@@ -224,7 +224,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#e65100',
+                                          color: '#339933',
                                           fontSize: 36
                                         }}
                                       >

@@ -3,9 +3,8 @@ export default theme => ({
     width: '100%',
     flexGrow: 1,
     overflow: 'hidden',
-    backgroundSize: 'cover',
-    backgroundPosition: '0 400px',
-    paddingBottom: 200
+    paddingBottom: 200,
+    backgroundColor: '#eff7f2'
   },
   grid: {
     width: '95%',
@@ -15,6 +14,7 @@ export default theme => ({
     }
   },
   paper: {
+    backgroundColor: 'white',
     padding: theme.spacing.unit * 3,
     textAlign: 'left',
     color: theme.palette.text.secondary,
@@ -91,7 +91,7 @@ export default theme => ({
   percentagePos: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#00897b',
+    color: '#4fc878',
     marginTop: 5
   },
   percentageNeg: {
@@ -110,7 +110,7 @@ export default theme => ({
     width: 72,
     height: 72,
     borderRadius: '50%',
-    backgroundColor: '#ffee58',
+    backgroundColor: '#a8e4bc',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
