@@ -141,15 +141,16 @@ export default withStyles(styles)(
           <Button
             onClick={this.handleFormSubmit}
             variant="contained"
-            style={{ background: "#4fc878" }}
+            style={{ background: "#4fc878", width: 100 }}
             //color="primary"
           >
             Edit
           </Button>
+
           <Button
             //onClick={this.handleFormSubmit}
             variant="contained"
-            style={{ background: "#ff8080" }}
+            style={{ background: "#ff8080", width: 100, marginLeft: 10 }}
             //color="primary"
           >
             Cancel

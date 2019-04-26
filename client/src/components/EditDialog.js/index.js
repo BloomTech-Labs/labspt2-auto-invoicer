@@ -68,7 +68,7 @@ export default class extends Component {
                 {this.toolTipSize(<Edit />, "right", "New Edit")}
               </Fab>
               <Dialog open={open} onClose={this.handleToggle}>
-                <DialogTitle>Edit Invoice Form</DialogTitle>
+                <DialogTitle>Update Payment</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
                     Please make your edits below.
