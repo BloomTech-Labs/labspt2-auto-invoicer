@@ -40,54 +40,36 @@ MyAutoInvoicer allows users to easily generate, track, analyze, save and send in
 - [Documentation](#documentation)
   - [Database](#database)
     - [Models](#models)
+      - [Company Model](#company-model)
       - [User Model](#user-model)
-      - [Client Model](#client-model)
-      - [Job Model](#job-model)
-      - [Part Model](#part-model)
-      - [Note Model](#note-model)
-      - [Tag Model](#tag-model)
+      - [Invoice Model](#invoice-model)
+      - [Item Model](#item-model)
   - [GraphQL](#graphql)
     - [Queries](#queries)
+      - [On Company Model](#on-company-model)
       - [On User Model](#on-user-model)
-      - [On Client Model](#on-client-model)
-      - [On Job Model](#on-job-model)
-      - [On Note Model](#on-note-model)
-      - [On Part Model](#on-part-model)
+      - [On Invoice Model](#on-invoice-model)
+      - [On Item Model](#on-item-model)
     - [Mutations](#mutations)
+      - [Company Mutations](#company-mutations)
+        - [Create Company](#create-company)
+        - [Edit Company](#edit-company)
+        - [Delete Company](#delete-company)
       - [User Mutations](#user-mutations)
         - [Create User](#create-user)
         - [Edit User](#edit-user)
         - [Delete User](#delete-user)
-      - [Client Mutations](#client-mutations)
-        - [Create Client](#create-client)
-        - [Edit Client](#edit-client)
-        - [Delete Client](#delete-client)
-      - [Job Mutations](#job-mutations)
-        - [Create Job](#create-job)
-        - [Edit Job](#edit-job)
-        - [Delete Job](#delete-job)
-      - [Note Mutatons](#note-mutations)
-        - [Create Note](#create-note)
-        - [Edit Note](#edit-note)
-        - [Delete Note](#delete-note)
-      - [Part Mutations](#part-mutations)
-        - [Create Part](#create-part)
-        - [Edit Part](#edit-part)
-        - [Delete Part](#delete-part)
-      - [Auth Mutations](#auth-mutations)
-        - [Token Auth](#token-auth)
-        - [Verify Token](#verify-token)
-        - [Refresh Token](#refresh-token)
-      - [Tag Mutations](#tag-mutations)
-        - [Create Tag](#create-tag)
-        - [Edit Tag](#edit-tag)
-        - [Delete Tag](#delete-tag)
+      - [Invoice Mutations](#invoice-mutations)
+        - [Create Invoice](#create-invoice)
+        - [Edit Invoice](#edit-invoice)
+        - [Delete Invoice](#delete-invoice)
+      - [Item Mutatons](#item-mutations)
+        - [Create Item](#create-item)
+        - [Edit Item](#edit-item)
+        - [Delete Item](#delete-item)
   - [Stripe](#stripe)
   - [Free vs Premium](#free-vs-premium)
-  - [Design](#design)
-    - Original Wireframe
-    - Extending the Wireframe
-    - [Styles and Theming](#styles-and-theming)
+  - [Styles and Theming](#styles-and-theming)
 
 ## Tech Stack
 
@@ -144,6 +126,18 @@ Deployed [here](https://www.myautoinvoicer.com)
 
 ---
 
+# Security
+
+### Authentication:
+
+### Authorization:
+
+### Form Validation
+
+## Testing
+
+## Improving Performance
+
 # Installation Instructions
 
 ### Environment Variables
@@ -198,8 +192,14 @@ Deployed [here](https://www.myautoinvoicer.com)
 
 #### Item Mutations:
 
-##### Create Invoice
+##### Create Item
 
-##### Edit Invoice
+##### Edit Item
 
-##### Delete Invoice
+##### Delete Item
+
+## Stripe:
+
+## Free vs Premium
+
+## Styles and Theming
