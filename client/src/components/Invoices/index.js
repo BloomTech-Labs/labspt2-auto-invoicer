@@ -368,12 +368,12 @@ class Invoices extends Component {
                                             className="card-links"
                                             to={`/user/${
                                               userState.userID
-                                            }/invoice/${invoice._id}/edit`}
+                                            }/invoice/${invoice._id}/view`}
                                           >
                                             {this.toolTipSize(
                                               <Edit />,
                                               "left",
-                                              "Edit"
+                                              "temporary invoice view"
                                             )}
                                           </Link>
                                         </IconButton>

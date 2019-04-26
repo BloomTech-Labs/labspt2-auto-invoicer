@@ -138,12 +138,21 @@ class App extends Component {
                       />
                     ) : null}
                     <section className="routes-container">
-                      <Route path="/user/:id/billing" component={BillingPage} />
-                      <Route path="/user/:id/dashboard" component={Dashboard} />
+                      <Route
+                        path="/user/:id/billing"
+                        component={BillingPage}
+                      />
+                      <Route
+                        path="/user/:id/dashboard"
+                        component={Dashboard}
+                      />
                       <Route
                         path="/user/:id/invoice/create"
                         render={props => (
-                          <CreateInvoice {...props} click={this.createPDF} />
+                          <CreateInvoice
+                            {...props}
+                            click={this.createPDF}
+                          />
                         )}
                       />
                       <Route
@@ -153,17 +162,26 @@ class App extends Component {
                       <Route
                         exact
                         path="/"
-                        render={props => <LandingPage {...props} />}
+                        render={props => (
+                          <LandingPage {...props} />
+                        )}
                       />
                       <Route
                         path="/user/:id/invoices"
                         render={props => (
-                          <InvoiceList {...props} click={this.createPDF} />
+                          <InvoiceList
+                            {...props}
+                            click={this.createPDF}
+                          />
                         )}
                       />
                       <Route
-                        path="/user/:id/invoice/view"
-                        component={InvoiceView}
+                        path="/user/:id/invoice/:invoiceID/view"
+                        render={props => (
+                          <InvoiceView
+                            {...props}
+                          />
+                        )}
                       />
                       <Route
                         path="/user/:id/invoice/:invoiceID/edit"
