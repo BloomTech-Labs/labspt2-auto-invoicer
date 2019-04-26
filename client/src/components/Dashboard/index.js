@@ -29,6 +29,7 @@ class Dashboard extends Component {
       <CompanyConsumer>
         {({ companyState: { invoices } }) => {
           console.log(invoices);
+
           let collected = 0;
           let late = 0;
           let unpaid = 0;
@@ -121,7 +122,7 @@ class Dashboard extends Component {
                             <div className={classes.middleInfo}>
                               <span className={classes.span}>{9}</span>
                               <Typography variant="subtitle1">
-                                New Users
+                                New Customers
                               </Typography>
                             </div>
                             <Tooltip
@@ -204,7 +205,7 @@ class Dashboard extends Component {
                     </Grid>
                     <Grid container spacing={24} justify="center">
                       <Grid item xs={12} md={8}>
-                        <InvoicedCard checked={checked} />
+                        <InvoicedCard invoices={invoices} checked={checked} />
                       </Grid>
                       <Grid item xs={12} md={4}>
                         <StatisticsCard
