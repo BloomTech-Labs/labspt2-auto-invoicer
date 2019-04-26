@@ -112,6 +112,7 @@
 - React.js
 - Material UI
 - GraphQL
+- Netlify
 
 Deployed [here](https://www.myautoinvoicer.com)
 
@@ -244,7 +245,7 @@ Form validation was done on this application through the use of Formik and yup. 
 
 This application was tested at every step in the development process manually through the use of the GraphiQL interface, the Django admin page, terminal logging, and Chrome DevTools. Testing was done by each contributor prior to each pull request to the Development branch and after each merge to ensure that no environment differences were negatively affecting the code.
 
-We were continuously deploying to Netlify and Heroku and so had checks on every pull request to verify whether or not the code about to be merged would break the build.
+\*\*\* We were continuously deploying to Netlify and Heroku and so had checks on every pull request to verify whether or not the code about to be merged would break the build.
 
 All pull requests were reviewed by one or more team members and merged by someone other than the individual making the pull request (except in cases where all parties were in a Zoom and had agreed upon the merge).
 
