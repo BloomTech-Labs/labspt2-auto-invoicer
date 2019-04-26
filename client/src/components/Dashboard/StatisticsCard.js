@@ -21,7 +21,11 @@ const StatisticsCard = props => {
           <Typography variant="h4" gutterBottom>
             Statistics
           </Typography>
-          <StatisticsChart />
+          <StatisticsChart
+            unpaid={props.unpaid}
+            late={props.late}
+            collected={props.collected}
+          />
         </div>
       </Paper>
     </Zoom>

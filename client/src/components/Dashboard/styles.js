@@ -1,5 +1,6 @@
 export default theme => ({
   root: {
+    width: '100%',
     flexGrow: 1,
     overflow: 'hidden',
     backgroundSize: 'cover',
@@ -7,7 +8,7 @@ export default theme => ({
     paddingBottom: 200
   },
   grid: {
-    width: 1200,
+    width: '95%',
     margin: `0 ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.down('sm')]: {
       width: 'calc(100% - 20px)'
