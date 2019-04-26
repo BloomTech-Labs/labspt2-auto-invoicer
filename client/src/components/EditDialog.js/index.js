@@ -58,10 +58,6 @@ export default class extends Component {
     return (
       <CompanyConsumer>
         {({ companyState }) => {
-          const { id } = this.props;
-          const invoice = companyState.invoices.find(
-            invoice => invoice._id === id
-          );
           return (
             <Fragment>
               <Fab onClick={this.handleToggle} mini="true">

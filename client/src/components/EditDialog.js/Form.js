@@ -148,7 +148,7 @@ export default withStyles(styles)(
           </Button>
 
           <Button
-            //onClick={this.handleFormSubmit}
+            //onClick={this.handleClose}
             variant="contained"
             style={{ background: "#ff8080", width: 100, marginLeft: 10 }}
             //color="primary"
