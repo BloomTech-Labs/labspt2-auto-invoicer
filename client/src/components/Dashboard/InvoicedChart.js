@@ -106,6 +106,7 @@ export default class InvoicedChart extends PureComponent {
         if (invoice.selectedDate.includes('Dec')) {
           invoicedDecember += parseFloat(invoice.total);
         }
+        return invoice;
       });
 
       mappedInvoices.push(

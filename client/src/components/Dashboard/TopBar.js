@@ -7,14 +7,15 @@ import Slide from '@material-ui/core/Slide';
 import styles from './styles';
 
 const TopBar = props => {
-  const { checked, classes } = props;
+  const { checked, classes, name } = props;
   return (
     <Grid item xs={12}>
       <div className={classes.topBar}>
         <div className={classes.block}>
           <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
             <Typography variant="h3" gutterBottom>
-              Dashboard
+              Hello, {name.toLowerCase().replace(/\b\w/g, I => I.toUpperCase())}
+              !
             </Typography>
           </Slide>
         </div>
