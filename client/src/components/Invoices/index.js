@@ -184,7 +184,7 @@ class Invoices extends Component {
     }
   };
   render() {
-    const { classes } = this.props;
+    const { classes, invoice } = this.props;
     const { rowsPerPage, page, buttonSize } = this.state;
     const themes = createMuiTheme({
       typography: {
@@ -368,12 +368,12 @@ class Invoices extends Component {
                                             className="card-links"
                                             to={`/user/${
                                               userState.userID
-                                            }/invoice/${invoice._id}/edit`}
+                                            }/invoice/${invoice._id}/view`}
                                           >
                                             {this.toolTipSize(
                                               <Edit />,
                                               "left",
-                                              "Edit"
+                                              "temporary invoice view"
                                             )}
                                           </Link>
                                         </IconButton>
@@ -391,7 +391,7 @@ class Invoices extends Component {
                                         {/* Experimental */}
                                         <IconButton>
                                           {this.toolTipSize(
-                                            <EditDialog />,
+                                            <EditDialog invoice={invoice} />,
                                             "right",
                                             "Edit"
                                           )}
