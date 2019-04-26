@@ -4,7 +4,7 @@ export default theme => ({
     flexGrow: 1,
     overflow: 'hidden',
     paddingBottom: 200,
-    backgroundColor: '#eff7f2'
+    backgroundColor: '#a8e4bc'
   },
   grid: {
     width: '95%',
