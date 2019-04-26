@@ -8,14 +8,14 @@ import styles from './styles';
 import InvoicedChart from './InvoicedChart';
 
 const InvoicedCard = props => {
-  const { checked, classes } = props;
+  const { checked, classes, invoices } = props;
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
       <Paper className={classes.paper} style={{ position: 'relative' }}>
         <Typography variant="h4" gutterBottom>
           Total Invoiced
         </Typography>
-        <InvoicedChart />
+        <InvoicedChart invoices={invoices} />
       </Paper>
     </Zoom>
   );

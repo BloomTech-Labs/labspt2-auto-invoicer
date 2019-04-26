@@ -13,6 +13,7 @@ import { CompanyConsumer } from './../../contexts/CompanyContext';
 import StatisticsCard from './StatisticsCard';
 import TopBar from './TopBar';
 import { Typography } from '@material-ui/core';
+import { UserConsumer } from './../../contexts/UserContext';
 
 class Dashboard extends Component {
   state = {
@@ -26,202 +27,241 @@ class Dashboard extends Component {
     const { classes } = this.props;
     const { checked } = this.state;
     return (
-      <CompanyConsumer>
-        {({ companyState: { invoices } }) => {
-          console.log(invoices);
-          let collected = 0;
-          let late = 0;
-          let unpaid = 0;
-          invoices.map(invoice => {
-            collected += parseFloat(invoice.amountPaid);
-            if (moment(invoice.invoiceDueDate).isBefore(new Date())) {
-              late +=
-                parseFloat(invoice.total) - parseFloat(invoice.amountPaid);
-            } else {
-              unpaid +=
-                parseFloat(invoice.total) - parseFloat(invoice.amountPaid);
-            }
-          });
-
+      <UserConsumer>
+        {({ userState }) => {
           return (
-            <>
-              <CssBaseline />
-              <div className={classes.root}>
-                <Grid container justify="center">
-                  <Grid
-                    spacing={40}
-                    alignItems="center"
-                    justify="center"
-                    container
-                    className={classes.grid}
-                  >
-                    <TopBar checked={checked} />
-                    <Grid container spacing={40} style={{ marginBottom: 20 }}>
-                      <Grid item xs={12} md={4}>
-                        <TopCards checked={checked} timeout={1000}>
-                          <div style={{ display: 'flex' }}>
-                            <div className={classes.iconContainer}>
-                              <Tooltip
-                                title="Invoices"
-                                classes={{ tooltip: classes.tooltip }}
-                              >
-                                <div className={classes.invoicesCircle}>
-                                  <i
-                                    className="material-icons"
-                                    style={{ color: '#0d47a1' }}
+            <CompanyConsumer>
+              {({ companyState: { invoices } }) => {
+                console.log(invoices);
+
+                let collected = 0;
+                let late = 0;
+                let unpaid = 0;
+                invoices.map(invoice => {
+                  collected += parseFloat(invoice.amountPaid);
+                  if (moment(invoice.invoiceDueDate).isBefore(new Date())) {
+                    late +=
+                      parseFloat(invoice.total) -
+                      parseFloat(invoice.amountPaid);
+                  } else {
+                    unpaid +=
+                      parseFloat(invoice.total) -
+                      parseFloat(invoice.amountPaid);
+                  }
+                  return invoice;
+                });
+
+                return (
+                  <>
+                    <CssBaseline />
+                    <div className={classes.root}>
+                      <Grid container justify="center">
+                        <Grid
+                          spacing={40}
+                          alignItems="center"
+                          justify="center"
+                          container
+                          className={classes.grid}
+                        >
+                          <TopBar name={userState.name} checked={checked} />
+                          <Grid
+                            container
+                            spacing={40}
+                            style={{ marginBottom: 20 }}
+                          >
+                            <Grid item xs={12} md={4}>
+                              <TopCards checked={checked} timeout={1000}>
+                                <div style={{ display: 'flex' }}>
+                                  <div className={classes.iconContainer}>
+                                    <Tooltip
+                                      title="Invoices"
+                                      classes={{ tooltip: classes.tooltip }}
+                                    >
+                                      <div className={classes.invoicesCircle}>
+                                        <i
+                                          className="material-icons"
+                                          style={{ color: '#0d47a1' }}
+                                        >
+                                          file_copy
+                                        </i>
+                                      </div>
+                                    </Tooltip>
+                                  </div>
+                                  <div className={classes.middleInfo}>
+                                    <span className={classes.span}>{124}</span>
+                                    <Typography variant="subtitle1">
+                                      Total Invoices
+                                    </Typography>
+                                  </div>
+                                  <Tooltip
+                                    title="Compared to Last Month"
+                                    classes={{ tooltip: classes.tooltip }}
                                   >
-                                    file_copy
-                                  </i>
+                                    <div
+                                      className={classes.percentageComparison}
+                                    >
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#4fc878',
+                                          marginRight: 12
+                                        }}
+                                      >
+                                        arrow_upward
+                                      </i>
+                                      <span className={classes.percentagePos}>
+                                        12.05%
+                                      </span>
+                                    </div>
+                                  </Tooltip>
                                 </div>
-                              </Tooltip>
-                            </div>
-                            <div className={classes.middleInfo}>
-                              <span className={classes.span}>{124}</span>
-                              <Typography variant="subtitle1">
-                                Total Invoices
-                              </Typography>
-                            </div>
-                            <Tooltip
-                              title="Compared to Last Month"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.percentageComparison}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#00897b', marginRight: 12 }}
-                                >
-                                  arrow_upward
-                                </i>
-                                <span className={classes.percentagePos}>
-                                  12.05%
-                                </span>
-                              </div>
-                            </Tooltip>
-                          </div>
-                        </TopCards>
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <TopCards checked={checked} timeout={1400}>
-                          <div style={{ display: 'flex' }}>
-                            <div className={classes.iconContainer}>
-                              <Tooltip
-                                title="Users"
-                                classes={{ tooltip: classes.tooltip }}
-                              >
-                                <div className={classes.usersCircle}>
-                                  <i
-                                    className="material-icons"
-                                    style={{ color: '#e65100' }}
+                              </TopCards>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                              <TopCards checked={checked} timeout={1400}>
+                                <div style={{ display: 'flex' }}>
+                                  <div className={classes.iconContainer}>
+                                    <Tooltip
+                                      title="Users"
+                                      classes={{ tooltip: classes.tooltip }}
+                                    >
+                                      <div className={classes.usersCircle}>
+                                        <i
+                                          className="material-icons"
+                                          style={{ color: '#e65100' }}
+                                        >
+                                          supervisor_account
+                                        </i>
+                                      </div>
+                                    </Tooltip>
+                                  </div>
+                                  <div className={classes.middleInfo}>
+                                    <span className={classes.span}>{9}</span>
+                                    <Typography variant="subtitle1">
+                                      New Customers
+                                    </Typography>
+                                  </div>
+                                  <Tooltip
+                                    title="Compared to Last Month"
+                                    classes={{ tooltip: classes.tooltip }}
                                   >
-                                    supervisor_account
-                                  </i>
+                                    <div
+                                      className={classes.percentageComparison}
+                                    >
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#ff5722',
+                                          marginRight: 12
+                                        }}
+                                      >
+                                        arrow_downward
+                                      </i>
+                                      <span className={classes.percentageNeg}>
+                                        3.89%
+                                      </span>
+                                    </div>
+                                  </Tooltip>
                                 </div>
-                              </Tooltip>
-                            </div>
-                            <div className={classes.middleInfo}>
-                              <span className={classes.span}>{9}</span>
-                              <Typography variant="subtitle1">
-                                New Users
-                              </Typography>
-                            </div>
-                            <Tooltip
-                              title="Compared to Last Month"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.percentageComparison}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#ff5722', marginRight: 12 }}
-                                >
-                                  arrow_downward
-                                </i>
-                                <span className={classes.percentageNeg}>
-                                  3.89%
-                                </span>
-                              </div>
-                            </Tooltip>
-                          </div>
-                        </TopCards>
+                              </TopCards>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                              <TopCards checked={checked} timeout={1800}>
+                                <div className={classes.shortcuts}>
+                                  <Tooltip
+                                    title="Create a New Invoice"
+                                    classes={{ tooltip: classes.tooltip }}
+                                  >
+                                    <div className={classes.shortcutsCircle}>
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#339933',
+                                          fontSize: 36
+                                        }}
+                                      >
+                                        note_add
+                                      </i>
+                                    </div>
+                                  </Tooltip>
+                                  <Tooltip
+                                    title="Add a Payment"
+                                    classes={{ tooltip: classes.tooltip }}
+                                  >
+                                    <div className={classes.shortcutsCircle}>
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#339933',
+                                          fontSize: 36
+                                        }}
+                                      >
+                                        attach_money
+                                      </i>
+                                    </div>
+                                  </Tooltip>
+                                  <Tooltip
+                                    title="Add a New Customer"
+                                    classes={{ tooltip: classes.tooltip }}
+                                  >
+                                    <div className={classes.shortcutsCircle}>
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#339933',
+                                          fontSize: 36
+                                        }}
+                                      >
+                                        person_add
+                                      </i>
+                                    </div>
+                                  </Tooltip>
+                                  <Tooltip
+                                    title="Add a New Item"
+                                    classes={{ tooltip: classes.tooltip }}
+                                  >
+                                    <div className={classes.shortcutsCircle}>
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: '#339933',
+                                          fontSize: 36
+                                        }}
+                                      >
+                                        add_to_queue
+                                      </i>
+                                    </div>
+                                  </Tooltip>
+                                </div>
+                              </TopCards>
+                            </Grid>
+                          </Grid>
+                          <Grid container spacing={24} justify="center">
+                            <Grid item xs={12} md={8}>
+                              <InvoicedCard
+                                invoices={invoices}
+                                checked={checked}
+                              />
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                              <StatisticsCard
+                                unpaid={unpaid}
+                                late={late}
+                                collected={collected}
+                                checked={checked}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} md={4}>
-                        <TopCards checked={checked} timeout={1800}>
-                          <div className={classes.shortcuts}>
-                            <Tooltip
-                              title="Create a New Invoice"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.shortcutsCircle}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#e65100', fontSize: 36 }}
-                                >
-                                  note_add
-                                </i>
-                              </div>
-                            </Tooltip>
-                            <Tooltip
-                              title="Add a Payment"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.shortcutsCircle}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#e65100', fontSize: 36 }}
-                                >
-                                  attach_money
-                                </i>
-                              </div>
-                            </Tooltip>
-                            <Tooltip
-                              title="Add a New Customer"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.shortcutsCircle}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#e65100', fontSize: 36 }}
-                                >
-                                  person_add
-                                </i>
-                              </div>
-                            </Tooltip>
-                            <Tooltip
-                              title="Add a New Item"
-                              classes={{ tooltip: classes.tooltip }}
-                            >
-                              <div className={classes.shortcutsCircle}>
-                                <i
-                                  className="material-icons"
-                                  style={{ color: '#e65100', fontSize: 36 }}
-                                >
-                                  add_to_queue
-                                </i>
-                              </div>
-                            </Tooltip>
-                          </div>
-                        </TopCards>
-                      </Grid>
-                    </Grid>
-                    <Grid container spacing={24} justify="center">
-                      <Grid item xs={12} md={8}>
-                        <InvoicedCard checked={checked} />
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <StatisticsCard
-                          unpaid={unpaid}
-                          late={late}
-                          collected={collected}
-                          checked={checked}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </div>
-            </>
+                    </div>
+                  </>
+                );
+              }}
+            </CompanyConsumer>
           );
         }}
-      </CompanyConsumer>
+      </UserConsumer>
     );
   }
 }
