@@ -7,7 +7,7 @@ import "./SettingsPage.css";
 
 function SettingsPage()  {
     return (
-      <div className='container'>
+      <div className='mainSettingsContainer'>
         <Settings />
       </div>
     );
