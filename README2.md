@@ -645,6 +645,16 @@ TBD
 
 ## Stripe:
 
+We are using Stripe in order to accept payments from users of the application. We are utilizing `stripe`, `passport-stripe` and `react-stripe-elements` in order to accomplish this. When the user completes checkout, a request is then sent to the server with BuyPlanOrCredits mutation and the type of subscription the user selected.
+
 ## Free vs Premium
 
+Free users of the application are allowed to create unlimited invoices.
+
+Premium plans cost \$6.00 per month. The perks of such a membership include unlimited invoices for unlimited companies and customers. Moreover users have the ability to save all company and customer data for future convenience.
+
 ## Styles and Theming
+
+This project uses the Material Ui theme provider which cascades the defined theme down to all material ui components.
+
+The theme choice is saved on localstorage and localstorage is checked for a theme choice on reload.
