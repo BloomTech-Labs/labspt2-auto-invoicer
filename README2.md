@@ -138,13 +138,37 @@ Form validation is handled at the component level with Material-UI.
 
 ## Testing
 
+TBD
+
 ## Improving Performance
+
+TBD
 
 # Installation Instructions
 
 ### Environment Variables
 
+The `SECRET_KEY` needed include:
+
+- `SESSION_SECRET`
+- `COOKIE_SECRET`
+- `GOOGLE_CLIENT_SECRET`
+- `FACEBOOK_APP_SECRET_KEY`
+- `STRIPE_SECRET`
+- `STRIPE_CHECKOUT_SECRET_KEY`
+
 ### Using the application
+
+The following APIs are needed:
+
+- Postmark: `POSTMARK_API`
+- TaxJar: `TAX_API`
+- ZipCode: `ZIPCODE_API`, `CLIENT_KEY`
+- Google Calendar: `CLIENT_ID`, `DISCOVERY_DOCS`, `SCOPES`
+
+MongoDB Atlas
+
+- `DB_NAME`, `DB_USER`, `DB_PASSWORD`
 
 # Contributing
 
