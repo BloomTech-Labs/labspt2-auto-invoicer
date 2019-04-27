@@ -14,6 +14,23 @@ export default theme => ({
       minWidth:0,
     }
   },
+  shortcutsCircle: {
+    fontSize: '30px',
+    width: 50,
+    height: 50,
+    borderRadius: '50%',
+    backgroundColor: '#a8e4bc',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    cursor: 'pointer'
+  },
+  shortcuts: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
   tableRowHover: {
     '&:hover': {
       backgroundColor: theme.palette.grey[200],
@@ -46,6 +63,18 @@ export default theme => ({
       marginLeft: 120,
       width: "40%"
     }
+  },
+    tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 13
+  },
+  tooltipNumber:{
+        backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 15
   },
   searchIcon: {
     paddingLeft: 5,
