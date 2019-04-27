@@ -41,12 +41,14 @@ MyAutoInvoicer allows users to easily generate, track, analyze, save and send in
   - [Database](#database)
     - [Models](#models)
       - [Company Model](#company-model)
+      - [Customer Model](#customer-model)
       - [User Model](#user-model)
       - [Invoice Model](#invoice-model)
       - [Item Model](#item-model)
   - [GraphQL](#graphql)
     - [Queries](#queries)
       - [On Company Model](#on-company-model)
+      - [On Customer Model](#on-customer-model)
       - [On User Model](#on-user-model)
       - [On Invoice Model](#on-invoice-model)
       - [On Item Model](#on-item-model)
@@ -55,6 +57,10 @@ MyAutoInvoicer allows users to easily generate, track, analyze, save and send in
         - [Create Company](#create-company)
         - [Edit Company](#edit-company)
         - [Delete Company](#delete-company)
+      - [Customer Mutations](#customer-mutations)
+        - [Create Customer](#create-customer)
+        - [Edit Customer](#edit-customer)
+        - [Delete Customer](#delete-customer)
       - [User Mutations](#user-mutations)
         - [Create User](#create-user)
         - [Edit User](#edit-user)
@@ -204,23 +210,124 @@ Dependencies needed on Backend:
 
 # Contributing
 
+(note: change links)
+
+If you would like to contribute to the project, please see our <a href=".github/CONTRIBUTING.md">Contributing Guidelines</a> which include issue templates for submitting <a href=".github/ISSUE_TEMPLATE/feature_request.md">feature requests</a>, <a href=".github/ISSUE_TEMPLATE/bug_report.md">bug fixes</a>, and a template for submitting <a href=".github/pull_request_template.md">pull requests</a>.
+
+Please read our <a href="CODE_OF_CONDUCT.md">Code of Conduct</a> before contributing!
+
 # Documentation
 
 ### Models
 
 #### Company Model
 
+Fields added to Company model:
+
+```
+- name
+- email
+- phone_num
+- country_code
+- address_1
+- address_2
+- city
+- state
+- postal_code
+- country
+- unlimited_tier
+- credits
+- users
+- customers
+- invoices
+
+```
+
+#### Customer Model
+
+Fields added to Customer model:
+
+```
+- name
+- email
+- phone_num
+- country_code
+- address_1
+- address_2
+- city
+- state
+- postal_code
+- country
+- companies
+- invoices
+```
+
 #### User Model
+
+Fields added to User model:
+
+```
+- email
+- name
+- phone_num
+- companies
+- invoices
+- googleId
+- facebookId
+```
 
 #### Invoice Model
 
+Fields added to Invoice model:
+
+```
+- invoiceNumber
+- invoiceDescription
+- selectionDate
+- invoiceDueDate
+- company
+- addressFrom
+- cityTo
+- stateTo
+- zipCodeTo
+- addressTo
+- emailTo
+- subtotal
+- discount
+- tax
+- shipping
+- total
+- amountPaid
+- balanceDue
+- notes
+- terms
+- paid
+- companyID
+- companyName
+- userID
+- userName
+- customerID
+- invoiceItems
+```
+
 #### Item Model
+
+Fields added to Item model:
+
+```
+- description
+- quantity
+- rate
+- amount
+```
 
 ## GraphQL
 
 ### Queries
 
 #### On Company Model:
+
+#### On Customer Model:
 
 #### On User Model:
 
@@ -237,6 +344,8 @@ Dependencies needed on Backend:
 ```
 - Create company mutations
 ```
+
+#### Customer Mutations:
 
 #### User Mutations:
 
