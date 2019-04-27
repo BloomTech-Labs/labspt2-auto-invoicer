@@ -43,7 +43,7 @@ class EditDialog extends Component {
           title="Edit Amount"
           placement="right"
           classes={{
-          tooltip: classes.tooltip
+            tooltip: classes.tooltip
           }}
         >
           <div
@@ -53,7 +53,7 @@ class EditDialog extends Component {
             <i
               className="material-icons"
               style={{
-                color: "#339933",
+                color: "#4fc878",
                 fontSize: 26
               }}
             >

@@ -11,30 +11,30 @@ export default theme => ({
     minWidth: 1000,
     [theme.breakpoints.up("sm")]: {
       width: "100%",
-      minWidth:0,
+      minWidth: 0
     }
   },
   shortcutsCircle: {
-    fontSize: '30px',
+    fontSize: "30px",
     width: 50,
     height: 50,
-    borderRadius: '50%',
-    backgroundColor: '#a8e4bc',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    cursor: 'pointer'
+    borderRadius: "50%",
+    backgroundColor: "#eff7f2",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    cursor: "pointer"
   },
   shortcuts: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   tableRowHover: {
-    '&:hover': {
-      backgroundColor: theme.palette.grey[200],
-    },
+    "&:hover": {
+      backgroundColor: theme.palette.grey[200]
+    }
   },
   tableWrapper: {
     overflowX: "auto"
@@ -64,15 +64,15 @@ export default theme => ({
       width: "40%"
     }
   },
-    tooltip: {
+  tooltip: {
     backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 13
   },
-  tooltipNumber:{
-        backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+  tooltipNumber: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 15
   },
@@ -101,10 +101,10 @@ export default theme => ({
     },
     [theme.breakpoints.up("sm")]: {
       width: 300,
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+      paddingTop: theme.spacing.unit,
+      paddingRight: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 10
     }
-  },
+  }
 });

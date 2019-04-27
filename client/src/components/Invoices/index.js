@@ -205,7 +205,9 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <EmptyInvoices userID={userState.userID} />
+                      <EmptyInvoices
+                        userID={userState.userID}
+                      />
                     ) : (
                       <Grow in={true} {...{ timeout: 1300 }}>
                         <Paper className={classes.root}>
@@ -225,13 +227,19 @@ class Invoices extends Component {
                                   Invoices
                                 </Typography>
                                 <div className={classes.search}>
-                                  <div className={classes.searchIcon}>
+                                  <div
+                                    className={
+                                      classes.searchIcon
+                                    }
+                                  >
                                     <SearchIcon />
                                   </div>
                                   <InputBase
                                     placeholder="Search…"
                                     name="search"
-                                    onChange={this.handleInputChange}
+                                    onChange={
+                                      this.handleInputChange
+                                    }
                                     classes={{
                                       root: classes.inputRoot,
                                       input: classes.inputInput
@@ -248,7 +256,8 @@ class Invoices extends Component {
                                     <Button
                                       variant="contained"
                                       style={{
-                                        backgroundColor: "#4fc878",
+                                        backgroundColor:
+                                          "#4fc878",
                                         color: "white"
                                       }}
                                       size={buttonSize}
@@ -306,11 +315,14 @@ class Invoices extends Component {
                                 {this.invoiceSearch(invoices)
                                   .slice(
                                     page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
+                                    page * rowsPerPage +
+                                      rowsPerPage
                                   )
                                   .map(invoice => (
                                     <TableRow
-                                      className={classes.tableRowHover}
+                                      className={
+                                        classes.tableRowHover
+                                      }
                                       key={invoice._id}
                                     >
                                       <TableCell
@@ -323,9 +335,12 @@ class Invoices extends Component {
                                       >
                                         <Tooltip
                                           placement="right"
-                                          title={invoice.invoiceNumber}
+                                          title={
+                                            invoice.invoiceNumber
+                                          }
                                           classes={{
-                                            tooltip: classes.tooltipNumber
+                                            tooltip:
+                                              classes.tooltipNumber
                                           }}
                                         >
                                           <div>
@@ -341,7 +356,10 @@ class Invoices extends Component {
                                         align="center"
                                         style={{ fontSize: 18 }}
                                       >
-                                        {this.status(invoice, classes.tooltip)}
+                                        {this.status(
+                                          invoice,
+                                          classes.tooltip
+                                        )}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 18 }}
@@ -354,7 +372,9 @@ class Invoices extends Component {
                                         align="center"
                                         colSpan={3}
                                       >
-                                        {this.dueDate(invoice.invoiceDueDate)}
+                                        {this.dueDate(
+                                          invoice.invoiceDueDate
+                                        )}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 17 }}
@@ -365,11 +385,14 @@ class Invoices extends Component {
                                           placement="right"
                                           title={invoice.total}
                                           classes={{
-                                            tooltip: classes.tooltipNumber
+                                            tooltip:
+                                              classes.tooltipNumber
                                           }}
                                         >
                                           <div>
-                                            {this.ellipsis(invoice.total)}
+                                            {this.ellipsis(
+                                              invoice.total
+                                            )}
                                           </div>
                                         </Tooltip>
                                       </TableCell>
@@ -377,18 +400,25 @@ class Invoices extends Component {
                                         style={{ fontSize: 18 }}
                                         align="center"
                                       >
-                                        <div className={classes.shortcuts}>
+                                        <div
+                                          className={
+                                            classes.shortcuts
+                                          }
+                                        >
                                           <Link
                                             className="card-links"
                                             to={`/user/${
                                               userState.userID
-                                            }/invoice/${invoice._id}/view`}
+                                            }/invoice/${
+                                              invoice._id
+                                            }/view`}
                                           >
                                             <Tooltip
                                               title="View Invoice"
                                               placement="left"
                                               classes={{
-                                                tooltip: classes.tooltip
+                                                tooltip:
+                                                  classes.tooltip
                                               }}
                                             >
                                               <div
@@ -399,7 +429,8 @@ class Invoices extends Component {
                                                 <i
                                                   className="material-icons"
                                                   style={{
-                                                    color: "#339933",
+                                                    color:
+                                                      "#4fc878",
                                                     fontSize: 26
                                                   }}
                                                 >
@@ -411,12 +442,15 @@ class Invoices extends Component {
                                           <Tooltip
                                             title="Download PDF"
                                             classes={{
-                                              tooltip: classes.tooltip
+                                              tooltip:
+                                                classes.tooltip
                                             }}
                                           >
                                             <div
                                               onClick={() => {
-                                                this.props.createPDF(invoice);
+                                                this.props.createPDF(
+                                                  invoice
+                                                );
                                               }}
                                               className={
                                                 classes.shortcutsCircle
@@ -425,7 +459,8 @@ class Invoices extends Component {
                                               <i
                                                 className="material-icons"
                                                 style={{
-                                                  color: "#339933",
+                                                  color:
+                                                    "#4fc878",
                                                   fontSize: 26
                                                 }}
                                               >
@@ -433,7 +468,9 @@ class Invoices extends Component {
                                               </i>
                                             </div>
                                           </Tooltip>
-                                          <EditDialog invoice={invoice} />
+                                          <EditDialog
+                                            invoice={invoice}
+                                          />
                                         </div>
                                       </TableCell>
                                     </TableRow>
@@ -448,26 +485,43 @@ class Invoices extends Component {
                                   </TableRow>
                                 )}
                               </TableBody>
-                              <TableFooter style={{ fontSize: 15 }}>
-                                <TableRow style={{ fontSize: 15 }}>
-                                  <MuiThemeProvider theme={themes}>
+                              <TableFooter
+                                style={{ fontSize: 15 }}
+                              >
+                                <TableRow
+                                  style={{ fontSize: 15 }}
+                                >
+                                  <MuiThemeProvider
+                                    theme={themes}
+                                  >
                                     <TablePagination
-                                      rowsPerPageOptions={[5, 10, 25]}
+                                      rowsPerPageOptions={[
+                                        5,
+                                        10,
+                                        25
+                                      ]}
                                       backIconButtonProps={{
-                                        "aria-label": "Previous Page"
+                                        "aria-label":
+                                          "Previous Page"
                                       }}
                                       nextIconButtonProps={{
-                                        "aria-label": "Next Page"
+                                        "aria-label":
+                                          "Next Page"
                                       }}
                                       colSpan={3}
                                       count={
-                                        this.invoiceSearch(invoices).length
+                                        this.invoiceSearch(
+                                          invoices
+                                        ).length
                                       }
                                       rowsPerPage={rowsPerPage}
                                       page={page}
-                                      onChangePage={this.handleChangePage}
+                                      onChangePage={
+                                        this.handleChangePage
+                                      }
                                       onChangeRowsPerPage={
-                                        this.handleChangeRowsPerPage
+                                        this
+                                          .handleChangeRowsPerPage
                                       }
                                     />
                                   </MuiThemeProvider>
