@@ -1,228 +1,164 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-const invoiceSchema = new Schema({
-  invoiceNumber: {
-    type: String,
-    required: true
+const invoiceSchema = new Schema(
+  {
+    createdBy: {
+      type: String,
+      required: true
+    },
+    number: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String
+    },
+    terms: {
+      type: String
+    },
+    date: {
+      type: String,
+      required: true
+    },
+    dueDate: {
+      type: String,
+      required: true
+    },
+    company: {
+      _id: {
+        type: String,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      email: {
+        type: String,
+        required: true
+      },
+      phoneNumber: {
+        type: String,
+        required: true
+      },
+      address1: {
+        type: String,
+        required: true
+      },
+      address2: {
+        type: String
+      },
+      zipCode: {
+        type: String,
+        required: true
+      },
+      city: {
+        type: String,
+        required: true
+      },
+      state: {
+        type: String,
+        required: true
+      }
+    },
+    customer: {
+      _id: {
+        type: String,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      email: {
+        type: String,
+        required: true
+      },
+      phoneNumber: {
+        type: String,
+        required: true
+      },
+      address1: {
+        type: String,
+        required: true
+      },
+      address2: {
+        type: String
+      },
+      zipCode: {
+        type: String,
+        required: true
+      },
+      city: {
+        type: String,
+        required: true
+      },
+      state: {
+        type: String,
+        required: true
+      }
+    },
+    items: [
+      {
+        _id: {
+          type: String,
+          required: true
+        },
+        name: {
+          type: String,
+          required: true
+        },
+        description: {
+          type: String
+        },
+        quantity: {
+          type: String,
+          required: true
+        },
+        cost: {
+          type: String,
+          required: true
+        },
+        amount: {
+          type: String,
+          required: true
+        }
+      }
+    ],
+    subtotal: {
+      type: String,
+      required: true
+    },
+    discount: {
+      type: String
+    },
+    tax: {
+      type: String
+    },
+    shipping: {
+      type: String
+    },
+    total: {
+      type: String,
+      required: true
+    },
+    balance: {
+      type: String,
+      required: true
+    },
+    notes: {
+      type: String
+    },
+    paid: {
+      type: Boolean,
+      default: false
+    },
+    hidden: {
+      type: Boolean,
+      default: false
+    }
   },
-  invoiceDescription: {
-    type: String,
-    required: true
-  },
-  selectedDate: {
-    type: String,
-    required: true
-  },
-  invoiceDueDate: {
-    type: String,
-    required: true
-  },
-  company: {
-    type: String,
-    required: true
-  },
-  addressFrom: {
-    type: String,
-    required: true
-  },
-  cityTo: {
-    type: String,
-    required: false
-  },
-  stateTo: {
-    type: String,
-    required: false
-  },
-  zipCodeTo: {
-    type: String,
-    required: true
-  },
-  addressTo: {
-    type: String,
-    required: true
-  },
-  emailTo: {
-    type: String,
-    required: true
-  },
-  subtotal: {
-    type: String,
-    required: true
-  },
-  discount: {
-    type: String,
-    required: true
-  },
-  tax: {
-    type: String,
-    required: true
-  },
-  shipping: {
-    type: String,
-    required: true
-  },
-  total: {
-    type: String,
-    required: true
-  },
-  amountPaid: {
-    type: String,
-    required: true
-  },
-  balanceDue: {
-    type: String,
-    required: true
-  },
-  //Notes & Terms
-  notes: {
-    type: String,
-    required: true
-  },
-  terms: {
-    type: String,
-    required: true
-  },
-  // invoiceItems
-  // invoiceItems: [{ item: "", quantity: "", rate: "", amount: "" }],
-  paid: {
-    type: Boolean,
-    default: false
-  },
-  companyID: {
-    type: String,
-    required: true
-  },
-  companyName: {
-    type: String,
-    required: true
-  },
-  userID: {
-    type: String,
-    required: true
-  },
-  userName: {
-    type: String,
-    required: true
-  },
-  customerID: {
-    type: String,
-    required: true
-  },
-  invoiceItems: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Item'
-  }
-});
+  { timestamps: true }
+);
 
-// Original Version
-// const invoiceSchema = new Schema({
-//   invoiceNumber: {
-//     type: String,
-//     required: true
-//   },
-//   languageSelection: {
-//     type: String,
-//     required: true
-//   },
-//   currencySelection: {
-//     type: String,
-//     required: true
-//   },
-//   addressFrom: {
-//     type: String,
-//     required: true
-//   },
-//   addressTo: {
-//     type: String,
-//     required: true
-//   },
-//   cityTo: {
-//     type: String,
-//     required: false
-//   },
-//   stateRegionTo: {
-//     type: String,
-//     required: false
-//   },
-//   zipCodeTo: {
-//     type: String,
-//     required: true
-//   },
-//   clientEmailTo: {
-//     type: String,
-//     required: true
-//   },
-//   selectedDate: {
-//     type: String,
-//     required: true
-//   },
-//   invoiceDueDate: {
-//     type: String,
-//     required: true
-//   },
-//   balanceDue: {
-//     type: String,
-//     required: true
-//   },
-//   subtotal: {
-//     type: String,
-//     required: true
-//   },
-//   discount: {
-//     type: String,
-//     required: true
-//   },
-//   tax: {
-//     type: String,
-//     required: true
-//   },
-//   shipping: {
-//     type: String,
-//     required: true
-//   },
-//   total: {
-//     type: String,
-//     required: true
-//   },
-//   amountPaid: {
-//     type: String,
-//     required: true
-//   },
-//   invoiceNotes: {
-//     type: String,
-//     required: true
-//   },
-//   invoiceTerms: {
-//     type: String,
-//     required: true
-//   },
-//   paid: {
-//     type: Boolean,
-//     default: false
-//   },
-//   companyID: {
-//     type: String,
-//     required: true
-//   },
-//   companyName: {
-//     type: String,
-//     required: true
-//   },
-//   userID: {
-//     type: String,
-//     required: true
-//   },
-//   userName: {
-//     type: String,
-//     required: true
-//   },
-//   customerID: {
-//     type: String,
-//     required: true
-//   }
-
-//   // invoiceItems: [{...}]
-//   // (not required) subtotal, tax, total, invoiceNotes, invoiceTerms
-// });
-
-module.exports = model("Invoice", invoiceSchema);
+module.exports = model('Invoice', invoiceSchema);
