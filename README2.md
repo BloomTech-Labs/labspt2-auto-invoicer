@@ -356,28 +356,292 @@ Fields added to Item model:
 ##### Create Company
 
 ```
-- Create company mutations
+const CreateCompany = async (companyInput, returnedData) => {
+  const result = inputToString(companyInput)
+
+  const CreateCompany = {
+    query: `
+      mutation {
+        createCompany(companyInput: {${result}} ) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+
+  const newCompany = await Post(CreateCompany)
+  return newCompany.data.data
+}
+```
+
+##### Edit Company
+
+```
+const EditCompany = async (companyID, editedData, returnedData) => {
+editedData = inputToString(editedData)
+
+    const EditCompany = {
+      query: `
+        mutation {
+          editCompany(companyID: "${companyID}", editCompanyInput: {${editedData}}) {
+            ${returnedData}
+          }
+        }
+      `
+    };
+
+    const editedCompany = await Post(EditCompany)
+    return editedCompany.data.data
+}
+```
+
+##### Edit Company (Buy Plan or Credits)
+
+```
+const BuyPlanOrCredits = async (companyID, quantity, returnedData) => {
+  const BuyPlanOrCredits = {
+    query: `
+      mutation {
+        buyPlanOrCredits(companyID: "${companyID}", quantity: ${quantity}) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+
+  const updatedCompany = await Post(BuyPlanOrCredits)
+  return updatedCompany.data.data
+}
 ```
 
 #### Customer Mutations:
 
+##### Create Customer
+
+```
+const CreateCustomer = async (customerInput, returnedData) => {
+  const result = inputToString(customerInput);
+
+  const CreateCustomer = {
+    query: `
+      mutation {
+        createCustomer(customerInput: {${result}}) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+  const newCustomer = await Post(CreateCustomer);
+  return newCustomer.data.data;
+};
+```
+
+##### Edit Customer
+
+```
+const EditCustomer = async (customerID, editedData, returnedData) => {
+  inputToString(editedData);
+
+  const EditCustomer = {
+    query: `
+      mutation {
+        editCustomer(customerID: "${customerID}", editCustomerInput: {${editedData}}) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+  const editedCustomer = await Post(EditCustomer);
+  return editedCustomer.data.data;
+};
+```
+
+##### Edit Customer (Add Customer to Company)
+
+```
+const AddCustomerToCompany = async (
+  customerID,
+  companyID,
+  returnedData
+) => {
+  const AddCustomerToCompany = {
+    query: `
+      mutation {
+        addCustomerToCompany(customerID: "${customerID}", companyID: "${companyID}") {
+          ${returnedData}
+        }
+      }
+    `
+  };
+  const returnedCustomer = await Post(AddCustomerToCompany);
+  return returnedCustomer.data.data;
+};
+
+```
+
 #### User Mutations:
+
+##### Create User
+
+```
+const CreateUser = async (userInput, returnedData) => {
+  inputToString(userInput)
+
+  const CreateUser = {
+    query: `
+      mutation {
+        createUser(userInput: {${userInput}} ) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+
+  const newUser = await Post(CreateUser)
+  return newUser.data.data
+}
+```
+
+##### Edit User
+
+```
+const EditUser = async (userID, editedData, returnedData) => {
+  editedData = inputToString(editedData)
+
+    const EditUser = {
+      query: `
+        mutation {
+          editUser(userID: "${userID}", editUserInput: {${editedData}}) {
+            ${returnedData}
+          }
+        }
+      `
+    };
+
+    const editedUser = await Post(EditUser)
+    return editedUser.data.data
+}
+```
+
+##### Edit User (Add User to Company)
+
+```
+const AddUserToCompany = async (userID, companyID, returnedData) => {
+  const AddUserToCompany = {
+    query:  `
+      mutation {
+        addUserToCompany(userID: "${userID}", companyID: "${companyID}") {
+          ${returnedData}
+        }
+      }
+    `
+  }
+
+  const returnedCompany = await Post(AddUserToCompany);
+  return returnedCompany.data.data
+}
+```
 
 #### Invoice Mutations:
 
 ##### Create Invoice
 
+```
+const CreateInvoice = async (invoiceInput, returnedData) => {
+  const result = inputToString(invoiceInput);
+  console.log("invoice input:", result);
+  const CreateInvoice = {
+    query: `
+            mutation {
+                createInvoice(invoiceInput: {${result}}) {
+                    ${returnedData}
+                }
+            }
+        `
+  };
+  console.log("create invoice", CreateInvoice);
+  const newInvoice = await Post(CreateInvoice);
+  console.log("new invoice", newInvoice);
+  return newInvoice.data.data;
+};
+```
+
 ##### Edit Invoice
 
-##### Delete Invoice
+```
+const EditInvoice = async (invoiceID, editedData, returnedData) => {
+  editedData = inputToString(editedData);
+
+  const EditInvoice = {
+    query: `
+            mutation {
+                editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {${editedData}}) {
+                    ${returnedData}
+                }
+            }
+        `
+  };
+  const editedInvoice = await Post(EditInvoice);
+  return editedInvoice.data.data;
+};
+```
+
+##### Edit Invoice (Add Invoice to Company)
+
+```
+const AddInvoiceToCompany = async (
+  invoiceID,
+  companyID,
+  returnedData
+) => {
+  const AddInvoiceToCompany = {
+    query: `
+            mutation {
+                addInvoiceToCompany(invoiceID: "${invoiceID}", companyID: "${companyID}") {
+                    ${returnedData}
+                }
+            }
+        `
+  };
+  const returnedInvoice = await Post(AddInvoiceToCompany);
+  return returnedInvoice.data.data;
+};
+```
 
 #### Item Mutations:
 
 ##### Create Item
 
+```
+const CreateItem = async (itemInput, returnedData) => {
+  const result = inputToString(itemInput);
+
+  const CreateItem = {
+    query: `
+      mutation {
+        createItem(itemInput: {${result}}) {
+          ${returnedData}
+        }
+      }
+    `
+  };
+  const newItem = await Post(CreateItem);
+  return newItem.data.data;
+};
+
+```
+
 ##### Edit Item
 
+```
+TBD
+```
+
 ##### Delete Item
+
+```
+TBD
+```
 
 ## Stripe:
 
