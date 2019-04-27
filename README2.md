@@ -327,13 +327,27 @@ Fields added to Item model:
 
 #### On Company Model:
 
+- company(companyID: `${companyID}`) query will search for a single company with id and return to the client with that company.
+- `companies` query will return all companies
+
 #### On Customer Model:
+
+- customer(customerID: `${customerID}`) query will search for a single customer with id and return to the client with that customer.
+- `customers` query will return all customers
 
 #### On User Model:
 
+- user(user: `${userID}`) query will search for a single user with id and return to the client with that user.
+- `users` query will return all users
+
 #### On Invoice Model:
 
+- invoice(invoice: `${invoiceID}`) query will search for a single invoice with id and return to the client with that invoice.
+- `invoices` query will return all invoices
+
 #### On Item Model:
+
+- TBD
 
 ### Mutations:
 
