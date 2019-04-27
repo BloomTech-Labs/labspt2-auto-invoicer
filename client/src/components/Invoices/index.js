@@ -18,8 +18,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import SaveAlt from "@material-ui/icons/SaveAlt";
-import Money from "@material-ui/icons/AttachMoney";
 import Tooltip from "@material-ui/core/Tooltip";
 // import components here
 
@@ -141,7 +139,12 @@ class Invoices extends Component {
             tooltip: tooltips
           }}
         >
-          <Money style={{ color: "green" }} />
+          <i
+            className="material-icons"
+            style={{ color: "green", fontSize: 26 }}
+          >
+            attach_money
+          </i>
         </Tooltip>
       );
     } else if (
@@ -156,7 +159,9 @@ class Invoices extends Component {
             tooltip: tooltips
           }}
         >
-          <Money color="error" />
+          <i className="material-icons" style={{ color:"red", fontSize: 26 }}>
+            attach_money
+          </i>
         </Tooltip>
       );
     } else {
@@ -168,7 +173,12 @@ class Invoices extends Component {
             tooltip: tooltips
           }}
         >
-          <Money style={{ color: "yellow" }} />
+          <i
+            className="material-icons"
+            style={{ color: "#FFFF00", fontSize: 26 }}
+          >
+            attach_money
+          </i>
         </Tooltip>
       );
     }
