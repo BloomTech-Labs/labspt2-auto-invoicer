@@ -1,31 +1,48 @@
-.container {
+.mainSettingsContainer {
   width: 100%;
-  padding: 0 20px;
-  margin: 30px auto;
 }
 
-.card-header {
+.mainSettingsContainer .card-header {
   margin-bottom: 10px;
   border-bottom: 1px solid gray;
   display: flex;
   justify-content: space-around;
 }
+.mainSettingsContainer .cardDetails {
+  width: 50%
+}
 
-.edit {
+.mainSettingsContainer .infoContainer {
+  align-self: flex-start;
+}
+
+.mainSettingsContainer .edit {
   cursor: pointer;
 }
 
-.container h1 {
+.mainSettingsContainer h1 {
   font-size: 2.5rem;
   color: black;
 }
 
-.container h2 {
+.mainSettingsContainer h2 {
   font-size: 1.6rem;
+  display: inline;
 }
 
-.container p {
+.mainSettingsContainer p {
   font-size: 2.2rem;
-  /* font-style: italic; */
   color: black;
+  padding-bottom: 10px;
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .mainSettingsContainer h2 {
+    font-size: 1.2rem;
+  }
+
+  .mainSettingsContainer p {
+    font-size: 1.6rem
+  }
 }
