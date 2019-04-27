@@ -166,9 +166,41 @@ The following APIs are needed:
 - ZipCode: `ZIPCODE_API`, `CLIENT_KEY`
 - Google Calendar: `CLIENT_ID`, `DISCOVERY_DOCS`, `SCOPES`
 
-MongoDB Atlas
+MongoDB Atlas:
 
 - `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+
+Dependencies needed on Frontend:
+
+- Material-UI/Core
+- Material-UI/Icons
+- Material-UI/Styles
+- Material-UI/Labs
+- Material-UI-Pickers
+- Axios
+- React
+- React-Router-Dom
+- Recharts
+- Styled-Components
+- React-Testing-Library
+
+Dependencies needed on Backend:
+
+- Node
+- Express
+- Express-GraphQL
+- GraphQL
+- Helmet
+- Mongoose
+- Passport
+
+- Once you have those dependencies:
+- Fork and clone repo
+- Add environment variables to a `.env` folder at the root of the project folder. Please see [Environment Variables](#environment-variables) section for how to configure envrionment variables for this project. This file will be ignored by git unless you modify the .gitignore
+  ...
+- From there, run `yarn` or `npm install` command to install node_modules required for the project.
+- Type `yarn start` to start the React application.
+- Type `yarn run dev` to start the server.
 
 # Contributing
 
