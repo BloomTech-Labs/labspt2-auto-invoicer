@@ -14,6 +14,11 @@ export default theme => ({
       minWidth:0,
     }
   },
+  tableRowHover: {
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    },
+  },
   tableWrapper: {
     overflowX: "auto"
   },
@@ -30,9 +35,9 @@ export default theme => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.black, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.black, 0.25)
     },
     marginRight: theme.spacing.unit * 2,
     marginLeft: 20,
@@ -52,7 +57,7 @@ export default theme => ({
     justifyContent: "center"
   },
   inputRoot: {
-    color: "inherit",
+    color: "black",
     width: "100%"
   },
   inputInput: {

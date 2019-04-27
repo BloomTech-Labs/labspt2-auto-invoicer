@@ -73,6 +73,7 @@ class App extends Component {
   };
 
   createPDF = formPayload => {
+    console.log(formPayload)
     const file = {
       addressFrom: formPayload.addressFrom,
       addressTo: formPayload.addressTo,
