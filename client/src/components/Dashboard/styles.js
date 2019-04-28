@@ -4,17 +4,17 @@ export default theme => ({
     flexGrow: 1,
     overflow: 'hidden',
     paddingBottom: 200,
-    backgroundColor: '#a8e4bc'
+    backgroundColor: '#f2f2f2'
   },
   grid: {
     width: '95%',
-    margin: `0 ${theme.spacing.unit * 2}px`,
+    margin: `0 ${theme.spacing.unit * 1}px`,
     [theme.breakpoints.down('sm')]: {
       width: 'calc(100% - 20px)'
     }
   },
   paper: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     padding: theme.spacing.unit * 3,
     textAlign: 'left',
     color: theme.palette.text.secondary,
@@ -23,7 +23,7 @@ export default theme => ({
     }
   },
   statistics: {
-    height: 280
+    height: 308
   },
   topBar: {
     display: 'flex',
@@ -35,7 +35,8 @@ export default theme => ({
     margin: theme.spacing.unit
   },
   block: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    paddingLeft: 0
   },
   topCards: {
     display: 'flex',
@@ -110,7 +111,7 @@ export default theme => ({
     width: 72,
     height: 72,
     borderRadius: '50%',
-    backgroundColor: '#a8e4bc',
+    backgroundColor: '#eff7f2',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -118,9 +119,11 @@ export default theme => ({
     cursor: 'pointer'
   },
   tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: '#eff7f2',
+    color: '#4fc878',
     boxShadow: theme.shadows[1],
-    fontSize: 11
+    fontSize: 12,
+    fontWeight: 'bolder',
+    border: '1px solid #4fc878'
   }
 });

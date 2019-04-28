@@ -57,7 +57,7 @@ class Dashboard extends Component {
                     <div className={classes.root}>
                       <Grid container justify="center">
                         <Grid
-                          spacing={40}
+                          spacing={24}
                           alignItems="center"
                           justify="center"
                           container
@@ -66,8 +66,8 @@ class Dashboard extends Component {
                           <TopBar name={userState.name} checked={checked} />
                           <Grid
                             container
-                            spacing={40}
-                            style={{ marginBottom: 20 }}
+                            spacing={24}
+                            style={{ marginBottom: 12 }}
                           >
                             <Grid item xs={12} md={4}>
                               <TopCards checked={checked} timeout={1000}>
@@ -176,7 +176,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#339933',
+                                          color: '#4fc878',
                                           fontSize: 36
                                         }}
                                       >
@@ -192,7 +192,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#339933',
+                                          color: '#4fc878',
                                           fontSize: 36
                                         }}
                                       >
@@ -208,7 +208,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#339933',
+                                          color: '#4fc878',
                                           fontSize: 36
                                         }}
                                       >
@@ -224,7 +224,7 @@ class Dashboard extends Component {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: '#339933',
+                                          color: '#4fc878',
                                           fontSize: 36
                                         }}
                                       >
