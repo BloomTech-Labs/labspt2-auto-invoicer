@@ -33,13 +33,12 @@ class EmptyInvoices extends Component {
       <Grow in={true} {...{ timeout: 1300 }}>
         <Paper
           style={{
-            border: "2px solid #8bc34a",
             height: "490px",
             marginBottom: "20px"
           }}
           className={classes.root}
         >
-          <AppBar style={{ backgroundColor: "#8bc34a" }} position="static">
+          <AppBar style={{ backgroundColor: "#eff7f2" }} position="static">
             <Toolbar className={classes.toolbar}>
               <Typography className={classes.title} color="inherit" noWrap>
                 Invoices
@@ -47,7 +46,7 @@ class EmptyInvoices extends Component {
               <Link to={`/user/${userID}/invoice/create`}>
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "#689f38", color: "white" }}
+                  style={{ backgroundColor: "#4fc878", color: "white" }}
                   size={buttonSize}
                   color="primary"
                 >
@@ -62,7 +61,9 @@ class EmptyInvoices extends Component {
                 Your Path To Financial Success Starts Here.
               </p>
               <Investing className="emptyInvoices" />
-              <p className="btmText">Click Now To Create Your First Invoice.</p>
+              <p className="btmText">
+                Click Now To Create Your First Invoice.
+              </p>
             </Link>
           </div>
         </Paper>

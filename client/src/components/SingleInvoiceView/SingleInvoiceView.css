@@ -1,0 +1,88 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-size:3rem;
+}
+.page {
+  height: 8.5in;
+  width: 95%;
+  position: relative;
+  margin: 30px 20px;
+}
+.page table {
+  width: 100%;
+}
+.page .company {
+  width: 150px;
+}
+.invoice-header {
+  width: 100%;
+  margin-top:10px;
+  padding-bottom: 20px;
+}
+.invoice-header .company {
+  vertical-align: top;
+  font-size: 5rem;
+}
+.invoice-dates {
+  width: 100%;
+  text-align: right;
+}
+.invoice-addresses {
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 20px 0;
+}
+.invoice-address {
+  padding: 30px;
+  line-height: 1.3;
+}
+.invoice-address .address-frto {
+  /* font-size: 20px; */
+}
+.page td .invoice-money {
+  text-align: right;
+  margin-left: auto;
+  margin-bottom: 10px;
+  width: 300px;
+}
+.page td .invoice-money tr {
+  line-height: 1.3;
+}
+.page td .invoice-money tr:nth-child(even) {
+  background: lightgray;
+}
+.page td .invoice-money tr td {
+  padding: 3px;
+}
+.page .invoice-next-page {
+  position: absolute;
+  margin-bottom:20px;
+  text-align: center;
+  width: 100%;
+}
+.invoice-terms {
+  width: 100%;
+  margin-bottom:30px;
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+
+#total-due {
+  background: rgb(224, 123, 105);
+}
+#amount-paid {
+  background: rgb(145, 195, 149);
+}
+.invoice-items {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.invoice-items .invoice-item {
+  border: 1px solid black;
+}
+.btm-header{
+  margin-top:50px;
+  margin-bottom:50px;
+}

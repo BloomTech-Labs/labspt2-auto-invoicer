@@ -10,7 +10,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
@@ -19,9 +18,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import SaveAlt from "@material-ui/icons/SaveAlt";
-import Edit from "@material-ui/icons/EditOutlined";
-import Money from "@material-ui/icons/AttachMoney";
 import Tooltip from "@material-ui/core/Tooltip";
 // import components here
 
@@ -122,21 +118,7 @@ class Invoices extends Component {
     let dateInNumberForm = parseInt(year + monthConvertedToNumber + day, 10);
     return dateInNumberForm;
   };
-  toolTipSize = (component, placement, str) => {
-    const theme = createMuiTheme({
-      typography: {
-        fontSize: 25,
-        useNextVariants: true
-      }
-    });
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Tooltip placement={placement} title={str}>
-          {component}
-        </Tooltip>
-      </MuiThemeProvider>
-    );
-  };
+
   invoiceSearch = invoices => {
     let invoicesToShow =
       this.state.search === ""
@@ -147,44 +129,62 @@ class Invoices extends Component {
     return invoicesToShow;
   };
 
-  status = invoice => {
-    const theme = createMuiTheme({
-      typography: {
-        fontSize: 25,
-        useNextVariants: true
-      }
-    });
+  status = (invoice, tooltips) => {
     if (Number(invoice.amountPaid) >= Number(invoice.total)) {
       return (
-        <MuiThemeProvider theme={theme}>
-          <Tooltip placement="left" title="Paid">
-            <Money style={{ color: "green" }} />
-          </Tooltip>
-        </MuiThemeProvider>
+        <Tooltip
+          placement="left"
+          title="Paid"
+          classes={{
+            tooltip: tooltips
+          }}
+        >
+          <i
+            className="material-icons"
+            style={{ color: "green", fontSize: 26 }}
+          >
+            attach_money
+          </i>
+        </Tooltip>
       );
     } else if (
       this.lateChecker(Date()) >
       this.lateChecker(String(invoice.invoiceDueDate))
     ) {
       return (
-        <MuiThemeProvider theme={theme}>
-          <Tooltip placement="left" title="Late">
-            <Money color="error" />
-          </Tooltip>
-        </MuiThemeProvider>
+        <Tooltip
+          placement="left"
+          title="Late"
+          classes={{
+            tooltip: tooltips
+          }}
+        >
+          <i className="material-icons" style={{ color:"red", fontSize: 26 }}>
+            attach_money
+          </i>
+        </Tooltip>
       );
     } else {
       return (
-        <MuiThemeProvider theme={theme}>
-          <Tooltip placement="left" title="Outstanding">
-            <Money style={{ color: "yellow" }} />
-          </Tooltip>
-        </MuiThemeProvider>
+        <Tooltip
+          placement="left"
+          title="Outstanding"
+          classes={{
+            tooltip: tooltips
+          }}
+        >
+          <i
+            className="material-icons"
+            style={{ color: "#FFFF00", fontSize: 26 }}
+          >
+            attach_money
+          </i>
+        </Tooltip>
       );
     }
   };
   render() {
-    const { classes, invoice } = this.props;
+    const { classes } = this.props;
     const { rowsPerPage, page, buttonSize } = this.state;
     const themes = createMuiTheme({
       typography: {
@@ -205,20 +205,18 @@ class Invoices extends Component {
                 return (
                   <section>
                     {invoices.length < 1 ? (
-                      <EmptyInvoices userID={userState.userID} />
+                      <EmptyInvoices
+                        userID={userState.userID}
+                      />
                     ) : (
                       <Grow in={true} {...{ timeout: 1300 }}>
-                        <Paper
-                          style={{
-                            border: "2px solid #8bc34a",
-                            marginBottom: "20px"
-                          }}
-                          className={classes.root}
-                        >
+                        <Paper className={classes.root}>
                           <div className={classes.rootbar}>
                             <AppBar
                               position="static"
-                              style={{ backgroundColor: "#8bc34a" }}
+                              style={{
+                                backgroundColor: "#eff7f2"
+                              }}
                             >
                               <Toolbar>
                                 <Typography
@@ -229,13 +227,19 @@ class Invoices extends Component {
                                   Invoices
                                 </Typography>
                                 <div className={classes.search}>
-                                  <div className={classes.searchIcon}>
+                                  <div
+                                    className={
+                                      classes.searchIcon
+                                    }
+                                  >
                                     <SearchIcon />
                                   </div>
                                   <InputBase
                                     placeholder="Search…"
                                     name="search"
-                                    onChange={this.handleInputChange}
+                                    onChange={
+                                      this.handleInputChange
+                                    }
                                     classes={{
                                       root: classes.inputRoot,
                                       input: classes.inputInput
@@ -252,7 +256,8 @@ class Invoices extends Component {
                                     <Button
                                       variant="contained"
                                       style={{
-                                        backgroundColor: "#689f38",
+                                        backgroundColor:
+                                          "#4fc878",
                                         color: "white"
                                       }}
                                       size={buttonSize}
@@ -267,11 +272,7 @@ class Invoices extends Component {
                           <div className={classes.tableWrapper}>
                             <Table className={classes.table}>
                               <TableBody>
-                                <TableRow
-                                  style={{
-                                    borderBottom: "2px solid #8bc34a"
-                                  }}
-                                >
+                                <TableRow>
                                   <TableCell
                                     style={{ fontSize: 20 }}
                                     align="center"
@@ -314,22 +315,40 @@ class Invoices extends Component {
                                 {this.invoiceSearch(invoices)
                                   .slice(
                                     page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
+                                    page * rowsPerPage +
+                                      rowsPerPage
                                   )
                                   .map(invoice => (
                                     <TableRow
-                                      style={{
-                                        borderBottom: "2px solid #8bc34a"
-                                      }}
+                                      className={
+                                        classes.tableRowHover
+                                      }
                                       key={invoice._id}
                                     >
                                       <TableCell
                                         component="th"
                                         scope="row"
                                         align="center"
-                                        style={{ fontSize: 18.5 }}
+                                        style={{
+                                          fontSize: 18.5
+                                        }}
                                       >
-                                        {this.ellipsis(invoice.invoiceNumber)}
+                                        <Tooltip
+                                          placement="right"
+                                          title={
+                                            invoice.invoiceNumber
+                                          }
+                                          classes={{
+                                            tooltip:
+                                              classes.tooltipNumber
+                                          }}
+                                        >
+                                          <div>
+                                            {this.ellipsis(
+                                              invoice.invoiceNumber
+                                            )}
+                                          </div>
+                                        </Tooltip>
                                       </TableCell>
                                       <TableCell
                                         component="th"
@@ -337,7 +356,10 @@ class Invoices extends Component {
                                         align="center"
                                         style={{ fontSize: 18 }}
                                       >
-                                        {this.status(invoice)}
+                                        {this.status(
+                                          invoice,
+                                          classes.tooltip
+                                        )}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 18 }}
@@ -350,53 +372,106 @@ class Invoices extends Component {
                                         align="center"
                                         colSpan={3}
                                       >
-                                        {this.dueDate(invoice.invoiceDueDate)}
+                                        {this.dueDate(
+                                          invoice.invoiceDueDate
+                                        )}
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 17 }}
                                         align="center"
                                         colSpan={3}
                                       >
-                                        ${this.ellipsis(invoice.total)}
+                                        <Tooltip
+                                          placement="right"
+                                          title={invoice.total}
+                                          classes={{
+                                            tooltip:
+                                              classes.tooltipNumber
+                                          }}
+                                        >
+                                          <div>
+                                            {this.ellipsis(
+                                              invoice.total
+                                            )}
+                                          </div>
+                                        </Tooltip>
                                       </TableCell>
                                       <TableCell
                                         style={{ fontSize: 18 }}
                                         align="center"
                                       >
-                                        <IconButton>
+                                        <div
+                                          className={
+                                            classes.shortcuts
+                                          }
+                                        >
                                           <Link
                                             className="card-links"
                                             to={`/user/${
                                               userState.userID
-                                            }/invoice/${invoice._id}/view`}
+                                            }/invoice/${
+                                              invoice._id
+                                            }/view`}
                                           >
-                                            {this.toolTipSize(
-                                              <Edit />,
-                                              "left",
-                                              "temporary invoice view"
-                                            )}
+                                            <Tooltip
+                                              title="View Invoice"
+                                              placement="left"
+                                              classes={{
+                                                tooltip:
+                                                  classes.tooltip
+                                              }}
+                                            >
+                                              <div
+                                                className={
+                                                  classes.shortcutsCircle
+                                                }
+                                              >
+                                                <i
+                                                  className="material-icons"
+                                                  style={{
+                                                    color:
+                                                      "#4fc878",
+                                                    fontSize: 26
+                                                  }}
+                                                >
+                                                  visibility
+                                                </i>
+                                              </div>
+                                            </Tooltip>
                                           </Link>
-                                        </IconButton>
-                                        <IconButton
-                                          onClick={() => {
-                                            this.props.createPDF(invoice);
-                                          }}
-                                        >
-                                          {this.toolTipSize(
-                                            <SaveAlt />,
-                                            "right",
-                                            "Download"
-                                          )}
-                                        </IconButton>
-                                        {/* Experimental */}
-                                        <IconButton>
-                                          {this.toolTipSize(
-                                            <EditDialog invoice={invoice} />,
-                                            "right",
-                                            "Edit"
-                                          )}
-                                        </IconButton>
-                                        {/* Experimental */}
+                                          <Tooltip
+                                            title="Download PDF"
+                                            classes={{
+                                              tooltip:
+                                                classes.tooltip
+                                            }}
+                                          >
+                                            <div
+                                              onClick={() => {
+                                                this.props.createPDF(
+                                                  invoice
+                                                );
+                                              }}
+                                              className={
+                                                classes.shortcutsCircle
+                                              }
+                                            >
+                                              <i
+                                                className="material-icons"
+                                                style={{
+                                                  color:
+                                                    "#4fc878",
+                                                  fontSize: 26
+                                                }}
+                                              >
+                                                save_alt
+                                              </i>
+                                            </div>
+                                          </Tooltip>
+                                          <EditDialog
+                                            invoice={invoice}
+                                          />
+                                        </div>
                                       </TableCell>
                                     </TableRow>
                                   ))}
@@ -410,26 +485,43 @@ class Invoices extends Component {
                                   </TableRow>
                                 )}
                               </TableBody>
-                              <TableFooter style={{ fontSize: 15 }}>
-                                <TableRow style={{ fontSize: 15 }}>
-                                  <MuiThemeProvider theme={themes}>
+                              <TableFooter
+                                style={{ fontSize: 15 }}
+                              >
+                                <TableRow
+                                  style={{ fontSize: 15 }}
+                                >
+                                  <MuiThemeProvider
+                                    theme={themes}
+                                  >
                                     <TablePagination
-                                      rowsPerPageOptions={[5, 10, 25]}
+                                      rowsPerPageOptions={[
+                                        5,
+                                        10,
+                                        25
+                                      ]}
                                       backIconButtonProps={{
-                                        "aria-label": "Previous Page"
+                                        "aria-label":
+                                          "Previous Page"
                                       }}
                                       nextIconButtonProps={{
-                                        "aria-label": "Next Page"
+                                        "aria-label":
+                                          "Next Page"
                                       }}
                                       colSpan={3}
                                       count={
-                                        this.invoiceSearch(invoices).length
+                                        this.invoiceSearch(
+                                          invoices
+                                        ).length
                                       }
                                       rowsPerPage={rowsPerPage}
                                       page={page}
-                                      onChangePage={this.handleChangePage}
+                                      onChangePage={
+                                        this.handleChangePage
+                                      }
                                       onChangeRowsPerPage={
-                                        this.handleChangeRowsPerPage
+                                        this
+                                          .handleChangeRowsPerPage
                                       }
                                     />
                                   </MuiThemeProvider>

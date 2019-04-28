@@ -11,7 +11,29 @@ export default theme => ({
     minWidth: 1000,
     [theme.breakpoints.up("sm")]: {
       width: "100%",
-      minWidth:0,
+      minWidth: 0
+    }
+  },
+  shortcutsCircle: {
+    fontSize: "30px",
+    width: 50,
+    height: 50,
+    borderRadius: "50%",
+    backgroundColor: "#eff7f2",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    cursor: "pointer"
+  },
+  shortcuts: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  tableRowHover: {
+    "&:hover": {
+      backgroundColor: theme.palette.grey[200]
     }
   },
   tableWrapper: {
@@ -30,9 +52,9 @@ export default theme => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.black, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.black, 0.25)
     },
     marginRight: theme.spacing.unit * 2,
     marginLeft: 20,
@@ -41,6 +63,18 @@ export default theme => ({
       marginLeft: 120,
       width: "40%"
     }
+  },
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 13
+  },
+  tooltipNumber: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 15
   },
   searchIcon: {
     paddingLeft: 5,
@@ -52,7 +86,7 @@ export default theme => ({
     justifyContent: "center"
   },
   inputRoot: {
-    color: "inherit",
+    color: "black",
     width: "100%"
   },
   inputInput: {
@@ -67,10 +101,10 @@ export default theme => ({
     },
     [theme.breakpoints.up("sm")]: {
       width: 300,
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+      paddingTop: theme.spacing.unit,
+      paddingRight: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 10
     }
-  },
+  }
 });
