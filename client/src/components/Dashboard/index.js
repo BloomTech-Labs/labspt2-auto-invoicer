@@ -15,6 +15,8 @@ import TopBar from './TopBar';
 import { Typography } from '@material-ui/core';
 import { UserConsumer } from './../../contexts/UserContext';
 
+import './index.css';
+
 class Dashboard extends Component {
   state = {
     checked: false
