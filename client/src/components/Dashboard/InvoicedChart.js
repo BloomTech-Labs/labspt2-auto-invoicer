@@ -36,6 +36,7 @@ class CustomizedAxisTick extends PureComponent {
           textAnchor="end"
           fill="#666"
           transform="rotate(-35)"
+          fontSize={15}
         >
           {payload.value}
         </text>
@@ -110,18 +111,18 @@ export default class InvoicedChart extends PureComponent {
       });
 
       mappedInvoices.push(
-        { name: 'January', invoiced: invoicedJanuary },
-        { name: 'February', invoiced: invoicedFebruary },
-        { name: 'March', invoiced: invoicedMarch },
-        { name: 'April', invoiced: invoicedApril },
+        { name: 'Jan', invoiced: invoicedJanuary },
+        { name: 'Feb', invoiced: invoicedFebruary },
+        { name: 'Mar', invoiced: invoicedMarch },
+        { name: 'Apr', invoiced: invoicedApril },
         { name: 'May', invoiced: invoicedMay },
-        { name: 'June', invoiced: invoicedJune },
-        { name: 'July', invoiced: invoicedJuly },
-        { name: 'August', invoiced: invoicedAugust },
-        { name: 'September', invoiced: invoicedSeptember },
-        { name: 'October', invoiced: invoicedOctober },
-        { name: 'November', invoiced: invoicedNovember },
-        { name: 'December', invoiced: invoicedDecember }
+        { name: 'Jun', invoiced: invoicedJune },
+        { name: 'Jul', invoiced: invoicedJuly },
+        { name: 'Aug', invoiced: invoicedAugust },
+        { name: 'Sep', invoiced: invoicedSeptember },
+        { name: 'Oct', invoiced: invoicedOctober },
+        { name: 'Nov', invoiced: invoicedNovember },
+        { name: 'Dec', invoiced: invoicedDecember }
       );
       this.setState({
         data: [...mappedInvoices]

@@ -9,13 +9,13 @@ import styles from './styles';
 const TopBar = props => {
   const { checked, classes, name } = props;
   return (
-    <Grid item xs={12}>
+    <Grid style={{ paddingLeft: 0 }} item xs={12}>
       <div className={classes.topBar}>
         <div className={classes.block}>
           <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
-            <Typography variant="h3" gutterBottom>
-              Hello, {name.toLowerCase().replace(/\b\w/g, I => I.toUpperCase())}
-              !
+            <Typography variant="h4" gutterBottom>
+              Welcome,{' '}
+              {name.toLowerCase().replace(/\b\w/g, I => I.toUpperCase())}!
             </Typography>
           </Slide>
         </div>

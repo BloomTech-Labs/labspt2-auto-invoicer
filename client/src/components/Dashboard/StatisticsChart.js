@@ -105,14 +105,16 @@ export default class StatisticsChart extends PureComponent {
   };
 
   render() {
+    const { current } = this.props.cardRef;
+    const xPosition = current ? current.clientWidth / 2 : null;
     return (
-      <PieChart width={400} height={400}>
+      <PieChart width={xPosition * 2} height={240}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.state.data}
-          cx={210}
-          cy={100}
+          cx={xPosition}
+          cy={120}
           innerRadius={45}
           outerRadius={95}
           fill="#8884d8"
