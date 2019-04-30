@@ -1,9 +1,10 @@
-const Company = require("../../models/company");
-const User = require("../../models/user");
-const Customer = require("../../models/customer");
-const Invoice = require("../../models/invoice");
+const Company = require('../../models/company');
+const User = require('../../models/user');
+const Customer = require('../../models/customer');
+const Invoice = require('../../models/invoice');
+const Item = require('../../models/item');
 
-const { formatData } = require("./format");
+const { formatData } = require('./format');
 
 const users = async userId => {
   try {
@@ -69,7 +70,21 @@ const invoices = async invoiceId => {
     const fetchedInvoices = await Invoice.find({ _id: { $in: invoiceId } });
     return fetchedInvoices.map(invoice => {
       return {
-        ...invoice._doc
+        ...invoice._doc,
+        invoiceItems: items.bind(this, invoice._doc.items)
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+const items = async itemId => {
+  try {
+    const fetchedItems = await Item.find({ _id: { $in: itemId } });
+    return fetchedItems.map(item => {
+      return {
+        ...item._doc
       };
     });
   } catch (err) {
@@ -81,7 +96,7 @@ const updateDocumentById = async (documentInput, id, Model) => {
   try {
     const documentExists = await Model.findById(id);
     if (!documentExists) {
-      throw new Error("There is no document with the specified ID!");
+      throw new Error('There is no document with the specified ID!');
     }
     Object.keys(documentInput).forEach(key => {
       if (!documentInput[key]) {
@@ -101,14 +116,14 @@ const updateDocumentById = async (documentInput, id, Model) => {
       }
     );
     const documentType = Model.modelName;
-    if (documentType === "User" || documentType === "Customer") {
+    if (documentType === 'User' || documentType === 'Customer') {
       return {
         ...updatedDocument._doc,
         companies: companies.bind(this, updatedDocument._doc.companies),
         invoices: invoices.bind(this, updatedDocument._doc.invoices)
       };
     }
-    if (documentType === "Company") {
+    if (documentType === 'Company') {
       return {
         ...updatedDocument._doc,
         users: users.bind(this, updatedDocument._doc.users),
@@ -149,7 +164,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
       $or: validFields
     });
     const documentType = Model.modelName;
-    if (documentType === "User" || documentType === "Customer") {
+    if (documentType === 'User' || documentType === 'Customer') {
       return documents.map(document => {
         return {
           ...document._doc,
@@ -158,7 +173,7 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
         };
       });
     }
-    if (documentType === "Company") {
+    if (documentType === 'Company') {
       return documents.map(document => {
         return {
           ...document._doc,
@@ -185,14 +200,14 @@ const findDocumentById = async (documentId, Model) => {
     if (!document) {
       throw new Error(`${documentType} with the specified ID does not exist.`);
     }
-    if (documentType === "User" || documentType === "Customer") {
+    if (documentType === 'User' || documentType === 'Customer') {
       return {
         ...document._doc,
         companies: companies.bind(this, document._doc.companies),
         invoices: invoices.bind(this, document._doc.invoices)
       };
     }
-    if (documentType === "Company") {
+    if (documentType === 'Company') {
       return {
         ...document._doc,
         users: users.bind(this, document._doc.users),
@@ -215,7 +230,7 @@ const findAllDocuments = async Model => {
     if (!documents.length) {
       throw new Error(`${documentType} does not exist.`);
     }
-    if (documentType === "User" || documentType === "Customer") {
+    if (documentType === 'User' || documentType === 'Customer') {
       return documents.map(document => {
         return {
           ...document._doc,
@@ -224,7 +239,7 @@ const findAllDocuments = async Model => {
         };
       });
     }
-    if (documentType === "Company") {
+    if (documentType === 'Company') {
       return documents.map(document => {
         return {
           ...document._doc,

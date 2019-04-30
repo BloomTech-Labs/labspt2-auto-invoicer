@@ -21,7 +21,7 @@ router.get(
     failureRedirect: '/login'
   }),
   (req, res) => {
-    res.redirect('https://www.myautoinvoicer.com');
+    res.redirect(process.env.FRONTEND_URL);
   }
 );
 
@@ -41,7 +41,7 @@ router.get(
     failureRedirect: '/login'
   }),
   (req, res) => {
-    res.redirect('https://www.myautoinvoicer.com');
+    res.redirect(process.env.FRONTEND_URL);
   }
 );
 
@@ -61,7 +61,7 @@ router.get(
     failureRedirect: '/auth'
   }),
   (req, res) => {
-    res.redirect('https://www.myautoinvoicer.com');
+    res.redirect(process.env.FRONTEND_URL);
   }
 );
 

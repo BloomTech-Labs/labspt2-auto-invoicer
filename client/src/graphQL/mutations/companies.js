@@ -18,12 +18,12 @@ export const CreateCompany = async (companyInput, returnedData) => {
 }
 
 export const EditCompany = async (companyID, editedData, returnedData) => {
-const result = inputToString(editedData)
+editedData = inputToString(editedData)
 
     const EditCompany = {
       query: `
         mutation {
-          editCompany(companyID: "${companyID}", editCompanyInput: {${result}}) {
+          editCompany(companyID: "${companyID}", editCompanyInput: {${editedData}}) {
             ${returnedData}
           }
         }
@@ -47,4 +47,5 @@ export const BuyPlanOrCredits = async (companyID, quantity, returnedData) => {
 
   const updatedCompany = await Post(BuyPlanOrCredits)
   return updatedCompany.data.data
+  //change
 }

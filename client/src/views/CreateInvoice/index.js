@@ -5,10 +5,12 @@ import React, { Component } from "react";
 import "./CreateInvoice.css";
 
 //import components
-import CreateInvoiceForm from "../../components/CreateInvoiceForm";
-import GoogleCalApi from "../../components/GoogleCalApi";
+//import CreateInvoiceForm from "../../components/CreateInvoiceForm";
+//import GoogleCalApi from "../../components/GoogleCalApi";
 import { UserConsumer } from "../../contexts/UserContext";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
+
+import CreateInvoiceForm2 from "../../components/CreateInvoiceForm2";
 
 export default class index extends Component {
   //No state held - views only render
@@ -18,16 +20,23 @@ export default class index extends Component {
         {({ userState }) => {
           return (
             <CompanyConsumer>
-              {({ companyState }) => {
+              {({ companyState, fetchInvoices }) => {
                 return (
-                  <div>
-                    Views Only.
-                    <CreateInvoiceForm
+                  <div className="main-container">
+                    Views 2.
+                    {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}
                       company={companyState}
+                      fetchInvoices={fetchInvoices}
                     />
-                    <GoogleCalApi />
+                    <GoogleCalApi /> */}
+                    <CreateInvoiceForm2
+                      history={this.props.history}
+                      user={userState}
+                      company={companyState}
+                      fetchInvoices={fetchInvoices}
+                    />
                   </div>
                 );
               }}

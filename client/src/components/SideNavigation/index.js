@@ -18,6 +18,7 @@ import AboutIcon from "@material-ui/icons/Code";
 import BillingIcon from "@material-ui/icons/Payment";
 import SettingsIcon from "@material-ui/icons/Settings";
 import InvoicesIcon from "@material-ui/icons/Receipt";
+import { UserConsumer } from "../../contexts/UserContext";
 
 // imported css here
 import "./SideNavigation.css";
@@ -32,9 +33,10 @@ class SideNavigation extends React.Component {
 
     this.state = {
       open: false,
-      credits: 3
+      creditsOrPlan: ""
     };
   }
+
   handleDrawerOpen = () => {
     // change open state to true || false to open or close navigation
     this.setState({ open: !this.state.open });
@@ -44,9 +46,27 @@ class SideNavigation extends React.Component {
     // signInModal from App Component
     return this.props.signInModal();
   };
+
   signUpModal = () => {
     return this.props.signUpModal();
   };
+
+  connectUserContextWithState = company => {
+    console.log(company);
+    if (!this.state.creditsOrPlan) {
+      const { credits, unlimited_tier } = company;
+      this.setState({
+        creditsOrPlan: unlimited_tier ? "1 Month Unlimited" : credits
+      });
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.userState !== prevProps.userState) {
+      this.connectUserContextWithState(this.props.userState.companies[0]);
+    }
+  }
+
   render() {
     // deconstruct state to get a list of needed attributes
     const { open } = this.state;
@@ -70,7 +90,7 @@ class SideNavigation extends React.Component {
             <AuthSecured
               {...this.props}
               signOut={this.props.signOut}
-              credits={this.state.credits}
+              // credits={this.state.creditsOrPlan}
             />
           )}
         </header>
@@ -122,7 +142,7 @@ class SideNavigation extends React.Component {
                 return (
                   <NavLink
                     exact
-                    to={`/user/${this.props.id}/${lowerTitle}`}
+                    to={`/user/${this.props.userState.userID}/${lowerTitle}`}
                     key={title}
                     className="icon-container"
                     onClick={() => {

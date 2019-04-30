@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -16,13 +16,13 @@ const userSchema = new Schema(
     companies: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Company"
+        ref: 'Company'
       }
     ],
     invoices: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Invoice"
+        ref: 'Invoice'
       }
     ],
     googleId: {
@@ -35,4 +35,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("User", userSchema);
+module.exports = model('User', userSchema);

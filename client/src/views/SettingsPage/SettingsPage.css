@@ -1,54 +1,52 @@
-.settings-view {
-  display: flex;
-  align-items: baseline;
-  margin-top: 30px;
-}
-.settings-view div > h3 {
-  font-size: 3.6rem;
-  margin: 20px auto;
+.mainSettingsContainer {
   width: 100%;
-  text-align: center;
-}
-.settings-view div:nth-child(2) {
-  border-left: 1px solid black;
 }
 
-.form-column {
+.mainSettingsContainer .card-header {
+  margin-bottom: 10px;
+  border-bottom: 1px solid gray;
   display: flex;
-  flex-direction: column;
-  width: 500px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: space-around;
+}
+.mainSettingsContainer .cardDetails {
+  width: 50%
 }
 
-.form-column label {
-  display: flex;
-  width: 400px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 20px;
-  margin: 10px auto;
+.mainSettingsContainer .infoContainer {
+  align-self: flex-start;
 }
 
-.form-column label input {
-  width: 200px;
-  margin: 5px;
-  font-size: 20px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 3px;
+.mainSettingsContainer .edit {
+  cursor: pointer;
 }
 
-.form-column button {
-  width: 200px;
-  font-size: 20px;
-  padding: 3px 0;
-  margin: 10px auto;
+.mainSettingsContainer h1 {
+  font-size: 2.5rem;
+  color: black;
 }
-.notes-caption {
-  width: 400px;
-  padding: 0 5px;
-  text-align: right;
-  margin: 0 auto;
+
+.mainSettingsContainer h2 {
+  font-size: 1.6rem;
+  display: inline;
+}
+
+.mainSettingsContainer p {
+  font-size: 2.2rem;
+  color: black;
+  padding-bottom: 10px;
+  display: inline;
+}
+
+@media only screen and (max-width: 600px) {
+  .mainSettingsContainer h2 {
+    font-size: 1.2rem;
+  }
+
+  .mainSettingsContainer p {
+    font-size: 1.6rem
+  }
+
+  .mainSettingsContainer .cardDetails {
+    width: 75%
+  }
 }

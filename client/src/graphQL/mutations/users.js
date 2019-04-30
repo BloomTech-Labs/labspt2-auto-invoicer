@@ -18,7 +18,7 @@ export const CreateUser = async (userInput, returnedData) => {
 }
 
 export const EditUser = async (userID, editedData, returnedData) => {
-  inputToString(editedData)
+  editedData = inputToString(editedData)
   
     const EditUser = {
       query: `

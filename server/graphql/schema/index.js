@@ -1,4 +1,4 @@
-const { buildSchema } = require('graphql');
+const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
 type User {
@@ -47,33 +47,34 @@ type Customer {
   invoices: [Invoice!]
 }
 
+
 type Invoice {
-  _id: ID!
-  companyID: String!
-  companyName: String!
-  userID: String!
-  userName: String!
-  customerID: String! 
-  invoiceNumber: String!
-  languageSelection: String!
-  currencySelection: String!
+  _id: ID
+  companyID: String
+  companyName: String
+  userID: String
+  userName: String
+  customerID: String
+  invoiceNumber: String
+  invoiceDescription: String
+  selectedDate: String
+  invoiceDueDate: String
+  company: String
   addressFrom: String
-  addressTo: String!
   cityTo: String
-  stateRegionTo: String
-  zipCodeTo: String!
-  clientEmailTo: String!
-  selectedDate: String!
-  invoiceDueDate: String!
-  balanceDue: String!
+  stateTo: String
+  zipCodeTo: String
+  addressTo: String
+  emailTo: String
   subtotal: String
   discount: String
-  tax: String!
-  shipping: String!
+  tax: String
+  shipping: String
   total: String
   amountPaid: String
-  invoiceNotes: String
-  invoiceTerms: String
+  balanceDue: String
+  notes: String
+  terms: String
 }
 
 input InvoiceInput {
@@ -82,39 +83,48 @@ input InvoiceInput {
   userID: String!
   userName: String!
   customerID: String!
-  invoiceNumber: String
-  languageSelection: String
-  currencySelection: String
-  addressFrom: String
-  addressTo: String
+  invoiceNumber: String!
+  invoiceDescription: String!
+  selectedDate: String!
+  invoiceDueDate: String!
+  company: String!
+  addressFrom: String!
   cityTo: String
-  stateRegionTo: String
-  zipCodeTo: String
-  clientEmailTo: String
-  selectedDate: String
-  invoiceDueDate: String
-  balanceDue: String
+  stateTo: String
+  zipCodeTo: String!
+  addressTo: String
+  emailTo: String!
   subtotal: String
   discount: String
-  tax: String
-  shipping: String
+  tax: String!
+  shipping: String!
   total: String
   amountPaid: String
-  invoiceNotes: String
-  invoiceTerms: String
+  balanceDue: String!
+  notes: String
+  terms: String
 }
+
+
 
 input EditInvoiceInput {
   amountPaid: String!
 }
 
-
 type Item {
   _id: ID!
   description: String!
-  quantity: Int!
-  rate: Float!
-  amount: Int!
+  quantity: String!
+  rate: String!
+  amount: String!
+}
+
+input ItemInput {
+  _id: ID!
+  description: String!
+  quantity: String!
+  rate: String!
+  amount: String!
 }
 
 input CompanyInput {
@@ -216,7 +226,7 @@ type RootMutation {
   addCustomerToCompany(customerID: ID!, companyID: ID!): Customer
   createInvoice(invoiceInput: InvoiceInput!): Invoice
   editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceID: ID!): Invoice
-  buyPlanOrCredits(companyID: ID!, quantity: Int! ): Company
+  buyPlanOrCredits(companyID: ID!, quantity: Int!): Company
 }
 
 schema {

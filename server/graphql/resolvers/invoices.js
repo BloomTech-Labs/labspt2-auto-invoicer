@@ -17,10 +17,10 @@ module.exports = {
     return findDocumentById(invoiceID, Invoice);
   },
   createInvoice: async ({ invoiceInput }) => {
-    const company = await Company.findById(invoiceInput.companyID)
+    const company = await Company.findById(invoiceInput.companyID);
     if (!company.unlimited_tier) {
       if (!company.credits) {
-        throw new Error ('')
+        throw new Error("");
       }
     }
     try {
@@ -31,25 +31,52 @@ module.exports = {
         companyName: invoiceInput.companyName,
         userName: invoiceInput.userName,
         invoiceNumber: invoiceInput.invoiceNumber,
-        languageSelection: invoiceInput.languageSelection,
-        currencySelection: invoiceInput.currencySelection,
-        addressFrom: invoiceInput.addressFrom,
-        addressTo: invoiceInput.addressTo,
-        cityTo: invoiceInput.cityTo,
-        stateRegionTo: invoiceInput.stateRegionTo,
-        zipCodeTo: invoiceInput.zipCodeTo,
-        clientEmailTo: invoiceInput.clientEmailTo,
+        invoiceDescription: invoiceInput.invoiceDescription,
         selectedDate: invoiceInput.selectedDate,
         invoiceDueDate: invoiceInput.invoiceDueDate,
-        balanceDue: invoiceInput.balanceDue,
+        company: invoiceInput.company,
+        addressFrom: invoiceInput.addressFrom,
+        cityTo: invoiceInput.cityTo,
+        stateTo: invoiceInput.stateTo,
+        zipCodeTo: invoiceInput.zipCodeTo,
+        addressTo: invoiceInput.addressTo,
+        emailTo: invoiceInput.emailTo,
         subtotal: invoiceInput.subtotal,
         discount: invoiceInput.discount,
         tax: invoiceInput.tax,
         shipping: invoiceInput.shipping,
         total: invoiceInput.total,
         amountPaid: invoiceInput.amountPaid,
-        invoiceNotes: invoiceInput.invoiceNotes,
-        invoiceTerms: invoiceInput.invoiceTerms,
+        balanceDue: invoiceInput.balanceDue,
+        notes: invoiceInput.notes,
+        terms: invoiceInput.terms
+
+        // Original Invoice Resolver
+        // companyID: invoiceInput.companyID,
+        // userID: invoiceInput.userID,
+        // customerID: invoiceInput.customerID,
+        // companyName: invoiceInput.companyName,
+        // userName: invoiceInput.userName,
+        // invoiceNumber: invoiceInput.invoiceNumber,
+        // languageSelection: invoiceInput.languageSelection,
+        // currencySelection: invoiceInput.currencySelection,
+        // addressFrom: invoiceInput.addressFrom,
+        // addressTo: invoiceInput.addressTo,
+        // cityTo: invoiceInput.cityTo,
+        // stateRegionTo: invoiceInput.stateRegionTo,
+        // zipCodeTo: invoiceInput.zipCodeTo,
+        // clientEmailTo: invoiceInput.clientEmailTo,
+        // selectedDate: invoiceInput.selectedDate,
+        // invoiceDueDate: invoiceInput.invoiceDueDate,
+        // balanceDue: invoiceInput.balanceDue,
+        // subtotal: invoiceInput.subtotal,
+        // discount: invoiceInput.discount,
+        // tax: invoiceInput.tax,
+        // shipping: invoiceInput.shipping,
+        // total: invoiceInput.total,
+        // amountPaid: invoiceInput.amountPaid,
+        // invoiceNotes: invoiceInput.invoiceNotes,
+        // invoiceTerms: invoiceInput.invoiceTerms
       });
 
       const newInvoice = await invoice.save();
@@ -59,7 +86,7 @@ module.exports = {
       company.invoices.push(newInvoice._doc._id);
       customer.invoices.push(newInvoice._doc._id);
       if (!company.unlimited_tier) {
-        company.credits = company.credits - 1
+        company.credits -= 1;
       }
       await user.save();
       await company.save();

@@ -6,7 +6,7 @@ passport.use(
     {
       clientID: process.env.STRIPE_ID,
       clientSecret: process.env.STRIPE_SECRET,
-      callbackURL: 'https://www.myautoinvoicer.com'
+      callbackURL: process.env.FRONTEND_URL
     },
     async (accessToken, refreshToken, stripe_properties, done) => {
       console.log(stripe_properties, accessToken);

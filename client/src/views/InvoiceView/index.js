@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-
 //import styles
 //import "./InvoiceView.css";
 
 //import components
-import InvoiceViewForm from "../../components/InvoiceViewForm";
+import SingleInvoiceView from "../../components/SingleInvoiceView";
+
 
 export default class index extends Component {
   // No state held - views only render
   render() {
     return (
       <div>
-        InvoiceViews Only.
-        <InvoiceViewForm />
+        <SingleInvoiceView props={this.props}/>
       </div>
     );
   }

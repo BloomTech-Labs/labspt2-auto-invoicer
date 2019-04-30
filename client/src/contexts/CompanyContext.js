@@ -1,74 +1,72 @@
-import React from 'react'
+import React from "react";
 
-import { FetchCompany } from '../graphQL/queries/companies'
+import { FetchCompany } from "../graphQL/queries/companies";
 
-export const CompanyContext = React.createContext()
+export const CompanyContext = React.createContext();
 
 export class CompanyProvider extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      companyID: '',
-      name: '',
-      email: '',
-      phone_num: '',
-      address_1: '',
-      address_2: '',
-      city: '',
-      state: '',
-      postal_code: '',
-      country: '',
+      companyID: "",
+      name: "",
+      email: "",
+      phone_num: "",
+      address_1: "",
+      address_2: "",
+      city: "",
+      state: "",
+      postal_code: "",
+      country: "",
       unlimited_tier: false,
       credits: 0,
       users: [],
       customers: [],
-      invoices: [],
-    }
-    this.fetchCompany = async (companyID) => {
-      const companyData = `
-      _id 
-      name 
-      email 
-      phone_num 
-      address_1
-      address_2 
-      city 
-      state 
-      postal_code 
-      country 
-      unlimited_tier 
-      credits`
-      const usersData =  `users {_id name}`
-      const customersData = `customers {_id name}`
-      const invoicesData = `invoices {
-        _id
-        invoiceNumber 
-        companyName 
-        userName 
-        languageSelection 
-        currencySelection 
-        addressFrom 
-        addressTo 
-        cityTo 
-        stateRegionTo 
-        zipCodeTo 
-        clientEmailTo 
-        selectedDate 
-        invoiceDueDate 
-        balanceDue 
-        subtotal 
-        discount
-        tax 
-        shipping 
-        total 
-        amountPaid 
-        invoiceNotes 
-        invoiceTerms
-      }`
-
-      const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`
-      const result = await FetchCompany(companyID, returnedData)
-      const {company} = result
+      invoices: []
+    };
+    const companyData = `
+    _id 
+    name 
+    email 
+    phone_num 
+    address_1
+    address_2 
+    city 
+    state 
+    postal_code 
+    country 
+    unlimited_tier 
+    credits`;
+    const usersData = `users {_id name}`;
+    const customersData = `customers {_id name}`;
+    const invoicesData = `invoices {
+      _id
+      invoiceNumber 
+      companyName 
+      userName 
+      invoiceDescription 
+      addressFrom 
+      addressTo 
+      cityTo 
+      stateTo 
+      zipCodeTo 
+      emailTo 
+      selectedDate 
+      invoiceDueDate 
+      balanceDue 
+      subtotal 
+      discount
+      tax 
+      shipping 
+      total 
+      amountPaid 
+      notes 
+      terms
+    }`;
+    this.fetchCompany = async companyID => {
+      const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`;
+      const result = await FetchCompany(companyID, returnedData);
+      const { company } = result;
       this.setState({
         companyID: company._id,
         name: company.name,
@@ -84,23 +82,83 @@ export class CompanyProvider extends React.Component {
         credits: company.credits,
         users: company.users,
         customers: company.customers,
-        invoices: company.invoices,
+        invoices: company.invoices
+      });
+    };
+
+    this.fetchInvoices = async () => {
+      const returnedData = `credits ${invoicesData}`;
+      const result = await FetchCompany(this.state.companyID, returnedData);
+      const { company } = result;
+      this.setState({ invoices: company.invoices, credits: company.credits });
+    };
+
+    this.fetchUsers = async () => {
+      const result = await FetchCompany(this.state.companyID, usersData);
+      const { company } = result;
+      this.setState({ users: company.users });
+    };
+
+    this.fetchCustomers = async () => {
+      const result = await FetchCompany(this.state.companyID, customersData);
+      const { company } = result;
+      this.setState({ customers: company.customers });
+    };
+
+    this.fetchCompanyData = async (companyID) => {
+      const result = await FetchCompany(companyID, companyData);
+      const { company } = result
+      this.setState({
+        companyID: company._id,
+        name: company.name,
+        email: company.email,
+        phone_num: company.phone_num,
+        address_1: company.address_1,
+        address_2: company.address_2,
+        city: company.city,
+        state: company.state,
+        postal_code: company.postal_code,
+        country: company.country,
+        unlimited_tier: company.unlimited_tier,
+        credits: company.credits,
       })
     }
+
+    this.fetchPlanOrCredits = async (companyID) => {
+      const plan = `unlimited_tier credits`
+      const result = await FetchCompany(companyID, plan )
+      const { company } = result;
+      this.setState({
+        credits: company.credits,
+        unlimited_tier: company.unlimited_tier
+      });
+    };
   }
 
   render() {
-    const {fetchCompany} = this
-    const companyState = this.state
-    return(
-      <CompanyContext.Provider value={
-        {companyState, fetchCompany}
-      }>
+    const {
+      fetchCompany,
+      fetchCustomers,
+      fetchInvoices,
+      fetchUsers,
+      fetchPlanOrCredits
+    } = this;
+    const companyState = this.state;
+    return (
+      <CompanyContext.Provider
+        value={{
+          companyState,
+          fetchCompany,
+          fetchCustomers,
+          fetchInvoices,
+          fetchUsers,
+          fetchPlanOrCredits
+        }}
+      >
         {this.props.children}
       </CompanyContext.Provider>
-    )
+    );
   }
 }
 
-export const CompanyConsumer = CompanyContext.Consumer
-
+export const CompanyConsumer = CompanyContext.Consumer;

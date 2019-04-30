@@ -12,7 +12,7 @@ import AmountCredits from './AmountCredits';
 import SelectCurrency from './SelectCurrency';
 import SelectCompany from './SelectCompany';
 import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
-import { UserConsumer } from './../../contexts/UserContext';
+import { UserConsumer } from '../../contexts/UserContext';
 
 class StripeCheckoutForm extends Component {
   state = {
@@ -30,12 +30,14 @@ class StripeCheckoutForm extends Component {
     setTimeout(() => this.setState({ checked: true }), 700);
   }
 
-  companyHelper = companies => {
-    let company = companies.filter(
-      company => company.name === this.state.company
-    );
-    if (company._id !== this.state.companyID) {
-      this.setState({ companyID: company._id });
+  connectUserContextWithState = companies => {
+    if (this.state.company) {
+      const company = companies.filter(
+        company => company.name === this.state.company
+      );
+      if (company[0]._id !== this.state.companyID) {
+        this.setState({ companyID: company[0]._id });
+      }
     }
   };
 
@@ -52,7 +54,7 @@ class StripeCheckoutForm extends Component {
     }
     const { token } = await this.props.stripe.createToken({ name });
     const response = await fetch(
-      'https://api.myautoinvoicer.com/stripe/charge',
+      `${process.env.REACT_APP_BACKEND_URL}/stripe/charge`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
@@ -63,18 +65,20 @@ class StripeCheckoutForm extends Component {
         })
       }
     );
-    if (response.ok) {
-      const result = await BuyPlanOrCredits(
+    if (response.ok && this.state.companyID) {
+      BuyPlanOrCredits(
         this.state.companyID,
         quantity,
         'name unlimited_tier credits'
       );
+      await this.props.fetchPlanOrCredits(this.state.companyID);
     }
     this.setState({
       unlimited: false,
       currency: 'USD',
       name: '',
-      quantity: 0
+      quantity: 0,
+      company: ''
     });
   };
 
@@ -84,7 +88,7 @@ class StripeCheckoutForm extends Component {
     return (
       <UserConsumer>
         {({ userState: { companies } }) => {
-          this.companyHelper(companies);
+          this.connectUserContextWithState(companies);
           return (
             <Slide
               direction="right"

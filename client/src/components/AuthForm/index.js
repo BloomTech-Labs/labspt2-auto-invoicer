@@ -10,19 +10,19 @@ class AuthForm extends React.Component {
         <section className="auth-btns">
           <a
             className="auth-btn"
-            href="https://api.myautoinvoicer.com/auth/facebook"
+            href={`${process.env.REACT_APP_BACKEND_URL}/auth/facebook`}
           >
             Facebook
           </a>
           <a
             className="auth-btn"
-            href="https://api.myautoinvoicer.com/auth/google"
+            href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}
           >
             Google
           </a>
           <a
             className="auth-btn"
-            href="https://api.myautoinvoicer.com/auth/stripe"
+            href={`${process.env.REACT_APP_BACKEND_URL}/auth/stripe`}
           >
             Stripe
           </a>

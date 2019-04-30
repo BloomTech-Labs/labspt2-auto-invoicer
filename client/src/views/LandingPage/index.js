@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
 
 // import components here
-import Landing from "../../components/Landing";
+import Landing from '../../components/Landing';
 
 // import styles here
-import "./LandingPage.css";
+import './LandingPage.css';
 
 const LandingPage = props => {
   return (
-    <section className="landing_page">
-      <Landing click={props.click} />
+    <section className="landing-page">
+      <Landing
+      // click={props.click}
+      />
     </section>
   );
 };

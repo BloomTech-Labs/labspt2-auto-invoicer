@@ -1,29 +1,22 @@
 import React from "react";
 
-// import components here
-import LandingText from "../LandingText";
-import Button from "../reusableComponents/Button";
-// import css here
-import "./Landing.css";
+//import LandingText from "../LandingText";
+import LandingCTA from "../LandingText/LandingCTA.js";
+import LandingFeaturesText from "../LandingText/LandingFeaturesText";
+import { LandingGetStarted } from "../LandingGetStarted";
 
-class Landing extends React.Component {
-  constructor(props) {
-    super(props);
+import HeadlineText from "../LandingText/HeadlineText";
 
-    this.state = {};
-  }
-  changeHandler = e => {
-    return this.setState({ [e.target.name]: e.target.value });
-  };
+const Landing = props => {
+  return (
+    <React.Fragment>
+      <HeadlineText />
+      <LandingCTA />
+      <LandingFeaturesText />
 
-  render() {
-    return (
-      <div className="landing">
-        <LandingText />
-        <Button click={this.props.click}>Buy Now</Button>
-      </div>
-    );
-  }
-}
+      <LandingGetStarted />
+    </React.Fragment>
+  );
+};
 
 export default Landing;
