@@ -1,6 +1,6 @@
 export default theme => ({
   root: {
-    width: "99%",
+    width: "100%",
     height: "1500",
     marginTop: theme.spacing.unit * 3
   },
@@ -9,7 +9,11 @@ export default theme => ({
     justifyContent: "space-between"
   },
   table: {
-    minWidth: 1000
+    minWidth: 1000,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      minWidth: 0
+    }
   },
   tableWrapper: {
     overflowX: "auto"

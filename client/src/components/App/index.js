@@ -72,32 +72,31 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  createPDF = formPayload => {
-    console.log(formPayload)
+  createPDF = invoice => {
     const file = {
-      addressFrom: formPayload.addressFrom,
-      addressTo: formPayload.addressTo,
-      amountPaid: formPayload.amountPaid,
-      balanceDue: formPayload.balanceDue,
-      stateRegionTo: formPayload.stateRegionTo,
-      zipCodeTo: formPayload.zipCodeTo,
-      cityTo: formPayload.cityTo,
-      clientEmailTo: formPayload.clientEmailTo,
-      currencySelection: formPayload.currencySelection,
-      date: formPayload.selectedDate,
-      discount: formPayload.discount,
-      invoiceDueSelection: formPayload.invoiceDueDate,
+      addressFrom: invoice.addressFrom,
+      addressTo: invoice.addressTo,
+      amountPaid: invoice.amountPaid,
+      balanceDue: invoice.balanceDue,
+      stateTo: invoice.stateTo,
+      zipCodeTo: invoice.zipCodeTo,
+      cityTo: invoice.cityTo,
+      emailTo: invoice.emailTo,
+      selectedDate: invoice.selectedDate,
+      discount: invoice.discount,
+      invoiceDueDate: invoice.invoiceDueDate,
+      invoiceDescription:invoice.invoiceDescription,
+      company:invoice.companyName,
       // invoiceItems: [
       //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
       // ],
-      invoiceNotes: formPayload.invoiceNotes,
-      invoiceNumber: formPayload.invoiceNumber,
-      invoiceTerms: formPayload.invoiceTerms,
-      languageSelection: formPayload.languageSelection,
-      shipping: formPayload.shipping,
-      subtotal: formPayload.subtotal,
-      tax: formPayload.tax,
-      total: formPayload.total
+      notes: invoice.notes,
+      invoiceNumber: invoice.invoiceNumber,
+      terms: invoice.terms,
+      shipping: invoice.shipping,
+      subtotal: invoice.subtotal,
+      tax: invoice.tax,
+      total: invoice.total
     };
     axios
       .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
