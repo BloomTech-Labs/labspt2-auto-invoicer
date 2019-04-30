@@ -32,7 +32,7 @@
   - [Authentication](#authentication)
   - [Authorization](#authorization)
   - [Form Validation](#form-validation)
-  - [OWASP Top 10 Application Security Risks 2017](#owasp-top-10-application-security-risks-2017)
+  - [OWASP Top 10 Application Security Risks 2017](#owasp-top-10-application-security-risks-2017) {consider this section}
     - [Injection](#injection)
     - [Broken Authentication](#broken-authentication)
     - [Sensitive Data Exposure](#sensitive-data-exposure)
@@ -43,7 +43,7 @@
     - [Insecure Deserialization](#insecure-deserialization)
     - [Using Components with Known Vulnerabilities](#using-components-with-known-vulnerabilities)
     - [Insufficient Logging and Monitoring](#insufficient-logging-and-monitoring)
-  - [Additional Security Threats](#additional-security-threats)
+  - [Additional Security Threats](#additional-security-threats) {consider this section}
     - [CSRF](#csrf)
     - [Clickjacking](#clickjacking)
 - [Testing](#testing)
@@ -112,6 +112,7 @@
 - React.js
 - Material UI
 - GraphQL
+- Netlify
 
 Deployed [here](https://www.myautoinvoicer.com)
 
@@ -146,7 +147,7 @@ Deployed [here](https://www.myautoinvoicer.com)
 
   - We chose a SQL database database because we felt that the necessary components of our application related to each other and would be best implemented in a relational database. We chose PostgresQL specifically because it was the backend support most recommended by Django, which we had already decided would be our backend framework, for its support of schemas.
 
-* GraphQL
+- GraphQL
 
   - We knew that the models we were dealing with were very closely related to each other and that the way in which we wanted to display that data to users called for a lot of connected queries to the database. Using GraphQL in lieu of REST (while having an initial setup cost of having to make sense of the various documentation) has made a lot of the communication between client and server more efficient.
 
@@ -244,7 +245,7 @@ Form validation was done on this application through the use of Formik and yup. 
 
 This application was tested at every step in the development process manually through the use of the GraphiQL interface, the Django admin page, terminal logging, and Chrome DevTools. Testing was done by each contributor prior to each pull request to the Development branch and after each merge to ensure that no environment differences were negatively affecting the code.
 
-We were continuously deploying to Netlify and Heroku and so had checks on every pull request to verify whether or not the code about to be merged would break the build.
+\*\*\* We were continuously deploying to Netlify and Heroku and so had checks on every pull request to verify whether or not the code about to be merged would break the build.
 
 All pull requests were reviewed by one or more team members and merged by someone other than the individual making the pull request (except in cases where all parties were in a Zoom and had agreed upon the merge).
 
