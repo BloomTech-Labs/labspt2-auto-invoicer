@@ -54,7 +54,7 @@ class EditDialog extends Component {
               className="material-icons"
               style={{
                 color: "#4fc878",
-                fontSize: 26
+                fontSize: 36
               }}
             >
               edit
