@@ -1,1 +1,1 @@
-export * from './CustomerFormDialog';
+export { default } from './CustomerFormDialog';
