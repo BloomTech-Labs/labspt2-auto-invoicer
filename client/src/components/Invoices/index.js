@@ -293,7 +293,7 @@ class Invoices extends Component {
                                     style={{ fontSize: 30 }}
                                     align="center"
                                   >
-                                    Total
+                                    Total Due
                                   </TableCell>
                                   <TableCell
                                     style={{ fontSize: 30 }}
