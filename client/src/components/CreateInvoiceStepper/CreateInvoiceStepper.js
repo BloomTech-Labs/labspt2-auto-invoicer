@@ -1,30 +1,49 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import withStyles from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import Step from '@material-ui/core/Step';
-import StepContent from '@material-ui/core/StepContent';
-import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import UserContext from '../../context/UserContext';
 
-import InvoiceCompany from '../InvoiceCompany';
+import InvoiceCompany from './InvoiceCompany';
+import InvoiceCustomer from './InvoiceCustomer';
 
 const styles = theme => ({
-  root: {
-    width: '95%'
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
+    [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2,
+    [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+      marginTop: theme.spacing.unit * 6,
+      marginBottom: theme.spacing.unit * 6,
+      padding: theme.spacing.unit * 3
+    }
+  },
+  stepper: {
+    padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit
   }
 });
 
@@ -76,6 +95,10 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, company });
   };
 
+  const handleCustomerSelect = customer => {
+    setInvoiceState({ ...invoiceState, customer });
+  };
+
   const handleNext = () => {
     setStepState(prevStep => prevStep + 1);
   };
@@ -84,40 +107,28 @@ const CreateInvoiceStepper = props => {
     setStepState(prevStep => prevStep - 1);
   };
 
-  const handleReset = () => {
-    setStepState(0);
-  };
-
-  const getSteps = () => {
-    return [
-      'Select your company',
-      'Select your customer',
-      'Due Date, Terms and Notes'
-    ];
-  };
+  const steps = [
+    'Select your company',
+    'Select your customer',
+    'Due Date, Terms and Notes'
+  ];
 
   const getStepContent = step => {
     switch (step) {
       case 0:
         return (
-          <React.Fragment>
-            <div>
-              Your customer will be invoiced from this company. You can select
-              your company or create a new company here.
-            </div>
-            <InvoiceCompany
-              company={invoiceState.company}
-              onCompanySelect={handleCompanySelect}
-            />
-          </React.Fragment>
+          <InvoiceCompany
+            company={invoiceState.company}
+            onCompanySelect={handleCompanySelect}
+          />
         );
       case 1:
         return (
-          <React.Fragment>
-            <div>
-              You can select your customer or create a new customer here.
-            </div>
-          </React.Fragment>
+          <InvoiceCustomer
+            companyId={invoiceState.company._id}
+            customer={invoiceState.customer}
+            onCustomerSelect={handleCustomerSelect}
+          />
         );
       case 2:
         return (
@@ -139,50 +150,54 @@ const CreateInvoiceStepper = props => {
     console.log('[invoiceState in CIS]: ', invoiceState);
   }, [invoiceState]);
 
-  const steps = getSteps();
   const { classes } = props;
 
   return (
     <React.Fragment>
-      <div className={classes.root}>
-        <Stepper activeStep={stepState} orientation="vertical">
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                <Typography>{getStepContent(index)}</Typography>
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={stepState === 0}
-                      onClick={handleBack}
-                      className={classes.button}
-                    >
+      <CssBaseline />
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Stepper activeStep={stepState} className={classes.stepper}>
+            {steps.map(label => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <React.Fragment>
+            {stepState === steps.length ? (
+              <React.Fragment>
+                <Typography variant="h5" gutterBottom>
+                  Invoice #1 generated
+                </Typography>
+                <Typography variant="subtitle1">
+                  Your invoice has been created. [OPTIONS WITH ICONS TO SEND,
+                  VIEW, ETC HERE]
+                </Typography>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                {getStepContent(stepState)}
+                <div className={classes.buttons}>
+                  {stepState !== 0 && (
+                    <Button onClick={handleBack} className={classes.button}>
                       Back
                     </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {stepState === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                  </div>
+                  )}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {stepState === steps.length - 1 ? 'Create Invoice' : 'Next'}
+                  </Button>
                 </div>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {stepState === steps.length && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
-      </div>
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        </Paper>
+      </main>
     </React.Fragment>
   );
 };
