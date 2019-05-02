@@ -1,27 +1,31 @@
-import React, { useState, useContext, useEffect } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, useContext, useEffect } from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Paper from "@material-ui/core/Paper";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
-import InvoiceCompany from './InvoiceCompany';
-import InvoiceCustomer from './InvoiceCustomer';
+import InvoiceCompany from "./InvoiceCompany";
+import InvoiceCustomer from "./InvoiceCustomer";
+// import components from old invoice form
+import { Grid } from "@material-ui/core";
+import DateIssue from "../CreateInvoiceForm3/DateIssue";
+import DueDate from "../CreateInvoiceForm3/DueDate";
 
 const styles = theme => ({
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
       width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      marginLeft: "auto",
+      marginRight: "auto"
     }
   },
   paper: {
@@ -38,8 +42,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end'
+    display: "flex",
+    justifyContent: "flex-end"
   },
   button: {
     marginTop: theme.spacing.unit * 3,
@@ -52,41 +56,41 @@ const CreateInvoiceStepper = props => {
 
   const [invoiceState, setInvoiceState] = useState({
     createdBy: context.user._id,
-    number: '',
-    description: '',
-    terms: '',
-    date: '',
-    dueDate: '',
+    number: "",
+    description: "",
+    terms: "",
+    date: "",
+    dueDate: "",
     company: {
-      _id: '',
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address1: '',
-      address2: '',
-      zipCode: '',
-      city: '',
-      state: ''
+      _id: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address1: "",
+      address2: "",
+      zipCode: "",
+      city: "",
+      state: ""
     },
     customer: {
-      _id: '',
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address1: '',
-      address2: '',
-      zipCode: '',
-      city: '',
-      state: ''
+      _id: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address1: "",
+      address2: "",
+      zipCode: "",
+      city: "",
+      state: ""
     },
     items: [],
-    subtotal: '',
-    discount: '',
-    tax: '',
-    shipping: '',
-    total: '',
-    balance: '',
-    notes: ''
+    subtotal: "",
+    discount: "",
+    tax: "",
+    shipping: "",
+    total: "",
+    balance: "",
+    notes: ""
   });
 
   const [stepState, setStepState] = useState(0);
@@ -108,11 +112,11 @@ const CreateInvoiceStepper = props => {
   };
 
   const steps = [
-    'Select your company',
-    'Select your customer',
-    'Dates',
-    'Items',
-    'General'
+    "Select your company",
+    "Select your customer",
+    "Dates",
+    "Items",
+    "General"
   ];
 
   const getStepContent = step => {
@@ -135,7 +139,20 @@ const CreateInvoiceStepper = props => {
       case 2:
         return (
           <React.Fragment>
-            <div>Dates</div>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <DateIssue
+                // onChangeHandler={this.handleDateChange}
+                // value={this.state.selectedDate}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <DueDate
+                // onChangeHandler={this.handleInvoiceDueDateChange}
+                // value={this.state.invoiceDueDate}
+                />
+              </Grid>
+            </Grid>
           </React.Fragment>
         );
       case 3:
@@ -151,7 +168,7 @@ const CreateInvoiceStepper = props => {
           </React.Fragment>
         );
       default:
-        return 'Error';
+        return "Error";
     }
   };
 
@@ -161,7 +178,7 @@ const CreateInvoiceStepper = props => {
       await context.getUser();
     };
     getUser();
-    console.log('[invoiceState in CIS]: ', invoiceState);
+    console.log("[invoiceState in CIS]: ", invoiceState);
   }, [invoiceState]);
 
   const { classes } = props;
@@ -204,7 +221,7 @@ const CreateInvoiceStepper = props => {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {stepState === steps.length - 1 ? 'Create Invoice' : 'Next'}
+                    {stepState === steps.length - 1 ? "Create Invoice" : "Next"}
                   </Button>
                 </div>
               </React.Fragment>
