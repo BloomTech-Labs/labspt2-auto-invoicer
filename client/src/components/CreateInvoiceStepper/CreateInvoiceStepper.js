@@ -16,8 +16,7 @@ import InvoiceCustomer from "./InvoiceCustomer";
 import { Grid } from "@material-ui/core";
 import DateIssue from "../CreateInvoiceForm3/DateIssue";
 import DueDate from "../CreateInvoiceForm3/DueDate";
-import InvoiceNumberInput from "../CreateInvoiceForm3/InvoiceNumberInput";
-import InvoiceDescription from "../CreateInvoiceForm3/InvoiceDescription";
+import SingleLineInput from "../SingleLineInput";
 import MultiLineInput from "../MultiLineInput";
 
 const styles = theme => ({
@@ -93,7 +92,8 @@ const CreateInvoiceStepper = props => {
     tax: "",
     shipping: "",
     total: "",
-    balance: ""
+    balance: "",
+    errorText: ""
     //notes: ""
   });
 
@@ -186,35 +186,17 @@ const CreateInvoiceStepper = props => {
           <React.Fragment>
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
-                <InvoiceNumberInput
+                <SingleLineInput
+                  label="Invoice Number"
                   onChangeHandler={handleInputChange("number")}
                   value={invoiceState.number}
-                  // error={
-                  //   this.state.invoiceNumber.length === 0
-                  //     ? !!this.state.errorText
-                  //     : false
-                  // }
-                  // helperText={
-                  //   this.state.invoiceNumber
-                  //     ? !!this.state.errorText
-                  //     : this.state.errorText
-                  // }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <InvoiceDescription
+                <SingleLineInput
+                  label="Invoice Description"
                   onChangeHandler={handleInputChange("description")}
                   value={invoiceState.description}
-                  // error={
-                  //   this.state.invoiceDescription.length === 0
-                  //     ? !!this.state.errorText
-                  //     : false
-                  // }
-                  // helperText={
-                  //   this.state.invoiceDescription
-                  //     ? !!this.state.errorText
-                  //     : this.state.errorText
-                  // }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
