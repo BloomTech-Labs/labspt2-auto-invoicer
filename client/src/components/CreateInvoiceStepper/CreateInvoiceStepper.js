@@ -16,6 +16,8 @@ import InvoiceCustomer from "./InvoiceCustomer";
 import { Grid } from "@material-ui/core";
 import DateIssue from "../CreateInvoiceForm3/DateIssue";
 import DueDate from "../CreateInvoiceForm3/DueDate";
+import InvoiceNumberInput from "../CreateInvoiceForm3/InvoiceNumberInput";
+import InvoiceDescription from "../CreateInvoiceForm3/InvoiceDescription";
 
 const styles = theme => ({
   layout: {
@@ -166,13 +168,46 @@ const CreateInvoiceStepper = props => {
       case 3:
         return (
           <React.Fragment>
-            <div>Insert text for remaining steps.</div>
+            <div>Invoice Items</div>
           </React.Fragment>
         );
       case 4:
         return (
           <React.Fragment>
-            <div>General (Invoice number, invoice description,)</div>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <InvoiceNumberInput
+                // onChangeHandler={this.handleInputChange("invoiceNumber")}
+                // value={this.state.invoiceNumber}
+                // error={
+                //   this.state.invoiceNumber.length === 0
+                //     ? !!this.state.errorText
+                //     : false
+                // }
+                // helperText={
+                //   this.state.invoiceNumber
+                //     ? !!this.state.errorText
+                //     : this.state.errorText
+                // }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InvoiceDescription
+                // onChangeHandler={this.handleInputChange("invoiceDescription")}
+                // value={this.state.invoiceDescription}
+                // error={
+                //   this.state.invoiceDescription.length === 0
+                //     ? !!this.state.errorText
+                //     : false
+                // }
+                // helperText={
+                //   this.state.invoiceDescription
+                //     ? !!this.state.errorText
+                //     : this.state.errorText
+                // }
+                />
+              </Grid>
+            </Grid>
           </React.Fragment>
         );
       default:

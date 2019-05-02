@@ -28,7 +28,7 @@ const InvoiceNumberInput = props => {
       InputLabelProps={{ style: { fontSize: 20 } }}
       InputProps={{ style: { fontSize: 20 } }}
       margin="normal"
-      variant="filled"
+      //variant="filled"
       error={error}
       helperText={helperText}
     />

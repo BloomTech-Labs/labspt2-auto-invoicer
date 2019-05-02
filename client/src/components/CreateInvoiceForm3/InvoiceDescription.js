@@ -15,11 +15,11 @@ const InvoiceDescription = props => {
       className={classes.textField}
       value={value}
       onChange={onChangeHandler}
-      style={{ width: 400 }}
+      style={{ width: 200 }}
       InputLabelProps={{ style: { fontSize: 20 } }}
       InputProps={{ style: { fontSize: 20 } }}
       margin="normal"
-      variant="filled"
+      //variant="filled"
       error={error}
       helperText={helperText}
     />
