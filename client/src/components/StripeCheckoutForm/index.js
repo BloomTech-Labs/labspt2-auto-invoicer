@@ -106,7 +106,7 @@ class StripeCheckoutForm extends Component {
                     onChangeHandler={this.onChange}
                     value={this.state.name}
                   />
-                  <SelectCompany
+                  {/* <SelectCompany
                     onChangeHandler={this.onChange}
                     value={this.state.company}
                     companies={companies}
@@ -114,7 +114,7 @@ class StripeCheckoutForm extends Component {
                   <SelectPurchasePlan
                     onChangeHandler={this.onChange}
                     value={this.state.unlimited}
-                  />
+                  /> */}
                   <AmountCredits
                     onChangeHandler={this.onChange}
                     value={this.state.quantity}

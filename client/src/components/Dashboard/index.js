@@ -34,8 +34,6 @@ class Dashboard extends Component {
           return (
             <CompanyConsumer>
               {({ companyState: { invoices } }) => {
-                console.log(invoices);
-
                 let collected = 0;
                 let late = 0;
                 let unpaid = 0;
