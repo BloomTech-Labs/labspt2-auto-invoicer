@@ -11,7 +11,6 @@ import { UserConsumer } from "../../contexts/UserContext";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
 
 import CreateInvoiceForm2 from "../../components/CreateInvoiceForm2";
-import CreateInvoiceForm3 from "../../components/CreateInvoiceForm3";
 
 export default class index extends Component {
   //No state held - views only render
@@ -24,7 +23,7 @@ export default class index extends Component {
               {({ companyState, fetchInvoices }) => {
                 return (
                   <div className="main-container">
-                    Views 3.
+                    Views 2.
                     {/* <CreateInvoiceForm
                       click={this.props.click}
                       user={userState}
@@ -32,13 +31,7 @@ export default class index extends Component {
                       fetchInvoices={fetchInvoices}
                     />
                     <GoogleCalApi /> */}
-                    {/* <CreateInvoiceForm2
-                      history={this.props.history}
-                      user={userState}
-                      company={companyState}
-                      fetchInvoices={fetchInvoices}
-                    /> */}
-                    <CreateInvoiceForm3
+                    <CreateInvoiceForm2
                       history={this.props.history}
                       user={userState}
                       company={companyState}
