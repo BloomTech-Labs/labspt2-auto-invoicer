@@ -12,10 +12,9 @@ import UserContext from "../../context/UserContext";
 
 import InvoiceCompany from "./InvoiceCompany";
 import InvoiceCustomer from "./InvoiceCustomer";
-// import components from old invoice form
+// import components for Dates & General
 import { Grid } from "@material-ui/core";
-import DateIssue from "../CreateInvoiceForm3/DateIssue";
-import DueDate from "../CreateInvoiceForm3/DueDate";
+import DateSelecter from "../DateSelecter";
 import SingleLineInput from "../SingleLineInput";
 import MultiLineInput from "../MultiLineInput";
 
@@ -107,17 +106,13 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, customer });
   };
 
-  const handleDateIssueSelect = date => {
+  const handleDateSelect = date => {
     setInvoiceState({ ...invoiceState, date });
   };
 
   const handleDueDateSelect = dueDate => {
     setInvoiceState({ ...invoiceState, dueDate });
   };
-
-  // const handleInputChange = e => {
-  //   setInvoiceState({ ...invoiceState, [e.target.name]: e.target.value });
-  // };
 
   const handleInputChange = name => e => {
     setInvoiceState({ ...invoiceState, [name]: e.target.value });
@@ -161,13 +156,15 @@ const CreateInvoiceStepper = props => {
           <React.Fragment>
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
-                <DateIssue
-                  onChangeHandler={handleDateIssueSelect}
+                <DateSelecter
+                  label="Issue Date"
+                  onChangeHandler={handleDateSelect}
                   value={invoiceState.date}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <DueDate
+                <DateSelecter
+                  label="Due Date"
                   onChangeHandler={handleDueDateSelect}
                   value={invoiceState.dueDate}
                 />
