@@ -4,9 +4,9 @@ const formatData = document => {
       document[key] = document[key].toLowerCase();
     }
   });
-  if (document.phone_num) {
+  if (document.phoneNumber) {
     const regx = /\D+/g;
-    document.phone_num = document.phone_num.replace(regx, '');
+    document.phoneNumber = document.phoneNumber.replace(regx, '');
   }
   return document;
 };

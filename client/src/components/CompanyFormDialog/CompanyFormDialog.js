@@ -8,9 +8,9 @@ import TextField from '@material-ui/core/TextField';
 
 import UserContext from '../../context/UserContext';
 
-import { CreateCustomer } from '../../graphQL/mutations/customers';
+import { CreateCompany } from '../../graphQL/mutations/companies';
 
-const CustomerFormDialog = props => {
+const CompanyFormDialog = props => {
   const context = useContext(UserContext);
 
   const [formState, setFormState] = useState({
@@ -35,8 +35,8 @@ const CustomerFormDialog = props => {
     state
   } = formState;
 
-  const handleSaveCustomer = async () => {
-    const result = await CreateCustomer(
+  const handleSaveCompany = async () => {
+    const result = await CreateCompany(
       {
         name,
         email,
@@ -47,9 +47,10 @@ const CustomerFormDialog = props => {
         city,
         state
       },
-      context.user.companies[0]._id, // change based on props
+      context.user._id,
       '_id'
     );
+    await context.getCompanies();
     setFormState({
       name: '',
       email: '',
@@ -75,7 +76,7 @@ const CustomerFormDialog = props => {
         onClose={props.onClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
+        <DialogTitle id="form-dialog-title">New Company</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -170,7 +171,7 @@ const CustomerFormDialog = props => {
           <Button onClick={props.onClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSaveCustomer} color="primary">
+          <Button onClick={handleSaveCompany} color="primary">
             Save
           </Button>
         </DialogActions>
@@ -179,4 +180,4 @@ const CustomerFormDialog = props => {
   );
 };
 
-export default CustomerFormDialog;
+export default CompanyFormDialog;

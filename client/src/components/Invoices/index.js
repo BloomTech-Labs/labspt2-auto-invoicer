@@ -70,7 +70,7 @@ class Invoices extends Component {
     return str.slice(4, 16);
   };
   ellipsis = str => {
-    let shortened = str.length >= 5 ? str.slice(0, 5) + "..." : str;
+    let shortened = str.length >= 10 ? str.slice(0, 10) + "..." : str;
     return shortened;
   };
   handleChangeRowsPerPage = event => {
@@ -141,7 +141,7 @@ class Invoices extends Component {
         >
           <i
             className="material-icons"
-            style={{ color: "green", fontSize: 26 }}
+            style={{ color: "green", fontSize: 36 }}
           >
             attach_money
           </i>
@@ -159,7 +159,7 @@ class Invoices extends Component {
             tooltip: tooltips
           }}
         >
-          <i className="material-icons" style={{ color:"red", fontSize: 26 }}>
+          <i className="material-icons" style={{ color: "red", fontSize: 36 }}>
             attach_money
           </i>
         </Tooltip>
@@ -175,7 +175,7 @@ class Invoices extends Component {
         >
           <i
             className="material-icons"
-            style={{ color: "#FFFF00", fontSize: 26 }}
+            style={{ color: "#FFFF00", fontSize: 36 }}
           >
             attach_money
           </i>
@@ -203,11 +203,9 @@ class Invoices extends Component {
                   rowsPerPage -
                   Math.min(rowsPerPage, invoices.length - page * rowsPerPage);
                 return (
-                  <section>
+                  <section className="test">
                     {invoices.length < 1 ? (
-                      <EmptyInvoices
-                        userID={userState.userID}
-                      />
+                      <EmptyInvoices userID={userState.userID} />
                     ) : (
                       <Grow in={true} {...{ timeout: 1300 }}>
                         <Paper className={classes.root}>
@@ -227,19 +225,13 @@ class Invoices extends Component {
                                   Invoices
                                 </Typography>
                                 <div className={classes.search}>
-                                  <div
-                                    className={
-                                      classes.searchIcon
-                                    }
-                                  >
+                                  <div className={classes.searchIcon}>
                                     <SearchIcon />
                                   </div>
                                   <InputBase
                                     placeholder="Search…"
                                     name="search"
-                                    onChange={
-                                      this.handleInputChange
-                                    }
+                                    onChange={this.handleInputChange}
                                     classes={{
                                       root: classes.inputRoot,
                                       input: classes.inputInput
@@ -255,9 +247,9 @@ class Invoices extends Component {
                                   >
                                     <Button
                                       variant="contained"
+                                      className={classes.button}
                                       style={{
-                                        backgroundColor:
-                                          "#4fc878",
+                                        backgroundColor: "#4fc878",
                                         color: "white"
                                       }}
                                       size={buttonSize}
@@ -274,39 +266,37 @@ class Invoices extends Component {
                               <TableBody>
                                 <TableRow>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
                                   >
                                     Number
                                   </TableCell>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
                                   >
                                     Status
                                   </TableCell>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
                                   >
                                     Name
                                   </TableCell>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
-                                    colSpan={3}
                                   >
                                     Due Date
                                   </TableCell>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
-                                    colSpan={3}
                                   >
-                                    Total
+                                    Total Due
                                   </TableCell>
                                   <TableCell
-                                    style={{ fontSize: 20 }}
+                                    style={{ fontSize: 30 }}
                                     align="center"
                                   >
                                     Actions
@@ -315,14 +305,11 @@ class Invoices extends Component {
                                 {this.invoiceSearch(invoices)
                                   .slice(
                                     page * rowsPerPage,
-                                    page * rowsPerPage +
-                                      rowsPerPage
+                                    page * rowsPerPage + rowsPerPage
                                   )
                                   .map(invoice => (
                                     <TableRow
-                                      className={
-                                        classes.tableRowHover
-                                      }
+                                      className={classes.tableRowHover}
                                       key={invoice._id}
                                     >
                                       <TableCell
@@ -330,17 +317,14 @@ class Invoices extends Component {
                                         scope="row"
                                         align="center"
                                         style={{
-                                          fontSize: 18.5
+                                          fontSize: 25
                                         }}
                                       >
                                         <Tooltip
                                           placement="right"
-                                          title={
-                                            invoice.invoiceNumber
-                                          }
+                                          title={invoice.invoiceNumber}
                                           classes={{
-                                            tooltip:
-                                              classes.tooltipNumber
+                                            tooltip: classes.tooltipNumber
                                           }}
                                         >
                                           <div>
@@ -354,71 +338,54 @@ class Invoices extends Component {
                                         component="th"
                                         scope="row"
                                         align="center"
-                                        style={{ fontSize: 18 }}
+                                        style={{ fontSize: 25 }}
                                       >
-                                        {this.status(
-                                          invoice,
-                                          classes.tooltip
-                                        )}
+                                        {this.status(invoice, classes.tooltip)}
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 18 }}
+                                        style={{ fontSize: 25 }}
                                         align="center"
                                       >
                                         {invoice.companyName}
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 17 }}
+                                        style={{ fontSize: 25 }}
                                         align="center"
-                                        colSpan={3}
                                       >
-                                        {this.dueDate(
-                                          invoice.invoiceDueDate
-                                        )}
+                                        {this.dueDate(invoice.invoiceDueDate)}
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 17 }}
+                                        style={{ fontSize: 25 }}
                                         align="center"
-                                        colSpan={3}
                                       >
                                         <Tooltip
                                           placement="right"
                                           title={invoice.total}
                                           classes={{
-                                            tooltip:
-                                              classes.tooltipNumber
+                                            tooltip: classes.tooltipNumber
                                           }}
                                         >
                                           <div>
-                                            {this.ellipsis(
-                                              invoice.total
-                                            )}
+                                            {this.ellipsis(invoice.total)}
                                           </div>
                                         </Tooltip>
                                       </TableCell>
                                       <TableCell
-                                        style={{ fontSize: 18 }}
+                                        style={{ fontSize: 25 }}
                                         align="center"
                                       >
-                                        <div
-                                          className={
-                                            classes.shortcuts
-                                          }
-                                        >
+                                        <div className={classes.shortcuts}>
                                           <Link
                                             className="card-links"
                                             to={`/user/${
                                               userState.userID
-                                            }/invoice/${
-                                              invoice._id
-                                            }/view`}
+                                            }/invoice/${invoice._id}/view`}
                                           >
                                             <Tooltip
                                               title="View Invoice"
                                               placement="left"
                                               classes={{
-                                                tooltip:
-                                                  classes.tooltip
+                                                tooltip: classes.tooltip
                                               }}
                                             >
                                               <div
@@ -429,9 +396,8 @@ class Invoices extends Component {
                                                 <i
                                                   className="material-icons"
                                                   style={{
-                                                    color:
-                                                      "#4fc878",
-                                                    fontSize: 26
+                                                    color: "#4fc878",
+                                                    fontSize: 36
                                                   }}
                                                 >
                                                   visibility
@@ -442,15 +408,12 @@ class Invoices extends Component {
                                           <Tooltip
                                             title="Download PDF"
                                             classes={{
-                                              tooltip:
-                                                classes.tooltip
+                                              tooltip: classes.tooltip
                                             }}
                                           >
                                             <div
                                               onClick={() => {
-                                                this.props.createPDF(
-                                                  invoice
-                                                );
+                                                this.props.createPDF(invoice);
                                               }}
                                               className={
                                                 classes.shortcutsCircle
@@ -459,18 +422,15 @@ class Invoices extends Component {
                                               <i
                                                 className="material-icons"
                                                 style={{
-                                                  color:
-                                                    "#4fc878",
-                                                  fontSize: 26
+                                                  color: "#4fc878",
+                                                  fontSize: 36
                                                 }}
                                               >
                                                 save_alt
                                               </i>
                                             </div>
                                           </Tooltip>
-                                          <EditDialog
-                                            invoice={invoice}
-                                          />
+                                          <EditDialog invoice={invoice} />
                                         </div>
                                       </TableCell>
                                     </TableRow>
@@ -485,43 +445,26 @@ class Invoices extends Component {
                                   </TableRow>
                                 )}
                               </TableBody>
-                              <TableFooter
-                                style={{ fontSize: 15 }}
-                              >
-                                <TableRow
-                                  style={{ fontSize: 15 }}
-                                >
-                                  <MuiThemeProvider
-                                    theme={themes}
-                                  >
+                              <TableFooter style={{ fontSize: 15 }}>
+                                <TableRow style={{ fontSize: 15 }}>
+                                  <MuiThemeProvider theme={themes}>
                                     <TablePagination
-                                      rowsPerPageOptions={[
-                                        5,
-                                        10,
-                                        25
-                                      ]}
+                                      rowsPerPageOptions={[5, 10, 25]}
                                       backIconButtonProps={{
-                                        "aria-label":
-                                          "Previous Page"
+                                        "aria-label": "Previous Page"
                                       }}
                                       nextIconButtonProps={{
-                                        "aria-label":
-                                          "Next Page"
+                                        "aria-label": "Next Page"
                                       }}
                                       colSpan={3}
                                       count={
-                                        this.invoiceSearch(
-                                          invoices
-                                        ).length
+                                        this.invoiceSearch(invoices).length
                                       }
                                       rowsPerPage={rowsPerPage}
                                       page={page}
-                                      onChangePage={
-                                        this.handleChangePage
-                                      }
+                                      onChangePage={this.handleChangePage}
                                       onChangeRowsPerPage={
-                                        this
-                                          .handleChangeRowsPerPage
+                                        this.handleChangeRowsPerPage
                                       }
                                     />
                                   </MuiThemeProvider>
