@@ -18,6 +18,7 @@ import DateIssue from "../CreateInvoiceForm3/DateIssue";
 import DueDate from "../CreateInvoiceForm3/DueDate";
 import InvoiceNumberInput from "../CreateInvoiceForm3/InvoiceNumberInput";
 import InvoiceDescription from "../CreateInvoiceForm3/InvoiceDescription";
+import MultiLineInput from "../MultiLineInput";
 
 const styles = theme => ({
   layout: {
@@ -60,6 +61,7 @@ const CreateInvoiceStepper = props => {
     createdBy: context.user._id,
     number: "",
     description: "",
+    notes: "",
     terms: "",
     date: new Date(),
     dueDate: new Date(),
@@ -91,8 +93,8 @@ const CreateInvoiceStepper = props => {
     tax: "",
     shipping: "",
     total: "",
-    balance: "",
-    notes: ""
+    balance: ""
+    //notes: ""
   });
 
   const [stepState, setStepState] = useState(0);
@@ -213,6 +215,20 @@ const CreateInvoiceStepper = props => {
                   //     ? !!this.state.errorText
                   //     : this.state.errorText
                   // }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MultiLineInput
+                  label="Notes"
+                  onChangeHandler={handleInputChange("notes")}
+                  value={invoiceState.notes}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MultiLineInput
+                  label="Terms"
+                  onChangeHandler={handleInputChange("terms")}
+                  value={invoiceState.terms}
                 />
               </Grid>
             </Grid>
