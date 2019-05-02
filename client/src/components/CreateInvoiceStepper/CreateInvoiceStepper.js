@@ -110,7 +110,9 @@ const CreateInvoiceStepper = props => {
   const steps = [
     'Select your company',
     'Select your customer',
-    'Due Date, Terms and Notes'
+    'Dates',
+    'Items',
+    'General'
   ];
 
   const getStepContent = step => {
@@ -133,7 +135,19 @@ const CreateInvoiceStepper = props => {
       case 2:
         return (
           <React.Fragment>
+            <div>Dates</div>
+          </React.Fragment>
+        );
+      case 3:
+        return (
+          <React.Fragment>
             <div>Insert text for remaining steps.</div>
+          </React.Fragment>
+        );
+      case 4:
+        return (
+          <React.Fragment>
+            <div>General (Invoice number, invoice description,)</div>
           </React.Fragment>
         );
       default:
