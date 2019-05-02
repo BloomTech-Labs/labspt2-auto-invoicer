@@ -59,8 +59,8 @@ const CreateInvoiceStepper = props => {
     number: "",
     description: "",
     terms: "",
-    date: "",
-    dueDate: "",
+    date: new Date(),
+    dueDate: new Date(),
     company: {
       _id: "",
       name: "",
@@ -103,6 +103,14 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, customer });
   };
 
+  const handleDateIssueSelect = date => {
+    setInvoiceState({ ...invoiceState, date });
+  };
+
+  const handleDueDateSelect = dueDate => {
+    setInvoiceState({ ...invoiceState, dueDate });
+  };
+
   const handleNext = () => {
     setStepState(prevStep => prevStep + 1);
   };
@@ -142,14 +150,14 @@ const CreateInvoiceStepper = props => {
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
                 <DateIssue
-                // onChangeHandler={this.handleDateChange}
-                // value={this.state.selectedDate}
+                  onChangeHandler={handleDateIssueSelect}
+                  value={invoiceState.date}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <DueDate
-                // onChangeHandler={this.handleInvoiceDueDateChange}
-                // value={this.state.invoiceDueDate}
+                  onChangeHandler={handleDueDateSelect}
+                  value={invoiceState.dueDate}
                 />
               </Grid>
             </Grid>
