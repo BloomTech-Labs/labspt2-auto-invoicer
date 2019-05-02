@@ -113,6 +113,14 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, dueDate });
   };
 
+  // const handleInputChange = e => {
+  //   setInvoiceState({ ...invoiceState, [e.target.name]: e.target.value });
+  // };
+
+  const handleInputChange = name => e => {
+    setInvoiceState({ ...invoiceState, [name]: e.target.value });
+  };
+
   const handleNext = () => {
     setStepState(prevStep => prevStep + 1);
   };
@@ -177,34 +185,34 @@ const CreateInvoiceStepper = props => {
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
                 <InvoiceNumberInput
-                // onChangeHandler={this.handleInputChange("invoiceNumber")}
-                // value={this.state.invoiceNumber}
-                // error={
-                //   this.state.invoiceNumber.length === 0
-                //     ? !!this.state.errorText
-                //     : false
-                // }
-                // helperText={
-                //   this.state.invoiceNumber
-                //     ? !!this.state.errorText
-                //     : this.state.errorText
-                // }
+                  onChangeHandler={handleInputChange("number")}
+                  value={invoiceState.number}
+                  // error={
+                  //   this.state.invoiceNumber.length === 0
+                  //     ? !!this.state.errorText
+                  //     : false
+                  // }
+                  // helperText={
+                  //   this.state.invoiceNumber
+                  //     ? !!this.state.errorText
+                  //     : this.state.errorText
+                  // }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <InvoiceDescription
-                // onChangeHandler={this.handleInputChange("invoiceDescription")}
-                // value={this.state.invoiceDescription}
-                // error={
-                //   this.state.invoiceDescription.length === 0
-                //     ? !!this.state.errorText
-                //     : false
-                // }
-                // helperText={
-                //   this.state.invoiceDescription
-                //     ? !!this.state.errorText
-                //     : this.state.errorText
-                // }
+                  onChangeHandler={handleInputChange("description")}
+                  value={invoiceState.description}
+                  // error={
+                  //   this.state.invoiceDescription.length === 0
+                  //     ? !!this.state.errorText
+                  //     : false
+                  // }
+                  // helperText={
+                  //   this.state.invoiceDescription
+                  //     ? !!this.state.errorText
+                  //     : this.state.errorText
+                  // }
                 />
               </Grid>
             </Grid>
