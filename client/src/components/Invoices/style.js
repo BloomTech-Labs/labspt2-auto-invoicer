@@ -1,7 +1,7 @@
 import { fade } from "@material-ui/core/styles/colorManipulator";
 export default theme => ({
   root: {
-    width: "99%",
+    width: "100%",
     marginTop: theme.spacing.unit * 3
   },
   rootbar: {
@@ -16,8 +16,8 @@ export default theme => ({
   },
   shortcutsCircle: {
     fontSize: "30px",
-    width: 50,
-    height: 50,
+    width: 72,
+    height: 72,
     borderRadius: "50%",
     backgroundColor: "#eff7f2",
     display: "flex",
@@ -43,10 +43,11 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 45
+      fontSize: 45,
+      marginLeft:16,
     }
   },
   search: {
@@ -60,21 +61,30 @@ export default theme => ({
     marginLeft: 20,
     width: "auto",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: 120,
+      marginLeft: 200,
       width: "40%"
     }
   },
+  button: {
+    [theme.breakpoints.up("sm")]: {
+      marginRight: 72
+    }
+  },
   tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
+    backgroundColor: "#eff7f2",
+    color: "#4fc878",
     boxShadow: theme.shadows[1],
-    fontSize: 13
+    fontSize: 14,
+    fontWeight: "bolder",
+    border: "1px solid #4fc878"
   },
   tooltipNumber: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
+    backgroundColor: "#eff7f2",
+    color: "#4fc878",
     boxShadow: theme.shadows[1],
-    fontSize: 15
+    fontWeight: "bolder",
+    border: "1px solid #4fc878",
+    fontSize: 16
   },
   searchIcon: {
     paddingLeft: 5,

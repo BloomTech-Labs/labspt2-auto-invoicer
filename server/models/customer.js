@@ -1,57 +1,48 @@
 const { Schema, model } = require('mongoose');
 
-const customerSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  phone_num: {
-    type: String,
-    required: true
-  },
-  country_code: {
-    type: String,
-    required: true
-  },
-  address_1: {
-    type: String,
-    required: true
-  },
-  address_2: {
-    type: String
-  },
-  city: {
-    type: String,
-    required: true
-  },
-  state: {
-    type: String,
-    required: true
-  },
-  postal_code: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  companies: [
-    {
-      type: Schema.Types.ObjectId,
+const customerSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    phoneNumber: {
+      type: String,
+      required: true
+    },
+    address1: {
+      type: String,
+      required: true
+    },
+    address2: {
+      type: String
+    },
+    zipCode: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    companies: {
+      type: [Schema.Types.ObjectId],
       ref: 'Company'
-    }
-  ],
-  invoices: [
-    {
-      type: Schema.Types.ObjectId,
+    },
+    invoices: {
+      type: [Schema.Types.ObjectId],
       ref: 'Invoice'
     }
-  ]
-});
+  },
+  { timestamps: true }
+);
 
 module.exports = model('Customer', customerSchema);

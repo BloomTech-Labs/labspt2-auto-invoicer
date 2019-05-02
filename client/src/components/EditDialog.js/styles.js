@@ -1,8 +1,8 @@
 export default theme => ({
   shortcutsCircle: {
     fontSize: "30px",
-    width: 50,
-    height: 50,
+    width: 72,
+    height: 72,
     borderRadius: "50%",
     backgroundColor: "#eff7f2",
     display: "flex",
@@ -12,9 +12,11 @@ export default theme => ({
     cursor: "pointer"
   },
   tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
+    backgroundColor: "#eff7f2",
+    color: "#4fc878",
     boxShadow: theme.shadows[1],
-    fontSize: 13
+    fontSize: 14,
+    fontWeight: "bolder",
+    border: "1px solid #4fc878"
   }
 });
