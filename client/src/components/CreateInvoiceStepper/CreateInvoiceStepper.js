@@ -155,22 +155,17 @@ const CreateInvoiceStepper = props => {
       case 2:
         return (
           <React.Fragment>
-            <Grid container spacing={16}>
-              <Grid item xs={12} sm={6}>
-                <DateSelecter
-                  label="Issue Date"
-                  onChangeHandler={handleDateSelect}
-                  value={invoiceState.date}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <DateSelecter
-                  label="Due Date"
-                  onChangeHandler={handleDueDateSelect}
-                  value={invoiceState.dueDate}
-                />
-              </Grid>
-            </Grid>
+            <DateSelecter
+              label="Issue Date"
+              onChangeHandler={handleDateSelect}
+              value={invoiceState.date}
+            />
+
+            <DateSelecter
+              label="Due Date"
+              onChangeHandler={handleDueDateSelect}
+              value={invoiceState.dueDate}
+            />
           </React.Fragment>
         );
       case 3:
