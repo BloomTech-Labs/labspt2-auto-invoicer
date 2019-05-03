@@ -1,27 +1,33 @@
-import React, { useState, useContext, useEffect } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, useContext, useEffect } from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Paper from "@material-ui/core/Paper";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
-import InvoiceCompany from './InvoiceCompany';
-import InvoiceCustomer from './InvoiceCustomer';
+import InvoiceCompany from "./InvoiceCompany";
+import InvoiceCustomer from "./InvoiceCustomer";
+
+// import components for Dates & General
+import { Grid } from "@material-ui/core";
+import DateSelecter from "../DateSelecter";
+import SingleLineInput from "../SingleLineInput";
+import MultiLineInput from "../MultiLineInput";
 
 const styles = theme => ({
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
       width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      marginLeft: "auto",
+      marginRight: "auto"
     }
   },
   paper: {
@@ -38,8 +44,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end'
+    display: "flex",
+    justifyContent: "flex-end"
   },
   button: {
     marginTop: theme.spacing.unit * 3,
@@ -52,41 +58,43 @@ const CreateInvoiceStepper = props => {
 
   const [invoiceState, setInvoiceState] = useState({
     createdBy: context.user._id,
-    number: '',
-    description: '',
-    terms: '',
-    date: '',
-    dueDate: '',
+    number: "",
+    description: "",
+    notes: "",
+    terms: "",
+    date: new Date(),
+    dueDate: new Date(),
     company: {
-      _id: '',
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address1: '',
-      address2: '',
-      zipCode: '',
-      city: '',
-      state: ''
+      _id: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address1: "",
+      address2: "",
+      zipCode: "",
+      city: "",
+      state: ""
     },
     customer: {
-      _id: '',
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address1: '',
-      address2: '',
-      zipCode: '',
-      city: '',
-      state: ''
+      _id: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address1: "",
+      address2: "",
+      zipCode: "",
+      city: "",
+      state: ""
     },
     items: [],
-    subtotal: '',
-    discount: '',
-    tax: '',
-    shipping: '',
-    total: '',
-    balance: '',
-    notes: ''
+    subtotal: "",
+    discount: "",
+    tax: "",
+    shipping: "",
+    total: "",
+    balance: "",
+    errorText: ""
+    //notes: ""
   });
 
   const [stepState, setStepState] = useState(0);
@@ -99,6 +107,18 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, customer });
   };
 
+  const handleDateSelect = date => {
+    setInvoiceState({ ...invoiceState, date });
+  };
+
+  const handleDueDateSelect = dueDate => {
+    setInvoiceState({ ...invoiceState, dueDate });
+  };
+
+  const handleInputChange = name => e => {
+    setInvoiceState({ ...invoiceState, [name]: e.target.value });
+  };
+
   const handleNext = () => {
     setStepState(prevStep => prevStep + 1);
   };
@@ -108,9 +128,11 @@ const CreateInvoiceStepper = props => {
   };
 
   const steps = [
-    'Select your company',
-    'Select your customer',
-    'Due Date, Terms and Notes'
+    "Select your company",
+    "Select your customer",
+    "Dates",
+    "Items",
+    "General"
   ];
 
   const getStepContent = step => {
@@ -133,11 +155,67 @@ const CreateInvoiceStepper = props => {
       case 2:
         return (
           <React.Fragment>
-            <div>Insert text for remaining steps.</div>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <DateSelecter
+                  label="Issue Date"
+                  onChangeHandler={handleDateSelect}
+                  value={invoiceState.date}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <DateSelecter
+                  label="Due Date"
+                  onChangeHandler={handleDueDateSelect}
+                  value={invoiceState.dueDate}
+                />
+              </Grid>
+            </Grid>
+          </React.Fragment>
+        );
+      case 3:
+        return (
+          <React.Fragment>
+            <div>Invoice Items</div>
+          </React.Fragment>
+        );
+      case 4:
+        return (
+          <React.Fragment>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <SingleLineInput
+                  label="Invoice Number"
+                  onChangeHandler={handleInputChange("number")}
+                  value={invoiceState.number}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <SingleLineInput
+                  label="Invoice Description"
+                  onChangeHandler={handleInputChange("description")}
+                  value={invoiceState.description}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MultiLineInput
+                  label="Notes"
+                  onChangeHandler={handleInputChange("notes")}
+                  value={invoiceState.notes}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MultiLineInput
+                  label="Terms"
+                  onChangeHandler={handleInputChange("terms")}
+                  value={invoiceState.terms}
+                />
+              </Grid>
+            </Grid>
           </React.Fragment>
         );
       default:
-        return 'Error';
+        return "Error";
     }
   };
 
@@ -147,7 +225,7 @@ const CreateInvoiceStepper = props => {
       await context.getUser();
     };
     getUser();
-    console.log('[invoiceState in CIS]: ', invoiceState);
+    console.log("[invoiceState in CIS]: ", invoiceState);
   }, [invoiceState]);
 
   const { classes } = props;
@@ -190,7 +268,7 @@ const CreateInvoiceStepper = props => {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {stepState === steps.length - 1 ? 'Create Invoice' : 'Next'}
+                    {stepState === steps.length - 1 ? "Create Invoice" : "Next"}
                   </Button>
                 </div>
               </React.Fragment>

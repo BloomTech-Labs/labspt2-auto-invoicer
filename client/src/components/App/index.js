@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateInvoiceStepper from '../CreateInvoiceStepper';
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
@@ -38,7 +39,7 @@ class App extends Component {
         if (res.data.userId) {
           this.fetchData(res.data.userId);
           this.setState({ loggedIn: true });
-          this.props.history.push(`/user/${res.data.userId}/dashboard`);
+          //this.props.history.push(`/user/${res.data.userId}/dashboard`);
         }
       })
       .catch(err => console.log(err));
@@ -175,6 +176,7 @@ class App extends Component {
                           />
                         )}
                       />
+                      <Route path="/cis" component={CreateInvoiceStepper} />
                       <Route
                         path="/user/:id/invoice/:invoiceID/view"
                         render={props => (
