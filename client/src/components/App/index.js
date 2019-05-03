@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect, useContext} from 'react';
+import CreateInvoiceStepper from "../CreateInvoiceStepper";
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
@@ -17,11 +19,13 @@ import Navigation from '../Navigation/Navigation';
 import UserContext from '../../context/UserContext'
 import './App.css';
 
+
 const App = props => {
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [toggleAuth, setToggleAuth] = useState(false)
   const [toggleSignIn, setToggleSignIn] = useState(false)
+
 
 
   const context = useContext(UserContext);
@@ -51,6 +55,7 @@ const App = props => {
         withCredentials: true
       })
       .then(() => {
+
         setLoggedIn(!loggedIn);
         window.location.replace('/');
       })
@@ -70,8 +75,8 @@ const App = props => {
       selectedDate: invoice.selectedDate,
       discount: invoice.discount,
       invoiceDueDate: invoice.invoiceDueDate,
-      invoiceDescription:invoice.invoiceDescription,
-      company:invoice.companyName,
+      invoiceDescription: invoice.invoiceDescription,
+      company: invoice.companyName,
       // invoiceItems: [
       //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
       // ],
@@ -84,19 +89,19 @@ const App = props => {
       total: invoice.total
     };
     axios
-      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
+      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
-          responseType: 'blob'
+        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
+          responseType: "blob"
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return 'Error';
+        return "Error";
       });
   };
 
@@ -152,6 +157,7 @@ const App = props => {
               />
             )}
           />
+          <Route path="/cis" component={CreateInvoiceStepper} />
           <Route
             path="/user/:id/invoice/:invoiceID/view"
             render={props => (
