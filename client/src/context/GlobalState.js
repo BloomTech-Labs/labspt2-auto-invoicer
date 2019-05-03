@@ -3,8 +3,9 @@ import axios from 'axios';
 
 import UserContext from './UserContext';
 
-import { userReducer, GET_USER, GET_COMPANIES } from './reducers';
+import { userReducer, GET_USER, GET_COMPANIES, GET_UPDATED_USER_DATA } from './reducers';
 import { userData, companyData } from './graphql';
+import { toUpdateUser } from './mutations'
 
 const GlobalState = props => {
   const [userState, dispatch] = useReducer(userReducer, {
@@ -64,13 +65,22 @@ const GlobalState = props => {
     });
   };
 
+  const updateUser = async (editedData) => {
+    const user = await toUpdateUser(userState.user._id, editedData);
+    console.log('updated data:', user)
+    dispatch({
+      type: GET_UPDATED_USER_DATA,
+      user: user.data.data.editUser
+    })
+  }
+
   useEffect(() => {
     console.log('[userState in GlobalState]: ', userState);
   }, [userState]);
 
   return (
     <UserContext.Provider
-      value={{ user: userState.user, getUser, getCompanies }}
+      value={{ user: userState.user, getUser, getCompanies, updateUser }}
     >
       {props.children}
     </UserContext.Provider>
