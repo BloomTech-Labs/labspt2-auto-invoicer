@@ -71,40 +71,40 @@ export default class InvoicedChart extends PureComponent {
       let invoicedNovember = 0;
       let invoicedDecember = 0;
       this.props.invoices.map(invoice => {
-        if (invoice.selectedDate.includes('Jan')) {
+        if (invoice.date.includes('Jan')) {
           invoicedJanuary += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Feb')) {
+        if (invoice.date.includes('Feb')) {
           invoicedFebruary += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Mar')) {
+        if (invoice.date.includes('Mar')) {
           invoicedMarch += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Apr')) {
+        if (invoice.date.includes('Apr')) {
           invoicedApril += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('May')) {
+        if (invoice.date.includes('May')) {
           invoicedMay += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Jun')) {
+        if (invoice.date.includes('Jun')) {
           invoicedJune += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Jul')) {
+        if (invoice.date.includes('Jul')) {
           invoicedJuly += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Aug')) {
+        if (invoice.date.includes('Aug')) {
           invoicedAugust += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Sep')) {
+        if (invoice.date.includes('Sep')) {
           invoicedSeptember += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Oct')) {
+        if (invoice.date.includes('Oct')) {
           invoicedOctober += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Nov')) {
+        if (invoice.date.includes('Nov')) {
           invoicedNovember += parseFloat(invoice.total);
         }
-        if (invoice.selectedDate.includes('Dec')) {
+        if (invoice.date.includes('Dec')) {
           invoicedDecember += parseFloat(invoice.total);
         }
         return invoice;
