@@ -64,26 +64,13 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  buyPremium: async ({ userId }) => {
+    const user = await User.findById(userId);
+    user.premium = true;
+    const date = new Date();
+    user.premiumExpiresOn = date.setDate(date.getDate() + 30);
+    const updatedUser = await user.save();
+    return updatedUser._doc;
   }
-  // addUserToCompany: async ({ userId, companyId }) => {
-  //   try {
-  //     const company = await Company.findById(companyId);
-  //     const user = await User.findById(userId);
-  //     if (!company) {
-  //       throw new Error('company does not exist');
-  //     }
-  //     if (!user) {
-  //       throw new Error('user does not exist');
-  //     }
-  //     company.users.push(userId);
-  //     user.companies.push(companyId);
-  //     const companyDetails = await company.save();
-  //     const userDetails = await user.save();
-  //     return {
-  //       ...userDetails._doc
-  //     };
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 };
