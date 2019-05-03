@@ -18,17 +18,19 @@ import './index.css';
 
 const Dashboard = props => {
   const [checked, setChecked] = useState(false);
-  const context = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setTimeout(() => setChecked(true), 800);
   }, []);
 
   const { classes } = props;
+
   let collected = 0;
   let late = 0;
   let unpaid = 0;
-  context.user.companies[0].invoices.map(invoice => {
+
+  user.companies[0].invoices.map(invoice => {
     collected += parseFloat(invoice.total) - parseFloat(invoice.balance);
     if (moment(invoice.date).isBefore(new Date())) {
       late += parseFloat(invoice.balance);
@@ -50,7 +52,7 @@ const Dashboard = props => {
             container
             className={classes.grid}
           >
-            <TopBar name={context.user.name} checked={checked} />
+            <TopBar name={user.name} checked={checked} />
             <Grid container spacing={24} style={{ marginBottom: 12 }}>
               <Grid item xs={12} md={4}>
                 <TopCards checked={checked} timeout={1000}>
@@ -212,7 +214,7 @@ const Dashboard = props => {
             <Grid container spacing={24} justify="center">
               <Grid item xs={12} md={8}>
                 <InvoicedCard
-                  invoices={context.user.companies[0].invoices}
+                  invoices={user.companies[0].invoices}
                   checked={checked}
                 />
               </Grid>
