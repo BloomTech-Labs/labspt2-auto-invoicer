@@ -1,5 +1,6 @@
 export const GET_USER = 'GET_USER';
 export const GET_COMPANIES = 'GET_COMPANIES';
+export const GET_COMPANY = 'GET_COMPANY'
 export const GET_UPDATED_USER_DATA = 'GET_UPDATED_USER_DATA'
 
 const getUser = (user, state) => {
@@ -7,11 +8,15 @@ const getUser = (user, state) => {
 };
 
 const getCompanies = (companies, state) => {
-  return { user: { ...state.user, companies } };
+  return { ...state, user: { ...state.user, companies } };
 };
 
+const getCompany = (company, state) => {
+  return {...state, company}
+}
+
 const getUpdatedUserData = (user, state) => {
-  return {user: {...state.user, ...user} }
+  return {...state, user: {...state.user, ...user} }
 }
 
 export const userReducer = (state, action) => {
@@ -21,7 +26,9 @@ export const userReducer = (state, action) => {
     case GET_COMPANIES:
       return getCompanies(action.companies, state);
     case GET_UPDATED_USER_DATA:
-      return getUpdatedUserData(action.user, state)
+      return getUpdatedUserData(action.user, state);
+    case GET_COMPANY:
+      return getCompany(action.company, state)
     default:
       return state;
   }

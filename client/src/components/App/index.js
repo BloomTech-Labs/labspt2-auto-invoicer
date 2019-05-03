@@ -29,7 +29,10 @@ const App = props => {
   const getUser = async () => {
     await context.getUser()
     setLoggedIn(true)
-    props.history.push(`/user/${context.user._id}/dashboard`)
+    console.log('I ran 1')
+    await context.getCompany(context.user.defaultCompany);
+    console.log('I ran 2')
+    props.history.push(`/user/${context.user._id}/dashboard`);
   };
 
   useEffect(() => {
