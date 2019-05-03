@@ -18,6 +18,7 @@ import { Grid } from "@material-ui/core";
 import DateSelecter from "../DateSelecter";
 import SingleLineInput from "../SingleLineInput";
 import MultiLineInput from "../MultiLineInput";
+import InvoiceSummary from "../InvoiceSummary";
 
 const styles = theme => ({
   layout: {
@@ -271,6 +272,7 @@ const CreateInvoiceStepper = props => {
           </React.Fragment>
         </Paper>
       </main>
+      <InvoiceSummary />
     </React.Fragment>
   );
 };

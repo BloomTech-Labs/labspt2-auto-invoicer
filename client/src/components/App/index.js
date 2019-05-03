@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import CreateInvoiceStepper from '../CreateInvoiceStepper';
-import axios from 'axios';
-import { Route, withRouter } from 'react-router-dom';
-import { saveAs } from 'file-saver';
+import React, { Component } from "react";
+import CreateInvoiceStepper from "../CreateInvoiceStepper";
+import axios from "axios";
+import { Route, withRouter } from "react-router-dom";
+import { saveAs } from "file-saver";
 
-import { UserConsumer } from '../../contexts/UserContext';
-import { CompanyConsumer } from '../../contexts/CompanyContext';
+import { UserConsumer } from "../../contexts/UserContext";
+import { CompanyConsumer } from "../../contexts/CompanyContext";
 
-import LandingPage from '../../views/LandingPage';
-import BillingPage from '../../views/BillingPage';
-import CreateInvoice from '../../views/CreateInvoice';
-import SettingsPage from '../../views/SettingsPage';
-import InvoiceList from '../../views/InvoiceList';
-import InvoiceView from '../../views/InvoiceView';
-import SignInModal from '../SignInModal';
-import EditInvoiceForm from '../EditInvoiceForm';
-import Dashboard from '../Dashboard';
-import Navigation from '../Navigation/Navigation';
+import LandingPage from "../../views/LandingPage";
+import BillingPage from "../../views/BillingPage";
+import CreateInvoice from "../../views/CreateInvoice";
+import SettingsPage from "../../views/SettingsPage";
+import InvoiceList from "../../views/InvoiceList";
+import InvoiceView from "../../views/InvoiceView";
+import SignInModal from "../SignInModal";
+import EditInvoiceForm from "../EditInvoiceForm";
+import Dashboard from "../Dashboard";
+import Navigation from "../Navigation/Navigation";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -48,9 +48,9 @@ class App extends Component {
   fetchData = async userId => {
     await this.props.fetchUser(userId);
 
-    if (this.props.companies.length) console.log('Testing Run');
+    if (this.props.companies.length) console.log("Testing Run");
     await this.props.fetchCompany(this.props.companies[0]._id);
-    console.log('Testing Again');
+    console.log("Testing Again");
   };
 
   toggleAuthModal = () => {
@@ -68,7 +68,7 @@ class App extends Component {
       })
       .then(() => {
         this.setState({ loggedIn: false });
-        window.location.replace('/');
+        window.location.replace("/");
       })
       .catch(err => console.log(err));
   };
@@ -86,8 +86,8 @@ class App extends Component {
       selectedDate: invoice.selectedDate,
       discount: invoice.discount,
       invoiceDueDate: invoice.invoiceDueDate,
-      invoiceDescription:invoice.invoiceDescription,
-      company:invoice.companyName,
+      invoiceDescription: invoice.invoiceDescription,
+      company: invoice.companyName,
       // invoiceItems: [
       //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
       // ],
@@ -100,19 +100,19 @@ class App extends Component {
       total: invoice.total
     };
     axios
-      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
+      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
-          responseType: 'blob'
+        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
+          responseType: "blob"
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return 'Error';
+        return "Error";
       });
   };
 
@@ -139,21 +139,12 @@ class App extends Component {
                       />
                     ) : null}
                     <section className="routes-container">
-                      <Route
-                        path="/user/:id/billing"
-                        component={BillingPage}
-                      />
-                      <Route
-                        path="/user/:id/dashboard"
-                        component={Dashboard}
-                      />
+                      <Route path="/user/:id/billing" component={BillingPage} />
+                      <Route path="/user/:id/dashboard" component={Dashboard} />
                       <Route
                         path="/user/:id/invoice/create"
                         render={props => (
-                          <CreateInvoice
-                            {...props}
-                            click={this.createPDF}
-                          />
+                          <CreateInvoice {...props} click={this.createPDF} />
                         )}
                       />
                       <Route
@@ -163,27 +154,18 @@ class App extends Component {
                       <Route
                         exact
                         path="/"
-                        render={props => (
-                          <LandingPage {...props} />
-                        )}
+                        render={props => <LandingPage {...props} />}
                       />
                       <Route
                         path="/user/:id/invoices"
                         render={props => (
-                          <InvoiceList
-                            {...props}
-                            click={this.createPDF}
-                          />
+                          <InvoiceList {...props} click={this.createPDF} />
                         )}
                       />
                       <Route path="/cis" component={CreateInvoiceStepper} />
                       <Route
                         path="/user/:id/invoice/:invoiceID/view"
-                        render={props => (
-                          <InvoiceView
-                            {...props}
-                          />
-                        )}
+                        render={props => <InvoiceView {...props} />}
                       />
                       <Route
                         path="/user/:id/invoice/:invoiceID/edit"
