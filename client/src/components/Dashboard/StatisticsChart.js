@@ -85,8 +85,8 @@ const StatisticsChart = props => {
   useEffect(() => {
     setData([
       { name: 'Late', money: late },
-      { name: 'Collected', money: 500 },
-      { name: 'Unpaid', money: 300 }
+      { name: 'Collected', money: collected },
+      { name: 'Unpaid', money: unpaid }
     ]);
   }, [collected, unpaid, late]);
 
