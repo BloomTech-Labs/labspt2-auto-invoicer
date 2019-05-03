@@ -82,8 +82,6 @@ const StatisticsChart = props => {
 
   const { unpaid, late, collected } = props;
 
-  const jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
-
   useEffect(() => {
     setData([
       { name: 'Late', money: late },
