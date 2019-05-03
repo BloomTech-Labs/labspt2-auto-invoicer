@@ -1,12 +1,12 @@
 import { Post, inputToString } from '../index';
 
-export const CreateItem = async (itemInput, returnedData) => {
+export const CreateItem = async (itemInput, companyId, returnedData) => {
   const result = inputToString(itemInput);
 
   const CreateItem = {
     query: `
       mutation {
-        createItem(itemInput: {${result}}) {
+        createItem(itemInput: {${result}}, companyId: "${companyId}") {
           ${returnedData}
         }
       }
