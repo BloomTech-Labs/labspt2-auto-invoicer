@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, Grid } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+//import components
+import SingleLineInput from "./SingleLineInput";
+
 const styles = {
   card: {
     width: 600,
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 200
+    marginBottom: 200,
+    backgroundColor: "#eff7f2"
   },
   bullet: {
     display: "inline-block",
@@ -24,12 +28,15 @@ const styles = {
   },
   pos: {
     marginBottom: 12
+  },
+  gridTop: {
+    borderTop: "1px solid white",
+    flexGrow: 1
   }
 };
 
 const InvoiceSummary = props => {
   const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.card}>
@@ -39,19 +46,69 @@ const InvoiceSummary = props => {
           color="textSecondary"
           gutterBottom
         >
-          Summary Invoice Card Placeholder
+          Placeholder
         </Typography>
         <Typography variant="h5" component="h2">
-          Sample Invoice Card
+          Invoice Summary
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          sub-heading
         </Typography>
-        <Typography component="p">
-          Invoice Content
-          <br />
-          Invoice Details
-        </Typography>
+        <Grid container spacing={24} className={classes.gridTop}>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Invoice Number" />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Date Issue" />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Date Due" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={24} className={classes.gridTop}>
+          <Grid item xs={12} sm={6}>
+            <SingleLineInput label="Company Name" />
+            <SingleLineInput label="Email" />
+            <SingleLineInput label="Phone" />
+            <SingleLineInput label="Address" />
+            <SingleLineInput label="Zip Code" />
+            <SingleLineInput label="City" />
+            <SingleLineInput label="State" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SingleLineInput label="Customer Name" />
+            <SingleLineInput label="Email" />
+            <SingleLineInput label="Phone" />
+            <SingleLineInput label="Address" />
+            <SingleLineInput label="Zip Code" />
+            <SingleLineInput label="City" />
+            <SingleLineInput label="State" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={24} className={classes.gridTop}>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Item" />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Quantity" />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Rate" />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <SingleLineInput label="Amount" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={24} className={classes.gridTop}>
+          <Grid item xs={12} sm={6}>
+            <SingleLineInput label="Subtotal" />
+            <SingleLineInput label="Discount" />
+            <SingleLineInput label="Tax" />
+            <SingleLineInput label="Shipping" />
+            <SingleLineInput label="Total" />
+            <SingleLineInput label="Balance" />
+          </Grid>
+        </Grid>
       </CardContent>
       <CardActions>
         <Button size="small">Generate</Button>
