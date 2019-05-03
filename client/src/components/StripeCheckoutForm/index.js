@@ -7,8 +7,8 @@ import Slide from '@material-ui/core/Slide';
 
 import styles from './styles';
 import CardHolderName from './CardHolderName';
-import { BuyPlanOrCredits } from '../../graphQL/mutations/companies';
 import UserContext from './../../context/UserContext';
+import { BuyPremium } from '../../graphQL/mutations/users';
 
 const StripeCheckoutForm = props => {
   const [name, setName] = useState('');
@@ -39,7 +39,7 @@ const StripeCheckoutForm = props => {
       }
     );
     if (response.ok) {
-      BuyPlanOrCredits(user.companies[0]._id, 'name');
+      await BuyPremium(user._id, 'name');
     }
   };
 
