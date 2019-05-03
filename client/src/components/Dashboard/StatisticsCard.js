@@ -15,7 +15,6 @@ class StatisticsCard extends React.Component {
 
   render() {
     const { checked, classes, unpaid, late, collected } = this.props;
-    console.log('inside the card', unpaid, late, collected);
     return (
       <Zoom
         in={checked}

@@ -21,12 +21,10 @@ const Dashboard = props => {
   const context = useContext(UserContext);
 
   useEffect(() => {
-    context.getUser();
     setTimeout(() => setChecked(true), 800);
   }, []);
 
   const { classes } = props;
-  console.log('context is', context);
   let collected = 0;
   let late = 0;
   let unpaid = 0;
@@ -39,7 +37,6 @@ const Dashboard = props => {
     }
     return invoice;
   });
-  console.log('after map', collected, late, unpaid);
 
   return (
     <>
