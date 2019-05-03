@@ -21,27 +21,25 @@ const CustomizedLabel = props => {
   );
 };
 
-class CustomizedAxisTick extends PureComponent {
-  render() {
-    const { x, y, payload } = this.props;
+const CustomizedAxisTick = props => {
+  const { x, y, payload } = props;
 
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={16}
-          textAnchor="end"
-          fill="#666"
-          transform="rotate(-35)"
-          fontSize={15}
-        >
-          {payload.value}
-        </text>
-      </g>
-    );
-  }
-}
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fill="#666"
+        transform="rotate(-35)"
+        fontSize={15}
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+};
 
 export default class InvoicedChart extends PureComponent {
   constructor(props) {
