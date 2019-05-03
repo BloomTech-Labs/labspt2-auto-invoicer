@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, useEffect, useContext, useLayoutEffect } from 'react';
-=======
-import React, { Component } from 'react';
-import CreateInvoiceStepper from '../CreateInvoiceStepper';
->>>>>>> c500b20662a2f03fcfc671e48cb1311a102a99cd
+import React, { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
