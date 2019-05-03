@@ -208,7 +208,7 @@ module.exports = buildSchema(`
     editInvoice(editInvoiceInput: EditInvoiceInput!, invoiceId: ID!): Invoice
     addCustomerToCompany(customerId: ID!, companyId: ID!): Customer
     addUserToCompany(userId: ID!, companyId: ID!): Company
-    buyPlanOrCredits(companyId: ID!, quantity: Int!): Company
+    buyPremium(userId: ID!): User
   }
 
   schema {

@@ -1,79 +1,68 @@
-import React, { Component } from "react";
+
+import React, { useState, useEffect, useContext} from 'react';
 import CreateInvoiceStepper from "../CreateInvoiceStepper";
-import axios from "axios";
-import { Route, withRouter } from "react-router-dom";
-import { saveAs } from "file-saver";
+import axios from 'axios';
+import { Route, withRouter } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 
-import { UserConsumer } from "../../contexts/UserContext";
-import { CompanyConsumer } from "../../contexts/CompanyContext";
+import LandingPage from '../../views/LandingPage';
+import BillingPage from '../../views/BillingPage';
+import CreateInvoice from '../../views/CreateInvoice';
+import SettingsPage from '../../views/SettingsPage';
+import InvoiceList from '../../views/InvoiceList';
+import InvoiceView from '../../views/InvoiceView';
+import SignInModal from '../SignInModal';
+import EditInvoiceForm from '../EditInvoiceForm';
+import Dashboard from '../Dashboard';
+import Navigation from '../Navigation/Navigation';
 
-import LandingPage from "../../views/LandingPage";
-import BillingPage from "../../views/BillingPage";
-import CreateInvoice from "../../views/CreateInvoice";
-import SettingsPage from "../../views/SettingsPage";
-import InvoiceList from "../../views/InvoiceList";
-import InvoiceView from "../../views/InvoiceView";
-import SignInModal from "../SignInModal";
-import EditInvoiceForm from "../EditInvoiceForm";
-import Dashboard from "../Dashboard";
-import Navigation from "../Navigation/Navigation";
+import UserContext from '../../context/UserContext'
+import './App.css';
 
-import "./App.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggleSignIn: false,
-      loggedIn: false,
-      toggleAuth: false
-    };
-  }
+const App = props => {
 
-  componentDidMount() {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
-        withCredentials: true
-      })
-      .then(res => {
-        if (res.data.userId) {
-          this.fetchData(res.data.userId);
-          this.setState({ loggedIn: true });
-          //this.props.history.push(`/user/${res.data.userId}/dashboard`);
-        }
-      })
-      .catch(err => console.log(err));
-  }
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [toggleAuth, setToggleAuth] = useState(false)
+  const [toggleSignIn, setToggleSignIn] = useState(false)
 
-  fetchData = async userId => {
-    await this.props.fetchUser(userId);
 
-    if (this.props.companies.length) console.log("Testing Run");
-    await this.props.fetchCompany(this.props.companies[0]._id);
-    console.log("Testing Again");
+
+  const context = useContext(UserContext);
+  
+  const getUser = async () => {
+    await context.getUser()
+    setLoggedIn(true)
+    props.history.push(`/user/${context.user._id}/dashboard`)
   };
 
-  toggleAuthModal = () => {
-    return this.setState({ toggleAuth: !this.state.toggleAuth });
+  useEffect(() => {
+    getUser();
+    console.log('this is my context', context);
+  }, [loggedIn])
+
+  const toggleAuthModal = () => {
+    return setToggleAuth(!toggleAuth);
   };
 
-  signInModal = () => {
-    return this.setState({ toggleSignIn: !this.state.toggleSignIn });
+  const signInModal = () => {
+    return setToggleSignIn(!toggleSignIn);
   };
 
-  signOut = () => {
+  const signOut = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
         withCredentials: true
       })
       .then(() => {
-        this.setState({ loggedIn: false });
-        window.location.replace("/");
+
+        setLoggedIn(!loggedIn);
+        window.location.replace('/');
       })
       .catch(err => console.log(err));
   };
 
-  createPDF = invoice => {
+  const createPDF = invoice => {
     const file = {
       addressFrom: invoice.addressFrom,
       addressTo: invoice.addressTo,
@@ -116,77 +105,80 @@ class App extends Component {
       });
   };
 
-  render() {
     return (
-      <UserConsumer>
-        {({ userState }) => {
-          return (
-            <CompanyConsumer>
-              {({ companyState, fetchInvoices }) => {
-                return (
-                  <div className="App">
-                    <Navigation
-                      user={userState}
-                      handleSignIn={this.signInModal}
-                      handleSignOut={this.signOut}
-                      loggedIn={this.state.loggedIn}
-                    />
-                    {this.state.toggleSignIn ? (
-                      <SignInModal
-                        click={this.signInModal}
-                        auth={this.toggleAuthModal}
-                        forgot={this.forgotPassModal}
-                      />
-                    ) : null}
-                    <section className="routes-container">
-                      <Route path="/user/:id/billing" component={BillingPage} />
-                      <Route path="/user/:id/dashboard" component={Dashboard} />
-                      <Route
-                        path="/user/:id/invoice/create"
-                        render={props => (
-                          <CreateInvoice {...props} click={this.createPDF} />
-                        )}
-                      />
-                      <Route
-                        path="/user/:id/settings"
-                        component={SettingsPage}
-                      />
-                      <Route
-                        exact
-                        path="/"
-                        render={props => <LandingPage {...props} />}
-                      />
-                      <Route
-                        path="/user/:id/invoices"
-                        render={props => (
-                          <InvoiceList {...props} click={this.createPDF} />
-                        )}
-                      />
-                      <Route path="/cis" component={CreateInvoiceStepper} />
-                      <Route
-                        path="/user/:id/invoice/:invoiceID/view"
-                        render={props => <InvoiceView {...props} />}
-                      />
-                      <Route
-                        path="/user/:id/invoice/:invoiceID/edit"
-                        render={props => (
-                          <EditInvoiceForm
-                            {...props}
-                            fetchInvoices={fetchInvoices}
-                            userID={userState.userID}
-                          />
-                        )}
-                      />
-                    </section>
-                  </div>
-                );
-              }}
-            </CompanyConsumer>
-          );
-        }}
-      </UserConsumer>
+      <div className="App">
+        <Navigation
+          // user={userState}
+          handleSignIn={signInModal}
+          handleSignOut={signOut}
+          loggedIn={loggedIn}
+        />
+        {toggleSignIn ? (
+          <SignInModal
+            click={signInModal}
+            auth={toggleAuthModal}
+          />
+        ) : null}
+        <section className="routes-container">
+          <Route
+            path="/user/:id/billing"
+            component={BillingPage}
+          />
+          <Route
+            path="/user/:id/dashboard"
+            component={Dashboard}
+          />
+          <Route
+            path="/user/:id/invoice/create"
+            render={props => (
+              <CreateInvoice
+                {...props}
+                click={createPDF}
+              />
+            )}
+          />
+          <Route
+            path="/user/:id/settings"
+            component={SettingsPage}
+          />
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <LandingPage {...props} />
+            )}
+          />
+          <Route
+            path="/user/:id/invoices"
+            render={props => (
+              <InvoiceList
+                {...props}
+                click={createPDF}
+              />
+            )}
+          />
+          <Route path="/cis" component={CreateInvoiceStepper} />
+          <Route
+            path="/user/:id/invoice/:invoiceID/view"
+            render={props => (
+              <InvoiceView
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/user/:id/invoice/:invoiceID/edit"
+            render={props => (
+              <EditInvoiceForm
+                {...props}
+                // fetchInvoices={fetchInvoices}
+                // userID={useruserID}
+              />
+            )}
+          />
+        </section>
+      </div>
     );
   }
-}
 
 export default withRouter(App);
