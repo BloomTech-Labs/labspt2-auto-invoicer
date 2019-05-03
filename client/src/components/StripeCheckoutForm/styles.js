@@ -26,7 +26,8 @@ export default theme => ({
     alignSelf: 'center',
     height: 40,
     marginTop: 20,
-    fontSize: 18
+    fontSize: 18,
+    backgroundColor: '#4fc878'
   },
   label: {
     fontSize: '1.5rem'
