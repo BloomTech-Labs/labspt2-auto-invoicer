@@ -6,7 +6,7 @@ import UserDetails from './UserDetails';
 import CompanyDetails from './CompanyDetails'
 import styles from './styles'
 
-function SettingsView(props) {
+const SettingsView = props => {
   const { classes } = props;
   return (
     <Grid 
