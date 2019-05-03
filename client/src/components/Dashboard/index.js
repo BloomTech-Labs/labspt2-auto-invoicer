@@ -28,7 +28,7 @@ const Dashboard = props => {
   let collected = 0;
   let late = 0;
   let unpaid = 0;
-  context.user.invoices.map(invoice => {
+  context.user.companies[0].invoices.map(invoice => {
     collected += parseFloat(invoice.total) - parseFloat(invoice.balance);
     if (moment(invoice.date).isBefore(new Date())) {
       late += parseFloat(invoice.balance);
@@ -212,7 +212,7 @@ const Dashboard = props => {
             <Grid container spacing={24} justify="center">
               <Grid item xs={12} md={8}>
                 <InvoicedCard
-                  invoices={context.user.invoices}
+                  invoices={context.user.companies[0].invoices}
                   checked={checked}
                 />
               </Grid>
