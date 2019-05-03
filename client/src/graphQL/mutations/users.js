@@ -1,8 +1,8 @@
-import {Post, inputToString} from '../index'
+import { Post, inputToString } from '../index';
 
 export const CreateUser = async (userInput, returnedData) => {
-  inputToString(userInput)
-  
+  inputToString(userInput);
+
   const CreateUser = {
     query: `
       mutation {
@@ -13,38 +13,53 @@ export const CreateUser = async (userInput, returnedData) => {
     `
   };
 
-  const newUser = await Post(CreateUser)
-  return newUser.data.data
-}
+  const newUser = await Post(CreateUser);
+  return newUser.data.data;
+};
 
 export const EditUser = async (userID, editedData, returnedData) => {
-  editedData = inputToString(editedData)
-  
-    const EditUser = {
-      query: `
+  editedData = inputToString(editedData);
+
+  const EditUser = {
+    query: `
         mutation {
           editUser(userID: "${userID}", editUserInput: {${editedData}}) {
             ${returnedData}
           }
         }
       `
-    };
+  };
 
-    const editedUser = await Post(EditUser)
-    return editedUser.data.data
-}
+  const editedUser = await Post(EditUser);
+  return editedUser.data.data;
+};
 
 export const AddUserToCompany = async (userID, companyID, returnedData) => {
   const AddUserToCompany = {
-    query:  `
+    query: `
       mutation {
         addUserToCompany(userID: "${userID}", companyID: "${companyID}") {
           ${returnedData}
         }
       }
     `
-  }
-  
+  };
+
   const returnedCompany = await Post(AddUserToCompany);
-  return returnedCompany.data.data
-}
+  return returnedCompany.data.data;
+};
+
+export const BuyPremium = async (userId, returnedData) => {
+  const BuyPremium = {
+    query: `
+      mutation {
+        buyPremium(userId: "${userId}") {
+          ${returnedData}
+        }
+      }
+    `
+  };
+
+  const updatedUser = await Post(BuyPremium);
+  return updatedUser.data.data;
+};
