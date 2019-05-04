@@ -23,9 +23,10 @@
 }
 .box {
   width: 45%;
-  height: 220px;
+  min-height: 220px;
   padding: 8px 0px 8px 8px;
   font-size: 3.5rem;
+  overflow-wrap: break-word;
 }
 .header {
   font-size: 4rem;
