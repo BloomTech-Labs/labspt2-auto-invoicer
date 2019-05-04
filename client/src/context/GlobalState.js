@@ -15,7 +15,6 @@ const GlobalState = props => {
       name: '',
       phoneNumber: '',
       companies: [],
-      invoices: [],
       defaultCompany: '',
       premium: '',
       premiumExpiresOn: '',
