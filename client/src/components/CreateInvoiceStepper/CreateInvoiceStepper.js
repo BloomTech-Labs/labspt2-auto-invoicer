@@ -18,6 +18,7 @@ import { Grid } from "@material-ui/core";
 import DateSelecter from "../DateSelecter";
 import SingleLineInput from "../SingleLineInput";
 import MultiLineInput from "../MultiLineInput";
+import InvoiceSummary from "../InvoiceSummary";
 
 const styles = theme => ({
   layout: {
@@ -155,22 +156,17 @@ const CreateInvoiceStepper = props => {
       case 2:
         return (
           <React.Fragment>
-            <Grid container spacing={16}>
-              <Grid item xs={12} sm={6}>
-                <DateSelecter
-                  label="Issue Date"
-                  onChangeHandler={handleDateSelect}
-                  value={invoiceState.date}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <DateSelecter
-                  label="Due Date"
-                  onChangeHandler={handleDueDateSelect}
-                  value={invoiceState.dueDate}
-                />
-              </Grid>
-            </Grid>
+            <DateSelecter
+              label="Issue Date"
+              onChangeHandler={handleDateSelect}
+              value={invoiceState.date}
+            />
+
+            <DateSelecter
+              label="Due Date"
+              onChangeHandler={handleDueDateSelect}
+              value={invoiceState.dueDate}
+            />
           </React.Fragment>
         );
       case 3:
@@ -276,6 +272,7 @@ const CreateInvoiceStepper = props => {
           </React.Fragment>
         </Paper>
       </main>
+      <InvoiceSummary />
     </React.Fragment>
   );
 };

@@ -6,6 +6,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
 const styles = theme => ({
+  backgroundColor: "red",
   line: {
     width: 200,
     [`@media (max-width: 600px)`]: {
@@ -19,16 +20,18 @@ const DateSelecter = props => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container className={classes.grid} justify="space-around">
-        <DatePicker
-          margin="normal"
-          label={label}
-          InputLabelProps={{ style: { fontSize: 15 } }}
-          InputProps={{ style: { fontSize: 20 } }}
-          value={value}
-          onChange={onChangeHandler}
-          className={classes.line}
-        />
+      <Grid container spacing={16}>
+        <Grid item xs={12} sm={6}>
+          <DatePicker
+            margin="normal"
+            label={label}
+            InputLabelProps={{ style: { fontSize: 15 } }}
+            InputProps={{ style: { fontSize: 20 } }}
+            value={value}
+            onChange={onChangeHandler}
+            className={classes.line}
+          />
+        </Grid>
       </Grid>
     </MuiPickersUtilsProvider>
   );
