@@ -22,23 +22,32 @@ const App = props => {
   const [loggedIn, setLoggedIn] = useState(false)
   const [toggleAuth, setToggleAuth] = useState(false)
   const [toggleSignIn, setToggleSignIn] = useState(false)
-
+  const [userData, setUserData] = useState('')
 
   const context = useContext(UserContext);
   
   const getUser = async () => {
-    await context.getUser()
     setLoggedIn(true)
-    console.log('I ran 1')
-    await context.getCompany(context.user.defaultCompany);
-    console.log('I ran 2')
-    props.history.push(`/user/${context.user._id}/dashboard`);
+    await context.getUser()
+    await setUserData({
+      userId: context.user._id, 
+      defaultCompany: context.user.defaultCompany })
   };
+
+  const getCompany = async () => {
+    if (userData.userId) {
+      await context.getCompany(userData.defaultCompany);
+      props.history.push(`/user/${userData.userId}/dashboard`);
+    }
+  }
 
   useEffect(() => {
     getUser();
-    console.log('this is my context', context);
-  }, [loggedIn])
+  }, [])
+
+  useEffect(() => {
+    getCompany();
+  }, [userData.userId])
 
   const toggleAuthModal = () => {
     return setToggleAuth(!toggleAuth);
