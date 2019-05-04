@@ -1,8 +1,14 @@
 export default theme => ({
   root: {
-    width: "100%",
-    height: "1500",
-    marginTop: theme.spacing.unit * 3
+    width: "95%",
+    margin: "20px auto",
+    height:"1500",
+    marginTop: theme.spacing.unit * 3,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      margin: "0px",
+      marginTop: theme.spacing.unit * 3
+    },
   },
   toolbar: {
     display: "flex",

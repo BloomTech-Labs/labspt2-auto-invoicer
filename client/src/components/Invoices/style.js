@@ -1,8 +1,15 @@
 import { fade } from "@material-ui/core/styles/colorManipulator";
 export default theme => ({
   root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3
+    width: "95%",
+    margin: "20px auto",
+    marginTop: theme.spacing.unit * 3,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      margin: "0px",
+      marginTop: theme.spacing.unit * 3
+    },
+    
   },
   rootbar: {
     width: "100%"
@@ -47,7 +54,7 @@ export default theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block",
       fontSize: 45,
-      marginLeft:16,
+      marginLeft: 16
     }
   },
   search: {

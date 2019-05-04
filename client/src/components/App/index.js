@@ -64,24 +64,16 @@ const App = props => {
 
   const createPDF = invoice => {
     const file = {
-      addressFrom: invoice.addressFrom,
-      addressTo: invoice.addressTo,
-      amountPaid: invoice.amountPaid,
-      balanceDue: invoice.balanceDue,
-      stateTo: invoice.stateTo,
-      zipCodeTo: invoice.zipCodeTo,
-      cityTo: invoice.cityTo,
-      emailTo: invoice.emailTo,
-      selectedDate: invoice.selectedDate,
+      customer:invoice.customer,
+      company: invoice.company,
+      balance: invoice.balance,
+      date: invoice.date,
       discount: invoice.discount,
-      invoiceDueDate: invoice.invoiceDueDate,
-      invoiceDescription: invoice.invoiceDescription,
-      company: invoice.companyName,
-      // invoiceItems: [
-      //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
-      // ],
+      dueDate: invoice.dueDate,
+      description: invoice.description,    
+      items: invoice.items,
       notes: invoice.notes,
-      invoiceNumber: invoice.invoiceNumber,
+      number: invoice.number,
       terms: invoice.terms,
       shipping: invoice.shipping,
       subtotal: invoice.subtotal,
