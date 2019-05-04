@@ -81,11 +81,9 @@ export const userData = `
   email
   name
   phoneNumber
-  invoices {
-    ${invoiceData}
-  }
   companies {
-    ${companyData}
+    _id
+    name
   }
   defaultCompany
   premium
