@@ -5,6 +5,7 @@ import {
   MuiThemeProvider
 } from "@material-ui/core/styles";
 import Grow from "@material-ui/core/Grow";
+import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Table from "@material-ui/core/Table";
@@ -38,20 +39,21 @@ const Invoices = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [search, setSearch] = useState("");
   const [buttonSize, setButtonSize] = useState("large");
-  // const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("All");
+  const filterOptions = ["All", "Late", "Paid", "Due"];
+
+  useEffect(() => {
+    rowsPerPageFunc();
+    buttonSizeFunc();
+  }, []);
 
   const rowsPerPageFunc = () => {
     window.innerWidth > 500 ? setRowsPerPage(10) : setRowsPerPage(5);
   };
   const buttonSizeFunc = () => {
-    window.innerWidth > 500 ? setButtonSize("large") : setButtonSize("medium");
+    window.innerWidth > 500 ? setButtonSize("large") : setButtonSize("small");
   };
 
-  useEffect(() => {
-    rowsPerPageFunc();
-    buttonSizeFunc();  
-  }, []);
- 
   const handleChangePage = (event, page) => {
     setPage(page);
   };
@@ -112,14 +114,62 @@ const Invoices = props => {
     return dateInNumberForm;
   };
 
-  const invoiceSearch = invoices => {
-    let invoicesToShow =
-      search === ""
-        ? invoices
-        : invoices.filter(invoice => {
-            return invoice.number.includes(search);
-          });
-    return invoicesToShow;
+  const paidFilter = passedInvoices => {
+    let filtered = passedInvoices.filter(singleInvoice => {
+      return singleInvoice.balance === 0;
+    });
+    if (search) {
+      return filtered.filter(singleInvoice => {
+        return singleInvoice.number.includes(search);
+      });
+    } else {
+      return filtered;
+    }
+  };
+  const lateFilter = passedInvoices => {
+    let filtered = passedInvoices.filter(singleInvoice => {
+      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate));
+    });
+    if (search) {
+      return filtered.filter(singleInvoice => {
+        return singleInvoice.number.includes(search);
+      });
+    } else {
+      return filtered;
+    }
+  };
+  const dueFilter = passedInvoices => {
+    let filtered = passedInvoices.filter(singleInvoice => {
+      return (
+        lateChecker(Date()) <= lateChecker(String(singleInvoice.dueDate)) &&
+        singleInvoice.balance > 0
+      );
+    });
+    if (search) {
+      return filtered.filter(singleInvoice => {
+        return singleInvoice.number.includes(search);
+      });
+    } else {
+      return filtered;
+    }
+  };
+  const invoiceFilterSearch = passedInvoices => {
+    let initInvoices = passedInvoices.filter(singleInvoice => {
+      return singleInvoice.hidden === false;
+    });
+    if (search === "" && filter === "All") {
+      return initInvoices;
+    } else if (search !== "" && filter === "All") {
+      return initInvoices.filter(singleInvoice => {
+        return singleInvoice.number.includes(search);
+      });
+    } else if (filter === "Paid") {
+      return paidFilter(initInvoices);
+    } else if (filter === "Late") {
+      return lateFilter(initInvoices);
+    } else if (filter === "Due") {
+      return dueFilter(initInvoices);
+    }
   };
 
   const status = (invoice, tooltips) => {
@@ -158,7 +208,7 @@ const Invoices = props => {
       return (
         <Tooltip
           placement="left"
-          title="Outstanding"
+          title="Owed"
           classes={{
             tooltip: tooltips
           }}
@@ -189,7 +239,6 @@ const Invoices = props => {
     }
   });
   return (
-    
     <section>
       {invoices.length < 1 ? (
         <EmptyInvoices userID={userID} />
@@ -204,11 +253,7 @@ const Invoices = props => {
                 }}
               >
                 <Toolbar>
-                  <Typography
-                    className={classes.title}
-                    color="inherit"
-                    noWrap
-                  >
+                  <Typography className={classes.title} color="inherit" noWrap>
                     Invoices
                   </Typography>
                   <div className={classes.search}>
@@ -226,6 +271,28 @@ const Invoices = props => {
                     />
                   </div>
                   <div className={classes.grow} />
+                  <div>
+                    <TextField
+                      select
+                      label="Filter by"
+                      className={classes.textField}
+                      value={filter}
+                      onChange={e => setFilter(e.target.value)}
+                      SelectProps={{
+                        native: true,
+                        MenuProps: {
+                          className: classes.menu
+                        }
+                      }}
+                      margin="normal"
+                    >
+                      {filterOptions.map(option => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </TextField>
+                  </div>
                   <div>
                     <Link to={`/user/${userID}/invoice/create`}>
                       <Button
@@ -267,115 +334,134 @@ const Invoices = props => {
                       Actions
                     </TableCell>
                   </TableRow>
-                  {invoiceSearch(invoices)
-                    .slice(
-                      page  * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    .map(invoice => (
-                      <TableRow
-                        className={classes.tableRowHover}
-                        key={invoice._id}
-                      >
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          align="center"
-                          style={{
-                            fontSize: 25
-                          }}
-                        >
-                          <Tooltip
-                            placement="right"
-                            title={invoice.number}
-                            classes={{
-                              tooltip: classes.tooltipNumber
-                            }}
+                  {invoiceFilterSearch(invoices)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map(
+                      invoice => (
+                        console.log(invoice, "test"),
+                        (
+                          <TableRow
+                            className={classes.tableRowHover}
+                            key={invoice._id}
                           >
-                            <div>{ellipsis(invoice.number)}</div>
-                          </Tooltip>
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          align="center"
-                          style={{ fontSize: 25 }}
-                        >
-                          {status(invoice, classes.tooltip)}
-                        </TableCell>
-                        <TableCell style={{ fontSize: 25 }} align="center">
-                          {capitalizeFirstLetter(invoice.customer.name)}
-                        </TableCell>
-                        <TableCell style={{ fontSize: 25 }} align="center">
-                          {dueDate(invoice.dueDate)}
-                        </TableCell>
-                        <TableCell style={{ fontSize: 25 }} align="center">
-                          <Tooltip
-                            placement="right"
-                            title={invoice.total}
-                            classes={{
-                              tooltip: classes.tooltipNumber
-                            }}
-                          >
-                            <div>{ellipsis(invoice.total)}</div>
-                          </Tooltip>
-                        </TableCell>
-                        <TableCell style={{ fontSize: 25 }} align="center">
-                          <div className={classes.shortcuts}>
-                            <Link
-                              className="card-links"
-                              to={`/user/${userID}/invoice/${
-                                invoice._id
-                              }/view`}
-                            >
-                              <Tooltip
-                                title="View Invoice"
-                                placement="left"
-                                classes={{
-                                  tooltip: classes.tooltip
-                                }}
-                              >
-                                <div className={classes.shortcutsCircle}>
-                                  <i
-                                    className="material-icons"
-                                    style={{
-                                      color: "#4fc878",
-                                      fontSize: 36
-                                    }}
-                                  >
-                                    visibility
-                                  </i>
-                                </div>
-                              </Tooltip>
-                            </Link>
-                            <Tooltip
-                              title="Download PDF"
-                              classes={{
-                                tooltip: classes.tooltip
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              align="center"
+                              style={{
+                                fontSize: 25
                               }}
                             >
-                              <div
-                                onClick={() => {
-                                  props.createPDF(invoice);
+                              <Tooltip
+                                placement="right"
+                                title={invoice.number}
+                                classes={{
+                                  tooltip: classes.tooltipNumber
                                 }}
-                                className={classes.shortcutsCircle}
                               >
-                                <i
-                                  className="material-icons"
-                                  style={{
-                                    color: "#4fc878",
-                                    fontSize: 36
+                                <div>{ellipsis(invoice.number)}</div>
+                              </Tooltip>
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              align="center"
+                              style={{ fontSize: 25 }}
+                            >
+                              {status(invoice, classes.tooltip)}
+                            </TableCell>
+                            <TableCell style={{ fontSize: 25 }} align="center">
+                              {capitalizeFirstLetter(invoice.customer.name)}
+                            </TableCell>
+                            <TableCell style={{ fontSize: 25 }} align="center">
+                              {dueDate(invoice.dueDate)}
+                            </TableCell>
+                            <TableCell style={{ fontSize: 25 }} align="center">
+                              <Tooltip
+                                placement="right"
+                                title={invoice.total}
+                                classes={{
+                                  tooltip: classes.tooltipNumber
+                                }}
+                              >
+                                <div>{ellipsis(invoice.total)}</div>
+                              </Tooltip>
+                            </TableCell>
+                            <TableCell style={{ fontSize: 25 }} align="center">
+                              <div className={classes.shortcuts}>
+                                <Link
+                                  className="card-links"
+                                  to={`/user/${userID}/invoice/${
+                                    invoice._id
+                                  }/view`}
+                                >
+                                  <Tooltip
+                                    title="View Invoice"
+                                    classes={{
+                                      tooltip: classes.tooltip
+                                    }}
+                                  >
+                                    <div className={classes.shortcutsCircle}>
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          color: "#4fc878",
+                                          fontSize: 36
+                                        }}
+                                      >
+                                        visibility
+                                      </i>
+                                    </div>
+                                  </Tooltip>
+                                </Link>
+                                <Tooltip
+                                  title="Download PDF"
+                                  classes={{
+                                    tooltip: classes.tooltip
                                   }}
                                 >
-                                  save_alt
-                                </i>
+                                  <div
+                                    onClick={() => {
+                                      props.createPDF(invoice);
+                                    }}
+                                    className={classes.shortcutsCircle}
+                                  >
+                                    <i
+                                      className="material-icons"
+                                      style={{
+                                        color: "#4fc878",
+                                        fontSize: 36
+                                      }}
+                                    >
+                                      save_alt
+                                    </i>
+                                  </div>
+                                </Tooltip>
+                                <EditDialog invoice={invoice} />
+                                <Tooltip
+                                  title="Delete"
+                                  classes={{
+                                    tooltip: classes.tooltip
+                                  }}
+                                >
+                                  <div className={classes.shortcutsCircle}>
+                                    <i
+                                      className="material-icons"
+                                      style={{
+                                        color: "#4fc878",
+                                        fontSize: 36
+                                      }}
+                                    >
+                                      delete_forever
+                                    </i>
+                                  </div>
+                                </Tooltip>
                               </div>
-                            </Tooltip>
-                            <EditDialog invoice={invoice} />
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                            </TableCell>
+                          </TableRow>
+                        )
+                      )
+                    )}
                   {emptyRows > 0 && (
                     <TableRow
                       style={{
@@ -398,9 +484,9 @@ const Invoices = props => {
                           "aria-label": "Next Page"
                         }}
                         colSpan={3}
-                          count={invoiceSearch(invoices).length}
+                        count={invoiceFilterSearch(invoices).length}
                         rowsPerPage={rowsPerPage}
-                        page = {page}
+                        page={page}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
                       />

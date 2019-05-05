@@ -36,7 +36,9 @@ const SingleInvoiceView = props => {
     return str.length > 10 ? str.slice(0, 11) : str;
   };
   const itemChecker = items => {
-    let emptyItems = [{ name: "", description: "", cost: "", quantity: "",amount: ""}];
+    let emptyItems = [
+      { name: "", description: "", cost: "", quantity: "", amount: "" }
+    ];
     return items ? items : emptyItems;
   };
   const itemsLengthChecker = items => {
@@ -125,6 +127,7 @@ const SingleInvoiceView = props => {
                 {" " + company.zipCode}
                 <br />
                 {company.email}
+                <br />
                 {" " + company.phoneNumber}
               </p>
             </div>
@@ -159,16 +162,12 @@ const SingleInvoiceView = props => {
             </div>
             <div className="box">
               <p className="subtotalTax">Subtotal: ${invoice.subtotal}</p>
-              <p className="shippingDiscount">
-                Discount: ${invoice.discount}
-              </p>
+              <p className="shippingDiscount">Discount: ${invoice.discount}</p>
               <p className="subtotalTax">
                 Tax:
                 {" " + Number(invoice.tax) * 100}%
               </p>
-              <p className="shippingDiscount">
-                Shipping: ${invoice.shipping}
-              </p>
+              <p className="shippingDiscount">Shipping: ${invoice.shipping}</p>
               <p className="total-due">Total: ${invoice.total}</p>
               <p className="amount-paid">Balance: ${invoice.balance}</p>
             </div>
@@ -197,7 +196,6 @@ const SingleInvoiceView = props => {
             {" "}
             <AppBar className={classes.appbar}>
               <Toolbar>
-                }
                 <Typography className={classes.title} color="inherit" noWrap>
                   Invoice Items (if applicable)
                 </Typography>
@@ -208,34 +206,50 @@ const SingleInvoiceView = props => {
             <Table className={classes.table}>
               <TableBody>
                 <TableRow>
-                
-                  <TableCell style={{color: "#4fc878"}} align="center" className={classes.tablecell}>
+                  <TableCell
+                    style={{ color: "#4fc878" }}
+                    align="center"
+                    className={classes.tablecell}
+                  >
                     Name
                   </TableCell>
-                
-                  <TableCell style={{color: "#4fc878"}} align="center" className={classes.tablecell}>
+
+                  <TableCell
+                    style={{ color: "#4fc878" }}
+                    align="center"
+                    className={classes.tablecell}
+                  >
                     Description
                   </TableCell>
-                  
-                  <TableCell style={{ color: "#4fc878" }} align="center" className={classes.tablecell}>
+
+                  <TableCell
+                    style={{ color: "#4fc878" }}
+                    align="center"
+                    className={classes.tablecell}
+                  >
                     Cost
                   </TableCell>
-                
-                  <TableCell style={{color: "#4fc878"}}  align="center" className={classes.tablecell}>
+
+                  <TableCell
+                    style={{ color: "#4fc878" }}
+                    align="center"
+                    className={classes.tablecell}
+                  >
                     Quantity
                   </TableCell>
-                
-                  <TableCell style={{color: "#4fc878"}} align="center" className={classes.tablecell}>
+
+                  <TableCell
+                    style={{ color: "#4fc878" }}
+                    align="center"
+                    className={classes.tablecell}
+                  >
                     Amount
                   </TableCell>
                 </TableRow>
                 {itemChecker(invoice.items)
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(item => (
-                    <TableRow
-                      className={classes.tableRowHover}
-                      key={item._id}
-                    >
+                    <TableRow className={classes.tableRowHover} key={item._id}>
                       <TableCell
                         component="th"
                         scope="row"

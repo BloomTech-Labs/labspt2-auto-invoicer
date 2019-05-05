@@ -41,7 +41,6 @@ class EditDialog extends Component {
       <Fragment>
         <Tooltip
           title="Edit Amount"
-          placement="right"
           classes={{
             tooltip: classes.tooltip
           }}
