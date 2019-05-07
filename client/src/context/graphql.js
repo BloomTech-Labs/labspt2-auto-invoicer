@@ -81,6 +81,9 @@ export const userData = `
   email
   name
   phoneNumber
+  invoices {
+    ${invoiceData}
+  }
   companies {
     _id
     name
