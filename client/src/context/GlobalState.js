@@ -14,6 +14,7 @@ const GlobalState = props => {
       email: '',
       name: '',
       phoneNumber: '',
+      invoices: [],
       companies: [],
       defaultCompany: '',
       premium: '',
@@ -54,6 +55,7 @@ const GlobalState = props => {
       userQuery
     );
     dispatch({ type: GET_USER, user: userDetails.data.data.user });
+    getCompany(userDetails.data.data.user.defaultCompany)
   };
 
   const getCompanies = async () => {
@@ -92,7 +94,6 @@ const GlobalState = props => {
       `${process.env.REACT_APP_BACKEND_URL}/graphql`,
       companyQuery
     );
-    console.log('company data', company)
     dispatch({
       type: GET_COMPANY,
       company: company.data.data.company
