@@ -21,37 +21,25 @@ import './App.css';
 
 
 const App = props => {
+  const context = useContext(UserContext);
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [toggleAuth, setToggleAuth] = useState(false)
   const [toggleSignIn, setToggleSignIn] = useState(false)
-  const [userData, setUserData] = useState('')
 
-
-  const context = useContext(UserContext);
-  
   const getUser = async () => {
-    setLoggedIn(true)
     await context.getUser()
-    await setUserData({
-      userId: context.user._id, 
-      defaultCompany: context.user.defaultCompany })
+    setLoggedIn(true)
   };
 
-  const getCompany = async () => {
-    if (userData.userId) {
-      await context.getCompany(userData.defaultCompany);
-      props.history.push(`/user/${userData.userId}/dashboard`);
+  useEffect(() => {
+    if (!context.user._id) {
+      getUser();
     }
-  }
-
-  useEffect(() => {
-    getUser();
-  }, [])
-
-  useEffect(() => {
-    getCompany();
-  }, [userData.userId])
+    if (context.user._id) {
+      props.history.push(`/user/${context.user._id}/dashboard`);
+    }
+  }, [loggedIn])
 
   const toggleAuthModal = () => {
     return setToggleAuth(!toggleAuth);
@@ -68,7 +56,7 @@ const App = props => {
       })
       .then(() => {
 
-        setLoggedIn(!loggedIn);
+        setLoggedIn(false);
         window.location.replace('/');
       })
       .catch(err => console.log(err));
