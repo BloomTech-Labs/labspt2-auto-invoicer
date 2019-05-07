@@ -1,8 +1,11 @@
-import React from 'react'
-import Edit from '../EditIcon'
+import React, { useContext } from 'react'
 
-export default function ViewUserDetails(props) {
-  const {name, email, phone_num } = props.userState
+import Edit from '../EditIcon'
+import UserContext from '../../../context/UserContext'
+
+export const ViewUserDetails = (props) => {
+  const context = useContext(UserContext)
+  const {name, email, phoneNumber } = context.user
   return (
     <div className='cardDetails'>
       <div className='card-header'>
@@ -11,7 +14,7 @@ export default function ViewUserDetails(props) {
         <Edit />
       </div>
     </div>
-    <div className='infoContainer'>
+      <div className='infoContainer'>
         <div className='info'>
           <h2>Name: </h2>
           <p>{name}</p>
@@ -22,7 +25,7 @@ export default function ViewUserDetails(props) {
         </div>
         <div className='info'>
           <h2>Phone Number: </h2>
-          <p>{phone_num}</p>
+          <p>{phoneNumber}</p>
         </div>
       </div>
     </div>

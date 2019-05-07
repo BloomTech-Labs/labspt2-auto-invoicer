@@ -85,7 +85,8 @@ export const userData = `
     ${invoiceData}
   }
   companies {
-    ${companyData}
+    _id
+    name
   }
   defaultCompany
   premium

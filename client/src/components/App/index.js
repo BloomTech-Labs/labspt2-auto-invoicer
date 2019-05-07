@@ -21,24 +21,24 @@ import './App.css';
 
 
 const App = props => {
+  const context = useContext(UserContext);
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [toggleAuth, setToggleAuth] = useState(false)
   const [toggleSignIn, setToggleSignIn] = useState(false)
 
-
-
-  const context = useContext(UserContext);
-  
   const getUser = async () => {
     await context.getUser()
     setLoggedIn(true)
-    props.history.push(`/user/${context.user._id}/dashboard`)
   };
 
   useEffect(() => {
-    getUser();
-    console.log('this is my context', context);
+    if (!context.user._id) {
+      getUser();
+    }
+    if (context.user._id) {
+      props.history.push(`/user/${context.user._id}/dashboard`);
+    }
   }, [loggedIn])
 
   const toggleAuthModal = () => {
@@ -56,7 +56,7 @@ const App = props => {
       })
       .then(() => {
 
-        setLoggedIn(!loggedIn);
+        setLoggedIn(false);
         window.location.replace('/');
       })
       .catch(err => console.log(err));
