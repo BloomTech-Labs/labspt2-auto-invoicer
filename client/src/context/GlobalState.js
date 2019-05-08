@@ -3,22 +3,37 @@ import axios from 'axios';
 
 import UserContext from './UserContext';
 
-import { userReducer, GET_USER, GET_COMPANIES } from './reducers';
+import { userReducer, GET_USER, GET_COMPANIES, GET_COMPANY, GET_UPDATED_USER_DATA } from './reducers';
 import { userData, companyData } from './graphql';
+import { toUpdateUser } from './mutations'
 
 const GlobalState = props => {
-  const [userState, dispatch] = useReducer(userReducer, {
+  const [state, dispatch] = useReducer(userReducer, {
     user: {
       _id: '',
       email: '',
       name: '',
       phoneNumber: '',
-      companies: [],
       invoices: [],
+      companies: [],
       defaultCompany: '',
       premium: '',
       premiumExpiresOn: '',
       newAccount: ''
+    },
+    company: {
+      _id: '',
+      name:'',
+      email:'',
+      phoneNumber: '',
+      address1:'',
+      address2:'',
+      zipCode: '',
+      city: '',
+      state: '',
+      customers: [],
+      items: [],
+      invoices: [],
     }
   });
 
@@ -40,13 +55,14 @@ const GlobalState = props => {
       userQuery
     );
     dispatch({ type: GET_USER, user: userDetails.data.data.user });
+    getCompany(userDetails.data.data.user.defaultCompany)
   };
 
   const getCompanies = async () => {
     const companiesQuery = {
       query: `
         query {
-          user(userId: "${userState.user._id}") {
+          user(userId: "${state.user._id}") {
             companies {
               ${companyData}
             }
@@ -64,13 +80,42 @@ const GlobalState = props => {
     });
   };
 
+  const getCompany = async (companyId) => {
+    const companyQuery = {
+      query: `
+        query {
+          company(companyId: "${companyId}") {
+            ${companyData}
+          }
+        }
+      `
+    };
+    const company = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/graphql`,
+      companyQuery
+    );
+    dispatch({
+      type: GET_COMPANY,
+      company: company.data.data.company
+    })
+  }
+
+  const updateUser = async (editedData) => {
+    const user = await toUpdateUser(state.user._id, editedData);
+    console.log('updated data:', user)
+    dispatch({
+      type: GET_UPDATED_USER_DATA,
+      user: user.data.data.editUser
+    })
+  }
+
   useEffect(() => {
-    console.log('[userState in GlobalState]: ', userState);
-  }, [userState]);
+    console.log('[state in GlobalState]: ', state);
+  }, [state]);
 
   return (
     <UserContext.Provider
-      value={{ user: userState.user, getUser, getCompanies }}
+      value={{ user: state.user, company: state.company, getUser, getCompanies, getCompany, updateUser }}
     >
       {props.children}
     </UserContext.Provider>
