@@ -33,7 +33,7 @@ import UserContext from "../../context/UserContext";
 
 const Invoices = props => {
   const context = useContext(UserContext);
-  const invoices = context.user.invoices;
+  const invoices = context.company.invoices;
   const userID = context.user._id;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
