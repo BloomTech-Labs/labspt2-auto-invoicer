@@ -82,7 +82,7 @@ const SingleInvoiceView = props => {
             </Toolbar>
           </AppBar>
           <div className="box-container bottom">
-            <div className="box">
+            <div className="top-box box">
               <p>
                 <strong>
                   <span className="entryName">Invoice #:</span>
