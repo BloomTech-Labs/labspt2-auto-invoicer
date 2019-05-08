@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
@@ -17,6 +17,8 @@ import SignUpStepper from '../SignUpStepper/';
 
 import UserContext from '../../context/UserContext';
 import './App.css';
+import Error404Page from './../Errors/404/404';
+import Error500Page from './../Errors/500/500';
 
 const App = props => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -114,6 +116,14 @@ const App = props => {
         <Route path="/user/:id/billing" component={BillingPage} />
         <Route path="/user/:id/dashboard" component={Dashboard} />
         <Route path="/user/:id/setup" component={SignUpStepper} />
+        <Route
+          path="/user/:id/error/404"
+          render={props => <Error404Page {...props} />}
+        />
+        <Route
+          path="/user/:id/error/500"
+          render={props => <Error500Page {...props} />}
+        />
         <Route
           path="/user/:id/invoice/create"
           render={props => <CreateInvoice {...props} click={createPDF} />}
