@@ -59,18 +59,11 @@ const InvoiceCompany = props => {
   return (
     <React.Fragment>
       <TextField
-        // name="companyId"
         id="company"
         select
         label="Company"
-        // className={classes.textField}
         value={props.company._id}
         onChange={handleCompanySelect}
-        // SelectProps={{
-        //   MenuProps: {
-        //     className: classes.menu
-        //   }
-        // }}
         helperText="Select a company"
         margin="normal"
       >
