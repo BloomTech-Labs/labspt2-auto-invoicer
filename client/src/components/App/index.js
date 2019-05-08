@@ -1,6 +1,4 @@
-
-import React, { useState, useEffect, useContext} from 'react';
-import CreateInvoiceStepper from "../CreateInvoiceStepper";
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Route, withRouter } from 'react-router-dom';
 import { saveAs } from 'file-saver';
@@ -15,31 +13,30 @@ import SignInModal from '../SignInModal';
 import EditInvoiceForm from '../EditInvoiceForm';
 import Dashboard from '../Dashboard';
 import Navigation from '../Navigation/Navigation';
+import SignUpStepper from '../SignUpStepper/';
 
-import UserContext from '../../context/UserContext'
+import UserContext from '../../context/UserContext';
 import './App.css';
-
+import Error404Page from './../Errors/404/404';
+import Error500Page from './../Errors/500/500';
 
 const App = props => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [toggleAuth, setToggleAuth] = useState(false);
+  const [toggleSignIn, setToggleSignIn] = useState(false);
+
   const context = useContext(UserContext);
 
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [toggleAuth, setToggleAuth] = useState(false)
-  const [toggleSignIn, setToggleSignIn] = useState(false)
-
   const getUser = async () => {
-    await context.getUser()
-    setLoggedIn(true)
+    await context.getUser();
+    setLoggedIn(true);
+    // props.history.push(`/user/${context.user._id}/dashboard`);
   };
 
   useEffect(() => {
-    if (!context.user._id) {
-      getUser();
-    }
-    if (context.user._id) {
-      props.history.push(`/user/${context.user._id}/dashboard`);
-    }
-  }, [loggedIn])
+    getUser();
+    console.log('this is my context', context);
+  }, [loggedIn]);
 
   const toggleAuthModal = () => {
     return setToggleAuth(!toggleAuth);
@@ -55,8 +52,7 @@ const App = props => {
         withCredentials: true
       })
       .then(() => {
-
-        setLoggedIn(false);
+        setLoggedIn(!loggedIn);
         window.location.replace('/');
       })
       .catch(err => console.log(err));
@@ -64,16 +60,24 @@ const App = props => {
 
   const createPDF = invoice => {
     const file = {
-      customer:invoice.customer,
-      company: invoice.company,
-      balance: invoice.balance,
-      date: invoice.date,
+      addressFrom: invoice.addressFrom,
+      addressTo: invoice.addressTo,
+      amountPaid: invoice.amountPaid,
+      balanceDue: invoice.balanceDue,
+      stateTo: invoice.stateTo,
+      zipCodeTo: invoice.zipCodeTo,
+      cityTo: invoice.cityTo,
+      emailTo: invoice.emailTo,
+      selectedDate: invoice.selectedDate,
       discount: invoice.discount,
-      dueDate: invoice.dueDate,
-      description: invoice.description,    
-      items: invoice.items,
+      invoiceDueDate: invoice.invoiceDueDate,
+      invoiceDescription: invoice.invoiceDescription,
+      company: invoice.companyName,
+      // invoiceItems: [
+      //   { amount: "10.00", item: "BELL", quantity: "10", rate: "1.00" }
+      // ],
       notes: invoice.notes,
-      number: invoice.number,
+      invoiceNumber: invoice.invoiceNumber,
       terms: invoice.terms,
       shipping: invoice.shipping,
       subtotal: invoice.subtotal,
@@ -81,96 +85,72 @@ const App = props => {
       total: invoice.total
     };
     axios
-      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
+      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
       .then(() =>
-        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
-          responseType: "blob"
+        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
+          responseType: 'blob'
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
         saveAs(pdfBlob, `${file.invoiceNumber}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return "Error";
+        return 'Error';
       });
   };
 
-    return (
-      <div className="App">
-        <Navigation
-          // user={userState}
-          handleSignIn={signInModal}
-          handleSignOut={signOut}
-          loggedIn={loggedIn}
+  return (
+    <div className="App">
+      <Navigation
+        // user={userState}
+        handleSignIn={signInModal}
+        handleSignOut={signOut}
+        loggedIn={loggedIn}
+      />
+      {toggleSignIn ? (
+        <SignInModal click={signInModal} auth={toggleAuthModal} />
+      ) : null}
+      <section className="routes-container">
+        <Route path="/user/:id/billing" component={BillingPage} />
+        <Route path="/user/:id/dashboard" component={Dashboard} />
+        <Route path="/user/:id/setup" component={SignUpStepper} />
+        <Route
+          path="/user/:id/error/404"
+          render={props => <Error404Page {...props} />}
         />
-        {toggleSignIn ? (
-          <SignInModal
-            click={signInModal}
-            auth={toggleAuthModal}
-          />
-        ) : null}
-        <section className="routes-container">
-          <Route
-            path="/user/:id/billing"
-            component={BillingPage}
-          />
-          <Route
-            path="/user/:id/dashboard"
-            component={Dashboard}
-          />
-          <Route
-            path="/user/:id/invoice/create"
-            render={props => (
-              <CreateInvoice
-                {...props}
-                click={createPDF}
-              />
-            )}
-          />
-          <Route
-            path="/user/:id/settings"
-            component={SettingsPage}
-          />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <LandingPage {...props} />
-            )}
-          />
-          <Route
-            path="/user/:id/invoices"
-            render={props => (
-              <InvoiceList
-                {...props}
-                click={createPDF}
-              />
-            )}
-          />
-          <Route path="/cis" component={CreateInvoiceStepper} />
-          <Route
-            path="/user/:id/invoice/:invoiceID/view"
-            render={props => (
-              <InvoiceView
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/user/:id/invoice/:invoiceID/edit"
-            render={props => (
-              <EditInvoiceForm
-                {...props}
-                // fetchInvoices={fetchInvoices}
-                // userID={useruserID}
-              />
-            )}
-          />
-        </section>
-      </div>
-    );
-  }
+        <Route
+          path="/user/:id/error/500"
+          render={props => <Error500Page {...props} />}
+        />
+        <Route
+          path="/user/:id/invoice/create"
+          render={props => <CreateInvoice {...props} click={createPDF} />}
+        />
+        <Route path="/user/:id/settings" component={SettingsPage} />
+        <Route exact path="/" render={props => <LandingPage {...props} />} />
+        <Route
+          path="/user/:id/invoices"
+          render={props => <InvoiceList {...props} click={createPDF} />}
+        />
+        <Route
+          path="/user/:id/invoice/:invoiceID/view"
+          render={props => <InvoiceView {...props} />}
+        />
+        <Route
+          path="/user/:id/invoice/:invoiceID/edit"
+          render={props => (
+            <EditInvoiceForm
+              {...props}
+              // fetchInvoices={fetchInvoices}
+              // userID={useruserID}
+            />
+          )}
+        />
+      </section>
+    </div>
+  );
+};
 
 export default withRouter(App);
