@@ -12,6 +12,10 @@ const InvoiceItems = props => {
 
   const [dialogState, setDialogState] = useState(false);
 
+  const handleClose = () => {
+    setDialogState(false);
+  };
+
   const handleSelectItem = e => {
     if (e.target.value === 'new') {
       setDialogState(true);
@@ -35,11 +39,16 @@ const InvoiceItems = props => {
     }
   };
 
-  const handleClose = () => {
-    setDialogState(false);
+  const handleSubtotal = () => {
+    const subtotal = props.items.reduce(
+      (total, item) => (total += Number(item.amount)),
+      0
+    );
+    props.handleSubtotal(subtotal);
   };
 
   useEffect(() => {
+    handleSubtotal();
     console.log('[props.items in InvoiceItems]: ', props.items);
   }, [props.items]);
 
@@ -47,18 +56,11 @@ const InvoiceItems = props => {
     <React.Fragment>
       <Grid item xs={12} sm={12}>
         <TextField
-          name="itemId" // event.target.name
           id="item"
           select
           label="Item"
-          // className={classes.textField}
-          value={'test'}
+          value=""
           onChange={handleSelectItem}
-          // SelectProps={{
-          //   MenuProps: {
-          //     className: classes.menu
-          //   }
-          // }}
           helperText="Select an item"
           margin="normal"
         >
@@ -73,6 +75,90 @@ const InvoiceItems = props => {
         </TextField>
         {dialogState ? <ItemFormDialog onClose={handleClose} /> : null}
       </Grid>
+      {props.items.length ? (
+        <Grid container spacing={24}>
+          <Grid item xs={12} />
+          {props.items.map((val, index) => {
+            const itemId = `item-${index}`;
+            const descriptionId = `description-${index}`;
+            const quantityId = `quantity-${index}`;
+            const costId = `cost-${index}`;
+            const amountId = `amount-${index}`;
+            return (
+              <React.Fragment>
+                <Grid item xs={3}>
+                  <TextField
+                    type="text"
+                    id={itemId}
+                    name={itemId}
+                    value={props.items[index].name}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <TextField
+                    type="text"
+                    id={descriptionId}
+                    name={descriptionId}
+                    value={props.items[index].description}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <TextField
+                    type="text"
+                    id={quantityId}
+                    name={quantityId}
+                    value={props.items[index].quantity}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <TextField
+                    type="text"
+                    id={costId}
+                    name={costId}
+                    value={props.items[index].cost}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <TextField
+                    type="text"
+                    id={amountId}
+                    name={amountId}
+                    value={props.items[index].amount}
+                    InputProps={{
+                      readOnly: true
+                    }}
+                  />
+                </Grid>
+              </React.Fragment>
+            );
+          })}
+          <Grid item xs={12} />
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="subtotal"
+              name="subtotal"
+              label="Subtotal"
+              value={props.subtotal}
+              InputProps={{
+                readOnly: true
+              }}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+      ) : null}
     </React.Fragment>
   );
 };
