@@ -421,9 +421,9 @@ const Invoices = props => {
                                   }}
                                 >
                                   <div
-                                    onClick={() => {
-                                      props.createPDF(invoice);
-                                    }}
+                                    // onClick={() => {
+                                    //   props.createPDF(invoice);
+                                    // }}
                                     className={classes.shortcutsCircle}
                                   >
                                     <i
