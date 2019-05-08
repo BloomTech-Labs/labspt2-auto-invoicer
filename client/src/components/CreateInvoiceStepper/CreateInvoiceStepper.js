@@ -12,6 +12,7 @@ import UserContext from '../../context/UserContext';
 
 import InvoiceCompany from './InvoiceCompany';
 import InvoiceCustomer from './InvoiceCustomer';
+import InvoiceItems from './InvoiceItems';
 
 const styles = theme => ({
   layout: {
@@ -19,7 +20,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 600,
+      width: 960,
       marginLeft: 'auto',
       marginRight: 'auto'
     }
@@ -91,6 +92,14 @@ const CreateInvoiceStepper = props => {
 
   const [stepState, setStepState] = useState(0);
 
+  const handleBack = () => {
+    setStepState(prevStep => prevStep - 1);
+  };
+
+  const handleNext = () => {
+    setStepState(prevStep => prevStep + 1);
+  };
+
   const handleCompanySelect = company => {
     setInvoiceState({ ...invoiceState, company });
   };
@@ -99,12 +108,12 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, customer });
   };
 
-  const handleNext = () => {
-    setStepState(prevStep => prevStep + 1);
+  const handleItemSelect = items => {
+    setInvoiceState({ ...invoiceState, items });
   };
 
-  const handleBack = () => {
-    setStepState(prevStep => prevStep - 1);
+  const handleSubtotal = subtotal => {
+    setInvoiceState({ ...invoiceState, subtotal });
   };
 
   const steps = [
@@ -132,9 +141,12 @@ const CreateInvoiceStepper = props => {
         );
       case 2:
         return (
-          <React.Fragment>
-            <div>Insert text for remaining steps.</div>
-          </React.Fragment>
+          <InvoiceItems
+            items={invoiceState.items}
+            subtotal={invoiceState.subtotal}
+            onItemSelect={handleItemSelect}
+            handleSubtotal={handleSubtotal}
+          />
         );
       default:
         return 'Error';
