@@ -14,7 +14,7 @@ class StatisticsCard extends React.Component {
   }
 
   render() {
-    const { checked, classes } = this.props;
+    const { checked, classes, unpaid, late, collected } = this.props;
     return (
       <Zoom
         in={checked}
@@ -29,9 +29,9 @@ class StatisticsCard extends React.Component {
             </Typography>
             <StatisticsChart
               cardRef={this.cardRef}
-              unpaid={this.props.unpaid}
-              late={this.props.late}
-              collected={this.props.collected}
+              unpaid={unpaid}
+              late={late}
+              collected={collected}
             />
           </div>
         </Paper>

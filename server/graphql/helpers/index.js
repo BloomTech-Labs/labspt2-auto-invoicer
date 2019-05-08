@@ -38,7 +38,8 @@ const companies = async companyId => {
         ...company._doc,
         users: users.bind(this, company._doc.users),
         customers: customers.bind(this, company._doc.customers),
-        invoices: invoices.bind(this, company._doc.invoices)
+        invoices: invoices.bind(this, company._doc.invoices),
+        items: items.bind(this, company._doc.items)
       };
     });
   } catch (err) {
@@ -71,7 +72,7 @@ const invoices = async invoiceId => {
     return fetchedInvoices.map(invoice => {
       return {
         ...invoice._doc,
-        invoiceItems: items.bind(this, invoice._doc.items)
+        items: items.bind(this, invoice._doc.items)
       };
     });
   } catch (err) {
@@ -128,7 +129,8 @@ const updateDocumentById = async (documentInput, id, Model) => {
         ...updatedDocument._doc,
         users: users.bind(this, updatedDocument._doc.users),
         customers: customers.bind(this, updatedDocument._doc.customers),
-        invoices: invoices.bind(this, updatedDocument._doc.invoices)
+        invoices: invoices.bind(this, updatedDocument._doc.invoices),
+        items: items.bind(this, updatedDocument._doc.items)
       };
     }
     return {
@@ -179,7 +181,8 @@ const findDocumentsByAnyField = async (documentInput, Model) => {
           ...document._doc,
           users: users.bind(this, document._doc.users),
           customers: customers.bind(this, document._doc.customers),
-          invoices: invoices.bind(this, document._doc.invoices)
+          invoices: invoices.bind(this, document._doc.invoices),
+          items: items.bind(this, document._doc.items)
         };
       });
     }
@@ -212,7 +215,8 @@ const findDocumentById = async (documentId, Model) => {
         ...document._doc,
         users: users.bind(this, document._doc.users),
         customers: customers.bind(this, document._doc.customers),
-        invoices: invoices.bind(this, document._doc.invoices)
+        invoices: invoices.bind(this, document._doc.invoices),
+        items: items.bind(this, document._doc.items)
       };
     }
     return {
@@ -245,7 +249,8 @@ const findAllDocuments = async Model => {
           ...document._doc,
           users: users.bind(this, document._doc.users),
           customers: customers.bind(this, document._doc.customers),
-          invoices: invoices.bind(this, document._doc.invoices)
+          invoices: invoices.bind(this, document._doc.invoices),
+          items: items.bind(this, document._doc.items)
         };
       });
     }

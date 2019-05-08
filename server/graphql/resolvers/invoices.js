@@ -1,96 +1,91 @@
-const Invoice = require("../../models/invoice");
-const Company = require("../../models/company");
-const User = require("../../models/user");
-const Customer = require("../../models/customer");
+const Invoice = require('../../models/invoice');
+const Company = require('../../models/company');
+const User = require('../../models/user');
+const Customer = require('../../models/customer');
 
 const {
   findDocumentById,
   findAllDocuments,
   updateDocumentById
-} = require("../helpers");
+} = require('../helpers');
 
 module.exports = {
   invoices: () => {
     return findAllDocuments(Invoice);
   },
-  invoice: ({ invoiceID }) => {
-    return findDocumentById(invoiceID, Invoice);
+  invoice: ({ invoiceId }) => {
+    return findDocumentById(invoiceId, Invoice);
   },
   createInvoice: async ({ invoiceInput }) => {
-    const company = await Company.findById(invoiceInput.companyID);
-    if (!company.unlimited_tier) {
-      if (!company.credits) {
-        throw new Error("");
-      }
-    }
+    const invoiceCompany = await Company.findById(invoiceInput.company._id);
     try {
+      const {
+        createdBy,
+        number,
+        description,
+        terms,
+        date,
+        dueDate,
+        company,
+        customer,
+        items,
+        subtotal,
+        discount,
+        tax,
+        shipping,
+        total,
+        balance,
+        notes
+      } = invoiceInput;
       const invoice = new Invoice({
-        companyID: invoiceInput.companyID,
-        userID: invoiceInput.userID,
-        customerID: invoiceInput.customerID,
-        companyName: invoiceInput.companyName,
-        userName: invoiceInput.userName,
-        invoiceNumber: invoiceInput.invoiceNumber,
-        invoiceDescription: invoiceInput.invoiceDescription,
-        selectedDate: invoiceInput.selectedDate,
-        invoiceDueDate: invoiceInput.invoiceDueDate,
-        company: invoiceInput.company,
-        addressFrom: invoiceInput.addressFrom,
-        cityTo: invoiceInput.cityTo,
-        stateTo: invoiceInput.stateTo,
-        zipCodeTo: invoiceInput.zipCodeTo,
-        addressTo: invoiceInput.addressTo,
-        emailTo: invoiceInput.emailTo,
-        subtotal: invoiceInput.subtotal,
-        discount: invoiceInput.discount,
-        tax: invoiceInput.tax,
-        shipping: invoiceInput.shipping,
-        total: invoiceInput.total,
-        amountPaid: invoiceInput.amountPaid,
-        balanceDue: invoiceInput.balanceDue,
-        notes: invoiceInput.notes,
-        terms: invoiceInput.terms
-
-        // Original Invoice Resolver
-        // companyID: invoiceInput.companyID,
-        // userID: invoiceInput.userID,
-        // customerID: invoiceInput.customerID,
-        // companyName: invoiceInput.companyName,
-        // userName: invoiceInput.userName,
-        // invoiceNumber: invoiceInput.invoiceNumber,
-        // languageSelection: invoiceInput.languageSelection,
-        // currencySelection: invoiceInput.currencySelection,
-        // addressFrom: invoiceInput.addressFrom,
-        // addressTo: invoiceInput.addressTo,
-        // cityTo: invoiceInput.cityTo,
-        // stateRegionTo: invoiceInput.stateRegionTo,
-        // zipCodeTo: invoiceInput.zipCodeTo,
-        // clientEmailTo: invoiceInput.clientEmailTo,
-        // selectedDate: invoiceInput.selectedDate,
-        // invoiceDueDate: invoiceInput.invoiceDueDate,
-        // balanceDue: invoiceInput.balanceDue,
-        // subtotal: invoiceInput.subtotal,
-        // discount: invoiceInput.discount,
-        // tax: invoiceInput.tax,
-        // shipping: invoiceInput.shipping,
-        // total: invoiceInput.total,
-        // amountPaid: invoiceInput.amountPaid,
-        // invoiceNotes: invoiceInput.invoiceNotes,
-        // invoiceTerms: invoiceInput.invoiceTerms
+        createdBy,
+        number,
+        description,
+        terms,
+        date,
+        dueDate,
+        company: {
+          _id: company._id,
+          name: company.name,
+          email: company.email,
+          phoneNumber: company.phoneNumber,
+          address1: company.address1,
+          address2: company.address2,
+          zipCode: company.zipCode,
+          city: company.city,
+          state: company.state
+        },
+        customer: {
+          _id: customer._id,
+          name: customer.name,
+          email: customer.email,
+          phoneNumber: customer.phoneNumber,
+          address1: customer.address1,
+          address2: customer.address2,
+          zipCode: customer.zipCode,
+          city: customer.city,
+          state: customer.state
+        },
+        items,
+        subtotal,
+        discount,
+        tax,
+        shipping,
+        total,
+        balance,
+        notes
       });
-
       const newInvoice = await invoice.save();
-      const user = await User.findById(newInvoice._doc.userID);
-      const customer = await Customer.findById(newInvoice._doc.customerID);
-      user.invoices.push(newInvoice._doc._id);
-      company.invoices.push(newInvoice._doc._id);
-      customer.invoices.push(newInvoice._doc._id);
-      if (!company.unlimited_tier) {
-        company.credits -= 1;
-      }
-      await user.save();
-      await company.save();
-      await customer.save();
+      const invoiceUser = await User.findById(newInvoice._doc.createdBy);
+      const invoiceCustomer = await Customer.findById(
+        newInvoice._doc.customer._id
+      );
+      invoiceUser.invoices.push(newInvoice._doc._id);
+      invoiceCompany.invoices.push(newInvoice._doc._id);
+      invoiceCustomer.invoices.push(newInvoice._doc._id);
+      await invoiceUser.save();
+      await invoiceCompany.save();
+      await invoiceCustomer.save();
       return {
         ...newInvoice._doc
       };
@@ -98,7 +93,7 @@ module.exports = {
       throw err;
     }
   },
-  editInvoice: ({ editInvoiceInput, invoiceID }) => {
-    return updateDocumentById(editInvoiceInput, invoiceID, Invoice);
+  editInvoice: ({ editInvoiceInput, invoiceId }) => {
+    return updateDocumentById(editInvoiceInput, invoiceId, Invoice);
   }
 };

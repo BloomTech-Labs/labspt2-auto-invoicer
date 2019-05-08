@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { FetchCompany } from "../graphQL/queries/companies";
+import { FetchCompany } from '../graphQL/queries/companies';
 
 export const CompanyContext = React.createContext();
 
@@ -8,18 +8,17 @@ export class CompanyProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyID: "",
-      name: "",
-      email: "",
-      phone_num: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      state: "",
-      postal_code: "",
-      country: "",
-      unlimited_tier: false,
-      credits: 0,
+      companyID: '',
+      name: '',
+      email: '',
+      phone_num: '',
+      address_1: '',
+      address_2: '',
+      city: '',
+      state: '',
+      postal_code: '',
+      country: '',
+      premium: false,
       users: [],
       customers: [],
       invoices: []
@@ -35,8 +34,7 @@ export class CompanyProvider extends React.Component {
     state 
     postal_code 
     country 
-    unlimited_tier 
-    credits`;
+    premium`;
     const usersData = `users {_id name}`;
     const customersData = `customers {_id name}`;
     const invoicesData = `invoices {
@@ -65,8 +63,7 @@ export class CompanyProvider extends React.Component {
     }`;
     this.fetchCompany = async companyID => {
       const returnedData = `${companyData} ${usersData} ${customersData} ${invoicesData}`;
-      const result = await FetchCompany(companyID, returnedData);
-      const { company } = result;
+      const { company } = await FetchCompany(companyID, returnedData);
       this.setState({
         companyID: company._id,
         name: company.name,
@@ -78,8 +75,7 @@ export class CompanyProvider extends React.Component {
         state: company.state,
         postal_code: company.postal_code,
         country: company.country,
-        unlimited_tier: company.unlimited_tier,
-        credits: company.credits,
+        premium: company.premium,
         users: company.users,
         customers: company.customers,
         invoices: company.invoices
@@ -87,10 +83,12 @@ export class CompanyProvider extends React.Component {
     };
 
     this.fetchInvoices = async () => {
-      const returnedData = `credits ${invoicesData}`;
-      const result = await FetchCompany(this.state.companyID, returnedData);
-      const { company } = result;
-      this.setState({ invoices: company.invoices, credits: company.credits });
+      const returnedData = `${invoicesData}`;
+      const { company } = await FetchCompany(
+        this.state.companyID,
+        returnedData
+      );
+      this.setState({ invoices: company.invoices });
     };
 
     this.fetchUsers = async () => {
@@ -105,9 +103,9 @@ export class CompanyProvider extends React.Component {
       this.setState({ customers: company.customers });
     };
 
-    this.fetchCompanyData = async (companyID) => {
+    this.fetchCompanyData = async companyID => {
       const result = await FetchCompany(companyID, companyData);
-      const { company } = result
+      const { company } = result;
       this.setState({
         companyID: company._id,
         name: company.name,
@@ -119,18 +117,16 @@ export class CompanyProvider extends React.Component {
         state: company.state,
         postal_code: company.postal_code,
         country: company.country,
-        unlimited_tier: company.unlimited_tier,
-        credits: company.credits,
-      })
-    }
+        premium: company.premium
+      });
+    };
 
-    this.fetchPlanOrCredits = async (companyID) => {
-      const plan = `unlimited_tier credits`
-      const result = await FetchCompany(companyID, plan )
+    this.fetchPlanOrCredits = async companyID => {
+      const plan = `premium`;
+      const result = await FetchCompany(companyID, plan);
       const { company } = result;
       this.setState({
-        credits: company.credits,
-        unlimited_tier: company.unlimited_tier
+        premium: company.premium
       });
     };
   }

@@ -3,13 +3,15 @@ const companiesResolver = require('./companies');
 const customersResolver = require('./customers');
 const countryResolver = require('./country');
 const invoiceResolver = require('./invoices');
+const itemResolver = require('./items');
 
 const rootResolver = {
   ...usersResolver,
   ...companiesResolver,
   ...customersResolver,
   ...countryResolver,
-  ...invoiceResolver
+  ...invoiceResolver,
+  ...itemResolver
 };
 
 module.exports = rootResolver;

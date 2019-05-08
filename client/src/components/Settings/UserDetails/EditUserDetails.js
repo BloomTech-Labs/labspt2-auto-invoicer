@@ -1,68 +1,57 @@
-import React, { Component } from 'react'
+import React, { useContext, useState } from 'react'
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {EditUser} from '../../../graphQL/mutations/users'
 
-export default class EditUserDetails extends Component {
-  constructor(props) {
-    super(props)
-    const {name, email, phone_num} = this.props.userState
-    this.state = {
-      name: name,
-      email: email,
-      phone_num: phone_num
-    }
+import UserContext from '../../../context/UserContext'
+
+export const EditUserDetails = (props) => {
+  const context = useContext(UserContext)
+  const {name, email, phoneNumber} = context.user
+  const [userData, setUserData] = useState({name, email, phoneNumber})
+
+  const editUser = async editedData => {
+    await context.updateUser(editedData)
+    props.toggleView()
   }
 
-  editUser = async (editedData, returnedData) => {
-    const {userID} = this.props.userState
-    await EditUser(userID, editedData, returnedData)
-    await this.props.fetchUserData()
-    this.props.toggleView()
-  }
-
-  handleChange = e => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  render() {
-    return (
-      <div>
-        <form className='user-form'>
-          <TextField
-            id={'name'}
-            label={'Name'}
-            fullWidth={true}
-            placeholder={'Name'}
-            name={'name'}
-            onChange={this.handleChange}
-            value={this.state.name} />
-          <TextField
-            id={'email'}
-            label={'Email'}
-            fullWidth={true}
-            placeholder={'Email'}
-            name={'email'}
-            onChange={this.handleChange}
-            value={this.state.email} />
-          <TextField
-            id={'phone_num'}
-            label={'Phone Number'}
-            fullWidth={true}
-            placeholder={'Phone Number'}
-            name={'phone_num'}
-            onChange={this.handleChange}
-            value={this.state.phone_num} />
-        </form>
-        <Button
-          onClick={this.props.toggleView}>
-          cancel
-        </Button>
-        <Button
-          onClick={() => this.editUser(this.state, '_id')}>
-          save
-        </Button>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <form className='user-form'>
+        <TextField
+          id={'name'}
+          label={'Name'}
+          fullWidth={true}
+          placeholder={'Name'}
+          name={'name'}
+          onChange={e => setUserData({...userData, name: e.target.value})}
+          value={userData.name} />
+        <TextField
+          id={'email'}
+          label={'Email'}
+          fullWidth={true}
+          placeholder={'Email'}
+          name={'email'}
+          onChange={e => setUserData({...userData, email: e.target.value})}
+          value={userData.email} />
+        <TextField
+          id={'phone_num'}
+          label={'Phone Number'}
+          fullWidth={true}
+          placeholder={'Phone Number'}
+          name={'phone_num'}
+          onChange={e => setUserData({...userData, phoneNumber: e.target.value})}
+          value={userData.phoneNumber} />
+      </form>
+      <Button
+        onClick={props.toggleView}>
+        cancel
+      </Button>
+      <Button
+        onClick={() => editUser(userData)}
+        >
+        save
+      </Button>
+    </div>
+  )
 }

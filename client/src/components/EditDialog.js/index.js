@@ -41,7 +41,6 @@ class EditDialog extends Component {
       <Fragment>
         <Tooltip
           title="Edit Amount"
-          placement="right"
           classes={{
             tooltip: classes.tooltip
           }}
@@ -54,7 +53,7 @@ class EditDialog extends Component {
               className="material-icons"
               style={{
                 color: "#4fc878",
-                fontSize: 26
+                fontSize: 36
               }}
             >
               edit
