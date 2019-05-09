@@ -76,6 +76,8 @@ const App = props => {
       tax: invoice.tax,
       total: invoice.total
     };
+    //https://pdf-server-invoice.herokuapp.com/create-pdf
+    //https://pdf-server-invoice.herokuapp.com/fetch-pdf
     axios
       .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>

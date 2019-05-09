@@ -39,7 +39,7 @@ const SingleInvoiceView = props => {
     let emptyItems = [
       { name: "", description: "", cost: "", quantity: "", amount: "" }
     ];
-    return items ? items : emptyItems;
+    return items.length > 1 ? items : emptyItems;
   };
   const itemsLengthChecker = items => {
     return items ? items.length : 0;
