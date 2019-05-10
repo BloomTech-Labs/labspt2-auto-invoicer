@@ -35,7 +35,6 @@ class EditDialog extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(classes);
     const { open } = this.state;
     return (
       <Fragment>
