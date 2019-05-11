@@ -10,6 +10,7 @@ import BillingPage from "../../views/BillingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import InvoiceList from "../../views/InvoiceList";
 import InvoiceView from "../../views/InvoiceView";
+import CreateInvoiceStepper from "../CreateInvoiceStepper";
 import EditInvoiceForm from "../EditInvoiceForm";
 
 import Dashboard from "../Dashboard/index";
@@ -57,6 +58,10 @@ it("contains InvoiceList views component", () => {
 
 it("contains InvoiceView views component", () => {
   expect(wrapped.find(InvoiceView));
+});
+
+it("contains CreateInvoiceStepper component", () => {
+  expect(wrapped.find(CreateInvoiceStepper));
 });
 
 it("contains EditInvoiceForm component", () => {
