@@ -144,6 +144,12 @@ Form validation is handled at the component level with Material-UI.
 
 ## Testing
 
+### Dependencies
+
+`"enzyme": "^3.9.0"`
+`"enzyme-adapter-react-16": "^1.12.1"`
+`"jest": "^24.8.0"`
+
 ### Level 1 Testing (Basic)
 
 Starting off with the App component, basic tests are designed to show that sub-components exist (i.e., Landing Page, Navigation, SignInModal, Dashboard, InvoiceList, Billing Page, Settings Page, CreateInvoiceSteppers etc. )
