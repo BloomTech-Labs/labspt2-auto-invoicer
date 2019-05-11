@@ -1,11 +1,9 @@
 import React from "react";
-//import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 
 import StripeElements from "../StripeElements/index";
 import StripeCheckoutForm from "../StripeCheckoutForm/index";
 import Typography from "@material-ui/core/Typography";
-//import StripeProvider from "react-stripe-elements";
 
 // NOTE: test checks the StripeElements contains StripeCheckoutForm & Typography
 // test cannot check StripeProvider - TypeError: expects a string, object or component constructor
