@@ -150,7 +150,7 @@ Starting off with the App component, basic tests are designed to show that sub-c
 
 Next, tests are designed for _each_ sub-component (i.e., Landing Page, Dashboard, Invoice List etc). At this level, we test for components to render.
 
-In some cases, tests have been written for small, isolated components (i.e., SignInModal). Similarly, we test to ensure that certain things are rendering (GoogleLogo, FacebookLogo etc.)
+In some cases, tests have been written for small, isolated components (i.e., SignInModal). Similarly, we test to ensure that certain things are rendering (GoogleLogo, FacebookLogo etc.). For StripeElements, we test to ensure components exists (StripeCheckoutForm and Typography elements).
 
 ## Improving Performance
 
