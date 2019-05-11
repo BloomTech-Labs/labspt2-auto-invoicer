@@ -2,13 +2,15 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import App from "../App/index";
-import SignInModal from "../SignInModal";
+import SignInModal from "../SignInModal/index";
 import Navigation from "../Navigation/Navigation";
 import LandingPage from "../../views/LandingPage";
 import CreateInvoice from "../../views/CreateInvoice";
 import InvoiceList from "../../views/InvoiceList";
 import InvoiceView from "../../views/InvoiceView";
 import EditInvoiceForm from "../EditInvoiceForm";
+
+// Testing the App Component - show all components *within* the App component
 
 let wrapped;
 
