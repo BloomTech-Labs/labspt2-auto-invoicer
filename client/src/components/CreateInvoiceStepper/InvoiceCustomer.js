@@ -28,7 +28,7 @@ const InvoiceCustomer = props => {
     }
 
     if (e.target.value !== 'new') {
-      const [customer] = context.user.companies[0].customers.filter(
+      const [customer] = context.company.customers.filter(
         customer => customer._id === e.target.value
       );
       props.onCustomerSelect({
@@ -73,7 +73,7 @@ const InvoiceCustomer = props => {
         helperText="Select a company"
         margin="normal"
       >
-        {context.user.companies[0].customers.map(customer => (
+        {context.company.customers.map(customer => (
           <MenuItem key={customer._id} value={customer._id}>
             {customer.name}
           </MenuItem>
