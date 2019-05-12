@@ -1,36 +1,16 @@
-.nav-container {
-  background: #ffffff;
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.15);
+header .nav_link {
   display: flex;
-  font-family: 'Roboto', sans-serif;
-  height: 50px;
   justify-content: center;
-  margin: 0 auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
+  align-items: center;
+  width: 10%;
 }
 
-.nav {
-  align-items: flex-end;
-  display: flex;
-  justify-content: space-between;
-  max-width: 960px;
-  padding-bottom: 10px;
-  width: 100%;
+header .active {
+  border-bottom: solid #065203 5px;
 }
 
-.nav-left {
-  align-items: flex-end;
-  display: flex;
-  width: 100%;
-}
-
-.nav-right {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+header .nav_link:hover {
+  border-bottom: solid #065203 5px;
 }
 
 .company-name {
@@ -38,15 +18,4 @@
   padding-left: 4px;
   font-size: 18px;
   font-weight: bold;
-}
-
-.link {
-  color: #000000;
-  margin-left: 20px;
-  font-size: 14px;
-}
-
-.link:hover {
-  color: #689f38;
-  cursor: pointer;
 }

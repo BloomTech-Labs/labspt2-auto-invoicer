@@ -96,7 +96,6 @@ const App = props => {
   return (
     <div className="App">
       <Navigation
-        // user={userState}
         handleSignIn={signInModal}
         handleSignOut={signOut}
         loggedIn={loggedIn}
@@ -135,8 +134,6 @@ const App = props => {
           render={props => (
             <EditInvoiceForm
               {...props}
-              // fetchInvoices={fetchInvoices}
-              // userID={useruserID}
             />
           )}
         />
