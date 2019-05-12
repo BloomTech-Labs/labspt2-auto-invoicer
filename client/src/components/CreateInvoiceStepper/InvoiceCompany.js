@@ -12,7 +12,7 @@ const InvoiceCompany = props => {
 
   const [dialogState, setDialogState] = useState(false);
 
-  const handleCompanySelect = e => {
+  const handleCompanySelect = async e => {
     if (e.target.value === 'new') {
       setDialogState(true);
       props.onCompanySelect({
@@ -29,20 +29,18 @@ const InvoiceCompany = props => {
     }
 
     if (e.target.value !== 'new') {
-      const [company] = context.user.companies.filter(
-        company => company._id === e.target.value
-      );
-      props.onCompanySelect({
-        _id: company._id,
-        name: company.name,
-        email: company.email,
-        phoneNumber: company.phoneNumber,
-        address1: company.address1,
-        address2: company.address2,
-        zipCode: company.zipCode,
-        city: company.city,
-        state: company.state
-      });
+      await context.getCompany(e.target.value);
+      // props.onCompanySelect({
+      //   _id: context.company._id,
+      //   name: context.company.name,
+      //   email: context.company.email,
+      //   phoneNumber: context.company.phoneNumber,
+      //   address1: context.company.address1,
+      //   address2: context.company.address2,
+      //   zipCode: context.company.zipCode,
+      //   city: context.company.city,
+      //   state: context.company.state
+      // });
     }
   };
 
@@ -51,8 +49,18 @@ const InvoiceCompany = props => {
   };
 
   useEffect(() => {
-    console.log('[props.company in InvoiceCompany]: ', props.company);
-  }, [props.company]);
+    props.onCompanySelect({
+      _id: context.company._id,
+      name: context.company.name,
+      email: context.company.email,
+      phoneNumber: context.company.phoneNumber,
+      address1: context.company.address1,
+      address2: context.company.address2,
+      zipCode: context.company.zipCode,
+      city: context.company.city,
+      state: context.company.state
+    });
+  }, [context.company]);
 
   // const { classes } = props;
 
