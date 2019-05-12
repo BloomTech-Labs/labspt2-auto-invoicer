@@ -1,16 +1,14 @@
 import React, { Component, Fragment } from "react";
-import { CompanyConsumer } from "../../contexts/CompanyContext";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import  {withStyles} from "@material-ui/core/styles";
 import {
-  Fab,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Tooltip
 } from "@material-ui/core";
-import Edit from "@material-ui/icons/EditOutlined";
 import Form from "./Form";
+import styles from './styles';
 
 //import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -18,7 +16,7 @@ import Form from "./Form";
 // import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default class extends Component {
+class EditDialog extends Component {
   state = {
     open: false
   };
@@ -35,47 +33,43 @@ export default class extends Component {
     this.props.onCreate(exercise);
   };
 
-  toolTipSize = (component, placement, str) => {
-    const theme = createMuiTheme({
-      typography: {
-        fontSize: 25,
-        useNextVariants: true
-      }
-    });
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Tooltip placement={placement} title={str}>
-          {component}
-        </Tooltip>
-      </MuiThemeProvider>
-    );
-  };
-
   render() {
+    const { classes } = this.props;
     const { open } = this.state;
-    //{ invoice } = this.props;
-
     return (
-      <CompanyConsumer>
-        {({ companyState }) => {
-          return (
-            <Fragment>
-              <Fab onClick={this.handleToggle} mini="true">
-                {this.toolTipSize(<Edit />, "right", "New Edit")}
-              </Fab>
-              <Dialog open={open} onClose={this.handleToggle}>
-                <DialogTitle>Update Payment</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Please make updates to your invoice here
-                  </DialogContentText>
-                  <Form invoice={this.props.invoice} />
-                </DialogContent>
-              </Dialog>
-            </Fragment>
-          );
-        }}
-      </CompanyConsumer>
+      <Fragment>
+        <Tooltip
+          title="Edit Amount"
+          classes={{
+            tooltip: classes.tooltip
+          }}
+        >
+          <div
+            onClick={this.handleToggle}
+            className={classes.shortcutsCircle}
+          >
+            <i
+              className="material-icons"
+              style={{
+                color: "#4fc878",
+                fontSize: 36
+              }}
+            >
+              edit
+            </i>
+          </div>
+        </Tooltip>
+        <Dialog open={open} onClose={this.handleToggle}>
+          <DialogTitle>Update Payment</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please make updates to your invoice here
+            </DialogContentText>
+            <Form invoice={this.props.invoice} />
+          </DialogContent>
+        </Dialog>
+      </Fragment>
     );
   }
 }
+export default withStyles(styles)(EditDialog);

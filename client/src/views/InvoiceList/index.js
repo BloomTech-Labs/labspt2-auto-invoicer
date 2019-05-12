@@ -1,5 +1,5 @@
 // import packages
-import React, { Component } from "react";
+import React from "react";
 
 //import styles
 import "./InvoiceList.css";
@@ -7,13 +7,12 @@ import "./InvoiceList.css";
 //import components/CreateInvoiceButton";
 import Invoices from "../../components/Invoices";
 
-export default class index extends Component {
+const InvoiceList = props => {
 
-  render() {
     return (
       <section className="invoice-list-container">
-        <Invoices createPDF={this.props.click} />
+        <Invoices createPDF={props.click} />
       </section>
     );
-  }
 }
+export default InvoiceList;

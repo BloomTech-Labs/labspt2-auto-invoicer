@@ -12,5 +12,19 @@ export default React.createContext({
     premium: '',
     premiumExpiresOn: '',
     newAccount: ''
+  },
+  company: {
+    _id: '',
+    name:'',
+    email:'',
+    phoneNumber: '',
+    address1:'',
+    address2:'',
+    zipCode: '',
+    city: '',
+    state: '',
+    customers: [],
+    items: [],
+    invoices: [],
   }
 });

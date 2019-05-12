@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 //import styles
 //import "./InvoiceView.css";
 
@@ -6,13 +6,12 @@ import React, { Component } from "react";
 import SingleInvoiceView from "../../components/SingleInvoiceView";
 
 
-export default class index extends Component {
+const InvoiceView = props => {
   // No state held - views only render
-  render() {
     return (
       <div>
-        <SingleInvoiceView props={this.props}/>
+        <SingleInvoiceView props={props}/>
       </div>
     );
-  }
 }
+export default InvoiceView;

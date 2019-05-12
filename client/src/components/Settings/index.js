@@ -1,23 +1,35 @@
 import React from 'react'
-import { Grid } from '@material-ui/core';
+import { Grid, Grow } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import UserDetails from './UserDetails';
 import CompanyDetails from './CompanyDetails'
+import styles from './styles'
 
-export default function index() {
+const SettingsView = props => {
+  const { classes } = props;
   return (
-    <div>
-        <Grid container spacing={8} justify='space-around' wrap='wrap'>
-          <Grid item xs>
-            <UserDetails />
-          </Grid>
-          <Grid item xs>
-            <CompanyDetails />
-          </Grid>
-          <Grid item xs>
-          Add User to Company
-          </Grid>
-      </Grid>
-    </div>
+    <Grid 
+    container 
+    justify='space-around' 
+    wrap='wrap'
+    className={classes.settingsContainer}>
+      <Grow in={true} timeout={1000}>
+        <Grid 
+          item
+          className={classes.cardContainer} >
+          <UserDetails />
+        </Grid>
+      </Grow>
+      <Grow in={true} timeout={2000}>
+        <Grid 
+          item
+          className={classes.cardContainer} >
+          <CompanyDetails />
+        </Grid>
+      </Grow>
+    </Grid>
   )
 }
+
+export default withStyles(styles)(SettingsView);

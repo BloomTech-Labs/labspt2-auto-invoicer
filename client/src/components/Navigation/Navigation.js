@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 
+import UserContext from '../../context/UserContext'
 import MyAutoInvoicerIcon from '../../assets/myai.png';
 
 import './Navigation.css';
 
+
 const Navigation = props => {
+  const context = useContext(UserContext)
   return (
     <div className="nav-container">
       <div className="nav">
         <div className="nav-left">
           {props.loggedIn ? (
-            <Link to={`/user/${props.user.userID}/dashboard`}>
+            <Link to={`/user/${context.user._id}/dashboard`}>
               <img alt="" src={MyAutoInvoicerIcon} width="32" height="32" />
               <span className="company-name">myAutoInvoicer</span>
             </Link>
@@ -24,16 +27,16 @@ const Navigation = props => {
         </div>
         {props.loggedIn ? (
           <div className="nav-right">
-            <Link to={`/user/${props.user.userID}/dashboard`}>
+            <Link to={`/user/${context.user._id}/dashboard`}>
               <span className="link">Dashboard</span>
             </Link>
-            <Link to={`/user/${props.user.userID}/invoices`}>
+            <Link to={`/user/${context.user._id}/invoices`}>
               <span className="link">Invoices</span>
             </Link>
-            <Link to={`/user/${props.user.userID}/billing`}>
+            <Link to={`/user/${context.user._id}/billing`}>
               <span className="link">Billing</span>
             </Link>
-            <Link to={`/user/${props.user.userID}/settings`}>
+            <Link to={`/user/${context.user._id}/settings`}>
               <span className="link">Settings</span>
             </Link>
             <span className="link" onClick={props.handleSignOut}>
