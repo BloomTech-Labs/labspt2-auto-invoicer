@@ -12,6 +12,10 @@ const InvoiceItems = props => {
 
   const [dialogState, setDialogState] = useState(false);
 
+  const handleClose = () => {
+    setDialogState(false);
+  };
+
   const handleSelectItem = e => {
     if (e.target.value === 'new') {
       setDialogState(true);
@@ -35,11 +39,16 @@ const InvoiceItems = props => {
     }
   };
 
-  const handleClose = () => {
-    setDialogState(false);
+  const handleSubtotal = () => {
+    const subtotal = props.items.reduce(
+      (total, item) => (total += Number(item.amount)),
+      0
+    );
+    props.handleSubtotal(subtotal);
   };
 
   useEffect(() => {
+    handleSubtotal();
     console.log('[props.items in InvoiceItems]: ', props.items);
   }, [props.items]);
 
@@ -47,18 +56,11 @@ const InvoiceItems = props => {
     <React.Fragment>
       <Grid item xs={12} sm={12}>
         <TextField
-          name="itemId" // event.target.name
           id="item"
           select
           label="Item"
-          // className={classes.textField}
-          value={'test'}
+          value=""
           onChange={handleSelectItem}
-          // SelectProps={{
-          //   MenuProps: {
-          //     className: classes.menu
-          //   }
-          // }}
           helperText="Select an item"
           margin="normal"
         >

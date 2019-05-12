@@ -144,7 +144,21 @@ Form validation is handled at the component level with Material-UI.
 
 ## Testing
 
-TBD
+### Dependencies
+
+Install the following dependencies for testing:
+
+`"enzyme": "^3.9.0"`
+`"enzyme-adapter-react-16": "^1.12.1"`
+`"jest": "^24.8.0"`
+
+### Level 1 Testing (Basic)
+
+Starting off with the App component, basic tests are designed to show that sub-components exist (i.e., Landing Page, Navigation, SignInModal, Dashboard, InvoiceList, Billing Page, Settings Page, CreateInvoiceSteppers etc. )
+
+Next, tests are designed for _each_ sub-component (i.e., Landing Page, Dashboard, Invoice List etc). At this level, we test for components to render.
+
+In some cases, tests have been written for small, isolated components (i.e., SignInModal). Similarly, we test to ensure that certain things are rendering (GoogleLogo, FacebookLogo etc.). For StripeElements, we test to ensure necessary components exists (StripeCheckoutForm and Typography elements).
 
 ## Improving Performance
 

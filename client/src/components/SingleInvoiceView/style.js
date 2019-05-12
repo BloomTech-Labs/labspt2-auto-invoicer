@@ -1,8 +1,10 @@
-import { fade } from "@material-ui/core/styles/colorManipulator";
+
 export default theme => ({
   paper: {
-    // margin: "20px",
-    width: "80%",
+    width: "95%",
+    [theme.breakpoints.up("sm")]: {
+      width: "80%",
+    },
     margin: "20px auto",
     border: "1px solid #eff7f2"
   },

@@ -1,8 +1,14 @@
 import { fade } from "@material-ui/core/styles/colorManipulator";
 export default theme => ({
   root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3
+    width: "95%",
+    margin: "20px auto",
+    marginTop: theme.spacing.unit * 3,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      margin: "0px",
+      marginTop: theme.spacing.unit * 3
+    }
   },
   rootbar: {
     width: "100%"
@@ -43,11 +49,20 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
+    marginRight: "7px",
     [theme.breakpoints.up("sm")]: {
       display: "block",
+      fontSize: 35,
+    },
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+      fontSize: 40,
+      marginLeft: 8
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: 15,
       fontSize: 45,
-      marginLeft:16,
     }
   },
   search: {
@@ -57,16 +72,25 @@ export default theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.black, 0.25)
     },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 20,
     width: "auto",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: 200,
-      width: "40%"
+      marginLeft: "10px"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "30%",
+      marginLeft: "10px"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "40%",
+      marginLeft: "60px"
     }
   },
   button: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {
+      marginRight: 60
+    },
+    [theme.breakpoints.up("lg")]: {
       marginRight: 72
     }
   },
@@ -87,13 +111,18 @@ export default theme => ({
     fontSize: 16
   },
   searchIcon: {
-    paddingLeft: 5,
+    paddingLeft: 8,
+    paddingRight: 2,
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: 0,
+      paddingRight: 0
+    }
   },
   inputRoot: {
     color: "black",
@@ -105,16 +134,43 @@ export default theme => ({
     paddingBottom: 5,
     paddingLeft: 30,
     transition: theme.transitions.create("width"),
-    width: 60,
+    width: 0.5,
     "&:focus": {
-      width: 165
+      width: 110
     },
     [theme.breakpoints.up("sm")]: {
+    width: 100,
+    "&:focus": {
+      width: 200,
+    }
+    },
+    [theme.breakpoints.up("md")]: {
       width: 300,
       paddingTop: theme.spacing.unit,
       paddingRight: theme.spacing.unit,
       paddingBottom: theme.spacing.unit,
       paddingLeft: theme.spacing.unit * 10
+    }
+  },
+  textField: {
+    marginRight: "8px",
+    width: 72,
+    [theme.breakpoints.up("sm")]: {
+      width: 100,
+      margin:"15px"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 200,
+      marginRight: "55px"
+    }
+  },
+  menu: {
+    width: 72,
+    [theme.breakpoints.up("sm")]: {
+      width: 100
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 200
     }
   }
 });

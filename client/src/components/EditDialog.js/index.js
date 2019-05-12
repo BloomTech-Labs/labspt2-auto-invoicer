@@ -35,13 +35,11 @@ class EditDialog extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(classes);
     const { open } = this.state;
     return (
       <Fragment>
         <Tooltip
           title="Edit Amount"
-          placement="right"
           classes={{
             tooltip: classes.tooltip
           }}
