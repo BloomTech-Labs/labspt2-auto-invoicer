@@ -30,17 +30,17 @@ const InvoiceCompany = props => {
 
     if (e.target.value !== 'new') {
       await context.getCompany(e.target.value);
-      props.onCompanySelect({
-        _id: context.company._id,
-        name: context.company.name,
-        email: context.company.email,
-        phoneNumber: context.company.phoneNumber,
-        address1: context.company.address1,
-        address2: context.company.address2,
-        zipCode: context.company.zipCode,
-        city: context.company.city,
-        state: context.company.state
-      });
+      // props.onCompanySelect({
+      //   _id: context.company._id,
+      //   name: context.company.name,
+      //   email: context.company.email,
+      //   phoneNumber: context.company.phoneNumber,
+      //   address1: context.company.address1,
+      //   address2: context.company.address2,
+      //   zipCode: context.company.zipCode,
+      //   city: context.company.city,
+      //   state: context.company.state
+      // });
     }
   };
 
@@ -49,8 +49,18 @@ const InvoiceCompany = props => {
   };
 
   useEffect(() => {
-    console.log('[props.company in InvoiceCompany]: ', props.company);
-  }, [props.company]);
+    props.onCompanySelect({
+      _id: context.company._id,
+      name: context.company.name,
+      email: context.company.email,
+      phoneNumber: context.company.phoneNumber,
+      address1: context.company.address1,
+      address2: context.company.address2,
+      zipCode: context.company.zipCode,
+      city: context.company.city,
+      state: context.company.state
+    });
+  }, [context.company]);
 
   // const { classes } = props;
 
