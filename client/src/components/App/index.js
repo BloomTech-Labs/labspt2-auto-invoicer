@@ -108,7 +108,6 @@ const App = props => {
     return (
       <div className="App">
         <Navigation
-          // user={userState}
           handleSignIn={signInModal}
           handleSignOut={signOut}
           loggedIn={loggedIn}
