@@ -10,10 +10,10 @@ import Typography from "@material-ui/core/Typography";
 
 import UserContext from "../../context/UserContext";
 
-import InvoiceCompany from "./InvoiceCompany";
-import InvoiceCustomer from "./InvoiceCustomer";
+import InvoiceCompany from './InvoiceCompany';
+import InvoiceCustomer from './InvoiceCustomer';
+import InvoiceItems from './InvoiceItems';
 
-// import components for Dates & General
 import { Grid } from "@material-ui/core";
 import DateSelecter from "../DateSelecter";
 import SingleLineInput from "../SingleLineInput";
@@ -26,9 +26,9 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 600,
-      marginLeft: "auto",
-      marginRight: "auto"
+      width: 960,
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
   paper: {
@@ -100,6 +100,14 @@ const CreateInvoiceStepper = props => {
 
   const [stepState, setStepState] = useState(0);
 
+  const handleBack = () => {
+    setStepState(prevStep => prevStep - 1);
+  };
+
+  const handleNext = () => {
+    setStepState(prevStep => prevStep + 1);
+  };
+
   const handleCompanySelect = company => {
     setInvoiceState({ ...invoiceState, company });
   };
@@ -108,6 +116,10 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, customer });
   };
 
+  const handleItemSelect = items => {
+    setInvoiceState({ ...invoiceState, items });
+  };
+  
   const handleDateSelect = date => {
     setInvoiceState({ ...invoiceState, date });
   };
@@ -120,12 +132,8 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, [name]: e.target.value });
   };
 
-  const handleNext = () => {
-    setStepState(prevStep => prevStep + 1);
-  };
-
-  const handleBack = () => {
-    setStepState(prevStep => prevStep - 1);
+  const handleSubtotal = subtotal => {
+    setInvoiceState({ ...invoiceState, subtotal });
   };
 
   const steps = [
@@ -171,9 +179,12 @@ const CreateInvoiceStepper = props => {
         );
       case 3:
         return (
-          <React.Fragment>
-            <div>Invoice Items</div>
-          </React.Fragment>
+          <InvoiceItems
+            items={invoiceState.items}
+            subtotal={invoiceState.subtotal}
+            onItemSelect={handleItemSelect}
+            handleSubtotal={handleSubtotal}
+          />
         );
       case 4:
         return (
