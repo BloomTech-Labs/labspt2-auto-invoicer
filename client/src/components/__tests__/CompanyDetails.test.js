@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+
 import { shallow, mount } from "enzyme";
 
 import SelectCompany from "../Settings/CompanyDetails/SelectCompany";
