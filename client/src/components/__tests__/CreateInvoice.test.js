@@ -5,7 +5,7 @@ import { shallow } from "enzyme";
 import { UserConsumer } from "../../contexts/UserContext";
 import CreateInvoiceForm2 from "../CreateInvoiceForm2";
 
-// NOTE: Will switch over to Invoice-Steppers when ready
+// NOTE: Will switch over to Invoice-Steppers when ready again
 
 test("contains CreateInvoiceForm2", () => {
   const TestComponent = () => (
