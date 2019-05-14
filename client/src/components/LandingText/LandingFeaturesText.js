@@ -1,49 +1,49 @@
-import React from "react";
+import React from 'react';
 
-import { ReactComponent as InvoicesSVG } from "../../assets/undraw_printing_invoices_5r4r.svg";
-import { ReactComponent as ChartsSVG } from "../../assets/undraw_finance_0bdk.svg";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+import { ReactComponent as InvoicesSVG } from '../../assets/undraw_printing_invoices_5r4r.svg';
+import { ReactComponent as ChartsSVG } from '../../assets/undraw_finance_0bdk.svg';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   container: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    background: "#ffffff"
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    background: '#ffffff'
   },
   features: {
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: "1.6rem",
+    display: 'flex',
+    flexWrap: 'wrap',
+    fontSize: '1.6rem',
     maxWidth: 960,
-    padding: "100px 0",
-    width: "100%"
+    padding: '100px 0',
+    width: '100%'
   },
   top: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    width: "100%"
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    width: '100%'
   },
   topText: {
     maxWidth: 360,
-    padding: "8px",
-    width: "100%"
+    padding: '8px',
+    width: '100%'
   },
   bottom: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     marginTop: 40,
-    width: "100%"
+    width: '100%'
   },
   bottomText: {
     maxWidth: 460,
-    padding: "8px",
-    width: "100%"
+    padding: '8px',
+    width: '100%'
   }
 };
 

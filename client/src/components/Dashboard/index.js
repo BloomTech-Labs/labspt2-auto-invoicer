@@ -29,7 +29,7 @@ const Dashboard = props => {
   let collected = 0;
   let late = 0;
   let unpaid = 0;
-  console.log('I ran',company.invoices)
+  console.log('I ran', company.invoices);
   company.invoices.map(invoice => {
     collected += parseFloat(invoice.total) - parseFloat(invoice.balance);
     if (moment(invoice.date).isBefore(new Date())) {
@@ -65,7 +65,7 @@ const Dashboard = props => {
                         <div className={classes.invoicesCircle}>
                           <i
                             className="material-icons"
-                            style={{ color: '#0d47a1' }}
+                            style={{ color: '#ffffff' }}
                           >
                             file_copy
                           </i>
@@ -86,7 +86,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#4fc878',
+                            color: '#8bc34a',
                             marginRight: 12
                           }}
                         >
@@ -109,7 +109,7 @@ const Dashboard = props => {
                         <div className={classes.usersCircle}>
                           <i
                             className="material-icons"
-                            style={{ color: '#e65100' }}
+                            style={{ color: '#ffffff' }}
                           >
                             supervisor_account
                           </i>
@@ -128,7 +128,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#ff5722',
+                            color: '#FF0000',
                             marginRight: 12
                           }}
                         >
@@ -151,7 +151,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#4fc878',
+                            color: 'rgba(255,255,255,0.9)',
                             fontSize: 36
                           }}
                         >
@@ -167,7 +167,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#4fc878',
+                            color: 'rgba(255,255,255,0.9)',
                             fontSize: 36
                           }}
                         >
@@ -183,7 +183,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#4fc878',
+                            color: 'rgba(255,255,255,0.9)',
                             fontSize: 36
                           }}
                         >
@@ -199,7 +199,7 @@ const Dashboard = props => {
                         <i
                           className="material-icons"
                           style={{
-                            color: '#4fc878',
+                            color: 'rgba(255,255,255,0.9)',
                             fontSize: 36
                           }}
                         >
@@ -213,10 +213,7 @@ const Dashboard = props => {
             </Grid>
             <Grid container spacing={24} justify="center">
               <Grid item xs={12} md={8}>
-                <InvoicedCard
-                  invoices={company.invoices}
-                  checked={checked}
-                />
+                <InvoicedCard invoices={company.invoices} checked={checked} />
               </Grid>
               <Grid item xs={12} md={4}>
                 <StatisticsCard

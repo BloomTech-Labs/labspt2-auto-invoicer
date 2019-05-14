@@ -142,7 +142,7 @@ const InvoicedChart = props => {
           <Line
             type="monotone"
             dataKey="invoiced"
-            stroke="#8884d8"
+            stroke="#6EB700"
             label={<CustomizedLabel />}
           />
         </LineChart>

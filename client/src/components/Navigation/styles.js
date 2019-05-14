@@ -10,9 +10,9 @@ export default theme => ({
     width: `100%`,
     alignItems: `center`
   },
-  
+
   accountBarContainer: {
-    backgroundColor: `white`,
+    backgroundColor: `#8bc34a`,
     width: `100%`,
     padding: `0 2.5%`,
     display: `flex`,
@@ -20,7 +20,7 @@ export default theme => ({
   },
 
   navLinksContainer: {
-    backgroundColor: `#8bc34a`,
+    backgroundColor: `#2d2f31`,
     width: `100%`,
     padding: `0 2.5%`,
     display: `flex`,
@@ -28,16 +28,15 @@ export default theme => ({
     alignItems: `stretch`
   },
 
-
-  icon: {
-    
-  },
+  icon: {},
 
   accountMenu: {
-    display: `flex`
+    display: `flex`,
+    color: `#ffffff`
   },
 
   selectCompany: {
+    color: `#ffffff`,
     margin: `0 20px`
   }
-})
+});
