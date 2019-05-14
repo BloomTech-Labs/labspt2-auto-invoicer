@@ -53,7 +53,7 @@ export default theme => ({
     width: 50,
     height: 50,
     borderRadius: '50%',
-    backgroundColor: '#b2ebf2',
+    backgroundColor: '#2d2f31',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -63,7 +63,7 @@ export default theme => ({
     width: 50,
     height: 50,
     borderRadius: '50%',
-    backgroundColor: '#ffee58',
+    backgroundColor: '#2d2f31',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -92,13 +92,13 @@ export default theme => ({
   percentagePos: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#4fc878',
+    color: '#8bc34a',
     marginTop: 5
   },
   percentageNeg: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#ff5722',
+    color: '#FF0000',
     marginTop: 5
   },
   shortcuts: {
@@ -111,7 +111,7 @@ export default theme => ({
     width: 72,
     height: 72,
     borderRadius: '50%',
-    backgroundColor: '#eff7f2',
+    backgroundColor: '#8bc34a',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

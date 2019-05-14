@@ -1,21 +1,20 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   container: {
     paddingTop: 20,
     paddingBottom: 20,
-    width: "100%",
-    background: "#a8e4bc"
+    width: '100%',
+    background: '#f2f2f2'
   },
   root: {
-    width: "100%",
+    width: '100%',
     maxWidth: 700,
-    display: "flex",
-    flexDirection: "column",
-    margin: "0 auto",
-    background: "#a8e4bc"
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0 auto'
   }
 };
 
