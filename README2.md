@@ -152,13 +152,25 @@ Install the following dependencies for testing:
 `"enzyme-adapter-react-16": "^1.12.1"`
 `"jest": "^24.8.0"`
 
-### Level 1 Testing (Basic)
+### Testing (Shallow Render)
 
 Starting off with the App component, basic tests are designed to show that sub-components exist (i.e., Landing Page, Navigation, SignInModal, Dashboard, InvoiceList, Billing Page, Settings Page, CreateInvoiceSteppers etc. )
 
 Next, tests are designed for _each_ sub-component (i.e., Landing Page, Dashboard, Invoice List etc). At this level, we test for components to render.
 
 In some cases, tests have been written for small, isolated components (i.e., SignInModal). Similarly, we test to ensure that certain things are rendering (GoogleLogo, FacebookLogo etc.). For StripeElements, we test to ensure necessary components exists (StripeCheckoutForm and Typography elements).
+
+### Testing (React Context - Shallow Render with Enzyme and Dive)
+
+Here the idea is to create a TestComponent function. The function returns a callback with the component that is being tested wrapped around Context.Provider.
+
+The .dive() method is then used to _deeply_ render a part of an otherwise shallow rendered component.
+
+Components that require the `UserConsumer`, `CompanyConsumer` and `GlobalState` context are tested (i.e., CompanyDetails component, CreateInvoiceForm2\*, main App component).
+
+\*This needs to be changed to CreateInvoiceStepper
+
+In addition, the `MuiThemeProvider` from material-ui is also tested for the App component.
 
 ## Improving Performance
 
