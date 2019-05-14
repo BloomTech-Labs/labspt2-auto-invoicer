@@ -144,6 +144,12 @@ Form validation is handled at the component level with Material-UI.
 
 ## Testing
 
+Testing for myAutoInvoicer uses jest and enzyme. For the most part, components are Shallow rendered, rendering just the given components and none of its children.
+
+In some cases, Full DOM render of the component and all its children for modification is taken.
+
+For React components that is dependent on Context API, there are some specific tests.
+
 ### Dependencies
 
 Install the following dependencies for testing:
