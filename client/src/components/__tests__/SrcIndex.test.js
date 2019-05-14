@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 
 import { GlobalState } from "../../context/GlobalState";
 import { CompanyConsumer } from "../../contexts/CompanyContext";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 import App from "../App/index";
 
@@ -29,6 +30,21 @@ test("contains App in CompanyConsumer context", () => {
     <CompanyConsumer value="Provided Value">
       <App />
     </CompanyConsumer>
+  );
+  const element = shallow(<TestComponent />);
+  expect(
+    element
+      .find(App)
+      .dive()
+      .text()
+  ).toBe("<Route />");
+});
+
+test("contains App in MuiThemeProvider", () => {
+  const TestComponent = () => (
+    <MuiThemeProvider theme="theme">
+      <App />
+    </MuiThemeProvider>
   );
   const element = shallow(<TestComponent />);
   expect(
