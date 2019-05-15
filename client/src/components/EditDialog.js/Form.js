@@ -48,7 +48,7 @@ const Form = props => {
         variant="contained"
         style={{ background: "#4fc878", width: 100 }}
       >
-        Edit
+        Submit
       </Button>
 
       <Button

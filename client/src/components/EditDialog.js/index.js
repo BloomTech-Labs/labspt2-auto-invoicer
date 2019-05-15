@@ -21,7 +21,7 @@ const EditDialog = props => {
   return (
     <Fragment>
       <Tooltip
-        title="Edit Amount"
+        title="Add Payment"
         classes={{
           tooltip: classes.tooltip
         }}
@@ -42,10 +42,10 @@ const EditDialog = props => {
         </div>
       </Tooltip>
       <Dialog open={open} onClose={handleToggle}>
-        <DialogTitle>Update Payment</DialogTitle>
+        <DialogTitle>Add Payment</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please make updates to your invoice here
+            Please add payment to your invoice here
           </DialogContentText>
           <Form 
             invoice={invoice}
