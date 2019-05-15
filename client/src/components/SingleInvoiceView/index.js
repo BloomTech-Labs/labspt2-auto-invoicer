@@ -41,6 +41,10 @@ const SingleInvoiceView = props => {
     ];
     return items.length > 1 ? items : emptyItems;
   };
+  const mobileItemChecker = items => {
+    let emptyItems = [{ name: "", quantity: "", amount: "" }];
+    return items.length > 1 ? items : emptyItems;
+  };
   const itemsLengthChecker = items => {
     return items ? items.length : 0;
   };
@@ -318,22 +322,22 @@ const SingleInvoiceView = props => {
           ) : (
             <div>
               <table className="btmTable">
-              <tbody>
-                <tr className="btmTopRow">
-                  <td className="entryName1">Name</td>
-                  <td className="entryName1">Quantity</td>
-                  <td className="entryName1">Total</td>
-                </tr>
-                {itemChecker(invoice.items).map(item => {
-                  const { name, quantity, amount } = item;
-                  return (    
-                    <tr key={item._id}>
-                      <td className="items">{name}</td>
-                      <td className="items">{quantity}</td>
-                      <td className="items">{amount}</td>
-                    </tr>
-                  );
-                })}
+                <tbody>
+                  <tr className="btmTopRow">
+                    <td className="entryName1">Name</td>
+                    <td className="entryName1">Quantity</td>
+                    <td className="entryName1">Total</td>
+                  </tr>
+                  {mobileItemChecker(invoice.items).map(item => {
+                    const { name, quantity, amount } = item;
+                    return (
+                      <tr key={item._id}>
+                        <td className="items">{name}</td>
+                        <td className="items">{quantity}</td>
+                        <td className="items">{amount}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
