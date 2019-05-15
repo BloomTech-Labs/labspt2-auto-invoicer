@@ -117,7 +117,7 @@ const Invoices = props => {
 
   const paidFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return singleInvoice.balance === 0;
+      return Number(singleInvoice.balance) === 0;
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -129,7 +129,7 @@ const Invoices = props => {
   };
   const lateFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate));
+      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) && Number(singleInvoice.balance) > 0 ;
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -142,8 +142,9 @@ const Invoices = props => {
   const dueFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
       return (
-        lateChecker(Date()) <= lateChecker(String(singleInvoice.dueDate)) &&
-        singleInvoice.balance > 0
+        lateChecker(Date()) <=
+          lateChecker(String(singleInvoice.dueDate)) &&
+        Number(singleInvoice.balance) > 0
       );
     });
     if (search) {
@@ -155,6 +156,7 @@ const Invoices = props => {
     }
   };
   const invoiceFilterSearch = passedInvoices => {
+    console.log(passedInvoices)
     let initInvoices = passedInvoices.filter(singleInvoice => {
       return singleInvoice.hidden === false;
     });
