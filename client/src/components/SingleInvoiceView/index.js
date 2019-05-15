@@ -318,21 +318,23 @@ const SingleInvoiceView = props => {
           ) : (
             <div>
               <table className="btmTable">
+              <tbody>
                 <tr className="btmTopRow">
                   <td className="entryName1">Name</td>
                   <td className="entryName1">Quantity</td>
                   <td className="entryName1">Total</td>
                 </tr>
-                {itemChecker(invoice.items).map(row => {
-                  const { name, quantity, amount } = row;
-                  return (
-                    <tr>
+                {itemChecker(invoice.items).map(item => {
+                  const { name, quantity, amount } = item;
+                  return (    
+                    <tr key={item._id}>
                       <td className="items">{name}</td>
                       <td className="items">{quantity}</td>
                       <td className="items">{amount}</td>
                     </tr>
                   );
                 })}
+                </tbody>
               </table>
             </div>
           )}
