@@ -13,13 +13,13 @@ const NavNavLinksBar = props => {
   const { classes } = props
   return (
     <ToolBar className={classes.navLinksContainer}>
-      <NavLink className="nav_link" to={`/user/${context.user._id}/dashboard`}>
+      <NavLink className={classes.navLink} to={`/user/${context.user._id}/dashboard`}>
         <span>Dashboard</span>
       </NavLink>
-      <NavLink className="nav_link" to={`/user/${context.user._id}/invoices`}>
+      <NavLink className={classes.navLink} to={`/user/${context.user._id}/invoices`}>
       <span>Invoices</span>
       </NavLink>
-      <NavLink className="nav_link" to={`/user/${context.user._id}/billing`}>
+      <NavLink className={classes.navLink} to={`/user/${context.user._id}/billing`}>
       <span>Billing</span>
       </NavLink>
     </ToolBar>
