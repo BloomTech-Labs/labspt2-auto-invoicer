@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Edit from '../EditIcon'
 
-export default function ViewCompanyDetails(props) {
-  const {name, email, address_1, address_2, phone_num, city, state, postal_code} = props.company
+import style from '../styles'
+
+import { withStyles } from '@material-ui/core/styles';
+import UserContext from '../../../context/UserContext'
+
+const ViewCompanyDetails = props => {
+  const context = useContext(UserContext)
+  const {name, email, address1, address2, phoneNumber, city, state, zipCode} = context.company
   return (
     <div className='cardDetails'>
       <div className='card-header'>
@@ -22,15 +28,15 @@ export default function ViewCompanyDetails(props) {
         </div>
         <div className='info'>
           <h2>Phone Number: </h2>
-          <p>{phone_num}</p>
+          <p>{phoneNumber}</p>
         </div>
         <div className='info'>
           <h2>Address_1: </h2>
-          <p>{address_1}</p>
+          <p>{address1}</p>
         </div>
         <div className='info'>
           <h2>Address_2: </h2>
-          <p>{address_2}</p>
+          <p>{address2}</p>
         </div>
         <div className='info'>
           <h2>City: </h2>
@@ -42,9 +48,11 @@ export default function ViewCompanyDetails(props) {
         </div>
         <div className='info'>
           <h2>Postal Code: </h2>
-          <p>{postal_code}</p>
+          <p>{zipCode}</p>
         </div>
       </div>
     </div>
   )
 }
+
+export default withStyles(style)(ViewCompanyDetails)
