@@ -22,7 +22,7 @@ const SelectCompany = props => {
       className={classes.selectCompany}
       onChange={handleSelectCompany}
       value={company}
-      renderValue={value => `Company: ${value.name}`}
+      renderValue={value => `${value.name}`}
     >
       {user.companies.map(company => {
         return (

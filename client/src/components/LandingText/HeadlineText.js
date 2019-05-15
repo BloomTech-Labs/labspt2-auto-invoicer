@@ -2,24 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = {
-  container: {
-    paddingTop: 100,
-    paddingBottom: 50,
-    width: '100%',
-    background: '#2d2f31'
-  },
-  root: {
-    width: '100%',
-    maxWidth: 700,
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '0 auto'
-  },
-  subtext: {
-    color: '#8bc34a'
-  }
-};
+import style from './styles'
 
 const HeadlineText = props => {
   const { classes } = props;
@@ -28,12 +11,7 @@ const HeadlineText = props => {
       <div className={classes.root}>
         <Typography
           variant="h1"
-          style={{
-            fontFamily: 'roboto',
-            fontSize: 95,
-            fontWeight: 500,
-            color: 'white'
-          }}
+          className={classes.headlineText}
         >
           Invoicing Solved
         </Typography>
@@ -46,4 +24,4 @@ const HeadlineText = props => {
   );
 };
 
-export default withStyles(styles)(HeadlineText);
+export default withStyles(style)(HeadlineText);
