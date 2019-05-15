@@ -72,7 +72,7 @@ export default theme => ({
   },
 
   link: {
-    padding: `15px`,
+    padding: `10px 15px`,
     borderRadius: `10%`,
 
     '&:hover': {
