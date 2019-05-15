@@ -92,6 +92,10 @@ export default theme => ({
     '&:hover': {
       borderBottom: `solid #8bc34a 5px`,
     },
+
+    [theme.breakpoints.down('sm')]: {
+      width: `20%`
+    }
   },
 
   active: { 
