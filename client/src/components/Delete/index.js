@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import {
   Dialog,
@@ -11,14 +11,20 @@ import {
 import styles from "./styles";
 import "./Delete.css";
 
-const Delete = props => {
-  const [open, setOpen] = useState(false);
+import UserContext from '../../context/UserContext'
 
+const Delete = props => {
+  const {invoice} = props;
+  const {hideInvoice} = useContext(UserContext)
+  const [open, setOpen] = useState(false);
+  
   const handleToggle = () => {
     setOpen(!open);
   };
 
-  const hiddenToggle = () => {};
+  const hiddenToggle = () => {
+    hideInvoice(invoice._id, {hidden: true})
+  };
 
   const { classes } = props;
 
@@ -50,9 +56,9 @@ const Delete = props => {
           <DialogContentText className={classes.dialogText}>
             Are you sure you wish to delete ?
             <br />
-            <div className="buttons">
+            <span className="buttons">
               <Button
-                // onClick={hiddenToggle}
+                onClick={hiddenToggle}
                 className={classes.buttons}
                 variant="contained"
                 style={{
@@ -69,7 +75,7 @@ const Delete = props => {
               >
                 Cancel
               </Button>
-            </div>
+            </span>
           </DialogContentText>
         </DialogContent>
       </Dialog>
