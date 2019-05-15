@@ -16,7 +16,7 @@ export default theme => ({
     minWidth: 1000,
     [theme.breakpoints.up("sm")]: {
       width: "100%",
-      minWidth: 0
+      minWidth: 0,
     }
   },
   tablecell: {
@@ -35,14 +35,14 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     [theme.breakpoints.up("sm")]: {
       display: "block",
       fontSize: 40
     }
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 35,
     [theme.breakpoints.up("sm")]: {
       display: "block",
       fontSize: 50
