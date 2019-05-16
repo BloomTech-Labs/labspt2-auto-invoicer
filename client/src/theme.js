@@ -13,6 +13,10 @@ export default createMuiTheme({
     }
   },
   typography: {
-    htmlFontSize: 10
-  }
+    htmlFontSize: 10,
+    
+    h1: {
+      htmlFontSize: 40
+    },
+  },
 });
