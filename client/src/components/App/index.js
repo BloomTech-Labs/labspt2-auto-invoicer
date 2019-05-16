@@ -94,8 +94,10 @@ const App = props => {
       });
   };
 
+  const appPadding = loggedIn ? `128px` : `64px`
+
   return (
-    <div className="App">
+    <div className="App" style={{marginTop: appPadding}}>
       <Navigation
         handleSignIn={signInModal}
         handleSignOut={signOut}

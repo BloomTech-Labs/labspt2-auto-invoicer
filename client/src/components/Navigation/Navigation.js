@@ -14,8 +14,11 @@ import style from './styles'
 const Navigation = props => {
   const context = useContext(UserContext)
   const { classes } = props;
+
+  const appBarSize = props.loggedIn ? `128px` : `64px`;
+
   return (
-  <AppBar className={classes.mainNavContainer}>
+  <AppBar className={classes.mainNavContainer} style={{height: appBarSize}}>
     <AccountBar 
       loggedIn={props.loggedIn}
       handleSignIn={props.handleSignIn}

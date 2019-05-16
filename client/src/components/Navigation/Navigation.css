@@ -1,22 +1,4 @@
-header .nav_link {
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10%;
-}
 
 header .active {
   border-bottom: solid #8bc34a 5px;
-}
-
-header .nav_link:hover {
-  border-bottom: solid #8bc34a 5px;
-}
-
-.company-name {
-  color: #2d2f31;
-  padding-left: 4px;
-  font-size: 18px;
-  font-weight: bold;
 }

@@ -121,13 +121,8 @@ const GlobalState = props => {
   const addPayment = async (invoiceId, editedData) => {
     const {balance, amountPaid} = editedData;
     const newBalance = Number(balance) - Number(amountPaid)
-
-    if (newBalance <= 0) {
-      editedData = {balance: newBalance.toFixed(2), hidden: true}
-    } else {
-      editedData = {balance: newBalance.toFixed(2)}
-    }
-
+    editedData = {balance: newBalance.toFixed(2)}
+    
     const invoice = await toUpdateInvoice(invoiceId, editedData);
     dispatch({
       type: GET_UPDATED_INVOICE,
