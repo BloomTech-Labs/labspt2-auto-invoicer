@@ -1,25 +1,21 @@
 const User = require('../../models/user');
 const Company = require('../../models/company');
-// const isAuth = require('../../middleware/isAuth');
 
 const { findAllDocuments, findDocumentById } = require('../helpers/index');
 
 const { formatData } = require('../helpers/format');
 
 module.exports = {
-  user: ({ userID }) => {
-    return findDocumentById(userID, User);
+  user: ({ userId }) => {
+    return findDocumentById(userId, User);
   },
   users: () => {
-    // if (!req.isAuth) {
-    //   throw new Error('not logged in')
-    // }
     return findAllDocuments(User);
   },
   createUser: async args => {
     formatData(args.userInput);
     try {
-      const { name, email, phone_num } = args.userInput;
+      const { name, email, phoneNumber } = args.userInput;
       const userExists = await User.findOne({
         email
       });
@@ -29,7 +25,7 @@ module.exports = {
       const user = new User({
         name,
         email,
-        phone_num
+        phoneNumber
       });
       const newUser = await user.save();
       return {
@@ -39,9 +35,9 @@ module.exports = {
       throw err;
     }
   },
-  editUser: async ({ editUserInput, userID }, req) => {
+  editUser: async ({ editUserInput, userId }, req) => {
     try {
-      const userExist = await User.findById(userID);
+      const userExist = await User.findById(userId);
       if (!userExist) {
         throw new Error('user does not exist');
       }
@@ -52,7 +48,7 @@ module.exports = {
       });
       formatData(editUserInput);
       const updatedUser = await User.findByIdAndUpdate(
-        userID,
+        userId,
         {
           $set: {
             ...editUserInput
@@ -69,25 +65,12 @@ module.exports = {
       throw error;
     }
   },
-  addUserToCompany: async ({ userID, companyID }) => {
-    try {
-      const company = await Company.findById(companyID);
-      const user = await User.findById(userID);
-      if (!company) {
-        throw new Error('company does not exist');
-      }
-      if (!user) {
-        throw new Error('user does not exist');
-      }
-      company.users.push(userID);
-      user.companies.push(companyID);
-      const companyDetails = await company.save();
-      const userDetails = await user.save();
-      return {
-        ...userDetails._doc
-      };
-    } catch (error) {
-      throw error;
-    }
+  buyPremium: async ({ userId }) => {
+    const user = await User.findById(userId);
+    user.premium = true;
+    const date = new Date();
+    user.premiumExpiresOn = date.setDate(date.getDate() + 30);
+    const updatedUser = await user.save();
+    return updatedUser._doc;
   }
 };

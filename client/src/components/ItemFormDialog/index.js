@@ -1,1 +1,1 @@
-export * from './ItemFormDialog';
+export { default } from './ItemFormDialog';

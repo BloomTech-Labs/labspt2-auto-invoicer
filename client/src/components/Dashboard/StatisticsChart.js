@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
-const COLORS = ['#ff3d00', '#00e676', '#40c4ff'];
+const COLORS = ['#FF0000', '#00e676', '#40c4ff'];
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
@@ -76,56 +76,46 @@ const renderActiveShape = props => {
   );
 };
 
-export default class StatisticsChart extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeIndex: 0,
-      data: []
-    };
-  }
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
+const StatisticsChart = props => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [data, setData] = useState([]);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.collected !== this.props.collected) {
-      this.setState({
-        data: [
-          { name: 'Late', money: this.props.late },
-          { name: 'Collected', money: this.props.collected },
-          { name: 'Unpaid', money: this.props.unpaid }
-        ]
-      });
-    }
-  }
+  const { unpaid, late, collected } = props;
 
-  onPieEnter = (data, index) => {
-    this.setState({
-      activeIndex: index
-    });
+  useEffect(() => {
+    setData([
+      { name: 'Late', money: late },
+      { name: 'Collected', money: collected },
+      { name: 'Unpaid', money: unpaid }
+    ]);
+  }, [collected, unpaid, late]);
+
+  const onPieEnter = (data, index) => {
+    setActiveIndex(index);
   };
 
-  render() {
-    const { current } = this.props.cardRef;
-    const xPosition = current ? current.clientWidth / 2 : null;
-    return (
-      <PieChart width={xPosition * 2} height={240}>
-        <Pie
-          activeIndex={this.state.activeIndex}
-          activeShape={renderActiveShape}
-          data={this.state.data}
-          cx={xPosition}
-          cy={120}
-          innerRadius={45}
-          outerRadius={95}
-          fill="#8884d8"
-          dataKey="money"
-          onMouseEnter={this.onPieEnter}
-        >
-          {this.state.data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    );
-  }
-}
+  const { current } = props.cardRef;
+  const xPosition = current ? current.clientWidth / 2 : null;
+  return (
+    <PieChart width={xPosition * 2} height={240}>
+      <Pie
+        activeIndex={activeIndex}
+        activeShape={renderActiveShape}
+        data={data}
+        cx={xPosition}
+        cy={120}
+        innerRadius={35}
+        outerRadius={60}
+        fill="#8884d8"
+        dataKey="money"
+        onMouseEnter={onPieEnter}
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+    </PieChart>
+  );
+};
+
+export default StatisticsChart;

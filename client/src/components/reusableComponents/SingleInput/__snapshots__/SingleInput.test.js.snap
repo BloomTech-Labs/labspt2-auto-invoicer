@@ -7,7 +7,7 @@ exports[`<SingleInput /> renders SingleInput 1`] = `
       class="form-label"
     />
     <input
-      class="form-input"
+      class="sc-bdVaJa bYvEDq"
       value=""
     />
   </div>

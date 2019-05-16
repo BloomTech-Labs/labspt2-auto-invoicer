@@ -1,48 +1,30 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import ViewUserDetails from './ViewUserDetails';
 import EditUserDetails from './EditUserDetails';
-import {UserConsumer} from '../../../contexts/UserContext'
 import styles from '../styles'
 
-export class UserDetails extends Component {
-  state = {
-    edit: false
+export const UserDetails = (props) => {
+  const [edit, setEdit] =  useState(false)
+
+  const toggleView = () => {
+    setEdit(!edit)
   }
 
-  toggleView = () => {
-    this.setState( prevState => ({
-      edit: !prevState.edit
-    }))
-  }
-
-  handleChange = e => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-  
-  render() {
-    const { classes } = this.props;
-    return (
-      <UserConsumer>
-        {({userState, fetchUserData}) => {
-          return (
-            <Paper elevation={5} className={classes.cards}>
-              {!this.state.edit ? 
-              <ViewUserDetails 
-                toggleView={this.toggleView}
-                userState={userState} /> :
-              <EditUserDetails 
-                toggleView={this.toggleView} 
-                userState={userState}
-                fetchUserData={fetchUserData} /> }
-            </Paper>
-          )
-        }}
-      </UserConsumer>
-    )
-  }
+  const { classes } = props;
+  return (
+    <Paper elevation={5} className={classes.cards}>
+      {!edit ? 
+      <ViewUserDetails 
+        toggleView={toggleView}
+      /> :
+      <EditUserDetails 
+        toggleView={toggleView} 
+        />}
+    </Paper>
+  )
 }
 
 export default withStyles(styles)(UserDetails); 
