@@ -105,7 +105,7 @@ const StatisticsChart = props => {
         cx={xPosition}
         cy={120}
         innerRadius={35}
-        outerRadius={70}
+        outerRadius={60}
         fill="#8884d8"
         dataKey="money"
         onMouseEnter={onPieEnter}
