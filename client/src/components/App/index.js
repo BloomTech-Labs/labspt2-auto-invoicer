@@ -93,10 +93,11 @@ const App = props => {
       });
   };
 
+  const appPadding = loggedIn ? `128px` : `64px`
+
   return (
-    <div className="App">
+    <div className="App" style={{marginTop: appPadding}}>
       <Navigation
-        // user={userState}
         handleSignIn={signInModal}
         handleSignOut={signOut}
         loggedIn={loggedIn}
@@ -135,8 +136,6 @@ const App = props => {
           render={props => (
             <EditInvoiceForm
               {...props}
-              // fetchInvoices={fetchInvoices}
-              // userID={useruserID}
             />
           )}
         />

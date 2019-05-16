@@ -39,7 +39,11 @@ const SingleInvoiceView = props => {
     let emptyItems = [
       { name: "", description: "", cost: "", quantity: "", amount: "" }
     ];
-    return items ? items : emptyItems;
+    return items.length > 1 ? items : emptyItems;
+  };
+  const mobileItemChecker = items => {
+    let emptyItems = [{ name: "", quantity: "", amount: "" }];
+    return items.length > 1 ? items : emptyItems;
   };
   const itemsLengthChecker = items => {
     return items ? items.length : 0;
@@ -193,7 +197,6 @@ const SingleInvoiceView = props => {
             </div>
           </div>
           <div>
-            {" "}
             <AppBar className={classes.appbar}>
               <Toolbar>
                 <Typography className={classes.title} color="inherit" noWrap>
@@ -202,116 +205,143 @@ const SingleInvoiceView = props => {
               </Toolbar>
             </AppBar>
           </div>
-          <div className={classes.tableWrapper}>
-            <Table className={classes.table}>
-              <TableBody>
-                <TableRow>
-                  <TableCell
-                    style={{ color: "#4fc878" }}
-                    align="center"
-                    className={classes.tablecell}
-                  >
-                    Name
-                  </TableCell>
+          {window.innerWidth > 500 ? (
+            <div className={classes.tableWrapper}>
+              <Table className={classes.table}>
+                <TableBody>
+                  <TableRow>
+                    <TableCell
+                      style={{ color: "#4fc878" }}
+                      align="center"
+                      className={classes.tablecell}
+                    >
+                      Name
+                    </TableCell>
 
-                  <TableCell
-                    style={{ color: "#4fc878" }}
-                    align="center"
-                    className={classes.tablecell}
-                  >
-                    Description
-                  </TableCell>
+                    <TableCell
+                      style={{ color: "#4fc878" }}
+                      align="center"
+                      className={classes.tablecell}
+                    >
+                      Description
+                    </TableCell>
 
-                  <TableCell
-                    style={{ color: "#4fc878" }}
-                    align="center"
-                    className={classes.tablecell}
-                  >
-                    Cost
-                  </TableCell>
+                    <TableCell
+                      style={{ color: "#4fc878" }}
+                      align="center"
+                      className={classes.tablecell}
+                    >
+                      Cost
+                    </TableCell>
 
-                  <TableCell
-                    style={{ color: "#4fc878" }}
-                    align="center"
-                    className={classes.tablecell}
-                  >
-                    Quantity
-                  </TableCell>
+                    <TableCell
+                      style={{ color: "#4fc878" }}
+                      align="center"
+                      className={classes.tablecell}
+                    >
+                      Quantity
+                    </TableCell>
 
-                  <TableCell
-                    style={{ color: "#4fc878" }}
-                    align="center"
-                    className={classes.tablecell}
-                  >
-                    Amount
-                  </TableCell>
-                </TableRow>
-                {itemChecker(invoice.items)
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(item => (
-                    <TableRow className={classes.tableRowHover} key={item._id}>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        align="center"
-                        style={{
-                          fontSize: 25
-                        }}
-                      >
-                        {item.name}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        align="center"
-                        style={{ fontSize: 25 }}
-                      >
-                        {item.description}
-                      </TableCell>
-                      <TableCell style={{ fontSize: 25 }} align="center">
-                        {item.cost}
-                      </TableCell>
-                      <TableCell style={{ fontSize: 25 }} align="center">
-                        {item.quantity}
-                      </TableCell>
-                      <TableCell style={{ fontSize: 25 }} align="center">
-                        {item.amount}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                {emptyRows > 0 && (
-                  <TableRow
-                    style={{
-                      height: 48 * emptyRows
-                    }}
-                  >
-                    <TableCell colSpan={6} />
+                    <TableCell
+                      style={{ color: "#4fc878" }}
+                      align="center"
+                      className={classes.tablecell}
+                    >
+                      Amount
+                    </TableCell>
                   </TableRow>
-                )}
-              </TableBody>
-              <TableFooter style={{ fontSize: 15 }}>
-                <TableRow style={{ fontSize: 15 }}>
-                  <MuiThemeProvider theme={themes}>
-                    <TablePagination
-                      rowsPerPageOptions={[5, 10, 25]}
-                      backIconButtonProps={{
-                        "aria-label": "Previous Page"
+                  {itemChecker(invoice.items)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map(item => (
+                      <TableRow
+                        className={classes.tableRowHover}
+                        key={item._id}
+                      >
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          align="center"
+                          style={{
+                            fontSize: 25
+                          }}
+                        >
+                          {item.name}
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          align="center"
+                          style={{ fontSize: 25 }}
+                        >
+                          {item.description}
+                        </TableCell>
+                        <TableCell style={{ fontSize: 25 }} align="center">
+                          {item.cost}
+                        </TableCell>
+                        <TableCell style={{ fontSize: 25 }} align="center">
+                          {item.quantity}
+                        </TableCell>
+                        <TableCell style={{ fontSize: 25 }} align="center">
+                          {item.amount}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: 48 * emptyRows
                       }}
-                      nextIconButtonProps={{
-                        "aria-label": "Next Page"
-                      }}
-                      colSpan={3}
-                      count={itemsLengthChecker(invoice.items)}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      onChangePage={handleChangePage}
-                      onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                  </MuiThemeProvider>
-                </TableRow>
-              </TableFooter>
-            </Table>
-          </div>
+                    >
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+                <TableFooter style={{ fontSize: 15 }}>
+                  <TableRow style={{ fontSize: 15 }}>
+                    <MuiThemeProvider theme={themes}>
+                      <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        backIconButtonProps={{
+                          "aria-label": "Previous Page"
+                        }}
+                        nextIconButtonProps={{
+                          "aria-label": "Next Page"
+                        }}
+                        colSpan={3}
+                        count={itemsLengthChecker(invoice.items)}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                      />
+                    </MuiThemeProvider>
+                  </TableRow>
+                </TableFooter>
+              </Table>
+            </div>
+          ) : (
+            <div>
+              <table className="btmTable">
+                <tbody>
+                  <tr className="btmTopRow">
+                    <td className="entryName1">Name</td>
+                    <td className="entryName1">Quantity</td>
+                    <td className="entryName1">Total</td>
+                  </tr>
+                  {mobileItemChecker(invoice.items).map(item => {
+                    const { name, quantity, amount } = item;
+                    return (
+                      <tr key={item._id}>
+                        <td className="items">{name}</td>
+                        <td className="items">{quantity}</td>
+                        <td className="items">{amount}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </section>
       </Paper>
     </Grow>

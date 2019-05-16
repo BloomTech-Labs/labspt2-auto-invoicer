@@ -1,31 +1,31 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
-import "./LandingGetStarted.css";
+import './LandingGetStarted.css';
 
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.15)",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.15)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     maxWidth: 280,
-    width: "100%"
+    width: '100%'
   },
   greenButton: {
-    backgroundColor: "#4fc878",
-    color: "#fff",
+    backgroundColor: '#2d2f31',
+    color: '#fff',
     fontSize: 14,
-    "&:hover": {
-      backgroundColor: "#212121"
+    '&:hover': {
+      backgroundColor: '#6EB700'
     }
   },
   section1: {
@@ -43,15 +43,15 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   features: {
-    alignItems: "center",
-    color: "#4fc878",
-    display: "flex",
+    alignItems: 'center',
+    color: '#6EB700',
+    display: 'flex',
     fontSize: 14
   },
   lockedFeatures: {
-    alignItems: "center",
-    color: "rgba(0, 0, 0, 0.54)",
-    display: "flex",
+    alignItems: 'center',
+    color: 'rgba(0, 0, 0, 0.54)',
+    display: 'flex',
     fontSize: 14
   },
   description: {

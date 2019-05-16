@@ -30,6 +30,7 @@ import EditDialog from "../EditDialog.js";
 
 // Import Data Here
 import UserContext from "../../context/UserContext";
+import Delete from "../Delete";
 
 const Invoices = props => {
   const context = useContext(UserContext);
@@ -116,7 +117,7 @@ const Invoices = props => {
 
   const paidFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return singleInvoice.balance === 0;
+      return Number(singleInvoice.balance) === 0;
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -128,7 +129,7 @@ const Invoices = props => {
   };
   const lateFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate));
+      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) && Number(singleInvoice.balance) > 0 ;
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -141,8 +142,9 @@ const Invoices = props => {
   const dueFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
       return (
-        lateChecker(Date()) <= lateChecker(String(singleInvoice.dueDate)) &&
-        singleInvoice.balance > 0
+        lateChecker(Date()) <=
+          lateChecker(String(singleInvoice.dueDate)) &&
+        Number(singleInvoice.balance) > 0
       );
     });
     if (search) {
@@ -154,6 +156,7 @@ const Invoices = props => {
     }
   };
   const invoiceFilterSearch = passedInvoices => {
+    console.log(passedInvoices)
     let initInvoices = passedInvoices.filter(singleInvoice => {
       return singleInvoice.hidden === false;
     });
@@ -253,7 +256,11 @@ const Invoices = props => {
                 }}
               >
                 <Toolbar>
-                  <Typography className={classes.title} color="inherit" noWrap>
+                  <Typography
+                    className={classes.title}
+                    color="inherit"
+                    noWrap
+                  >
                     Invoices
                   </Typography>
                   <div className={classes.search}>
@@ -335,7 +342,10 @@ const Invoices = props => {
                     </TableCell>
                   </TableRow>
                   {invoiceFilterSearch(invoices)
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
                     .map(
                       invoice => (
                         console.log(invoice, "test"),
@@ -370,13 +380,22 @@ const Invoices = props => {
                             >
                               {status(invoice, classes.tooltip)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 25 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 25 }}
+                              align="center"
+                            >
                               {capitalizeFirstLetter(invoice.customer.name)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 25 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 25 }}
+                              align="center"
+                            >
                               {dueDate(invoice.dueDate)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 25 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 25 }}
+                              align="center"
+                            >
                               <Tooltip
                                 placement="right"
                                 title={invoice.total}
@@ -387,7 +406,10 @@ const Invoices = props => {
                                 <div>{ellipsis(invoice.total)}</div>
                               </Tooltip>
                             </TableCell>
-                            <TableCell style={{ fontSize: 25 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 25 }}
+                              align="center"
+                            >
                               <div className={classes.shortcuts}>
                                 <Link
                                   className="card-links"
@@ -421,9 +443,9 @@ const Invoices = props => {
                                   }}
                                 >
                                   <div
-                                    // onClick={() => {
-                                    //   props.createPDF(invoice);
-                                    // }}
+                                    onClick={() => {
+                                      props.createPDF(invoice);
+                                    }}
                                     className={classes.shortcutsCircle}
                                   >
                                     <i
@@ -438,24 +460,7 @@ const Invoices = props => {
                                   </div>
                                 </Tooltip>
                                 <EditDialog invoice={invoice} />
-                                <Tooltip
-                                  title="Delete"
-                                  classes={{
-                                    tooltip: classes.tooltip
-                                  }}
-                                >
-                                  <div className={classes.shortcutsCircle}>
-                                    <i
-                                      className="material-icons"
-                                      style={{
-                                        color: "#4fc878",
-                                        fontSize: 36
-                                      }}
-                                    >
-                                      delete_forever
-                                    </i>
-                                  </div>
-                                </Tooltip>
+                                <Delete invoice={invoice} />
                               </div>
                             </TableCell>
                           </TableRow>
