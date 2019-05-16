@@ -55,7 +55,7 @@ const StripeCheckoutForm = props => {
             variant="contained"
             className={classes.button}
           >
-            {`Pay $6.00`}
+            Pay $6.00
           </Button>
         </form>
       </Paper>
