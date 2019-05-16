@@ -44,7 +44,7 @@ const EditCompanyDetails = props => {
         fullWidth={true}
         placeholder={'Phone Number'}
         name={'phone_num'}
-        onChange={e => setCompanyData({...companyData, address1: e.target.value})}
+        onChange={e => setCompanyData({...companyData, phoneNumber: e.target.value})}
         value={companyData.phoneNumber}/>
       <TextField 
         id={'address_1'}
@@ -52,7 +52,7 @@ const EditCompanyDetails = props => {
         fullWidth={true}
         placeholder={'Address_1'}
         name={'address_1'}
-        onChange={e => setCompanyData({...companyData, name: e.target.value})}
+        onChange={e => setCompanyData({...companyData, address1: e.target.value})}
         value={companyData.address1}/>
       <TextField 
         id={'address_2'}
