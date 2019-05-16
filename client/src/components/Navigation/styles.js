@@ -57,11 +57,14 @@ export default theme => ({
   },
 
   rightContainer: {
-    width: `60%`,
+    width: `20%`,
     height: `100%`,
+    display: `flex`,
+    alignItems: `center`,
 
     [theme.breakpoints.up('md')]: {
-      width: `25%`
+      // width: `35%`
+      width: `10%`
     }
   },
 
@@ -74,9 +77,9 @@ export default theme => ({
   },
 
   link: {
-    padding: `10px 15px`,
-    borderRadius: `10%`,
-    width: `30%`,
+    padding: `10px`,
+    borderRadius: `6%`,
+    width: `100%`,
     textAlign: `center`,
 
     '&:hover': {
