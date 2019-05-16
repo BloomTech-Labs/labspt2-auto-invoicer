@@ -52,6 +52,8 @@ export default theme => ({
     width: `50%`,
     color: `#ffffff`,
     margin: `0 20px`,
+    fontWeight: `bold`,
+    textTransform: `capitalize`
   },
 
   rightContainer: {
@@ -74,6 +76,8 @@ export default theme => ({
   link: {
     padding: `10px 15px`,
     borderRadius: `10%`,
+    width: `30%`,
+    textAlign: `center`,
 
     '&:hover': {
       cursor: `pointer`,
@@ -88,6 +92,7 @@ export default theme => ({
     justifyContent: `center`,
     alignItems: `center`,
     width: `10%`,
+    fontWeight: `bold`,
 
     '&:hover': {
       borderBottom: `solid #8bc34a 5px`,
