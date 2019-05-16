@@ -6,6 +6,7 @@ import { saveAs } from "file-saver";
 import LandingPage from "../../views/LandingPage";
 import BillingPage from "../../views/BillingPage";
 import CreateInvoice from "../../views/CreateInvoice";
+import CreateInvoiceStepper from "../../components/CreateInvoiceStepper";
 import SettingsPage from "../../views/SettingsPage";
 import InvoiceList from "../../views/InvoiceList";
 import InvoiceView from "../../views/InvoiceView";
@@ -117,7 +118,7 @@ const App = props => {
         />
         <Route
           path="/user/:id/invoice/create"
-          render={props => <CreateInvoice {...props} click={createPDF} />}
+          render={props => <CreateInvoiceStepper {...props} click={createPDF} />}
         />
         <Route path="/user/:id/settings" component={SettingsPage} />
         <Route exact path="/" render={props => <LandingPage {...props} />} />
