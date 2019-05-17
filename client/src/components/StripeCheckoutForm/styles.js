@@ -26,11 +26,15 @@ export default theme => ({
     alignSelf: "center",
     height: 40,
     marginTop: 20,
-    fontSize: 16,
-    backgroundColor: "#4fc878"
+    fontSize: 18,
+    color: "#ffffff",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    }
   },
   label: {
-    fontSize: "1.4rem"
+    fontSize: "1.5rem"
   },
   helperText: {
     fontSize: "1.2rem"

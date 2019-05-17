@@ -40,12 +40,14 @@ const Invoices = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [search, setSearch] = useState("");
   const [buttonSize, setButtonSize] = useState("large");
+  const [placeHolderText, setPlaceholderText] = useState("Search By Number");
   const [filter, setFilter] = useState("All");
   const filterOptions = ["All", "Late", "Paid", "Due"];
 
   useEffect(() => {
     rowsPerPageFunc();
     buttonSizeFunc();
+    placeHolderTextFunc();
   }, []);
 
   const rowsPerPageFunc = () => {
@@ -54,7 +56,11 @@ const Invoices = props => {
   const buttonSizeFunc = () => {
     window.innerWidth > 500 ? setButtonSize("large") : setButtonSize("small");
   };
-
+  const placeHolderTextFunc = () => {
+    window.innerWidth > 500
+      ? setPlaceholderText("Search By Number")
+      : setPlaceholderText(" Search By #");
+  };
   const handleChangePage = (event, page) => {
     setPage(page);
   };
@@ -158,7 +164,6 @@ const Invoices = props => {
     }
   };
   const invoiceFilterSearch = passedInvoices => {
-    console.log(passedInvoices);
     let initInvoices = passedInvoices.filter(singleInvoice => {
       return singleInvoice.hidden === false;
     });
@@ -254,7 +259,8 @@ const Invoices = props => {
               <AppBar
                 position="static"
                 style={{
-                  backgroundColor: "#eff7f2"
+                  backgroundColor: "#ffffff",
+                  color: "#2d2f31"
                 }}
               >
                 <Toolbar>
@@ -271,7 +277,7 @@ const Invoices = props => {
                       <SearchIcon />
                     </div>
                     <InputBase
-                      placeholder="Search…"
+                      placeholder={placeHolderText}
                       name="search"
                       onChange={e => setSearch(e.target.value)}
                       classes={{
@@ -308,10 +314,6 @@ const Invoices = props => {
                       <Button
                         variant="button"
                         className={classes.button}
-                        style={{
-                          backgroundColor: "#4fc878",
-                          color: "white"
-                        }}
                         size={buttonSize}
                       >
                         Create
@@ -415,7 +417,7 @@ const Invoices = props => {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: "#4fc878",
+                                          color: "#ffffff",
                                           fontSize: 36
                                         }}
                                       >
@@ -439,7 +441,7 @@ const Invoices = props => {
                                     <i
                                       className="material-icons"
                                       style={{
-                                        color: "#4fc878",
+                                        color: "#ffffff",
                                         fontSize: 36
                                       }}
                                     >

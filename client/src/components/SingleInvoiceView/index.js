@@ -27,9 +27,10 @@ const SingleInvoiceView = props => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { invoiceID } = props.props.match.params;
 
-  const invoice = context.user.invoices.find(
+  const invoice = context.company.invoices.find(
     invoice => `${invoice._id}` === invoiceID
   );
+  console.log(invoice.company,"test")
   const company = invoice.company;
   const customer = invoice.customer;
   const headerellipsis = str => {
@@ -39,11 +40,11 @@ const SingleInvoiceView = props => {
     let emptyItems = [
       { name: "", description: "", cost: "", quantity: "", amount: "" }
     ];
-    return items.length > 1 ? items : emptyItems;
+    return items.length > 0 ? items : emptyItems;
   };
   const mobileItemChecker = items => {
     let emptyItems = [{ name: "", quantity: "", amount: "" }];
-    return items.length > 1 ? items : emptyItems;
+    return items.length > 0 ? items : emptyItems;
   };
   const itemsLengthChecker = items => {
     return items ? items.length : 0;
@@ -166,12 +167,16 @@ const SingleInvoiceView = props => {
             </div>
             <div className="box">
               <p className="subtotalTax">Subtotal: ${invoice.subtotal}</p>
-              <p className="shippingDiscount">Discount: ${invoice.discount}</p>
+              <p className="shippingDiscount">
+                Discount: ${invoice.discount}
+              </p>
               <p className="subtotalTax">
                 Tax:
                 {" " + Number(invoice.tax) * 100}%
               </p>
-              <p className="shippingDiscount">Shipping: ${invoice.shipping}</p>
+              <p className="shippingDiscount">
+                Shipping: ${invoice.shipping}
+              </p>
               <p className="total-due">Total: ${invoice.total}</p>
               <p className="amount-paid">Balance: ${invoice.balance}</p>
             </div>
@@ -211,7 +216,7 @@ const SingleInvoiceView = props => {
                 <TableBody>
                   <TableRow>
                     <TableCell
-                      style={{ color: "#4fc878" }}
+                      style={{ color: "#8bc34a" }}
                       align="center"
                       className={classes.tablecell}
                     >
@@ -219,7 +224,7 @@ const SingleInvoiceView = props => {
                     </TableCell>
 
                     <TableCell
-                      style={{ color: "#4fc878" }}
+                      style={{ color: "#8bc34a" }}
                       align="center"
                       className={classes.tablecell}
                     >
@@ -227,7 +232,7 @@ const SingleInvoiceView = props => {
                     </TableCell>
 
                     <TableCell
-                      style={{ color: "#4fc878" }}
+                      style={{ color: "#8bc34a" }}
                       align="center"
                       className={classes.tablecell}
                     >
@@ -235,7 +240,7 @@ const SingleInvoiceView = props => {
                     </TableCell>
 
                     <TableCell
-                      style={{ color: "#4fc878" }}
+                      style={{ color: "#8bc34a" }}
                       align="center"
                       className={classes.tablecell}
                     >
@@ -243,7 +248,7 @@ const SingleInvoiceView = props => {
                     </TableCell>
 
                     <TableCell
-                      style={{ color: "#4fc878" }}
+                      style={{ color: "#8bc34a" }}
                       align="center"
                       className={classes.tablecell}
                     >
@@ -251,7 +256,10 @@ const SingleInvoiceView = props => {
                     </TableCell>
                   </TableRow>
                   {itemChecker(invoice.items)
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
                     .map(item => (
                       <TableRow
                         className={classes.tableRowHover}
