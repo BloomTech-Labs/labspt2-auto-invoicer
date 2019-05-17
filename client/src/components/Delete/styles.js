@@ -18,8 +18,8 @@ export default theme => ({
     backgroundColor: "#ffffff",
     color: "#8bc34a",
     boxShadow: theme.shadows[1],
-    fontSize: 16,
-    fontWeight: "bolder",
+    fontSize: 12,
+    fontWeight: "bold",
     border: "1px solid #8bc34a"
   },
   dialogTitle: {
