@@ -24,5 +24,11 @@ export default theme => ({
   },
   subtext: {
     color: '#8bc34a'
+  },
+    mobileText: {
+    paddingLeft: "5px",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: 0
+    }
   }
 });
