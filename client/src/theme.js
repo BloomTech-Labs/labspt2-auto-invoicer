@@ -18,13 +18,13 @@ export default createMuiTheme({
       fontWeight: 500
     },
     h2: {
-      fontSize: 50
+      fontSize: 50,
     },
     h3: {
       fontSize: 30
     },
     h4: {
-      fontSize: 20
+      fontSize: 20,
     },
     h5: {
       fontSize: 16

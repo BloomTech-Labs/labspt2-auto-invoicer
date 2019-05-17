@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = {
+const styles = theme => ({
   container: {
     paddingTop: 20,
     paddingBottom: 20,
@@ -15,15 +15,21 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     margin: "0 auto"
+  },
+  mobileText: {
+    paddingLeft: "5px",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: 0
+    }
   }
-};
+});
 
 const LandingCTA = props => {
   const { classes } = props;
   return (
     <div className={classes.container}>
       <div className={classes.root}>
-        <Typography variant="h4">
+        <Typography className={classes.mobileText} variant="h4">
           Create a free invoice on the go or sign-up and get unlimited invoices
           today!
         </Typography>
