@@ -252,7 +252,7 @@ const Invoices = props => {
               <AppBar
                 position="static"
                 style={{
-                  backgroundColor: "#eff7f2"
+                  backgroundColor: "#ffffff"
                 }}
               >
                 <Toolbar>
@@ -305,10 +305,6 @@ const Invoices = props => {
                       <Button
                         variant="contained"
                         className={classes.button}
-                        style={{
-                          backgroundColor: "#4fc878",
-                          color: "white"
-                        }}
                         size={buttonSize}
                       >
                         Create
@@ -427,7 +423,7 @@ const Invoices = props => {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: "#4fc878",
+                                          color: "#ffffff",
                                           fontSize: 36
                                         }}
                                       >
@@ -451,7 +447,7 @@ const Invoices = props => {
                                     <i
                                       className="material-icons"
                                       style={{
-                                        color: "#4fc878",
+                                        color: "#ffffff",
                                         fontSize: 36
                                       }}
                                     >
