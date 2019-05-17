@@ -69,7 +69,7 @@ const InvoiceCustomer = props => {
         //     className: classes.menu
         //   }
         // }}
-        helperText="Select a company"
+        helperText="Select a customer"
         margin="normal"
       >
         {context.company.customers.map(customer => (
