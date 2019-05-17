@@ -17,7 +17,7 @@ const StripeElements = props => {
       <div>
         <Slide direction="down" in={checked} mountOnEnter unmountOnExit>
           <Typography
-            style={{ marginBottom: 40 }} //fontSize: '4rem',
+            style={{ marginBottom: 40,textAlign:"center" }} //fontSize: '4rem',
             variant="h4"
             gutterBottom
           >
