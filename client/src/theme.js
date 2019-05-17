@@ -14,23 +14,30 @@ export default createMuiTheme({
   },
   typography: {
     h1: {
-      //htmlFontSize: 40
-      fontSize: 16,
-      fontWeight: "bold",
-      color: "white"
+      fontSize: 95,
+      fontWeight: 500
     },
     h2: {
-      htmlFontSize: 20
+      fontSize: 50
     },
     h3: {
-      //htmlFontSize: 20,
-      fontSize: "4rem",
-      color: "blue"
+      fontSize: 30
     },
-    h4: {},
-    h5: {},
+    h4: {
+      fontSize: 20
+    },
+    h5: {
+      fontSize: 16
+    },
     h6: {},
-    button: {},
+    body1: {
+      fontSize: 14
+    },
+    body2: {},
+    button: {
+      fontSize: 16,
+      color: "white"
+    },
     caption: {
       fontSize: 12,
       color: "black"
