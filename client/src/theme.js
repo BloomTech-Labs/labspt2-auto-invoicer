@@ -21,7 +21,7 @@ export default createMuiTheme({
       fontSize: 50,
     },
     h3: {
-      fontSize: 40,
+      fontSize: 35,
     },
     h4: {
       fontSize: 25,
