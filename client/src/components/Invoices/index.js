@@ -265,8 +265,7 @@ const Invoices = props => {
               >
                 <Toolbar>
                   <Typography
-                    //className={classes.title}
-                    variant="h3"
+                    className={classes.title}
                     color="inherit"
                     noWrap
                   >
@@ -279,6 +278,9 @@ const Invoices = props => {
                     <InputBase
                       placeholder={placeHolderText}
                       name="search"
+                        style={{
+                          fontSize: "1.3rem"
+                        }}
                       onChange={e => setSearch(e.target.value)}
                       classes={{
                         root: classes.inputRoot,
@@ -290,7 +292,12 @@ const Invoices = props => {
                   <div>
                     <TextField
                       select
-                      label="Filter by"
+                      inputProps={{
+                        style: { fontSize: "1.3rem" }
+                      }}
+                      label={
+                        <span className={classes.filterLabel}>Filter by</span>
+                      }
                       className={classes.textField}
                       value={filter}
                       onChange={e => setFilter(e.target.value)}
@@ -303,7 +310,13 @@ const Invoices = props => {
                       margin="normal"
                     >
                       {filterOptions.map(option => (
-                        <option key={option} value={option}>
+                        <option
+                          style={{
+                            fontSize: "1.3rem"
+                          }}
+                          key={option}
+                          value={option}
+                        >
                           {option}
                         </option>
                       ))}
@@ -347,7 +360,10 @@ const Invoices = props => {
                     </TableCell>
                   </TableRow>
                   {invoiceFilterSearch(invoices)
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
                     .map(
                       invoice => (
                         console.log(invoice, "test"),
@@ -361,7 +377,7 @@ const Invoices = props => {
                               scope="row"
                               align="center"
                               style={{
-                                fontSize: 23
+                                fontSize: 20
                               }}
                             >
                               <Tooltip
@@ -378,17 +394,26 @@ const Invoices = props => {
                               component="th"
                               scope="row"
                               align="center"
-                              style={{ fontSize: 23 }}
+                              style={{ fontSize: 20 }}
                             >
                               {status(invoice, classes.tooltip)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 23 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 20 }}
+                              align="center"
+                            >
                               {capitalizeFirstLetter(invoice.customer.name)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 23 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 20 }}
+                              align="center"
+                            >
                               {dueDate(invoice.dueDate)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 23 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 20 }}
+                              align="center"
+                            >
                               <Tooltip
                                 placement="right"
                                 title={invoice.total}
@@ -399,7 +424,10 @@ const Invoices = props => {
                                 <div>{ellipsis(invoice.total)}</div>
                               </Tooltip>
                             </TableCell>
-                            <TableCell style={{ fontSize: 25 }} align="center">
+                            <TableCell
+                              style={{ fontSize: 25 }}
+                              align="center"
+                            >
                               <div className={classes.shortcuts}>
                                 <Link
                                   className="card-links"
