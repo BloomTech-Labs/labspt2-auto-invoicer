@@ -22,8 +22,8 @@ export default theme => ({
   },
   shortcutsCircle: {
     fontSize: "30px",
-    width: 72,
-    height: 72,
+    width: 60,
+    height: 60,
     borderRadius: "50%",
     backgroundColor: "#8bc34a",
     "&:hover": {
@@ -52,21 +52,12 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 25,
+    fontSize: 26,
     marginRight: "7px",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 35
+      fontSize: 30
     },
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-      fontSize: 40,
-      marginLeft: 8
-    },
-    [theme.breakpoints.up("lg")]: {
-      marginLeft: 15,
-      fontSize: 45
-    }
   },
   search: {
     position: "relative",
@@ -174,11 +165,15 @@ export default theme => ({
   },
   menu: {
     width: 72,
+    fontSize: "1.5rem",
     [theme.breakpoints.up("sm")]: {
       width: 100
     },
     [theme.breakpoints.up("md")]: {
       width: 200
     }
+  },
+  filterLabel:{
+    fontSize:"1.3rem"
   }
 });

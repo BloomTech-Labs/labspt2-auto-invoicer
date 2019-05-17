@@ -1,8 +1,8 @@
 export default theme => ({
   shortcutsCircle: {
     fontSize: "30px",
-    width: 72,
-    height: 72,
+    width: 60,
+    height: 60,
     borderRadius: "50%",
     backgroundColor: "#8bc34a",
     "&:hover": {
