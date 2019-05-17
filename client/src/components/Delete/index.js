@@ -40,7 +40,7 @@ const Delete = props => {
           <i
             className="material-icons"
             style={{
-              color: "#4fc878",
+              color: '#ffffff',
               fontSize: 36
             }}
           >

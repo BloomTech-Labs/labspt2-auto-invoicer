@@ -40,12 +40,14 @@ const Invoices = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [search, setSearch] = useState("");
   const [buttonSize, setButtonSize] = useState("large");
+  const [placeHolderText, setPlaceholderText] = useState("Search By Number");
   const [filter, setFilter] = useState("All");
   const filterOptions = ["All", "Late", "Paid", "Due"];
 
   useEffect(() => {
     rowsPerPageFunc();
     buttonSizeFunc();
+    placeHolderTextFunc();
   }, []);
 
   const rowsPerPageFunc = () => {
@@ -54,7 +56,11 @@ const Invoices = props => {
   const buttonSizeFunc = () => {
     window.innerWidth > 500 ? setButtonSize("large") : setButtonSize("small");
   };
-
+  const placeHolderTextFunc = () => {
+    window.innerWidth > 500
+      ? setPlaceholderText("Search By Number")
+      : setPlaceholderText(" Search By #");
+  };
   const handleChangePage = (event, page) => {
     setPage(page);
   };
@@ -129,7 +135,10 @@ const Invoices = props => {
   };
   const lateFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) && Number(singleInvoice.balance) > 0 ;
+      return (
+        lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) &&
+        Number(singleInvoice.balance) > 0
+      );
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -142,8 +151,7 @@ const Invoices = props => {
   const dueFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
       return (
-        lateChecker(Date()) <=
-          lateChecker(String(singleInvoice.dueDate)) &&
+        lateChecker(Date()) <= lateChecker(String(singleInvoice.dueDate)) &&
         Number(singleInvoice.balance) > 0
       );
     });
@@ -156,7 +164,6 @@ const Invoices = props => {
     }
   };
   const invoiceFilterSearch = passedInvoices => {
-    console.log(passedInvoices)
     let initInvoices = passedInvoices.filter(singleInvoice => {
       return singleInvoice.hidden === false;
     });
@@ -252,12 +259,14 @@ const Invoices = props => {
               <AppBar
                 position="static"
                 style={{
-                  backgroundColor: "#eff7f2"
+                  backgroundColor: "#ffffff",
+                  color: "#2d2f31"
                 }}
               >
                 <Toolbar>
                   <Typography
-                    className={classes.title}
+                    //className={classes.title}
+                    variant="h4"
                     color="inherit"
                     noWrap
                   >
@@ -268,7 +277,7 @@ const Invoices = props => {
                       <SearchIcon />
                     </div>
                     <InputBase
-                      placeholder="Search…"
+                      placeholder={placeHolderText}
                       name="search"
                       onChange={e => setSearch(e.target.value)}
                       classes={{
@@ -303,12 +312,8 @@ const Invoices = props => {
                   <div>
                     <Link to={`/user/${userID}/invoice/create`}>
                       <Button
-                        variant="contained"
+                        variant="button"
                         className={classes.button}
-                        style={{
-                          backgroundColor: "#4fc878",
-                          color: "white"
-                        }}
                         size={buttonSize}
                       >
                         Create
@@ -322,30 +327,27 @@ const Invoices = props => {
               <Table className={classes.table}>
                 <TableBody>
                   <TableRow>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Number
+                    <TableCell align="center">
+                      <Typography variant="h4">Number</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Status
+                    <TableCell align="center">
+                      <Typography variant="h4">Status</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Name
+                    <TableCell align="center">
+                      <Typography variant="h4">Name</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Due Date
+                    <TableCell align="center">
+                      <Typography variant="h4">Due Date</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Total Due
+                    <TableCell align="center">
+                      <Typography variant="h4">Total Due</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Actions
+                    <TableCell align="center">
+                      <Typography variant="h4">Actions</Typography>
                     </TableCell>
                   </TableRow>
                   {invoiceFilterSearch(invoices)
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map(
                       invoice => (
                         console.log(invoice, "test"),
@@ -359,7 +361,7 @@ const Invoices = props => {
                               scope="row"
                               align="center"
                               style={{
-                                fontSize: 25
+                                fontSize: 16
                               }}
                             >
                               <Tooltip
@@ -376,26 +378,17 @@ const Invoices = props => {
                               component="th"
                               scope="row"
                               align="center"
-                              style={{ fontSize: 25 }}
+                              style={{ fontSize: 16 }}
                             >
                               {status(invoice, classes.tooltip)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               {capitalizeFirstLetter(invoice.customer.name)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               {dueDate(invoice.dueDate)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               <Tooltip
                                 placement="right"
                                 title={invoice.total}
@@ -406,10 +399,7 @@ const Invoices = props => {
                                 <div>{ellipsis(invoice.total)}</div>
                               </Tooltip>
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 25 }} align="center">
                               <div className={classes.shortcuts}>
                                 <Link
                                   className="card-links"
@@ -427,7 +417,7 @@ const Invoices = props => {
                                       <i
                                         className="material-icons"
                                         style={{
-                                          color: "#4fc878",
+                                          color: "#ffffff",
                                           fontSize: 36
                                         }}
                                       >
@@ -451,7 +441,7 @@ const Invoices = props => {
                                     <i
                                       className="material-icons"
                                       style={{
-                                        color: "#4fc878",
+                                        color: "#ffffff",
                                         fontSize: 36
                                       }}
                                     >

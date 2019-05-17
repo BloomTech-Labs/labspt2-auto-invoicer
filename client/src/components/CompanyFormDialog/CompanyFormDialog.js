@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -67,6 +68,33 @@ const CompanyFormDialog = props => {
   const handleInputChange = e => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
+
+  const handleZipCodeChange = () => {
+    if (formState.zipCode.length > 4) {
+      const clientKey =
+        'tjS2tWmZcLLC5fga8lOjq7eU2rNPDLZL7PG4le9rVty3OxthYODSLaj6B6vAjpNs';
+      const zipcode = formState.zipCode;
+      const url = `https://www.zipcodeapi.com/rest/${clientKey}/info.json/${zipcode}/radians`;
+      axios
+        .get(url)
+        .then(res => {
+          setFormState({
+            ...formState,
+            city: res.data.city,
+            state: res.data.state
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      setFormState({ ...formState, city: '', state: '' });
+    }
+  };
+
+  useEffect(() => {
+    handleZipCodeChange();
+  }, [formState.zipCode]);
 
   return (
     <div>
@@ -142,7 +170,7 @@ const CompanyFormDialog = props => {
             type="text"
             fullWidth
             required
-            onChange={handleInputChange}
+            onChange={handleZipCodeChange}
           />
           <TextField
             margin="dense"
