@@ -13,7 +13,7 @@ const InvoicedCard = props => {
     <Zoom in={checked} style={{ transitionDelay: checked ? "500ms" : "0ms" }}>
       <Paper className={classes.paper} style={{ position: "relative" }}>
         <Typography variant="h4" gutterBottom>
-          Total Invoiced
+          Total Invoiced This Year
         </Typography>
         <InvoicedChart invoices={invoices} />
       </Paper>

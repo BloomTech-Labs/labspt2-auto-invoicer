@@ -14,7 +14,7 @@ export default createMuiTheme({
   },
   typography: {
     h1: {
-      fontSize: 95,
+      fontSize: 90,
       fontWeight: 500
     },
     h2: {

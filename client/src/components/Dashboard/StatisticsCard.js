@@ -25,7 +25,7 @@ class StatisticsCard extends React.Component {
         <Paper className={classes.paper} style={{ position: "relative" }}>
           <div ref={this.cardRef} className={classes.statistics}>
             <Typography variant="h4" gutterBottom>
-              Statistics
+              Total Invoiced This Month
             </Typography>
             <StatisticsChart
               cardRef={this.cardRef}
