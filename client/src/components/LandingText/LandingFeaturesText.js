@@ -16,7 +16,7 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     fontSize: "1.6rem",
-    maxWidth: 960,
+    maxWidth: 1080,
     padding: "100px 0",
     width: "100%"
   },
@@ -24,7 +24,7 @@ const styles = {
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "space-between",
     width: "100%"
   },
   topText: {
@@ -36,7 +36,7 @@ const styles = {
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "space-between",
     marginTop: 40,
     width: "100%"
   },

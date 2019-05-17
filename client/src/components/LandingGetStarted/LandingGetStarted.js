@@ -25,7 +25,7 @@ const styles = theme => ({
     color: "#fff",
     fontSize: 14,
     "&:hover": {
-      backgroundColor: "#6EB700"
+      backgroundColor: "#8bc34a"
     }
   },
   section1: {

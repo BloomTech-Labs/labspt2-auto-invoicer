@@ -80,6 +80,7 @@ export default theme => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    textAlign:"center",
     width: "35%"
   },
   span: {

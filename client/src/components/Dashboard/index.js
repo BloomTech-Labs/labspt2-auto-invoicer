@@ -74,7 +74,7 @@ const Dashboard = props => {
                     </div>
                     <div className={classes.middleInfo}>
                       <span className={classes.span}>{124}</span>
-                      <Typography variant="h5">Total Invoices</Typography>
+                      <Typography variant="h5">Total Invoices This Month</Typography>
                     </div>
                     <Tooltip
                       title="Compared to Last Month"
@@ -117,7 +117,7 @@ const Dashboard = props => {
                     <div className={classes.middleInfo}>
                       <span className={classes.span}>{9}</span>
                       <Typography style={{ fontSize: 15 }}>
-                        New Customers
+                        New Customers This Month
                       </Typography>
                     </div>
                     <Tooltip

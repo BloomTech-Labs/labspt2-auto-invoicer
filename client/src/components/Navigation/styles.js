@@ -88,7 +88,6 @@ export default theme => ({
   },
 
   link: {
-    padding: `10px`,
     borderRadius: `6%`,
     width: `100px`,
     textAlign: `center`,
