@@ -39,7 +39,7 @@ function AccountBar(props) {
             {/* <Typography className={classes.link}>Features</Typography>
             <Typography className={classes.link}>Get Started</Typography> */}
             <Typography
-              variant="h1"
+              variant="overline"
               className={classes.link}
               onClick={props.handleSignIn}
             >

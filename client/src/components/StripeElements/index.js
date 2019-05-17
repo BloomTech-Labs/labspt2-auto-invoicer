@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Elements, StripeProvider } from 'react-stripe-elements';
-import StripeCheckoutForm from '../StripeCheckoutForm';
+import React, { useState, useEffect } from "react";
+import { Elements, StripeProvider } from "react-stripe-elements";
+import StripeCheckoutForm from "../StripeCheckoutForm";
 
-import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
+import Typography from "@material-ui/core/Typography";
+import Slide from "@material-ui/core/Slide";
 
 const StripeElements = props => {
   const [checked, setChecked] = useState(false);
@@ -17,7 +17,7 @@ const StripeElements = props => {
       <div>
         <Slide direction="down" in={checked} mountOnEnter unmountOnExit>
           <Typography
-            style={{ fontSize: '4rem', marginBottom: 40 }}
+            style={{ marginBottom: 40 }} //fontSize: '4rem',
             variant="h3"
             gutterBottom
           >
