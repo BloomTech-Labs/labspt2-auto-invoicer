@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer
-} from 'recharts';
+} from "recharts";
 
 const CustomizedLabel = props => {
   const { x, y, stroke, value } = props;
@@ -63,65 +63,65 @@ const InvoicedChart = props => {
     let invoicedDecember = 0;
 
     invoices.map(invoice => {
-      if (invoice.date.includes('Jan')) {
+      if (invoice.date.includes("Jan")) {
         invoicedJanuary += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Feb')) {
+      if (invoice.date.includes("Feb")) {
         invoicedFebruary += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Mar')) {
+      if (invoice.date.includes("Mar")) {
         invoicedMarch += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Apr')) {
+      if (invoice.date.includes("Apr")) {
         invoicedApril += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('May')) {
+      if (invoice.date.includes("May")) {
         invoicedMay += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Jun')) {
+      if (invoice.date.includes("Jun")) {
         invoicedJune += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Jul')) {
+      if (invoice.date.includes("Jul")) {
         invoicedJuly += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Aug')) {
+      if (invoice.date.includes("Aug")) {
         invoicedAugust += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Sep')) {
+      if (invoice.date.includes("Sep")) {
         invoicedSeptember += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Oct')) {
+      if (invoice.date.includes("Oct")) {
         invoicedOctober += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Nov')) {
+      if (invoice.date.includes("Nov")) {
         invoicedNovember += parseFloat(invoice.total);
       }
-      if (invoice.date.includes('Dec')) {
+      if (invoice.date.includes("Dec")) {
         invoicedDecember += parseFloat(invoice.total);
       }
       return invoice;
     });
 
     mappedInvoices.push(
-      { name: 'Jan', invoiced: invoicedJanuary },
-      { name: 'Feb', invoiced: invoicedFebruary },
-      { name: 'Mar', invoiced: invoicedMarch },
-      { name: 'Apr', invoiced: invoicedApril },
-      { name: 'May', invoiced: invoicedMay },
-      { name: 'Jun', invoiced: invoicedJune },
-      { name: 'Jul', invoiced: invoicedJuly },
-      { name: 'Aug', invoiced: invoicedAugust },
-      { name: 'Sep', invoiced: invoicedSeptember },
-      { name: 'Oct', invoiced: invoicedOctober },
-      { name: 'Nov', invoiced: invoicedNovember },
-      { name: 'Dec', invoiced: invoicedDecember }
+      { name: "Jan", invoiced: invoicedJanuary },
+      { name: "Feb", invoiced: invoicedFebruary },
+      { name: "Mar", invoiced: invoicedMarch },
+      { name: "Apr", invoiced: invoicedApril },
+      { name: "May", invoiced: invoicedMay },
+      { name: "Jun", invoiced: invoicedJune },
+      { name: "Jul", invoiced: invoicedJuly },
+      { name: "Aug", invoiced: invoicedAugust },
+      { name: "Sep", invoiced: invoicedSeptember },
+      { name: "Oct", invoiced: invoicedOctober },
+      { name: "Nov", invoiced: invoicedNovember },
+      { name: "Dec", invoiced: invoicedDecember }
     );
 
     setData([...mappedInvoices]);
   }, [invoices]);
 
   return (
-    <div style={{ width: '100%', height: 270 }}>
+    <div style={{ width: "100%", height: 270 }}>
       <ResponsiveContainer>
         <LineChart
           width={700}
