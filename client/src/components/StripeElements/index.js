@@ -18,7 +18,7 @@ const StripeElements = props => {
         <Slide direction="down" in={checked} mountOnEnter unmountOnExit>
           <Typography
             style={{ marginBottom: 40 }} //fontSize: '4rem',
-            variant="h3"
+            variant="h4"
             gutterBottom
           >
             1 Month Unlimited
