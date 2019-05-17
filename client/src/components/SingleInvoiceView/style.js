@@ -9,7 +9,8 @@ export default theme => ({
     border: "1px solid #eff7f2"
   },
   appbar: {
-    backgroundColor: "#eff7f2",
+    backgroundColor: "#ffffff",
+    color:"#2d2f31",
     position: "static"
   },
   table: {

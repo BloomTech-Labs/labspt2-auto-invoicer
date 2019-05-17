@@ -25,7 +25,10 @@ export default theme => ({
     width: 72,
     height: 72,
     borderRadius: "50%",
-    backgroundColor: "#eff7f2",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    },
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -53,7 +56,7 @@ export default theme => ({
     marginRight: "7px",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 35,
+      fontSize: 35
     },
     [theme.breakpoints.up("md")]: {
       display: "block",
@@ -62,7 +65,7 @@ export default theme => ({
     },
     [theme.breakpoints.up("lg")]: {
       marginLeft: 15,
-      fontSize: 45,
+      fontSize: 45
     }
   },
   search: {
@@ -86,7 +89,12 @@ export default theme => ({
     }
   },
   button: {
-    [theme.breakpoints.up("sm")]: {},
+    color: "#ffffff",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    },
+
     [theme.breakpoints.up("md")]: {
       marginRight: 60
     },
@@ -95,20 +103,20 @@ export default theme => ({
     }
   },
   tooltip: {
-    backgroundColor: "#eff7f2",
-    color: "#4fc878",
+    backgroundColor: "#ffffff",
+    color: "#8bc34a",
     boxShadow: theme.shadows[1],
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bolder",
-    border: "1px solid #4fc878"
+    border: "1px solid #8bc34a"
   },
   tooltipNumber: {
-    backgroundColor: "#eff7f2",
-    color: "#4fc878",
+    backgroundColor: "#ffffff",
+    color: "#8bc34a",
     boxShadow: theme.shadows[1],
+    fontSize: 17,
     fontWeight: "bolder",
-    border: "1px solid #4fc878",
-    fontSize: 16
+    border: "1px solid #8bc34a"
   },
   searchIcon: {
     paddingLeft: 8,
@@ -139,10 +147,10 @@ export default theme => ({
       width: 110
     },
     [theme.breakpoints.up("sm")]: {
-    width: 100,
-    "&:focus": {
-      width: 200,
-    }
+      width: 100,
+      "&:focus": {
+        width: 200
+      }
     },
     [theme.breakpoints.up("md")]: {
       width: 300,
@@ -157,7 +165,7 @@ export default theme => ({
     width: 72,
     [theme.breakpoints.up("sm")]: {
       width: 100,
-      margin:"15px"
+      margin: "15px"
     },
     [theme.breakpoints.up("md")]: {
       width: 200,
