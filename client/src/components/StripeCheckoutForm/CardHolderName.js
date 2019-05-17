@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
-import styles from './styles';
+import styles from "./styles";
 
 const CardHolderName = props => {
   const { classes, onChangeHandler, value } = props;
@@ -18,7 +18,7 @@ const CardHolderName = props => {
         className: classes.label
       }}
       id="standard-with-placeholder"
-      style={{ fontSize: '2rem' }}
+      style={{ fontSize: "1.4rem" }}
       label="Card Holder's Name"
       placeholder="Enter your name"
       className={classes.textField}

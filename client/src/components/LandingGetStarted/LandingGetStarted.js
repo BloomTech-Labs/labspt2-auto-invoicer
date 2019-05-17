@@ -1,31 +1,31 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 
-import './LandingGetStarted.css';
+import "./LandingGetStarted.css";
 
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.15)',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.15)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
     maxWidth: 280,
-    width: '100%'
+    width: "100%"
   },
   greenButton: {
-    backgroundColor: '#2d2f31',
-    color: '#fff',
+    backgroundColor: "#2d2f31",
+    color: "#fff",
     fontSize: 14,
-    '&:hover': {
-      backgroundColor: '#6EB700'
+    "&:hover": {
+      backgroundColor: "#6EB700"
     }
   },
   section1: {
@@ -43,15 +43,15 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   features: {
-    alignItems: 'center',
-    color: '#6EB700',
-    display: 'flex',
+    alignItems: "center",
+    color: "#6EB700",
+    display: "flex",
     fontSize: 14
   },
   lockedFeatures: {
-    alignItems: 'center',
-    color: 'rgba(0, 0, 0, 0.54)',
-    display: 'flex',
+    alignItems: "center",
+    color: "rgba(0, 0, 0, 0.54)",
+    display: "flex",
     fontSize: 14
   },
   description: {
@@ -64,7 +64,11 @@ const LandingGetStarted = props => {
   return (
     <div className="landing-get-started-container">
       <div className="landing-get-started">
-        <div className="get-started-text">STOP WAITING AND START INVOICING</div>
+        <div className="get-started-text">
+          <Typography variant="h3" style={{ color: "white" }}>
+            STOP WAITING AND START INVOICING
+          </Typography>
+        </div>
         <div className="card">
           <div className={classes.root}>
             <div className={classes.section1}>
@@ -90,7 +94,7 @@ const LandingGetStarted = props => {
             </div>
             <Divider variant="middle" />
             <div className={classes.section2}>
-              <Typography gutterBottom className={classes.description}>
+              <Typography variant="body1">
                 Simply create a free account and get started with your free
                 invoice on the go!
               </Typography>
@@ -102,7 +106,7 @@ const LandingGetStarted = props => {
                 className={classes.greenButton}
                 fullWidth
               >
-                Try For free
+                <Typography variant="button">Try For free</Typography>
               </Button>
             </div>
           </div>
@@ -117,7 +121,7 @@ const LandingGetStarted = props => {
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Typography gutterBottom variant="h6">
+                  <Typography gutterBottom variant="h4">
                     $6/month
                   </Typography>
                 </Grid>
@@ -137,7 +141,7 @@ const LandingGetStarted = props => {
             </div>
             <Divider variant="middle" />
             <div className={classes.section2}>
-              <Typography gutterBottom className={classes.description}>
+              <Typography variant="body1">
                 Unlimited invoices for unlimited customers. Create an account to
                 save your invoices, customers and company settings for
                 convenient access.
@@ -150,7 +154,7 @@ const LandingGetStarted = props => {
                 className={classes.greenButton}
                 fullWidth
               >
-                Get Premium
+                <Typography variant="button">Get Premium</Typography>
               </Button>
             </div>
           </div>

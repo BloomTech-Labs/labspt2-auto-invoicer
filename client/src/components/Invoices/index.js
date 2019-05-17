@@ -135,7 +135,10 @@ const Invoices = props => {
   };
   const lateFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
-      return lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) && Number(singleInvoice.balance) > 0 ;
+      return (
+        lateChecker(Date()) > lateChecker(String(singleInvoice.dueDate)) &&
+        Number(singleInvoice.balance) > 0
+      );
     });
     if (search) {
       return filtered.filter(singleInvoice => {
@@ -148,8 +151,7 @@ const Invoices = props => {
   const dueFilter = passedInvoices => {
     let filtered = passedInvoices.filter(singleInvoice => {
       return (
-        lateChecker(Date()) <=
-          lateChecker(String(singleInvoice.dueDate)) &&
+        lateChecker(Date()) <= lateChecker(String(singleInvoice.dueDate)) &&
         Number(singleInvoice.balance) > 0
       );
     });
@@ -263,7 +265,8 @@ const Invoices = props => {
               >
                 <Toolbar>
                   <Typography
-                    className={classes.title}
+                    //className={classes.title}
+                    variant="h4"
                     color="inherit"
                     noWrap
                   >
@@ -309,7 +312,7 @@ const Invoices = props => {
                   <div>
                     <Link to={`/user/${userID}/invoice/create`}>
                       <Button
-                        variant="contained"
+                        variant="button"
                         className={classes.button}
                         size={buttonSize}
                       >
@@ -324,30 +327,27 @@ const Invoices = props => {
               <Table className={classes.table}>
                 <TableBody>
                   <TableRow>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Number
+                    <TableCell align="center">
+                      <Typography variant="h4">Number</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Status
+                    <TableCell align="center">
+                      <Typography variant="h4">Status</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Name
+                    <TableCell align="center">
+                      <Typography variant="h4">Name</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Due Date
+                    <TableCell align="center">
+                      <Typography variant="h4">Due Date</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Total Due
+                    <TableCell align="center">
+                      <Typography variant="h4">Total Due</Typography>
                     </TableCell>
-                    <TableCell style={{ fontSize: 30 }} align="center">
-                      Actions
+                    <TableCell align="center">
+                      <Typography variant="h4">Actions</Typography>
                     </TableCell>
                   </TableRow>
                   {invoiceFilterSearch(invoices)
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map(
                       invoice => (
                         console.log(invoice, "test"),
@@ -361,7 +361,7 @@ const Invoices = props => {
                               scope="row"
                               align="center"
                               style={{
-                                fontSize: 25
+                                fontSize: 16
                               }}
                             >
                               <Tooltip
@@ -378,26 +378,17 @@ const Invoices = props => {
                               component="th"
                               scope="row"
                               align="center"
-                              style={{ fontSize: 25 }}
+                              style={{ fontSize: 16 }}
                             >
                               {status(invoice, classes.tooltip)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               {capitalizeFirstLetter(invoice.customer.name)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               {dueDate(invoice.dueDate)}
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 16 }} align="center">
                               <Tooltip
                                 placement="right"
                                 title={invoice.total}
@@ -408,10 +399,7 @@ const Invoices = props => {
                                 <div>{ellipsis(invoice.total)}</div>
                               </Tooltip>
                             </TableCell>
-                            <TableCell
-                              style={{ fontSize: 25 }}
-                              align="center"
-                            >
+                            <TableCell style={{ fontSize: 25 }} align="center">
                               <div className={classes.shortcuts}>
                                 <Link
                                   className="card-links"

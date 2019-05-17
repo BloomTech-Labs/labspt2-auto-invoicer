@@ -2,7 +2,7 @@ export default theme => ({
   mainNavContainer: {
     display: `flex`,
     flexDirection: `column`,
-    alignItems: `center`,
+    alignItems: `center`
   },
 
   appBar: {
@@ -37,7 +37,7 @@ export default theme => ({
   iconText: {
     fontWeight: `bold`,
 
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       fontSize: `2rem`
     }
   },
@@ -45,7 +45,7 @@ export default theme => ({
   accountMenu: {
     display: `flex`,
     justifyContent: `flex-end`,
-    color: `#ffffff`,
+    color: `#ffffff`
   },
 
   selectCompany: {
@@ -63,7 +63,7 @@ export default theme => ({
     alignItems: `center`,
     justifyContent: `flex-end`,
 
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       width: `35%`
       // width: `10%`
     }
@@ -74,7 +74,7 @@ export default theme => ({
     justifyContent: `flex-end`,
     alignItems: `center`,
     height: `50px`,
-    width: `100%`,
+    width: `100%`
 
     // [theme.breakpoints.up('sm')]: {
     //   // width: `35%`
@@ -101,11 +101,11 @@ export default theme => ({
     //   width: `100px`
     // },
 
-    '&:hover': {
+    "&:hover": {
       cursor: `pointer`,
       backgroundColor: `#2d2f31`,
       color: `white`
-    },
+    }
   },
 
   navLink: {
@@ -116,16 +116,16 @@ export default theme => ({
     width: `10%`,
     fontWeight: `bold`,
 
-    '&:hover': {
-      borderBottom: `solid #8bc34a 5px`,
+    "&:hover": {
+      borderBottom: `solid #8bc34a 5px`
     },
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       width: `20%`
     }
   },
 
-  active: { 
-    borderBottom: `solid #8bc34a 5px`,
+  active: {
+    borderBottom: `solid #8bc34a 5px`
   }
 });
