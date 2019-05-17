@@ -44,7 +44,7 @@ const SingleInvoiceView = props => {
   };
   const mobileItemChecker = items => {
     let emptyItems = [{ name: "", quantity: "", amount: "" }];
-    return items.length > 1 ? items : emptyItems;
+    return items.length > 0 ? items : emptyItems;
   };
   const itemsLengthChecker = items => {
     return items ? items.length : 0;
