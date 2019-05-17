@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {EditCompany} from '../../../graphQL/mutations/companies'
 import { withStyles } from '@material-ui/core';
 import style from '../styles';
 import UserContext from '../../../context/UserContext'

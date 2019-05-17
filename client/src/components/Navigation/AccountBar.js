@@ -36,8 +36,8 @@ function AccountBar(props) {
             /> 
           </span>:
           <div className={classes.navLinksRight}>
-            <Typography className={classes.link}>Features</Typography>
-            <Typography className={classes.link}>Get Started</Typography>
+            {/* <Typography className={classes.link}>Features</Typography>
+            <Typography className={classes.link}>Get Started</Typography> */}
             <Typography className={classes.link} onClick={props.handleSignIn}>Sign In</Typography>
           </div>
           }

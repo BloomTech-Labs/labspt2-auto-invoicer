@@ -57,27 +57,49 @@ export default theme => ({
   },
 
   rightContainer: {
-    width: `60%`,
+    width: `20%`,
     height: `100%`,
+    display: `flex`,
+    alignItems: `center`,
+    justifyContent: `flex-end`,
 
     [theme.breakpoints.up('md')]: {
-      width: `25%`
+      width: `35%`
+      // width: `10%`
     }
   },
 
   navLinksRight: {
     display: `flex`,
-    justifyContent: `space-between`,
+    justifyContent: `flex-end`,
     alignItems: `center`,
     height: `50px`,
     width: `100%`,
+
+    // [theme.breakpoints.up('sm')]: {
+    //   // width: `35%`
+    //   width: `70%`
+    // },
+
+    // [theme.breakpoints.up('md')]: {
+    //   // width: `35%`
+    //   width: `20%`
+    // },
   },
 
   link: {
-    padding: `10px 15px`,
-    borderRadius: `10%`,
-    width: `30%`,
+    padding: `10px`,
+    borderRadius: `6%`,
+    width: `100px`,
     textAlign: `center`,
+
+    // [theme.breakpoints.up('sm')]: {
+    //   width: `30px`
+    // },
+
+    // [theme.breakpoints.up('md')]: {
+    //   width: `100px`
+    // },
 
     '&:hover': {
       cursor: `pointer`,
