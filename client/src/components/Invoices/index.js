@@ -266,7 +266,7 @@ const Invoices = props => {
                 <Toolbar>
                   <Typography
                     //className={classes.title}
-                    variant="h4"
+                    variant="h3"
                     color="inherit"
                     noWrap
                   >
@@ -361,7 +361,7 @@ const Invoices = props => {
                               scope="row"
                               align="center"
                               style={{
-                                fontSize: 16
+                                fontSize: 23
                               }}
                             >
                               <Tooltip
@@ -378,17 +378,17 @@ const Invoices = props => {
                               component="th"
                               scope="row"
                               align="center"
-                              style={{ fontSize: 16 }}
+                              style={{ fontSize: 23 }}
                             >
                               {status(invoice, classes.tooltip)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 16 }} align="center">
+                            <TableCell style={{ fontSize: 23 }} align="center">
                               {capitalizeFirstLetter(invoice.customer.name)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 16 }} align="center">
+                            <TableCell style={{ fontSize: 23 }} align="center">
                               {dueDate(invoice.dueDate)}
                             </TableCell>
-                            <TableCell style={{ fontSize: 16 }} align="center">
+                            <TableCell style={{ fontSize: 23 }} align="center">
                               <Tooltip
                                 placement="right"
                                 title={invoice.total}
