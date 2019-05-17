@@ -32,7 +32,7 @@ const EmptyInvoices = props => {
         }}
         className={classes.root}
       >
-        <AppBar style={{ backgroundColor: "#ffffff" }} position="static">
+        <AppBar style={{ backgroundColor: "#ffffff", color: "#2d2f31" }} position="static">
           <Toolbar className={classes.toolbar}>
             <Typography className={classes.title} color="inherit" noWrap>
               Invoices
