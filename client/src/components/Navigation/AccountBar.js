@@ -20,16 +20,14 @@ function AccountBar(props) {
   const { loggedIn, classes } = props
   return (
     <Toolbar className={classes.accountBarContainer}>
-      <div className={classes.icon} >
-        <Typography>
-          {<Link 
-            to={loggedIn ? `/user/${context.user._id}/dashboard` : `/` } >
-            <img alt="" src={MyAutoInvoicerIcon} width="32" height="32" />
-            <span className="company-name">myAutoInvoicer</span>
-          </Link>}
-        </Typography>
-      </div>
-      <div>
+      {<Link 
+        to={loggedIn ? `/user/${context.user._id}/dashboard` : `/` } >
+        <div className={classes.icon} >
+          <img alt="" src={MyAutoInvoicerIcon} width="32" height="32" />
+          <Typography className={classes.iconText}>myAutoInvoicer</Typography>
+        </div>
+      </Link>}
+      <div className={classes.rightContainer}>
         {loggedIn ?
           <span className={classes.accountMenu}>
             <SelectCompany />
@@ -37,12 +35,10 @@ function AccountBar(props) {
               handleSignOut={props.handleSignOut}
             /> 
           </span>:
-          <div className="nav-right">
-            <Typography>
-              <span className="link">Features</span>
-              <span className="link">Get Started</span>
-              <span className="link" onClick={props.handleSignIn}>Sign In</span>
-            </Typography>
+          <div className={classes.navLinksRight}>
+            {/* <Typography className={classes.link}>Features</Typography>
+            <Typography className={classes.link}>Get Started</Typography> */}
+            <Typography className={classes.link} onClick={props.handleSignIn}>Sign In</Typography>
           </div>
           }
       </div>

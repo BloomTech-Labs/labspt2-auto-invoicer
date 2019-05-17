@@ -42,17 +42,11 @@ exports[`<SideNavigation /> renders Side Navigation component 1`] = `
       <ul
         class="auth-container"
       >
-        <p
-          class="credits"
+        <button
+          class="authentication-btns"
         >
-          Credits: 3
-        </p>
-        <a
-          href="/"
-          id="signOut"
-        >
-          Sign Out
-        </a>
+          Sign In
+        </button>
       </ul>
     </header>
   </div>

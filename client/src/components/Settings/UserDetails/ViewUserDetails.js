@@ -2,8 +2,11 @@ import React, { useContext } from 'react'
 
 import Edit from '../EditIcon'
 import UserContext from '../../../context/UserContext'
+import { withStyles } from '@material-ui/core';
 
-export const ViewUserDetails = (props) => {
+import style from '../styles'
+
+const ViewUserDetails = (props) => {
   const context = useContext(UserContext)
   const {name, email, phoneNumber } = context.user
   return (
@@ -31,3 +34,5 @@ export const ViewUserDetails = (props) => {
     </div>
   )
 }
+
+export default withStyles(style)(ViewUserDetails)

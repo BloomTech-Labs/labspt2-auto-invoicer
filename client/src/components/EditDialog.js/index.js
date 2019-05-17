@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import  {withStyles} from "@material-ui/core/styles";
 import {
   Dialog,
@@ -10,66 +10,50 @@ import {
 import Form from "./Form";
 import styles from './styles';
 
-//import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+const EditDialog = props => {
+  const { classes, invoice } = props;
+  const [open, setOpen] = useState(false)
 
-class EditDialog extends Component {
-  state = {
-    open: false
-  };
+  const handleToggle = () => {
+    setOpen(!open)
+    };
 
-  handleToggle = () => {
-    this.setState({
-      open: !this.state.open
-    });
-  };
-
-  handleFormSubmit = exercise => {
-    this.handleToggle();
-
-    this.props.onCreate(exercise);
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { open } = this.state;
-    return (
-      <Fragment>
-        <Tooltip
-          title="Edit Amount"
-          classes={{
-            tooltip: classes.tooltip
-          }}
+  return (
+    <Fragment>
+      <Tooltip
+        title="Add Payment"
+        classes={{
+          tooltip: classes.tooltip
+        }}
+      >
+        <div
+          onClick={handleToggle}
+          className={classes.shortcutsCircle}
         >
-          <div
-            onClick={this.handleToggle}
-            className={classes.shortcutsCircle}
+          <i
+            className="material-icons"
+            style={{
+              color: "#4fc878",
+              fontSize: 36
+            }}
           >
-            <i
-              className="material-icons"
-              style={{
-                color: "#4fc878",
-                fontSize: 36
-              }}
-            >
-              edit
-            </i>
-          </div>
-        </Tooltip>
-        <Dialog open={open} onClose={this.handleToggle}>
-          <DialogTitle>Update Payment</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please make updates to your invoice here
-            </DialogContentText>
-            <Form invoice={this.props.invoice} />
-          </DialogContent>
-        </Dialog>
-      </Fragment>
-    );
-  }
+            edit
+          </i>
+        </div>
+      </Tooltip>
+      <Dialog open={open} onClose={handleToggle}>
+        <DialogTitle>Add Payment</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please add payment to your invoice here
+          </DialogContentText>
+          <Form 
+            invoice={invoice}
+            handleToggle={handleToggle} />
+        </DialogContent>
+      </Dialog>
+    </Fragment>
+  );
 }
+
 export default withStyles(styles)(EditDialog);

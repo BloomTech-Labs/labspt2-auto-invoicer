@@ -4,8 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import UserContext from '../../../context/UserContext'
+import { withStyles } from '@material-ui/core';
 
-export const EditUserDetails = (props) => {
+import style from '../styles'
+
+const EditUserDetails = (props) => {
   const context = useContext(UserContext)
   const {name, email, phoneNumber} = context.user
   const [userData, setUserData] = useState({name, email, phoneNumber})
@@ -55,3 +58,5 @@ export const EditUserDetails = (props) => {
     </div>
   )
 }
+
+export default withStyles(style)(EditUserDetails)
