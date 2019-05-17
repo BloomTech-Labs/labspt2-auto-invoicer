@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import {ViewUserDetails} from './ViewUserDetails';
-import {EditUserDetails} from './EditUserDetails';
+import ViewUserDetails from './ViewUserDetails';
+import EditUserDetails from './EditUserDetails';
 import styles from '../styles'
 
 export const UserDetails = (props) => {

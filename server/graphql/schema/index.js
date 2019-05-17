@@ -92,7 +92,23 @@ module.exports = buildSchema(`
   }
 
   input EditInvoiceInput {
-    amountPaid: String!
+    createdBy: String
+    number: String
+    description: String
+    terms: String
+    date: String
+    dueDate: String
+    company: CompanyInput
+    customer: CustomerInput
+    items: [ItemInput!]
+    subtotal: String
+    discount: String
+    tax: String
+    shipping: String
+    total: String
+    balance: String
+    notes: String
+    hidden: Boolean
   }
 
   type Item {
