@@ -51,7 +51,6 @@ const SignUpStepper = props => {
   const onSubmit = async () => {
     if(activeStep === steps.length - 1) {
       await toSetupAccount(user._id, {...contactInfoState, newAccount: false}, createCompanyState, createCustomerState)
-    console.log('esto esta jodio')
     }
   }
 
