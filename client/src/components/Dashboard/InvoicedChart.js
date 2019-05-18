@@ -103,18 +103,18 @@ const InvoicedChart = props => {
     });
 
     mappedInvoices.push(
-      { name: "Jan", invoiced: invoicedJanuary },
-      { name: "Feb", invoiced: invoicedFebruary },
-      { name: "Mar", invoiced: invoicedMarch },
-      { name: "Apr", invoiced: invoicedApril },
-      { name: "May", invoiced: invoicedMay },
-      { name: "Jun", invoiced: invoicedJune },
-      { name: "Jul", invoiced: invoicedJuly },
-      { name: "Aug", invoiced: invoicedAugust },
-      { name: "Sep", invoiced: invoicedSeptember },
-      { name: "Oct", invoiced: invoicedOctober },
-      { name: "Nov", invoiced: invoicedNovember },
-      { name: "Dec", invoiced: invoicedDecember }
+      { name: "Jan", invoiced: invoicedJanuary.toFixed(2) },
+      { name: "Feb", invoiced: invoicedFebruary.toFixed(2) },
+      { name: "Mar", invoiced: invoicedMarch.toFixed(2) },
+      { name: "Apr", invoiced: invoicedApril.toFixed(2) },
+      { name: "May", invoiced: invoicedMay.toFixed(2) },
+      { name: "Jun", invoiced: invoicedJune.toFixed(2) },
+      { name: "Jul", invoiced: invoicedJuly.toFixed(2) },
+      { name: "Aug", invoiced: invoicedAugust.toFixed(2) },
+      { name: "Sep", invoiced: invoicedSeptember.toFixed(2) },
+      { name: "Oct", invoiced: invoicedOctober.toFixed(2) },
+      { name: "Nov", invoiced: invoicedNovember.toFixed(2) },
+      { name: "Dec", invoiced: invoicedDecember.toFixed(2) }
     );
 
     setData([...mappedInvoices]);

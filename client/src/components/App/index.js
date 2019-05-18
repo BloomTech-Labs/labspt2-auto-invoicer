@@ -5,7 +5,6 @@ import { saveAs } from 'file-saver';
 
 import LandingPage from '../../views/LandingPage';
 import BillingPage from '../../views/BillingPage';
-import CreateInvoice from '../../views/CreateInvoice';
 import SettingsPage from '../../views/SettingsPage';
 import InvoiceList from '../../views/InvoiceList';
 import InvoiceView from '../../views/InvoiceView';
@@ -31,7 +30,11 @@ const App = props => {
   const getUser = async () => {
     await context.getUser();
     setLoggedIn(true);
-    props.history.push(`/user/${context.user._id}/setup`);
+    if(context.user.newAccount) {
+      props.history.push(`/user/${context.user._id}/setup`);
+    } else {
+      props.history.push(`/user/${context.user._id}/dashboard`);
+    }
   };
 
   useEffect(() => {
@@ -109,7 +112,7 @@ const App = props => {
       <section className="routes-container">
         <Route path="/user/:id/billing" component={BillingPage} />
         <Route path="/user/:id/dashboard" component={Dashboard} />
-        <Route path="/user/:id/setup" component={SignUpStepper} />
+        <Route path="/user/:id/setup" render={props => <SignUpStepper {...props} />} />
         <Route
           path="/user/:id/error/404"
           render={props => <Error404Page {...props} />}

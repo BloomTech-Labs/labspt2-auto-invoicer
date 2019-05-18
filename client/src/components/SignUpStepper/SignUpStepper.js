@@ -12,8 +12,10 @@ import Typography from '@material-ui/core/Typography';
 import ContactInfo from './ContactInfo';
 import CreateCompany from './CreateCompany';
 import CreateCustomer from './CreateCustomer';
+import FinalStep from './FinalStep';
 import styles from './styles';
 import UserContext from '../../context/UserContext';
+import { toSetupAccount } from '../../context/mutations';
 
 const SignUpStepper = props => {
   const { user } = useContext(UserContext);
@@ -44,6 +46,14 @@ const SignUpStepper = props => {
     }
   );
 
+  const steps = ['Contact Info', 'Create Company', 'Create Customer'];
+
+  const onSubmit = async () => {
+    if(activeStep === steps.length - 1) {
+      await toSetupAccount(user._id, {...contactInfoState, newAccount: false}, createCompanyState, createCustomerState)
+    }
+  }
+
   const settingCustomerState = state => {
     return setCreateCustomerState({...createCustomerState, ...state})
   }
@@ -54,9 +64,7 @@ const SignUpStepper = props => {
 
   const settingCompanyState = state => {
     return setCreateCompanyState({...createCompanyState, ...state})
-  }
-  
-  const steps = ['Contact Info', 'Create Company', 'Create Customer'];
+  } 
 
 const getStepContent = (step) => {
   switch (step) {
@@ -71,10 +79,9 @@ const getStepContent = (step) => {
   }
 }
 
-
-
   const handleNext = () => {
     setActiveStep(prevStep => prevStep + 1)
+    onSubmit();
   };
 
   const handleBack = () => {
@@ -104,17 +111,7 @@ const getStepContent = (step) => {
               ))}
             </Stepper>
             <>
-              {activeStep === steps.length ? (
-                <>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
-                  </Typography>
-                </>
+              {activeStep === steps.length ? ( <FinalStep id={user._id} history={props.history} />
               ) : (
                 <>
                   {getStepContent(activeStep)}
