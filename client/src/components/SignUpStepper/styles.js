@@ -10,7 +10,6 @@ export default theme => ({
   },
   layout: {
     width: '50%',
-    border: '1px solid red',
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
