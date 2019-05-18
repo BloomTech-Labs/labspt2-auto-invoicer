@@ -18,10 +18,11 @@ const FinalStep = props => {
     return (
         <>
             <Typography variant="h5" gutterBottom>
-                Thank you for your order.
+                Thanks for setting things up.
             </Typography>
             <Typography variant="subtitle1">
-                You'll be redirected to the dashboard in {timer} {time}.
+                Now you can start invoicing in our app
+                You'll be redirected to the dashboard in <b>{timer} {time}</b>.
             </Typography>
         </>
         
