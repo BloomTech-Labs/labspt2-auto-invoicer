@@ -9,9 +9,16 @@ export default theme => ({
   },
 
   cardContainer: {
-    maxWidth: `960px`,
+    maxWidth: `650px`,
     width: `100%`,
-    marginBottom: `20px` 
+    marginBottom: `30px`,
+  },
+
+  cardHeader: {
+    margin: `15px 20px`,
+    borderBottom: `1px solid gray`,
+    display: `flex`,
+    justifyContent: `space-around`,
   },
 
   cards : {
@@ -19,7 +26,7 @@ export default theme => ({
     color: theme.palette.text.secondary,
     width: '100%',
     height: `100%`,
-    padding: `20px`,
+    
     borderRadius: 0,
     boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
     display: `flex`,
@@ -27,9 +34,102 @@ export default theme => ({
     alignItems: `center`
   },
 
-  companyDropDown : {
-    width: `50%`,
-    marginBottom: `20px`,
-    fontSize: `2rem`
+  infoContainer: {
+
+  },
+
+  info: {
+    padding: `10px 20px`,
+    display: `flex`,
+
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: `column`,
+    },
+
+    "&:hover": {
+      backgroundColor: `#F9FBE7`
+    },
+  },
+
+  infoTitle: {
+    width: `30%`,
+    display: `flex`,
+    [theme.breakpoints.down("xs")]: {
+      width: `100%`
+    }
+  },
+
+  infoData: {
+    width: `70%`,
+    display: `flex`,
+    justifyContent: `flex-start`,
+    textTransform: `capitalize`,
+
+    [theme.breakpoints.down("xs")]: {
+      width: `100%`
+    }
+  },
+
+  infoDataEmail: {
+    width: `70%`,
+    display: `flex`,
+    justifyContent: `flex-start`,
+
+    [theme.breakpoints.down("xs")]: {
+      width: `100%`
+    }
+  },
+
+  edit : {
+    marginLeft: `20px`,
+    padding: `5px 20px`,
+    backgroundColor: `#8bc34a`,
+    color: `black`,
+
+    "&:hover": {
+      backgroundColor: `#2d2f31`,
+      color: `white`,
+    }
+  },
+
+  cancel: {
+    width: `100px`,
+    marginTop: `10px`,
+    marginRight: `10px`,
+    padding: `5px 10px`,
+    backgroundColor: `#8bc34a`,
+    color: `black`,
+
+    "&:hover": {
+      backgroundColor: `#2d2f31`,
+      color: `white`,
+    }
+  },
+
+  save: {
+    width: `100px`,
+    marginTop: `10px`,
+    padding: `5px 10px`,
+    backgroundColor: `#8bc34a`,
+    color: `black`,
+
+    "&:hover": {
+      backgroundColor: `#2d2f31`,
+      color: `white`,
+    }
+  },
+
+  editContainer: {
+    width: `80%`,
+    padding: `10px`,
+  },
+
+  text : {
+    fontSize: `1.6rem`
+  },
+
+  labelText: {
+    fontSize: `1.2rem`
   }
+
 })
