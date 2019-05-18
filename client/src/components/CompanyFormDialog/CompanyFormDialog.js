@@ -72,7 +72,7 @@ const CompanyFormDialog = props => {
   const handleZipCodeChange = () => {
     if (formState.zipCode.length > 4) {
       const clientKey =
-        'tjS2tWmZcLLC5fga8lOjq7eU2rNPDLZL7PG4le9rVty3OxthYODSLaj6B6vAjpNs';
+        'js-5XV4nRgHrRKhBmdufOwIFv2Fd9i2PXzj34LNZiQ9fRdEzalHkUYsVTS27ILfU8Qq';
       const zipcode = formState.zipCode;
       const url = `https://www.zipcodeapi.com/rest/${clientKey}/info.json/${zipcode}/radians`;
       axios
