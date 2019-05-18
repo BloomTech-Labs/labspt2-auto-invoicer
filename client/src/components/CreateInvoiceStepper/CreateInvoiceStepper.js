@@ -122,12 +122,7 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, dueDate });
   };
 
-  // const handleInputChange = name => e => {
-  //   setInvoiceState({ ...invoiceState, [name]: e.target.value });
-  // };
-
   const handleInputChange = input => {
-    console.log(input);
     setInvoiceState({ ...invoiceState, ...input });
   };
 
@@ -182,6 +177,7 @@ const CreateInvoiceStepper = props => {
     }`
     };
     await axios.post(`${process.env.REACT_APP_BACKEND_URL}/graphql`, query);
+    setStepState(prevStep => prevStep + 1);
   };
 
   const steps = [
@@ -287,12 +283,8 @@ const CreateInvoiceStepper = props => {
           <React.Fragment>
             {stepState === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Invoice #1 generated
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your invoice has been created. [OPTIONS WITH ICONS TO SEND,
-                  VIEW, ETC HERE]
+                <Typography variant="h6" gutterBottom>
+                  Invoice #{invoiceState.number} was successfully created
                 </Typography>
               </React.Fragment>
             ) : (
