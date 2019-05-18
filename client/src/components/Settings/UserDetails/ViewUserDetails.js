@@ -1,38 +1,56 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react";
 
-import Edit from '../EditIcon'
-import UserContext from '../../../context/UserContext'
-import { withStyles } from '@material-ui/core';
+import Edit from "../EditIcon";
+import UserContext from "../../../context/UserContext";
+import { withStyles } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
-import style from '../styles'
+import style from "../styles";
 
-const ViewUserDetails = (props) => {
-  const context = useContext(UserContext)
-  const {name, email, phoneNumber } = context.user
+const ViewUserDetails = props => {
+  const { classes } = props;
+  const context = useContext(UserContext);
+  const { name, email, phoneNumber } = context.user;
+
   return (
-    <div className='cardDetails'>
-      <div className='card-header'>
-        <h1>User Details</h1>
-        <div onClick={props.toggleView} className='edit'>
-        <Edit />
+    <div className={classes.cardContainer}>
+      <div className={classes.cardHeader}>
+        <Typography className={classes.cardTitle} variant={"h3"}>
+          User Details
+        </Typography>
       </div>
-    </div>
-      <div className='infoContainer'>
-        <div className='info'>
-          <h2>Name: </h2>
-          <p>{name}</p>
+      <div className={classes.infoContainer}>
+        <div className={classes.info}>
+          <Typography className={classes.infoTitle} variant={'h4'}>
+            Name: 
+          </Typography>
+          <Typography className={classes.infoData} variant={'h5'}>
+            {name}
+          </Typography>
         </div>
-        <div className='info'>
-          <h2>Email: </h2>
-          <p>{email}</p>
+        <div className={classes.info}>
+          <Typography className={classes.infoTitle} variant={'h4'}>
+            Email: 
+          </Typography>
+          <Typography className={classes.infoDataEmail} variant={'h5'}>
+            {email}
+          </Typography>
         </div>
-        <div className='info'>
-          <h2>Phone Number: </h2>
-          <p>{phoneNumber}</p>
+        <div className={classes.info}>
+          <Typography className={classes.infoTitle} variant={'h4'}>
+            Phone Number: 
+          </Typography>
+          <Typography className={classes.infoData} variant={'h5'}>
+            {phoneNumber}
+          </Typography>
         </div>
       </div>
+      <Button className={classes.edit} onClick={props.toggleView}>
+        Edit
+      </Button>
     </div>
-  )
-}
+  );
+};
 
-export default withStyles(style)(ViewUserDetails)
+export default withStyles(style)(ViewUserDetails);

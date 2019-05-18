@@ -8,11 +8,6 @@ exports[`<AuthLanding /> renders Auth Landing components 1`] = `
     <button
       class="authentication-btns"
     >
-      Sign Up
-    </button>
-    <button
-      class="authentication-btns"
-    >
       Sign In
     </button>
   </ul>

@@ -32,17 +32,24 @@ const EmptyInvoices = props => {
         }}
         className={classes.root}
       >
-        <AppBar style={{ backgroundColor: "#eff7f2" }} position="static">
+        <AppBar
+          style={{ backgroundColor: "#ffffff", color: "#2d2f31" }}
+          position="static"
+        >
           <Toolbar className={classes.toolbar}>
-            <Typography className={classes.title} color="inherit" noWrap>
+            <Typography
+              //className={classes.title}
+              variant="h3"
+              color="inherit"
+              noWrap
+            >
               Invoices
             </Typography>
             <Link to={`/user/${userID}/invoice/create`}>
               <Button
                 variant="contained"
-                style={{ backgroundColor: "#4fc878", color: "white" }}
+                className={classes.button}
                 size={buttonSize}
-                color="primary"
               >
                 Create
               </Button>

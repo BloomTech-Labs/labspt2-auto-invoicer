@@ -12,13 +12,15 @@
   display: flex;
   flex-wrap: wrap;
   font-size: 1.6rem;
-  justify-content: center;
+  justify-content: space-around;
+  text-align:center;
   max-width: 960px;
   width: 100%;
 }
 
 .get-started-text {
   display: flex;
+  padding-bottom:10px; 
   justify-content: center;
   width: 100%;
 }

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import React, { useState, useEffect } from "react";
+import { PieChart, Pie, Sector, Cell } from "recharts";
+import { Typography } from "../../../node_modules/@material-ui/core";
 
-const COLORS = ['#FF0000', '#00e676', '#40c4ff'];
+const COLORS = ["#FF0000", "#00e676", "#40c4ff"];
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
@@ -26,7 +27,7 @@ const renderActiveShape = props => {
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
+  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -84,9 +85,9 @@ const StatisticsChart = props => {
 
   useEffect(() => {
     setData([
-      { name: 'Late', money: late },
-      { name: 'Collected', money: collected },
-      { name: 'Unpaid', money: unpaid }
+      { name: "Late", money: late },
+      { name: "Collected", money: collected },
+      { name: "Unpaid", money: unpaid }
     ]);
   }, [collected, unpaid, late]);
 

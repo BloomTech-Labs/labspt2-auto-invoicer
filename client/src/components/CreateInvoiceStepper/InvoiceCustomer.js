@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 import UserContext from '../../context/UserContext';
 
-import CustomerFormDialog from '../CompanyFormDialog';
+import CustomerFormDialog from '../CustomerFormDialog';
 
 const InvoiceCustomer = props => {
   const context = useContext(UserContext);
@@ -57,7 +57,6 @@ const InvoiceCustomer = props => {
 
   return (
     <React.Fragment>
-      <div>You can select your customer or create a new customer here.</div>
       <TextField
         id="customer"
         select
@@ -70,7 +69,7 @@ const InvoiceCustomer = props => {
         //     className: classes.menu
         //   }
         // }}
-        helperText="Select a company"
+        helperText="Select a customer"
         margin="normal"
       >
         {context.company.customers.map(customer => (
