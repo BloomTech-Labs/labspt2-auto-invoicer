@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import style from "../styles";
 
 const EditUserDetails = props => {
+  const { classes } = props;
   const context = useContext(UserContext);
   const { name, email, phoneNumber } = context.user;
   const [userData, setUserData] = useState({ name, email, phoneNumber });
@@ -20,9 +21,10 @@ const EditUserDetails = props => {
   };
 
   return (
-    <div>
-      <form className="user-form">
+    <div className={classes.editContainer}>
+      <form className={classes.formContainer}>
         <TextField
+          className={classes.inputText}
           id={"name"}
           label={"Name"}
           fullWidth={true}
@@ -30,8 +32,19 @@ const EditUserDetails = props => {
           name={"name"}
           onChange={e => setUserData({ ...userData, name: e.target.value })}
           value={userData.name}
+          InputProps={{
+            classes: {
+              input: classes.text,
+            },
+          }}
+          InputLabelProps={{
+            FormLabelClasses: {
+              root: classes.labelText
+            },
+          }}
         />
         <TextField
+          className={classes.inputText}
           id={"email"}
           label={"Email"}
           fullWidth={true}
@@ -39,8 +52,20 @@ const EditUserDetails = props => {
           name={"email"}
           onChange={e => setUserData({ ...userData, email: e.target.value })}
           value={userData.email}
+          type='email'
+          InputProps={{
+            classes: {
+              input: classes.text,
+            },
+          }}
+          InputLabelProps={{
+            FormLabelClasses: {
+              root: classes.labelText
+            },
+          }}
         />
         <TextField
+          className={classes.inputText}
           id={"phone_num"}
           label={"Phone Number"}
           fullWidth={true}
@@ -50,17 +75,23 @@ const EditUserDetails = props => {
             setUserData({ ...userData, phoneNumber: e.target.value })
           }
           value={userData.phoneNumber}
+          InputProps={{
+            classes: {
+              input: classes.text,
+            },
+          }}
+          InputLabelProps={{
+            FormLabelClasses: {
+              root: classes.labelText
+            },
+          }}
         />
       </form>
-      <Button onClick={props.toggleView}>
-        <Typography variant="button" style={{ color: "black" }}>
-          cancel
-        </Typography>
+      <Button className={classes.cancel} onClick={props.toggleView}>
+        cancel
       </Button>
-      <Button onClick={() => editUser(userData)}>
-        <Typography variant="button" style={{ color: "black" }}>
-          save
-        </Typography>
+      <Button className={classes.save} onClick={() => editUser(userData)}>
+        save
       </Button>
     </div>
   );
