@@ -23,7 +23,7 @@ export default theme => ({
     }
   },
   statistics: {
-    height: 308
+    height: 300
   },
   topBar: {
     display: "flex",
