@@ -14,6 +14,7 @@ export default theme => ({
     }
   },
   paper: {
+    width: '100%',
     backgroundColor: "#ffffff",
     padding: theme.spacing.unit * 3,
     textAlign: "left",

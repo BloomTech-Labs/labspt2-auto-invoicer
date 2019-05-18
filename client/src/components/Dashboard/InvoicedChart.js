@@ -15,7 +15,7 @@ const CustomizedLabel = props => {
   const { x, y, stroke, value } = props;
 
   return (
-    <text x={x} y={y} dy={-4} fill={stroke} fontSize={14} textAnchor="middle">
+    <text x={x} y={y} dy={-4} fill={stroke} fontSize={12} textAnchor="middle">
       {value}
     </text>
   );
@@ -33,7 +33,7 @@ const CustomizedAxisTick = props => {
         textAnchor="end"
         fill="#666"
         transform="rotate(-35)"
-        fontSize={15}
+        fontSize={12}
       >
         {payload.value}
       </text>
@@ -134,7 +134,7 @@ const InvoicedChart = props => {
             bottom: 10
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="2 2" />
           <XAxis dataKey="name" height={60} tick={<CustomizedAxisTick />} />
           <YAxis />
           <Tooltip />
