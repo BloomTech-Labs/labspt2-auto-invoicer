@@ -31,7 +31,7 @@ const App = props => {
   const getUser = async () => {
     await context.getUser();
     setLoggedIn(true);
-    // props.history.push(`/user/${context.user._id}/dashboard`);
+    props.history.push(`/user/${context.user._id}/setup`);
   };
 
   useEffect(() => {
