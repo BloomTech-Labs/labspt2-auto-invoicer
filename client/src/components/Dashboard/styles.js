@@ -114,9 +114,9 @@ export default theme => ({
     alignItems: "center"
   },
   shortcutsCircle: {
-    fontSize: "30px",
-    width: 72,
-    height: 72,
+    fontSize: 30,
+    width: 65,
+    height: 65,
     borderRadius: "50%",
     backgroundColor: "#8bc34a",
     "&:hover": {

@@ -62,4 +62,36 @@ export const toUpdateCompany = async (companyId, editedData) => {
     `${process.env.REACT_APP_BACKEND_URL}/graphql`,
     companyMutation
   )
+  };
+
+export const toSetupAccount = async (userId, userData, companyData, customerData) => {
+  toUpdateUser(userId, userData);
+  companyData = inputToString(companyData);
+  customerData = inputToString(customerData);
+  const companyMutation = {
+    query: `
+    mutation {
+      createCompany(userId: "${userId}", companyInput: {${companyData}}) {
+        _id
+      }
+    }`
+  };
+  const companyId = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URL}/graphql`,
+    companyMutation
+    );
+    const cid = companyId.data.data.createCompany._id;
+    const customerMutation = {
+      query:`
+      mutation {
+        createCustomer(companyId: "${cid}", customerInput: {${customerData}}) {
+          _id
+        }
+      }
+      `
+    };
+    axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/graphql`,
+       customerMutation
+       )
 }
