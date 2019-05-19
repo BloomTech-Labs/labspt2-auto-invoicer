@@ -71,7 +71,7 @@ const CustomerFormDialog = props => {
   const handleZipCodeChange = () => {
     if (formState.zipCode.length > 4) {
       const clientKey =
-        'js-5XV4nRgHrRKhBmdufOwIFv2Fd9i2PXzj34LNZiQ9fRdEzalHkUYsVTS27ILfU8Qq';
+        "js-9jwG4pMhxXwB2HJF9aeDBGOda0jkLUJewpCh5pAhTX7uTgshfr1de2PHdrwuBxdv";
       const zipcode = formState.zipCode;
       const url = `https://www.zipcodeapi.com/rest/${clientKey}/info.json/${zipcode}/radians`;
       axios
