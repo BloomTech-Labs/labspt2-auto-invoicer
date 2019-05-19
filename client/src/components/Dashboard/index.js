@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withRouter } from "react-router-dom";
@@ -147,22 +148,25 @@ const Dashboard = props => {
                       title="Create a New Invoice"
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <div className={classes.shortcutsCircle}>
-                        <i
-                          className="material-icons"
-                          style={{
-                            color: "rgba(255,255,255,0.9)",
-                            fontSize: 36
-                          }}
-                        >
-                          note_add
-                        </i>
-                      </div>
+                      <Link to={`/user/${user._id}/invoice/create`}>
+                        <div className={classes.shortcutsCircle}>
+                          <i
+                            className="material-icons"
+                            style={{
+                              color: "rgba(255,255,255,0.9)",
+                              fontSize: 36
+                            }}
+                          >
+                            note_add
+                          </i>
+                        </div>
+                      </Link>
                     </Tooltip>
                     <Tooltip
                       title="Add a Payment"
                       classes={{ tooltip: classes.tooltip }}
                     >
+                      <Link to={`/user/${user._id}/invoices`}>
                       <div className={classes.shortcutsCircle}>
                         <i
                           className="material-icons"
@@ -174,6 +178,7 @@ const Dashboard = props => {
                           attach_money
                         </i>
                       </div>
+                      </Link>
                     </Tooltip>
                     <Tooltip
                       title="Add a New Customer"
