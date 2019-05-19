@@ -27,6 +27,7 @@ MyAutoInvoicer allows users to easily generate, track, analyze, save and send in
   - [Frontend Built Using](#frontend-built-using)
   - [Backend Built Using](#backend-built-using)
   - [Reasoning](#reasoning)
+  - [Tech Stack Blurb](#tech-stack-blurb)
 - [Security](#security)
   - [Authentication](#authentication)
   - [Authorization](#authorization)
@@ -93,6 +94,7 @@ Deployed [here](https://www.myautoinvoicer.com)
 - GraphQL
 - MongoDB/Mongoose
 - Node & Express
+- html-pdf
 
 Deployed [here](https://www.myautoinvoicer.com)
 
@@ -125,6 +127,14 @@ Deployed [here](https://www.myautoinvoicer.com)
 * Node & Express
 
   - We are with Node and Express and it works well with GraphQL.
+
+* html-pdf
+
+  - We used the html-pdf react package to create dynamic pdfs and a server on a seperate repo to handle the creation and downloads of the pdfs. The server includes two routes accessed with axios. A POST route to fetch the data and generate a PDF and a GET route to send the generated PDF to the client. The Repo address is https://github.com/Dewayne87/pdf-server. The server is hosted on heroku.
+
+
+### Tech Stack Blurb:
+-Technology is the final frontier. To prepare us for this ever-changing techno-scape; We knew the labs project was a great opportunity to not only learn new tech stacks but also how to learn more efficiently in a fast paced real world setting. One example of this is when we learned React hooks and Graphql. Both are gaining popularity and for good reason. The superior syntactical querying with Graphql and its use of only one endpoint makes it an exciting look at a more straightforward server future. With react hooks, a new way of react state and life cycle management accompanying it. It makes for a potent one, two punch of functionality, and cleaner, easier to read code. In our learning we quickly found out that leveraging diverse resources of knowledge, such as videos, official docs and tech articles, was the key to quickly gaining core concepts while simultaneously improving understanding of the more nuanced parts of the tech. In conclusion, some might say the biggest part of being a coder is not what you know, but what you can learn well and learn quickly. In this project we showed that we embodied that sentiment in, not only words, but quantifiable actions.
 
 ---
 
@@ -617,6 +627,60 @@ const EditInvoice = async (invoiceID, editedData, returnedData) => {
   return editedInvoice.data.data;
 };
 ```
+##### Edit Invoice (Amount Paid)
+
+```
+ const EditAmountPaid = async (invoiceID, amountPaid, returnedData) => {
+  
+  const EditAmountPaid = {
+    query: `
+                mutation {
+                    editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {amountPaid: "${amountPaid}"}) {
+                        ${returnedData}
+                    }
+                }
+            `
+  };
+  const editedAmount = await Post(EditAmountPaid);
+  return editedAmount.data.data;
+};
+```
+##### Edit Invoice (Edit total)
+
+```
+const EditTotal = async (invoiceID, total, returnedData) => {
+  const EditTotal = {
+    query: `
+                  mutation {
+                      editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {total: "${total}"}) {
+                          ${returnedData}
+                      }
+                  }
+              `
+  };
+  const editedTotal = await Post(EditTotal);
+  return editedTotal.data.data;
+};
+
+```
+##### Edit Invoice(Edit Balance Due)
+
+```
+export const EditBalanceDue = async (invoiceID, balanceDue, returnedData) => {
+  const EditBalanceDue = {
+    query: `
+                      mutation {
+                          editInvoice(invoiceID: "${invoiceID}", editInvoiceInput: {balanceDue: "${balanceDue}"}) {
+                              ${returnedData}
+                          }
+                      }
+                  `
+  };
+  const editedBalanceDue = await Post(EditBalanceDue);
+  return editedBalanceDue.data.data;
+};
+
+```
 
 ##### Edit Invoice (Add Invoice to Company)
 
@@ -638,6 +702,7 @@ const AddInvoiceToCompany = async (
   const returnedInvoice = await Post(AddInvoiceToCompany);
   return returnedInvoice.data.data;
 };
+
 ```
 
 #### Item Mutations:
@@ -678,6 +743,10 @@ TBD
 ## Stripe:
 
 We are using Stripe in order to accept payments from users of the application. We are utilizing `stripe`, `passport-stripe` and `react-stripe-elements` in order to accomplish this. When the user completes checkout, a request is then sent to the server with BuyPlanOrCredits mutation and the type of subscription the user selected.
+
+## ZipcodeAPI:
+
+We are using ZipcodeApi to autofill the city and state when the user creates a new customer. It takes the users inputted zipcode data and uses an axios call to send it along with a client key that we registered for to the zipcodeapi website. It returns a data object with the state and city of the given zipcode. The client key gives us 50 api calls an hour until June 2nd 2019. AFter that our free trial will be over and we will only get 10 api calls an hour. If we exceed this limit the state and city will not autofill and we will recieve a 429 status code error.
 
 ## Free vs Premium
 
