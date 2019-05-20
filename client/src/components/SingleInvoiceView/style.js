@@ -36,7 +36,7 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 26,
+    fontSize: 23,
     [theme.breakpoints.up("sm")]: {
       display: "block",
       fontSize: 30

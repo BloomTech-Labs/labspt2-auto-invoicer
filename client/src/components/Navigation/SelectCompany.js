@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
@@ -12,13 +12,15 @@ const SelectCompany = props => {
   const context = useContext(UserContext);
   const { user, company, getCompany } = context;
   const { classes } = props;
-
   const handleSelectCompany = e => {
     const company = e.target.value;
     getCompany(company._id);
   };
 
+
+ console.log(company);
   return (
+   
     <Select
       className={classes.selectCompany}
       onChange={handleSelectCompany}

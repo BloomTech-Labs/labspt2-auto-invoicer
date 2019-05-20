@@ -30,7 +30,7 @@ const App = props => {
   const getUser = async () => {
     await context.getUser();
     setLoggedIn(true);
-    if(context.user.newAccount) {
+    if(context.user.companies === 0) {
       props.history.push(`/user/${context.user._id}/setup`);
     } else {
       props.history.push(`/user/${context.user._id}/dashboard`);
