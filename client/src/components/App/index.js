@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { Route, withRouter } from 'react-router-dom';
-import { saveAs } from 'file-saver';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { Route, withRouter } from "react-router-dom";
+import { saveAs } from "file-saver";
 
-import LandingPage from '../../views/LandingPage';
-import BillingPage from '../../views/BillingPage';
-import SettingsPage from '../../views/SettingsPage';
-import InvoiceList from '../../views/InvoiceList';
-import InvoiceView from '../../views/InvoiceView';
-import SignInModal from '../SignInModal';
-import EditInvoiceForm from '../EditInvoiceForm';
-import Dashboard from '../Dashboard';
-import Navigation from '../Navigation/Navigation';
-import SignUpStepper from '../SignUpStepper/';
-import CreateInvoiceStepper from '../CreateInvoiceStepper';
+import LandingPage from "../../views/LandingPage";
+import BillingPage from "../../views/BillingPage";
+import SettingsPage from "../../views/SettingsPage";
+import InvoiceList from "../../views/InvoiceList";
+import InvoiceView from "../../views/InvoiceView";
+import SignInModal from "../SignInModal";
+import EditInvoiceForm from "../EditInvoiceForm";
+import Dashboard from "../Dashboard";
+import Navigation from "../Navigation/Navigation";
+import SignUpStepper from "../SignUpStepper/";
+import CreateInvoiceStepper from "../CreateInvoiceStepper";
 
-import UserContext from '../../context/UserContext';
-import './App.css';
-import Error404Page from './../Errors/404/404';
-import Error500Page from './../Errors/500/500';
+import UserContext from "../../context/UserContext";
+import "./App.css";
+import Error404Page from "./../Errors/404/404";
+import Error500Page from "./../Errors/500/500";
 
 const App = props => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,8 +29,9 @@ const App = props => {
 
   const getUser = async () => {
     await context.getUser();
+    console.log(context.user.companies, "here");
     setLoggedIn(true);
-    if(context.user.companies === 0) {
+    if (context.user.companies.length === 0) {
       props.history.push(`/user/${context.user._id}/setup`);
     } else {
       props.history.push(`/user/${context.user._id}/dashboard`);
@@ -39,7 +40,7 @@ const App = props => {
 
   useEffect(() => {
     getUser();
-    console.log('this is my context', context);
+    //console.log("this is my context", context);
   }, [loggedIn]);
 
   const toggleAuthModal = () => {
@@ -57,7 +58,7 @@ const App = props => {
       })
       .then(() => {
         setLoggedIn(!loggedIn);
-        window.location.replace('/');
+        window.location.replace("/");
       })
       .catch(err => console.log(err));
   };
@@ -81,26 +82,26 @@ const App = props => {
       total: invoice.total
     };
     axios
-      .post('https://pdf-server-invoice.herokuapp.com/create-pdf', file)
+      .post("https://pdf-server-invoice.herokuapp.com/create-pdf", file)
       .then(() =>
-        axios.get('https://pdf-server-invoice.herokuapp.com/fetch-pdf', {
-          responseType: 'blob'
+        axios.get("https://pdf-server-invoice.herokuapp.com/fetch-pdf", {
+          responseType: "blob"
         })
       )
       .then(res => {
-        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         saveAs(pdfBlob, `${file.number}-invoice.pdf`);
       })
       .catch(err => {
         console.log(err);
-        return 'Error';
+        return "Error";
       });
   };
 
-  const appPadding = loggedIn ? `128px` : `64px`
+  const appPadding = loggedIn ? `128px` : `64px`;
 
   return (
-    <div className="App" style={{marginTop: appPadding}}>
+    <div className="App" style={{ marginTop: appPadding }}>
       <Navigation
         handleSignIn={signInModal}
         handleSignOut={signOut}
@@ -112,7 +113,10 @@ const App = props => {
       <section className="routes-container">
         <Route path="/user/:id/billing" component={BillingPage} />
         <Route path="/user/:id/dashboard" component={Dashboard} />
-        <Route path="/user/:id/setup" render={props => <SignUpStepper {...props} />} />
+        <Route
+          path="/user/:id/setup"
+          render={props => <SignUpStepper {...props} />}
+        />
         <Route
           path="/user/:id/error/404"
           render={props => <Error404Page {...props} />}

@@ -38,7 +38,7 @@ const Dashboard = props => {
   let collected = 0;
   let late = 0;
   let unpaid = 0;
-  console.log("I ran", company.invoices);
+  //console.log("I ran", company.invoices);
   company.invoices.map(invoice => {
     collected += parseFloat(invoice.total) - parseFloat(invoice.balance);
     if (moment(invoice.date).isBefore(new Date())) {
