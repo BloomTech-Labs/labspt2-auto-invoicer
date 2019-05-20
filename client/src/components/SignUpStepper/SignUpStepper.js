@@ -19,6 +19,8 @@ import { toSetupAccount } from '../../context/mutations';
 
 const SignUpStepper = props => {
   const { user } = useContext(UserContext);
+  const context = useContext(UserContext);
+
   const [ activeStep, setActiveStep ] = useState(0)
   const [ contactInfoState, setContactInfoState ] = useState({name: user.name, phoneNumber: ''})
   const [ createCompanyState, setCreateCompanyState ] = useState(
@@ -50,7 +52,8 @@ const SignUpStepper = props => {
 
   const onSubmit = async () => {
     if(activeStep === steps.length - 1) {
-      await toSetupAccount(user._id, {...contactInfoState, newAccount: false}, createCompanyState, createCustomerState)
+      await toSetupAccount(user._id, {...contactInfoState, newAccount: false}, createCompanyState, createCustomerState);
+      await context.updateData();
     }
   }
 
