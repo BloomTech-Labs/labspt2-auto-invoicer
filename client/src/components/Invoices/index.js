@@ -57,7 +57,7 @@ const Invoices = props => {
     window.innerWidth > 500 ? setButtonSize("large") : setButtonSize("small");
   };
   const placeHolderTextFunc = () => {
-    window.innerWidth > 500
+    window.innerWidth > 750
       ? setPlaceholderText("Search By Number")
       : setPlaceholderText(" Search By #");
   };
@@ -292,12 +292,7 @@ const Invoices = props => {
                   <div>
                     <TextField
                       select
-                      inputProps={{
-                        style: { fontSize: "1.3rem" }
-                      }}
-                      label={
-                        <span className={classes.filterLabel}>Filter by</span>
-                      }
+                      label="Filter By"
                       className={classes.textField}
                       value={filter}
                       onChange={e => setFilter(e.target.value)}
@@ -311,9 +306,6 @@ const Invoices = props => {
                     >
                       {filterOptions.map(option => (
                         <option
-                          style={{
-                            fontSize: "1.3rem"
-                          }}
                           key={option}
                           value={option}
                         >

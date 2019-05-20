@@ -1,28 +1,28 @@
-import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
-import { CreateCustomer } from '../../graphQL/mutations/customers';
+import { CreateCustomer } from "../../graphQL/mutations/customers";
 
 const CustomerFormDialog = props => {
   const context = useContext(UserContext);
-
+  const { company, updateData } = context;
   const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phoneNumber: '',
-    address1: '',
-    address2: '',
-    zipCode: '',
-    city: '',
-    state: ''
+    name: "",
+    email: "",
+    phoneNumber: "",
+    address1: "",
+    address2: "",
+    zipCode: "",
+    city: "",
+    state: ""
   });
 
   const {
@@ -49,18 +49,19 @@ const CustomerFormDialog = props => {
         state
       },
       context.company._id,
-      '_id'
+      "_id"
     );
     setFormState({
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address1: '',
-      address2: '',
-      zipCode: '',
-      city: '',
-      state: ''
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address1: "",
+      address2: "",
+      zipCode: "",
+      city: "",
+      state: ""
     });
+updateData(company._id);
     props.onClose();
   };
 
@@ -87,7 +88,7 @@ const CustomerFormDialog = props => {
           console.log(error);
         });
     } else {
-      setFormState({ ...formState, city: '', state: '' });
+      setFormState({ ...formState, city: "", state: "" });
     }
   };
 
@@ -104,7 +105,7 @@ const CustomerFormDialog = props => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
-        <DialogContent>
+        <DialogContent >
           <TextField
             autoFocus
             margin="dense"

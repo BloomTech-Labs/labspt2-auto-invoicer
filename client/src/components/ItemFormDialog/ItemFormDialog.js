@@ -1,24 +1,24 @@
-import React, { useContext, useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext, useState } from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
-import { CreateItem } from '../../graphQL/mutations/items';
+import { CreateItem } from "../../graphQL/mutations/items";
 
 const ItemFormDialog = props => {
   const context = useContext(UserContext);
-
+  const { company, updateData } = context;
   const [formState, setFormState] = useState({
-    name: '',
-    description: '',
-    quantity: '',
-    cost: '',
-    amount: ''
+    name: "",
+    description: "",
+    quantity: "",
+    cost: "",
+    amount: ""
   });
 
   const { name, description, quantity, cost, amount } = formState;
@@ -32,18 +32,19 @@ const ItemFormDialog = props => {
         cost,
         amount
       },
-      context.user.companies[0]._id,
-      '_id'
+      context.company._id,
+      "_id"
     );
     // TODO
     // await context.getItems();
     setFormState({
-      name: '',
-      description: '',
-      quantity: '',
-      cost: '',
-      amount: ''
+      name: "",
+      description: "",
+      quantity: "",
+      cost: "",
+      amount: ""
     });
+    updateData(company._id);
     props.onClose();
   };
 

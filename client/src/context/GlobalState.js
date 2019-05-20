@@ -58,6 +58,28 @@ const GlobalState = props => {
     getCompany(userDetails.data.data.user.defaultCompany)
   };
 
+    const updateData = async (companyid) => {
+      //this is how the component gets the newly created data and stays on the company the user was using.
+    const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
+      withCredentials: true
+    });
+    const userQuery = {
+      query: `
+        query {
+          user(userId: "${user.data.userId}") {
+            ${userData}
+          }
+        } 
+      `
+    };
+    const userDetails = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/graphql`,
+      userQuery
+    );
+    dispatch({ type: GET_USER, user: userDetails.data.data.user });
+    getCompany(companyid)
+  };
+
   const getCompanies = async () => {
     const companiesQuery = {
       query: `
@@ -149,6 +171,7 @@ const GlobalState = props => {
         user: state.user, 
         company: state.company, 
         getUser, 
+        updateData,
         getCompanies, 
         getCompany, 
         updateUser,
