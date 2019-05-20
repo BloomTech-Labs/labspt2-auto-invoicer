@@ -179,7 +179,7 @@ const CreateInvoiceStepper = props => {
     await axios.post(`${process.env.REACT_APP_BACKEND_URL}/graphql`, query);
     setStepState(prevStep => prevStep + 1);
     console.log("after submission");
-    await context.getUser();
+    await context.updateData(context.company._id);
     props.history.push(`/user/${context.user._id}/invoices`);
   };
 
