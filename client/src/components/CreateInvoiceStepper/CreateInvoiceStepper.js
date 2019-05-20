@@ -1,32 +1,31 @@
-import React, { useState, useContext, useEffect } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
+import withStyles from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Paper from '@material-ui/core/Paper';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-import UserContext from "../../context/UserContext";
+import UserContext from '../../context/UserContext';
 
-import InvoiceCompany from './InvoiceCompany';
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
+import InvoiceDetails from './InvoiceDetails';
+import DateSelecter from '../DateSelecter';
+import InvoiceSummary from '../InvoiceSummary';
 
-import { Grid } from "@material-ui/core";
-import DateSelecter from "../DateSelecter";
-import SingleLineInput from "../SingleLineInput";
-import MultiLineInput from "../MultiLineInput";
-import InvoiceSummary from "../InvoiceSummary";
+import './CreateInvoiceStepper.css';
 
 const styles = theme => ({
   layout: {
-    width: "auto",
+    width: 'auto',
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-      width: 960,
+      width: '60%',
       marginLeft: 'auto',
       marginRight: 'auto'
     }
@@ -45,8 +44,8 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
   },
   buttons: {
-    display: "flex",
-    justifyContent: "flex-end"
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   button: {
     marginTop: theme.spacing.unit * 3,
@@ -59,43 +58,42 @@ const CreateInvoiceStepper = props => {
 
   const [invoiceState, setInvoiceState] = useState({
     createdBy: context.user._id,
-    number: "",
-    description: "",
-    notes: "",
-    terms: "",
-    date: new Date(),
-    dueDate: new Date(),
+    number: '',
+    description: '',
+    terms: '',
+    date: null,
+    dueDate: null,
     company: {
-      _id: "",
-      name: "",
-      email: "",
-      phoneNumber: "",
-      address1: "",
-      address2: "",
-      zipCode: "",
-      city: "",
-      state: ""
+      _id: context.company._id,
+      name: context.company.name,
+      email: context.company.email,
+      phoneNumber: context.company.phoneNumber,
+      address1: context.company.address1,
+      address2: context.company.address2,
+      zipCode: context.company.zipCode,
+      city: context.company.city,
+      state: context.company.state
     },
     customer: {
-      _id: "",
-      name: "",
-      email: "",
-      phoneNumber: "",
-      address1: "",
-      address2: "",
-      zipCode: "",
-      city: "",
-      state: ""
+      _id: '',
+      name: '',
+      email: '',
+      phoneNumber: '',
+      address1: '',
+      address2: '',
+      zipCode: '',
+      city: '',
+      state: ''
     },
     items: [],
-    subtotal: "",
-    discount: "",
-    tax: "",
-    shipping: "",
-    total: "",
-    balance: "",
-    errorText: ""
-    //notes: ""
+    subtotal: '',
+    discount: '',
+    tax: '',
+    shipping: '',
+    total: '',
+    balance: '',
+    notes: '',
+    errorText: ''
   });
 
   const [stepState, setStepState] = useState(0);
@@ -108,10 +106,6 @@ const CreateInvoiceStepper = props => {
     setStepState(prevStep => prevStep + 1);
   };
 
-  const handleCompanySelect = company => {
-    setInvoiceState({ ...invoiceState, company });
-  };
-
   const handleCustomerSelect = customer => {
     setInvoiceState({ ...invoiceState, customer });
   };
@@ -119,7 +113,7 @@ const CreateInvoiceStepper = props => {
   const handleItemSelect = items => {
     setInvoiceState({ ...invoiceState, items });
   };
-  
+
   const handleDateSelect = date => {
     setInvoiceState({ ...invoiceState, date });
   };
@@ -128,32 +122,77 @@ const CreateInvoiceStepper = props => {
     setInvoiceState({ ...invoiceState, dueDate });
   };
 
-  const handleInputChange = name => e => {
-    setInvoiceState({ ...invoiceState, [name]: e.target.value });
+  const handleInputChange = input => {
+    setInvoiceState({ ...invoiceState, ...input });
   };
 
-  const handleSubtotal = subtotal => {
-    setInvoiceState({ ...invoiceState, subtotal });
+  const handleCreateInvoice = async () => {
+    const items = JSON.stringify(invoiceState.items).replace(
+      /"([^"]+)":/g,
+      '$1:'
+    );
+    const query = {
+      query: `
+      mutation {
+        createInvoice(invoiceInput: {
+          createdBy: "${invoiceState.createdBy}",
+          number: "${invoiceState.number}",
+          description: "${invoiceState.description}",
+          terms: "${invoiceState.terms}",
+          date: "${invoiceState.date}",
+          dueDate: "${invoiceState.dueDate}",
+          company: {
+            _id: "${invoiceState.company._id}",
+            name: "${invoiceState.company.name}",
+            email: "${invoiceState.company.email}",
+            phoneNumber: "${invoiceState.company.phoneNumber}",
+            address1: "${invoiceState.company.address1}",
+            address2: "${invoiceState.company.address2}",
+            zipCode: "${invoiceState.company.zipCode}",
+            city: "${invoiceState.company.city}",
+            state: "${invoiceState.company.state}"
+          },
+          customer: {
+            _id: "${invoiceState.customer._id}",
+            name: "${invoiceState.customer.name}",
+            email: "${invoiceState.customer.email}",
+            phoneNumber: "${invoiceState.customer.phoneNumber}",
+            address1: "${invoiceState.customer.address1}",
+            address2: "${invoiceState.customer.address2}",
+            zipCode: "${invoiceState.customer.zipCode}",
+            city: "${invoiceState.customer.city}",
+            state: "${invoiceState.customer.state}"
+          },
+          items: ${items},
+          subtotal: "${invoiceState.subtotal}",
+          discount: "${invoiceState.discount}",
+          tax: "${invoiceState.tax}",
+          shipping: "${invoiceState.shipping}",
+          total: "${invoiceState.total}",
+          balance: "${invoiceState.balance}",
+          notes: "${invoiceState.notes}"
+        } ) {
+          _id
+        }
+    }`
+    };
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/graphql`, query);
+    setStepState(prevStep => prevStep + 1);
+    console.log("after submission");
+    await context.getUser();
+    props.history.push(`/user/${context.user._id}/invoices`);
   };
 
   const steps = [
-    "Select your company",
-    "Select your customer",
-    "Dates",
-    "Items",
-    "General"
+    'Select your customer',
+    'Select dates',
+    'Select your items',
+    'Fill out details'
   ];
 
   const getStepContent = step => {
     switch (step) {
       case 0:
-        return (
-          <InvoiceCompany
-            company={invoiceState.company}
-            onCompanySelect={handleCompanySelect}
-          />
-        );
-      case 1:
         return (
           <InvoiceCustomer
             companyId={invoiceState.company._id}
@@ -161,7 +200,7 @@ const CreateInvoiceStepper = props => {
             onCustomerSelect={handleCustomerSelect}
           />
         );
-      case 2:
+      case 1:
         return (
           <React.Fragment>
             <DateSelecter
@@ -177,68 +216,63 @@ const CreateInvoiceStepper = props => {
             />
           </React.Fragment>
         );
-      case 3:
+      case 2:
         return (
           <InvoiceItems
             items={invoiceState.items}
             subtotal={invoiceState.subtotal}
             onItemSelect={handleItemSelect}
-            handleSubtotal={handleSubtotal}
           />
         );
-      case 4:
+      case 3:
         return (
-          <React.Fragment>
-            <Grid container spacing={16}>
-              <Grid item xs={12} sm={6}>
-                <SingleLineInput
-                  label="Invoice Number"
-                  onChangeHandler={handleInputChange("number")}
-                  value={invoiceState.number}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <SingleLineInput
-                  label="Invoice Description"
-                  onChangeHandler={handleInputChange("description")}
-                  value={invoiceState.description}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <MultiLineInput
-                  label="Notes"
-                  onChangeHandler={handleInputChange("notes")}
-                  value={invoiceState.notes}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <MultiLineInput
-                  label="Terms"
-                  onChangeHandler={handleInputChange("terms")}
-                  value={invoiceState.terms}
-                />
-              </Grid>
-            </Grid>
-          </React.Fragment>
+          <InvoiceDetails
+            invoice={invoiceState}
+            onInputChange={handleInputChange}
+          />
         );
       default:
-        return "Error";
+        return 'Error';
     }
   };
 
+  // Update subtotal on item change
   useEffect(() => {
-    // temporary
-    const getUser = async () => {
-      await context.getUser();
-    };
-    getUser();
-    console.log("[invoiceState in CIS]: ", invoiceState);
+    if (invoiceState.items.length) {
+      const subtotal = invoiceState.items.reduce(
+        (total, item) => (total += Number(item.amount)),
+        0
+      );
+      setInvoiceState({ ...invoiceState, subtotal });
+    }
+  }, [invoiceState.items]);
+
+  // Update total and balance on subtotal, discount, tax or shipping change
+  useEffect(() => {
+    if (invoiceState.items.length) {
+      const { subtotal, discount, tax, shipping } = invoiceState;
+      const total =
+        Number(subtotal) + Number(discount) + Number(tax) + Number(shipping);
+
+      setInvoiceState({ ...invoiceState, total, balance: total });
+    }
+  }, [
+    invoiceState.subtotal,
+    invoiceState.discount,
+    invoiceState.tax,
+    invoiceState.shipping
+  ]);
+
+  // Console.log
+  useEffect(() => {
+    // remove
+    console.log(invoiceState);
   }, [invoiceState]);
 
   const { classes } = props;
 
   return (
-    <React.Fragment>
+    <div className="create-invoice-container">
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -252,12 +286,8 @@ const CreateInvoiceStepper = props => {
           <React.Fragment>
             {stepState === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Invoice #1 generated
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your invoice has been created. [OPTIONS WITH ICONS TO SEND,
-                  VIEW, ETC HERE]
+                <Typography variant="h6" gutterBottom>
+                  Invoice #{invoiceState.number} was successfully created
                 </Typography>
               </React.Fragment>
             ) : (
@@ -269,22 +299,34 @@ const CreateInvoiceStepper = props => {
                       Back
                     </Button>
                   )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {stepState === steps.length - 1 ? "Create Invoice" : "Next"}
-                  </Button>
+
+                  {stepState === steps.length - 1 ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleCreateInvoice}
+                      className={classes.button}
+                    >
+                      Create Invoice
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      Next
+                    </Button>
+                  )}
                 </div>
               </React.Fragment>
             )}
           </React.Fragment>
         </Paper>
       </main>
-      <InvoiceSummary />
-    </React.Fragment>
+      <InvoiceSummary invoice={invoiceState} />
+    </div>
   );
 };
 

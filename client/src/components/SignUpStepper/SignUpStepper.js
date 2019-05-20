@@ -1,69 +1,107 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
+import Grid from '@material-ui/core/Grid';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
-
+import ContactInfo from './ContactInfo';
+import CreateCompany from './CreateCompany';
+import CreateCustomer from './CreateCustomer';
+import FinalStep from './FinalStep';
 import styles from './styles';
+import UserContext from '../../context/UserContext';
+import { toSetupAccount } from '../../context/mutations';
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const SignUpStepper = props => {
+  const { user } = useContext(UserContext);
+  const [ activeStep, setActiveStep ] = useState(0)
+  const [ contactInfoState, setContactInfoState ] = useState({name: user.name, phoneNumber: ''})
+  const [ createCompanyState, setCreateCompanyState ] = useState(
+    {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      address1: '',
+      address2: '',
+      zipCode: '',
+      city: '',
+      state: ''
+    }
+    );
+  const [ createCustomerState, setCreateCustomerState ] = useState(
+    {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      address1: '',
+      address2: '',
+      zipCode: '',
+      city: '',
+      state: ''
+    }
+  );
 
-function getStepContent(step) {
+  const steps = ['Contact Info', 'Create Company', 'Create Customer'];
+
+  const onSubmit = async () => {
+    if(activeStep === steps.length - 1) {
+      await toSetupAccount(user._id, {...contactInfoState, newAccount: false}, createCompanyState, createCustomerState)
+    }
+  }
+
+  const settingCustomerState = state => {
+    return setCreateCustomerState({...createCustomerState, ...state})
+  }
+
+  const settingContactState = state => {
+    return setContactInfoState({...contactInfoState, ...state})
+  }
+
+  const settingCompanyState = state => {
+    return setCreateCompanyState({...createCompanyState, ...state})
+  } 
+
+const getStepContent = (step) => {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <ContactInfo contactInfo={contactInfoState} setState={ settingContactState } />;
     case 1:
-      return <PaymentForm />;
+      return <CreateCompany companyState={createCompanyState} setState={settingCompanyState} />;
     case 2:
-      return <Review />;
+      return <CreateCustomer customerState={createCustomerState} setState={settingCustomerState} />;
     default:
       throw new Error('Unknown step');
   }
 }
 
-class Checkout extends React.Component {
-  state = {
-    activeStep: 0
+  const handleNext = () => {
+    setActiveStep(prevStep => prevStep + 1)
+    onSubmit();
   };
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }));
+  const handleBack = () => {
+    setActiveStep(prevStep => prevStep -1)
   };
 
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
-    }));
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { activeStep } = this.state;
+    const { classes } = props;
 
     return (
       <>
         <CssBaseline />
+        <Grid container spacing={24}>
+        <Grid item xs={12}>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
-              Checkout
+              3 Easy Steps ...
+            </Typography>
+            <Typography component="h1" variant="h5" align="center">
+              and you can start invoicing
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map(label => (
@@ -72,25 +110,15 @@ class Checkout extends React.Component {
                 </Step>
               ))}
             </Stepper>
-            <React.Fragment>
-              {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
-                  </Typography>
-                </React.Fragment>
+            <>
+              {activeStep === steps.length ? ( <FinalStep id={user._id} history={props.history} />
               ) : (
-                <React.Fragment>
+                <>
                   {getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button
-                        onClick={this.handleBack}
+                        onClick={handleBack}
                         className={classes.button}
                       >
                         Back
@@ -99,24 +127,26 @@ class Checkout extends React.Component {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={this.handleNext}
+                      onClick={handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                     </Button>
                   </div>
-                </React.Fragment>
+                </>
               )}
-            </React.Fragment>
+            </>
           </Paper>
         </main>
+        </Grid>
+        </Grid>
+        
       </>
     );
-  }
 }
 
-Checkout.propTypes = {
+SignUpStepper.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Checkout);
+export default withStyles(styles)(SignUpStepper);

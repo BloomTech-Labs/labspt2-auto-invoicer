@@ -39,16 +39,7 @@ const InvoiceItems = props => {
     }
   };
 
-  const handleSubtotal = () => {
-    const subtotal = props.items.reduce(
-      (total, item) => (total += Number(item.amount)),
-      0
-    );
-    props.handleSubtotal(subtotal);
-  };
-
   useEffect(() => {
-    handleSubtotal();
     console.log('[props.items in InvoiceItems]: ', props.items);
   }, [props.items]);
 

@@ -22,10 +22,13 @@ export default theme => ({
   },
   shortcutsCircle: {
     fontSize: "30px",
-    width: 72,
-    height: 72,
+    width: 60,
+    height: 60,
     borderRadius: "50%",
-    backgroundColor: "#eff7f2",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    },
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -49,21 +52,12 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 25,
+    fontSize: 26,
     marginRight: "7px",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 35,
+      fontSize: 30
     },
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-      fontSize: 40,
-      marginLeft: 8
-    },
-    [theme.breakpoints.up("lg")]: {
-      marginLeft: 15,
-      fontSize: 45,
-    }
   },
   search: {
     position: "relative",
@@ -86,7 +80,12 @@ export default theme => ({
     }
   },
   button: {
-    [theme.breakpoints.up("sm")]: {},
+    color: "#ffffff",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    },
+
     [theme.breakpoints.up("md")]: {
       marginRight: 60
     },
@@ -95,20 +94,20 @@ export default theme => ({
     }
   },
   tooltip: {
-    backgroundColor: "#eff7f2",
-    color: "#4fc878",
+    backgroundColor: "#ffffff",
+    color: "#8bc34a",
     boxShadow: theme.shadows[1],
-    fontSize: 14,
-    fontWeight: "bolder",
-    border: "1px solid #4fc878"
+    fontSize: 12,
+    fontWeight: "bold",
+    border: "1px solid #8bc34a"
   },
   tooltipNumber: {
-    backgroundColor: "#eff7f2",
-    color: "#4fc878",
+    backgroundColor: "#ffffff",
+    color: "#8bc34a",
     boxShadow: theme.shadows[1],
-    fontWeight: "bolder",
-    border: "1px solid #4fc878",
-    fontSize: 16
+    fontSize: 13,
+    fontWeight: "bold",
+    border: "1px solid #8bc34a"
   },
   searchIcon: {
     paddingLeft: 8,
@@ -139,10 +138,10 @@ export default theme => ({
       width: 110
     },
     [theme.breakpoints.up("sm")]: {
-    width: 100,
-    "&:focus": {
-      width: 200,
-    }
+      width: 100,
+      "&:focus": {
+        width: 200
+      }
     },
     [theme.breakpoints.up("md")]: {
       width: 300,
@@ -157,7 +156,7 @@ export default theme => ({
     width: 72,
     [theme.breakpoints.up("sm")]: {
       width: 100,
-      margin:"15px"
+      margin: "15px"
     },
     [theme.breakpoints.up("md")]: {
       width: 200,
@@ -166,11 +165,15 @@ export default theme => ({
   },
   menu: {
     width: 72,
+    fontSize: "1.5rem",
     [theme.breakpoints.up("sm")]: {
       width: 100
     },
     [theme.breakpoints.up("md")]: {
       width: 200
     }
+  },
+  filterLabel:{
+    fontSize:"1.3rem"
   }
 });

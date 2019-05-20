@@ -10,6 +10,13 @@ export default theme => ({
       marginTop: theme.spacing.unit * 3
     },
   },
+  button: {
+    color: "#ffffff",
+    backgroundColor: "#8bc34a",
+    "&:hover": {
+      backgroundColor: "#2d2f31"
+    },
+  },
   toolbar: {
     display: "flex",
     justifyContent: "space-between"

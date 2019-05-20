@@ -1,10 +1,10 @@
-import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Slide from '@material-ui/core/Slide';
+import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Slide from "@material-ui/core/Slide";
 
-import styles from './styles';
+import styles from "./styles";
 
 const TopBar = props => {
   const { checked, classes, name } = props;
@@ -14,7 +14,7 @@ const TopBar = props => {
         <div className={classes.block}>
           <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
             <Typography variant="h4" gutterBottom>
-              Welcome,{' '}
+              Welcome,{" "}
               {name.toLowerCase().replace(/\b\w/g, I => I.toUpperCase())}!
             </Typography>
           </Slide>

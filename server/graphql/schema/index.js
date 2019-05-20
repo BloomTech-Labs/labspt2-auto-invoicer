@@ -163,6 +163,7 @@ module.exports = buildSchema(`
     email: String
     name: String
     phoneNumber: String
+    newAccount: Boolean
   }
 
   input CustomerInput {

@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useContext } from "react";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { withStyles } from "@material-ui/core/styles";
 
-import UserContext from '../../context/UserContext';
-import style from './styles';
+import UserContext from "../../context/UserContext";
+import style from "./styles";
+import { Typography } from "../../../node_modules/@material-ui/core";
 // import style from '../EmptyInvoices/style'
 
 const SelectCompany = props => {
@@ -22,12 +23,14 @@ const SelectCompany = props => {
       className={classes.selectCompany}
       onChange={handleSelectCompany}
       value={company}
-      renderValue={value => `${value.name}`}
+      renderValue={value => (
+        <Typography variant="overline">{`${value.name}`}</Typography>
+      )}
     >
       {user.companies.map(company => {
         return (
           <MenuItem key={company._id} value={company}>
-            {company.name}
+            <Typography variant="caption">{company.name}</Typography>
           </MenuItem>
         );
       })}

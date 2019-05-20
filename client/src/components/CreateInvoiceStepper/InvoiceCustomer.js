@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import React, { useState, useContext, useEffect } from "react";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
-import CustomerFormDialog from '../CompanyFormDialog';
+import CustomerFormDialog from "../CustomerFormDialog";
 
 const InvoiceCustomer = props => {
   const context = useContext(UserContext);
@@ -12,22 +12,22 @@ const InvoiceCustomer = props => {
   const [dialogState, setDialogState] = useState(false);
 
   const handleCustomerSelect = e => {
-    if (e.target.value === 'new') {
+    if (e.target.value === "new") {
       setDialogState(true);
       props.onCustomerSelect({
-        _id: '',
-        name: '',
-        email: '',
-        phoneNumber: '',
-        address1: '',
-        address2: '',
-        zipCode: '',
-        city: '',
-        state: ''
+        _id: "",
+        name: "",
+        email: "",
+        phoneNumber: "",
+        address1: "",
+        address2: "",
+        zipCode: "",
+        city: "",
+        state: ""
       });
     }
 
-    if (e.target.value !== 'new') {
+    if (e.target.value !== "new") {
       const [customer] = context.company.customers.filter(
         customer => customer._id === e.target.value
       );
@@ -50,14 +50,13 @@ const InvoiceCustomer = props => {
   };
 
   useEffect(() => {
-    console.log('[props.company in InvoiceCompany]: ', props.customer);
+    console.log("[props.company in InvoiceCompany]: ", props.customer);
   }, [props.customer]);
 
   // const { classes } = props;
 
   return (
     <React.Fragment>
-      <div>You can select your customer or create a new customer here.</div>
       <TextField
         id="customer"
         select
@@ -70,15 +69,23 @@ const InvoiceCustomer = props => {
         //     className: classes.menu
         //   }
         // }}
-        helperText="Select a company"
+        // helperText="Select a customer"
+        helperText="Select A Customer"
         margin="normal"
       >
         {context.company.customers.map(customer => (
-          <MenuItem key={customer._id} value={customer._id}>
+          <MenuItem
+            key={customer._id}
+            value={customer._id}
+          >
             {customer.name}
           </MenuItem>
         ))}
-        <MenuItem value="new">Add New Customer</MenuItem>
+        <MenuItem
+          value="new"
+        >
+          Add New Customer
+        </MenuItem>
       </TextField>
       {dialogState ? <CustomerFormDialog onClose={handleClose} /> : null}
     </React.Fragment>

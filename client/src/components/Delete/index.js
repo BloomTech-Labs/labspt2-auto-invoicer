@@ -11,19 +11,19 @@ import {
 import styles from "./styles";
 import "./Delete.css";
 
-import UserContext from '../../context/UserContext'
+import UserContext from "../../context/UserContext";
 
 const Delete = props => {
-  const {invoice} = props;
-  const {hideInvoice} = useContext(UserContext)
+  const { invoice } = props;
+  const { hideInvoice } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  
+
   const handleToggle = () => {
     setOpen(!open);
   };
 
   const hiddenToggle = () => {
-    hideInvoice(invoice._id, {hidden: true})
+    hideInvoice(invoice._id, { hidden: true });
   };
 
   const { classes } = props;
@@ -40,7 +40,7 @@ const Delete = props => {
           <i
             className="material-icons"
             style={{
-              color: "#4fc878",
+              color: "#ffffff",
               fontSize: 36
             }}
           >
@@ -49,11 +49,11 @@ const Delete = props => {
         </div>
       </Tooltip>
       <Dialog open={open} onClose={handleToggle}>
-        <DialogTitle className={classes.dialogTitle}>
+        <DialogTitle>
           <p> Delete Invoice ? </p>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText className={classes.dialogText}>
+          <DialogContentText>
             Are you sure you wish to delete ?
             <br />
             <span className="buttons">
