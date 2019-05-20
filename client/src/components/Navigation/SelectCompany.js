@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,10 +17,8 @@ const SelectCompany = props => {
     getCompany(company._id);
   };
 
-
- console.log(company);
+  //console.log(company);
   return (
-   
     <Select
       className={classes.selectCompany}
       onChange={handleSelectCompany}
