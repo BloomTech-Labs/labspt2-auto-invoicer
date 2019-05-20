@@ -30,7 +30,6 @@ const SingleInvoiceView = props => {
   const invoice = context.company.invoices.find(
     invoice => `${invoice._id}` === invoiceID
   );
-  console.log(invoice.company,"test")
   const company = invoice.company;
   const customer = invoice.customer;
   const headerellipsis = str => {
@@ -162,7 +161,7 @@ const SingleInvoiceView = props => {
                   <span className="entryName">Invoice Description:</span>
                 </strong>
                 <br />
-                {invoice.description + "."}
+                {invoice.description ? invoice.description + ".":"None"}
               </p>
             </div>
             <div className="box">
@@ -188,7 +187,7 @@ const SingleInvoiceView = props => {
                   <span className="entryName">Notes (if applicable):</span>{" "}
                 </strong>
                 <br />
-                {invoice.notes + "."}
+                {invoice.notes ? invoice.notes + ".":"None"}
               </p>
             </div>
             <div className="box">
@@ -197,7 +196,7 @@ const SingleInvoiceView = props => {
                   <span className="entryName">Terms (if applicable):</span>
                 </strong>
                 <br />
-                {invoice.terms + "."}
+                {invoice.terms ? invoice.terms + ".":"None"}
               </p>
             </div>
           </div>
@@ -281,7 +280,7 @@ const SingleInvoiceView = props => {
                           align="center"
                           style={{ fontSize: 25 }}
                         >
-                          {item.description}
+                          {item.description ? item.description:"None"}
                         </TableCell>
                         <TableCell style={{ fontSize: 25 }} align="center">
                           {item.cost}

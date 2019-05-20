@@ -80,12 +80,12 @@ export default createMuiTheme({
         fontSize: 13
       }
     },
-    MuiDialogContentText: {
-      root: {
-        color: "black",
-        fontSize: 13
-      }
-    },
+    // MuiDialogContentText: {
+    //   root: {
+    //     color: "black",
+    //     fontSize: 13
+    //   }
+    // },
     MuiDialogTitle: {
       root: {
         color: "black",
