@@ -36,17 +36,17 @@ export default theme => ({
     flexGrow: 1
   },
   title: {
-    fontSize: 25,
+    fontSize: 26,
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 40
+      fontSize: 30
     }
   },
   headerTitle: {
-    fontSize: 35,
+    fontSize: 30,
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      fontSize: 50
+      fontSize: 35
     }
   }
 });
