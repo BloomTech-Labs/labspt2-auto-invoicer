@@ -44,7 +44,7 @@ const ItemFormDialog = props => {
       cost: "",
       amount: ""
     });
-    updateData(company._id);
+   await updateData(company._id);
     props.onClose();
   };
 
