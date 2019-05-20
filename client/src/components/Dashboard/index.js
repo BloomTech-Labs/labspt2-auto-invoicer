@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Tooltip from "@material-ui/core/Tooltip";
+import CustomerFormDialog from "../CustomerFormDialog";
+import ItemFormDialog from "../ItemFormDialog";
 
 import styles from "./styles";
 import InvoicedCard from "./InvoicedCard";
@@ -24,9 +26,15 @@ const Dashboard = props => {
   useEffect(() => {
     setTimeout(() => setChecked(true), 800);
   }, []);
-
+  const [customerDialog, setCustomerDialog] = useState(false);
+  const [itemDialog, setItemDialog] = useState(false);
   const { classes } = props;
-
+  const handleCustomerDialog = () => {
+    setCustomerDialog(!customerDialog);
+  };
+  const handleItemDialog = () => {
+    setItemDialog(!itemDialog);
+  };
   let collected = 0;
   let late = 0;
   let unpaid = 0;
@@ -167,24 +175,27 @@ const Dashboard = props => {
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <Link to={`/user/${user._id}/invoices`}>
-                      <div className={classes.shortcutsCircle}>
-                        <i
-                          className="material-icons"
-                          style={{
-                            color: "rgba(255,255,255,0.9)",
-                            fontSize: 36
-                          }}
-                        >
-                          attach_money
-                        </i>
-                      </div>
+                        <div className={classes.shortcutsCircle}>
+                          <i
+                            className="material-icons"
+                            style={{
+                              color: "rgba(255,255,255,0.9)",
+                              fontSize: 36
+                            }}
+                          >
+                            attach_money
+                          </i>
+                        </div>
                       </Link>
                     </Tooltip>
                     <Tooltip
                       title="Add a New Customer"
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <div className={classes.shortcutsCircle}>
+                      <div
+                        onClick={handleCustomerDialog}
+                        className={classes.shortcutsCircle}
+                      >
                         <i
                           className="material-icons"
                           style={{
@@ -200,7 +211,10 @@ const Dashboard = props => {
                       title="Add a New Item"
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <div className={classes.shortcutsCircle}>
+                      <div
+                        onClick={handleItemDialog}
+                        className={classes.shortcutsCircle}
+                      >
                         <i
                           className="material-icons"
                           style={{
@@ -213,6 +227,12 @@ const Dashboard = props => {
                       </div>
                     </Tooltip>
                   </div>
+                  {customerDialog ? (
+                    <CustomerFormDialog onClose={handleCustomerDialog} />
+                  ) : null}
+                  {itemDialog ? (
+                    <ItemFormDialog onClose={handleItemDialog} />
+                  ) : null}
                 </TopCards>
               </Grid>
             </Grid>
